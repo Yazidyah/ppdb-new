@@ -11,7 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('pekerjaan_orang_tua', function (Blueprint $table) {
+            $table->id("id_pekerjaan");
+            $table->string('nama_pekerjaan', 50);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('pekerjaan_orang_tua');
     }
 };
