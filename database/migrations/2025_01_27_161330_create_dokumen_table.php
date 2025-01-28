@@ -12,8 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dokumen', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_dokumen');
+            $table->unsignedBigInteger('id_registrasi');
+            $table->unsignedBigInteger('id_syarat');
+            $table->string('tipe_dokumen', 50);
+            $table->string('direktori_file', 255);
+            $table->timestamp('uploaded_at')->useCurrent();
             $table->timestamps();
+
+            $table->foreign('id_registrasi')->references('id_registrasi')->on('data_registrasi');
+            $table->foreign('id_syarat')->references('id_syarat')->on('persyaratan');
         });
     }
 
