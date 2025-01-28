@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_registrasi')->references('id_registrasi')->on('data_registrasi');
-            $table->foreign('id_syarat')->references('id_syarat')->on('persyaratan');
+            $table->foreign('id_syarat')->references('id_persyaratan')->on('persyaratan');
         });
     }
 
