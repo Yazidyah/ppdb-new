@@ -26,6 +26,6 @@ class OrangTua extends Model
 
     public function pekerjaan()
     {
-        return $this->belongsTo(PekerjaanOrangTua::class, 'pekerjaan');
+        return $this->belongsTo(PekerjaanOrangTua::class, 'id_pekerjaan');
     }
 }

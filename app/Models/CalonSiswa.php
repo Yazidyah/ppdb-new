@@ -9,6 +9,9 @@ class CalonSiswa extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'calon_siswa';
+    protected $primaryKey = 'id_calon_siswa';
+    
     protected $fillable = [
         'id_user',
         'nama_lengkap',
@@ -24,4 +27,11 @@ class CalonSiswa extends Model
         'alamat_domisili',
         'alamat_kk',
     ];
+
+    protected $dates = ['deleted_at', 'created_at', 'updated_at'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

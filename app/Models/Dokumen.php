@@ -13,4 +13,13 @@ class Dokumen extends Model
         'direktori_file', 
         'uploaded_at'
     ];
+    public function registrasi()
+    {
+        return $this->belongsTo(DataRegistrasi::class, 'id_registrasi');
+    }
+    public function syarat()
+    {
+        return $this->belongsTo(Persyaratan::class, 'id_syarat');
+    }
 }
+
