@@ -35,5 +35,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(HubunganOrangTuaSeeder::class);
+        $this->call(JalurRegistrasiSeeder::class);
+        $this->call(PekerjaanOrtuSeeder::class);
     }
 }

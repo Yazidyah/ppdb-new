@@ -18,8 +18,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('id_calon_siswa')->references('id_calon_siswa')->on('calon_siswa')->onDelete('cascade');
-            $table->foreign('id_hubungan')->references('id_hubungan')->on('hubungan_orang_tua')->onDelete('cascade');
-            $table->foreign('pekerjaan')->references('id_pekerjaan')->on('pekerjaan_orang_tua')->onDelete('cascade');
         });
     }
 

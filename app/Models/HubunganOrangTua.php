@@ -9,4 +9,5 @@ class HubunganOrangTua extends Model
     protected $fillable = [
         'nama_hubungan',
     ];
+    public $timestamps = true;
 }

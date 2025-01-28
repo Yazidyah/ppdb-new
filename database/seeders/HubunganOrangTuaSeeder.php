@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class HubunganOrangTuaSeeder extends Seeder
 {
@@ -12,10 +13,18 @@ class HubunganOrangTuaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('hubungan_orang_tua')->insert([
+        $timestamp = Carbon::now();
+
+        $hubungan = [
             ['nama_hubungan' => 'Ayah'],
             ['nama_hubungan' => 'Ibu'],
             ['nama_hubungan' => 'Wali'],
-        ]);
+        ];
+
+        foreach ($hubungan as &$item) {
+            $item['created_at'] = $timestamp;
+            $item['updated_at'] = $timestamp;
+            DB::table('hubungan_orang_tua')->insert($item);
+        }
     }
 }

@@ -17,4 +17,5 @@ class JalurRegistrasi extends Model
         'tanggal_tutup',
         'is_open',
     ];
+    public $timestamps = true;
 }

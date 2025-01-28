@@ -9,4 +9,5 @@ class PekerjaanOrangTua extends Model
     protected $table = 'pekerjaan_orang_tua';
     protected $primaryKey = 'id_pekerjaan';
     protected $fillable = ['nama_pekerjaan'];
+    public $timestamps = true;
 }

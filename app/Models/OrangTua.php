@@ -14,6 +14,8 @@ class OrangTua extends Model
         'no_telp',
     ];
 
+    protected $table = 'orang_tua';
+
     public function calonSiswa()
     {
         return $this->belongsTo(CalonSiswa::class, 'id_calon_siswa');
@@ -22,10 +24,5 @@ class OrangTua extends Model
     public function hubungan()
     {
         return $this->belongsTo(HubunganOrangTua::class, 'id_hubungan');
-    }
-
-    public function pekerjaan()
-    {
-        return $this->belongsTo(PekerjaanOrangTua::class, 'id_pekerjaan');
     }
 }
