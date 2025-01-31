@@ -10,6 +10,7 @@ class OrangTua extends Model
         'id_calon_siswa',
         'id_hubungan',
         'nama_lengkap',
+        'nik',
         'pekerjaan',
         'no_telp',
     ];

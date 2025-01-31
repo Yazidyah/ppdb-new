@@ -10,10 +10,11 @@ return new class extends Migration
     {
         Schema::create('orang_tua', function (Blueprint $table) {
             $table->increments('id_orang_tua');
-            $table->unsignedInteger('id_calon_siswa');
-            $table->unsignedInteger('id_hubungan');
+            $table->unsignedBigInteger('id_calon_siswa');
+            $table->unsignedBigInteger('id_hubungan');
             $table->string('nama_lengkap', 100);
-            $table->unsignedInteger('pekerjaan');
+            $table->string('nik', 20);
+            $table->unsignedBigInteger('pekerjaan');
             $table->string('no_telp', 15);
             $table->timestamps();
 
