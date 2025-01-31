@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Siswa;
 use App\Http\Middleware\Operator;
-
+use App\Livewire\Counter;
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -41,39 +41,92 @@ Route::get('/daftar/step4', function () {
     return view('daftar-step4');
 });
 
-Route::middleware(['auth', 'verified', 'siswa'])->group(function(){
-    Route::get('/siswa/dashboard', function () {return view('siswa.dashboard');})->name('siswa.dashboard');
-    Route::get('/siswa/daftar-reguler', function () {return view('siswa.daftar-reguler');})->name('siswa.daftar-reguler');
-    Route::get('/siswa/daftar-step1', function () {return view('siswa.daftar-step1');})->name('siswa.daftar-step1');
-    Route::get('/siswa/daftar-step2', function () {return view('siswa.daftar-step2');})->name('tambah-step2');
+Route::get('/coba', Counter::class)->name('testing');
+
+
+Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
+    Route::get('/siswa/dashboard', function () {
+        return view('siswa.dashboard');
+    })->name('siswa.dashboard');
+    Route::get('/siswa/daftar-reguler', function () {
+        return view('siswa.daftar-reguler');
+    })->name('siswa.daftar-reguler');
+    Route::get('/siswa/daftar-step1', function () {
+        return view('siswa.daftar-step1');
+    })->name('siswa.daftar-step1');
+    Route::get('/siswa/daftar-step2', function () {
+        return view('siswa.daftar-step2');
+    })->name('tambah-step2');
     Route::post('/siswa/daftar-step2', [SiswaController::class, 'jalur'])->name('siswa.daftar-step2');
     Route::get('/siswa/daftar-step3', [SiswaController::class, 'persyaratan'])->name('siswa.daftar-step3');
 });
-Route::middleware(['auth', 'verified', 'operator'])->group(function(){
-    Route::get('/operator/dashboard', function () {return view('operator.dashboard');})->name('operator.dashboard');
-    Route::get('/operator/persyaratan', function () {return view('operator.persyaratan');})->name('operator.persyaratan');
-    Route::get('/operator/tambah-persyaratan', function () {return view('operator.tambah-persyaratan');})->name('operator.tambah-persyaratan');
+Route::middleware(['auth', 'verified', 'operator'])->group(function () {
+    Route::get('/operator/dashboard', function () {
+        return view('operator.dashboard');
+    })->name('operator.dashboard');
+    Route::get('/operator/persyaratan', function () {
+        return view('operator.persyaratan');
+    })->name('operator.persyaratan');
+    Route::get('/operator/tambah-persyaratan', function () {
+        return view('operator.tambah-persyaratan');
+    })->name('operator.tambah-persyaratan');
     Route::post('/operator/tambah-persyaratan', [OperatorController::class, 'tambahpersyaratan'])->name('admin.tambah-persyaratan');
-    Route::get('/operator/alur-pendaftaran', function () {return view('operator.alur-pendaftaran');})->name('operator.alur-pendaftaran');
-    Route::get('/operator/data-siswa', function () {return view('operator.datasiswa');})->name('operator.datasiswa');
-    Route::get('/operator/data-afirmasi-prestasi', function () {return view('operator.data-afirmasi-prestasi');})->name('operator.data-afirmasi-prestasi');
-    Route::get('/operator/data-afirmasi-abk', function () {return view('operator.data-afirmasi-abk');})->name('operator.data-afirmasi-abk');
-    Route::get('/operator/data-afirmasi-ketm', function () {return view('operator.data-afirmasi-ketm');})->name('operator.data-afirmasi-ketm');
-    Route::get('/operator/data-reguler', function () {return view('operator.data-reguler');})->name('operator.data-reguler');
-    Route::get('/operator/data-lulus', function () {return view('operator.data-lulus');})->name('operator.data-lulus');
-    Route::get('/operator/data-tidaklulus', function () {return view('operator.data-tidaklulus');})->name('operator.data-tidaklulus');
+    Route::get('/operator/alur-pendaftaran', function () {
+        return view('operator.alur-pendaftaran');
+    })->name('operator.alur-pendaftaran');
+    Route::get('/operator/data-siswa', function () {
+        return view('operator.datasiswa');
+    })->name('operator.datasiswa');
+    Route::get('/operator/data-afirmasi-prestasi', function () {
+        return view('operator.data-afirmasi-prestasi');
+    })->name('operator.data-afirmasi-prestasi');
+    Route::get('/operator/data-afirmasi-abk', function () {
+        return view('operator.data-afirmasi-abk');
+    })->name('operator.data-afirmasi-abk');
+    Route::get('/operator/data-afirmasi-ketm', function () {
+        return view('operator.data-afirmasi-ketm');
+    })->name('operator.data-afirmasi-ketm');
+    Route::get('/operator/data-reguler', function () {
+        return view('operator.data-reguler');
+    })->name('operator.data-reguler');
+    Route::get('/operator/data-lulus', function () {
+        return view('operator.data-lulus');
+    })->name('operator.data-lulus');
+    Route::get('/operator/data-tidaklulus', function () {
+        return view('operator.data-tidaklulus');
+    })->name('operator.data-tidaklulus');
 });
-Route::middleware(['auth', 'verified', 'admin'])->group(function(){
-    Route::get('/admin/dashboard', function () {return view('admin.dashboard');})->name('admin.dashboard');
-    Route::get('/admin/persyaratan', function () {return view('admin.persyaratan');})->name('admin.persyaratan');
-    Route::get('/admin/alur-pendaftaran', function () {return view('admin.alur-pendaftaran');})->name('admin.alur-pendaftaran');
-    Route::get('/admin/data-siswa', function () {return view('admin.datasiswa');})->name('admin.datasiswa');
-    Route::get('/admin/data-afirmasi-prestasi', function () {return view('admin.data-afirmasi-prestasi');})->name('admin.data-afirmasi-prestasi');
-    Route::get('/admin/data-afirmasi-abk', function () {return view('admin.data-afirmasi-abk');})->name('admin.data-afirmasi-abk');
-    Route::get('/admin/data-afirmasi-ketm', function () {return view('admin.data-afirmasi-ketm');})->name('admin.data-afirmasi-ketm');
-    Route::get('/admin/data-reguler', function () {return view('admin.data-reguler');})->name('admin.data-reguler');
-    Route::get('/admin/data-lulus', function () {return view('admin.data-lulus');})->name('admin.data-lulus');
-    Route::get('/admin/data-tidaklulus', function () {return view('admin.data-tidaklulus');})->name('admin.data-tidaklulus');
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+    Route::get('/admin/persyaratan', function () {
+        return view('admin.persyaratan');
+    })->name('admin.persyaratan');
+    Route::get('/admin/alur-pendaftaran', function () {
+        return view('admin.alur-pendaftaran');
+    })->name('admin.alur-pendaftaran');
+    Route::get('/admin/data-siswa', function () {
+        return view('admin.datasiswa');
+    })->name('admin.datasiswa');
+    Route::get('/admin/data-afirmasi-prestasi', function () {
+        return view('admin.data-afirmasi-prestasi');
+    })->name('admin.data-afirmasi-prestasi');
+    Route::get('/admin/data-afirmasi-abk', function () {
+        return view('admin.data-afirmasi-abk');
+    })->name('admin.data-afirmasi-abk');
+    Route::get('/admin/data-afirmasi-ketm', function () {
+        return view('admin.data-afirmasi-ketm');
+    })->name('admin.data-afirmasi-ketm');
+    Route::get('/admin/data-reguler', function () {
+        return view('admin.data-reguler');
+    })->name('admin.data-reguler');
+    Route::get('/admin/data-lulus', function () {
+        return view('admin.data-lulus');
+    })->name('admin.data-lulus');
+    Route::get('/admin/data-tidaklulus', function () {
+        return view('admin.data-tidaklulus');
+    })->name('admin.data-tidaklulus');
 });
 
 Route::middleware('auth')->group(function () {
@@ -86,4 +139,4 @@ Route::middleware('auth')->group(function () {
     Route::get('npsn-data/sekolah', [BiodataController::class, 'searchBySekolah'])->name('search.sekolah');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
