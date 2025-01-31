@@ -11,7 +11,7 @@
             <div class="items-center flex">
                 <div class="">
                     <ul class="text-white text-xs xl:text-base font-semibold lg:flex gap-4 hidden" >
-                        <li class="hover:bg-secondary hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2 rounded-lg"><a href="/home">Beranda</a></li>
+                        <li class="hover:bg-secondary hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2 rounded-lg"><a href="/">Beranda</a></li>
                         <li class="hover:bg-secondary hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2 rounded-lg"><a href="/persyaratan">Persyaratan</a></li>
                         <li class="hover:bg-secondary hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2 rounded-lg"><a href="/alurpendaftaran">Alur Pendaftaran</a></li>
                         <li class="border-l py-3" ></li>
@@ -30,21 +30,9 @@
         </nav>
         <div class="mobileMenu hidden xl:hidden">
             <ul class=" text-sm text-center font-bold gap-8" >
-                <li  class="py-4 px-3 cursor-pointer hover:bg-white text-white hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2"><a href="/">Beranda</a></li>
-                <li  class="py-4 px-3 cursor-pointer hover:bg-white text-white hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2"><a href="/guest-prestasi">Prestasi</a></li>
-                <li  class="py-4 px-3 cursor-pointer hover:bg-white text-white hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2"><a href="/guest-kegiatan">Kegiatan</a></li>
-                <li  class="py-4 px-3 cursor-pointer hover:bg-white text-white hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2 relative" x-data="{dropdown:false}">
-                    <button @click="dropdown = !dropdown" class=" focus-scale-95 transition-all duration-200 ease-out p-2 rounded-lg " >Tentang Kami</button>
-                    <!--DropDown-->
-                    <div class=" bg-secondary z-10 text-primary rounded-md right-0 my-2 p-2" x-show="dropdown" @click.outside="dropdown = false">
-                        <ul class="space-y-2 w-full">
-                            <li><a href="/guest-sejarah" class=" flex p-2 font-medium text-primary rounded-md hover:bg-white hover:text-black">Sejarah KHALANSA</a></li>
-                            <li><a href="/guest-struktur" class=" flex p-2 font-medium text-primary rounded-md hover:bg-white hover:text-black">Struktur Kepengurusan</a></li>
-                            <li><a href="/guest-dewankehormatan" class="flex p-2 font-medium text-primary rounded-md hover:bg-white hover:text-black">Dewan Kehormatan</a></li>
-                            <li><a href="/guest-jp" class="flex p-2 font-medium text-primary rounded-md hover:bg-white hover:text-black">Jumpa Penggalang</a></li>
-                        </ul>
-                    </div></li>
-                <li  class="py-4 px-3 cursor-pointer hover:bg-white text-white hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2"><a href="/guest-kontak">Kontak Kami</a></li>
+                <li class="text-white hover:bg-secondary hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2 rounded-lg"><a href="/">Beranda</a></li>
+                <li class="text-white hover:bg-secondary hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2 rounded-lg"><a href="/persyaratan">Persyaratan</a></li>
+                <li class="text-white hover:bg-secondary hover:text-primary focus-scale-95 transition-all duration-200 ease-out p-2 rounded-lg"><a href="/alurpendaftaran">Alur Pendaftaran</a></li>
             </ul>
             <div class=" flex gap-4 px-4 pb-4 mt-4">
                 <a class="flex items-center justify-center w-full text-white outline px-9 py-4 rounded-full font-bold text-sm hover:bg-secondary hover:text-primary" href="login">Masuk</a>

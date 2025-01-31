@@ -7,7 +7,7 @@
 <section>
     <div class="container flex justify-center  mx-auto gap-2">
 
-        <div class="w-[20vw] p-6 bg-primary border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white">
+        <div class="md:w-[20vw] p-6 bg-primary border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-primary">Jalur Afirmatif</h5>
             </a>
@@ -19,7 +19,7 @@
                 </svg>
             </a>
         </div>
-        <div class="w-[20vw] p-6 bg-primary border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white">
+        <div class="md:w-[20vw] p-6 bg-primary border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white">
             <a href="#">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-primary">Jalur Reguler</h5>
             </a>
@@ -36,7 +36,7 @@
 
 <section>
         <div class="container mx-auto py-5">
-            <div class="my-4 bg-white border border-tertiary rounded-lg text-tertiary text-center py-8 mx-auto w-1/2">
+            <div class="my-4 bg-white border border-tertiary rounded-lg text-tertiary text-center py-8 mx-auto w-3/4 md:w-1/2">
                 <h2 class="font-bold text-xl">Jadwal Penerimaan Peserta Didik Baru (PPDB)</h2>
                 <p class="text-lg">Tahun Pelajaran 2025/2026</p>
             </div>

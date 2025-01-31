@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
 class Operator
 {
@@ -21,16 +22,16 @@ class Operator
 
         $userRole=Auth::user()->role;
 
-        if($userRole==2){
+        if($userRole=='operator'){
             return $next($request);
         }
         
-        if($userRole==1){
-            return redirect()->route('/');;
+        if($userRole=='admin'){
+            return redirect()->route('admin.dashboard');;
         }
         
-        if($userRole==3){
-            return redirect()->route('/');;
+        if($userRole=='siswa'){
+            return redirect()->route('siswa.dashboard');;
         }
     }
 }
