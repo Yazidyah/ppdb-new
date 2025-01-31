@@ -4,45 +4,62 @@
 
 switch ($userRole){
     //Admin
-    case 1:
+    case 'admin':
     $redirectUrl = 'admin.dashboard';
-    $redirectUrlp = 'admin.prestasi';
-    $redirectUrlk = 'admin.kegiatan';
-    $redirectUrlpk = 'admin.postkegiatan';
-    $redirectUrlc = 'admin.kontak';
+    $redirectUrlp = 'admin.persyaratan';
+    $redirectUrlk = 'admin.alur-pendaftaran';
+    $redirectUrlpk = 'admin.dashboard';
+    $redirectUrlc = 'admin.dashboard';
+    $redirectUrlrr = 'admin.dashboard';
+    $redirectUrldk = 'admin.dashboard';
+    $redirectUrlst = 'admin.dashboard';
+    $redirectUrls = 'admin.dashboard';
     break;
     //Pembina
-    case 2:
-    $redirectUrl = 'pembina.dashboard';
-    $redirectUrlp = 'pembina.prestasi';
-    $redirectUrlk = 'pembina.kegiatan';
-    $redirectUrlpk = 'pembina.postkegiatan';
-    $redirectUrlc = 'pembina.kontak';
+    case 'operator':
+    $redirectUrl = 'operator.dashboard';
+    $redirectUrlp = 'operator.persyaratan';
+    $redirectUrlk = 'operator.alur-pendaftaran';
+    $redirectUrlpk = 'operator.data-afirmasi-prestasi';
+    $redirectUrlc = 'operator.data-afirmasi-abk';
+    $redirectUrlrr = 'operator.data-afirmasi-ketm';
+    $redirectUrldk = 'operator.data-tidaklulus';
+    $redirectUrlst = 'operator.data-reguler';
+    $redirectUrls = 'operator.datasiswa';
+    $redirectUrlls = 'operator.data-lulus';
+    $redirectUrlcrud = 'operator.tambah-persyaratan';
     break;
 
     default:
-    $redirectUrl = 'siswa.dashboard';
-    $redirectUrlp = 'siswa.dashboard';
-    $redirectUrlk = 'siswa.dashboard';
-    $redirectUrlpk = 'siswa.dashboard';
-    $redirectUrlc = 'siswa.dashboard';
+    $redirectUrl = 'anggota.dashboard';
+    $redirectUrlp = 'anggota.prestasi';
+    $redirectUrlk = 'anggota.kegiatan';
+    $redirectUrlpk = 'anggota.postkegiatan';
+    $redirectUrlc = 'anggota.kontak';
+    $redirectUrlrr = 'anggota.jp';
+    $redirectUrldk = 'anggota.dewankehormatan';
+    $redirectUrlst = 'anggota.struktur';
+    $redirectUrls = 'anggota.sejarah';
     break;
 
 }
 @endphp
 
 
-<nav x-data="{ open: false }" class="bg-primary mx-auto w-full sticky z-10 top-0 right-0 left-0">
+
+
+<nav x-data="{ open: false }" class="fixed top-0 z-50 bg-tertiary mx-auto w-full right-0 left-0">
     <!-- Primary Navigation Menu -->
     <div class="flex justify-between items-center container mx-auto">
        
             
                 <!-- Logo -->
-                <div class="flex items-center gap-1 justify-center px-6">
-                    <a href="{{ route($redirectUrl) }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                <div x-data="{cheat:false}" class="flex items-center gap-1 justify- px-6">
+                    <a href={{ route($redirectUrl) }}>
+                        <x-application-logo class=" h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
-                </div>
+
+</div>
             <div class="flex">
                 <!-- Navigation Links -->
                 <div class="items-center justify-center flex">
@@ -50,6 +67,13 @@ switch ($userRole){
                     <x-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
                         {{ __('Beranda') }} 
                     </x-nav-link>
+                    <x-nav-link :href="route($redirectUrlp)" :active="request()->routeIs($redirectUrlp)">
+                        {{ __('Persyaratan') }} 
+                    </x-nav-link>
+                    <x-nav-link :href="route($redirectUrlk)" :active="request()->routeIs($redirectUrlk)">
+                        {{ __('Alur Pendaftaran') }} 
+                    </x-nav-link>
+                   
                     <div class="border-l py-3" ></div>
                 </div>
             </div>
@@ -59,12 +83,13 @@ switch ($userRole){
             <div class="py-4 pl-6 lg:flex hidden gap-4">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center  border border-transparent  leading-4 bg-dasar  focus:outline-none transition ease-in-out duration-150 hover:bg-white text-white outline-dasar outline px-7 py-3 rounded-full font-bold text-xs xl:text-base hover:text-tertiary ">
-                            <img src="/logoman.webp" class="w-5">
-                            <div class="text-base ml-2" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+                        <button class=" hover:text-tertiary inline-flex items-center  border border-transparent  leading-4 bg-dasar  focus:outline-none transition ease-in-out duration-150 hover:bg-white
+                        text-white outline-dasar outline px-7 py-3 rounded-full font-bold text-xs xl:text-base hover:text-dasar2 ">
+                            <img src="/logoman.webp" class="w-5 mr-2">
+                            <div class="" x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
 
                             <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <svg class="fill-current h-4 w-4 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </div>
@@ -102,10 +127,10 @@ switch ($userRole){
     </div>
 </div>
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class=" hidden lg:hidden h-64 overflow-y-auto">
         <div class=" pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
-                {{ __('Beranda') }}
+                {{ __('Dashboard') }}
             </x-responsive-nav-link>
            
         </div>
@@ -117,12 +142,10 @@ switch ($userRole){
                 <div class="font-medium text-sm text-gray-300">{{ auth()->user()->email }}</div>
             </div>
 
-            <div class=" mt-3 space-y-1">
+            <div class=" mt-3">
             <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                
+                </x-responsive-nav-link>             
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
@@ -139,3 +162,49 @@ switch ($userRole){
         </div>
     </div>
 </nav>
+<aside x-show="cheat" id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full border-r border-gray-200 sm:translate-x-0 " aria-label="Sidebar">
+   <div  class="h-full px-3 py-4 overflow-y-auto bg-tertiary">
+      <ul  class="space-y-2 font-medium">
+         <li>
+         <x-side-nav :href="route($redirectUrlcrud)" :active="request()->routeIs($redirectUrlcrud)">
+         {{ __('Tambah Persyaratan') }}
+         </x-side-nav>
+         </li>
+         <li>
+         <x-side-nav :href="route($redirectUrls)" :active="request()->routeIs($redirectUrls)">
+         {{ __('Data Pendaftar') }}
+         </x-side-nav>
+         </li>
+         <li>
+         <x-side-nav :href="route($redirectUrlpk)" :active="request()->routeIs($redirectUrlpk)">
+         {{ __('Data Pendaftar Afirmasi Prestasi') }}
+         </x-side-nav>
+         </li>
+         <li>
+         <x-side-nav :href="route($redirectUrlc)" :active="request()->routeIs($redirectUrlc)">
+         {{ __('Data Pendaftar Afirmasi ABK') }}
+         </x-side-nav>
+         </li>
+         <li>
+         <x-side-nav :href="route($redirectUrlrr)" :active="request()->routeIs($redirectUrlrr)">
+         {{ __('Data Pendaftar Afirmasi KETM') }}
+         </x-side-nav>
+         </li>
+         <li>
+         <x-side-nav :href="route($redirectUrlst)" :active="request()->routeIs($redirectUrlst)">
+         {{ __('Data Pendaftar Reguler') }}
+         </x-side-nav>
+         </li>
+         <li>
+         <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
+         {{ __('Data Pendaftar Lulus') }}
+         </x-side-nav>
+         </li>         
+         <li>
+         <x-side-nav :href="route($redirectUrldk)" :active="request()->routeIs($redirectUrldk)">
+         {{ __('Data Pendaftar Tidak Lulus') }}
+         </x-side-nav>
+         </li>         
+      </ul>
+   </div>
+</aside>

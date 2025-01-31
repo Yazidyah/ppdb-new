@@ -26,7 +26,7 @@ switch ($userRole){
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" href="/path/to/flickity.css" media="screen">
-        <link rel="icon" type="image/png" sizes="32x32" href="/logoman.webp">
+        <link rel="icon" type="image/png" sizes="32x32" src="logoman.webp">
         <title>{{ config('app.name', 'MAN 1 KOTA BOGOR') }}</title>
 
         <!-- Fonts -->
@@ -38,7 +38,7 @@ switch ($userRole){
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include($redirectUrl)
+            
 
             <!-- Page Heading -->
             @isset($header)
@@ -48,7 +48,8 @@ switch ($userRole){
                     </div>
                 </header>
             @endisset
-
+            <x-logo-horizontal></x-logo-horizontal>
+            <x-javascript></x-javascript>
             <!-- Page Content -->
             <main>
                 {{ $slot }}

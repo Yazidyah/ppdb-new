@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('persyaratan', function (Blueprint $table) {
             $table->id('id_persyaratan');
-            $table->unsignedInteger('id_jalur');
+            $table->unsignedBigInteger('id_jalur');
             $table->string('nama_persyaratan', 50);
             $table->text('deskripsi'); 
             $table->timestamps();
