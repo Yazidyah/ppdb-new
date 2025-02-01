@@ -21,7 +21,6 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->boolean('is_active')->default(true);
             $table->date('tanggal_lahir')->nullable()->nullable();
-            $table->string('tempat_lahir', 50)->nullable();
             $table->string('NPSN', 15)->nullable();
             $table->string('sekolah_asal', 100)->nullable();
             $table->text('alamat_domisili')->nullable();

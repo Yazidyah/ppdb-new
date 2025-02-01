@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('calon_siswa', function (Blueprint $table) {
-            $table->string('NIK', 20)->change();
-            $table->string('NISN', 20)->change();
+            $table->string('NIK', 20)->nullable()->change();
+            $table->string('NISN', 20)->nullable()->change();
         });
     }
 

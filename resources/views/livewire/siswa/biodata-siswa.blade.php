@@ -51,7 +51,7 @@
                                 <x-reg-input-text id="NISN"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NISN" required autofocus autocomplete="NISN"
-                                    placeholder="NISN" />
+                                    placeholder="NISN" wire:model.live="nisn" />
                                 <x-input-error :messages="$errors->get('NISN')" class="mt-2" />
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                 <x-reg-input-text id="NPSN"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NPSN" required autofocus autocomplete="NPSN"
-                                    placeholder="NPSN" />
+                                    placeholder="NPSN" wire:model.live="npsn" />
                                 <x-input-error :messages="$errors->get('NPSN')" class="mt-2" />
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                                 <x-reg-input-text id="sekolah_asal"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="sekolah_asal" required autofocus autocomplete="sekolah_asal"
-                                    placeholder="Asal Sekolah" />
+                                    placeholder="Asal Sekolah" wire:model.live="sekolah_asal" />
                                 <x-input-error :messages="$errors->get('sekolah_asal')" class="mt-2" />
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                                 <x-reg-input-text id="no_telp"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="no_telp" required autofocus autocomplete="no_telp"
-                                    placeholder="Nomor Telepon" />
+                                    placeholder="Nomor Telepon" wire:model.live="no_telp" />
                                 <x-input-error :messages="$errors->get('no_telp')" class="mt-2" />
                             </div>
                         </div>
@@ -101,11 +101,12 @@
                                 <p>Jenis Kelamin:</p>
                                 <div class="flex items-center justify-center gap-2">
                                     <label class="text-xs">
-                                        <input type="radio" name="jenis_kelamin" value="L" required>
-                                        Laki-laki
+                                        <input type="radio" name="jenis_kelamin" value="L"
+                                            wire:model.live="jenis_kelamin"> Laki-laki
                                     </label>
                                     <label class="text-xs">
-                                        <input type="radio" name="jenis_kelamin" value="P">
+                                        <input type="radio" name="jenis_kelamin" value="P"
+                                            wire:model.live="jenis_kelamin">
                                         Perempuan
                                     </label>
                                 </div>
@@ -119,7 +120,8 @@
                                 <x-reg-input-text id="alamat_domisili"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="alamat_domisili" required autofocus
-                                    autocomplete="alamat_domisili" placeholder="Alamat Domisili" />
+                                    autocomplete="alamat_domisili" placeholder="Alamat Domisili"
+                                    wire:model.live='alamat_domisili' />
                                 <x-input-error :messages="$errors->get('alamat_domisili')" class="mt-2" />
                             </div>
                         </div>
@@ -131,7 +133,7 @@
                                 <x-reg-input-text id="alamat_kk"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="alamat_kk" required autofocus autocomplete="alamat_kk"
-                                    placeholder="Alamat KK" />
+                                    placeholder="Alamat KK" wire:model.live='alamat_kk' />
                                 <x-input-error :messages="$errors->get('alamat_kk')" class="mt-2" />
                             </div>
                         </div>
@@ -168,7 +170,7 @@
                                 <x-reg-input-text id="tempat_lahir"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="tempat_lahir" required autofocus autocomplete="tempat_lahir"
-                                    placeholder="Tempat Lahir" />
+                                    placeholder="Tempat Lahir" wire:model.live='tempat_lahir' />
                                 <x-input-error :messages="$errors->get('tempat_lahir')" class="mt-2" />
                             </div>
                         </div>
@@ -181,7 +183,8 @@
                                 <x-reg-input-text id="tanggal_lahir"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="date" name="tanggal_lahir" required autofocus
-                                    autocomplete="tanggal_lahir" placeholder="Tanggal Lahir" />
+                                    autocomplete="tanggal_lahir" placeholder="Tanggal Lahir"
+                                    wire:model.live='tanggal_lahir' />
                                 <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
                             </div>
                         </div>
