@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id("id_registrasi");
             $table->unsignedBigInteger('id_calon_siswa');
             $table->unsignedBigInteger('id_jalur');
-            $table->string('status', 20)->default('0');
+            $table->string('status', 20)->default('0')->nullable();
             $table->timestamp('tanggal_daftar')->useCurrent();
             $table->timestamps();
 

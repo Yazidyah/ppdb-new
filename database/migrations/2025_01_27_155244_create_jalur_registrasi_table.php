@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('jalur_registrasi', function (Blueprint $table) {
             $table->id('id_jalur');
-            $table->string('nama_jalur', 50);
-            $table->text('deskripsi');
-            $table->date('tanggal_buka');
-            $table->date('tanggal_tutup');
+            $table->string('nama_jalur', 50)->nullable();
+            $table->text('deskripsi')->nullable();
+            $table->date('tanggal_buka')->nullable();
+            $table->date('tanggal_tutup')->nullable();
             $table->boolean('is_open')->default(false);
             $table->timestamps();
         });

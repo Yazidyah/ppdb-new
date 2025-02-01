@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id('id_calon_siswa');
             $table->unsignedBigInteger('id_user')->unique();
             $table->string('nama_lengkap', 50)->nullable();
-            $table->integer('NIK')->unique()->nullable();
-            $table->integer('NISN')->unique()->nullable();
+            $table->string('NIK', 20)->nullable();
+            $table->string('NISN')->nullable();
             $table->string('no_telp', 15)->nullable();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->boolean('is_active')->default(true);
+            $table->string('tempat_lahir', 50)->nullable();
             $table->date('tanggal_lahir')->nullable()->nullable();
             $table->string('NPSN', 15)->nullable();
             $table->string('sekolah_asal', 100)->nullable();

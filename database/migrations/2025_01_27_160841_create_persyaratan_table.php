@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('persyaratan', function (Blueprint $table) {
             $table->id('id_persyaratan');
             $table->unsignedBigInteger('id_jalur');
-            $table->string('nama_persyaratan', 50);
-            $table->text('deskripsi'); 
+            $table->string('nama_persyaratan', 50)->nullable();
+            $table->text('deskripsi')->nullable(); 
             $table->timestamps();
 
             $table->foreign('id_jalur')->references('id_jalur')->on('jalur_registrasi')->onDelete('cascade');

@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id('id_berkas');
             $table->integer('kategori_berkas_id');
             $table->integer('id_syarat')->default(0)->nullable();
-            $table->string('original_name', 255);
-            $table->string('file_name', 255);
-            $table->uuid('document_uuid');
-            $table->string('berkasable_type', 255);
-            $table->bigInteger('berkasable_id');
-            $table->bigInteger('uploader_id');
+            $table->string('original_name', 255)->nullable();
+            $table->string('file_name', 255)->nullable();
+            $table->uuid('document_uuid')->nullable();
+            $table->string('berkasable_type', 255)->nullable();
+            $table->bigInteger('berkasable_id')->nullable();
+            $table->bigInteger('uploader_id')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable();
             $table->string('disk', 255);
