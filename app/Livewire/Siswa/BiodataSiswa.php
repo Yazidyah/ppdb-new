@@ -3,6 +3,7 @@
 namespace App\Livewire\Siswa;
 
 use App\Models\CalonSiswa;
+use App\Models\KategoriBerkas;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -12,6 +13,7 @@ class BiodataSiswa extends Component
     public $siswa;
     public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk;
 
+    public $kb;
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
@@ -47,6 +49,9 @@ class BiodataSiswa extends Component
 
     public function mount()
     {
+        $this->kb = KategoriBerkas::where('key', 'test')->first();
+        // dd($this->kb);
+
         $this->user = Auth::user();
         $this->siswa = CalonSiswa::firstOrCreate([
             'id_user' => $this->user->id,

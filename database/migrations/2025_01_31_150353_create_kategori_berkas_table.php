@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kategori_berkas', function (Blueprint $table) {
-            $table->bigIncrements('id_kategori');
-            $table->string('name', 255);
-            $table->string('accepted_file_types', 255);
+            $table->id();
+            $table->string('nama');
+            $table->string('folder_name');
+            $table->string('accepted_file_types');
             $table->integer('max_file_size');
-            $table->boolean('is_multiple');
-            $table->string('key', 255);
-            $table->string('disk', 255);
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('deleted_at')->nullable();
+            $table->boolean('is_multiple')->default(0);
+            $table->string('key')->nullable();
+            $table->string('disk')->nullable()->default('local');
+            $table->timestamps();
         });
     }
 

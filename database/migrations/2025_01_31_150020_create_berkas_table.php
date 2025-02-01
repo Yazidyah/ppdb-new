@@ -12,18 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('berkas', function (Blueprint $table) {
-            $table->id('id_berkas');
-            $table->integer('kategori_berkas_id');
+            $table->id();
+            $table->bigInteger('kategori_berkas_id')->nullable();
             $table->integer('id_syarat')->default(0)->nullable();
-            $table->string('original_name', 255);
-            $table->string('file_name', 255);
-            $table->uuid('document_uuid');
-            $table->string('berkasable_type', 255);
-            $table->bigInteger('berkasable_id');
-            $table->bigInteger('uploader_id');
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('deleted_at')->nullable();
-            $table->string('disk', 255);
+            $table->string('original_name');
+            $table->string('file_name');
+            $table->uuid('document_uuid')->nullable();
+            $table->morphs('berkasable');
+            $table->foreignId('uploader_id')->constrained('users');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->string('disk')->nullable()->default('local');
         });
     }
 
