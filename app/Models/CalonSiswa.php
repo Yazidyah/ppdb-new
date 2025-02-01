@@ -10,7 +10,7 @@ class CalonSiswa extends Model
     use SoftDeletes;
 
     protected $table = 'calon_siswa';
-    protected $primaryKey = 'id_calon_siswa';
+    protected $primaryKey = 'id_calon_siswa'; // Specify the primary key column
     
     protected $fillable = [
         'id_user',
