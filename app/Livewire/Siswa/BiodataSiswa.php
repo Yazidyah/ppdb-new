@@ -4,6 +4,7 @@ namespace App\Livewire\Siswa;
 
 use App\Models\CalonSiswa;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 
 class BiodataSiswa extends Component
@@ -12,6 +13,7 @@ class BiodataSiswa extends Component
     public $siswa;
     public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk;
 
+    public $sekolahs = [];
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
@@ -94,6 +96,7 @@ class BiodataSiswa extends Component
 
     public function updatedNpsn($value)
     {
+        $this->searchByNps($value);
         $this->validateOnly('npsn');
         $this->siswa->NPSN = $value;
         $this->siswa->save();
@@ -138,6 +141,21 @@ class BiodataSiswa extends Component
         $this->validateOnly('tempat_lahir');
         $this->siswa->tempat_lahir = $value;
         $this->siswa->save();
+    }
+
+    public function searchByNps($value)
+    {
+        $apiUrl = env('NPSN_API_BASE_URL') . "/sekolah?npsn={$value}";
+        $response = Http::get($apiUrl);
+        if ($response->successful()) {
+            $data = $response->json();
+            $this->sekolahs = array_map(function ($item) {
+                return [
+                    'npsn' => $item['npsn'],
+                    'sekolah' => $item['sekolah']
+                ];
+            }, $data['dataSekolah']);
+        }
     }
 
 
