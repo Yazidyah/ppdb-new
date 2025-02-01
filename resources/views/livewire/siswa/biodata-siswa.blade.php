@@ -19,6 +19,7 @@
             <h1 class="font-semibold py-2 ">Informasi Pribadi</h1>
             <div class="">
                 <div class="md:flex gap-3 w-full">
+                    <!-- Left Column -->
                     <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-4 py-2 w-full">
                         <!-- Nama Lengkap -->
                         <div class="col-span-4">
@@ -28,8 +29,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="nama_lengkap" required autofocus autocomplete="nama_lengkap"
                                     placeholder="Nama Lengkap" wire:model.live="nama_lengkap" />
-                                <x-input-error :messages="$errors->get('nama_lengkap')" class="mt-2" />
                             </div>
+                            @error('nama_lengkap')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- NIK -->
@@ -40,8 +43,11 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NIK" required autofocus autocomplete="NIK"
                                     placeholder="NIK" wire:model.live="nik" />
-                                <x-input-error :messages="$errors->get('NIK')" class="mt-2" />
                             </div>
+                            @error('nik')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+
                         </div>
 
                         <!-- NISN -->
@@ -52,8 +58,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NISN" required autofocus autocomplete="NISN"
                                     placeholder="NISN" wire:model.live="nisn" />
-                                <x-input-error :messages="$errors->get('NISN')" class="mt-2" />
                             </div>
+                            @error('nisn')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- NPSN -->
@@ -64,8 +72,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NPSN" required autofocus autocomplete="NPSN"
                                     placeholder="NPSN" wire:model.live="npsn" />
-                                <x-input-error :messages="$errors->get('NPSN')" class="mt-2" />
                             </div>
+                            @error('npsn')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- ASAL SEKOLAH -->
@@ -76,8 +86,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="sekolah_asal" required autofocus autocomplete="sekolah_asal"
                                     placeholder="Asal Sekolah" wire:model.live="sekolah_asal" />
-                                <x-input-error :messages="$errors->get('sekolah_asal')" class="mt-2" />
                             </div>
+                            @error('sekolah_asal')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Nomor Telepon -->
@@ -89,11 +101,14 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="no_telp" required autofocus autocomplete="no_telp"
                                     placeholder="Nomor Telepon" wire:model.live="no_telp" />
-                                <x-input-error :messages="$errors->get('no_telp')" class="mt-2" />
                             </div>
+                            @error('no_telp')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 
+                    <!-- Right Column -->
                     <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-4 py-2 w-full">
                         <!-- Jenis Kelamin -->
                         <div class="col-span-4">
@@ -106,8 +121,7 @@
                                     </label>
                                     <label class="text-xs">
                                         <input type="radio" name="jenis_kelamin" value="P"
-                                            wire:model.live="jenis_kelamin">
-                                        Perempuan
+                                            wire:model.live="jenis_kelamin"> Perempuan
                                     </label>
                                 </div>
                             </div>
@@ -122,8 +136,10 @@
                                     type="text" name="alamat_domisili" required autofocus
                                     autocomplete="alamat_domisili" placeholder="Alamat Domisili"
                                     wire:model.live='alamat_domisili' />
-                                <x-input-error :messages="$errors->get('alamat_domisili')" class="mt-2" />
                             </div>
+                            @error('alamat_domisili')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Alamat KK -->
@@ -134,8 +150,11 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="alamat_kk" required autofocus autocomplete="alamat_kk"
                                     placeholder="Alamat KK" wire:model.live='alamat_kk' />
-                                <x-input-error :messages="$errors->get('alamat_kk')" class="mt-2" />
                             </div>
+                            @error('alamat_kk')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+
                         </div>
 
                         <!-- Provinsi -->
@@ -171,8 +190,11 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="tempat_lahir" required autofocus autocomplete="tempat_lahir"
                                     placeholder="Tempat Lahir" wire:model.live='tempat_lahir' />
-                                <x-input-error :messages="$errors->get('tempat_lahir')" class="mt-2" />
                             </div>
+                            @error('tempat_lahir')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+
                         </div>
 
                         <!-- Tanggal Lahir -->
@@ -185,12 +207,17 @@
                                     type="date" name="tanggal_lahir" required autofocus
                                     autocomplete="tanggal_lahir" placeholder="Tanggal Lahir"
                                     wire:model.live='tanggal_lahir' />
-                                <x-input-error :messages="$errors->get('tanggal_lahir')" class="mt-2" />
                             </div>
+                            @error('tanggal_lahir')
+                                <span class="text-xs text-red-500">{{ $message }}</span>
+                            @enderror
+
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
 
     </div>
