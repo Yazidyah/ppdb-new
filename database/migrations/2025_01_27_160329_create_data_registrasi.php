@@ -14,13 +14,12 @@ return new class extends Migration
         Schema::create('data_registrasi', function (Blueprint $table) {
             $table->id("id_registrasi");
             $table->unsignedBigInteger('id_calon_siswa');
-            $table->unsignedBigInteger('id_jalur');
+            $table->unsignedBigInteger('id_jalur')->nullable();
             $table->string('status', 20)->default('0')->nullable();
             $table->timestamp('tanggal_daftar')->useCurrent();
             $table->timestamps();
-
             $table->foreign('id_calon_siswa')->references('id_calon_siswa')->on('calon_siswa')->onDelete('cascade');
-            $table->foreign('id_jalur')->references('id_jalur')->on('jalur_registrasi')->onDelete('cascade');
+            // $table->foreign('id_jalur')->references('id_jalur')->on('jalur_registrasi')->onDelete('cascade');
         });
     }
 

@@ -11,7 +11,7 @@
         <a href="/daftar/step2">
             <span class="flex items-center sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 <span class="me-2">2</span>
-                Jalur <span class="hidden sm:inline-flex sm:ms-2">Afirmatif</span>
+                Jalur <span class="hidden sm:inline-flex sm:ms-2">Pendaftaran</span>
             </span>
         </a>
     </li>

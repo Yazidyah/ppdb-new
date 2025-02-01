@@ -10,6 +10,8 @@ use App\Http\Middleware\Siswa;
 use App\Http\Middleware\Operator;
 use App\Livewire\Counter;
 use App\Livewire\Siswa\StepSatu;
+use App\Livewire\Registrasi\StepDua;
+use App\Livewire\Dokumen\StepTiga;
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -56,6 +58,8 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
         return view('siswa.daftar-step1');
     })->name('siswa.daftar-step1');
     Route::get('/siswa/daftar-step-satu', StepSatu::class)->name('siswa.daftar-step-satu');
+    Route::get('/siswa/daftar-step-dua', StepDua::class)->name('siswa.daftar-step-dua');
+    Route::get('/siswa/daftar-step-tiga', StepTiga::class)->name('siswa.daftar-step-tiga');
     Route::get('/siswa/daftar-step2', function () {
         return view('siswa.daftar-step2');
     })->name('tambah-step2');
