@@ -34,6 +34,6 @@ class PekerjaanOrtuSeeder extends Seeder
             $item['updated_at'] = $timestamp;
         }
 
-        DB::table('pekerjaan_orang_tuas')->insert($pekerjaan);
+        DB::table('pekerjaan_orang_tua')->insert($pekerjaan);
     }
 }
