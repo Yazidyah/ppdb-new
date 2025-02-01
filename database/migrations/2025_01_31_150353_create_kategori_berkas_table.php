@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('kategori_berkas', function (Blueprint $table) {
             $table->bigIncrements('id_kategori');
-            $table->string('name', 255);
-            $table->string('accepted_file_types', 255);
-            $table->integer('max_file_size');
-            $table->boolean('is_multiple');
-            $table->string('key', 255);
-            $table->string('disk', 255);
+            $table->string('name', 255)->nullable();
+            $table->string('accepted_file_types', 255)->nullable();
+            $table->integer('max_file_size')->nullable();
+            $table->boolean('is_multiple')->nullable();
+            $table->string('key', 255)->nullable();
+            $table->string('disk', 255)->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable();
         });
