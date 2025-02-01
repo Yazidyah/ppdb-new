@@ -20,6 +20,29 @@ class BiodataSiswa extends Component
         'jenis_kelamin' => 'required',
         'tanggal_lahir' => 'required|date',
         'tempat_lahir' => 'required|string',
+        'sekolah_asal' => 'required|string',
+        'npsn' => 'required|numeric',
+        'alamat_domisili' => 'required|string',
+        'alamat_kk' => 'required|string',
+    ];
+
+    public $messages = [
+        'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong',
+        'nik.required' => 'NIK tidak boleh kosong',
+        'nik.numeric' => 'NIK harus berupa angka',
+        'nisn.required' => 'NISN tidak boleh kosong',
+        'nisn.numeric' => 'NISN harus berupa angka',
+        'no_telp.required' => 'No. Telp tidak boleh kosong',
+        'no_telp.numeric' => 'No. Telp harus berupa angka',
+        'jenis_kelamin.required' => 'Jenis Kelamin tidak boleh kosong',
+        'tanggal_lahir.required' => 'Tanggal Lahir tidak boleh kosong',
+        'tanggal_lahir.date' => 'Tanggal Lahir harus berupa tanggal',
+        'tempat_lahir.required' => 'Tempat Lahir tidak boleh kosong',
+        'sekolah_asal.required' => 'Sekolah Asal tidak boleh kosong',
+        'npsn.required' => 'NPSN tidak boleh kosong',
+        'npsn.numeric' => 'NPSN harus berupa angka',
+        'alamat_domisili.required' => 'Alamat Domisili tidak boleh kosong',
+        'alamat_kk.required' => 'Alamat KK tidak boleh kosong',
     ];
 
     public function mount()
@@ -43,48 +66,56 @@ class BiodataSiswa extends Component
 
     public function updatedNamaLengkap($value)
     {
+        $this->validateOnly('nama_lengkap');
         $this->siswa->nama_lengkap = $value;
         $this->siswa->save();
     }
 
     public function updatedNik($value)
     {
+        $this->validateOnly('nik');
         $this->siswa->NIK = $value;
         $this->siswa->save();
     }
 
     public function updatedNisn($value)
     {
+        $this->validateOnly('nisn');
         $this->siswa->NISN = $value;
         $this->siswa->save();
     }
 
     public function updatedNoTelp($value)
     {
+        $this->validateOnly('no_telp');
         $this->siswa->no_telp = $value;
         $this->siswa->save();
     }
 
     public function updatedNpsn($value)
     {
+        $this->validateOnly('npsn');
         $this->siswa->NPSN = $value;
         $this->siswa->save();
     }
 
     public function updatedSekolahAsal($value)
     {
+        $this->validateOnly('sekolah_asal');
         $this->siswa->sekolah_asal = $value;
         $this->siswa->save();
     }
 
     public function updatedAlamatDomisili($value)
     {
+        $this->validateOnly('alamat_domisili');
         $this->siswa->alamat_domisili = $value;
         $this->siswa->save();
     }
 
     public function updatedAlamatKk($value)
     {
+        $this->validateOnly('alamat_kk');
         $this->siswa->alamat_kk = $value;
         $this->siswa->save();
     }
@@ -97,12 +128,14 @@ class BiodataSiswa extends Component
 
     public function updatedTanggalLahir($value)
     {
+        $this->validateOnly('tanggal_lahir');
         $this->siswa->tanggal_lahir = $value;
         $this->siswa->save();
     }
 
     public function updatedTempatLahir($value)
     {
+        $this->validateOnly('tempat_lahir');
         $this->siswa->tempat_lahir = $value;
         $this->siswa->save();
     }
