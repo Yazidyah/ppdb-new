@@ -24,7 +24,7 @@ class HubunganOrangTuaSeeder extends Seeder
         foreach ($hubungan as &$item) {
             $item['created_at'] = $timestamp;
             $item['updated_at'] = $timestamp;
-            DB::table('hubungan_orang_tua')->insert($item);
+            DB::table('hubungan_orang_tuas')->insert($item);
         }
     }
 }
