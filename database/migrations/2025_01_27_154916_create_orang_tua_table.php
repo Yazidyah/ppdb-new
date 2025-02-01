@@ -11,11 +11,11 @@ return new class extends Migration
         Schema::create('orang_tua', function (Blueprint $table) {
             $table->id('id_orang_tua');
             $table->unsignedBigInteger('id_calon_siswa');
-            $table->unsignedBigInteger('id_hubungan');
-            $table->string('nama_lengkap', 100);
-            $table->string('nik', 20);
-            $table->unsignedBigInteger('pekerjaan');
-            $table->string('no_telp', 15);
+            $table->unsignedBigInteger('id_hubungan')->nullable();
+            $table->string('nama_lengkap', 100)->nullable();
+            $table->string('nik', 20)->nullable();
+            $table->unsignedBigInteger('pekerjaan')->nullable();
+            $table->string('no_telp', 15)->nullable();
             $table->timestamps();
 
             $table->foreign('id_calon_siswa')->references('id_calon_siswa')->on('calon_siswa')->onDelete('cascade');

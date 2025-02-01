@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rapot', function (Blueprint $table) {
             $table->id('id_rapot');
             $table->unsignedBigInteger('id_registrasi');
-            $table->json('nilai_rapot');
+            $table->json('nilai_rapot')->nullable();
             $table->timestamps();
 
             $table->foreign('id_registrasi')->references('id_registrasi')->on('data_registrasi')->onDelete('cascade');
