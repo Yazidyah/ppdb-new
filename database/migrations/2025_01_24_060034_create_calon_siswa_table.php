@@ -13,17 +13,16 @@ return new class extends Migration
     {
         Schema::create('calon_siswa', function (Blueprint $table) {
             $table->id('id_calon_siswa');
-            $table->unsignedBigInteger('id_user')->unique(); 
-            $table->string('nama_lengkap', 50);
-            $table->integer('NIK')->unique(); 
-            $table->integer('NISN')->unique(); 
-            $table->string('no_telp', 15)->nullable(); 
-            $table->enum('jenis_kelamin', ['L', 'P']); 
+            $table->unsignedBigInteger('id_user')->unique();
+            $table->string('nama_lengkap', 50)->nullable();
+            $table->integer('NIK')->unique()->nullable();
+            $table->integer('NISN')->unique()->nullable();
+            $table->string('no_telp', 15)->nullable();
+            $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
             $table->boolean('is_active')->default(true);
-            $table->date('tanggal_lahir')->nullable(); 
-            $table->string('tempat_lahir', 50)->nullable();
-            $table->string('NPSN', 15);
-            $table->string('sekolah_asal', 100);
+            $table->date('tanggal_lahir')->nullable()->nullable();
+            $table->string('NPSN', 15)->nullable();
+            $table->string('sekolah_asal', 100)->nullable();
             $table->text('alamat_domisili')->nullable();
             $table->text('alamat_kk')->nullable();
             $table->timestamps();
