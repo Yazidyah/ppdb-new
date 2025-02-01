@@ -14,7 +14,7 @@ class OrangTua extends Component
     public $user;
     public $siswa;
     public $forms = [];
-
+    public $orangTua;
     protected $rules = [
         'forms.*.id_hubungan' => 'required|exists:hubungan_orang_tua,id_hubungan',
         'forms.*.nama_lengkap' => 'required|string|max:255',
@@ -26,7 +26,11 @@ class OrangTua extends Component
     public function mount()
     {
         $this->user = Auth::user();
-        $this->siswa = CalonSiswa::where('id_calon_siswa', $this->user->id)->first();
+        $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
+        $this->orangTua = ModelsOrangTua::firstOrCreate([
+            'id_calon_siswa' => $this->user->id,
+            'id_hubungan' => 1,
+        ]);
         $this->forms[] = $this->initializeForm();
     }
 
@@ -43,32 +47,33 @@ class OrangTua extends Component
         ];
     }
 
-    public function addForm()
-    {
-        if (count($this->forms) < 2) {
-            $this->forms[] = $this->initializeForm();
-        }
-    }
+    // public function addForm()
+    // {
+    //     if (count($this->forms) < 2) {
+    //         $this->forms[] = $this->initializeForm();
+    //     }
+    // }
 
-    public function updatedForms($value, $name)
-    {
-        list($index, $field) = explode('.', $name);
-        $orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->first();
-        $orangTua->$field = $value;
-        $orangTua->save();
-        if ($field == 'id_hubungan') {
-            $this->filterPekerjaanOptions($index);
-        }
-    }
+    // public function updatedForms($value, $name)
+    // {
+    //     list($index, $field) = explode('.', $name);
+    //     $orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->first();
+    //     $orangTua->$field = $value;
+    //     $orangTua->save();
+    //     if ($field == 'id_hubungan') {
+    //         $this->filterPekerjaanOptions($index);
+    //     }
+    // }
 
-    public function filterPekerjaanOptions($index)
-    {
-        if ($this->forms[$index]['id_hubungan'] == 1) {
-            $this->forms[$index]['pekerjaanOptions'] = PekerjaanOrangTua::where('id_pekerjaan', '!=', 1)->get();
-        } else {
-            $this->forms[$index]['pekerjaanOptions'] = PekerjaanOrangTua::all();
-        }
-    }
+    // public function filterPekerjaanOptions($index)
+    // {
+    //     $idHubungan = $this->forms[$index]['id_hubungan'];
+    //     $this->PekerjaanOrangTua = PekerjaanOrangTua::query()->get();
+    //     dd($this->PekerjaanOrangTua);
+    //     $this->forms[$index]['pekerjaanOptions'] = PekerjaanOrangTua::when($idHubungan == 2, function ($query) {
+    //         return $query->where('id_pekerjaan', '!=', 1);
+    //     })->get();
+    // }
 
     public function render()
     {

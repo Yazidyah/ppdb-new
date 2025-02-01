@@ -11,7 +11,7 @@
                 Isi Data yang Sebenar-benarnya.</h1>
         </div>
         @foreach($forms as $index => $form)
-            <livewire:orang-tua-form :index="$index" :key="$index"/>
+            @livewire('orang-tua-form',['orangTua',$orangTua], key('add-orang-tua'.$orangTua->id))
         @endforeach
         @if(count($forms) < 2)
             <button wire:click="addForm" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">+ Tambah Data</button>
