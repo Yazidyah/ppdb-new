@@ -25,7 +25,7 @@
                     <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">2</h1>
                 </a>
                 <a class="text-[8px] md:text-[13px]">
-                    <h1 class="font-semibold flex text-center">Data Orang Tua</h1>
+                    <h1 class="font-semibold flex text-center">Data Orang Tua dan Wali</h1>
                 </a>
             </button>
 

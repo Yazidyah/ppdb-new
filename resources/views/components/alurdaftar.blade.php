@@ -1,5 +1,5 @@
 <ol class="stepper container mx-auto flex items-center w-1/2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base my-4">
-    <li data-step="1" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step1') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+    <li data-step="1" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-satu') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
         <a href="/daftar/step1">
             <span class="flex items-center sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
             <span class="me-2">1</span>
@@ -7,7 +7,7 @@
             </span>
         </a>
     </li>
-    <li data-step="2" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step2') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+    <li data-step="2" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-dua') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
         <a href="/daftar/step2">
             <span class="flex items-center sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 <span class="me-2">2</span>
@@ -15,7 +15,7 @@
             </span>
         </a>
     </li>
-    <li data-step="3" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step3') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+    <li data-step="3" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-tiga') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
         <a href="/daftar/step3/prestasi">
             <span class="flex items-center sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 <span class="me-2">3</span>
@@ -23,7 +23,7 @@
             </span>
         </a>
     </li>
-    <li data-step="4" class="step flex items-center {{ Request::is('siswa/daftar-step4') ? 'text-blue-600 dark:text-blue-500' : '' }}">
+    <li data-step="4" class="step flex items-center {{ Request::is('siswa/daftar-step-empat') ? 'text-blue-600 dark:text-blue-500' : '' }}">
         <span class="me-2">4</span>
         Verifikasi
     </li>
