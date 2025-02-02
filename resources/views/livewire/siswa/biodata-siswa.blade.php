@@ -14,9 +14,14 @@
                     Isi Data Diri Anda yang Sebenar-benarnya.</h1>
             </div>
 
+
+
         </div>
         <div class="">
             <h1 class="font-semibold py-2 ">Informasi Pribadi</h1>
+            <div>
+                @livewire('pemberkasan.uploader', ['kategori' => $kb, 'model' => $siswa, 'editable' => true], key($siswa->id . '-testing-'))
+            </div>
             <div class="">
                 <div class="md:flex gap-3 w-full">
                     <!-- Left Column -->

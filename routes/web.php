@@ -145,4 +145,21 @@ Route::middleware('auth')->group(function () {
     Route::get('npsn-data/sekolah', [BiodataController::class, 'searchBySekolah'])->name('search.sekolah');
 });
 
+Route::get('local/temp/{path}', function (string $path) {
+    $decoded = base64_decode($path, true);
+
+    if ($decoded === false || !Storage::disk('local')->exists($decoded)) {
+        return response('File not found.', 404);
+    }
+
+    try {
+        return Storage::disk('local')->response($decoded);
+    } catch (\Throwable $th) {
+        if (app()->isLocal())
+            return $th->getMessage();
+        return '';
+    }
+})->name('local.temp');
+
+
 require __DIR__ . '/auth.php';
