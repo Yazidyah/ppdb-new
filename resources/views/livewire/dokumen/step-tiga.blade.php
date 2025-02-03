@@ -26,6 +26,7 @@
         <button onclick="closeExample()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
     </div>
     </div>
+    
     <div>
         @if ($tab === 1)
             @livewire('dokumen.upload-dokumen', key('upload-dokumen'))
