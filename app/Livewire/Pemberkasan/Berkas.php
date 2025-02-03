@@ -37,7 +37,7 @@ class Berkas extends Component
     public function delete()
     {
         $this->berkas->delete();
-        $this->emit('berkas-updated', $this->berkas->kategori_berkas_id);
+        $this->dispatch('berkas-updated', kategoriBerkasId: $this->berkas->kategori_berkas_id);
     }
     public function render()
     {

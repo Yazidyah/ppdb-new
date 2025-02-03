@@ -99,7 +99,7 @@ class Uploader extends Component
         $this->model->berkas()->save($berkas);
         $this->mount();
         $this->berkas = null;
-        $this->emit('berkasUploaded', $this->kategori->id);
+        $this->dispatch('berkasUploaded', $this->kategori->id);
     }
     public function render()
     {

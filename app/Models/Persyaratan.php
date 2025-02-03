@@ -9,6 +9,11 @@ class Persyaratan extends Model
     protected $table = 'persyaratan';
     protected $primaryKey = 'id_persyaratan';
     protected $fillable = ['id_jalur', 'nama_persyaratan', 'deskripsi'];
+    public function berkas()
+    {
+        return $this->morphMany(Berkas::class, 'berkasable');
+    }
+
 
     public function jalurRegistrasi()
     {
