@@ -1,72 +1,74 @@
-<div>
-<div class="">
+<div id="rapotModal" class=" fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+<div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
     <div class="pt-6 pb-12"><h1 class="text-3xl text-center font-bold">Isi Sesuai dengan nilai pengetahuan di Rapor</h1></div>
-</div>
-<div class="flex flex-row justify-center lg:justify-between px-4 sm:px-40 items-center mx-auto bg-secondary">
-    <div onclick="goToStep(1)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-white' : '' }}">
+
+<div>
+    <div class="">
+    <div class="flex flex-row justify-center lg:justify-between px-4 sm:px-40 items-center mx-auto bg-secondary">
+    <div onclick="goToStep(0)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-white' : '' }}">
         <a href="javascript:void(0)" class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
             <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">1</h1>
         </a>
         <a href="javascript:void(0)" class="text-[8px] md:text-[13px]"><h1 class="font-semibold flex text-center">Semester 1</h1></a>
     </div>
-    <div onclick="goToStep(2)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-tertiary' : '' }}">
+    <div onclick="goToStep(1)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-tertiary' : '' }}">
         <a href="javascript:void(0)" class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
             <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">2</h1>
         </a>
         <a href="javascript:void(0)" class="text-[8px] md:text-[13px]"><h1 class="font-semibold flex text-center">Semester 2</h1></a>
     </div>
-    <div onclick="goToStep(3)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-tertiary' : '' }}">
+    <div onclick="goToStep(2)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-tertiary' : '' }}">
         <a href="javascript:void(0)" class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
             <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">3</h1>
         </a>
         <a href="javascript:void(0)" class="text-[8px] md:text-[13px]"><h1 class="font-semibold flex text-center">Semester 3</h1></a>
     </div>
-    <div onclick="goToStep(4)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-tertiary' : '' }}">
+    <div onclick="goToStep(3)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-tertiary' : '' }}">
         <a href="javascript:void(0)" class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
             <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">4</h1>
         </a>
         <a href="javascript:void(0)" class="text-[8px] md:text-[13px]"><h1 class="font-semibold flex text-center">Semester 4</h1></a>
     </div>
-    <div onclick="goToStep(5)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-tertiary' : '' }}">
+    <div onclick="goToStep(4)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-tertiary' : '' }}">
         <a href="javascript:void(0)" class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
             <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">5</h1>
         </a>
         <a href="javascript:void(0)" class="text-[8px] md:text-[13px]"><h1 class="font-semibold flex text-center">Semester 5</h1></a>
     </div>
 </div>
-<div class="container pt-10 mx-auto px-12 lg:px-32">
+    <div class="container pt-10 mx-auto px-12 lg:px-32">
     <form method="post" action="{{ route('register') }}" id="multiStepForm" enctype="multipart/form-data">
     @csrf
     <!-- Step 1 - Semester 1-->
 <div class="steps">
         <div>
             <x-input-label for="matematika" :value="__('Matematika')" />
-            <x-text-input id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
+            <x-text-input class="bg-white" id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
             <x-input-error :messages="$errors->get('matematika')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasaindo" :value="__('Bahasa Indonesia')" />
-            <x-text-input id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
+            <x-text-input class="bg-white" id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
             <x-input-error :messages="$errors->get('bahasaindo')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasainggris" :value="__('Bahasa Inggris')" />
-            <x-text-input id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
+            <x-text-input class="bg-white" id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="pai" :value="__('PAI')" />
-            <x-text-input id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+            <x-text-input class="bg-white" id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ipa" :value="__('IPA')" />
-            <x-text-input id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
+            <x-text-input class="bg-white" id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
             <x-input-error :messages="$errors->get('ipa')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ips" :value="__('IPS')" />
-            <x-text-input id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
+            <x-text-input class="bg-white" id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
             <x-input-error :messages="$errors->get('ips')" class="mt-2" />
         </div>
 </div>
@@ -74,32 +76,32 @@
 <div class="steps hidden">
         <div>
             <x-input-label for="matematika" :value="__('Matematika')" />
-            <x-text-input id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
+            <x-text-input class="bg-white" id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
             <x-input-error :messages="$errors->get('matematika')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasaindo" :value="__('Bahasa Indonesia')" />
-            <x-text-input id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
+            <x-text-input class="bg-white" id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
             <x-input-error :messages="$errors->get('bahasaindo')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasainggris" :value="__('Bahasa Inggris')" />
-            <x-text-input id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
+            <x-text-input class="bg-white" id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="pai" :value="__('PAI')" />
-            <x-text-input id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+            <x-text-input class="bg-white" id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ipa" :value="__('IPA')" />
-            <x-text-input id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
+            <x-text-input class="bg-white" id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
             <x-input-error :messages="$errors->get('ipa')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ips" :value="__('IPS')" />
-            <x-text-input id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
+            <x-text-input class="bg-white" id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
             <x-input-error :messages="$errors->get('ips')" class="mt-2" />
         </div>
 </div>
@@ -107,32 +109,32 @@
 <div class="steps hidden">
         <div>
             <x-input-label for="matematika" :value="__('Matematika')" />
-            <x-text-input id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
+            <x-text-input class="bg-white" id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
             <x-input-error :messages="$errors->get('matematika')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasaindo" :value="__('Bahasa Indonesia')" />
-            <x-text-input id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
+            <x-text-input class="bg-white" id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
             <x-input-error :messages="$errors->get('bahasaindo')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasainggris" :value="__('Bahasa Inggris')" />
-            <x-text-input id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
+            <x-text-input class="bg-white" id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="pai" :value="__('PAI')" />
-            <x-text-input id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+            <x-text-input class="bg-white" id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ipa" :value="__('IPA')" />
-            <x-text-input id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
+            <x-text-input class="bg-white" id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
             <x-input-error :messages="$errors->get('ipa')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ips" :value="__('IPS')" />
-            <x-text-input id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
+            <x-text-input class="bg-white" id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
             <x-input-error :messages="$errors->get('ips')" class="mt-2" />
         </div>
 </div>
@@ -140,32 +142,32 @@
 <div class="steps hidden">
         <div>
             <x-input-label for="matematika" :value="__('Matematika')" />
-            <x-text-input id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
+            <x-text-input class="bg-white" id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
             <x-input-error :messages="$errors->get('matematika')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasaindo" :value="__('Bahasa Indonesia')" />
-            <x-text-input id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
+            <x-text-input class="bg-white" id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
             <x-input-error :messages="$errors->get('bahasaindo')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasainggris" :value="__('Bahasa Inggris')" />
-            <x-text-input id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
+            <x-text-input class="bg-white" id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="pai" :value="__('PAI')" />
-            <x-text-input id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+            <x-text-input class="bg-white" id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ipa" :value="__('IPA')" />
-            <x-text-input id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
+            <x-text-input class="bg-white" id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
             <x-input-error :messages="$errors->get('ipa')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ips" :value="__('IPS')" />
-            <x-text-input id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
+            <x-text-input class="bg-white" id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
             <x-input-error :messages="$errors->get('ips')" class="mt-2" />
         </div>
 </div>
@@ -173,32 +175,32 @@
 <div class="steps hidden">
         <div>
             <x-input-label for="matematika" :value="__('Matematika')" />
-            <x-text-input id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
+            <x-text-input class="bg-white" id="matematika" class="block mt-1 w-full" type="text" name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
             <x-input-error :messages="$errors->get('matematika')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasaindo" :value="__('Bahasa Indonesia')" />
-            <x-text-input id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
+            <x-text-input class="bg-white" id="bahasaindo" class="block mt-1 w-full" type="text" name="bahasaindo" :value="old('bahasaindo')" required autofocus autocomplete="bahasaindo" />
             <x-input-error :messages="$errors->get('bahasaindo')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="bahasainggris" :value="__('Bahasa Inggris')" />
-            <x-text-input id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
+            <x-text-input class="bg-white" id="bahasainggris" class="block mt-1 w-full" type="text" name="bahasainggris" :value="old('bahasainggris')" required autofocus autocomplete="bahasainggris" />
             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="pai" :value="__('PAI')" />
-            <x-text-input id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+            <x-text-input class="bg-white" id="pai" class="block mt-1 w-full placeholder:text-white" type="text" name="pai" :value="old('pai')" required autofocus autocomplete="pai" placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ipa" :value="__('IPA')" />
-            <x-text-input id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
+            <x-text-input class="bg-white" id="ipa" class="block mt-1 w-full " type="text" name="ipa" :value="old('ipa')" required autofocus autocomplete="ipa" />
             <x-input-error :messages="$errors->get('ipa')" class="mt-2" />
         </div>
         <div>
             <x-input-label for="ips" :value="__('IPS')" />
-            <x-text-input id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
+            <x-text-input class="bg-white" id="ips" class="block mt-1 w-full" type="text" name="ips" :value="old('ips')" required autofocus autocomplete="ips" />
             <x-input-error :messages="$errors->get('ips')" class="mt-2" />
         </div>
 </div>
@@ -287,4 +289,7 @@
     // Update step indicators on window resize
     window.addEventListener('resize', () => updateStepIndicator(currentStep));
 </script>
+    </div>
+    </div>
+</div>
 </div>

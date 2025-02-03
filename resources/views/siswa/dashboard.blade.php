@@ -7,9 +7,15 @@
 <section>
     <div class="container flex justify-center  mx-auto gap-2">
 
+<<<<<<< HEAD
     <div class="md:w-[20vw] p-6 bg-primary border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white">
             <a href="/siswa/daftar-step-satu?t=1">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-primary">Jalur Afirmatif</h5>
+=======
+    <div class="w-1/2 p-6 bg-primary border justify-center items-center flex flex-col border-gray-200 rounded-lg shadow-sm  dark:border-white">
+            <a href="/siswa/daftar-step1">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-white ">Pendaftaran</h5>
+>>>>>>> da45044 (Del Dark Fix FE n Rapot)
             </a>
             <p class="mb-3 font-normal text-white dark:text-gray-400">Sebentar lagi Mulai.</p>
             <a href="/siswa/daftar-step-satu?t=1" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-primary bg-secondary rounded-lg hover:bg-tertiary focus:ring-4 focus:outline-none focus:ring-blue-300 hover:text-white dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -19,6 +25,7 @@
                 </svg>
             </a>
         </div>
+<<<<<<< HEAD
         <div class="md:w-[20vw] p-6 bg-primary border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white">
             <a href="/siswa/daftar-step-satu?t=1">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white dark:text-primary">Jalur Reguler</h5>
@@ -31,6 +38,8 @@
                 </svg>
             </a>
         </div>
+=======
+>>>>>>> da45044 (Del Dark Fix FE n Rapot)
     </div>
 </section>
 </x-app-layout>

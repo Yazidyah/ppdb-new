@@ -21,7 +21,18 @@
         </div>
 
     </div>
+<<<<<<< HEAD
 
+=======
+    <div id="exampleModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-lg font-semibold">Contoh File</h2>
+        <img id="exampleImage" href="exampleFiles()" alt="Contoh File" class="mt-4 w-full rounded">
+        <button onclick="closeExample()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
+    </div>
+    </div>
+    
+>>>>>>> da45044 (Del Dark Fix FE n Rapot)
     <div>
         @if ($tab === 1)
             @livewire('dokumen.upload-dokumen', key('upload-dokumen' . rand()))

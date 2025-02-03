@@ -5,15 +5,17 @@
 switch ($userRole){
     //Admin
     case 'admin':
-    $redirectUrl = 'admin.dashboard';
+        $redirectUrl = 'admin.dashboard';
     $redirectUrlp = 'admin.persyaratan';
     $redirectUrlk = 'admin.alur-pendaftaran';
-    $redirectUrlpk = 'admin.dashboard';
-    $redirectUrlc = 'admin.dashboard';
-    $redirectUrlrr = 'admin.dashboard';
-    $redirectUrldk = 'admin.dashboard';
-    $redirectUrlst = 'admin.dashboard';
-    $redirectUrls = 'admin.dashboard';
+    $redirectUrlpk = 'admin.data-afirmasi-prestasi';
+    $redirectUrlc = 'admin.data-afirmasi-abk';
+    $redirectUrlrr = 'admin.data-afirmasi-ketm';
+    $redirectUrldk = 'admin.data-tidaklulus';
+    $redirectUrlst = 'admin.data-reguler';
+    $redirectUrls = 'admin.datasiswa';
+    $redirectUrlls = 'admin.data-lulus';
+    $redirectUrlcrud = 'admin.tambah-persyaratan';
     break;
     //Pembina
     case 'operator':

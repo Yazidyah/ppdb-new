@@ -22,8 +22,8 @@ switch ($userRole){
 
     default:
     $redirectUrl = 'siswa.dashboard';
-    $redirectUrlp = 'siswa.dashboard';
-    $redirectUrlk = 'siswa.dashboard';
+    $redirectUrlp = 'siswa.alurpendaftaran';
+    $redirectUrlk = 'siswa.persyaratan';
     $redirectUrlpk = 'siswa.dashboard';
     $redirectUrlc = 'siswa.dashboard';
     break;
@@ -40,7 +40,7 @@ switch ($userRole){
                 <!-- Logo -->
                 <div class="flex items-center gap-1 justify-center px-6">
                     <a href="{{ route($redirectUrl) }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
             <div class="flex">
@@ -49,6 +49,12 @@ switch ($userRole){
                 <div class=" text-white text-xs xl:text-base font-semibold lg:flex gap-4 hidden">
                     <x-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
                         {{ __('Beranda') }} 
+                    </x-nav-link>
+                    <x-nav-link :href="route($redirectUrlp)" :active="request()->routeIs($redirectUrlp)">
+                        {{ __('Alur Pendaftaran') }} 
+                    </x-nav-link>
+                    <x-nav-link :href="route($redirectUrlk)" :active="request()->routeIs($redirectUrlk)">
+                        {{ __('Persyaratan') }} 
                     </x-nav-link>
                     <div class="border-l py-3" ></div>
                 </div>
@@ -106,6 +112,12 @@ switch ($userRole){
         <div class=" pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
                 {{ __('Beranda') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route($redirectUrlp)" :active="request()->routeIs($redirectUrlp)">
+                {{ __('Alur Pendaftaran') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route($redirectUrlk)" :active="request()->routeIs($redirectUrlk)">
+                {{ __('Persyaratan') }}
             </x-responsive-nav-link>
            
         </div>
