@@ -21,7 +21,7 @@ class KategoriBerkasSeeder extends Seeder
                 'accepted_file_types' => 'jpg',
                 'max_file_size' => 30000,
                 'is_multiple' => false,
-                'key' => 'foto_kegiatan',
+                'key' => 'persyaratan_satu',
                 'disk' => 'local',
                 'created_at' => '2024-12-02 19:30:40',
                 'updated_at' => '2024-12-02 19:30:42',
