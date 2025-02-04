@@ -1,6 +1,6 @@
 <div>
-    <div>
-        <h2 class="text-2xl font-bold mb-4">Verifikasi Data</h2>
+    <div class="container mx-auto">
+        <h2 class="text-2xl font-bold mb-4 text-center">Verifikasi Data</h2>
         <div class="mb-4">
             <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
             <input type="text" id="nama_lengkap" value="{{ $calonSiswa->nama_lengkap }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
