@@ -12,6 +12,7 @@ use App\Livewire\Counter;
 use App\Livewire\Siswa\StepSatu;
 use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -51,6 +52,13 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/dashboard', function () {
         return view('siswa.dashboard');
     })->name('siswa.dashboard');
+    Route::get('/siswa/alurpendaftaran', function () {
+        return view('siswa.alurpendaftaran');
+    })->name('siswa.alurpendaftaran');
+    Route::get('/siswa/persyaratan', function () {
+        return view('siswa.persyaratan');
+    })->name('siswa.persyaratan');
+
     Route::get('/siswa/daftar-reguler', function () {
         return view('siswa.daftar-reguler');
     })->name('siswa.daftar-reguler');
@@ -76,7 +84,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/tambah-persyaratan', function () {
         return view('operator.tambah-persyaratan');
     })->name('operator.tambah-persyaratan');
-    Route::post('/operator/tambah-persyaratan', [OperatorController::class, 'tambahpersyaratan'])->name('admin.tambah-persyaratan');
+    Route::post('/operator/tambah-persyaratan', [OperatorController::class, 'tambahpersyaratan'])->name('operator.tambah-persyaratan');
     Route::get('/operator/alur-pendaftaran', function () {
         return view('operator.alur-pendaftaran');
     })->name('operator.alur-pendaftaran');
@@ -133,6 +141,11 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/data-tidaklulus', function () {
         return view('admin.data-tidaklulus');
     })->name('admin.data-tidaklulus');
+
+    Route::get('/admin/tambah-persyaratan', function () {
+        return view('admin.tambah-persyaratan');
+    })->name('admin.tambah-persyaratan');
+    Route::post('/admin/tambah-persyaratan', [OperatorController::class, 'tambahpersyaratan'])->name('admin.tambah-persyaratan');
 });
 
 Route::middleware('auth')->group(function () {

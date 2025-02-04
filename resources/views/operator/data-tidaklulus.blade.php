@@ -8,8 +8,8 @@
                 <h1 @click="tahun = !tahun" class="font-bold text-[32px] pt-7 pb-7 ">Pendaftar Tidak Lulus</h1>
 <div x-show="tahun" class="w-full overflow-x-auto   mx-auto flex  items-center relative shadow-md sm:rounded-lg my-6">
  
-    <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 dark:text-gray-400 my-3">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500  my-3">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50  ">
             <tr>
                 <th scope="col" class="px-6 py-3 text-center">
                     No
