@@ -28,16 +28,12 @@
                     <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-4 py-2 w-full">
                         <!-- Nama Lengkap -->
                         <div class="col-span-4">
-                            <div
-                                class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2">
-                                <x-reg-input-text id="nama_lengkap"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
-                                    type="text" name="nama_lengkap" required autofocus autocomplete="nama_lengkap"
-                                    placeholder="Nama Lengkap" wire:model.live="nama_lengkap" />
-                            </div>
-                            @error('nama_lengkap')
+                            <div class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2">
+                                <x-reg-input-text id="nama_lengkap" class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full" type="text" name="nama_lengkap" required autofocus autocomplete="nama_lengkap" placeholder="Nama Lengkap" wire:model.live="nama_lengkap" />
+                                @error('nama_lengkap')
                                 <span class="text-xs text-red-500">{{ $message }}</span>
-                            @enderror
+                                @enderror
+                            </div>
                         </div>
 
                         <!-- NIK -->
