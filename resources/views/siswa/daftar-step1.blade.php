@@ -321,8 +321,8 @@ Submit
     <button class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
     <button class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
 </div>
+</form>
         </div>
-    </form>
 </div>
 <script>
     let currentStep = 0;  // Step pertama

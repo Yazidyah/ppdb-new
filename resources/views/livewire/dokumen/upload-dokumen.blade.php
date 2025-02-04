@@ -14,8 +14,9 @@
         </h1>
     </div>
 
+
     <div class="flex w-3/4 mx-auto">
-<<<<<<< HEAD
+
         <div class="md:grid flex flex-col grid-cols-4 grid-rows-2 gap-8 w-full">
             @foreach ($persyaratan as $data)
                 <div class="flex flex-col col-span-1 row-span-1">
@@ -56,7 +57,11 @@
                     </div>
                 </div>
             @endforeach
-=======
+
+
+    
+    <div class="flex w-3/4 mx-auto">
+
     <div class="md:grid flex flex-col grid-cols-4 grid-rows-2 gap-8 w-full">
     @foreach ($persyaratan as $data)
         <div class="flex flex-col col-span-1 row-span-1">
@@ -83,7 +88,8 @@
 
 
             </div>
->>>>>>> da45044 (Del Dark Fix FE n Rapot)
+
+
         </div>
     @endforeach
 </div>
@@ -108,12 +114,36 @@
         }
     }
 
-<<<<<<< HEAD
+
     function rapotModal() {
         const modal = document.getElementById('rapotModal');
         modal.classList.toggle('hidden'); // Tampilkan/sembunyikan modal
     }
-=======
+
+
+        </div>
+    @endforeach
+</div>
+    </div>
+    
+    <div class="navigation-buttons w-1/2 mx-auto justify-center flex items-center py-10 sm:py-6 px-2 sm:px-4">
+        <button class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary" type="submit">
+            Submit
+        </button>
+    </div>
+</form>
+</div>
+
+
+<script>
+function handleFileUpload(event, labelId) {
+    const file = event.target.files[0];
+    if (file) {
+        document.getElementById(labelId).innerText = file.name;
+    }
+}
+
+
 function rapotModal() {
     const modal = document.getElementById('rapotModal');
     modal.classList.toggle('hidden'); // Tampilkan/sembunyikan modal
@@ -123,7 +153,8 @@ function rapotModal() {
 function showExample(type) {
     const exampleModal = document.getElementById('exampleModal');
     const exampleImage = document.getElementById('exampleImage');
->>>>>>> da45044 (Del Dark Fix FE n Rapot)
+
+
 
     // Fungsi untuk menampilkan contoh file
     function showExample(type) {
@@ -149,4 +180,26 @@ function showExample(type) {
     function closeExample() {
         document.getElementById('exampleModal').classList.add('hidden');
     }
+
+
+    // Tentukan URL gambar contoh berdasarkan jenis file
+    let exampleFiles = {
+        "Pas Foto 3x4": "/contoh-pas-foto.jpg",
+        "Kartu Keluarga": "/logoman.webp",
+        "Akte Kelahiran": "https://example.com/contoh-pasfoto.jpg",
+        "Rapor Semester 1-5": "https://example.com/contoh-pasfoto.jpg",
+        "Piagam Akreditasi Sekolah Asal": "https://example.com/contoh-pasfoto.jpg",
+        "Piagam Kejuaraan": "https://example.com/contoh-pasfoto.jpg",
+        // Tambahkan contoh file lainnya di sini...
+    };
+
+    exampleImage.src = exampleFiles[type] || "https://via.placeholder.com/300";
+    exampleModal.classList.remove('hidden');
+}
+
+// Fungsi untuk menutup modal contoh file
+function closeExample() {
+    document.getElementById('exampleModal').classList.add('hidden');
+}
+
 </script>
