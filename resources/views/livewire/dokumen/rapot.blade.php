@@ -1,8 +1,11 @@
-<div id="rapotModal" class=" fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-<div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
-    <div class="pt-6 pb-12"><h1 class="text-3xl text-center font-bold">Isi Sesuai dengan nilai pengetahuan di Rapor</h1></div>
-
-<div>
+<div id="rapotModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+        <div class="flex justify-end">
+            <button onclick="document.getElementById('rapotModal').style.display='none'" class="text-gray-500 hover:text-gray-700">&times;</button>
+        </div>
+        <div class="pt-6 pb-12">
+            <h1 class="text-3xl text-center font-bold">Isi Sesuai dengan nilai pengetahuan di Rapor</h1>
+        </div>
     <div class="">
     <div class="flex flex-row justify-center lg:justify-between px-4 sm:px-40 items-center mx-auto bg-secondary">
     <div onclick="goToStep(0)" class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ request()->is('showStep(currentStep)') ? 'bg-tertiary text-white' : '' }}">
@@ -214,9 +217,13 @@
 </form>
         </div>
         <script>
-    let currentStep = 0;  // Step pertama
+    let currentStep = 1;  // Step pertama
     const steps = document.getElementsByClassName("steps");
     const stepIndicators = document.getElementsByClassName("step-indicator");
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        showStep(currentStep);  // Initialize the first step when the modal appears
+    });
 
     function showStep(step) {
         for (let i = 0; i < steps.length; i++) {
@@ -282,9 +289,6 @@
         });
         return isValid;
     }
-
-    // Initialize the first step
-    
 
     // Update step indicators on window resize
     window.addEventListener('resize', () => updateStepIndicator(currentStep));

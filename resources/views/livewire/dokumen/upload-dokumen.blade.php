@@ -47,8 +47,12 @@
                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                             Lihat Contoh
                         </button>
-
-
+                        @if (strpos($data->nama_persyaratan, 'Rapot') !== false)
+                            <button type="button" onclick="rapotModal()"
+                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                Isi Data
+                            </button>
+                        @endif
                     </div>
                 </div>
             @endforeach
@@ -76,7 +80,7 @@
 
     function rapotModal() {
         const modal = document.getElementById('rapotModal');
-        modal.classList.toggle('hidden'); // Tampilkan/sembunyikan modal
+        modal.classList.toggle('hidden');
     }
 
     // Fungsi untuk menampilkan contoh file
