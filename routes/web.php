@@ -88,9 +88,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/alur-pendaftaran', function () {
         return view('operator.alur-pendaftaran');
     })->name('operator.alur-pendaftaran');
-    Route::get('/operator/data-siswa', function () {
-        return view('operator.datasiswa');
-    })->name('operator.datasiswa');
+    Route::get('/operator/data-siswa', [OperatorController::class,'showsiswa'])->name('operator.datasiswa');
     Route::get('/operator/data-afirmasi-prestasi', function () {
         return view('operator.data-afirmasi-prestasi');
     })->name('operator.data-afirmasi-prestasi');

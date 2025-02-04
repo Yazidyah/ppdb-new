@@ -19,4 +19,10 @@ public function updatepersyaratan(Request $request)
         $calonSiswa = Persyaratan::update($request->all());
         return response()->json($calonSiswa, 201);
     }
+
+    public function showsiswa(Request $request)
+    {
+        $data = CalonSiswa::all();
+        return view('operator.datasiswa', compact('data'));
+    }
 }
