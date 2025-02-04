@@ -36,29 +36,29 @@
         </thead>
         <tbody>
             @foreach ($data as $siswa)
-            
-            @endforeach
-            <th scope="col" class="px-6 py-3 text-center">
+            <td scope="col" class="px-6 py-3 text-center">
                     {{$siswa->id_user}}
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
                     {{$siswa->nama_lengkap}}
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
                     {{$siswa->NISN}}
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
                     {{$siswa->sekolah_asal}}
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
                     {{$siswa->jenis_kelamin}}
-                </th>
-                <th scope="col" class="w-[30px] whitespace-nowrap text-center">
+                </td>
+                <td scope="col" class="w-[30px] whitespace-nowrap text-center">
                     {{$siswa->user->email}}
-                </th>
-                <th scope="col" class="px-6 py-3 text-center">
-                    Aksi
-                </th>
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
+                <a href="/operator/Lulus/{{$siswa->id_user}}" class="px-4 py-2 bg-tertiary text-white font-medium rounded-lg hover:bg-secondary hover:text-tertiary">Lulus</a>
+                <a href="/operator/TidakLulus/{{$siswa->id_user}}" class="px-4 py-2 bg-red-700 text-white font-medium rounded-lg hover:bg-red-900 hover:text-white">Tidak Lulus</a>
+                </td>
+                @endforeach
         </tbody>
     </table>
 </div>
