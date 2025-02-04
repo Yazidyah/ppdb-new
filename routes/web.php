@@ -4,8 +4,6 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\SiswaController;
-use App\Livewire\Dokumen\StepTiga;
-use App\Livewire\Registrasi\StepDua;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Siswa;
@@ -14,6 +12,7 @@ use App\Livewire\Counter;
 use App\Livewire\Siswa\StepSatu;
 use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -147,7 +146,6 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         return view('admin.tambah-persyaratan');
     })->name('admin.tambah-persyaratan');
     Route::post('/admin/tambah-persyaratan', [OperatorController::class, 'tambahpersyaratan'])->name('admin.tambah-persyaratan');
-
 });
 
 Route::middleware('auth')->group(function () {

@@ -20,25 +20,27 @@
 
     </div>
     <div id="exampleModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 class="text-lg font-semibold">Contoh File</h2>
-        <img id="exampleImage" href="exampleFiles()" alt="Contoh File" class="mt-4 w-full rounded">
-        <button onclick="closeExample()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
-    </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 class="text-lg font-semibold">Contoh File</h2>
+            <img id="exampleImage" href="exampleFiles()" alt="Contoh File" class="mt-4 w-full rounded">
+            <button onclick="closeExample()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
+        </div>
     </div>
 
     <div>
         @if ($tab === 1)
             @livewire('dokumen.upload-dokumen', key('upload-dokumen' . rand()))
+            <div class="hidden">
+                @livewire('dokumen.rapot', key('rapot'))
+            </div>
             <div
                 class="navigation-buttons justify-between flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
                 <button wire:click="$set('tab', 2)"
                     class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
                     type="button" id="nextBtn">Next</button>
-            @livewire('dokumen.upload-dokumen', key('upload-dokumen'))
-            @livewire('dokumen.rapot', key('rapot'))
-            <div class="navigation-buttons justify-between flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
-            </div>
+                <div
+                    class="navigation-buttons justify-between flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
+                </div>
         @endif
     </div>
 </div>
