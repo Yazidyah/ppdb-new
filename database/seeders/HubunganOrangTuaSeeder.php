@@ -16,8 +16,8 @@ class HubunganOrangTuaSeeder extends Seeder
         $timestamp = Carbon::now();
 
         $hubungan = [
-            ['nama_hubungan' => 'Ayah'],
             ['nama_hubungan' => 'Ibu'],
+            ['nama_hubungan' => 'Ayah'],
             ['nama_hubungan' => 'Wali'],
         ];
 

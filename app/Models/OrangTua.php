@@ -16,6 +16,7 @@ class OrangTua extends Model
     ];
 
     protected $table = 'orang_tua';
+    protected $primaryKey = 'id_orang_tua'; // Specify the primary key column
 
     public function calonSiswa()
     {
