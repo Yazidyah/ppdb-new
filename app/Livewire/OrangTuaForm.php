@@ -31,6 +31,12 @@ class OrangTuaForm extends Component
         'no_telp.numeric' => 'No. Telp harus berupa angka',
     ];
 
+
+    protected $listeners = [
+        'orangtuaAdded' => 'cekOrangTua',
+    ];
+
+
     public function mount()
     {
 
@@ -43,6 +49,11 @@ class OrangTuaForm extends Component
         $this->nik = $this->orangTua->nik;
         $this->pekerjaan = $this->orangTua->pekerjaan;
         $this->no_telp = $this->orangTua->no_telp;
+    }
+
+    public function cekOrangTua()
+    {
+        redirect(request()->header('Referer'));
     }
     public function updatedNamaLengkap($value)
     {

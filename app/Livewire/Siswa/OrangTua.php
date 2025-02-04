@@ -14,7 +14,7 @@ class OrangTua extends Component
     public $user;
     public $siswa;
     public $forms = [];
-    public $orangTuaIbu, $orangTuaAyah;
+    public $orangTua;
     protected $rules = [
         'forms.*.id_hubungan' => 'required|exists:hubungan_orang_tua,id_hubungan',
         'forms.*.nama_lengkap' => 'required|string|max:255',
@@ -27,26 +27,27 @@ class OrangTua extends Component
     {
         $this->user = Auth::user();
         $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
-        $this->orangTuaIbu = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->whereIn('id_hubungan', [1, 2])->first();
-        $this->orangTuaAyah = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)
-            ->whereIn('id_hubungan', [2, 3])
-            ->first();
+        $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();
         if ($this->siswa != null) {
-            if ($this->orangTuaIbu == null) {
-                $this->orangTuaIbu = ModelsOrangTua::create([
+            if (count($this->orangTua) == 0) {
+                $this->orangTua = ModelsOrangTua::create([
                     'id_calon_siswa' => $this->siswa->id_calon_siswa,
                     'id_hubungan' => 1,
-                ]);
-            }
-            if ($this->orangTuaAyah == null) {
-                $this->orangTuaAyah = ModelsOrangTua::create([
-                    'id_calon_siswa' => $this->siswa->id_calon_siswa,
-                    'id_hubungan' => 2,
                 ]);
             }
         }
     }
 
+    public function tambahOrtu()
+    {
+        $orangTua = ModelsOrangTua::create([
+            'id_calon_siswa' => $this->siswa->id_calon_siswa,
+            'id_hubungan' => 1,
+        ]);
+
+        $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();
+        $this->dispatch('orangtuaAdded');
+    }
 
     public function render()
     {

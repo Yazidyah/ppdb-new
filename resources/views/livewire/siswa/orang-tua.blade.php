@@ -10,7 +10,16 @@
             <h1 class=" block text-xs lg:text-base items-center text-center justify-center font-semibold">Peringatan :
                 Isi Data yang Sebenar-benarnya.</h1>
         </div>
-        @livewire('orang-tua-form', ['orangTua' => $orangTuaIbu], key('form-orang-tua-' . $orangTuaIbu->id))
-        @livewire('orang-tua-form', ['orangTua' => $orangTuaAyah], key('form-orang-tua-ayah-' . $orangTuaAyah->id))
+        @foreach ($orangTua as $ortu)
+            @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua-' . $ortu->id))
+        @endforeach
+        @if (count($orangTua) < 2)
+            <button wire:click="tambahOrtu"
+                class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Tambah Data
+            </button>
+        @endif
+
+
     </div>
 </div>
