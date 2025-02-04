@@ -27,7 +27,7 @@ class OrangTua extends Component
     {
         $this->user = Auth::user();
         $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
-        $this->orangTuaIbu = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->where('id_hubungan', 1)->first();
+        $this->orangTuaIbu = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->whereIn('id_hubungan', [1, 2])->first();
         $this->orangTuaAyah = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)
             ->whereIn('id_hubungan', [2, 3])
             ->first();

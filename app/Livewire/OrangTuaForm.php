@@ -18,7 +18,7 @@ class OrangTuaForm extends Component
         'id_hubungan' => 'required|exists:hubungan_orang_tua,id_hubungan',
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
-        'pekerjaan' => 'required|exists:pekerjaan_orang_tuas,id_pekerjaan',
+        'pekerjaan' => 'required',
         'no_telp' => 'required|numeric',
     ];
 
@@ -33,6 +33,7 @@ class OrangTuaForm extends Component
 
     public function mount()
     {
+
         $this->hubunganOptions = HubunganOrangTua::orderBy('id_hubungan', 'asc')->get();
         $this->pekerjaanOptions = PekerjaanOrangTua::query()->when($this->orangTua->id_hubungan != 1, function ($query) {
             return $query->where('id_pekerjaan', '!=', 1);
