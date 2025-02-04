@@ -12,6 +12,8 @@ use App\Http\Middleware\Siswa;
 use App\Http\Middleware\Operator;
 use App\Livewire\Counter;
 use App\Livewire\Siswa\StepSatu;
+use App\Livewire\Registrasi\StepDua;
+use App\Livewire\Dokumen\StepTiga;
 
 Route::get('/sementara', function () {
     return view('sementara');

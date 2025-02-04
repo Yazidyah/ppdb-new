@@ -20,7 +20,7 @@
                 class="block w-full px-3 py-2 text-gray-900 transition transform border-0 rounded-md shadow-sm uploader ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:scale-105">
 
 
-            <button wire:loading wire:target="berkas"
+            <button wire:loading wire:target.live="berkas"
                 class="px-10 text-sm font-semibold text-white transition transform bg-indigo-600 rounded-md c-button hover:scale-105 opacity-60">Mengunggah...</button>
             @error('berkas')
                 {{ $message }}

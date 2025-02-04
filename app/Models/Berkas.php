@@ -37,4 +37,13 @@ class Berkas extends Model
     {
         return $this->belongsTo(KategoriBerkas::class, 'kategori_berkas_id', 'id');
     }
+    public function owner()
+    {
+        return $this->morphTo('owner', 'owner_type', 'owner_id');
+    }
+
+    public function morphModel()
+    {
+        return $this->morphTo('berkas', 'berkasable_type', 'berkasable_id');
+    }
 }
