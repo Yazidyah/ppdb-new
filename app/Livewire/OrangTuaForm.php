@@ -18,7 +18,7 @@ class OrangTuaForm extends Component
         'id_hubungan' => 'required|exists:hubungan_orang_tua,id_hubungan',
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
-        'pekerjaan' => 'required|exists:pekerjaan_orang_tuas,id_pekerjaan',
+        'pekerjaan' => 'required',
         'no_telp' => 'required|numeric',
     ];
 
@@ -31,8 +31,15 @@ class OrangTuaForm extends Component
         'no_telp.numeric' => 'No. Telp harus berupa angka',
     ];
 
+
+    protected $listeners = [
+        'orangtuaAdded' => 'cekOrangTua',
+    ];
+
+
     public function mount()
     {
+
         $this->hubunganOptions = HubunganOrangTua::orderBy('id_hubungan', 'asc')->get();
         $this->pekerjaanOptions = PekerjaanOrangTua::query()->when($this->orangTua->id_hubungan != 1, function ($query) {
             return $query->where('id_pekerjaan', '!=', 1);
@@ -42,6 +49,11 @@ class OrangTuaForm extends Component
         $this->nik = $this->orangTua->nik;
         $this->pekerjaan = $this->orangTua->pekerjaan;
         $this->no_telp = $this->orangTua->no_telp;
+    }
+
+    public function cekOrangTua()
+    {
+        redirect(request()->header('Referer'));
     }
     public function updatedNamaLengkap($value)
     {

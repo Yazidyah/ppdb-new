@@ -1,11 +1,11 @@
 <x-app-layout>
-<div class="container mx-auto pt-5 px-4">
+    <div class="container mx-auto pt-5 px-4">
         <div class="my-4 bg-tertiary rounded-lg text-white text-center py-8 leading-tight">
             <h2 class="font-bold text-3xl md:text-4xl ">Selamat Datang Calon Siswa MAN 1 Kota Bogor</h2>
         </div>
     </div>
-<section>
-    <div class="container flex justify-center  mx-auto gap-2">
+    <section>
+        <div class="container flex justify-center  mx-auto gap-2">
 
     <div class="w-1/2 flex justify-center items-center flex-col  p-6 bg-primary border border-gray-200 rounded-lg shadow-sm">
         <a href="/siswa/daftar-step-satu">
@@ -24,6 +24,3 @@
     </div>
 </section>
 </x-app-layout>
-
-
-
