@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class CalonSiswa extends Model
 {
@@ -36,9 +37,19 @@ class CalonSiswa extends Model
         return $this->morphMany(Berkas::class, 'berkasable');
     }
 
-
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function getJenisKelaminReadableAttribute()
+    {
+        return $this->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
+    }
+
+    public function getTanggalLahirFormattedAttribute()
+    {
+        Carbon::setLocale('id');
+        return Carbon::parse($this->tanggal_lahir)->translatedFormat('j F Y');
     }
 }
