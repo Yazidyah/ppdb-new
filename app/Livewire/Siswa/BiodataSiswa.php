@@ -81,6 +81,8 @@ class BiodataSiswa extends Component
                 'name' => $province->name
             ];
         });
+        $this->provinsi = @Province::where('name', $this->siswa->provinsi)->first()->id ?? '';
+        $this->kota = @Regency::where('name', $this->siswa->kota)->first()->id ?? '';
         $this->updateCities(); // Add this line
     }
 
