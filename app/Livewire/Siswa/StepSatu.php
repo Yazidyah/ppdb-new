@@ -22,6 +22,6 @@ class StepSatu extends Component
 
     public function render()
     {
-        return view('livewire.siswa.step-satu')->layout('layouts.apk');
+        return view('livewire.siswa.step-satu');
     }
 }
