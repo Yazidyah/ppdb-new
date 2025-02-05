@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('sekolah_asal', 100)->nullable();
             $table->text('alamat_domisili')->nullable();
             $table->text('alamat_kk')->nullable();
+            $table->string('provinsi', 100)->nullable();
+            $table->string('kota', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -165,11 +165,16 @@
                         <div class="col-span-2">
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <x-reg-input-text id="provinsi"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
-                                    type="text" name="provinsi" required autofocus autocomplete="provinsi"
-                                    placeholder="Provinsi" />
-                                <x-input-error :messages="$errors->get('provinsi')" class="mt-2" />
+                                <select id="provinsi" name="provinsi" wire:model.live="provinsi"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
+                                    <option value="">Pilih Provinsi</option>
+                                    @foreach($provinces as $province)
+                                        <option value="{{ $province['id'] }}">{{ $province['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                @error('provinsi')
+                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 

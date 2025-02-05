@@ -28,6 +28,8 @@ class CalonSiswa extends Model
         'sekolah_asal',
         'alamat_domisili',
         'alamat_kk',
+        'id_provinsi',
+        'id_kota',
     ];
 
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];
@@ -54,7 +56,7 @@ class CalonSiswa extends Model
     }
 
     public function dataRegistrasi()
-{
-    return $this->hasOne(DataRegistrasi::class, 'id_calon_siswa', 'id_user');
-}
+    {
+        return $this->hasOne(DataRegistrasi::class, 'id_calon_siswa', 'id_user');
+    }
 }

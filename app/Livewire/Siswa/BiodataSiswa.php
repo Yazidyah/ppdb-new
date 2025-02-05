@@ -4,6 +4,7 @@ namespace App\Livewire\Siswa;
 
 use App\Models\CalonSiswa;
 use App\Models\KategoriBerkas;
+use App\Models\Province; // Add this line
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -14,6 +15,8 @@ class BiodataSiswa extends Component
     public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk;
 
     public $kb;
+    public $provinces; // Add this line
+    public $provinsi; // Add this line
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
@@ -67,6 +70,13 @@ class BiodataSiswa extends Component
         $this->sekolah_asal = $this->siswa->sekolah_asal ?? '';
         $this->alamat_domisili = $this->siswa->alamat_domisili ?? '';
         $this->alamat_kk = $this->siswa->alamat_kk ?? '';
+        $this->provinces = Province::all()->map(function($province) {
+            return [
+                'id' => (string) $province->id,
+                'name' => $province->name
+            ];
+        });
+        $this->provinsi = $this->siswa->provinsi ?? '';
     }
 
     public function updatedNamaLengkap($value)
@@ -145,8 +155,15 @@ class BiodataSiswa extends Component
         $this->siswa->save();
     }
 
-
-
+    public function updatedProvinsi($value)
+    {
+        $province = Province::find($value);
+        if ($province) {
+            $this->siswa->provinsi = $province->name;
+            $this->siswa->save();
+        }
+    }
+    
 
     public function render()
     {
