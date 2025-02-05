@@ -23,7 +23,7 @@ class JalurRegistrasi extends Component
     public function mount()
     {
         $this->user = Auth::user();
-        $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->pluck('id_calon_siswa');
+        $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->pluck('id_calon_siswa')->first();
         $this->siswa = DataRegistrasi::firstOrCreate([
             'id_calon_siswa' => $this->id_siswa,
             'status' => '0'

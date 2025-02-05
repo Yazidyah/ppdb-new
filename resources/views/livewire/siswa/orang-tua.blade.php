@@ -11,7 +11,7 @@
                 Isi Data yang Sebenar-benarnya.</h1>
         </div>
         @foreach ($orangTua as $ortu)
-            @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua-' . $ortu->id))
+            @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua' . $ortu->id))
         @endforeach
         @if (count($orangTua) < 2)
             <button wire:click="tambahOrtu"

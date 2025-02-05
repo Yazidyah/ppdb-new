@@ -49,7 +49,7 @@
                         </button>
                         @if (strpos($data->nama_persyaratan, 'Rapot') !== false)
                             <button type="button" onclick="rapotModal()"
-                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg hidden">
                                 Isi Data
                             </button>
                         @endif
