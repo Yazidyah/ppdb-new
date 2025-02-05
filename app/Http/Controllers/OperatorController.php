@@ -30,7 +30,7 @@ public function updatepersyaratan(Request $request)
     public function showsiswaLulus()
 {
     $data = CalonSiswa::whereHas('dataRegistrasi', function ($query) {
-        $query->where('status', 1);
+        $query->where('status', '1'); // Ubah '1' menjadi 1 (integer)
     })->get();
 
     return view('operator.data-lulus', compact('data'));
@@ -38,7 +38,7 @@ public function updatepersyaratan(Request $request)
     public function showsiswaTidakLulus()
 {
     $data = CalonSiswa::whereHas('dataRegistrasi', function ($query) {
-        $query->where('status', 2);
+        $query->where('status', '2');
     })->get();
 
     return view('operator.data-tidaklulus', compact('data'));
@@ -77,16 +77,32 @@ public function updatepersyaratan(Request $request)
 }
 
 
-    public function lulus($id){
-        $data = DataRegistrasi::find($id);
-        $data->status = '1';
-        $data->save();
-        return redirect()->back();
+public function lulus($id)
+{
+    // Cari berdasarkan id_calon_siswa
+    $data = DataRegistrasi::where('id_calon_siswa', $id)->first();
+
+    if (!$data) {
+        return redirect()->back()->with('error', 'Data tidak ditemukan');
     }
-    public function tidaklulus($id){
-        $data = DataRegistrasi::find($id);
-        $data->status = '2';
-        $data->save();
-        return redirect()->back();
+
+    $data->status = '1'; // Gunakan integer, bukan string
+    $data->save();
+
+    return redirect()->back()->with('success', 'Status berhasil diperbarui');
+}
+public function tidaklulus($id)
+{
+    // Cari berdasarkan id_calon_siswa
+    $data = DataRegistrasi::where('id_calon_siswa', $id)->first();
+
+    if (!$data) {
+        return redirect()->back()->with('error', 'Data tidak ditemukan');
     }
+
+    $data->status = '2'; // Gunakan integer, bukan string
+    $data->save();
+
+    return redirect()->back()->with('success', 'Status berhasil diperbarui');
+}
 }

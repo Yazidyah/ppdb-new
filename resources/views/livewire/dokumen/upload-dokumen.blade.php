@@ -14,7 +14,7 @@
         </h1>
     </div>
 
-    <div class="flex w-3/4 mx-auto">
+    <div class="flex w-3/4 mx-auto mt-4">
         <div class="md:grid flex flex-col grid-cols-4 grid-rows-2 gap-8 w-full">
             @foreach ($persyaratan as $data)
             <div class="flex flex-col col-span-1 row-span-1">
@@ -47,7 +47,7 @@
                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                             Lihat Contoh
                         </button>
-                        @if (strpos($data->nama_persyaratan, 'Rapot') !== false)
+                        @if (strpos($data->nama_persyaratan, 'Rapor semester 1-5') !== false)
                             <button type="button" onclick="rapotModal()"
                                 class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg hidden">
                                 Isi Data
