@@ -78,15 +78,9 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/dashboard', function () {
         return view('operator.dashboard');
     })->name('operator.dashboard');
-    Route::get('/operator/data-afirmasi-prestasi', function () {
-        return view('operator.data-afirmasi-prestasi');
-    })->name('operator.data-afirmasi-prestasi');
-    Route::get('/operator/data-afirmasi-abk', function () {
-        return view('operator.data-afirmasi-abk');
-    })->name('operator.data-afirmasi-abk');
-    Route::get('/operator/data-afirmasi-ketm', function () {
-        return view('operator.data-afirmasi-ketm');
-    })->name('operator.data-afirmasi-ketm');
+    Route::get('/operator/data-afirmasi-prestasi', [OperatorController::class,'showsiswaPrestasi'])->name('operator.data-afirmasi-prestasi');
+    Route::get('/operator/data-afirmasi-abk', [OperatorController::class,'showsiswaAbk'])->name('operator.data-afirmasi-abk');
+    Route::get('/operator/data-afirmasi-ketm', [OperatorController::class,'showsiswaKetm'])->name('operator.data-afirmasi-ketm');
     Route::get('/operator/persyaratan', function () {
         return view('operator.persyaratan');
     })->name('operator.persyaratan');
@@ -98,9 +92,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
         return view('operator.alur-pendaftaran');
     })->name('operator.alur-pendaftaran');
     Route::get('/operator/data-siswa', [OperatorController::class,'showsiswa'])->name('operator.datasiswa');
-    Route::get('/operator/data-reguler', function () {
-        return view('operator.data-reguler');
-    })->name('operator.data-reguler');
+    Route::get('/operator/data-reguler', [OperatorController::class,'showsiswaReguler'])->name('operator.data-reguler');
     Route::get('/operator/data-lulus', [OperatorController::class,'showsiswaLulus'])->name('operator.data-lulus');
     Route::get('/operator/data-tidaklulus', [OperatorController::class,'showsiswaTidakLulus'])->name('operator.data-tidaklulus');
 
