@@ -4,10 +4,11 @@ namespace App\Livewire\Siswa;
 
 use App\Models\CalonSiswa;
 use App\Models\KategoriBerkas;
-use App\Models\Province; // Add this line
-use App\Models\Regency; // Add this line
+use App\Models\Province; 
+use App\Models\Regency; 
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Http; // Add this line
 
 class BiodataSiswa extends Component
 {
@@ -16,10 +17,12 @@ class BiodataSiswa extends Component
     public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk;
 
     public $kb;
-    public $provinces; // Add this line
-    public $provinsi; // Add this line
-    public $cities = []; // Add this line
-    public $kota; // Add this line
+    public $provinces; 
+    public $provinsi; 
+    public $cities = []; 
+    public $kota; 
+    public $searchNpsn; 
+    public $sekolahs = []; 
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
@@ -74,7 +77,7 @@ class BiodataSiswa extends Component
         $this->alamat_domisili = $this->siswa->alamat_domisili ?? '';
         $this->alamat_kk = $this->siswa->alamat_kk ?? '';
         $this->provinsi = $this->siswa->provinsi ?? '';
-        $this->kota = $this->siswa->kota ?? ''; // Add this line
+        $this->kota = $this->siswa->kota ?? ''; 
         $this->provinces = Province::all()->map(function($province) {
             return [
                 'id' => (string) $province->id,
@@ -83,7 +86,7 @@ class BiodataSiswa extends Component
         });
         $this->provinsi = @Province::where('name', $this->siswa->provinsi)->first()->id ?? '';
         $this->kota = @Regency::where('name', $this->siswa->kota)->first()->id ?? '';
-        $this->updateCities(); // Add this line
+        $this->updateCities(); 
     }
 
     public function updatedNamaLengkap($value)
@@ -168,7 +171,7 @@ class BiodataSiswa extends Component
         if ($province) {
             $this->siswa->provinsi = $province->name;
             $this->siswa->save();
-            $this->updateCities(); // Add this line
+            $this->updateCities(); 
         }
     }
 
@@ -198,8 +201,41 @@ class BiodataSiswa extends Component
         }
     }
 
+    public function searchByNps()
+    {
+        $apiUrl = env('NPSN_API_BASE_URL') . "/sekolah?npsn={$this->npsn}";
+        $response = Http::get($apiUrl);
+        if ($response->successful()) {
+            $data = $response->json();
+            $this->sekolahs = array_map(function ($item) {
+                return [
+                    'npsn' => $item['npsn'],
+                    'sekolah' => $item['sekolah']
+                ];
+            }, $data['dataSekolah']);
+            if (!empty($this->sekolahs)) {
+                if (strpos($this->sekolahs[0]['sekolah'], 'SMP') !== 0) {
+                    $this->addError('sekolah_asal', 'Nama sekolah harus dimulai dengan SMP');
+                } else {
+                    $this->npsn = $this->sekolahs[0]['npsn'];
+                    $this->siswa->NPSN = $this->npsn;
+                    $this->siswa->sekolah_asal = $this->sekolahs[0]['sekolah'];
+                    $this->siswa->save();
+                    return redirect(request()->header('Referer'));
+                }
+            }
+        }
+    }
+
+    public function handleNpsnName()
+    {
+        $this->siswa->sekolah_asal= $this->sekolahs[0]['sekolah'];
+    }
+
     public function render()
     {
-        return view('livewire.siswa.biodata-siswa');
+        return view('livewire.siswa.biodata-siswa', [
+            'sekolahs' => $this->sekolahs 
+        ]);
     }
 }
