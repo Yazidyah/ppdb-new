@@ -73,14 +73,14 @@ class BiodataSiswa extends Component
         $this->sekolah_asal = $this->siswa->sekolah_asal ?? '';
         $this->alamat_domisili = $this->siswa->alamat_domisili ?? '';
         $this->alamat_kk = $this->siswa->alamat_kk ?? '';
-        $this->provinces = Province::all()->map(function($province) {
+        $this->provinces = Province::all()->map(function ($province) {
             return [
                 'id' => (string) $province->id,
                 'name' => $province->name
             ];
         });
-        $this->provinsi = $this->siswa->provinsi ?? '';
-        $this->kota = $this->siswa->kota ?? ''; // Add this line
+        $this->provinsi = Province::where('name', $this->siswa->provinsi)->first()->id ?? '';
+        $this->kota = Regency::where('name', $this->siswa->kota)->first()->id ?? '';
         $this->updateCities(); // Add this line
     }
 
@@ -184,7 +184,7 @@ class BiodataSiswa extends Component
         if ($this->provinsi) {
             $province = Province::find($this->provinsi);
             if ($province) {
-                $this->cities = $province->regencies->map(function($city) {
+                $this->cities = $province->regencies->map(function ($city) {
                     return [
                         'id' => (string) $city->id,
                         'name' => $city->name
