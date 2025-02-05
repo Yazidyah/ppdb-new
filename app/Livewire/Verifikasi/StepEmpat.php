@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Livewire\Registrasi;
+namespace App\Livewire\Verifikasi;
 
 use Livewire\Component;
 
-class StepDua extends Component
+class StepEmpat extends Component
 {
-
     public $tab = 1;
     protected $queryString = [
         'tab' => ['except' => 'konsep', 'as' => 't'],
@@ -14,6 +13,6 @@ class StepDua extends Component
 
     public function render()
     {
-        return view('livewire.registrasi.step-dua')->layout('layouts.apk');
+        return view('livewire.verifikasi.step-empat')->layout('layouts.apk');
     }
 }

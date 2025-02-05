@@ -81,6 +81,5 @@
                 <input type="text" id="no_telp_orang_tua_ayah" value="{{ $orangTuaAyah->no_telp }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
             </div>
         @endif
-        <!-- Add more fields as necessary -->
     </div>
 </div>
