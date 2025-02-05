@@ -52,4 +52,9 @@ class CalonSiswa extends Model
         Carbon::setLocale('id');
         return Carbon::parse($this->tanggal_lahir)->translatedFormat('j F Y');
     }
+
+    public function dataRegistrasi()
+{
+    return $this->hasOne(DataRegistrasi::class, 'id_calon_siswa', 'id_user');
+}
 }
