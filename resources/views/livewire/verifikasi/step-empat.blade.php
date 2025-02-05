@@ -1,6 +1,6 @@
 <div>
     {{-- Care about people's approval and you will be their prisoner. --}}
-        <div class="mb-7">
+    <div class="mb-7">
         <div class="">
             <div class="pt-6 pb-12">
                 <h1 class="text-3xl text-center font-bold">FINALISASI PENDAFTARAN</h1>
@@ -21,8 +21,9 @@
 
     <div>
         @if ($tab === 1)
-            @livewire('verifikasi.finalisasi-dokumen', key('finalisasi-dokumen'))
-            <div class="navigation-buttons justify-between flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
+            @livewire('verifikasi.finalisasi-dokumen', key('finalisasi-dokumen-' . $user->id))
+            <div
+                class="navigation-buttons justify-between flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
             </div>
         @endif
     </div>
