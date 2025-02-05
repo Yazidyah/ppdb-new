@@ -182,7 +182,7 @@ class BiodataSiswa extends Component
     public function updateCities() // Add this method
     {
         if ($this->provinsi) {
-            $province = Province::find($this->provinsi);
+            $province = Province::where('name', $this->provinsi)->first();
             if ($province) {
                 $this->cities = $province->regencies->map(function($city) {
                     return [
