@@ -167,7 +167,7 @@
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <select id="provinsi" name="provinsi" wire:model.live="provinsi"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
-                                    <option value="">Pilih Provinsi</option>
+                                    <option value=""disabled="disabled">Pilih Provinsi</option>
                                     @foreach($provinces as $province)
                                         <option value="{{ $province['id'] }}">{{ $province['name'] }}</option>
                                     @endforeach
@@ -184,7 +184,7 @@
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <select id="kota" name="kota" wire:model.live="kota"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
-                                    <option value="">Pilih Kota/Kab</option>
+                                    <option value="" disabled="disabled" >Pilih Kota/Kab</option>
                                     @foreach($cities as $city)
                                         <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
                                     @endforeach
