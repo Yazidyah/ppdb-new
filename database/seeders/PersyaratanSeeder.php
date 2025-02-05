@@ -15,12 +15,12 @@ class PersyaratanSeeder extends Seeder
     {
         DB::table('persyaratan')->insert([
             [
-                'id_jalur' => 1, // Adjust this value as needed
+                'id_jalur' => 1, 
                 'nama_persyaratan' => 'Ijazah SMP/MTs',
                 'deskripsi' => 'Ijazah dari sekolah menengah pertama atau madrasah tsanawiyah'
             ],
             [
-                'id_jalur' => 1, // Adjust this value as needed
+                'id_jalur' => 1, 
                 'nama_persyaratan' => 'Rapot',
                 'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah'
             ]

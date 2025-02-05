@@ -38,6 +38,14 @@
             <input type="text" id="sekolah_asal" value="{{ $calonSiswa->sekolah_asal }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
         </div>
         <div class="mb-4">
+            <label for="provinsi" class="block text-sm font-medium text-gray-700">Provinsi Tinggal</label>
+            <input type="text" id="provinsi" value="{{ $calonSiswa->provinsi }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+        <div class="mb-4">
+            <label for="kota" class="block text-sm font-medium text-gray-700">Kota Tinggal</label>
+            <input type="text" id="kota" value="{{ $calonSiswa->kota }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+        <div class="mb-4">
             <label for="alamat_domisili" class="block text-sm font-medium text-gray-700">Alamat Domisili</label>
             <input type="text" id="alamat_domisili" value="{{ $calonSiswa->alamat_domisili }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
         </div>
