@@ -56,7 +56,7 @@ class CalonSiswa extends Model
     }
 
     public function dataRegistrasi()
-    {
-        return $this->hasOne(DataRegistrasi::class, 'id_calon_siswa', 'id_user');
-    }
+{
+    return $this->hasOne(DataRegistrasi::class, 'id_calon_siswa', 'id_calon_siswa');
+}
 }

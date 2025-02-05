@@ -19,11 +19,11 @@
             <div class="">
                 <a href="/" class="flex flex-col justify-center items-center">
                     <img src="/logoman.webp" class="justify-center items-center w-40 fill-current" >
-                    <h1 class="text-3xl fill-current text-white font-bold text-center"> PPDB MAN 1 Kota Bogor</h1>
+                    <h1 class="text-3xl fill-current text-white font-bold text-center mt-4"> PPDB MAN 1 Kota Bogor</h1>
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white  shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white  shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
         </div>
