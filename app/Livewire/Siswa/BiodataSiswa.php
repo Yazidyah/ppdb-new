@@ -5,6 +5,7 @@ namespace App\Livewire\Siswa;
 use App\Models\CalonSiswa;
 use App\Models\KategoriBerkas;
 use App\Models\Province; // Add this line
+use App\Models\Regency; // Add this line
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -17,6 +18,8 @@ class BiodataSiswa extends Component
     public $kb;
     public $provinces; // Add this line
     public $provinsi; // Add this line
+    public $cities = []; // Add this line
+    public $kota; // Add this line
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
@@ -77,6 +80,8 @@ class BiodataSiswa extends Component
             ];
         });
         $this->provinsi = $this->siswa->provinsi ?? '';
+        $this->kota = $this->siswa->kota ?? ''; // Add this line
+        $this->updateCities(); // Add this line
     }
 
     public function updatedNamaLengkap($value)
@@ -161,9 +166,35 @@ class BiodataSiswa extends Component
         if ($province) {
             $this->siswa->provinsi = $province->name;
             $this->siswa->save();
+            $this->updateCities(); // Add this line
         }
     }
-    
+
+    public function updatedKota($value) // Add this method
+    {
+        $city = Regency::find($value);
+        if ($city) {
+            $this->siswa->kota = $city->name;
+            $this->siswa->save();
+        }
+    }
+
+    public function updateCities() // Add this method
+    {
+        if ($this->provinsi) {
+            $province = Province::find($this->provinsi);
+            if ($province) {
+                $this->cities = $province->regencies->map(function($city) {
+                    return [
+                        'id' => (string) $city->id,
+                        'name' => $city->name
+                    ];
+                });
+            }
+        } else {
+            $this->cities = [];
+        }
+    }
 
     public function render()
     {

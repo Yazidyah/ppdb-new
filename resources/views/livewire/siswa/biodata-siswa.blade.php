@@ -182,11 +182,16 @@
                         <div class="col-span-2">
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <x-reg-input-text id="kotakab"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
-                                    type="text" name="kotakab" required autofocus autocomplete="kotakab"
-                                    placeholder="Kota/Kab" />
-                                <x-input-error :messages="$errors->get('kotakab')" class="mt-2" />
+                                <select id="kota" name="kota" wire:model.live="kota"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
+                                    <option value="">Pilih Kota/Kab</option>
+                                    @foreach($cities as $city)
+                                        <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                @error('kota')
+                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
