@@ -88,7 +88,9 @@
 
                     <div id="orangtua-content" class="tab-content"
                         style="display: {{ $tab == 'orangtua' ? 'block' : 'none' }};">
-                        <p>orangtua</p>
+                        <div class="mt-3">
+                            @livewire('operator.tab-ortu-siswa', ['siswa' => $siswa], key('operator-tab-ortu-siswa-' . $siswa->id_calon_siswa))
+                        </div>
                     </div>
                 </div>
 
