@@ -41,5 +41,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PersyaratanSeeder::class);
         $this->call(IndoRegionProvinceSeeder::class);
         $this->call(IndoRegionRegencySeeder::class);
+        $this->call(StatistikSeeder::class);
     }
 }
