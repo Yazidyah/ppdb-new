@@ -83,7 +83,7 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NPSN" required autofocus autocomplete="NPSN"
                                     placeholder="NPSN" wire:model="npsn" />
-                                <button wire:click="searchByNps"
+                                <button wire:click="searchByNpsn"
                                     class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Check
                                 </button>
                                 @error('npsn')
