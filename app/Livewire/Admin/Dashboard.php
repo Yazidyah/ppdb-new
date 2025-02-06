@@ -9,11 +9,14 @@ use Illuminate\Support\Facades\DB;
 class Dashboard extends Component
 {
     public $statistik;
+    public $filterNamaStatistik = '';
+    public $allNamaStatistik = [];
 
     public function mount()
     {
-        $this->statistik = Statistik::orderBy('id', 'asc')->get();
         $this->updateStatistik();
+        $this->loadStatistik();
+        $this->loadAllNamaStatistik();
     }
 
     private function updateStatistik()
@@ -43,6 +46,27 @@ class Dashboard extends Component
         foreach ($statistikData as $id => $count) {
             Statistik::where('id', $id)->update(['count' => $count]);
         }
+    }
+
+    public function updatedFilterNamaStatistik()
+    {
+        $this->loadStatistik();
+    }
+
+    private function loadStatistik()
+    {
+        if ($this->filterNamaStatistik) {
+            $this->statistik = Statistik::where('nama_statistik', $this->filterNamaStatistik)
+                ->orderBy('id', 'asc')
+                ->get();
+        } else {
+            $this->statistik = Statistik::orderBy('id', 'asc')->get();
+        }
+    }
+
+    private function loadAllNamaStatistik()
+    {
+        $this->allNamaStatistik = Statistik::orderBy('id', 'asc')->pluck('nama_statistik')->toArray();
     }
 
     public function render()
