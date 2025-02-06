@@ -46,7 +46,7 @@ public function updatepersyaratan(Request $request)
     public function showsiswaReguler()
 {
     $data = CalonSiswa::whereHas('dataRegistrasi', function ($query) {
-        $query->where('id_jalur', 1);
+        $query->where('id_jalur', '1');
     })->get();
 
     return view('operator.data-reguler', compact('data'));
@@ -54,7 +54,7 @@ public function updatepersyaratan(Request $request)
     public function showsiswaPrestasi()
 {
     $data = CalonSiswa::whereHas('dataRegistrasi', function ($query) {
-        $query->where('id_jalur', 2);
+        $query->where('id_jalur', '2');
     })->get();
 
     return view('operator.data-afirmasi-prestasi', compact('data'));
@@ -62,7 +62,7 @@ public function updatepersyaratan(Request $request)
     public function showsiswaKetm()
 {
     $data = CalonSiswa::whereHas('dataRegistrasi', function ($query) {
-        $query->where('id_jalur', 3);
+        $query->where('id_jalur', '3');
     })->get();
 
     return view('operator.data-afirmasi-ketm', compact('data'));
@@ -70,7 +70,7 @@ public function updatepersyaratan(Request $request)
     public function showsiswaAbk()
 {
     $data = CalonSiswa::whereHas('dataRegistrasi', function ($query) {
-        $query->where('id_jalur', 4);
+        $query->where('id_jalur', '4');
     })->get();
 
     return view('operator.data-afirmasi-abk', compact('data'));

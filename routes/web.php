@@ -96,6 +96,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     })->name('operator.alur-pendaftaran');
     Route::get('/operator/data-siswa', [OperatorController::class,'showsiswa'])->name('operator.datasiswa');
     Route::get('/operator/data-reguler', [OperatorController::class,'showsiswaReguler'])->name('operator.data-reguler');
+    
     Route::get('/operator/data-lulus', [OperatorController::class,'showsiswaLulus'])->name('operator.data-lulus');
     Route::get('/operator/data-tidaklulus', [OperatorController::class,'showsiswaTidakLulus'])->name('operator.data-tidaklulus');
 
