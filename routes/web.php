@@ -80,9 +80,9 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/dashboard', function () {
         return view('operator.dashboard');
     })->name('operator.dashboard');
-    Route::get('/operator/data-afirmasi-prestasi', [OperatorController::class,'showsiswaPrestasi'])->name('operator.data-afirmasi-prestasi');
-    Route::get('/operator/data-afirmasi-abk', [OperatorController::class,'showsiswaAbk'])->name('operator.data-afirmasi-abk');
-    Route::get('/operator/data-afirmasi-ketm', [OperatorController::class,'showsiswaKetm'])->name('operator.data-afirmasi-ketm');
+    Route::get('/operator/data-afirmasi-prestasi', [OperatorController::class, 'showsiswaPrestasi'])->name('operator.data-afirmasi-prestasi');
+    Route::get('/operator/data-afirmasi-abk', [OperatorController::class, 'showsiswaAbk'])->name('operator.data-afirmasi-abk');
+    Route::get('/operator/data-afirmasi-ketm', [OperatorController::class, 'showsiswaKetm'])->name('operator.data-afirmasi-ketm');
     Route::get('/operator/persyaratan', function () {
         return view('operator.persyaratan');
     })->name('operator.persyaratan');
@@ -93,17 +93,15 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/alur-pendaftaran', function () {
         return view('operator.alur-pendaftaran');
     })->name('operator.alur-pendaftaran');
-    Route::get('/operator/data-siswa', [OperatorController::class,'showsiswa'])->name('operator.datasiswa');
-    Route::get('/operator/data-reguler', [OperatorController::class,'showsiswaReguler'])->name('operator.data-reguler');
-    
-    Route::get('/operator/data-lulus', [OperatorController::class,'showsiswaLulus'])->name('operator.data-lulus');
-    Route::get('/operator/data-tidaklulus', [OperatorController::class,'showsiswaTidakLulus'])->name('operator.data-tidaklulus');
+    Route::get('/operator/data-siswa', [OperatorController::class, 'showsiswa'])->name('operator.datasiswa');
+    Route::get('/operator/data-reguler', [OperatorController::class, 'showsiswaReguler'])->name('operator.data-reguler');
+
+    Route::get('/operator/data-lulus', [OperatorController::class, 'showsiswaLulus'])->name('operator.data-lulus');
+    Route::get('/operator/data-tidaklulus', [OperatorController::class, 'showsiswaTidakLulus'])->name('operator.data-tidaklulus');
 
 
     Route::get('/operator/Lulus/{id}', [OperatorController::class, 'lulus'])->name('operator.lulus');
     Route::get('/operator/TidakLulus/{id}', [OperatorController::class, 'tidaklulus'])->name('operator.tidaklulus');
-    
-
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
