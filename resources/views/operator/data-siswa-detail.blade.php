@@ -47,9 +47,9 @@
                             <p class="text-sm text-gray-500">{{ $siswa->NISN }}</p>
                         </div>
                         <div class="flex flex-col text-left">
-                            <p class="text-xs font-medium">Tanggal Lahir</p>
+                            <p class="text-xs font-medium">Jalur</p>
                             <p class="text-sm text-gray-500">
-                                {{ \Carbon\Carbon::parse(@$siswa->tanggal_lahir)->locale('id')->isoFormat('dddd, D MMMM YYYY') }}
+                                {{ $siswa->dataRegistrasi->jalur->nama_jalur }}</p>
                             </p>
                         </div>
                         <div class="flex flex-col text-left">
