@@ -201,7 +201,7 @@ class BiodataSiswa extends Component
         }
     }
 
-    public function searchByNps()
+    public function searchByNpsn()
     {
         $apiUrl = env('NPSN_API_BASE_URL') . "/sekolah?npsn={$this->npsn}";
         $response = Http::get($apiUrl);
