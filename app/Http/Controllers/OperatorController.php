@@ -31,7 +31,7 @@ class OperatorController extends Controller
 
         return redirect()->back()->with('success', 'Persyaratan berhasil ditambahkan.');
     }
-    
+
     public function updatepersyaratan(Request $request)
     {
         $calonSiswa = Persyaratan::update($request->all());
@@ -42,6 +42,12 @@ class OperatorController extends Controller
     {
         $data = CalonSiswa::all();
         return view('operator.datasiswa', compact('data'));
+    }
+
+    public function showsiswaDetail($id)
+    {
+        $siswa = CalonSiswa::findOrFail($id);
+        return view('operator.data-siswa-detail', compact('siswa'));
     }
     public function showsiswaLulus()
     {
