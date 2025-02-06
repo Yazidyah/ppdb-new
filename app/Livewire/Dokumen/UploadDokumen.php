@@ -18,7 +18,7 @@ class UploadDokumen extends Component
 
     public $persyaratan;
     public $user;
-    public $id_jalur, $kbs, $id_persyaratan, $berkas;
+    public $id_jalur, $kbs, $id_persyaratan, $id_siswa, $berkas;
 
     public $id_siswa;
 
@@ -27,8 +27,13 @@ class UploadDokumen extends Component
     public function mount()
     {
         $this->user = Auth::user();
+<<<<<<< HEAD
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->pluck('id_calon_siswa');
         $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->value('id_jalur');
+=======
+        $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
+        $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->pluck('id_jalur');
+>>>>>>> 8ae3b56bc5805419701aa532731153aa503a2057
         $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get();
         $this->syarat = null;
     }
