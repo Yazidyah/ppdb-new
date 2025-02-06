@@ -1,7 +1,9 @@
 <div>
     <div class="container mx-auto">
         <h2 class="text-2xl font-bold mb-4 text-center">Verifikasi Data</h2>
-        <div class="mb-4">
+        <h2 class="text-2xl font-bold mb-4 text-start">Biodata Diri</h2>
+        <div class="mx-auto grid grid-cols-4 gap-2">
+        <div class="mb-4 col-span-4">
             <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
             <input type="text" id="nama_lengkap" value="{{ $calonSiswa->nama_lengkap }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
         </div>
@@ -53,7 +55,9 @@
             <label for="alamat_kk" class="block text-sm font-medium text-gray-700">Alamat KK</label>
             <input type="text" id="alamat_kk" value="{{ $calonSiswa->alamat_kk }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
         </div>
+        </div>
         @if($orangTuaIbu)
+        <h2 class="text-2xl font-bold mb-4 text-start">Biodata Orang Tua Ibu</h2>
             <div class="mb-4">
                 <label for="nama_orang_tua_ibu" class="block text-sm font-medium text-gray-700">Nama Lengkap Ibu</label>
                 <input type="text" id="nama_orang_tua_ibu" value="{{ $orangTuaIbu->nama_lengkap }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
@@ -72,6 +76,7 @@
             </div>
         @endif
         @if($orangTuaAyah)
+        <h2 class="text-2xl font-bold mb-4 text-start">Biodata Orang Tua Ayah</h2>
             <div class="mb-4">
                 <label for="nama_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Nama Lengkap Ayah</label>
                 <input type="text" id="nama_orang_tua_ayah" value="{{ $orangTuaAyah->nama_lengkap }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
