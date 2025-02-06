@@ -15,6 +15,7 @@ use App\Livewire\Dokumen\StepTiga;
 use App\Livewire\Verifikasi\StepEmpat;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\NpsnController;
+use App\Livewire\Admin\Dashboard;
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -107,9 +108,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/TidakLulus/{id}', [OperatorController::class, 'tidaklulus'])->name('operator.tidaklulus');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
     Route::get('/admin/persyaratan', function () {
         return view('admin.persyaratan');
     })->name('admin.persyaratan');
