@@ -8,11 +8,11 @@
     <div class="container flex justify-center  mx-auto gap-2">
 
         <div class="md:w-[20vw] p-6 bg-primary border border-gray-200 rounded-lg shadow-sm  dark:border-white">
-            <a href="#">
+            <a href="#afirmatif">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white ">Jalur Afirmatif</h5>
             </a>
             <p class="mb-3 font-normal text-white ">Sebentar lagi Mulai.</p>
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-secondary rounded-lg hover:bg-tertiary focus:ring-4 focus:outline-none focus:ring-blue-300 hover:text-white dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <a href="#afirmatif" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 hover:text-tertiary">
                 Read more
                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -20,11 +20,11 @@
             </a>
         </div>
         <div class="md:w-[20vw] p-6 bg-primary border border-gray-200 rounded-lg shadow-sm  dark:border-white">
-            <a href="#">
+            <a href="#reguler">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white ">Jalur Reguler</h5>
             </a>
             <p class="mb-3 font-normal text-white ">Mulai Bulan Mei.</p>
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-secondary rounded-lg hover:text-white hover:bg-tertiary focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <a href="#reguler" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:text-tertiary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300">
                 Read more
                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -35,13 +35,13 @@
 </section>
 
 <section>
-        <div class="container mx-auto py-5">
+        <div class="container mx-auto py-5" >
             <div class="my-4 bg-white border border-tertiary rounded-lg text-tertiary text-center py-8 mx-auto w-3/4 md:w-1/2">
                 <h2 class="font-bold text-xl">Jadwal Penerimaan Peserta Didik Baru (PPDB)</h2>
                 <p class="text-lg">Tahun Pelajaran 2025/2026</p>
             </div>
         </div>
-            <div class="mx-auto container " x-data="{tahun:true}">
+            <div id="afirmatif" class="mx-auto container " x-data="{tahun:true}">
                 <button @click="tahun = !tahun" class="font-bold text-2xl pb-2 hover:underline text-center flex mx-auto">Jalur Afirmatif</button>
                 <div  x-show="tahun" class="border border-primary rounded-t-xl mx-auto container">
                     <div class="mx-auto w-full  grid grid-cols-4 py-3 grid-flow-col gap-2 items-center text-center bg-tertiary rounded-t-xl">
@@ -94,7 +94,7 @@
                 </div>
                 
             </div>
-            <div class="mx-auto container my-6" x-data="{tahun:true}">
+            <div id="reguler" class="mx-auto container my-6" x-data="{tahun:true}">
                 <button @click="tahun = !tahun" class="font-bold text-2xl pb-2 hover:underline text-center flex mx-auto">Jalur Reguler</button>
                 <div  x-show="tahun" class="border border-primary rounded-t-xl mx-auto container">
                     <div class="mx-auto w-full  grid grid-cols-4 py-3 grid-flow-col gap-2 items-center text-center bg-tertiary rounded-t-xl">

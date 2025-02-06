@@ -36,9 +36,32 @@
                 
             </tr>
         </thead>
+        @foreach ($data as $siswa)
         <tbody>
-           
-        </tbody>
+            <td scope="col" class="px-6 py-3 text-center">
+                    {{$siswa->id_user}}
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
+                    {{$siswa->nama_lengkap}}
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
+                    {{$siswa->NISN}}
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
+                    {{$siswa->sekolah_asal}}
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
+                    {{$siswa->jenis_kelamin}}
+                </td>
+                <td scope="col" class="w-[30px] whitespace-nowrap text-center">
+                    {{$siswa->user->email}}
+                </td>
+                <td scope="col" class="px-6 py-3 text-center">
+                <a href="{{ route('operator.lulus', $siswa->id_calon_siswa) }}" class="px-4 py-2 bg-tertiary text-white font-medium rounded-lg hover:bg-secondary hover:text-tertiary">Lulus</a>
+                <a href="{{ route('operator.tidaklulus', $siswa->id_calon_siswa) }}" class="px-4 py-2 bg-red-700 text-white font-medium rounded-lg hover:bg-red-900 hover:text-white">Tidak Lulus</a>
+                </td>
+            </tbody>
+            @endforeach
     </table>
 </div>
 </div>

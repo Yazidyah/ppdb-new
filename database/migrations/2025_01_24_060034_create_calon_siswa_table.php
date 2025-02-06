@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('calon_siswa', function (Blueprint $table) {
             $table->id('id_calon_siswa');
             $table->unsignedBigInteger('id_user')->unique();
-            $table->string('nama_lengkap', 50)->nullable();
+            $table->string('nama_lengkap', 255)->nullable();
             $table->string('NIK', 20)->nullable();
             $table->string('NISN')->nullable();
             $table->string('no_telp', 15)->nullable();
@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('sekolah_asal', 100)->nullable();
             $table->text('alamat_domisili')->nullable();
             $table->text('alamat_kk')->nullable();
+            $table->string('provinsi', 100)->nullable();
+            $table->string('kota', 100)->nullable();
             $table->timestamps();
             $table->softDeletes();
 

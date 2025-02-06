@@ -15,8 +15,13 @@ class StepSatu extends Component
 
     public function mount() {}
 
+    public function submit()
+    {
+        return redirect()->to('/siswa/daftar-step-dua?t=1');
+    }
+
     public function render()
     {
-        return view('livewire.siswa.step-satu')->layout('layouts.apk');
+        return view('livewire.siswa.step-satu');
     }
 }

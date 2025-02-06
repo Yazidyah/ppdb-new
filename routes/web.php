@@ -4,16 +4,22 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\SiswaController;
-use App\Livewire\Dokumen\StepTiga;
-use App\Livewire\Registrasi\StepDua;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Siswa;
 use App\Http\Middleware\Operator;
 use App\Livewire\Counter;
 use App\Livewire\Siswa\StepSatu;
+<<<<<<< HEAD
 
 
+=======
+use App\Livewire\Registrasi\StepDua;
+use App\Livewire\Dokumen\StepTiga;
+use App\Livewire\Verifikasi\StepEmpat;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\NpsnController;
+>>>>>>> main
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -69,6 +75,7 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/daftar-step-satu', StepSatu::class)->name('siswa.daftar-step-satu');
     Route::get('/siswa/daftar-step-dua', StepDua::class)->name('siswa.daftar-step-dua');
     Route::get('/siswa/daftar-step-tiga', StepTiga::class)->name('siswa.daftar-step-tiga');
+    Route::get('/siswa/daftar-step-empat', StepEmpat::class)->name('siswa.daftar-step-empat');
     Route::get('/siswa/daftar-step2', function () {
         return view('siswa.daftar-step2');
     })->name('tambah-step2');
@@ -79,6 +86,9 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/dashboard', function () {
         return view('operator.dashboard');
     })->name('operator.dashboard');
+    Route::get('/operator/data-afirmasi-prestasi', [OperatorController::class, 'showsiswaPrestasi'])->name('operator.data-afirmasi-prestasi');
+    Route::get('/operator/data-afirmasi-abk', [OperatorController::class, 'showsiswaAbk'])->name('operator.data-afirmasi-abk');
+    Route::get('/operator/data-afirmasi-ketm', [OperatorController::class, 'showsiswaKetm'])->name('operator.data-afirmasi-ketm');
     Route::get('/operator/persyaratan', function () {
         return view('operator.persyaratan');
     })->name('operator.persyaratan');
@@ -89,27 +99,17 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/alur-pendaftaran', function () {
         return view('operator.alur-pendaftaran');
     })->name('operator.alur-pendaftaran');
-    Route::get('/operator/data-siswa', function () {
-        return view('operator.datasiswa');
-    })->name('operator.datasiswa');
-    Route::get('/operator/data-afirmasi-prestasi', function () {
-        return view('operator.data-afirmasi-prestasi');
-    })->name('operator.data-afirmasi-prestasi');
-    Route::get('/operator/data-afirmasi-abk', function () {
-        return view('operator.data-afirmasi-abk');
-    })->name('operator.data-afirmasi-abk');
-    Route::get('/operator/data-afirmasi-ketm', function () {
-        return view('operator.data-afirmasi-ketm');
-    })->name('operator.data-afirmasi-ketm');
-    Route::get('/operator/data-reguler', function () {
-        return view('operator.data-reguler');
-    })->name('operator.data-reguler');
-    Route::get('/operator/data-lulus', function () {
-        return view('operator.data-lulus');
-    })->name('operator.data-lulus');
-    Route::get('/operator/data-tidaklulus', function () {
-        return view('operator.data-tidaklulus');
-    })->name('operator.data-tidaklulus');
+    Route::get('/operator/data-siswa', [OperatorController::class, 'showsiswa'])->name('operator.datasiswa');
+    Route::get('/operator/data-siswa/{id}', [OperatorController::class, 'showsiswaDetail'])->name('operator.datasiswa-detail');
+
+    Route::get('/operator/data-reguler', [OperatorController::class, 'showsiswaReguler'])->name('operator.data-reguler');
+
+    Route::get('/operator/data-lulus', [OperatorController::class, 'showsiswaLulus'])->name('operator.data-lulus');
+    Route::get('/operator/data-tidaklulus', [OperatorController::class, 'showsiswaTidakLulus'])->name('operator.data-tidaklulus');
+
+
+    Route::get('/operator/Lulus/{id}', [OperatorController::class, 'lulus'])->name('operator.lulus');
+    Route::get('/operator/TidakLulus/{id}', [OperatorController::class, 'tidaklulus'])->name('operator.tidaklulus');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
@@ -147,7 +147,6 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
         return view('admin.tambah-persyaratan');
     })->name('admin.tambah-persyaratan');
     Route::post('/admin/tambah-persyaratan', [OperatorController::class, 'tambahpersyaratan'])->name('admin.tambah-persyaratan');
-
 });
 
 Route::middleware('auth')->group(function () {
@@ -176,5 +175,6 @@ Route::get('local/temp/{path}', function (string $path) {
     }
 })->name('local.temp');
 
+Route::get('/fetch-npsn', [NpsnController::class, 'getNpsn']);
 
 require __DIR__ . '/auth.php';

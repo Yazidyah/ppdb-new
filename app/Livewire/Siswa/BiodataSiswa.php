@@ -4,8 +4,11 @@ namespace App\Livewire\Siswa;
 
 use App\Models\CalonSiswa;
 use App\Models\KategoriBerkas;
+use App\Models\Province;
+use App\Models\Regency;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Http; // Add this line
 
 class BiodataSiswa extends Component
 {
@@ -14,6 +17,12 @@ class BiodataSiswa extends Component
     public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk;
 
     public $kb;
+    public $provinces;
+    public $provinsi;
+    public $cities = [];
+    public $kota;
+    public $searchNpsn;
+    public $sekolahs = [];
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
@@ -67,6 +76,17 @@ class BiodataSiswa extends Component
         $this->sekolah_asal = $this->siswa->sekolah_asal ?? '';
         $this->alamat_domisili = $this->siswa->alamat_domisili ?? '';
         $this->alamat_kk = $this->siswa->alamat_kk ?? '';
+        $this->provinsi = $this->siswa->provinsi ?? '';
+        $this->kota = $this->siswa->kota ?? '';
+        $this->provinces = Province::all()->map(function ($province) {
+            return [
+                'id' => (string) $province->id,
+                'name' => $province->name
+            ];
+        });
+        $this->provinsi = @Province::where('name', $this->siswa->provinsi)->first()->id ?? '';
+        $this->kota = @Regency::where('name', $this->siswa->kota)->first()->id ?? '';
+        $this->updateCities();
     }
 
     public function updatedNamaLengkap($value)
@@ -94,13 +114,6 @@ class BiodataSiswa extends Component
     {
         $this->validateOnly('no_telp');
         $this->siswa->no_telp = $value;
-        $this->siswa->save();
-    }
-
-    public function updatedNpsn($value)
-    {
-        $this->validateOnly('npsn');
-        $this->siswa->NPSN = $value;
         $this->siswa->save();
     }
 
@@ -145,8 +158,85 @@ class BiodataSiswa extends Component
         $this->siswa->save();
     }
 
+    public function updatedProvinsi($value)
+    {
+        $province = Province::find($value);
+        if ($province) {
+            $this->siswa->provinsi = $province->name;
+            $this->siswa->save();
+            $this->updateCities();
+        }
+    }
 
+    public function updatedKota($value) // Add this method
+    {
+        $city = Regency::find($value);
+        if ($city) {
+            $this->siswa->kota = $city->name;
+            $this->siswa->save();
+        }
+    }
 
+    public function updateCities() // Add this method
+    {
+        if ($this->provinsi) {
+            $province = Province::find($this->provinsi);
+            if ($province) {
+                $this->cities = $province->regencies->map(function ($city) {
+                    return [
+                        'id' => (string) $city->id,
+                        'name' => $city->name
+                    ];
+                });
+            }
+        } else {
+            $this->cities = [];
+        }
+    }
+
+    public function searchByNpsn()
+    {
+        $baseUrl = env('NPSN_API_BASE_URL');
+        $url = "{$baseUrl}{$this->npsn}";
+        $data = $this->fetchNpsnFromHtml($url);
+        if ($data['npsn']) {
+            if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs'])) {
+                $this->addError('sekolah_asal', 'Tingkat pendidikan harus SMP atau MTs');
+                $this->npsn = '';
+                return; 
+            }
+            if (!$this->getErrorBag()->has('sekolah_asal')) {
+                $this->siswa->NPSN = $this->npsn;
+                $this->siswa->sekolah_asal = $data['nama_sekolah'];
+                $this->siswa->save();
+            }
+        } else {
+            $this->addError('npsn', 'NPSN not found');
+        }
+    }
+
+    public function fetchNpsnFromHtml($url)
+    {
+        $html = file_get_contents($url);
+        $dom = new \DOMDocument();
+        @$dom->loadHTML($html);
+        $xpath = new \DOMXPath($dom);
+        
+        $npsnNode = $xpath->query("//a[@class='link1']")->item(0);
+        $npsn = $npsnNode ? $npsnNode->nodeValue : null;
+
+        $nameNode = $xpath->query("//td[contains(text(), 'Nama')]/following-sibling::td[2]")->item(0);
+        $schoolName = $nameNode ? $nameNode->nodeValue : null;
+
+        $tingkatPendidikanNode = $xpath->query("//td[contains(text(), 'Bentuk Pendidikan')]/following-sibling::td[2]")->item(0);
+        $tingkatPendidikan = $tingkatPendidikanNode ? $tingkatPendidikanNode->nodeValue : null;
+
+        return [
+            'nama_sekolah' => $schoolName,
+            'npsn' => $npsn,
+            'tingkat_pendidikan' => $tingkatPendidikan,
+        ];
+    }
 
     public function render()
     {

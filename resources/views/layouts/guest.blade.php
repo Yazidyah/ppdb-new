@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <link rel="icon" type="image/png" sizes="32x32" src="/logoman.webp">
+        <link rel="icon" type="image/png" sizes="32x32" href="/logoman.webp">
         <title>{{ config('app.name', 'MAN 1 KOTA BOGOR') }}</title>
 
         <!-- Fonts -->
@@ -19,11 +19,11 @@
             <div class="">
                 <a href="/" class="flex flex-col justify-center items-center">
                     <img src="/logoman.webp" class="justify-center items-center w-40 fill-current" >
-                    <h1 class="text-3xl fill-current text-white font-bold text-center"> PPDB MAN 1 Kota Bogor</h1>
+                    <h1 class="text-3xl fill-current text-white font-bold text-center mt-4"> PPDB MAN 1 Kota Bogor</h1>
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white  shadow-md overflow-hidden sm:rounded-lg">
+            <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white  shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
         </div>

@@ -20,6 +20,16 @@ class DataRegistrasi extends Model
         return $this->belongsTo(CalonSiswa::class, 'id_calon_siswa');
     }
 
+    public function jalur()
+    {
+        return $this->belongsTo(JalurRegistrasi::class, 'id_jalur');
+    }
+
+    public function syarat()
+    {
+        return $this->hasMany(Persyaratan::class, 'id_jalur', 'id_jalur');
+    }
+
     // public function jalurRegistrasi()
     // {
     //     return $this->belongsTo(JalurRegistrasi::class, 'id_jalur');

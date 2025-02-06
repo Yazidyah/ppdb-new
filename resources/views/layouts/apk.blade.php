@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/path/to/flickity.css" media="screen">
-    <link rel="icon" type="image/png" sizes="32x32" src="logoman.webp">
+    <link rel="icon" type="image/png" sizes="32x32" href="/logoman.webp">
     <title>{{ config('app.name', 'MAN 1 KOTA BOGOR') }}</title>
 
     <!-- Fonts -->
@@ -34,12 +34,12 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
-    @livewireStyles
 
 
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body class="font-sans antialiased">
