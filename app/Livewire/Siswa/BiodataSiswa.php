@@ -207,9 +207,9 @@ class BiodataSiswa extends Component
             }
             if (!$this->getErrorBag()->has('sekolah_asal')) {
                 $this->siswa->NPSN = $this->npsn;
+                $this->siswa->sekolah_asal = $data['nama_sekolah'];
                 $this->siswa->save();
                 $this->updatedSekolahAsal($data['nama_sekolah']);
-                $this->handleNpsnName($data);
             }
         } else {
             $this->addError('npsn', 'NPSN not found');
@@ -237,11 +237,6 @@ class BiodataSiswa extends Component
             'npsn' => $npsn,
             'tingkat_pendidikan' => $tingkatPendidikan,
         ];
-    }
-
-    public function handleNpsnName($data)
-    {
-        $this->sekolah_asal = $data['nama_sekolah'];
     }
 
     public function render()
