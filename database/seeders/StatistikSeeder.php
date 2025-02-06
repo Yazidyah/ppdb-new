@@ -10,6 +10,11 @@ class StatistikSeeder extends Seeder
     public function run()
     {
         $statistikData = [
+            ['nama_statistik' => 'Total Pendaftar', 'count' => 0],
+            ['nama_statistik' => 'Pendaftar Jalur Reguler', 'count' => 0],
+            ['nama_statistik' => 'Pendaftar Jalur Afirmasi Prestasi', 'count' => 0],
+            ['nama_statistik' => 'Pendaftar Jalur Afirmasi KETM', 'count' => 0],
+            ['nama_statistik' => 'Pendaftar Jalur Afirmasi ABK', 'count' => 0],
             ['nama_statistik' => 'Laki-laki', 'count' => 0],
             ['nama_statistik' => 'Perempuan', 'count' => 0],
             ['nama_statistik' => 'Sekolah Negeri', 'count' => 0],

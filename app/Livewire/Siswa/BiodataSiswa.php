@@ -207,7 +207,7 @@ class BiodataSiswa extends Component
             }
             if (!$this->getErrorBag()->has('sekolah_asal')) {
                 $this->siswa->NPSN = $this->npsn;
-                $this->siswa->sekolah_asal = $data['nama_sekolah'];
+                $this->siswa->status_sekolah = $data['status_sekolah'];
                 $this->siswa->save();
                 $this->updatedSekolahAsal($data['nama_sekolah']);
             }
@@ -231,11 +231,16 @@ class BiodataSiswa extends Component
 
         $tingkatPendidikanNode = $xpath->query("//td[contains(text(), 'Bentuk Pendidikan')]/following-sibling::td[2]")->item(0);
         $tingkatPendidikan = $tingkatPendidikanNode ? $tingkatPendidikanNode->nodeValue : null;
-
+        
+        $statusSekolahNode = $xpath->query("//td[contains(text(), 'Status Sekolah')]/following-sibling::td[2]")->item(0);
+        $statusSekolah = $statusSekolahNode ? $statusSekolahNode->nodeValue : null;
+        
         return [
             'nama_sekolah' => $schoolName,
             'npsn' => $npsn,
             'tingkat_pendidikan' => $tingkatPendidikan,
+            'status_sekolah' => $statusSekolah,
+
         ];
     }
 

@@ -26,6 +26,7 @@ class CalonSiswa extends Model
         'tempat_lahir',
         'NPSN',
         'sekolah_asal',
+        'status_sekolah', 
         'alamat_domisili',
         'alamat_kk',
         'id_provinsi',
