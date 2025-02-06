@@ -1,4 +1,7 @@
 <x-app-layout>
+    @php
+        $tab = $tab ?? 'detail';
+    @endphp
     <div class="p-4 sm:ml-64">
         <div class="p-4  dark:border-gray-700 mt-14">
             <div class="container mx-auto text-center pt-7">
@@ -17,7 +20,7 @@
                             <div class="font-semibold text-lg text-gray-800">{{ $siswa->nama_lengkap }}</div>
                         </div>
                         <div class="flex flex-col text-left sm:text-center">
-                            {{ $siswa->sekolah_asal }}
+                            <div class="text-sm text-gray-600 font-semibold"> {{ $siswa->sekolah_asal }}</div>
                         </div>
                     </div>
                     <div class="flex justify-between items-start space-x-4 mt-2">
@@ -51,6 +54,62 @@
                     </div>
 
                 </div>
+
+                <div class="mt-5 relative w-full">
+                    <div
+                        class="relative flex items-center justify-between w-full h-12 gap-2 p-4 text-sm text-gray-500 bg-white rounded">
+
+                        <button onclick="setTab('detail')" @class([
+                            'flex-1 py-2 font-medium duration-300 h-10',
+                            'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
+                                $tab != 'detail',
+                            'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'detail',
+                        ])>
+                            Siswa
+                        </button>
+
+                        <button onclick="setTab('orangtua')" @class([
+                            'flex-1 py-2 font-medium duration-300 h-10',
+                            'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
+                                $tab != 'orangtua',
+                            'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'orangtua',
+                        ])>
+                            Orang Tua
+                        </button>
+
+                    </div>
+
+                    <div id="detail-content" class="tab-content"
+                        style="display: {{ $tab == 'detail' ? 'block' : 'none' }};">
+                        <div class="mt-3">
+                            @livewire('operator.tab-detail-siswa', ['siswa' => $siswa], key('operator-tab-detail-siswa-' . $siswa->id_calon_siswa))
+                        </div>
+                    </div>
+
+                    <div id="orangtua-content" class="tab-content"
+                        style="display: {{ $tab == 'orangtua' ? 'block' : 'none' }};">
+                        <p>orangtua</p>
+                    </div>
+                </div>
+
+                <script>
+                    function setTab(tab) {
+                        document.querySelectorAll('button').forEach(button => {
+                            button.classList.remove('text-indigo-700', 'border-indigo-500');
+                            button.classList.add('text-gray-400', 'border-white');
+                        });
+
+                        const activeButton = document.querySelector(`button[onclick="setTab('${tab}')"]`);
+                        activeButton.classList.add('text-indigo-700', 'border-indigo-500');
+                        activeButton.classList.remove('text-gray-400', 'border-white');
+
+                        document.querySelectorAll('.tab-content').forEach(content => {
+                            content.style.display = 'none';
+                        });
+
+                        document.getElementById(`${tab}-content`).style.display = 'block';
+                    }
+                </script>
             </div>
         </div>
     </div>
