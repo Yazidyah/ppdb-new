@@ -117,13 +117,6 @@ class BiodataSiswa extends Component
         $this->siswa->save();
     }
 
-    public function updatedNpsn($value)
-    {
-        $this->validateOnly('npsn');
-        $this->siswa->NPSN = $value;
-        $this->siswa->save();
-    }
-
     public function updatedSekolahAsal($value)
     {
         $this->validateOnly('sekolah_asal');
@@ -201,33 +194,54 @@ class BiodataSiswa extends Component
         }
     }
 
-    public function searchByNps()
+    public function searchByNpsn()
     {
-        $apiUrl = env('NPSN_API_BASE_URL') . "/sekolah?npsn={$this->npsn}";
-        $response = Http::get($apiUrl);
-        if ($response->successful()) {
-            $data = $response->json();
-            $this->sekolahs = array_map(function ($item) {
-                return [
-                    'npsn' => $item['npsn'],
-                    'sekolah' => $item['sekolah']
-                ];
-            }, $data['dataSekolah']);
-            if (!empty($this->sekolahs)) {
-                if (strpos($this->sekolahs[0]['sekolah'], 'SMP') !== 0) {
-                    $this->addError('sekolah_asal', 'Nama sekolah harus dimulai dengan SMP');
-                } else {
-                    $this->updatedNpsn($this->npsn);
-                    $this->updatedSekolahAsal($this->sekolahs[0]['sekolah']);
-                    $this->handleNpsnName();
-                }
+        $baseUrl = env('NPSN_API_BASE_URL');
+        $url = "{$baseUrl}{$this->npsn}";
+        $data = $this->fetchNpsnFromHtml($url);
+        if ($data['npsn']) {
+            if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs'])) {
+                $this->addError('sekolah_asal', 'Tingkat pendidikan harus SMP atau MTs');
+                $this->npsn = '';
+                return; 
             }
+            if (!$this->getErrorBag()->has('sekolah_asal')) {
+                $this->siswa->NPSN = $this->npsn;
+                $this->siswa->save();
+                $this->updatedSekolahAsal($data['nama_sekolah']);
+                $this->handleNpsnName($data);
+            }
+        } else {
+            $this->addError('npsn', 'NPSN not found');
         }
     }
 
-    public function handleNpsnName()
+    public function fetchNpsnFromHtml($url)
     {
-        $this->sekolah_asal = $this->sekolahs[0]['sekolah'];
+        $html = file_get_contents($url);
+        $dom = new \DOMDocument();
+        @$dom->loadHTML($html);
+        $xpath = new \DOMXPath($dom);
+        
+        $npsnNode = $xpath->query("//a[@class='link1']")->item(0);
+        $npsn = $npsnNode ? $npsnNode->nodeValue : null;
+
+        $nameNode = $xpath->query("//td[contains(text(), 'Nama')]/following-sibling::td[2]")->item(0);
+        $schoolName = $nameNode ? $nameNode->nodeValue : null;
+
+        $tingkatPendidikanNode = $xpath->query("//td[contains(text(), 'Bentuk Pendidikan')]/following-sibling::td[2]")->item(0);
+        $tingkatPendidikan = $tingkatPendidikanNode ? $tingkatPendidikanNode->nodeValue : null;
+
+        return [
+            'nama_sekolah' => $schoolName,
+            'npsn' => $npsn,
+            'tingkat_pendidikan' => $tingkatPendidikan,
+        ];
+    }
+
+    public function handleNpsnName($data)
+    {
+        $this->sekolah_asal = $data['nama_sekolah'];
     }
 
     public function render()
