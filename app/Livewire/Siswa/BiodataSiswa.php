@@ -210,10 +210,6 @@ class BiodataSiswa extends Component
                 $this->siswa->status_sekolah = $data['status_sekolah'];
                 $this->siswa->sekolah_asal = $data['nama_sekolah'];
                 $this->siswa->save();
-<<<<<<< HEAD
-=======
-                // $this->updatedSekolahAsal($data['nama_sekolah']);
->>>>>>> origin/admin-dashboard-livewire
             }
         } else {
             $this->addError('npsn', 'NPSN not found');

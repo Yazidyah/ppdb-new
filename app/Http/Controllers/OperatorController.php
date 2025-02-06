@@ -40,7 +40,7 @@ class OperatorController extends Controller
 
     public function showsiswa(Request $request)
     {
-        $data = CalonSiswa::all();
+        $data = CalonSiswa::paginate(50);
         return view('operator.datasiswa', compact('data'));
     }
 

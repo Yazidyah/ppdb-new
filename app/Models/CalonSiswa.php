@@ -13,12 +13,7 @@ class CalonSiswa extends Model
     protected $table = 'calon_siswa';
 
     protected $primaryKey = 'id_calon_siswa';
-<<<<<<< HEAD
-  
-=======
->>>>>>> main
-
-    protected $fillable = [
+      protected $fillable = [
         'id_user',
         'nama_lengkap',
         'NIK',

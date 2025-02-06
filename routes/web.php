@@ -10,20 +10,19 @@ use App\Http\Middleware\Siswa;
 use App\Http\Middleware\Operator;
 use App\Livewire\Counter;
 use App\Livewire\Siswa\StepSatu;
-<<<<<<< HEAD
 
 
-=======
+
+
 use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
 use App\Livewire\Verifikasi\StepEmpat;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\NpsnController;
-<<<<<<< HEAD
->>>>>>> main
-=======
+
+
 use App\Livewire\Admin\Dashboard;
->>>>>>> origin/admin-dashboard-livewire
+
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -123,27 +122,28 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/alur-pendaftaran', function () {
         return view('admin.alur-pendaftaran');
     })->name('admin.alur-pendaftaran');
-    Route::get('/admin/data-siswa', function () {
-        return view('admin.datasiswa');
-    })->name('admin.datasiswa');
-    Route::get('/admin/data-afirmasi-prestasi', function () {
-        return view('admin.data-afirmasi-prestasi');
-    })->name('admin.data-afirmasi-prestasi');
-    Route::get('/admin/data-afirmasi-abk', function () {
-        return view('admin.data-afirmasi-abk');
-    })->name('admin.data-afirmasi-abk');
-    Route::get('/admin/data-afirmasi-ketm', function () {
-        return view('admin.data-afirmasi-ketm');
-    })->name('admin.data-afirmasi-ketm');
-    Route::get('/admin/data-reguler', function () {
-        return view('admin.data-reguler');
-    })->name('admin.data-reguler');
-    Route::get('/admin/data-lulus', function () {
-        return view('admin.data-lulus');
-    })->name('admin.data-lulus');
-    Route::get('/admin/data-tidaklulus', function () {
-        return view('admin.data-tidaklulus');
-    })->name('admin.data-tidaklulus');
+    
+    // Route::get('/admin/data-siswa', function () {
+    //     return view('admin.datasiswa');
+    // })->name('admin.datasiswa');
+    // Route::get('/admin/data-afirmasi-prestasi', function () {
+    //     return view('admin.data-afirmasi-prestasi');
+    // })->name('admin.data-afirmasi-prestasi');
+    // Route::get('/admin/data-afirmasi-abk', function () {
+    //     return view('admin.data-afirmasi-abk');
+    // })->name('admin.data-afirmasi-abk');
+    // Route::get('/admin/data-afirmasi-ketm', function () {
+    //     return view('admin.data-afirmasi-ketm');
+    // })->name('admin.data-afirmasi-ketm');
+    // Route::get('/admin/data-reguler', function () {
+    //     return view('admin.data-reguler');
+    // })->name('admin.data-reguler');
+    // Route::get('/admin/data-lulus', function () {
+    //     return view('admin.data-lulus');
+    // })->name('admin.data-lulus');
+    // Route::get('/admin/data-tidaklulus', function () {
+    //     return view('admin.data-tidaklulus');
+    // })->name('admin.data-tidaklulus');
 
     Route::get('/admin/tambah-persyaratan', function () {
         return view('admin.tambah-persyaratan');

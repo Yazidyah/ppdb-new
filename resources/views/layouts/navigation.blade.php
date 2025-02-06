@@ -4,20 +4,20 @@
 
 switch ($userRole){
     //Admin
-    case 1:
+    case 'admin':
     $redirectUrl = 'admin.dashboard';
-    $redirectUrlp = 'admin.prestasi';
-    $redirectUrlk = 'admin.kegiatan';
-    $redirectUrlpk = 'admin.postkegiatan';
-    $redirectUrlc = 'admin.kontak';
+    $redirectUrlp = 'admin.alur-pendaftaran';
+    $redirectUrlk = 'admin.persyaratan';
+    $redirectUrlpk = 'admin.dashboard';
+    $redirectUrlc = 'admin.dashboard';
     break;
-    //Pembina
-    case 2:
-    $redirectUrl = 'pembina.dashboard';
-    $redirectUrlp = 'pembina.prestasi';
-    $redirectUrlk = 'pembina.kegiatan';
-    $redirectUrlpk = 'pembina.postkegiatan';
-    $redirectUrlc = 'pembina.kontak';
+    //Operator
+    case 'operator':
+    $redirectUrl = 'operator.dashboard';
+    $redirectUrlp = 'operator.alurpendaftaran';
+    $redirectUrlk = 'operator.persyaratan';
+    $redirectUrlpk = 'operator.dashboard';
+    $redirectUrlc = 'operator.dashboard';
     break;
 
     default:
