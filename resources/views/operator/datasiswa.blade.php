@@ -37,9 +37,9 @@
                             </thead>
                             @foreach ($data as $siswa)
                                 <tr onclick="window.location.href='{{ route('operator.datasiswa-detail', $siswa->id_calon_siswa) }}'"
-                                    style="cursor: pointer;">
+                                    class="hover:bg-gray-200 transition duration-200 cursor-pointer">
                                     <td scope="col" class="px-6 py-3 text-center">
-                                        {{ $siswa->id_user }}
+                                        {{ $siswa->id_calon_siswa }}
                                     </td>
                                     <td scope="col" class="px-6 py-3 text-center">
                                         {{ $siswa->nama_lengkap }}
