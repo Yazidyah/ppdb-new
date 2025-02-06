@@ -28,7 +28,7 @@
                     <!-- Left Column -->
                     <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-4 py-2 w-full">
                         <!-- Nama Lengkap -->
-                        <div class="col-span-4">
+                        <div class="col-span-4 mt-2">
                             <x-reg-input-label>Nama Lengkap</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -44,7 +44,7 @@
                         </div>
 
                         <!-- NIK -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>NIK</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -60,7 +60,7 @@
                         </div>
 
                         <!-- NISN -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>NISN</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -75,7 +75,7 @@
                         </div>
 
                         <!-- NPSN -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>NPSN</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -92,7 +92,7 @@
                             </div>
                         </div>
                         <!-- ASAL SEKOLAH -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>Asal Sekolah</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -108,7 +108,7 @@
                         </div>
 
                         <!-- Nomor Telepon -->
-                        <div class="col-span-4">
+                        <div class="col-span-4 mt-2">
                             <x-reg-input-label>Nomor Telepon</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -126,7 +126,7 @@
                     <!-- Right Column -->
                     <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-4 py-2 w-full">
                         <!-- Jenis Kelamin -->
-                        <div class="col-span-4">
+                        <div class="col-span-4 mt-2">
                             <div class="flex items-center justify-center gap-2">
                                 <p>Jenis Kelamin:</p>
                                 <div class="flex items-center justify-center gap-2">
@@ -143,7 +143,7 @@
                         </div>
 
                         <!-- Alamat Domisili -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>Alamat Domisili</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -159,7 +159,7 @@
                         </div>
 
                         <!-- Alamat KK -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>Alamat KK</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -175,7 +175,7 @@
                         </div>
 
                         <!-- Provinsi -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>Provinsi Tinggal</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -193,7 +193,7 @@
                         </div>
 
                         <!-- Kota/Kab -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>Kota/Kab Tinggal</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -211,7 +211,7 @@
                         </div>
 
                         <!-- Tempat Lahir -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>Tempat Lahir</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -227,7 +227,7 @@
                         </div>
 
                         <!-- Tanggal Lahir -->
-                        <div class="col-span-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>Tanggal Lahir</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">

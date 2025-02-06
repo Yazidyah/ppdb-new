@@ -12,7 +12,7 @@
             <button wire:click="$set('tab', 1)"
                 class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ $tab == 1 ? 'bg-tertiary text-white' : '' }}">
                 <a class="">
-                    <h1 class="font-semibold flex text-center text-wrap">Verifikasi</h1>
+                    <h1 class="font-semibold flex text-sm md:text-base text-center text-wrap">Verifikasi</h1>
                 </a>
             </button>
         </div>

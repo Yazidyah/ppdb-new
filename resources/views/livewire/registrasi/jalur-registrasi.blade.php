@@ -17,7 +17,7 @@
         </svg>
     </a>
 </div>
-<div class="md:w-full md:h-full p-6  border border-gray-200 rounded-lg shadow-sm  mx-auto container bg-secondary text-tertiary ">
+<div class="mb-4 md:w-full md:h-full p-6  border border-gray-200 rounded-lg shadow-sm  mx-auto container bg-secondary text-tertiary ">
             <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PPDB Jalur Reguler adalah sebagai berikut: </h1>
             <ol class="list-decimal items-center">
                 <li class="">Usia Maksimal 21 tahun pada tanggal 1 Juli 2025</li>
@@ -44,7 +44,7 @@
     </a>
 </div>
 
-<div class="md:w-full md:h-full p-6  border border-gray-200 rounded-lg shadow-sm  mx-auto container bg-secondary text-tertiary ">
+<div class="mb-4 md:w-full md:h-full p-6  border border-gray-200 rounded-lg shadow-sm  mx-auto container bg-secondary text-tertiary ">
             <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PPDB Jalur Prestasi adalah sebagai berikut: </h1>
             <ol class="list-decimal items-center">
                 <li class="">Usia Maksimal 21 tahun pada tanggal 1 Juli 2025</li>
@@ -71,7 +71,7 @@
     </a>
 </div>
 
-<div class="md:w-full md:h-full p-6  border border-gray-200 rounded-lg shadow-sm  mx-auto container bg-secondary text-tertiary ">
+<div class="mb-4 md:w-full md:h-full p-6  border border-gray-200 rounded-lg shadow-sm  mx-auto container bg-secondary text-tertiary ">
             <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PPDB Jalur KETM adalah sebagai berikut: </h1>
             <ol class="list-decimal items-center">
                 <li class="">Pas Foto 3x4</li>
@@ -97,7 +97,7 @@
         </svg>
     </a>
 </div>
-<div class="md:w-full md:h-full p-6  border border-gray-200 rounded-lg shadow-sm  mx-auto container bg-secondary text-tertiary ">
+<div class="mb-4 md:w-full md:h-full p-6  border border-gray-200 rounded-lg shadow-sm  mx-auto container bg-secondary text-tertiary ">
             <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PPDB Jalur Anak Berkemampuan Khusus adalah sebagai berikut: </h1>
             <ol class="list-decimal items-center">
                 <li class="">Usia Maksimal 21 tahun pada tanggal 1 Juli 2025</li>
