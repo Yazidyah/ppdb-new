@@ -15,12 +15,14 @@ class StatistikSeeder extends Seeder
             ['nama_statistik' => 'Pendaftar Jalur Afirmasi Prestasi', 'count' => 0],
             ['nama_statistik' => 'Pendaftar Jalur Afirmasi KETM', 'count' => 0],
             ['nama_statistik' => 'Pendaftar Jalur Afirmasi ABK', 'count' => 0],
-            ['nama_statistik' => 'Laki-laki', 'count' => 0],
-            ['nama_statistik' => 'Perempuan', 'count' => 0],
-            ['nama_statistik' => 'Sekolah Negeri', 'count' => 0],
-            ['nama_statistik' => 'Sekolah Swasta', 'count' => 0],
-            ['nama_statistik' => 'Diluar Kota', 'count' => 0],
-            ['nama_statistik' => 'Dalam Kota', 'count' => 0],
+            ['nama_statistik' => 'Pendaftar Laki-laki', 'count' => 0],
+            ['nama_statistik' => 'Pendaftar Perempuan', 'count' => 0],
+            ['nama_statistik' => 'Dari Sekolah Negeri', 'count' => 0],
+            ['nama_statistik' => 'Dari Sekolah Swasta', 'count' => 0],
+            ['nama_statistik' => 'Dari Luar Kota', 'count' => 0],
+            ['nama_statistik' => 'Dari Dalam Kota', 'count' => 0],
+            ['nama_statistik' => 'Pendaftar Lulus', 'count' => 0],
+            ['nama_statistik' => 'Pendaftar Tidak Lulus', 'count' => 0],
         ];
         foreach ($statistikData as $data) {
             $data['updated_at'] = now();

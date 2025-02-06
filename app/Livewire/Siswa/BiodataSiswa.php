@@ -117,12 +117,12 @@ class BiodataSiswa extends Component
         $this->siswa->save();
     }
 
-    public function updatedSekolahAsal($value)
-    {
-        $this->validateOnly('sekolah_asal');
-        $this->siswa->sekolah_asal = $value;
-        $this->siswa->save();
-    }
+    // public function updatedSekolahAsal($value)
+    // {
+    //     $this->validateOnly('sekolah_asal');
+    //     $this->siswa->sekolah_asal = $value;
+    //     $this->siswa->save();
+    // }
 
     public function updatedAlamatDomisili($value)
     {
@@ -208,8 +208,9 @@ class BiodataSiswa extends Component
             if (!$this->getErrorBag()->has('sekolah_asal')) {
                 $this->siswa->NPSN = $this->npsn;
                 $this->siswa->status_sekolah = $data['status_sekolah'];
+                $this->siswa->sekolah_asal = $data['nama_sekolah'];
                 $this->siswa->save();
-                $this->updatedSekolahAsal($data['nama_sekolah']);
+                // $this->updatedSekolahAsal($data['nama_sekolah']);
             }
         } else {
             $this->addError('npsn', 'NPSN not found');
