@@ -14,6 +14,7 @@ use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
 use App\Livewire\Verifikasi\StepEmpat;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\NpsnController;
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -169,5 +170,6 @@ Route::get('local/temp/{path}', function (string $path) {
     }
 })->name('local.temp');
 
+Route::get('/fetch-npsn', [NpsnController::class, 'getNpsn']);
 
 require __DIR__ . '/auth.php';
