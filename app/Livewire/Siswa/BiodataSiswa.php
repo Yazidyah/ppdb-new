@@ -62,9 +62,7 @@ class BiodataSiswa extends Component
         // dd($this->kb);
 
         $this->user = Auth::user();
-        $this->siswa = CalonSiswa::firstOrCreate([
-            'id_user' => $this->user->id,
-        ]);
+        $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
         $this->nama_lengkap = $this->siswa->nama_lengkap ?? '';
         $this->nik = $this->siswa->NIK ?? '';
         $this->nisn = $this->siswa->NISN ?? '';
