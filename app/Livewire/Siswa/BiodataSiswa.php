@@ -62,9 +62,7 @@ class BiodataSiswa extends Component
         // dd($this->kb);
 
         $this->user = Auth::user();
-        $this->siswa = CalonSiswa::firstOrCreate([
-            'id_user' => $this->user->id,
-        ]);
+        $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
         $this->nama_lengkap = $this->siswa->nama_lengkap ?? '';
         $this->nik = $this->siswa->NIK ?? '';
         $this->nisn = $this->siswa->NISN ?? '';
@@ -203,13 +201,15 @@ class BiodataSiswa extends Component
             if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs'])) {
                 $this->addError('sekolah_asal', 'Tingkat pendidikan harus SMP atau MTs');
                 $this->npsn = '';
-                return; 
+                return;
             }
             if (!$this->getErrorBag()->has('sekolah_asal')) {
                 $this->siswa->NPSN = $this->npsn;
                 $this->siswa->status_sekolah = $data['status_sekolah'];
                 $this->siswa->sekolah_asal = $data['nama_sekolah'];
+                $this->sekolah_asal = $data['nama_sekolah'];
                 $this->siswa->save();
+                // $this->updatedSekolahAsal($data['nama_sekolah']);
             }
         } else {
             $this->addError('npsn', 'NPSN not found');
@@ -222,7 +222,7 @@ class BiodataSiswa extends Component
         $dom = new \DOMDocument();
         @$dom->loadHTML($html);
         $xpath = new \DOMXPath($dom);
-        
+
         $npsnNode = $xpath->query("//a[@class='link1']")->item(0);
         $npsn = $npsnNode ? $npsnNode->nodeValue : null;
 
