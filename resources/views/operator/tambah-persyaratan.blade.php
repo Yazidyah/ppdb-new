@@ -85,10 +85,6 @@
                                 </option>
                             @endforeach
                         </select>
-                        <x-primary-button class="mt-2" value="Filter">
-                            {{ __('Filter') }}
-                        </x-primary-button>
-                    </form>
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
@@ -115,7 +111,7 @@
                                 @endif
                             @empty
                                 <tr>
-                                    <td colspan="4" class="border px-4 py-2 text-center">SYARAT UNTUK JALUR INI BELUM DITAMBAHKAN</td>
+                                    <td colspan="4" class="border px-4 py-2 text-center text-red-500">SYARAT UNTUK JALUR INI BELUM DITAMBAHKAN</td>
                                 </tr>
                             @endforelse
                         </tbody>
