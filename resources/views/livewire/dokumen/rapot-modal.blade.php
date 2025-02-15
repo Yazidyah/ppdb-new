@@ -17,15 +17,15 @@
                         class="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:w-full sm:max-w-lg p-4">
                         {{-- tab semester --}}
                         <div x-data="{ currentStep: @entangle('sem').defer }" x-init="currentStep = parseInt(new URLSearchParams(window.location.search).get('sem')) || 1"
-                            class="flex flex-row justify-center lg:justify-between px-4 sm:px-6 items-center mx-auto bg-gray-100 mb-6 rounded-lg">
+                            class="flex flex-row justify-center lg:justify-between px-4 sm:px-6 items-center mx-auto bg-secondary mb-6 rounded-lg">
 
                             <template x-for="(step, index) in 5" :key="index">
                                 <div @click="currentStep = (index + 1); window.history.pushState({}, '', '?sem=' + (index + 1) + '&t={{ $t }}'); $wire.set('sem', (index + 1))"
                                     :class="{
-                                        'bg-blue-500 text-white': currentStep === (index + 1),
-                                        'bg-gray-200 text-gray-700': currentStep !== (index + 1)
+                                        'bg-tertiary text-white': currentStep === (index + 1),
+                                        ' text-gray-700': currentStep !== (index + 1)
                                     }"
-                                    class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-full flex flex-col items-center justify-center cursor-pointer">
+                                    class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center cursor-pointer">
                                     <div
                                         class="bg-white rounded-full flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12">
                                         <h1 class="font-bold text-gray-700 text-center text-sm sm:text-3xl"
