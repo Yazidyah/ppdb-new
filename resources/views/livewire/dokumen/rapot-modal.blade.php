@@ -15,10 +15,12 @@
                 <div class="flex items-end justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
                     <div
                         class="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:w-full sm:max-w-lg p-4">
+                        {{-- tab semester --}}
                         <div x-data="{ currentStep: @entangle('sem').defer }" x-init="currentStep = parseInt(new URLSearchParams(window.location.search).get('sem')) || 1"
                             class="flex flex-row justify-center lg:justify-between px-4 sm:px-6 items-center mx-auto bg-gray-100 mb-6 rounded-lg">
+
                             <template x-for="(step, index) in 5" :key="index">
-                                <div @click="currentStep = (index+1); window.history.pushState({}, '', '?sem=' + (index+1) + '&t={{ $t }}'); $wire.set('sem', (index+1))"
+                                <div @click="currentStep = (index + 1); window.history.pushState({}, '', '?sem=' + (index + 1) + '&t={{ $t }}'); $wire.set('sem', (index + 1))"
                                     :class="{
                                         'bg-blue-500 text-white': currentStep === (index + 1),
                                         'bg-gray-200 text-gray-700': currentStep !== (index + 1)
@@ -38,12 +40,14 @@
 
                         <div class="steps">
                             <div>
-                                <x-input-label for="matematika" :value="__('Matematika')" />
-                                <x-text-input class="bg-white" id="matematika" class="block mt-1 w-full" type="text"
-                                    name="matematika" :value="old('matematika')" required autofocus autocomplete="matematika" />
-                                <x-input-error :messages="$errors->get('matematika')" class="mt-2" />
+                                <label for="matematika">Matematika semester {{ $sem }}</label>
+                                <x-text-input class="bg-white" id="matematika{{ $sem }}"
+                                    class="block mt-1 w-full" type="text" name="matematika{{ $sem }}"
+                                    required autofocus autocomplete="matematika{{ $sem }}"
+                                    wire:model.live='matematika{{ $sem }}' />
                             </div>
                         </div>
+
 
                         <div class="px-4 py-3 bg-gray-50 sm:flex sm:flex-row-reverse sm:px-6">
                             <button type="button" wire:click="kirim"
