@@ -31,7 +31,7 @@ class RapotModal extends Component
         $this->t = request()->query('t', 1);
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
         if ($this->rapot->nilai_rapot) {
-            $rapot = json_decode($this->rapot->nilai_rapot, true);
+            $rapot = is_string($this->rapot->nilai_rapot) ? json_decode($this->rapot->nilai_rapot, true) : $this->rapot->nilai_rapot;
             $this->initializeRapotValues($rapot);
         }
     }
@@ -115,16 +115,22 @@ class RapotModal extends Component
         $this->validateRapotInput();
 
         $formattedData = [];
+        $totalAverage = 0;
         for ($i = 1; $i <= 5; $i++) {
+            $rapotData = $this->getRapotData($i);
             $formattedData[] = [
                 'semester' => $i,
-                'data' => $this->getRapotData($i),
+                'data' => $rapotData,
             ];
+            $totalAverage += array_sum($rapotData) / count($rapotData);
         }
+
+        $totalAverage /= 5;
 
         // convert to json
         $jsonData = json_encode($formattedData, JSON_PRETTY_PRINT);
         $this->rapot->nilai_rapot = $jsonData;
+        $this->rapot->total_rata_nilai = $totalAverage;
         $this->rapot->save();
         $this->modalSubmit = false;
     }

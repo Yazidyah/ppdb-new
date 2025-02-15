@@ -23,8 +23,8 @@ class TabNilaiSiswa extends Component
             }, $nilaiRapot);
         })->flatten(1)->toArray();
 
+        $this->grandAverageScore = Rapot::sum('total_rata_nilai');
         $this->calculateAverageScores();
-        $this->calculateGrandAverageScore();
     }
 
     private function calculateAverageScores()
@@ -34,13 +34,6 @@ class TabNilaiSiswa extends Component
             $subjectCount = count($rapot['data']);
             return $subjectCount > 0 ? round($totalScore / $subjectCount, 3) : 0;
         }, $this->rapotData);
-    }
-
-    private function calculateGrandAverageScore()
-    {
-        $totalAverage = array_sum($this->averageScores);
-        $semesterCount = count($this->averageScores);
-        $this->grandAverageScore = $semesterCount > 0 ? round($totalAverage / $semesterCount, 3) : 0;
     }
 
     public function render()

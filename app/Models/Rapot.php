@@ -22,6 +22,13 @@ class Rapot extends Model
 
     public function getNilaiRapotAttribute($value)
     {
-        return json_decode($value, true);
+        return is_string($value) ? json_decode($value, true) : $value;
+    }
+
+    public static function calculateGrandAverageScore($averageScores)
+    {
+        $totalAverage = array_sum($averageScores);
+        $semesterCount = count($averageScores);
+        return $semesterCount > 0 ? round($totalAverage / $semesterCount, 3) : 0;
     }
 }
