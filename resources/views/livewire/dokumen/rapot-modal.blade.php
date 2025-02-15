@@ -46,6 +46,13 @@
                                     required autofocus autocomplete="matematika{{ $sem }}"
                                     wire:model.live='matematika{{ $sem }}' />
                             </div>
+                            <div>
+                                <label for="bahasa_indonesia">Bahasa Indonesia semester {{ $sem }}</label>
+                                <x-text-input class="bg-white" id="bahasa_indonesia{{ $sem }}"
+                                    class="block mt-1 w-full" type="text" name="bahasa_indonesia{{ $sem }}"
+                                    required autofocus autocomplete="bahasa_indonesia{{ $sem }}"
+                                    wire:model.live='bahasa_indonesia{{ $sem }}' />
+                            </div>
                         </div>
 
 

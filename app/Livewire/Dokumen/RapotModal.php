@@ -28,11 +28,16 @@ class RapotModal extends Component
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
         if ($this->rapot->nilai_rapot) {
             $rapot = json_decode($this->rapot->nilai_rapot, true);
-            $this->matematika1 = $rapot[0]['data']['matematika'];
-            $this->matematika2 = $rapot[1]['data']['matematika'];
-            $this->matematika3 = $rapot[2]['data']['matematika'];
-            $this->matematika4 = $rapot[3]['data']['matematika'];
-            $this->matematika5 = $rapot[4]['data']['matematika'];
+            $this->matematika1 = @$rapot[0]['data']['matematika'];
+            $this->matematika2 = @$rapot[1]['data']['matematika'];
+            $this->matematika3 = @$rapot[2]['data']['matematika'];
+            $this->matematika4 = @$rapot[3]['data']['matematika'];
+            $this->matematika5 = @$rapot[4]['data']['matematika'];
+            $this->bahasa_indonesia1 = @$rapot[0]['data']['bahasa_indonesia'];
+            $this->bahasa_indonesia2 = @$rapot[1]['data']['bahasa_indonesia'];
+            $this->bahasa_indonesia3 = @$rapot[2]['data']['bahasa_indonesia'];
+            $this->bahasa_indonesia4 = @$rapot[3]['data']['bahasa_indonesia'];
+            $this->bahasa_indonesia5 = @$rapot[4]['data']['bahasa_indonesia'];
         }
     }
 
@@ -42,23 +47,29 @@ class RapotModal extends Component
         for ($i = 1; $i <= 5; $i++) {
             if ($i == 1) {
                 $matematika = $this->matematika1;
+                $bind = $this->bahasa_indonesia1;
             }
             if ($i == 2) {
                 $matematika = $this->matematika2;
+                $bind = $this->bahasa_indonesia2;
             }
             if ($i == 3) {
                 $matematika = $this->matematika3;
+                $bind = $this->bahasa_indonesia3;
             }
             if ($i == 4) {
                 $matematika = $this->matematika4;
+                $bind = $this->bahasa_indonesia4;
             }
             if ($i == 5) {
                 $matematika = $this->matematika5;
+                $bind = $this->bahasa_indonesia5;
             }
             $formattedData[] = [
                 'semester' => $i,
                 'data' => [
                     'matematika' => $matematika,
+                    'bahasa_indonesia' => $bind,
                 ],
             ];
         }
