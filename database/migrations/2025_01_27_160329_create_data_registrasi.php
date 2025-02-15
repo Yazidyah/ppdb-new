@@ -19,7 +19,6 @@ return new class extends Migration
             $table->timestamp('tanggal_daftar')->useCurrent();
             $table->timestamps();
             $table->foreign('id_calon_siswa')->references('id_calon_siswa')->on('calon_siswa')->onDelete('cascade');
-            // $table->foreign('id_jalur')->references('id_jalur')->on('jalur_registrasi')->onDelete('cascade');
         });
     }
 

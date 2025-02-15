@@ -35,8 +35,6 @@
                         </div>
                     </div>
                     <hr class="my-4 border-gray-300">
-
-
                     <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-gray-700">
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">No Telpon</p>

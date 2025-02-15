@@ -28,9 +28,6 @@
                     </div>
                 @endif
 
-
-
-
                 <form action="{{ route('operator.tambah-persyaratan') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="container py-5 mx-auto px-12 lg:px-32 flex items-center justify-center">
@@ -52,10 +49,9 @@
                             <div class ="py-1 flex items-center justify-left col-span-3">
                                 <select name="id_jalur" id="id_jalur"
                                     class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2 ">
-                                    <option value="1">Reguler</option>
-                                    <option value="2">Prestasi</option>
-                                    <option value="3">KETM</option>
-                                    <option value="4">ABK</option>
+                                    @foreach ($jalurRegistrasi as $jalur)
+                                        <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
+                                    @endforeach
                                 </select>
                                 <x-input-error :messages="$errors->get('Jenis Jalur')" class="mt-2" />
                             </div>
@@ -77,6 +73,35 @@
                         {{ __('Submit') }}
                     </x-primary-button>
                 </form>
+
+                <div class="container mx-auto mt-10">
+                    <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
+                    <table class="table-auto w-full">
+                        <thead>
+                            <tr>
+                                <th class="px-4 py-2">Nama Persyaratan</th>
+                                <th class="px-4 py-2">Jenis Jalur</th>
+                                <th class="px-4 py-2">Deskripsi</th>
+                                <th class="px-4 py-2">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($persyaratan as $item)
+                                <tr>
+                                    <td class="border px-4 py-2">{{ $item->nama_persyaratan }}</td>
+                                    <td class="border px-4 py-2">{{ $item->jalurRegistrasi->nama_jalur }}</td>
+                                    <td class="border px-4 py-2">{{ $item->deskripsi }}</td>
+                                    <td class="border px-4 py-2">
+                                        <form action="{{ route('operator.delete-persyaratan', $item->id_persyaratan) }}" method="post">
+                                            @csrf
+                                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
