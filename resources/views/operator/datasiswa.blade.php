@@ -56,7 +56,7 @@
                                         <button type="submit" form="searchForm" name="sort_by" value="jenis_kelamin" class="text-gray-700">Jenis Kelamin</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
-                                        Email
+                                        <button type="submit" form="searchForm" name="sort_by" value="total_rata_nilai" class="text-gray-700">Nilai rata-rata</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
                                         <button type="submit" form="searchForm" name="sort_by" value="status" class="text-gray-700">Status</button>
@@ -85,8 +85,8 @@
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->jenis_kelamin }}
                                         </td>
-                                        <td scope="col" class="w-[30px] whitespace-nowrap text-center">
-                                            {{ $siswa->user->email }}
+                                        <td scope="col" class="px-6 py-3 text-center">
+                                            {{ $siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             @if($siswa->dataRegistrasi->status == '1')

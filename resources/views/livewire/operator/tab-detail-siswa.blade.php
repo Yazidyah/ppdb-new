@@ -30,8 +30,8 @@
                 </div>
 
                 <div>
-                    <p class="text-xs font-medium">No Telpon</p>
-                    <p>{{ $siswa->no_telp }}</p>
+                    <p class="text-xs font-medium">Email</p>
+                    <p>{{ $siswa->user->email }}</p>
                 </div>
 
                 <div>
