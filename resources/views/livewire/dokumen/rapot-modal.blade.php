@@ -66,6 +66,12 @@
                                     type="text" name="pai{{ $sem }}" required autofocus
                                     autocomplete="pai{{ $sem }}" wire:model.live='pai{{ $sem }}' />
                             </div>
+                            <div>
+                                <label for="ipa">IPA semester {{ $sem }}</label>
+                                <x-text-input class="bg-white" id="ipa{{ $sem }}" class="block mt-1 w-full"
+                                    type="text" name="ipa{{ $sem }}" required autofocus
+                                    autocomplete="ipa{{ $sem }}" wire:model.live='ipa{{ $sem }}' />
+                            </div>
                         </div>
 
 
