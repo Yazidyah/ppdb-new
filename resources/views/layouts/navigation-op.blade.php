@@ -23,12 +23,15 @@ switch ($userRole){
     $redirectUrlp = 'operator.persyaratan';
     $redirectUrlk = 'operator.alur-pendaftaran';
     $redirectUrlpk = 'operator.data-afirmasi-prestasi';
+    $redirectUrlpk = 'operator.data-afirmasi-prestasi';
     $redirectUrlc = 'operator.data-afirmasi-abk';
     $redirectUrlrr = 'operator.data-afirmasi-ketm';
     $redirectUrldk = 'operator.data-tidaklulus';
     $redirectUrlst = 'operator.data-reguler';
     $redirectUrls = 'operator.datasiswa';
     $redirectUrlls = 'operator.data-lulus';
+    $redirectUrstep1 = 'operator.data-lulus';
+    $redirectUrstep2 = 'operator.data-lulus';
     $redirectUrlcrud = 'operator.tambah-persyaratan';
     break;
 
@@ -177,7 +180,7 @@ switch ($userRole){
          {{ __('Data Pendaftar') }}
          </x-side-nav>
          </li>
-         <li>
+         <!-- <li>
          <x-side-nav :href="route($redirectUrlpk)" :active="request()->routeIs($redirectUrlpk)">
          {{ __('Data Pendaftar Afirmasi Prestasi') }}
          </x-side-nav>
@@ -201,12 +204,22 @@ switch ($userRole){
          <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
          {{ __('Data Pendaftar Lulus') }}
          </x-side-nav>
+         </li>          -->
+         <li>
+         <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
+         {{ __('Data Pendaftar Melaju ke (Step 1)') }}
+         </x-side-nav>
          </li>         
          <li>
+         <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
+         {{ __('Data Pendaftar Melaju ke (Step 2)') }}
+         </x-side-nav>
+         </li>         
+         <!-- <li>
          <x-side-nav :href="route($redirectUrldk)" :active="request()->routeIs($redirectUrldk)">
          {{ __('Data Pendaftar Tidak Lulus') }}
          </x-side-nav>
-         </li>         
+         </li>          -->
       </ul>
    </div>
 </aside>

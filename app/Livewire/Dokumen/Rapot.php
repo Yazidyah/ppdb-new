@@ -35,6 +35,13 @@ class Rapot extends Component
         }
     }
 
+    public static function calculateGrandAverageScore($averageScores)
+    {
+        $totalAverage = array_sum($averageScores);
+        $semesterCount = count($averageScores);
+        return $semesterCount > 0 ? round($totalAverage / $semesterCount, 3) : 0;
+    }
+
     public function update()
     {
         $this->validate([
@@ -48,8 +55,17 @@ class Rapot extends Component
             'nilai_rapot.*.ips' => 'required|integer',
         ]);
 
+        $averageScores = array_map(function ($rapot) {
+            $totalScore = array_sum($rapot['data']);
+            $subjectCount = count($rapot['data']);
+            return $subjectCount > 0 ? round($totalScore / $subjectCount, 3) : 0;
+        }, $this->nilai_rapot);
+
+        $grandAverageScore = self::calculateGrandAverageScore($averageScores);
+
         $this->rapot->update([
             'nilai_rapot' => json_encode($this->nilai_rapot),
+            'total_rata_nilai' => $grandAverageScore,
         ]);
 
         session()->flash('message', 'Rapot updated successfully.');

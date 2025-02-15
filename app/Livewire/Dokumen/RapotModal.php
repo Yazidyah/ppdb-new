@@ -31,102 +31,120 @@ class RapotModal extends Component
         $this->t = request()->query('t', 1);
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
         if ($this->rapot->nilai_rapot) {
-            $rapot = json_decode($this->rapot->nilai_rapot, true);
-            $this->matematika1 = @$rapot[0]['data']['matematika'];
-            $this->matematika2 = @$rapot[1]['data']['matematika'];
-            $this->matematika3 = @$rapot[2]['data']['matematika'];
-            $this->matematika4 = @$rapot[3]['data']['matematika'];
-            $this->matematika5 = @$rapot[4]['data']['matematika'];
-            $this->bahasa_indonesia1 = @$rapot[0]['data']['bahasa_indonesia'];
-            $this->bahasa_indonesia2 = @$rapot[1]['data']['bahasa_indonesia'];
-            $this->bahasa_indonesia3 = @$rapot[2]['data']['bahasa_indonesia'];
-            $this->bahasa_indonesia4 = @$rapot[3]['data']['bahasa_indonesia'];
-            $this->bahasa_indonesia5 = @$rapot[4]['data']['bahasa_indonesia'];
-            $this->bahasa_inggris1 = @$rapot[0]['data']['bahasa_inggris'];
-            $this->bahasa_inggris2 = @$rapot[1]['data']['bahasa_inggris'];
-            $this->bahasa_inggris3 = @$rapot[2]['data']['bahasa_inggris'];
-            $this->bahasa_inggris4 = @$rapot[3]['data']['bahasa_inggris'];
-            $this->bahasa_inggris5 = @$rapot[4]['data']['bahasa_inggris'];
-            $this->pai1 = @$rapot[0]['data']['pai'];
-            $this->pai2 = @$rapot[1]['data']['pai'];
-            $this->pai3 = @$rapot[2]['data']['pai'];
-            $this->pai4 = @$rapot[3]['data']['pai'];
-            $this->pai5 = @$rapot[4]['data']['pai'];
-            $this->ipa1 = @$rapot[0]['data']['ipa'];
-            $this->ipa2 = @$rapot[1]['data']['ipa'];
-            $this->ipa3 = @$rapot[2]['data']['ipa'];
-            $this->ipa4 = @$rapot[3]['data']['ipa'];
-            $this->ipa5 = @$rapot[4]['data']['ipa'];
-            $this->ips1 = @$rapot[0]['data']['ips'];
-            $this->ips2 = @$rapot[1]['data']['ips'];
-            $this->ips3 = @$rapot[2]['data']['ips'];
-            $this->ips4 = @$rapot[3]['data']['ips'];
-            $this->ips5 = @$rapot[4]['data']['ips'];
+            $rapot = is_string($this->rapot->nilai_rapot) ? json_decode($this->rapot->nilai_rapot, true) : $this->rapot->nilai_rapot;
+            $this->initializeRapotValues($rapot);
         }
+    }
+
+    private function initializeRapotValues($rapot)
+    {
+        $this->matematika1 = (float)($rapot[0]['data']['matematika'] ?? 0);
+        $this->matematika2 = (float)($rapot[1]['data']['matematika'] ?? 0);
+        $this->matematika3 = (float)($rapot[2]['data']['matematika'] ?? 0);
+        $this->matematika4 = (float)($rapot[3]['data']['matematika'] ?? 0);
+        $this->matematika5 = (float)($rapot[4]['data']['matematika'] ?? 0);
+        $this->bahasa_indonesia1 = (float)($rapot[0]['data']['bahasa_indonesia'] ?? 0);
+        $this->bahasa_indonesia2 = (float)($rapot[1]['data']['bahasa_indonesia'] ?? 0);
+        $this->bahasa_indonesia3 = (float)($rapot[2]['data']['bahasa_indonesia'] ?? 0);
+        $this->bahasa_indonesia4 = (float)($rapot[3]['data']['bahasa_indonesia'] ?? 0);
+        $this->bahasa_indonesia5 = (float)($rapot[4]['data']['bahasa_indonesia'] ?? 0);
+        $this->bahasa_inggris1 = (float)($rapot[0]['data']['bahasa_inggris'] ?? 0);
+        $this->bahasa_inggris2 = (float)($rapot[1]['data']['bahasa_inggris'] ?? 0);
+        $this->bahasa_inggris3 = (float)($rapot[2]['data']['bahasa_inggris'] ?? 0);
+        $this->bahasa_inggris4 = (float)($rapot[3]['data']['bahasa_inggris'] ?? 0);
+        $this->bahasa_inggris5 = (float)($rapot[4]['data']['bahasa_inggris'] ?? 0);
+        $this->pai1 = (float)($rapot[0]['data']['pai'] ?? 0);
+        $this->pai2 = (float)($rapot[1]['data']['pai'] ?? 0);
+        $this->pai3 = (float)($rapot[2]['data']['pai'] ?? 0);
+        $this->pai4 = (float)($rapot[3]['data']['pai'] ?? 0);
+        $this->pai5 = (float)($rapot[4]['data']['pai'] ?? 0);
+        $this->ipa1 = (float)($rapot[0]['data']['ipa'] ?? 0);
+        $this->ipa2 = (float)($rapot[1]['data']['ipa'] ?? 0);
+        $this->ipa3 = (float)($rapot[2]['data']['ipa'] ?? 0);
+        $this->ipa4 = (float)($rapot[3]['data']['ipa'] ?? 0);
+        $this->ipa5 = (float)($rapot[4]['data']['ipa'] ?? 0);
+        $this->ips1 = (float)($rapot[0]['data']['ips'] ?? 0);
+        $this->ips2 = (float)($rapot[1]['data']['ips'] ?? 0);
+        $this->ips3 = (float)($rapot[2]['data']['ips'] ?? 0);
+        $this->ips4 = (float)($rapot[3]['data']['ips'] ?? 0);
+        $this->ips5 = (float)($rapot[4]['data']['ips'] ?? 0);
+    }
+
+    public function validateRapotInput()
+    {
+        $this->validate([
+            'matematika1' => 'required|numeric|min:0|max:100',
+            'matematika2' => 'required|numeric|min:0|max:100',
+            'matematika3' => 'required|numeric|min:0|max:100',
+            'matematika4' => 'required|numeric|min:0|max:100',
+            'matematika5' => 'required|numeric|min:0|max:100',
+            'bahasa_indonesia1' => 'required|numeric|min:0|max:100',
+            'bahasa_indonesia2' => 'required|numeric|min:0|max:100',
+            'bahasa_indonesia3' => 'required|numeric|min:0|max:100',
+            'bahasa_indonesia4' => 'required|numeric|min:0|max:100',
+            'bahasa_indonesia5' => 'required|numeric|min:0|max:100',
+            'bahasa_inggris1' => 'required|numeric|min:0|max:100',
+            'bahasa_inggris2' => 'required|numeric|min:0|max:100',
+            'bahasa_inggris3' => 'required|numeric|min:0|max:100',
+            'bahasa_inggris4' => 'required|numeric|min:0|max:100',
+            'bahasa_inggris5' => 'required|numeric|min:0|max:100',
+            'pai1' => 'required|numeric|min:0|max:100',
+            'pai2' => 'required|numeric|min:0|max:100',
+            'pai3' => 'required|numeric|min:0|max:100',
+            'pai4' => 'required|numeric|min:0|max:100',
+            'pai5' => 'required|numeric|min:0|max:100',
+            'ipa1' => 'required|numeric|min:0|max:100',
+            'ipa2' => 'required|numeric|min:0|max:100',
+            'ipa3' => 'required|numeric|min:0|max:100',
+            'ipa4' => 'required|numeric|min:0|max:100',
+            'ipa5' => 'required|numeric|min:0|max:100',
+            'ips1' => 'required|numeric|min:0|max:100',
+            'ips2' => 'required|numeric|min:0|max:100',
+            'ips3' => 'required|numeric|min:0|max:100',
+            'ips4' => 'required|numeric|min:0|max:100',
+            'ips5' => 'required|numeric|min:0|max:100',
+        ], [
+            'numeric' => 'Nilai harus berupa angka.',
+            'min' => 'Nilai tidak boleh kurang dari 0.',
+            'max' => 'Nilai tidak boleh lebih dari 100.',
+        ]);
     }
 
     public function kirim()
     {
+        $this->validateRapotInput();
+
         $formattedData = [];
+        $totalAverage = 0;
         for ($i = 1; $i <= 5; $i++) {
-            if ($i == 1) {
-                $matematika = $this->matematika1;
-                $bind = $this->bahasa_indonesia1;
-                $bing = $this->bahasa_inggris1;
-                $pai = $this->pai1;
-                $ipa = $this->ipa1;
-                $ips = $this->ips1;
-            }
-            if ($i == 2) {
-                $matematika = $this->matematika2;
-                $bind = $this->bahasa_indonesia2;
-                $bing = $this->bahasa_inggris2;
-                $pai = $this->pai2;
-                $ipa = $this->ipa2;
-                $ips = $this->ips2;
-            }
-            if ($i == 3) {
-                $matematika = $this->matematika3;
-                $bind = $this->bahasa_indonesia3;
-                $bing = $this->bahasa_inggris3;
-                $pai = $this->pai3;
-                $ipa = $this->ipa3;
-                $ips = $this->ips3;
-            }
-            if ($i == 4) {
-                $matematika = $this->matematika4;
-                $bind = $this->bahasa_indonesia4;
-                $bing = $this->bahasa_inggris4;
-                $pai = $this->pai4;
-                $ipa = $this->ipa4;
-                $ips = $this->ips4;
-            }
-            if ($i == 5) {
-                $matematika = $this->matematika5;
-                $bind = $this->bahasa_indonesia5;
-                $bing = $this->bahasa_inggris5;
-                $pai = $this->pai5;
-                $ipa = $this->ipa5;
-                $ips = $this->ips5;
-            }
+            $rapotData = $this->getRapotData($i);
             $formattedData[] = [
                 'semester' => $i,
-                'data' => [
-                    'matematika' => $matematika,
-                    'bahasa_indonesia' => $bind,
-                    'bahasa_inggris' => $bing,
-                    'pai' => $pai,
-                    'ipa' => $ipa,
-                    'ips' => $ips,
-                ],
+                'data' => $rapotData,
             ];
+            $totalAverage += array_sum($rapotData) / count($rapotData);
         }
+
+        $totalAverage /= 5;
 
         // convert to json
         $jsonData = json_encode($formattedData, JSON_PRETTY_PRINT);
         $this->rapot->nilai_rapot = $jsonData;
+        $this->rapot->total_rata_nilai = $totalAverage;
         $this->rapot->save();
         $this->modalSubmit = false;
+    }
+
+    private function getRapotData($semester)
+    {
+        return [
+            'matematika' => (float)$this->{"matematika$semester"},
+            'bahasa_indonesia' => (float)$this->{"bahasa_indonesia$semester"},
+            'bahasa_inggris' => (float)$this->{"bahasa_inggris$semester"},
+            'pai' => (float)$this->{"pai$semester"},
+            'ipa' => (float)$this->{"ipa$semester"},
+            'ips' => (float)$this->{"ips$semester"},
+        ];
     }
 
     public function render()

@@ -23,7 +23,7 @@
                                 <path
                                     d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z" />
                             </svg>
-                            <div class="font-semibold text-lg text-gray-800">{{ $siswa->nama_lengkap }}</div>
+                            <div class="font-semibold text-lg text-gray-800">{{ Str::title($siswa->nama_lengkap) }}</div>
                         </div>
                         <div class="flex flex-col text-left sm:text-center">
                             <div class="text-sm text-gray-600 font-semibold"> {{ $siswa->sekolah_asal }}</div>
@@ -35,8 +35,6 @@
                         </div>
                     </div>
                     <hr class="my-4 border-gray-300">
-
-
                     <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-gray-700">
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">No Telpon</p>
@@ -82,6 +80,14 @@
                         ])>
                             Orang Tua
                         </button>
+                        <button onclick="setTab('nilai')" @class([
+                            'flex-1 py-2 font-medium duration-300 h-10',
+                            'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
+                                $tab != 'nilai',
+                            'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'nilai',
+                        ])>
+                            Nilai
+                        </button>
 
                         <button onclick="setTab('berkas')" @class([
                             'flex-1 py-2 font-medium duration-300 h-10',
@@ -108,6 +114,13 @@
                         </div>
                     </div>
 
+                    <div id="nilai-content" class="tab-content"
+                        style="display: {{ $tab == 'nilai' ? 'block' : 'none' }};">
+                        <div class="mt-3">
+                            @livewire('operator.tab-nilai-siswa', ['siswa' => $siswa], key('operator-tab-nilai-siswa-' . $siswa->id_calon_siswa))
+                        </div>
+                    </div>
+                    
                     <div id="berkas-content" class="tab-content"
                         style="display: {{ $tab == 'berkas' ? 'block' : 'none' }};">
                         <div class="mt-3">

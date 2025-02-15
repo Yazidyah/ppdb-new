@@ -11,7 +11,7 @@
             <div class="grid grid-cols-2 gap-4 text-gray-700 text-left">
                 <div>
                     <p class="text-xs font-medium">Nama Lengkap</p>
-                    <p>{{ $siswa->nama_lengkap }}</p>
+                    <p>{{ ucfirst($siswa->nama_lengkap) }}</p>
                 </div>
 
                 <div>
@@ -57,9 +57,9 @@
 
                 <div>
                     <p class="text-xs font-medium">Sekolah Asal</p>
-                    <p>{{ $siswa->sekolah_asal }}</p>
+                    <p>{{ $siswa->sekolah_asal_formatted }}</p>
                 </div>
-
+                
                 <div>
                     <p class="text-xs font-medium">Provinsi</p>
                     <p>{{ $siswa->provinsi }}</p>

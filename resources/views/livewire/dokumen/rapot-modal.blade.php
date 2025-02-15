@@ -7,7 +7,6 @@
         </button>
     </div>
 
-
     @if ($modalSubmit)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
@@ -42,66 +41,22 @@
 
                         <!-- Input Nilai -->
                         <div class="steps space-y-6">
-                            <div>
-                                <label for="matematika" class="block text-lg font-semibold text-gray-700">Matematika
-                                </label>
-                                <input
-                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
-                                    id="matematika{{ $sem }}" type="text"
-                                    name="matematika{{ $sem }}" required autofocus
-                                    autocomplete="matematika{{ $sem }}"
-                                    wire:model.live='matematika{{ $sem }}'
-                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
-                            </div>
-                            <div>
-                                <label for="bahasa_indonesia" class="block text-lg font-semibold text-gray-700">Bahasa
-                                    Indonesia</label>
-                                <input
-                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
-                                    id="bahasa_indonesia{{ $sem }}" type="text"
-                                    name="bahasa_indonesia{{ $sem }}" required autofocus
-                                    autocomplete="bahasa_indonesia{{ $sem }}"
-                                    wire:model.live='bahasa_indonesia{{ $sem }}'
-                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
-                            </div>
-                            <div>
-                                <label for="bahasa_inggris" class="block text-lg font-semibold text-gray-700">Bahasa
-                                    Inggris</label>
-                                <input
-                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
-                                    id="bahasa_inggris{{ $sem }}" type="text"
-                                    name="bahasa_inggris{{ $sem }}" required autofocus
-                                    autocomplete="bahasa_inggris{{ $sem }}"
-                                    wire:model.live='bahasa_inggris{{ $sem }}'
-                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
-                            </div>
-                            <div>
-                                <label for="pai" class="block text-lg font-semibold text-gray-700">PAI</label>
-                                <input
-                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
-                                    id="pai{{ $sem }}" type="text" name="pai{{ $sem }}" required
-                                    autofocus autocomplete="pai{{ $sem }}"
-                                    wire:model.live='pai{{ $sem }}'
-                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
-                            </div>
-                            <div>
-                                <label for="ipa" class="block text-lg font-semibold text-gray-700">IPA</label>
-                                <input
-                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
-                                    id="ipa{{ $sem }}" type="text" name="ipa{{ $sem }}" required
-                                    autofocus autocomplete="ipa{{ $sem }}"
-                                    wire:model.live='ipa{{ $sem }}'
-                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
-                            </div>
-                            <div>
-                                <label for="ips" class="block text-lg font-semibold text-gray-700">IPS</label>
-                                <input
-                                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
-                                    id="ips{{ $sem }}" type="text" name="ips{{ $sem }}" required
-                                    autofocus autocomplete="ips{{ $sem }}"
-                                    wire:model.live='ips{{ $sem }}'
-                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
-                            </div>
+                            @foreach (['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'pai', 'ipa', 'ips'] as $subject)
+                                <div>
+                                    <label for="{{ $subject }}" class="block text-lg font-semibold text-gray-700">{{ ucfirst(str_replace('_', ' ', $subject)) }}</label>
+                                    <input
+                                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+                                        id="{{ $subject }}{{ $sem }}" type="text"
+                                        name="{{ $subject }}{{ $sem }}" required autofocus
+                                        autocomplete="{{ $subject }}{{ $sem }}"
+                                        wire:model.live="{{ $subject }}{{ $sem }}"
+                                        x-on:input="if (!/^\d*\.?\d*$/.test($event.target.value) || $event.target.value > 100) $event.target.value = $event.target.value.replace(/[^\d.]/g, '').slice(0, 5)"
+                                        x-on:focus="if ($event.target.value == 0) $event.target.value = ''" />
+                                    @error($subject . $sem)
+                                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            @endforeach
                         </div>
 
                         <div class="sm:flex sm:flex-row-reverse sm:px-6 mt-8">
