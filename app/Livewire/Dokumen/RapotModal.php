@@ -122,7 +122,7 @@ class RapotModal extends Component
             ];
         }
 
-        // Convert the array to JSON
+        // convert to json
         $jsonData = json_encode($formattedData, JSON_PRETTY_PRINT);
         $this->rapot->nilai_rapot = $jsonData;
         $this->rapot->save();
