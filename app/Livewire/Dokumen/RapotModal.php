@@ -14,6 +14,7 @@ class RapotModal extends Component
     public $rapot;
     public $user;
     public $matematika1, $matematika2, $matematika3, $matematika4, $matematika5;
+    public $bahasa_indonesia1, $bahasa_indonesia2, $bahasa_indonesia3, $bahasa_indonesia4, $bahasa_indonesia5;
     protected $queryString = [
         'sem' => ['except' => 1],
         't' => ['except' => 1],
