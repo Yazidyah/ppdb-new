@@ -15,6 +15,7 @@ class RapotModal extends Component
     public $user;
     public $matematika1, $matematika2, $matematika3, $matematika4, $matematika5;
     public $bahasa_indonesia1, $bahasa_indonesia2, $bahasa_indonesia3, $bahasa_indonesia4, $bahasa_indonesia5;
+    public $bahasa_inggris1, $bahasa_inggris2, $bahasa_inggris3, $bahasa_inggris4, $bahasa_inggris5;
     protected $queryString = [
         'sem' => ['except' => 1],
         't' => ['except' => 1],
@@ -38,6 +39,11 @@ class RapotModal extends Component
             $this->bahasa_indonesia3 = @$rapot[2]['data']['bahasa_indonesia'];
             $this->bahasa_indonesia4 = @$rapot[3]['data']['bahasa_indonesia'];
             $this->bahasa_indonesia5 = @$rapot[4]['data']['bahasa_indonesia'];
+            $this->bahasa_inggris1 = @$rapot[0]['data']['bahasa_inggris'];
+            $this->bahasa_inggris2 = @$rapot[1]['data']['bahasa_inggris'];
+            $this->bahasa_inggris3 = @$rapot[2]['data']['bahasa_inggris'];
+            $this->bahasa_inggris4 = @$rapot[3]['data']['bahasa_inggris'];
+            $this->bahasa_inggris5 = @$rapot[4]['data']['bahasa_inggris'];
         }
     }
 
@@ -48,28 +54,34 @@ class RapotModal extends Component
             if ($i == 1) {
                 $matematika = $this->matematika1;
                 $bind = $this->bahasa_indonesia1;
+                $bing = $this->bahasa_inggris1;
             }
             if ($i == 2) {
                 $matematika = $this->matematika2;
                 $bind = $this->bahasa_indonesia2;
+                $bing = $this->bahasa_inggris2;
             }
             if ($i == 3) {
                 $matematika = $this->matematika3;
                 $bind = $this->bahasa_indonesia3;
+                $bing = $this->bahasa_inggris3;
             }
             if ($i == 4) {
                 $matematika = $this->matematika4;
                 $bind = $this->bahasa_indonesia4;
+                $bing = $this->bahasa_inggris4;
             }
             if ($i == 5) {
                 $matematika = $this->matematika5;
                 $bind = $this->bahasa_indonesia5;
+                $bing = $this->bahasa_inggris5;
             }
             $formattedData[] = [
                 'semester' => $i,
                 'data' => [
                     'matematika' => $matematika,
                     'bahasa_indonesia' => $bind,
+                    'bahasa_inggris' => $bing,
                 ],
             ];
         }
