@@ -12,6 +12,7 @@ class Rapot extends Model
     protected $fillable = [
         'id_registrasi',
         'nilai_rapot',
+        'total_rata_nilai',
     ];
 
     public function registrasi()
