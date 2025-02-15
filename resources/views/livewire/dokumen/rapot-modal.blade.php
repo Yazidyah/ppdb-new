@@ -138,7 +138,7 @@
                         <div class="steps space-y-6">
                             <div>
                                 <label for="matematika" class="block text-lg font-semibold text-gray-700">Matematika
-                                    semester {{ $sem }}</label>
+                                </label>
                                 <input
                                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
                                     id="matematika{{ $sem }}" type="text"
@@ -149,7 +149,7 @@
                             </div>
                             <div>
                                 <label for="bahasa_indonesia" class="block text-lg font-semibold text-gray-700">Bahasa
-                                    Indonesia semester {{ $sem }}</label>
+                                    Indonesia</label>
                                 <input
                                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
                                     id="bahasa_indonesia{{ $sem }}" type="text"
@@ -160,7 +160,7 @@
                             </div>
                             <div>
                                 <label for="bahasa_inggris" class="block text-lg font-semibold text-gray-700">Bahasa
-                                    Inggris semester {{ $sem }}</label>
+                                    Inggris</label>
                                 <input
                                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
                                     id="bahasa_inggris{{ $sem }}" type="text"
@@ -170,8 +170,7 @@
                                     x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                             <div>
-                                <label for="pai" class="block text-lg font-semibold text-gray-700">PAI semester
-                                    {{ $sem }}</label>
+                                <label for="pai" class="block text-lg font-semibold text-gray-700">PAI</label>
                                 <input
                                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
                                     id="pai{{ $sem }}" type="text" name="pai{{ $sem }}" required
@@ -180,8 +179,7 @@
                                     x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                             <div>
-                                <label for="ipa" class="block text-lg font-semibold text-gray-700">IPA semester
-                                    {{ $sem }}</label>
+                                <label for="ipa" class="block text-lg font-semibold text-gray-700">IPA</label>
                                 <input
                                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
                                     id="ipa{{ $sem }}" type="text" name="ipa{{ $sem }}" required
@@ -190,8 +188,7 @@
                                     x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                             <div>
-                                <label for="ips" class="block text-lg font-semibold text-gray-700">IPS semester
-                                    {{ $sem }}</label>
+                                <label for="ips" class="block text-lg font-semibold text-gray-700">IPS</label>
                                 <input
                                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
                                     id="ips{{ $sem }}" type="text" name="ips{{ $sem }}" required

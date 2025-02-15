@@ -126,6 +126,7 @@ class RapotModal extends Component
         $jsonData = json_encode($formattedData, JSON_PRETTY_PRINT);
         $this->rapot->nilai_rapot = $jsonData;
         $this->rapot->save();
+        $this->modalSubmit = false;
     }
 
     public function render()
