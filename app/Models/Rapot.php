@@ -18,4 +18,9 @@ class Rapot extends Model
     {
         return $this->belongsTo(DataRegistrasi::class, 'id_registrasi', 'id_registrasi');
     }
+
+    public function getNilaiRapotAttribute($value)
+    {
+        return json_decode($value, true);
+    }
 }
