@@ -76,6 +76,19 @@
 
                 <div class="container mx-auto mt-10">
                     <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
+                    <form action="{{ route('operator.tambah-persyaratan') }}" method="GET" class="mb-4">
+                        <select name="filter_jalur" id="filter_jalur" class="w-1/4 flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2" onchange="this.form.submit()">
+                            <option value="">Semua Jalur</option>
+                            @foreach ($jalurRegistrasi as $jalur)
+                                <option value="{{ $jalur->id_jalur }}" {{ request('filter_jalur') == $jalur->id_jalur ? 'selected' : '' }}>
+                                    {{ $jalur->nama_jalur }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <x-primary-button class="mt-2" value="Filter">
+                            {{ __('Filter') }}
+                        </x-primary-button>
+                    </form>
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
@@ -86,19 +99,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($persyaratan as $item)
+                            @forelse ($persyaratan as $item)
+                                @if (!request('filter_jalur') || request('filter_jalur') == $item->id_jalur)
+                                    <tr>
+                                        <td class="border px-4 py-2">{{ $item->nama_persyaratan }}</td>
+                                        <td class="border px-4 py-2">{{ $item->jalurRegistrasi->nama_jalur }}</td>
+                                        <td class="border px-4 py-2">{{ $item->deskripsi }}</td>
+                                        <td class="border px-4 py-2">
+                                            <form action="{{ route('operator.delete-persyaratan', $item->id_persyaratan) }}" method="post">
+                                                @csrf
+                                                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @empty
                                 <tr>
-                                    <td class="border px-4 py-2">{{ $item->nama_persyaratan }}</td>
-                                    <td class="border px-4 py-2">{{ $item->jalurRegistrasi->nama_jalur }}</td>
-                                    <td class="border px-4 py-2">{{ $item->deskripsi }}</td>
-                                    <td class="border px-4 py-2">
-                                        <form action="{{ route('operator.delete-persyaratan', $item->id_persyaratan) }}" method="post">
-                                            @csrf
-                                            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
-                                        </form>
-                                    </td>
+                                    <td colspan="4" class="border px-4 py-2 text-center">SYARAT UNTUK JALUR INI BELUM DITAMBAHKAN</td>
                                 </tr>
-                            @endforeach
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

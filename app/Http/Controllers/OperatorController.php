@@ -11,24 +11,15 @@ use Illuminate\Support\Facades\Validator;
 
 class OperatorController extends Controller
 {
-
     public function tambahpersyaratan(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_persyaratan' => 'required|string|max:255',
-            'id_jalur' => 'required|integer|in:1,2,3,4',
-            'deskripsi' => 'nullable|string',
-        ]);
+        $validator = $this->validatePersyaratan($request);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Persyaratan::create([
-            'nama_persyaratan' => $request->nama_persyaratan,
-            'id_jalur' => $request->id_jalur,
-            'deskripsi' => $request->deskripsi,
-        ]);
+        Persyaratan::create($request->only(['nama_persyaratan', 'id_jalur', 'deskripsi']));
 
         return redirect()->back()->with('success', 'Persyaratan berhasil ditambahkan.');
     }
@@ -48,6 +39,92 @@ class OperatorController extends Controller
     }
 
     public function showsiswa(Request $request)
+    {
+        $query = $this->buildSiswaQuery($request);
+
+        $sortBy = $request->input('sort_by', 'id_calon_siswa');
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        $query = $this->applySorting($query, $sortBy, $sortOrder);
+
+        $data = $query->get()->map(function ($item) {
+            $item->nama_lengkap = ucwords(strtolower($item->nama_lengkap));
+            $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
+            return $item;
+        });
+
+        $jalurRegistrasi = JalurRegistrasi::all();
+        $statuses = DataRegistrasi::select('status')->distinct()->get();
+        return view('operator.datasiswa', compact('data', 'jalurRegistrasi', 'statuses'));
+    }
+
+    public function showsiswaDetail($id)
+    {
+        $siswa = CalonSiswa::findOrFail($id);
+        return view('operator.data-siswa-detail', compact('siswa'));
+    }
+
+    public function showsiswaLulus()
+    {
+        $data = CalonSiswa::whereHas('dataRegistrasi', function ($query) {
+            $query->where('status', 1);
+        })->get();
+
+        return view('operator.data-lulus', compact('data'));
+    }
+
+    public function showPersyaratan(Request $request)
+    {
+        $filterJalur = $request->input('filter_jalur');
+        $query = Persyaratan::query();
+
+        if ($filterJalur) {
+            $query->where('id_jalur', $filterJalur);
+        }
+
+        $persyaratan = $query->orderBy('id_jalur', 'asc')->get();
+        $jalurRegistrasi = JalurRegistrasi::all();
+        return view('operator.tambah-persyaratan', compact('persyaratan', 'jalurRegistrasi'));
+    }
+
+    public function lulus($id)
+    {
+        $data = DataRegistrasi::where('id_calon_siswa', $id)->first();
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+
+        $data->status = 1;
+        $data->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diperbarui');
+    }
+
+    public function tidaklulus($id)
+    {
+        $data = DataRegistrasi::where('id_calon_siswa', $id)->first();
+
+        if (!$data) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+
+        $data->status = 2;
+        $data->save();
+
+        return redirect()->back()->with('success', 'Status berhasil diperbarui');
+    }
+
+    private function validatePersyaratan(Request $request)
+    {
+        return Validator::make($request->all(), [
+            'nama_persyaratan' => 'required|string|max:255',
+            'id_jalur' => 'required|integer|in:1,2,3,4',
+            'deskripsi' => 'nullable|string',
+        ]);
+    }
+
+    private function buildSiswaQuery(Request $request)
     {
         $query = CalonSiswa::with('dataRegistrasi');
 
@@ -79,16 +156,16 @@ class OperatorController extends Controller
             });
         }
 
-        $sortBy = $request->input('sort_by', 'id_calon_siswa'); // Default sort_by to 'id_calon_siswa'
-        $sortOrder = $request->input('sort_order', 'asc'); // Default sort_order to 'asc'
+        return $query;
+    }
 
-        // Validate sort_by to ensure it is a valid column name
+    private function applySorting($query, $sortBy, $sortOrder)
+    {
         $validSortByColumns = ['id_calon_siswa', 'nama_lengkap', 'NISN', 'sekolah_asal', 'jenis_kelamin', 'status'];
         if (!in_array($sortBy, $validSortByColumns)) {
             $sortBy = 'id_calon_siswa';
         }
 
-        // Validate sort_order to ensure it is either 'asc' or 'desc'
         if (!in_array($sortOrder, ['asc', 'desc'])) {
             $sortOrder = 'asc';
         }
@@ -100,64 +177,6 @@ class OperatorController extends Controller
             $query->orderBy($sortBy, $sortOrder);
         }
 
-        $data = $query->get()->map(function ($item) {
-            $item->nama_lengkap = ucwords(strtolower($item->nama_lengkap));
-            $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
-            return $item;
-        });
-
-        $jalurRegistrasi = JalurRegistrasi::all();
-        $statuses = DataRegistrasi::select('status')->distinct()->get();
-        return view('operator.datasiswa', compact('data', 'jalurRegistrasi', 'statuses'));
-    }
-
-    public function showsiswaDetail($id)
-    {
-        $siswa = CalonSiswa::findOrFail($id);
-        return view('operator.data-siswa-detail', compact('siswa'));
-    }
-    public function showsiswaLulus()
-    {
-        $data = CalonSiswa::whereHas('dataRegistrasi', function ($query) {
-            $query->where('status', '1'); // Ubah '1' menjadi 1 (integer)
-        })->get();
-
-        return view('operator.data-lulus', compact('data'));
-    }
-
-    public function showPersyaratan()
-    {
-        $persyaratan = Persyaratan::orderBy('id_jalur', 'asc')->get();
-        $jalurRegistrasi = JalurRegistrasi::all();
-        return view('operator.tambah-persyaratan', compact('persyaratan', 'jalurRegistrasi'));
-    }
-
-    public function lulus($id)
-    {
-        // Cari berdasarkan id_calon_siswa
-        $data = DataRegistrasi::where('id_calon_siswa', $id)->first();
-
-        if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
-        }
-
-        $data->status = '1'; // Gunakan integer, bukan string
-        $data->save();
-
-        return redirect()->back()->with('success', 'Status berhasil diperbarui');
-    }
-    public function tidaklulus($id)
-    {
-        // Cari berdasarkan id_calon_siswa
-        $data = DataRegistrasi::where('id_calon_siswa', $id)->first();
-
-        if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
-        }
-
-        $data->status = '2'; // Gunakan integer, bukan string
-        $data->save();
-
-        return redirect()->back()->with('success', 'Status berhasil diperbarui');
+        return $query;
     }
 }
