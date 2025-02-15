@@ -44,41 +44,48 @@
                                 <x-text-input class="bg-white" id="matematika{{ $sem }}"
                                     class="block mt-1 w-full" type="text" name="matematika{{ $sem }}"
                                     required autofocus autocomplete="matematika{{ $sem }}"
-                                    wire:model.live='matematika{{ $sem }}' />
+                                    wire:model.live='matematika{{ $sem }}'
+                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                             <div>
                                 <label for="bahasa_indonesia">Bahasa Indonesia semester {{ $sem }}</label>
                                 <x-text-input class="bg-white" id="bahasa_indonesia{{ $sem }}"
                                     class="block mt-1 w-full" type="text" name="bahasa_indonesia{{ $sem }}"
                                     required autofocus autocomplete="bahasa_indonesia{{ $sem }}"
-                                    wire:model.live='bahasa_indonesia{{ $sem }}' />
+                                    wire:model.live='bahasa_indonesia{{ $sem }}'
+                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                             <div>
                                 <label for="bahasa_inggris">Bahasa Inggris semester {{ $sem }}</label>
                                 <x-text-input class="bg-white" id="bahasa_inggris{{ $sem }}"
                                     class="block mt-1 w-full" type="text" name="bahasa_inggris{{ $sem }}"
                                     required autofocus autocomplete="bahasa_inggris{{ $sem }}"
-                                    wire:model.live='bahasa_inggris{{ $sem }}' />
+                                    wire:model.live='bahasa_inggris{{ $sem }}'
+                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                             <div>
                                 <label for="pai">PAI semester {{ $sem }}</label>
                                 <x-text-input class="bg-white" id="pai{{ $sem }}" class="block mt-1 w-full"
                                     type="text" name="pai{{ $sem }}" required autofocus
-                                    autocomplete="pai{{ $sem }}" wire:model.live='pai{{ $sem }}' />
+                                    autocomplete="pai{{ $sem }}" wire:model.live='pai{{ $sem }}'
+                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                             <div>
                                 <label for="ipa">IPA semester {{ $sem }}</label>
                                 <x-text-input class="bg-white" id="ipa{{ $sem }}" class="block mt-1 w-full"
                                     type="text" name="ipa{{ $sem }}" required autofocus
-                                    autocomplete="ipa{{ $sem }}" wire:model.live='ipa{{ $sem }}' />
+                                    autocomplete="ipa{{ $sem }}" wire:model.live='ipa{{ $sem }}'
+                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                             <div>
                                 <label for="ips">IPS semester {{ $sem }}</label>
                                 <x-text-input class="bg-white" id="ips{{ $sem }}" class="block mt-1 w-full"
                                     type="text" name="ips{{ $sem }}" required autofocus
-                                    autocomplete="ips{{ $sem }}" wire:model.live='ips{{ $sem }}' />
+                                    autocomplete="ips{{ $sem }}" wire:model.live='ips{{ $sem }}'
+                                    x-on:input="if (!/^\d*$/.test($event.target.value)) $event.target.value = $event.target.value.replace(/[^\d]/g, '')" />
                             </div>
                         </div>
+
 
 
                         <div class="px-4 py-3 bg-gray-50 sm:flex sm:flex-row-reverse sm:px-6">
