@@ -25,31 +25,15 @@ class RapotModal extends Component
         $this->sem = request()->query('sem', 1);
         $this->t = request()->query('t', 1);
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
+        if ($this->rapot->nilai_rapot) {
+            $rapot = json_decode($this->rapot->nilai_rapot, true);
+            $this->matematika1 = $rapot[0]['data']['matematika'];
+            $this->matematika2 = $rapot[1]['data']['matematika'];
+            $this->matematika3 = $rapot[2]['data']['matematika'];
+            $this->matematika4 = $rapot[3]['data']['matematika'];
+            $this->matematika5 = $rapot[4]['data']['matematika'];
+        }
     }
-
-    public function updatedMatematika1($value)
-    {
-        $this->matematika1 = $value;
-    }
-
-    // public function updatedMatematika($value)
-    // {
-    //     // Ensure that the incoming value is an array
-    //     if (is_array($value)) {
-    //         foreach ($value as $item) {
-    //             // Check if the item has the expected structure
-    //             if (isset($item['semester']) && isset($item['data']['matematika'])) {
-    //                 $semester = $item['semester'];
-    //                 $score = $item['data']['matematika'];
-
-    //                 // Store the score in the matematika array
-    //                 $this->matematika[$semester] = $score;
-    //             }
-    //         }
-    //     } else {
-    //         // Log an error if the incoming value is not an array
-    //     }
-    // }
 
     public function kirim()
     {
