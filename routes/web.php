@@ -99,6 +99,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
         return view('operator.tambah-persyaratan');
     })->name('operator.tambah-persyaratan');
     Route::post('/operator/tambah-persyaratan', [OperatorController::class, 'tambahpersyaratan'])->name('operator.tambah-persyaratan');
+    Route::post('/operator/delete-persyaratan/{id}', [OperatorController::class, 'deletepersyaratan'])->name('operator.delete-persyaratan');
     Route::get('/operator/alur-pendaftaran', function () {
         return view('operator.alur-pendaftaran');
     })->name('operator.alur-pendaftaran');
@@ -113,6 +114,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
 
     Route::get('/operator/Lulus/{id}', [OperatorController::class, 'lulus'])->name('operator.lulus');
     Route::get('/operator/TidakLulus/{id}', [OperatorController::class, 'tidaklulus'])->name('operator.tidaklulus');
+    Route::get('/operator/tambah-persyaratan', [OperatorController::class, 'showPersyaratan'])->name('operator.show-persyaratan');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');

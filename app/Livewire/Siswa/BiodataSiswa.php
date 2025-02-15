@@ -90,7 +90,7 @@ class BiodataSiswa extends Component
     public function updatedNamaLengkap($value)
     {
         $this->validateOnly('nama_lengkap');
-        $this->siswa->nama_lengkap = $value;
+        $this->siswa->nama_lengkap = strtolower($value);
         $this->siswa->save();
     }
 
@@ -125,14 +125,14 @@ class BiodataSiswa extends Component
     public function updatedAlamatDomisili($value)
     {
         $this->validateOnly('alamat_domisili');
-        $this->siswa->alamat_domisili = $value;
+        $this->siswa->alamat_domisili = strtolower($value);
         $this->siswa->save();
     }
 
     public function updatedAlamatKk($value)
     {
         $this->validateOnly('alamat_kk');
-        $this->siswa->alamat_kk = $value;
+        $this->siswa->alamat_kk = strtolower($value);
         $this->siswa->save();
     }
 
@@ -152,7 +152,7 @@ class BiodataSiswa extends Component
     public function updatedTempatLahir($value)
     {
         $this->validateOnly('tempat_lahir');
-        $this->siswa->tempat_lahir = $value;
+        $this->siswa->tempat_lahir = strtolower($value);
         $this->siswa->save();
     }
 

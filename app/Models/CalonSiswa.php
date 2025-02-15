@@ -30,44 +30,10 @@ class CalonSiswa extends Model
         'alamat_kk',
         'id_provinsi',
         'id_kota',
+        'status_sekolah'
     ];
 
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];
-
-    // public static function boot()
-    // {
-    //     parent::boot();
-    
-    //     static::saved(function ($model) {
-    //         // Ambil jenis kelamin sebelum perubahan
-    //         $previousGender = $model->getOriginal('jenis_kelamin');
-    
-    //         // Jika jenis kelamin berubah, kurangi statistik lama (jika count > 0)
-    //         if ($previousGender && $previousGender != $model->jenis_kelamin) {
-    //             if ($previousGender == 'L') {
-    //                 Statistik::where('id', 1)->where('count', '>', 0)->decrement('count');
-    //             } else {
-    //                 Statistik::where('id', 2)->where('count', '>', 0)->decrement('count');
-    //             }
-    //         }
-
-    //         // Tambah statistik baru sesuai jenis kelamin yang sekarang
-    //         if ($model->jenis_kelamin == 'L') {
-    //             Statistik::where('id', 1)->increment('count');
-    //         } else {
-    //             Statistik::where('id', 2)->increment('count');
-    //         }
-    //     });
-    
-    //     static::deleting(function ($model) {
-    //         // Kurangi statistik saat user dihapus, tapi hanya jika count > 0
-    //         if ($model->jenis_kelamin == 'L') {
-    //             Statistik::where('id', 1)->where('count', '>', 0)->decrement('count');
-    //         } else {
-    //             Statistik::where('id', 2)->where('count', '>', 0)->decrement('count');
-    //         }
-    //     });
-    // }
     
     public function berkas()
     {
@@ -88,6 +54,11 @@ class CalonSiswa extends Model
     {
         Carbon::setLocale('id');
         return Carbon::parse($this->tanggal_lahir)->translatedFormat('j F Y');
+    }
+
+    public function getSekolahAsalFormattedAttribute()
+    {
+        return "{$this->sekolah_asal} ({$this->status_sekolah})";
     }
 
     public function dataRegistrasi()

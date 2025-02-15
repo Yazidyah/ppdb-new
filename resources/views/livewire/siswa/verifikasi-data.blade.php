@@ -5,7 +5,7 @@
         <div class="mx-auto md:grid md:grid-cols-4 gap-2">
         <div class="mb-4 mx-2 col-span-4">
             <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
-            <input type="text" id="nama_lengkap" value="{{ $calonSiswa->nama_lengkap }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            <input type="text" id="nama_lengkap" value="{{ ucfirst($calonSiswa->nama_lengkap) }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
         </div>
         <div class="mb-4 mx-2">
             <label for="nik" class="block text-sm font-medium text-gray-700">NIK</label>
