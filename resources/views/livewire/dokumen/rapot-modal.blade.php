@@ -60,6 +60,12 @@
                                     required autofocus autocomplete="bahasa_inggris{{ $sem }}"
                                     wire:model.live='bahasa_inggris{{ $sem }}' />
                             </div>
+                            <div>
+                                <label for="pai">PAI semester {{ $sem }}</label>
+                                <x-text-input class="bg-white" id="pai{{ $sem }}" class="block mt-1 w-full"
+                                    type="text" name="pai{{ $sem }}" required autofocus
+                                    autocomplete="pai{{ $sem }}" wire:model.live='pai{{ $sem }}' />
+                            </div>
                         </div>
 
 

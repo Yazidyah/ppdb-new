@@ -16,6 +16,8 @@ class RapotModal extends Component
     public $matematika1, $matematika2, $matematika3, $matematika4, $matematika5;
     public $bahasa_indonesia1, $bahasa_indonesia2, $bahasa_indonesia3, $bahasa_indonesia4, $bahasa_indonesia5;
     public $bahasa_inggris1, $bahasa_inggris2, $bahasa_inggris3, $bahasa_inggris4, $bahasa_inggris5;
+    public $pai1, $pai2, $pai3, $pai4, $pai5;
+    
     protected $queryString = [
         'sem' => ['except' => 1],
         't' => ['except' => 1],
@@ -44,6 +46,11 @@ class RapotModal extends Component
             $this->bahasa_inggris3 = @$rapot[2]['data']['bahasa_inggris'];
             $this->bahasa_inggris4 = @$rapot[3]['data']['bahasa_inggris'];
             $this->bahasa_inggris5 = @$rapot[4]['data']['bahasa_inggris'];
+            $this->pai1 = @$rapot[0]['data']['pai'];
+            $this->pai2 = @$rapot[1]['data']['pai'];
+            $this->pai3 = @$rapot[2]['data']['pai'];
+            $this->pai4 = @$rapot[3]['data']['pai'];
+            $this->pai5 = @$rapot[4]['data']['pai'];
         }
     }
 
@@ -55,26 +62,31 @@ class RapotModal extends Component
                 $matematika = $this->matematika1;
                 $bind = $this->bahasa_indonesia1;
                 $bing = $this->bahasa_inggris1;
+                $pai = $this->pai1;
             }
             if ($i == 2) {
                 $matematika = $this->matematika2;
                 $bind = $this->bahasa_indonesia2;
                 $bing = $this->bahasa_inggris2;
+                $pai = $this->pai2;
             }
             if ($i == 3) {
                 $matematika = $this->matematika3;
                 $bind = $this->bahasa_indonesia3;
                 $bing = $this->bahasa_inggris3;
+                $pai = $this->pai3;
             }
             if ($i == 4) {
                 $matematika = $this->matematika4;
                 $bind = $this->bahasa_indonesia4;
                 $bing = $this->bahasa_inggris4;
+                $pai = $this->pai4;
             }
             if ($i == 5) {
                 $matematika = $this->matematika5;
                 $bind = $this->bahasa_indonesia5;
                 $bing = $this->bahasa_inggris5;
+                $pai = $this->pai5;
             }
             $formattedData[] = [
                 'semester' => $i,
@@ -82,6 +94,7 @@ class RapotModal extends Component
                     'matematika' => $matematika,
                     'bahasa_indonesia' => $bind,
                     'bahasa_inggris' => $bing,
+                    'pai' => $pai,
                 ],
             ];
         }
