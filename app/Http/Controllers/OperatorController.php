@@ -27,7 +27,7 @@ class OperatorController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $jalurIds = $request->input('id_jalur');
+        $jalurIds = array_unique($request->input('id_jalur'));
         foreach ($jalurIds as $idJalur) {
             Persyaratan::create([
                 'nama_persyaratan' => $request->input('nama_persyaratan'),
@@ -35,8 +35,7 @@ class OperatorController extends Controller
                 'deskripsi' => $request->input('deskripsi')
             ]);
         }
-
-        return redirect()->back()->with('success', 'Persyaratan berhasil ditambahkan.');
+        return redirect()->route('operator.show-persyaratan')->with('success', 'Persyaratan berhasil ditambahkan.');
     }
     
     public function editPersyaratan($id)
@@ -48,14 +47,27 @@ class OperatorController extends Controller
 
     public function updatePersyaratan(Request $request, $id)
     {
-        $validator = $this->validatePersyaratan($request);
+        $validator = Validator::make($request->all(), [
+            'nama_persyaratan' => 'required|string|max:255',
+            'id_jalur' => 'required|array',
+            'id_jalur.*' => 'integer|exists:jalur_registrasi,id_jalur',
+            'deskripsi' => 'nullable|string',
+        ],[
+            'required' => 'Nilai tidak boleh kosong.',
+            'exists' => 'Jalur yang dipilih tidak valid.',
+        ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $jalurIds = array_unique($request->input('id_jalur'));
         $persyaratan = Persyaratan::findOrFail($id);
-        $persyaratan->update($request->only(['nama_persyaratan', 'id_jalur', 'deskripsi']));
+        $persyaratan->update([
+            'nama_persyaratan' => $request->input('nama_persyaratan'),
+            'id_jalur' => $jalurIds[0], // Assuming only one id_jalur is needed for update
+            'deskripsi' => $request->input('deskripsi')
+        ]);
 
         return redirect()->route('operator.show-persyaratan')->with('success', 'Persyaratan berhasil diperbarui.');
     }

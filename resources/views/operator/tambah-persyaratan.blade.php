@@ -63,7 +63,7 @@
                                 <x-input-error :messages="$errors->get('Jenis Jalur')" class="mt-2" />
                             </div>
                             <div class ="py-1 flex items-center justify-left col-span-3 hidden" id="jalur-dropdown">
-                                <select name="id_jalur" id="id_jalur_dropdown" class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2">
+                                <select name="id_jalur[]" id="id_jalur_dropdown" class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2">
                                     @foreach ($jalurRegistrasi as $jalur)
                                         <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
                                     @endforeach
@@ -99,7 +99,7 @@
                         </div>
         </div>
                 <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
-                    <form action="{{ route('operator.tambah-persyaratan') }}" method="GET" class="mb-4">
+                    <form action="{{ route('operator.show-persyaratan') }}" method="GET" class="mb-4">
                         <select name="filter_jalur" id="filter_jalur" class="w-1/4 flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2" onchange="this.form.submit()">
                             <option value="">Semua Jalur</option>
                             @foreach ($jalurRegistrasi as $jalur)
@@ -150,6 +150,7 @@
     function openModal(title, action, isCreate = false) {
         document.getElementById('modal-title').innerText = title;
         document.getElementById('persyaratan-form').action = action;
+        document.getElementById('persyaratan-form').method = 'post';
         document.getElementById('persyaratan').classList.remove('hidden');
         document.getElementById('persyaratan').classList.add('flex');
         if (isCreate) {
@@ -181,7 +182,7 @@
                 }
                 document.getElementById('id_jalur_dropdown').appendChild(option);
             });
-            openModal('Edit Persyaratan', `/operator/update-persyaratan/${id}`);
+            openModal('Edit Persyaratan', `/operator/update-persyaratan/${id}`, false);
         });
     }
 
