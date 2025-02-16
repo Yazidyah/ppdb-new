@@ -8,13 +8,8 @@
                     <h1 @click="tahun = !tahun" class="font-bold text-[32px] pt-7 pb-7 ">Siswa Terdaftar</h1>
                     
                     <!-- Search and Filter Form -->
-                    <form method="GET" action="{{ route('operator.datasiswa') }}" class="mb-4 flex justify-between" id="searchForm">
-                    <div>    
-                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Nama atau NISN" class="px-4 py-2 border rounded-lg">
-                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Search</button>
-                        
-                        </div>
-                        <div>
+                    <form method="GET" action="{{ route('operator.datasiswa') }}" class="mb-4" id="searchForm">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Nama atau NISN" class="px-4 py-2 border rounded-lg">
                         <select name="filter" class="px-4 py-2 border rounded-lg" onchange="document.getElementById('searchForm').submit()">
                             <option value="" {{ !request('filter') ? 'selected' : '' }}>Tidak ada filter data</option>
                             <option value="L" {{ request('filter') == 'L' ? 'selected' : '' }}>Laki-laki</option>
@@ -33,11 +28,12 @@
                         </select>
                         <input type="hidden" name="sort_by" value="{{ request('sort_by', 'id_calon_siswa') }}">
                         <input type="hidden" name="sort_order" value="{{ request('sort_order', 'asc') }}">
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Search</button>
                         @if(request('search') || request('filter') || request('jalur'))
                             <a href="{{ route('operator.datasiswa') }}" class="px-4 py-2 bg-gray-500 text-white rounded-lg">Reset</a>
                         @endif
-                    </div>
                     </form>
+
                     <div x-show="tahun"
                         class="w-full overflow-x-auto   mx-auto flex  items-center relative shadow-md sm:rounded-lg my-6">
 
@@ -60,7 +56,10 @@
                                         <button type="submit" form="searchForm" name="sort_by" value="jenis_kelamin" class="text-gray-700">Jenis Kelamin</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
-                                        Email
+                                        <button type="submit" form="searchForm" name="sort_by" value="total_rata_nilai" class="text-gray-700">Nilai rata-rata</button>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        <button type="submit" form="searchForm" name="sort_by" value="status" class="text-gray-700">Status</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
                                         <button type="submit" form="searchForm" name="sort_by" value="status" class="text-gray-700">Status</button>
@@ -89,8 +88,8 @@
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->jenis_kelamin }}
                                         </td>
-                                        <td scope="col" class="w-[30px] whitespace-nowrap text-center">
-                                            {{ $siswa->user->email }}
+                                        <td scope="col" class="px-6 py-3 text-center">
+                                            {{ $siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             @if($siswa->dataRegistrasi->status == '1')

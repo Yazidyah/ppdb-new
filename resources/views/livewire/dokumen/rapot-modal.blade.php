@@ -43,14 +43,24 @@
                         <div class="steps space-y-6">
                             @foreach (['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'pai', 'ipa', 'ips'] as $subject)
                                 <div>
-                                    <label for="{{ $subject }}" class="block text-lg font-semibold text-gray-700">{{ ucfirst(str_replace('_', ' ', $subject)) }}</label>
+                                    <label for="{{ $subject }}"
+                                        class="block text-lg font-semibold text-gray-700">{{ ucfirst(str_replace('_', ' ', $subject)) }}</label>
                                     <input
                                         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
                                         id="{{ $subject }}{{ $sem }}" type="text"
                                         name="{{ $subject }}{{ $sem }}" required autofocus
                                         autocomplete="{{ $subject }}{{ $sem }}"
                                         wire:model.live="{{ $subject }}{{ $sem }}"
-                                        x-on:input="if (!/^\d*\.?\d*$/.test($event.target.value) || $event.target.value > 100) $event.target.value = $event.target.value.replace(/[^\d.]/g, '').slice(0, 5)"
+                                        x-on:input="
+                                            let value = $event.target.value.replace(/[^\d.]/g, '');
+                                            if (!/^\d*\.?\d*$/.test(value) || parseFloat(value) > 100) {
+                                            value = value.slice(0, 5);
+                                            if (parseFloat(value) > 100) {
+                                                value = '100';
+                                            }
+                                            }
+                                            $event.target.value = value;
+                                        "
                                         x-on:focus="if ($event.target.value == 0) $event.target.value = ''" />
                                     @error($subject . $sem)
                                         <span class="text-red-500 text-sm">{{ $message }}</span>

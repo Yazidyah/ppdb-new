@@ -30,9 +30,14 @@ class RapotModal extends Component
         $this->sem = request()->query('sem', 1);
         $this->t = request()->query('t', 1);
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
-        if ($this->rapot->nilai_rapot) {
+        if ($this->rapot && $this->rapot->nilai_rapot != null) {
             $rapot = is_string($this->rapot->nilai_rapot) ? json_decode($this->rapot->nilai_rapot, true) : $this->rapot->nilai_rapot;
             $this->initializeRapotValues($rapot);
+        } else {
+            $this->rapot = Rapot::firstOrCreate([
+                'id_registrasi' => $this->user->siswa->dataRegistrasi->id_registrasi,
+                'total_rata_nilai' => 0,
+            ]);
         }
     }
 
@@ -73,38 +78,38 @@ class RapotModal extends Component
     public function validateRapotInput()
     {
         $this->validate([
-            'matematika1' => 'required|numeric|min:0|max:100',
-            'matematika2' => 'required|numeric|min:0|max:100',
-            'matematika3' => 'required|numeric|min:0|max:100',
-            'matematika4' => 'required|numeric|min:0|max:100',
-            'matematika5' => 'required|numeric|min:0|max:100',
-            'bahasa_indonesia1' => 'required|numeric|min:0|max:100',
-            'bahasa_indonesia2' => 'required|numeric|min:0|max:100',
-            'bahasa_indonesia3' => 'required|numeric|min:0|max:100',
-            'bahasa_indonesia4' => 'required|numeric|min:0|max:100',
-            'bahasa_indonesia5' => 'required|numeric|min:0|max:100',
-            'bahasa_inggris1' => 'required|numeric|min:0|max:100',
-            'bahasa_inggris2' => 'required|numeric|min:0|max:100',
-            'bahasa_inggris3' => 'required|numeric|min:0|max:100',
-            'bahasa_inggris4' => 'required|numeric|min:0|max:100',
-            'bahasa_inggris5' => 'required|numeric|min:0|max:100',
-            'pai1' => 'required|numeric|min:0|max:100',
-            'pai2' => 'required|numeric|min:0|max:100',
-            'pai3' => 'required|numeric|min:0|max:100',
-            'pai4' => 'required|numeric|min:0|max:100',
-            'pai5' => 'required|numeric|min:0|max:100',
-            'ipa1' => 'required|numeric|min:0|max:100',
-            'ipa2' => 'required|numeric|min:0|max:100',
-            'ipa3' => 'required|numeric|min:0|max:100',
-            'ipa4' => 'required|numeric|min:0|max:100',
-            'ipa5' => 'required|numeric|min:0|max:100',
-            'ips1' => 'required|numeric|min:0|max:100',
-            'ips2' => 'required|numeric|min:0|max:100',
-            'ips3' => 'required|numeric|min:0|max:100',
-            'ips4' => 'required|numeric|min:0|max:100',
-            'ips5' => 'required|numeric|min:0|max:100',
+            'matematika1' => 'required|min:0|max:100',
+            'matematika2' => 'required|min:0|max:100',
+            'matematika3' => 'required|min:0|max:100',
+            'matematika4' => 'required|min:0|max:100',
+            'matematika5' => 'required|min:0|max:100',
+            'bahasa_indonesia1' => 'required|min:0|max:100',
+            'bahasa_indonesia2' => 'required|min:0|max:100',
+            'bahasa_indonesia3' => 'required|min:0|max:100',
+            'bahasa_indonesia4' => 'required|min:0|max:100',
+            'bahasa_indonesia5' => 'required|min:0|max:100',
+            'bahasa_inggris1' => 'required|min:0|max:100',
+            'bahasa_inggris2' => 'required|min:0|max:100',
+            'bahasa_inggris3' => 'required|min:0|max:100',
+            'bahasa_inggris4' => 'required|min:0|max:100',
+            'bahasa_inggris5' => 'required|min:0|max:100',
+            'pai1' => 'required|min:0|max:100',
+            'pai2' => 'required|min:0|max:100',
+            'pai3' => 'required|min:0|max:100',
+            'pai4' => 'required|min:0|max:100',
+            'pai5' => 'required|min:0|max:100',
+            'ipa1' => 'required|min:0|max:100',
+            'ipa2' => 'required|min:0|max:100',
+            'ipa3' => 'required|min:0|max:100',
+            'ipa4' => 'required|min:0|max:100',
+            'ipa5' => 'required|min:0|max:100',
+            'ips1' => 'required|min:0|max:100',
+            'ips2' => 'required|min:0|max:100',
+            'ips3' => 'required|min:0|max:100',
+            'ips4' => 'required|min:0|max:100',
+            'ips5' => 'required|min:0|max:100',
         ], [
-            'numeric' => 'Nilai harus berupa angka.',
+            'required' => 'Nilai tidak boleh kosong.',
             'min' => 'Nilai tidak boleh kurang dari 0.',
             'max' => 'Nilai tidak boleh lebih dari 100.',
         ]);

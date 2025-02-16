@@ -126,7 +126,7 @@ class OperatorController extends Controller
 
     private function buildSiswaQuery(Request $request)
     {
-        $query = CalonSiswa::with('dataRegistrasi');
+        $query = CalonSiswa::with(['dataRegistrasi.rapot']);
 
         if ($request->has('search')) {
             $search = strtolower($request->input('search'));

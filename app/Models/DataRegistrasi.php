@@ -32,11 +32,6 @@ class DataRegistrasi extends Model
 
     public function rapot()
     {
-        return $this->belongsTo(Rapot::class, 'id_registrasi', 'id_registrasi');
+        return $this->hasOne(Rapot::class, 'id_registrasi', 'id_registrasi');
     }
-
-    // public function jalurRegistrasi()
-    // {
-    //     return $this->belongsTo(JalurRegistrasi::class, 'id_jalur');
-    // }
 }

@@ -16,6 +16,7 @@ class StepTiga extends Component
 
     public function mount()
     {
+        $this->tab = request()->query('t', 1);
         $this->user = Auth::user();
     }
 

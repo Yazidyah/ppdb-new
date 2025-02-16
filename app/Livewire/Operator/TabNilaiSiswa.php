@@ -2,18 +2,22 @@
 
 namespace App\Livewire\Operator;
 
+use App\Models\DataRegistrasi;
 use Livewire\Component;
 use App\Models\Rapot;
 
 class TabNilaiSiswa extends Component
 {
+    public $siswa;
     public $rapotData;
     public $averageScores;
     public $grandAverageScore;
 
     public function mount()
     {
-        $this->rapotData = Rapot::all()->map(function ($rapot) {
+        $this->data_registrasi = DataRegistrasi::where('id_calon_siswa', $this->siswa->id_calon_siswa)->first();
+        
+        $this->rapotData = Rapot::where('id_registrasi', $this->data_registrasi->id_registrasi)->get()->map(function ($rapot) {
             $nilaiRapot = $rapot->nilai_rapot;
             return array_map(function ($item) {
                 return [
@@ -23,7 +27,7 @@ class TabNilaiSiswa extends Component
             }, $nilaiRapot);
         })->flatten(1)->toArray();
 
-        $this->grandAverageScore = Rapot::sum('total_rata_nilai');
+        $this->grandAverageScore = Rapot::where('id_registrasi', $this->data_registrasi->id_registrasi)->sum('total_rata_nilai');
         $this->calculateAverageScores();
     }
 
