@@ -89,6 +89,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/dashboard', function () {
         return view('operator.dashboard');
     })->name('operator.dashboard');
+
     Route::get('/operator/data-afirmasi-prestasi', [OperatorController::class, 'showsiswaPrestasi'])->name('operator.data-afirmasi-prestasi');
     Route::get('/operator/data-afirmasi-abk', [OperatorController::class, 'showsiswaAbk'])->name('operator.data-afirmasi-abk');
     Route::get('/operator/data-afirmasi-ketm', [OperatorController::class, 'showsiswaKetm'])->name('operator.data-afirmasi-ketm');
@@ -105,16 +106,22 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     })->name('operator.alur-pendaftaran');
     Route::get('/operator/data-siswa', [OperatorController::class, 'showsiswa'])->name('operator.datasiswa');
     Route::get('/operator/data-siswa/{id}', [OperatorController::class, 'showsiswaDetail'])->name('operator.datasiswa-detail');
-
     Route::get('/operator/data-reguler', [OperatorController::class, 'showsiswaReguler'])->name('operator.data-reguler');
-
     Route::get('/operator/data-lulus', [OperatorController::class, 'showsiswaLulus'])->name('operator.data-lulus');
     Route::get('/operator/data-tidaklulus', [OperatorController::class, 'showsiswaTidakLulus'])->name('operator.data-tidaklulus');
-
-
     Route::get('/operator/Lulus/{id}', [OperatorController::class, 'lulus'])->name('operator.lulus');
     Route::get('/operator/TidakLulus/{id}', [OperatorController::class, 'tidaklulus'])->name('operator.tidaklulus');
     Route::get('/operator/tambah-persyaratan', [OperatorController::class, 'showPersyaratan'])->name('operator.show-persyaratan');
+    Route::get('/operator/edit-persyaratan/{id}', [OperatorController::class, 'editPersyaratan'])->name('operator.update-persyaratan');
+    Route::post('/operator/update-persyaratan/{id}', [OperatorController::class, 'updatePersyaratan'])->name('operator.update-persyaratan');
+    Route::get('/operator/tambah-jalur', function () {
+        return view('operator.tambah-jalur');
+    })->name('operator.tambah-jalur');
+    Route::get('/operator/tambah-jalur', [OperatorController::class, 'showJalur'])->name('operator.show-jalur');
+    Route::post('/operator/tambah-jalur', [OperatorController::class, 'tambahJalur'])->name('operator.tambah-jalur');
+    Route::post('/operator/delete-jalur/{id}', [OperatorController::class, 'deleteJalur'])->name('operator.delete-jalur');
+    Route::get('/operator/edit-jalur/{id}', [OperatorController::class, 'editJalur'])->name('operator.edit-jalur');
+    Route::post('/operator/update-jalur/{id}', [OperatorController::class, 'updateJalur'])->name('operator.update-jalur');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');

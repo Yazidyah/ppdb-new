@@ -83,7 +83,6 @@
                 <div class="container mx-auto mt-10">
                     <div class="w-1/2 inline-flex justify-center items-center px-4 py-2 bg-tertiary  border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary  focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150' ">
                     <button onclick="persyaratan()" class="text-center flex justify-center items-center w-full">TAMBAH PERSYARATAN</button>
-                   
                         </div>
         </div>
                 <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
