@@ -5,7 +5,7 @@
                 <div id="persyaratan" class="hidden fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50">
                 <div class="p-4 sm:ml-64">
                 <div class="p-4 border-2 border-tertiary border-dashed rounded-lg  bg-white mt-14">
-                <h1 class="font-bold text-[32px] pt-7 pb-7 ">Tambah Persyaratan</h1>
+                <h1 id="modal-title" class="font-bold text-[32px] pt-7 pb-7 ">Tambah Persyaratan</h1>
                 <div class="flex w-3/4 items-center justify-center border-2 border-tertiary rounded-lg py-2 mx-auto my-6">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-7 h-7">
@@ -31,7 +31,8 @@
                     </div>
                 @endif
 
-                <form action="{{ route('operator.tambah-persyaratan') }}" method="post" enctype="multipart/form-data">
+                <form id="persyaratan-form" action="{{ route('operator.tambah-persyaratan') }}" method="post" 
+                enctype="multipart/form-data" onsubmit="return validateForm()">
                     @csrf
                     <div class="container py-5 mx-auto px-12 lg:px-32 flex items-center justify-center">
                         <div class="md:grid grid-cols-4  py-2 w-6/7 gap-2">
@@ -42,6 +43,7 @@
                             <div class ="py-1 flex items-center justify-left col-span-3">
                                 <x-reg-input-text id="name" class=" block mt-1 w-full" type="text"
                                     name="nama_persyaratan" required autofocus autocomplete="nama_persyaratan" />
+                                <span id="error-nama_persyaratan" class="text-red-500 text-sm"></span>
                                 <x-input-error :messages="$errors->get('Nama Persyaratan')" class="mt-2" />
                             </div>
 
@@ -49,13 +51,23 @@
                                 <x-reg-input-label class="" for="id_jalur" :value="__('Jenis Jalur')" />
                             </div>
 
-                            <div class ="py-1 flex items-center justify-left col-span-3">
-                                @foreach ($jalurRegistrasi as $jalur)
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="id_jalur[]" id="id_jalur_{{ $jalur->id_jalur }}" value="{{ $jalur->id_jalur }}" class="mr-2">
-                                        <label for="id_jalur_{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</label>
-                                    </div>
-                                @endforeach
+                            <div class ="py-1 flex items-center justify-left col-span-3" id="jalur-checkboxes">
+                                <div class="grid grid-cols-2 gap-4">
+                                    @foreach ($jalurRegistrasi as $jalur)
+                                        <div class="flex items-center">
+                                            <input type="checkbox" name="id_jalur[]" id="id_jalur_{{ $jalur->id_jalur }}" value="{{ $jalur->id_jalur }}" class="mr-2">
+                                            <label for="id_jalur_{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <x-input-error :messages="$errors->get('Jenis Jalur')" class="mt-2" />
+                            </div>
+                            <div class ="py-1 flex items-center justify-left col-span-3 hidden" id="jalur-dropdown">
+                                <select name="id_jalur" id="id_jalur_dropdown" class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2">
+                                    @foreach ($jalurRegistrasi as $jalur)
+                                        <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
+                                    @endforeach
+                                </select>
                                 <x-input-error :messages="$errors->get('Jenis Jalur')" class="mt-2" />
                             </div>
                             <div class=" py-1 flex items-center justify-left col-span-1">
@@ -82,7 +94,8 @@
                 </div>
                 <div class="container mx-auto mt-10">
                     <div class="w-1/2 inline-flex justify-center items-center px-4 py-2 bg-tertiary  border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary  focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150' ">
-                    <button onclick="persyaratan()" class="text-center flex justify-center items-center w-full">TAMBAH PERSYARATAN</button>
+                    <button onclick="openModal('Tambah Persyaratan', '{{ route('operator.tambah-persyaratan') }}', true)" 
+                    class="text-center flex justify-center items-center w-full">TAMBAH PERSYARATAN</button>
                         </div>
         </div>
                 <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
@@ -112,7 +125,9 @@
                                         <td class="border px-4 py-2">{{ $item->nama_persyaratan }}</td>
                                         <td class="border px-4 py-2">{{ $item->jalurRegistrasi->nama_jalur }}</td>
                                         <td class="border px-4 py-2">{{ $item->deskripsi }}</td>
-                                        <td class="border px-4 py-2">
+                                        <td class="border px-4 py-2 flex justify-center space-x-2">
+                                            <button  type="button" onclick="editPersyaratan({{ $item->id_persyaratan }})" 
+                                            class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
                                             <form action="{{ route('operator.delete-persyaratan', $item->id_persyaratan) }}" method="post">
                                                 @csrf
                                                 <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
@@ -132,18 +147,56 @@
         </div>
     </div>
     <script>
-    function persyaratan() {
-        const modal = document.getElementById('persyaratan');
-        if (modal.classList.contains('hidden')) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
+    function openModal(title, action, isCreate = false) {
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('persyaratan-form').action = action;
+        document.getElementById('persyaratan').classList.remove('hidden');
+        document.getElementById('persyaratan').classList.add('flex');
+        if (isCreate) {
+            document.getElementById('jalur-checkboxes').classList.remove('hidden');
+            document.getElementById('jalur-dropdown').classList.add('hidden');
         } else {
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
+            document.getElementById('jalur-checkboxes').classList.add('hidden');
+            document.getElementById('jalur-dropdown').classList.remove('hidden');
         }
     }
+
     function closeExample() {
         document.getElementById('persyaratan').classList.add('hidden');
     }
-</script>
+
+    function editPersyaratan(id){
+        fetch(`/operator/edit-persyaratan/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('name').value = data.persyaratan.nama_persyaratan;
+            document.getElementById('deskripsi').value = data.persyaratan.deskripsi;
+            document.getElementById('id_jalur_dropdown').innerHTML = '';
+            data.jalurRegistrasi.forEach(jalur => {
+                const option = document.createElement('option');
+                option.value = jalur.id_jalur;
+                option.text = jalur.nama_jalur;
+                if (jalur.id_jalur == data.persyaratan.id_jalur) {
+                    option.selected = true;
+                }
+                document.getElementById('id_jalur_dropdown').appendChild(option);
+            });
+            openModal('Edit Persyaratan', `/operator/update-persyaratan/${id}`);
+        });
+    }
+
+    function validateForm() {
+        let isValid = true;
+        const namaPersyaratan = document.getElementById('name').value;
+
+        if (!namaPersyaratan) {
+            document.getElementById('error-nama_persyaratan').innerText = 'Nama Persyaratan tidak boleh kosong.';
+            isValid = false;
+        } else {
+            document.getElementById('error-nama_persyaratan').innerText = '';
+        }
+
+        return isValid;
+    }
+    </script>
 </x-app-layout>

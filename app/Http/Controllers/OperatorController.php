@@ -13,7 +13,15 @@ class OperatorController extends Controller
 {
     public function tambahpersyaratan(Request $request)
     {
-        $validator = $this->validatePersyaratan($request);
+        $validator = Validator::make($request->all(), [
+            'nama_persyaratan' => 'required|string|max:255',
+            'id_jalur' => 'required|array',
+            'id_jalur.*' => 'integer|exists:jalur_registrasi,id_jalur',
+            'deskripsi' => 'nullable|string',
+        ],[
+            'required' => 'Nilai tidak boleh kosong.',
+            'exists' => 'Jalur yang dipilih tidak valid.',
+        ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
@@ -30,6 +38,27 @@ class OperatorController extends Controller
 
         return redirect()->back()->with('success', 'Persyaratan berhasil ditambahkan.');
     }
+    
+    public function editPersyaratan($id)
+    {
+        $persyaratan = Persyaratan::findOrFail($id);
+        $jalurRegistrasi = JalurRegistrasi::all();
+        return response()->json(['persyaratan' => $persyaratan, 'jalurRegistrasi' => $jalurRegistrasi]);
+    }
+
+    public function updatePersyaratan(Request $request, $id)
+    {
+        $validator = $this->validatePersyaratan($request);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $persyaratan = Persyaratan::findOrFail($id);
+        $persyaratan->update($request->only(['nama_persyaratan', 'id_jalur', 'deskripsi']));
+
+        return redirect()->route('operator.show-persyaratan')->with('success', 'Persyaratan berhasil diperbarui.');
+    }
 
     public function deletepersyaratan($id)
     {
@@ -38,6 +67,7 @@ class OperatorController extends Controller
 
         return redirect()->back()->with('success', 'Persyaratan berhasil dihapus.');
     }
+
 
     public function showsiswa(Request $request)
     {
@@ -86,29 +116,6 @@ class OperatorController extends Controller
         $persyaratan = $query->orderBy('id_jalur', 'asc')->get();
         $jalurRegistrasi = JalurRegistrasi::all();
         return view('operator.tambah-persyaratan', compact('persyaratan', 'jalurRegistrasi'));
-    }
-    
-    
-
-    public function editPersyaratan($id)
-    {
-        $persyaratan = Persyaratan::findOrFail($id);
-        $jalurRegistrasi = JalurRegistrasi::all();
-        return response()->json(['persyaratan' => $persyaratan, 'jalurRegistrasi' => $jalurRegistrasi]);
-    }
-
-    public function updatePersyaratan(Request $request, $id)
-    {
-        $validator = $this->validatePersyaratan($request);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $persyaratan = Persyaratan::findOrFail($id);
-        $persyaratan->update($request->only(['nama_persyaratan', 'id_jalur', 'deskripsi']));
-
-        return redirect()->route('operator.show-persyaratan')->with('success', 'Persyaratan berhasil diperbarui.');
     }
 
     private function validatePersyaratan(Request $request)
