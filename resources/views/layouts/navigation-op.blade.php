@@ -15,7 +15,7 @@ switch ($userRole){
     $redirectUrlst = 'admin.data-reguler';
     $redirectUrls = 'admin.datasiswa';
     $redirectUrlls = 'admin.data-lulus';
-    $redirectUrlcrud = 'admin.tambah-persyaratan';
+    # $redirectUrlcrud = 'admin.tambah-persyaratan';
     break;
     //Pembina
     case 'operator':
@@ -32,7 +32,8 @@ switch ($userRole){
     $redirectUrlls = 'operator.data-lulus';
     $redirectUrstep1 = 'operator.data-lulus';
     $redirectUrstep2 = 'operator.data-lulus';
-    $redirectUrlcrud = 'operator.tambah-persyaratan';
+    $redirectUrlsyarat = 'operator.tambah-persyaratan';
+    $redirectUrljalur = 'operator.tambah-jalur';
     break;
 
     default:
@@ -171,13 +172,18 @@ switch ($userRole){
    <div  class="h-full px-3 py-4 overflow-y-auto bg-tertiary">
       <ul  class="space-y-2 font-medium">
          <li>
-         <x-side-nav :href="route($redirectUrlcrud)" :active="request()->routeIs($redirectUrlcrud)">
-         {{ __('Tambah Persyaratan') }}
+         <x-side-nav :href="route($redirectUrlsyarat)" :active="request()->routeIs($redirectUrlsyarat)">
+         {{ __('Konfigurasi Persyaratan') }}
          </x-side-nav>
          </li>
          <li>
          <x-side-nav :href="route($redirectUrls)" :active="request()->routeIs($redirectUrls)">
          {{ __('Data Pendaftar') }}
+         </x-side-nav>
+         </li>
+         <li>
+         <x-side-nav :href="route($redirectUrljalur)" :active="request()->routeIs($redirectUrljalur)">
+         {{ __('Konfigurasi Jalur') }}
          </x-side-nav>
          </li>
          <!-- <li>

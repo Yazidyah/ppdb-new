@@ -80,34 +80,8 @@ class OperatorController extends Controller
         $jalurRegistrasi = JalurRegistrasi::all();
         return view('operator.tambah-persyaratan', compact('persyaratan', 'jalurRegistrasi'));
     }
-
-    public function lulus($id)
-    {
-        $data = DataRegistrasi::where('id_calon_siswa', $id)->first();
-
-        if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
-        }
-
-        $data->status = 1;
-        $data->save();
-
-        return redirect()->back()->with('success', 'Status berhasil diperbarui');
-    }
-
-    public function tidaklulus($id)
-    {
-        $data = DataRegistrasi::where('id_calon_siswa', $id)->first();
-
-        if (!$data) {
-            return redirect()->back()->with('error', 'Data tidak ditemukan');
-        }
-
-        $data->status = 2;
-        $data->save();
-
-        return redirect()->back()->with('success', 'Status berhasil diperbarui');
-    }
+    
+    
 
     public function editPersyaratan($id)
     {
@@ -193,5 +167,70 @@ class OperatorController extends Controller
         }
 
         return $query;
+    }
+
+    public function showJalur(Request $request)
+    {
+        $jalurRegistrasi = JalurRegistrasi::orderBy('id_jalur', 'asc')->get();
+        return view('operator.tambah-jalur', compact('jalurRegistrasi'));
+    }
+
+    public function tambahJalur(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_jalur' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'tanggal_buka' => 'required|date',
+            'tanggal_tutup' => 'required|date|after:tanggal_buka',
+            'is_open' => 'required|boolean',
+        ],[
+            'required' => 'Nilai tidak boleh kosong.',
+            'after' => 'Tanggal tutup tutup tidak boleh lebih dari tanggal buka.',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        JalurRegistrasi::create($request->only(['nama_jalur', 'deskripsi', 'tanggal_buka', 'tanggal_tutup', 'is_open']));
+
+        return redirect()->back()->with('success', 'Jalur Registrasi berhasil ditambahkan.');
+    }
+
+    public function deleteJalur($id)
+    {
+        $jalur = JalurRegistrasi::findOrFail($id);
+        $jalur->delete();
+
+        return redirect()->back()->with('success', 'Jalur Registrasi berhasil dihapus.');
+    }
+
+    public function editJalur($id)
+    {
+        $jalur = JalurRegistrasi::findOrFail($id);
+        return response()->json(['jalur' => $jalur]);
+    }
+
+    public function updateJalur(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_jalur' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'tanggal_buka' => 'required|date',
+            'tanggal_tutup' => 'required|date|after:tanggal_buka',
+            'is_open' => 'required|boolean',
+        ],[
+            'required' => 'Nilai tidak boleh kosong.',
+            'after' => 'Tanggal tutup tutup tidak boleh lebih dari tanggal buka.',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $jalur = JalurRegistrasi::findOrFail($id);
+        $jalur->update($request->only(['nama_jalur', 'deskripsi', 'tanggal_buka', 'tanggal_tutup', 'is_open']));
+
+        return redirect()->route('operator.show-jalur')->with('success', 'Jalur Registrasi berhasil diperbarui.');
     }
 }
