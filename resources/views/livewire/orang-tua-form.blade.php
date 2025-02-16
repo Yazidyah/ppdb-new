@@ -10,7 +10,7 @@
                         class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                         type="text" name="nama_lengkap" wire:model.live="nama_lengkap" placeholder="Nama Lengkap" />
                     @error('nama_lengkap')
-                        <span class="text-xs text-red-500">{{ $message }}</span>
+                        <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -26,7 +26,7 @@
                         @endforeach
                     </select>
                     @error('id_hubungan')
-                        <span class="text-xs text-red-500">{{ $message }}</span>
+                        <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                         type="tel" name="nik" wire:model.live="nik" placeholder="NIK" />
                     @error('nik')
-                        <span class="text-xs text-red-500">{{ $message }}</span>
+                        <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         @endforeach
                     </select>
                     @error('pekerjaan')
-                        <span class="text-xs text-red-500">{{ $message }}</span>
+                        <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                     @enderror
                 </div>
             </div>
@@ -66,7 +66,7 @@
                         class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                         type="tel" name="no_telp" wire:model.live="no_telp" placeholder="Nomor Telepon" />
                     @error('no_telp')
-                        <span class="text-xs text-red-500">{{ $message }}</span>
+                        <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                     @enderror
                 </div>
             </div>

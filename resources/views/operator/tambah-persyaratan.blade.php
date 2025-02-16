@@ -1,9 +1,12 @@
 <x-app-layout>
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto text-center pt-7">
+            <div  class="container mx-auto text-center pt-7">
+                <div id="persyaratan" class="hidden fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50">
+                <div class="p-4 sm:ml-64">
+                <div class="p-4 border-2 border-tertiary border-dashed rounded-lg  bg-white mt-14">
                 <h1 class="font-bold text-[32px] pt-7 pb-7 ">Tambah Persyaratan</h1>
-                <div class="flex w-3/4 items-center justify-center border-2 border-dasar2 rounded-lg py-2 mx-auto my-6">
+                <div class="flex w-3/4 items-center justify-center border-2 border-tertiary rounded-lg py-2 mx-auto my-6">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-7 h-7">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -34,7 +37,7 @@
                         <div class="md:grid grid-cols-4  py-2 w-6/7 gap-2">
 
                             <div class ="py-1 flex items-center justify-left col-span-1">
-                                <x-reg-input-label class="" for="Persyaratan" :value="__('Dokumen Persyaratan')" />
+                                <x-reg-input-label class="" for="nama_persyaratan" :value="__('Dokumen Persyaratan')" />
                             </div>
                             <div class ="py-1 flex items-center justify-left col-span-3">
                                 <x-reg-input-text id="name" class=" block mt-1 w-full" type="text"
@@ -69,13 +72,21 @@
                             </div>
                         </div>
                     </div>
-                    <x-primary-button class="mb-2 mx-auto" value="Tambah Kegiatan">
+                    <x-primary-button class="mb-2 mx-auto w-full justify-center items-center" value="Tambah Kegiatan">
                         {{ __('Submit') }}
                     </x-primary-button>
                 </form>
-
+                <button onclick="closeExample()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
+                </div>
+                </div>
+                </div>
                 <div class="container mx-auto mt-10">
-                    <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
+                    <div class="w-1/2 inline-flex justify-center items-center px-4 py-2 bg-tertiary  border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary  focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150' ">
+                    <button onclick="persyaratan()" class="text-center flex justify-center items-center w-full">TAMBAH PERSYARATAN</button>
+                   
+                        </div>
+        </div>
+                <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
                     <form action="{{ route('operator.tambah-persyaratan') }}" method="GET" class="mb-4">
                         <select name="filter_jalur" id="filter_jalur" class="w-1/4 flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2" onchange="this.form.submit()">
                             <option value="">Semua Jalur</option>
@@ -85,6 +96,7 @@
                                 </option>
                             @endforeach
                         </select>
+                        
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
@@ -120,4 +132,19 @@
             </div>
         </div>
     </div>
+    <script>
+    function persyaratan() {
+        const modal = document.getElementById('persyaratan');
+        if (modal.classList.contains('hidden')) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        } else {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    }
+    function closeExample() {
+        document.getElementById('persyaratan').classList.add('hidden');
+    }
+</script>
 </x-app-layout>
