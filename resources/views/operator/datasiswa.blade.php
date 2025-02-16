@@ -66,6 +66,9 @@
                                         <button type="submit" form="searchForm" name="sort_by" value="status" class="text-gray-700">Status</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
+                                        <button type="submit" form="searchForm" name="sort_by" value="status" class="text-gray-700">Status</button>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         Aksi
                                     </th>
                                 </tr>
