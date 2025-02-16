@@ -50,12 +50,12 @@
                             </div>
 
                             <div class ="py-1 flex items-center justify-left col-span-3">
-                                <select name="id_jalur" id="id_jalur"
-                                    class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2 ">
-                                    @foreach ($jalurRegistrasi as $jalur)
-                                        <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
-                                    @endforeach
-                                </select>
+                                @foreach ($jalurRegistrasi as $jalur)
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="id_jalur[]" id="id_jalur_{{ $jalur->id_jalur }}" value="{{ $jalur->id_jalur }}" class="mr-2">
+                                        <label for="id_jalur_{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</label>
+                                    </div>
+                                @endforeach
                                 <x-input-error :messages="$errors->get('Jenis Jalur')" class="mt-2" />
                             </div>
                             <div class=" py-1 flex items-center justify-left col-span-1">

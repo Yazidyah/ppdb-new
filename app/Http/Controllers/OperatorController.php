@@ -19,8 +19,8 @@ class OperatorController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $idJalurArray = $request->input('id_jalur');
-        foreach ($idJalurArray as $idJalur) {
+        $jalurIds = $request->input('id_jalur');
+        foreach ($jalurIds as $idJalur) {
             Persyaratan::create([
                 'nama_persyaratan' => $request->input('nama_persyaratan'),
                 'id_jalur' => $idJalur,
