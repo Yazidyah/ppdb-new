@@ -114,6 +114,14 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/tambah-persyaratan', [OperatorController::class, 'showPersyaratan'])->name('operator.show-persyaratan');
     Route::get('/operator/edit-persyaratan/{id}', [OperatorController::class, 'editPersyaratan'])->name('operator.update-persyaratan');
     Route::post('/operator/update-persyaratan/{id}', [OperatorController::class, 'updatePersyaratan'])->name('operator.update-persyaratan');
+    Route::get('/operator/tambah-jalur', function () {
+        return view('operator.tambah-jalur');
+    })->name('operator.tambah-jalur');
+    Route::get('/operator/tambah-jalur', [OperatorController::class, 'showJalur'])->name('operator.show-jalur');
+    Route::post('/operator/tambah-jalur', [OperatorController::class, 'tambahJalur'])->name('operator.tambah-jalur');
+    Route::post('/operator/delete-jalur/{id}', [OperatorController::class, 'deleteJalur'])->name('operator.delete-jalur');
+    Route::get('/operator/edit-jalur/{id}', [OperatorController::class, 'editJalur'])->name('operator.edit-jalur');
+    Route::post('/operator/update-jalur/{id}', [OperatorController::class, 'updateJalur'])->name('operator.update-jalur');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
