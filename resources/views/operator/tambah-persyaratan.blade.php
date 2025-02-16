@@ -67,6 +67,42 @@
                             <button onclick="closeExample()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
                         </div>
                     </div>
+                            <div class ="py-1 flex items-center justify-left col-span-1">
+                                <x-reg-input-label class="" for="id_jalur" :value="__('Jenis Jalur')" />
+                            </div>
+
+                            <div class ="py-1 flex items-center justify-left col-span-3">
+                                <div class="flex flex-wrap gap-2">
+                                    @foreach ($jalurRegistrasi as $jalur)
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" name="id_jalur[]" value="{{ $jalur->id_jalur }}" class="form-checkbox">
+                                            <span class="ml-2">{{ $jalur->nama_jalur }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                                <x-input-error :messages="$errors->get('Jenis Jalur')" class="mt-2" />
+                            </div>
+                            <div class=" py-1 flex items-center justify-left col-span-1">
+                                <x-reg-input-label class="" for="deskripsi" :value="__('Deskripsi')" />
+                            </div>
+
+                            <div class ="py-1 flex items-center justify-left col-span-3">
+                                <div
+                                    class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2 ">
+                                    <textarea type="text" name="deskripsi" id="deskripsi" autocomplete="deskripsi"
+                                        class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full h-full"
+                                        placeholder=""></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <x-primary-button class="mb-2 mx-auto w-full justify-center items-center" value="Tambah Kegiatan">
+                        {{ __('Submit') }}
+                    </x-primary-button>
+                </form>
+                <button onclick="closeExample()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
+                </div>
+                </div>
                 </div>
                 <div class="container mx-auto mt-10">
                     <div class="w-1/2 inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
