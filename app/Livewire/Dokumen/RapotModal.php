@@ -33,6 +33,11 @@ class RapotModal extends Component
         if ($this->rapot && $this->rapot->nilai_rapot != null) {
             $rapot = is_string($this->rapot->nilai_rapot) ? json_decode($this->rapot->nilai_rapot, true) : $this->rapot->nilai_rapot;
             $this->initializeRapotValues($rapot);
+        } else {
+            $this->rapot = Rapot::firstOrCreate([
+                'id_registrasi' => $this->user->siswa->dataRegistrasi->id_registrasi,
+                'total_rata_nilai' => 0,
+            ]);
         }
     }
 
