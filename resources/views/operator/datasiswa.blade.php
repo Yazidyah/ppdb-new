@@ -4,7 +4,7 @@
             <div class="container mx-auto text-center pt-7">
 
 
-                <div class="container mx-auto text-center pt-7">
+                <div class="container mx-auto text-center pt-7 ">
                     <h1 @click="tahun = !tahun" class="font-bold text-[32px] pt-7 pb-7 ">Siswa Terdaftar</h1>
                     
                     <!-- Search and Filter Form -->
@@ -57,6 +57,9 @@
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
                                         <button type="submit" form="searchForm" name="sort_by" value="total_rata_nilai" class="text-gray-700">Nilai rata-rata</button>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        <button type="submit" form="searchForm" name="sort_by" value="status" class="text-gray-700">Status</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
                                         <button type="submit" form="searchForm" name="sort_by" value="status" class="text-gray-700">Status</button>

@@ -59,14 +59,7 @@
         </div>
     </div>
 
-    {{-- <div class="navigation-buttons w-1/2 mx-auto justify-center flex items-center py-10 sm:py-6 px-2 sm:px-4">
-            <button
-                class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
-                type="submit">
-                Submit
-            </button>
-        </div>
-    </form> --}}
+    </form> 
 </div>
 
 

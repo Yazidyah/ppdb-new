@@ -5,7 +5,7 @@
     switch ($userRole) {
         //Admin
         case 'admin':
-            $redirectUrl = 'layouts.navigation-op';
+            $redirectUrl = 'layouts.navigation';
             break;
         //Pembina
         case 'operator':
