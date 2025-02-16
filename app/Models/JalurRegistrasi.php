@@ -18,4 +18,9 @@ class JalurRegistrasi extends Model
         'is_open',
     ];
     public $timestamps = true;
+
+    public function persyaratan()
+    {
+        return $this->hasMany(Persyaratan::class, 'id_jalur', 'id_jalur');
+    }
 }

@@ -5,21 +5,18 @@ namespace App\Livewire\Registrasi;
 use Livewire\Component;
 use App\Models\CalonSiswa;
 use App\Models\DataRegistrasi;
+use App\Models\JalurRegistrasi as JalurRegistrasiModel;
+use App\Models\Persyaratan;
 use Illuminate\Support\Facades\Auth;
 
 class JalurRegistrasi extends Component
 {
     public $user;
     public $siswa;
+    public $jalurRegistrasi;
 
     public $id_jalur, $id_siswa;
-    // protected $rules = [
-    //     'id_jalur' => 'required|numeric',
-    // ];
 
-    // public $messages = [
-    //     'id_jalur.required' => 'Jalur Registrasi tidak boleh kosong',
-    // ];
     public function mount()
     {
         $this->user = Auth::user();
@@ -28,8 +25,8 @@ class JalurRegistrasi extends Component
             'id_calon_siswa' => $this->id_siswa,
             'status' => '0'
         ]);
-        // dd($this->siswa);
         $this->id_jalur = $this->siswa->jalurRegistrasi->id_jalur ?? '';
+        $this->jalurRegistrasi = JalurRegistrasiModel::where('is_open', true)->with('persyaratan')->get();
     }
 
     public function updateJalur($value)
@@ -41,6 +38,8 @@ class JalurRegistrasi extends Component
 
     public function render()
     {
-        return view('livewire.registrasi.jalur-registrasi');
+        return view('livewire.registrasi.jalur-registrasi', [
+            'jalurRegistrasi' => $this->jalurRegistrasi
+        ]);
     }
 }
