@@ -19,7 +19,14 @@ class OperatorController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Persyaratan::create($request->only(['nama_persyaratan', 'id_jalur', 'deskripsi']));
+        $jalurIds = $request->input('id_jalur');
+        foreach ($jalurIds as $idJalur) {
+            Persyaratan::create([
+                'nama_persyaratan' => $request->input('nama_persyaratan'),
+                'id_jalur' => $idJalur,
+                'deskripsi' => $request->input('deskripsi')
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Persyaratan berhasil ditambahkan.');
     }
@@ -119,7 +126,8 @@ class OperatorController extends Controller
     {
         return Validator::make($request->all(), [
             'nama_persyaratan' => 'required|string|max:255',
-            'id_jalur' => 'required|integer|in:1,2,3,4',
+            'id_jalur' => 'required|array',
+            'id_jalur.*' => 'integer|in:1,2,3,4',
             'deskripsi' => 'nullable|string',
         ]);
     }
