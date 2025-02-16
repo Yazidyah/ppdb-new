@@ -10,7 +10,7 @@ use App\Models\PekerjaanOrangTua;
 class OrangTuaForm extends Component
 {
     public $orangTua;
-    public $id_hubungan, $nama_lengkap, $nik, $pekerjaan, $no_telp;
+    public $id_hubungan, $nama_lengkap, $nik, $pekerjaan = 1, $no_telp;
     public $hubunganOptions;
     public $pekerjaanOptions;
 
@@ -47,7 +47,7 @@ class OrangTuaForm extends Component
         $this->nama_lengkap = $this->orangTua->nama_lengkap;
         $this->id_hubungan = $this->orangTua->id_hubungan;
         $this->nik = $this->orangTua->nik;
-        $this->pekerjaan = $this->orangTua->pekerjaan;
+        $this->pekerjaan = $this->orangTua->pekerjaan ?? 1;
         $this->no_telp = $this->orangTua->no_telp;
     }
 
