@@ -38,7 +38,7 @@
         </div> --}}
 
         <div>
-            @if ($tab === 1)
+            @if ($tab == 1)
                 @livewire('dokumen.upload-dokumen', key($user->id . '-upload-dokumen-' . rand()))
 
                 <div>
