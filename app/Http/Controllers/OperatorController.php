@@ -24,12 +24,6 @@ class OperatorController extends Controller
         return redirect()->back()->with('success', 'Persyaratan berhasil ditambahkan.');
     }
 
-    public function updatepersyaratan(Request $request)
-    {
-        $calonSiswa = Persyaratan::update($request->all());
-        return response()->json($calonSiswa, 201);
-    }
-
     public function deletepersyaratan($id)
     {
         $persyaratan = Persyaratan::findOrFail($id);
@@ -113,6 +107,27 @@ class OperatorController extends Controller
         $data->save();
 
         return redirect()->back()->with('success', 'Status berhasil diperbarui');
+    }
+
+    public function editPersyaratan($id)
+    {
+        $persyaratan = Persyaratan::findOrFail($id);
+        $jalurRegistrasi = JalurRegistrasi::all();
+        return response()->json(['persyaratan' => $persyaratan, 'jalurRegistrasi' => $jalurRegistrasi]);
+    }
+
+    public function updatePersyaratan(Request $request, $id)
+    {
+        $validator = $this->validatePersyaratan($request);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $persyaratan = Persyaratan::findOrFail($id);
+        $persyaratan->update($request->only(['nama_persyaratan', 'id_jalur', 'deskripsi']));
+
+        return redirect()->route('operator.show-persyaratan')->with('success', 'Persyaratan berhasil diperbarui.');
     }
 
     private function validatePersyaratan(Request $request)
