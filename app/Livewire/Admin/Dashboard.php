@@ -11,6 +11,15 @@ class Dashboard extends Component
     public $statistik;
     public $filterNamaStatistik = '';
     public $allNamaStatistik = [];
+    public $countLakiLaki;
+    public $countPerempuan;
+    public $countSekolahNegeri;
+    public $countSekolahSwasta;
+    public $countLuarBogor;
+    public $countDalamBogor;
+    public $countBelumDiproses;
+    public $countLulus;
+    public $countTidakLulus;
 
     public function mount()
     {
@@ -19,32 +28,45 @@ class Dashboard extends Component
         $this->loadAllNamaStatistik();
     }
 
-    private function updateStatistik()
+    public function updateStatistik()
     {
         $totalCalonSiswa = DB::table('calon_siswa')->count();
-        $countLakiLaki = DB::table('calon_siswa')->where('jenis_kelamin', 'L')->count();
-        $countSekolahNegeri = DB::table('calon_siswa')->where('status_sekolah', 'NEGERI')->count();
-        $countLuarBogor = DB::table('calon_siswa')->where('kota', '!=', 'KOTA BOGOR')->count();
-
+        $countJalurReguler = DB::table('data_registrasi')->where('id_jalur', 1)->count();
+        $countJalurAfirmasiPrestasi = DB::table('data_registrasi')->where('id_jalur', 2)->count();
+        $countJalurAfirmasiKETM = DB::table('data_registrasi')->where('id_jalur', 3)->count();
+        $countJalurAfirmasiABK = DB::table('data_registrasi')->where('id_jalur', 4)->count();
+        $this->countLakiLaki = DB::table('calon_siswa')->where('jenis_kelamin', 'L')->count();
+        $this->countPerempuan = $totalCalonSiswa - $this->countLakiLaki;
+        $this->countSekolahNegeri = DB::table('calon_siswa')->where('status_sekolah', 'NEGERI')->count();
+        $this->countSekolahSwasta = $totalCalonSiswa - $this->countSekolahNegeri;
+        $this->countLuarBogor = DB::table('calon_siswa')->where('kota', '!=', 'KOTA BOGOR')->count();
+        $this->countDalamBogor = $totalCalonSiswa - $this->countLuarBogor;
+        $this->countBelumDiproses = DB::table('data_registrasi')->where('status', '0')->count();
+        $this->countLulus = DB::table('data_registrasi')->where('status', '1')->count();
+        $this->countTidakLulus = DB::table('data_registrasi')->where('status', '2')->count();
 
         $statistikData = [
-            1 => $totalCalonSiswa,
-            2 => DB::table('data_registrasi')->where('id_jalur', 1)->count(),
-            3 => DB::table('data_registrasi')->where('id_jalur', 2)->count(),
-            4 => DB::table('data_registrasi')->where('id_jalur', 3)->count(),
-            5 => DB::table('data_registrasi')->where('id_jalur', 4)->count(), 
-            6 => $countLakiLaki,
-            7 => $totalCalonSiswa - $countLakiLaki,
-            8 => $countSekolahNegeri,
-            9 => $totalCalonSiswa - $countSekolahNegeri,
-            10 => $countLuarBogor,
-            11 => $totalCalonSiswa - $countLuarBogor,
-            12 => DB::table('data_registrasi')->where('status', '1')->count(),
-            13 => DB::table('data_registrasi')->where('status', '2')->count(),
+            'Total Pendaftar' => $totalCalonSiswa,
+            'Pendaftar Jalur Reguler' => $countJalurReguler,
+            'Pendaftar Jalur Afirmasi Prestasi' => $countJalurAfirmasiPrestasi,
+            'Pendaftar Jalur Afirmasi KETM' => $countJalurAfirmasiKETM,
+            'Pendaftar Jalur Afirmasi ABK' => $countJalurAfirmasiABK,
+            'Pendaftar Laki-laki' => $this->countLakiLaki,
+            'Pendaftar Perempuan' => $this->countPerempuan,
+            'Dari Sekolah Negeri' => $this->countSekolahNegeri,
+            'Dari Sekolah Swasta' => $this->countSekolahSwasta,
+            'Dari Luar Kota' => $this->countLuarBogor,
+            'Dari Dalam Kota' => $this->countDalamBogor,
+            'Pendaftar Belum di Proses' => $this->countBelumDiproses,
+            'Pendaftar Lulus' => $this->countLulus,
+            'Pendaftar Tidak Lulus' => $this->countTidakLulus,
         ];
 
-        foreach ($statistikData as $id => $count) {
-            Statistik::where('id', $id)->update(['count' => $count]);
+        foreach ($statistikData as $nama_statistik => $count) {
+            Statistik::updateOrCreate(
+                ['nama_statistik' => $nama_statistik],
+                ['count' => $count, 'updated_at' => now()]
+            );
         }
     }
 
