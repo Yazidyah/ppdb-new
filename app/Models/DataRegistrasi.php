@@ -13,7 +13,6 @@ class DataRegistrasi extends Model
         'id_jalur',
         'kode_registrasi',
         'status',
-        'tanggal_daftar'
     ];
     protected $dates = ['deleted_at', 'updated_at'];
 
