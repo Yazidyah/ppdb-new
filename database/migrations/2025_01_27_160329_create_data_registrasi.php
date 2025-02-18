@@ -17,9 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_jalur')->nullable();
             $table->string('kode_registrasi')->nullable();
             $table->string('status', 20)->default('0')->nullable();
-            $table->timestamp('tanggal_daftar')->useCurrent();
-            $table->timestamp('deleted_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->timestamps(); // created_at and updated_at
+            $table->softDeletes(); // deleted_at
             $table->foreign('id_calon_siswa')->references('id_calon_siswa')->on('calon_siswa')->onDelete('cascade');
         });
     }
