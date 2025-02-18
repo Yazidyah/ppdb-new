@@ -4,7 +4,7 @@
             <div class="fixed inset-0 bg-black/50"></div>
             <div class="relative w-full max-w-md p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Isi Data {{ $namaPersyaratan }}</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Isi Data sesusai syarat</h3>
                     <button wire:click="closeModal"
                         class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                         <svg class="h-4 w-4 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none"

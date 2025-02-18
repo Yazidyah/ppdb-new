@@ -2,24 +2,23 @@
 
 namespace App\Livewire\Dokumen;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\DataBerkas;
+use App\Models\Berkas;
 use Livewire\Component;
 
 class BerkasModal extends Component
 {
     public $modalSubmit = false;
     public $dataBerkas;
+    public $berkas;
     public $dataBerkasId;
 
     protected $listeners = ['openBerkasModal' => 'openModal'];
 
-    public function openModal($dataBerkasId = null)
+    public function openModal()
     {
         $this->modalSubmit = true;
-        if ($dataBerkasId) {
-            $this->dataBerkasId = $dataBerkasId;
-            $this->dataBerkas = DataBerkas::find($dataBerkasId);
-        }
     }
 
     public function closeModal()
@@ -28,25 +27,13 @@ class BerkasModal extends Component
         $this->reset(['dataBerkas', 'dataBerkasId']);
     }
 
-    public function mount()
+    public function mount(Berkas $berkas)
     {
-        $this->dataBerkas = new DataBerkas();
+        //mount here
     }
-
     public function update()
     {
-        $this->validate([
-            'dataBerkas.data_berkas' => 'required|string',
-        ]);
-
-        if ($this->dataBerkasId) {
-            $this->dataBerkas->save();
-        } else {
-            DataBerkas::create($this->dataBerkas->toArray());
-        }
-
-        $this->closeModal();
-        $this->emit('berkasUpdated');
+        //update here
     }
 
     public function render()
