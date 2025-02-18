@@ -98,7 +98,7 @@
                                     class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
                                     disabled="disabled" type="text" name="sekolah_asal" required autofocus
                                     autocomplete="sekolah_asal" placeholder="Asal Sekolah"
-                                    value="{{ $sekolah_asal }}" />
+                                    value="{{ strtoupper($sekolah_asal) }}" />
                                 @error('sekolah_asal')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror

@@ -72,7 +72,7 @@ class BiodataSiswa extends Component
         $this->tanggal_lahir = $this->siswa->tanggal_lahir ?? '';
         $this->tempat_lahir = $this->siswa->tempat_lahir ?? '';
         $this->npsn = $this->siswa->NPSN ?? '';
-        $this->sekolah_asal = strtoupper($this->siswa->sekolah_asal ?? '');
+        $this->sekolah_asal = $this->siswa->sekolah_asal ?? '';
         $this->alamat_kk = ucwords($this->siswa->alamat_kk ?? '');
         $this->alamat_domisili = ucwords($this->siswa->alamat_domisili ?? '');
         $this->provinsi = $this->siswa->provinsi ?? '';
