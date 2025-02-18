@@ -15,7 +15,7 @@ use Livewire\WithFileUploads;
 class UploadDokumen extends Component
 {
     use WithFileUploads;
-
+    public $modalSubmit = false;
     public $persyaratan;
     public $user;
     public $id_jalur, $kbs, $id_persyaratan, $id_siswa, $berkas;
