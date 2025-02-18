@@ -23,6 +23,7 @@ class BiodataSiswa extends Component
     public $kota;
     public $searchNpsn;
     public $sekolahs = [];
+    public $alamat_domisili_disabled = false;
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric',
@@ -63,7 +64,7 @@ class BiodataSiswa extends Component
 
         $this->user = Auth::user();
         $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
-        $this->nama_lengkap = $this->siswa->nama_lengkap ?? '';
+        $this->nama_lengkap = ucwords($this->siswa->nama_lengkap ?? '');
         $this->nik = $this->siswa->NIK ?? '';
         $this->nisn = $this->siswa->NISN ?? '';
         $this->no_telp = $this->siswa->no_telp ?? '';
@@ -71,9 +72,9 @@ class BiodataSiswa extends Component
         $this->tanggal_lahir = $this->siswa->tanggal_lahir ?? '';
         $this->tempat_lahir = $this->siswa->tempat_lahir ?? '';
         $this->npsn = $this->siswa->NPSN ?? '';
-        $this->sekolah_asal = $this->siswa->sekolah_asal ?? '';
-        $this->alamat_domisili = $this->siswa->alamat_domisili ?? '';
-        $this->alamat_kk = $this->siswa->alamat_kk ?? '';
+        $this->sekolah_asal = strtoupper($this->siswa->sekolah_asal ?? '');
+        $this->alamat_kk = ucwords($this->siswa->alamat_kk ?? '');
+        $this->alamat_domisili = ucwords($this->siswa->alamat_domisili ?? '');
         $this->provinsi = $this->siswa->provinsi ?? '';
         $this->kota = $this->siswa->kota ?? '';
         $this->provinces = Province::all()->map(function ($province) {
@@ -166,11 +167,11 @@ class BiodataSiswa extends Component
         }
     }
 
-    public function updatedKota($value) // Add this method
+    public function updatedKota($value)
     {
         $city = Regency::find($value);
         if ($city) {
-            $this->siswa->kota = $city->name;
+            $this->siswa->kota =  $city->name;
             $this->siswa->save();
         }
     }
@@ -206,8 +207,8 @@ class BiodataSiswa extends Component
             if (!$this->getErrorBag()->has('sekolah_asal')) {
                 $this->siswa->NPSN = $this->npsn;
                 $this->siswa->status_sekolah = $data['status_sekolah'];
-                $this->siswa->sekolah_asal = $data['nama_sekolah'];
-                $this->sekolah_asal = $data['nama_sekolah'];
+                $this->siswa->sekolah_asal = strtolower($data['nama_sekolah']);
+                $this->sekolah_asal = strtolower($data['nama_sekolah']);
                 $this->siswa->save();
                 // $this->updatedSekolahAsal($data['nama_sekolah']);
             }
@@ -242,6 +243,27 @@ class BiodataSiswa extends Component
             'status_sekolah' => $statusSekolah,
 
         ];
+    }
+
+    public function copyAlamatKk()
+    {
+        $this->alamat_domisili = $this->alamat_kk;
+        $this->siswa->alamat_domisili = strtolower($this->alamat_kk);
+        $this->siswa->save();
+    }
+
+    public function toggleAlamatDomisili()
+    {
+        if ($this->alamat_domisili_disabled) {
+            $this->alamat_domisili = $this->alamat_kk;
+            $this->siswa->alamat_domisili = strtolower($this->alamat_kk);
+            $this->siswa->save();
+        } else {
+            $this->alamat_domisili = '';
+            $this->siswa->alamat_domisili = '';
+            $this->siswa->save();
+        }
+        $this->validateOnly('alamat_domisili'); // Add this line
     }
 
     public function render()
