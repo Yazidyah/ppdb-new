@@ -23,7 +23,8 @@
                                 <path
                                     d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z" />
                             </svg>
-                            <div class="font-semibold text-lg text-gray-800">{{ Str::title($siswa->nama_lengkap) }}</div>
+                            <div class="font-semibold text-lg text-gray-800">{{ Str::title($siswa->nama_lengkap) }}
+                            </div>
                         </div>
                         <div class="flex flex-col text-left sm:text-center">
                             <div class="text-sm text-gray-600 font-semibold"> {{ $siswa->sekolah_asal }}</div>
@@ -38,21 +39,21 @@
                     <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-gray-700">
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">No Telpon</p>
-                            <p class="text-sm text-gray-500">{{ $siswa->no_telp }}</p>
+                            <p class="text-sm text-gray-500">{{ @$siswa->no_telp ?? 'Belum Di Lengkapi' }}</p>
                         </div>
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">NISN</p>
-                            <p class="text-sm text-gray-500">{{ $siswa->NISN }}</p>
+                            <p class="text-sm text-gray-500">{{ @$siswa->NISN ?? 'Belum Di Lengkapi' }}</p>
                         </div>
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">Jalur</p>
                             <p class="text-sm text-gray-500">
-                                {{ $siswa->dataRegistrasi->jalur->nama_jalur }}</p>
+                                {{ @$siswa->dataRegistrasi->jalur->nama_jalur ?? 'Belum Di Pilih' }}</p>
                             </p>
                         </div>
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">Kota</p>
-                            <p class="text-sm text-gray-500">{{ $siswa->kota }}</p>
+                            <p class="text-sm text-gray-500">{{ @$siswa->kota ?? 'Belum Di Lengkapi' }}</p>
                         </div>
 
                     </div>
@@ -120,7 +121,7 @@
                             @livewire('operator.tab-nilai-siswa', ['siswa' => $siswa], key('operator-tab-nilai-siswa-' . $siswa->id_calon_siswa))
                         </div>
                     </div>
-                    
+
                     <div id="berkas-content" class="tab-content"
                         style="display: {{ $tab == 'berkas' ? 'block' : 'none' }};">
                         <div class="mt-3">

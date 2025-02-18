@@ -21,27 +21,27 @@
 
                 <div>
                     <p class="text-xs font-medium">Nomor Induk Kependidikan</p>
-                    <p>{{ $siswa->NIK }}</p>
+                    <p>{{ @$siswa->NIK ?? 'Belum Di Lengkapi' }}</p>
                 </div>
 
                 <div>
                     <p class="text-xs font-medium">NISN</p>
-                    <p>{{ $siswa->NISN }}</p>
+                    <p>{{ @$siswa->NISN ?? 'Belum Di Lengkapi' }}</p>
                 </div>
 
                 <div>
                     <p class="text-xs font-medium">Email</p>
-                    <p>{{ $siswa->user->email }}</p>
+                    <p>{{ @$siswa->user->email }}</p>
                 </div>
 
                 <div>
                     <p class="text-xs font-medium">Alamat Domisili</p>
-                    <p>{{ $siswa->alamat_domisili }}</p>
+                    <p>{{ @$siswa->alamat_domisili ?? 'Belum Di Lengkapi' }}</p>
                 </div>
 
                 <div>
                     <p class="text-xs font-medium">Tempat Lahir</p>
-                    <p>{{ $siswa->tempat_lahir }}</p>
+                    <p>{{ @$siswa->tempat_lahir ?? 'Belum Di Lengkapi' }}</p>
                 </div>
 
                 <div>
@@ -52,22 +52,22 @@
 
                 <div>
                     <p class="text-xs font-medium">NPSN</p>
-                    <p>{{ $siswa->NPSN }}</p>
+                    <p>{{ @$siswa->NPSN ?? 'Belum Di Lengkapi' }}</p>
                 </div>
 
                 <div>
                     <p class="text-xs font-medium">Sekolah Asal</p>
-                    <p>{{ $siswa->sekolah_asal_formatted }}</p>
+                    <p>{{ @$siswa->sekolah_asal_formatted ?? 'Belum Di Lengkapi' }}</p>
                 </div>
-                
+
                 <div>
                     <p class="text-xs font-medium">Provinsi</p>
-                    <p>{{ $siswa->provinsi }}</p>
+                    <p>{{ @$siswa->provinsi ?? 'Belum Di Lengkapi' }}</p>
                 </div>
 
                 <div>
                     <p class="text-xs font-medium">Kota</p>
-                    <p>{{ $siswa->kota }}</p>
+                    <p>{{ @$siswa->kota ?? 'Belum Di Lengkapi' }}</p>
                 </div>
 
             </div>

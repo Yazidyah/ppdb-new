@@ -38,19 +38,19 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-left">
                         <div>
                             <p class="text-sm font-medium">Nama Lengkap</p>
-                            <p class="text-base">{{ $ortu->nama_lengkap }}</p>
+                            <p class="text-base">{{ @$ortu->nama_lengkap ?? 'Belum Di Lengkapi' }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium">NIK</p>
-                            <p class="text-base">{{ $ortu->nik }}</p>
+                            <p class="text-base">{{ @$ortu->nik ?? 'Belum Di Lengkapi' }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium">Pekerjaan</p>
-                            <p class="text-base">{{ $ortu->kerjaan->nama_pekerjaan }}</p>
+                            <p class="text-base">{{ @$ortu->kerjaan->nama_pekerjaan ?? 'Belum Di Lengkapi' }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium">No Telpon</p>
-                            <p class="text-base">{{ $ortu->no_telp }}</p>
+                            <p class="text-base">{{ @$ortu->no_telp ?? 'Belum Di Lengkapi' }}</p>
                         </div>
                     </div>
                 </div>
