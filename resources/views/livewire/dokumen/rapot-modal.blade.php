@@ -1,11 +1,11 @@
 <div>
-    <div class="navigation-buttons justify-center flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
+    <!-- <div class="navigation-buttons justify-center flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
         <button
             class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
             wire:click="$set('modalSubmit', true)">
             Isi data rapot
         </button>
-    </div>
+    </div> -->
 
     @if ($modalSubmit)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
@@ -14,6 +14,14 @@
                 <div class="flex items-center justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
                     <div
                         class="relative overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-2xl sm:my-8 sm:w-full sm:max-w-3xl p-8">
+                        <button wire:click="$set('modalSubmit', false)"
+                            class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                            <svg class="h-4 w-4 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                data-slot="icon">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
                         <h1 class="text-3xl text-center font-bold mb-6 text-gray-800">Isi Sesuai dengan Nilai
                             Pengetahuan di Rapor</h1>
 
