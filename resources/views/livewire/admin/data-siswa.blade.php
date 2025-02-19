@@ -2,7 +2,7 @@
     <div class="p-4  dark:border-gray-700 ">
         <div class="container mx-auto text-center pt-7">
             <div class="flex justify-between items-left mb-3">
-                <button onclick="window.location.href='{{ route('admin.dashboard') }}'"
+                <button onclick="window.history.back()"
                     class="px-4 py-2 bg-tertiary text-white font-medium rounded-lg hover:bg-secondary hover:text-tertiary">Kembali
                 </button>
             </div>
