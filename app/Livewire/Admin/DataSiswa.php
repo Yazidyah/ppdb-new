@@ -7,8 +7,10 @@ use Livewire\Component;
 
 class DataSiswa extends Component
 {
+    public $tab = 'detail';
     public $siswa;
     public $id;
+    
 
     public function mount()
     {

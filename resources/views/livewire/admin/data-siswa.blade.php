@@ -1,8 +1,8 @@
 <div>
-    <div class="p-4  dark:border-gray-700 ">
+    <div class="p-4  dark:border-gray-700 mt-14">
         <div class="container mx-auto text-center pt-7">
             <div class="flex justify-between items-left mb-3">
-                <button onclick="window.history.back()"
+                <button onclick="window.location.href='{{ route('admin.dashboard') }}'"
                     class="px-4 py-2 bg-tertiary text-white font-medium rounded-lg hover:bg-secondary hover:text-tertiary">Kembali
                 </button>
             </div>
@@ -55,94 +55,93 @@
 
             </div>
 
-            {{-- <div class="mt-5 relative w-full">
-                    <div
-                        class="relative flex items-center justify-between w-full h-12 gap-2 p-4 text-sm text-gray-500 bg-white rounded">
+            <div class="mt-5 relative w-full">
+                <div
+                    class="relative flex items-center justify-between w-full h-12 gap-2 p-4 text-sm text-gray-500 bg-white rounded">
 
-                        <button onclick="setTab('detail')" @class([
-                            'flex-1 py-2 font-medium duration-300 h-10',
-                            'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
-                                $tab != 'detail',
-                            'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'detail',
-                        ])>
-                            Siswa
-                        </button>
+                    <button onclick="setTab('detail')" @class([
+                        'flex-1 py-2 font-medium duration-300 h-10',
+                        'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
+                            $tab != 'detail',
+                        'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'detail',
+                    ])>
+                        Siswa
+                    </button>
 
-                        <button onclick="setTab('orangtua')" @class([
-                            'flex-1 py-2 font-medium duration-300 h-10',
-                            'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
-                                $tab != 'orangtua',
-                            'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'orangtua',
-                        ])>
-                            Orang Tua
-                        </button>
-                        <button onclick="setTab('nilai')" @class([
-                            'flex-1 py-2 font-medium duration-300 h-10',
-                            'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
-                                $tab != 'nilai',
-                            'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'nilai',
-                        ])>
-                            Nilai
-                        </button>
+                    <button onclick="setTab('orangtua')" @class([
+                        'flex-1 py-2 font-medium duration-300 h-10',
+                        'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
+                            $tab != 'orangtua',
+                        'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'orangtua',
+                    ])>
+                        Orang Tua
+                    </button>
+                    <button onclick="setTab('nilai')" @class([
+                        'flex-1 py-2 font-medium duration-300 h-10',
+                        'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
+                            $tab != 'nilai',
+                        'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'nilai',
+                    ])>
+                        Nilai
+                    </button>
 
-                        <button onclick="setTab('berkas')" @class([
-                            'flex-1 py-2 font-medium duration-300 h-10',
-                            'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
-                                $tab != 'berkas',
-                            'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'berkas',
-                        ])>
-                            Berkas
-                        </button>
+                    <button onclick="setTab('berkas')" @class([
+                        'flex-1 py-2 font-medium duration-300 h-10',
+                        'border-b-2 text-gray-400 hover:text-indigo-600 border-white hover:border-indigo-100' =>
+                            $tab != 'berkas',
+                        'text-indigo-700 border-b-2 border-indigo-500' => $tab == 'berkas',
+                    ])>
+                        Berkas
+                    </button>
 
-                    </div>
+                </div>
 
-                    <div id="detail-content" class="tab-content"
-                        style="display: {{ $tab == 'detail' ? 'block' : 'none' }};">
-                        <div class="mt-3">
-                            @livewire('operator.tab-detail-siswa', ['siswa' => $siswa], key('operator-tab-detail-siswa-' . $siswa->id_calon_siswa))
-                        </div>
-                    </div>
-
-                    <div id="orangtua-content" class="tab-content"
-                        style="display: {{ $tab == 'orangtua' ? 'block' : 'none' }};">
-                        <div class="mt-3">
-                            @livewire('operator.tab-ortu-siswa', ['siswa' => $siswa], key('operator-tab-ortu-siswa-' . $siswa->id_calon_siswa))
-                        </div>
-                    </div>
-
-                    <div id="nilai-content" class="tab-content"
-                        style="display: {{ $tab == 'nilai' ? 'block' : 'none' }};">
-                        <div class="mt-3">
-                            @livewire('operator.tab-nilai-siswa', ['siswa' => $siswa], key('operator-tab-nilai-siswa-' . $siswa->id_calon_siswa))
-                        </div>
-                    </div>
-
-                    <div id="berkas-content" class="tab-content"
-                        style="display: {{ $tab == 'berkas' ? 'block' : 'none' }};">
-                        <div class="mt-3">
-                            @livewire('operator.tab-berkas-siswa', ['siswa' => $siswa], key('operator-tab-berkas-siswa-' . $siswa->id_calon_siswa))
-                        </div>
+                <div id="detail-content" class="tab-content"
+                    style="display: {{ $tab == 'detail' ? 'block' : 'none' }};">
+                    <div class="mt-3">
+                        @livewire('operator.tab-detail-siswa', ['siswa' => $siswa], key('operator-tab-detail-siswa-' . $siswa->id_calon_siswa))
                     </div>
                 </div>
 
-                <script>
-                    function setTab(tab) {
-                        document.querySelectorAll('button').forEach(button => {
-                            button.classList.remove('text-indigo-700', 'border-indigo-500');
-                            button.classList.add('text-gray-400', 'border-white');
-                        });
+                <div id="orangtua-content" class="tab-content"
+                    style="display: {{ $tab == 'orangtua' ? 'block' : 'none' }};">
+                    <div class="mt-3">
+                        @livewire('operator.tab-ortu-siswa', ['siswa' => $siswa], key('operator-tab-ortu-siswa-' . $siswa->id_calon_siswa))
+                    </div>
+                </div>
 
-                        const activeButton = document.querySelector(`button[onclick="setTab('${tab}')"]`);
-                        activeButton.classList.add('text-indigo-700', 'border-indigo-500');
-                        activeButton.classList.remove('text-gray-400', 'border-white');
+                <div id="nilai-content" class="tab-content" style="display: {{ $tab == 'nilai' ? 'block' : 'none' }};">
+                    <div class="mt-3">
+                        @livewire('operator.tab-nilai-siswa', ['siswa' => $siswa], key('operator-tab-nilai-siswa-' . $siswa->id_calon_siswa))
+                    </div>
+                </div>
 
-                        document.querySelectorAll('.tab-content').forEach(content => {
-                            content.style.display = 'none';
-                        });
+                <div id="berkas-content" class="tab-content"
+                    style="display: {{ $tab == 'berkas' ? 'block' : 'none' }};">
+                    <div class="mt-3">
+                        @livewire('operator.tab-berkas-siswa', ['siswa' => $siswa], key('operator-tab-berkas-siswa-' . $siswa->id_calon_siswa))
+                    </div>
+                </div>
+            </div>
 
-                        document.getElementById(`${tab}-content`).style.display = 'block';
-                    }
-                </script> --}}
+            <script>
+                function setTab(tab) {
+                    document.querySelectorAll('button').forEach(button => {
+                        button.classList.remove('text-indigo-700', 'border-indigo-500');
+                        button.classList.add('text-gray-400', 'border-white');
+                    });
+
+                    const activeButton = document.querySelector(`button[onclick="setTab('${tab}')"]`);
+                    activeButton.classList.add('text-indigo-700', 'border-indigo-500');
+                    activeButton.classList.remove('text-gray-400', 'border-white');
+
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+
+                    document.getElementById(`${tab}-content`).style.display = 'block';
+                }
+            </script>
         </div>
     </div>
 </div>
