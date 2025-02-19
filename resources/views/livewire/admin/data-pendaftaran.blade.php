@@ -19,7 +19,8 @@
                     <tbody>
                         <div>
                             @foreach ($pendaftarans as $pendaftaran)
-                                <tr class="bg-white border-b hover:bg-gray-50">
+                                <tr onclick="window.location.href='{{ route('admin.data-siswa', ['id' => $pendaftaran->id_calon_siswa]) }}'"
+                                    class="bg-white border-b hover:bg-gray-50">
                                     <td class="px-4 py-2 text-center">{{ $pendaftaran->id_calon_siswa }}</td>
                                     <td class="px-4 py-2 font-medium  whitespace-nowrap">
                                         {{ ucwords(@$pendaftaran->nama_lengkap ?? 'Belum Di Lengkapi') }}

@@ -4,6 +4,7 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\SiswaController;
+use App\Livewire\Admin\DataSiswa;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Siswa;
@@ -131,7 +132,8 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/alur-pendaftaran', function () {
         return view('admin.alur-pendaftaran');
     })->name('admin.alur-pendaftaran');
-    
+    Route::get('/admin/data-siswa/{id}', DataSiswa::class)->name('admin.data-siswa');
+
     // Route::get('/admin/data-siswa', function () {
     //     return view('admin.datasiswa');
     // })->name('admin.datasiswa');
