@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
 {
+
+    public $tab = 1;
     public $statistik;
     public $filterNamaStatistik = '';
     public $allNamaStatistik = [];
@@ -20,6 +22,11 @@ class Dashboard extends Component
     public $countBelumDiproses;
     public $countLulus;
     public $countTidakLulus;
+
+
+    protected $queryString = [
+        'tab' => ['except' => 'konsep', 'as' => 't'],
+    ];
 
     public function mount()
     {
