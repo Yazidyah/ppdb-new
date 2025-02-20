@@ -21,6 +21,8 @@ class UploadDokumen extends Component
     public $id_jalur, $kbs, $id_persyaratan, $id_siswa, $berkas;
     public $syarat;
 
+    public $kb;
+
     public function mount()
     {
         $this->user = Auth::user();
@@ -45,6 +47,9 @@ class UploadDokumen extends Component
     public function setSyarat($id)
     {
         $this->syarat = Persyaratan::find($id);
+        if ($this->syarat->id_jalur == 1) {
+            $this->kb = KategoriBerkas::where('nama', $this->syarat->nama_persyaratan)->where('key', 'jalur_reguler')->first();
+        }
     }
 
     public function simpan()
@@ -53,6 +58,7 @@ class UploadDokumen extends Component
             $path = $this->berkas->store('pendaftaran/persyaratan', 'local');
 
             $berkas = new Berkas([
+                'kategori_berkas_id' => $this->kb->id,
                 'id_syarat' => $this->syarat->id_persyaratan,
                 'original_name' => $this->berkas->getClientOriginalName(),
                 'file_name' => $path,
