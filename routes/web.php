@@ -12,9 +12,8 @@ use App\Http\Middleware\Operator;
 use App\Livewire\Counter;
 use App\Livewire\Siswa\StepSatu;
 use App\Http\Controllers\PekerjaanOrangTuaController;
-
-
-
+use App\Http\Controllers\Operator\StatusController;
+use App\Http\Controllers\Operator\VerifOpController;
 
 use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
@@ -22,9 +21,7 @@ use App\Livewire\Verifikasi\StepEmpat;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\NpsnController;
 
-
 use App\Livewire\Admin\Dashboard;
-
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -58,7 +55,6 @@ Route::get('/daftar/step4', function () {
 });
 
 Route::get('/coba', Counter::class)->name('testing');
-
 
 Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/dashboard', function () {
@@ -128,6 +124,13 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/tambah-pekerjaan-ortu', function () {
         return redirect()->route('pekerjaan-ortu.index');
     })->name('operator.tambah-pekerjaan-ortu');
+    Route::post('/operator/update-status', [VerifOpController::class, 'updateStatus'])->name('operator.updateStatus');
+    Route::get('/operator/get-status/{id}', [VerifOpController::class, 'getStatus']);
+    Route::post('/operator/update-verif-berkas', [VerifOpController::class, 'updateVerifBerkas'])->name('operator.updateVerifBerkas');
+    Route::get('/operator/get-status/{id}', [VerifOpController::class, 'getStatus'])->name('operator.getStatus');
+    Route::get('/operator/get-berkas/{id}', [VerifOpController::class, 'getBerkas'])->name('operator.getBerkas');
+    Route::post('/operator/update-verif-status', [VerifOpController::class, 'updateVerifStatus'])->name('operator.updateVerifStatus');
+    Route::get('/operator/get-status-verif/{id}', [VerifOpController::class, 'getStatusVerif'])->name('operator.getStatusVerif');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');

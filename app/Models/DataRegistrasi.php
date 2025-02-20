@@ -35,4 +35,9 @@ class DataRegistrasi extends Model
     {
         return $this->hasOne(Rapot::class, 'id_registrasi', 'id_registrasi');
     }
+
+    public function berkas()
+    {
+        return $this->hasMany(Berkas::class, 'uploader_id', 'id_calon_siswa');
+    }
 }
