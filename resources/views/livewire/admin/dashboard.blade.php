@@ -26,6 +26,17 @@
                             </span>
                         </button>
                     </li>
+                    <li class="mb-2">
+                        <button wire:click="$set('tab', 3)">
+                            <span @class([
+                                'block px-4 py-2',
+                                'text-white' => $tab != 3,
+                                'text-white bg-primary' => $tab == 3,
+                            ])>
+                                Kelola Operator
+                            </span>
+                        </button>
+                    </li>
                 </ul>
             </nav>
 
@@ -197,6 +208,10 @@
 
         @if ($tab == 2)
             @livewire('admin.data-pendaftaran', key('data-pendaftaran' . rand()))
+        @endif
+
+        @if ($tab == 3)
+            @livewire('admin.data-operator', key('data-operator' . rand()))
         @endif
     </div>
 </div>

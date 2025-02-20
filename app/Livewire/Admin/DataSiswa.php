@@ -15,7 +15,6 @@ class DataSiswa extends Component
     public function mount()
     {
         $this->siswa = CalonSiswa::find($this->id);
-        // dd($this->id);
     }
     public function render()
     {
