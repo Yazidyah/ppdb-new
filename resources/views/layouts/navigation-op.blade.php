@@ -34,6 +34,7 @@ switch ($userRole){
     $redirectUrstep2 = 'operator.data-lulus';
     $redirectUrlsyarat = 'operator.tambah-persyaratan';
     $redirectUrljalur = 'operator.tambah-jalur';
+    $redirectUrlpot = 'pekerjaan-ortu.index';
     break;
 
     default:
@@ -168,64 +169,39 @@ switch ($userRole){
         </div>
     </div>
 </nav>
-<aside x-show="cheat" id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full border-r border-gray-200 sm:translate-x-0 " aria-label="Sidebar">
-   <div  class="h-full px-3 py-4 overflow-y-auto bg-tertiary">
-      <ul  class="space-y-2 font-medium">
-         <li>
-         <x-side-nav :href="route($redirectUrlsyarat)" :active="request()->routeIs($redirectUrlsyarat)">
-         {{ __('Konfigurasi Persyaratan') }}
-         </x-side-nav>
-         </li>
-         <li>
-         <x-side-nav :href="route($redirectUrls)" :active="request()->routeIs($redirectUrls)">
-         {{ __('Data Pendaftar') }}
-         </x-side-nav>
-         </li>
-         <li>
-         <x-side-nav :href="route($redirectUrljalur)" :active="request()->routeIs($redirectUrljalur)">
-         {{ __('Konfigurasi Jalur') }}
-         </x-side-nav>
-         </li>
-         <!-- <li>
-         <x-side-nav :href="route($redirectUrlpk)" :active="request()->routeIs($redirectUrlpk)">
-         {{ __('Data Pendaftar Afirmasi Prestasi') }}
-         </x-side-nav>
-         </li>
-         <li>
-         <x-side-nav :href="route($redirectUrlc)" :active="request()->routeIs($redirectUrlc)">
-         {{ __('Data Pendaftar Afirmasi ABK') }}
-         </x-side-nav>
-         </li>
-         <li>
-         <x-side-nav :href="route($redirectUrlrr)" :active="request()->routeIs($redirectUrlrr)">
-         {{ __('Data Pendaftar Afirmasi KETM') }}
-         </x-side-nav>
-         </li>
-         <li>
-         <x-side-nav :href="route($redirectUrlst)" :active="request()->routeIs($redirectUrlst)">
-         {{ __('Data Pendaftar Reguler') }}
-         </x-side-nav>
-         </li>
-         <li>
-         <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
-         {{ __('Data Pendaftar Lulus') }}
-         </x-side-nav>
-         </li>          -->
-         <li>
-         <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
-         {{ __('Data Pendaftar Melaju ke (Step 1)') }}
-         </x-side-nav>
-         </li>         
-         <li>
-         <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
-         {{ __('Data Pendaftar Melaju ke (Step 2)') }}
-         </x-side-nav>
-         </li>         
-         <!-- <li>
-         <x-side-nav :href="route($redirectUrldk)" :active="request()->routeIs($redirectUrldk)">
-         {{ __('Data Pendaftar Tidak Lulus') }}
-         </x-side-nav>
-         </li>          -->
-      </ul>
-   </div>
+<aside x-show="cheat" id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full border-r border-gray-200 sm:translate-x-0" aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-tertiary">
+        <ul class="space-y-2 font-medium">
+            <li>
+                <x-side-nav :href="route($redirectUrls)" :active="request()->routeIs($redirectUrls)">
+                    {{ __('Data Pendaftar') }}
+                </x-side-nav>
+            </li>
+            <li>
+                <x-side-nav :href="route($redirectUrlsyarat)" :active="request()->routeIs($redirectUrlsyarat)">
+                    {{ __('Konfigurasi Persyaratan') }}
+                </x-side-nav>
+            </li>
+            <li>
+                <x-side-nav :href="route($redirectUrljalur)" :active="request()->routeIs($redirectUrljalur)">
+                    {{ __('Konfigurasi Jalur') }}
+                </x-side-nav>
+            </li>
+            <li>
+                <x-side-nav :href="route($redirectUrlpot)" :active="request()->routeIs($redirectUrlpot)">
+                    {{ __('Konfigurasi Pekerjaan Orang Tua') }}
+                </x-side-nav>
+            </li>
+            <li>
+                <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
+                    {{ __('Data Pendaftar Melaju ke (Step 1)') }}
+                </x-side-nav>
+            </li>
+            <li>
+                <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
+                    {{ __('Data Pendaftar Melaju ke (Step 2)') }}
+                </x-side-nav>
+            </li>
+        </ul>
+    </div>
 </aside>

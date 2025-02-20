@@ -11,6 +11,7 @@ use App\Http\Middleware\Siswa;
 use App\Http\Middleware\Operator;
 use App\Livewire\Counter;
 use App\Livewire\Siswa\StepSatu;
+use App\Http\Controllers\PekerjaanOrangTuaController;
 
 
 
@@ -123,6 +124,10 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::post('/operator/delete-jalur/{id}', [OperatorController::class, 'deleteJalur'])->name('operator.delete-jalur');
     Route::get('/operator/edit-jalur/{id}', [OperatorController::class, 'editJalur'])->name('operator.edit-jalur');
     Route::post('/operator/update-jalur/{id}', [OperatorController::class, 'updateJalur'])->name('operator.update-jalur');
+    Route::resource('pekerjaan-ortu', PekerjaanOrangTuaController::class);
+    Route::get('/operator/tambah-pekerjaan-ortu', function () {
+        return redirect()->route('pekerjaan-ortu.index');
+    })->name('operator.tambah-pekerjaan-ortu');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
