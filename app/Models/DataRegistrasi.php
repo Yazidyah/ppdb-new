@@ -11,9 +11,10 @@ class DataRegistrasi extends Model
     protected $fillable = [
         'id_calon_siswa',
         'id_jalur',
+        'kode_registrasi',
         'status',
-        'tanggal_daftar'
     ];
+    protected $dates = ['deleted_at', 'updated_at'];
 
     public function calonSiswa()
     {

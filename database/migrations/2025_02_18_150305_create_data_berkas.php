@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('rapot', function (Blueprint $table) {
-            $table->decimal('total_rata_nilai', 5, 2)->nullable();
+        Schema::create('data_berkas', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('id_berkas')->nullable();
+            $table->string('data_berkas')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('rapot', function (Blueprint $table) {
-            $table->dropColumn('total_rata_nilai');
-        });
+        Schema::dropIfExists('data_berkas');
     }
 };

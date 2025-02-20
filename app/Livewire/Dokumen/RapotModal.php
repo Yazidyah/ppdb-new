@@ -9,6 +9,14 @@ use Livewire\Component;
 class RapotModal extends Component
 {
     public $modalSubmit = false;
+
+    protected $listeners = ['openRapotModal' => 'openModal'];
+
+    public function openModal()
+    {
+        $this->modalSubmit = true;
+    }
+
     public $sem;
     public $t;
     public $rapot;

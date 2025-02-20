@@ -15,8 +15,12 @@ class OrangTua extends Model
         'no_telp',
     ];
 
+    protected $attributes = [
+        'pekerjaan' => 1, // Default value for pekerjaan
+    ];
+
     protected $table = 'orang_tua';
-    protected $primaryKey = 'id_orang_tua'; // Specify the primary key column
+    protected $primaryKey = 'id_orang_tua';
 
     public function calonSiswa()
     {

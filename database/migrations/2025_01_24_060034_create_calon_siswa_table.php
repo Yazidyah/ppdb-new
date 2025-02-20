@@ -24,6 +24,7 @@ return new class extends Migration
             $table->date('tanggal_lahir')->nullable()->nullable();
             $table->string('NPSN', 15)->nullable();
             $table->string('sekolah_asal', 100)->nullable();
+            $table->string('status_sekolah')->nullable();
             $table->text('alamat_domisili')->nullable();
             $table->text('alamat_kk')->nullable();
             $table->string('provinsi', 100)->nullable();

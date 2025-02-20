@@ -47,10 +47,15 @@
                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                             Lihat Contoh
                         </button>
-                        @if (strpos($data->nama_persyaratan, 'Rapor semester 1-5') !== false)
+                        @if ($data->nama_persyaratan === 'Rapot')
                             <button type="button" onclick="rapotModal()"
-                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg hidden">
-                                Isi Data
+                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                Isi data rapot
+                            </button>
+                        @else
+                            <button type="button" onclick="berkasModal()"
+                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                Isi data berkas
                             </button>
                         @endif
                     </div>
@@ -72,8 +77,11 @@
     }
 
     function rapotModal() {
-        const modal = document.getElementById('rapotModal');
-        modal.classList.toggle('hidden');
+        Livewire.dispatch('openRapotModal');
+    }
+
+    function berkasModal() {
+        Livewire.dispatch('openBerkasModal');
     }
 
     // Fungsi untuk menampilkan contoh file

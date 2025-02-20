@@ -6,14 +6,14 @@
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
-                            <th scope="col" class="px-4 py-3 w-12 text-center">No</th>
-                            <th scope="col" class="px-4 py-3 min-w-[160px]">Nama</th>
-                            <th scope="col" class="px-4 py-3 w-32">NISN</th>
-                            <th scope="col" class="px-4 py-3 min-w-[200px]">Asal Sekolah</th>
-                            <th scope="col" class="px-4 py-3 w-36">Jenis Kelamin</th>
-                            <th scope="col" class="px-4 py-3 w-40">Nilai Rata-rata</th>
-                            <th scope="col" class="px-4 py-3 w-40">Domisili</th>
-                            <th scope="col" class="px-4 py-3 w-32">Status</th>
+                            <th scope="col" class="px-4 py-3 text-center">No</th>
+                            <th scope="col" class="px-4 py-3">Nama</th>
+                            <th scope="col" class="px-4 py-3">NISN</th>
+                            <th scope="col" class="px-4 py-3">Asal Sekolah</th>
+                            <th scope="col" class="px-4 py-3">Jenis Kelamin</th>
+                            <th scope="col" class="px-4 py-3">Nilai Rata-rata</th>
+                            <th scope="col" class="px-4 py-3">Domisili</th>
+                            <th scope="col" class="px-4 py-3">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,8 +46,6 @@
                         <div class="mt-3">
                             {{ $pendaftarans->links() }}
                         </div>
-
-
                     </tbody>
                 </table>
             </div>

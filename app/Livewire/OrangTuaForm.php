@@ -47,7 +47,6 @@ class OrangTuaForm extends Component
         $this->nama_lengkap = $this->orangTua->nama_lengkap;
         $this->id_hubungan = $this->orangTua->id_hubungan;
         $this->nik = $this->orangTua->nik;
-        $this->pekerjaan = $this->orangTua->pekerjaan ?? 1;
         $this->no_telp = $this->orangTua->no_telp;
     }
 
