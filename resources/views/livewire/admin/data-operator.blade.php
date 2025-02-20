@@ -47,7 +47,7 @@
     {{-- Table --}}
     <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14 w-[1200px]">
         <div class="flex justify-between mb-4">
-            <h1 class="text-lg font-bold">Manage Operator Accounts</h1>
+            <h1 class="text-lg font-bold">Kelola Akun Operator</h1>
             <button wire:click="create" class="bg-green-500 text-white px-4 py-2 rounded">Tambah Operator</button>
         </div>
         <div class="container mx-auto overflow-x-auto max-w-full">
