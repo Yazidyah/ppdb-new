@@ -16,8 +16,6 @@ class VerifBerkas extends Component
     public $catatan = [];
     public $verif = [];
 
-    public $url;
-
     public $preview = false;
 
 
@@ -30,8 +28,8 @@ class VerifBerkas extends Component
     {
         foreach ($this->syarat as $item) {
             foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
-                $berkas->verify = $this->verif[$berkas->id];
-                $berkas->verify_notes = $this->catatan[$berkas->id];
+                $berkas->verify = $this->verif[$berkas->id] ?? null;
+                $berkas->verify_notes = $this->catatan[$berkas->id] ?? null;
                 $berkas->save();
             }
         }
@@ -39,17 +37,6 @@ class VerifBerkas extends Component
         $this->modalOpen = false;
     }
 
-    public function updatedPreview()
-    {
-        foreach ($this->syarat as $item) {
-            foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
-                $this->berkas = $berkas;
-                $encodedPath = base64_encode($this->berkas->file_name);
-
-                $this->url = route('local.temp', ['path' => $encodedPath]);
-            }
-        }
-    }
 
 
     public function render()
