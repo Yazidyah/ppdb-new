@@ -31,7 +31,7 @@
                         </thead>
                         <tbody id="dokumenTableBody">
                             @foreach ($syarat as $index => $item)
-                                @foreach ($item->berkas->where('uploader_id', $siswa->id_user) as $berkas)
+                                @forelse ($item->berkas->where('uploader_id', $siswa->id_user) as $berkas)
                                     <tr>
                                         <td class="px-4 py-2">{{ $loop->parent->index + 1 }}</td>
                                         <td class="px-4 py-2">
@@ -47,7 +47,17 @@
                                                 name="catatan[{{ $berkas->id }}]" class="w-full border rounded-md">
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td class="px-4 py-2">{{ $index + 1 }}</td>
+                                        <td class="px-4 py-2">
+                                            <p>{{ $item->nama_persyaratan }}</p>
+                                        </td>
+                                        <td class="px-4 py-2" colspan="2">
+                                            <p>Berkas Belum Di Upload</p>
+                                        </td>
+                                    </tr>
+                                @endforelse
                             @endforeach
                         </tbody>
                     </table>
