@@ -17,11 +17,13 @@ class VerifBerkas extends Component
     public $verif = [];
 
     public $preview = false;
+    public $status;
 
 
     public function mount()
     {
         $this->syarat = $this->siswa->dataRegistrasi->syarat;
+        $this->status = $this->siswa->dataRegistrasi->status;
     }
 
     public function simpan()
@@ -34,10 +36,14 @@ class VerifBerkas extends Component
             }
         }
 
+        if ($this->status == 3 || $this->status == 4) {
+            $this->siswa->dataRegistrasi->status = $this->status;
+            $this->siswa->dataRegistrasi->save();
+        }
+
         $this->modalOpen = false;
+        return redirect(request()->header('Referer'));
     }
-
-
 
     public function render()
     {

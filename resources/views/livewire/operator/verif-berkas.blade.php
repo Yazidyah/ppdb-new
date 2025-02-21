@@ -1,4 +1,3 @@
-<!-- filepath: /Users/andreasnugroho/Herd/ppdb-new/resources/views/livewire/operator/verif-berkas.blade.php -->
 <div>
     <button wire:click="$set('modalOpen', true)"
         class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors bg-white border rounded-md hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Verif</button>
@@ -59,6 +58,14 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mb-4">
+                        <label for="status" class="block text-sm font-medium text-gray-700">Update Status</label>
+                        <select id="status" wire:model="status" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option value="" disabled>Pilih Status</option>
+                            <option value="3">Tidak Lolos</option>
+                            <option value="4">Lolos</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
                     <button wire:click="$set('modalOpen', false)" type="button"
@@ -69,6 +76,4 @@
             </div>
         </div>
     @endif
-
-
 </div>
