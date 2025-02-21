@@ -17,4 +17,9 @@ class JenisTes extends Model
     {
         return $this->belongsTo(JalurRegistrasi::class, 'id_jalur', 'id_jalur');
     }
+
+    public function tes()
+    {
+        return $this->hasMany(Tes::class, 'id_jenis_tes', 'id');
+    }
 }

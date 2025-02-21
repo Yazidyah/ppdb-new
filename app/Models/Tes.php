@@ -15,4 +15,9 @@ class Tes extends Model
         'jam_selesai',
         'kuota',
     ];
+
+    public function jenisTes()
+    {
+        return $this->belongsTo(JenisTes::class, 'id_jenis_tes', 'id');
+    }
 }
