@@ -35,6 +35,7 @@ switch ($userRole){
     $redirectUrlsyarat = 'operator.tambah-persyaratan';
     $redirectUrljalur = 'operator.tambah-jalur';
     $redirectUrlpot = 'pekerjaan-ortu.index';
+    $redirectUrltes = 'operator.konfigurasi-tes.index';
     break;
 
     default:
@@ -79,8 +80,7 @@ switch ($userRole){
                     </x-nav-link>
                     <x-nav-link :href="route($redirectUrlk)" :active="request()->routeIs($redirectUrlk)">
                         {{ __('Alur Pendaftaran') }} 
-                    </x-nav-link>
-                   
+                    </x-nav-link>                   
                     <div class="border-l py-3" ></div>
                 </div>
             </div>
@@ -193,8 +193,8 @@ switch ($userRole){
                 </x-side-nav>
             </li>
             <li>
-                <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
-                    {{ __('Data Pendaftar Melaju ke (Step 1)') }}
+                <x-side-nav :href="route($redirectUrltes)" :active="request()->routeIs($redirectUrltes)">
+                    {{ __('Konfigurasi Jadwal Tes') }}
                 </x-side-nav>
             </li>
             <li>
@@ -205,3 +205,10 @@ switch ($userRole){
         </ul>
     </div>
 </aside>
+
+<main>
+    @yield('content')
+</main>
+@livewireScripts
+</body>
+</html>
