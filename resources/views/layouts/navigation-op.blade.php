@@ -35,7 +35,7 @@ switch ($userRole){
     $redirectUrlsyarat = 'operator.tambah-persyaratan';
     $redirectUrljalur = 'operator.tambah-jalur';
     $redirectUrlpot = 'pekerjaan-ortu.index';
-    $redirectUrltes = 'operator.konfigurasi-tes.index';
+    $redirectUrltes = 'operator.konfigurasi-tes';
     break;
 
     default:
