@@ -13,7 +13,7 @@ class CalonSiswa extends Model
     protected $table = 'calon_siswa';
 
     protected $primaryKey = 'id_calon_siswa';
-      protected $fillable = [
+    protected $fillable = [
         'id_user',
         'nama_lengkap',
         'NIK',
@@ -25,7 +25,7 @@ class CalonSiswa extends Model
         'tempat_lahir',
         'NPSN',
         'sekolah_asal',
-        'status_sekolah', 
+        'status_sekolah',
         'alamat_domisili',
         'alamat_kk',
         'id_provinsi',
@@ -34,10 +34,10 @@ class CalonSiswa extends Model
     ];
 
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];
-    
+
     public function berkas()
     {
-        return $this->morphMany(Berkas::class, 'berkasable');
+        return $this->hasMany(Berkas::class, 'id_calon_siswa', 'uploader_id');
     }
 
     public function user()

@@ -13,6 +13,7 @@ class DataRegistrasi extends Model
         'id_jalur',
         'kode_registrasi',
         'status',
+        'id_jadwal_tes', // new field
     ];
     protected $dates = ['deleted_at', 'updated_at'];
 
@@ -34,5 +35,15 @@ class DataRegistrasi extends Model
     public function rapot()
     {
         return $this->hasOne(Rapot::class, 'id_registrasi', 'id_registrasi');
+    }
+
+    public function berkas()
+    {
+        return $this->hasMany(Berkas::class, 'uploader_id', 'id_calon_siswa');
+    }
+
+    public function jadwalTes()
+    {
+        return $this->belongsTo(JadwalTes::class, 'id_jadwal_tes', 'id');
     }
 }

@@ -93,12 +93,29 @@ class OperatorController extends Controller
         $data = $query->get()->map(function ($item) {
             $item->nama_lengkap = ucwords(strtolower($item->nama_lengkap));
             $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
+            $item->dataRegistrasi->status_label = $this->getStatusLabel($item->dataRegistrasi->status);
             return $item;
         });
 
         $jalurRegistrasi = JalurRegistrasi::all();
         $statuses = DataRegistrasi::select('status')->distinct()->get();
         return view('operator.datasiswa', compact('data', 'jalurRegistrasi', 'statuses'));
+    }
+
+    private function getStatusLabel($status)
+    {
+        $statusLabels = [
+            0 => 'Jalur',
+            1 => 'Upload',
+            2 => 'Submit',
+            3 => 'Lolos Verifikasi Berkas',
+            4 => 'Tidak Lolos Verifikasi Berkas',
+            5 => 'Tidak Diterima',
+            6 => 'Diterima',
+            7 => 'Dicadangkan'
+        ];
+
+        return $statusLabels[$status] ?? '-';
     }
 
     public function showsiswaDetail($id)
@@ -154,15 +171,9 @@ class OperatorController extends Controller
 
         if ($request->has('filter') && $request->input('filter') != '') {
             $filter = $request->input('filter');
-            if (in_array($filter, ['L', 'P'])) {
-                $query->where('jenis_kelamin', $filter);
-            } elseif (in_array($filter, ['NEGERI', 'SWASTA'])) {
-                $query->where('status_sekolah', $filter);
-            } else {
-                $query->whereHas('dataRegistrasi', function($q) use ($filter) {
-                    $q->where('status', $filter);
-                });
-            }
+            $query->whereHas('dataRegistrasi', function($q) use ($filter) {
+                $q->where('status', $filter);
+            });
         }
 
         if ($request->has('jalur') && $request->input('jalur') != '') {
@@ -170,6 +181,11 @@ class OperatorController extends Controller
             $query->whereHas('dataRegistrasi', function($q) use ($jalur) {
                 $q->where('id_jalur', $jalur);
             });
+        }
+
+        if ($request->has('sekolah_asal') && $request->input('sekolah_asal') != '') {
+            $sekolahAsal = strtolower($request->input('sekolah_asal'));
+            $query->whereRaw('LOWER(sekolah_asal) like ?', ["%$sekolahAsal%"]);
         }
 
         return $query;
