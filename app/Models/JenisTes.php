@@ -24,6 +24,6 @@ class JenisTes extends Model
 
     public function tes()
     {
-        return $this->hasMany(Tes::class, 'id_jenis_tes', 'id');
+        return $this->hasMany(Tes::class, 'id_jenis_tes', 'id_jenis_tes');
     }
 }
