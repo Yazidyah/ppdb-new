@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('tanggal')->nullable();
             $table->time('jam_mulai')->nullable();
             $table->time('jam_selesai')->nullable();
+            $table->integer('terisi')->default(0)->nullable();
             $table->integer('kuota')->nullable();
             $table->timestamps();
 

@@ -18,6 +18,10 @@
                     </button>
                 </div>
                 <div class="relative w-auto pb-8">
+                    <div class="mb-4">
+                        <label class="text-sm font-medium text-gray-700">Jalur Registrasi:</label>
+                        <p>{{ $siswa->dataRegistrasi->jalur->nama_jalur }}</p>
+                    </div>
                     <table class="w-full mb-4">
                         <thead>
                             <tr>
@@ -58,12 +62,28 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="mb-4">
-                        <label for="status" class="block text-sm font-medium text-gray-700">Update Status</label>
+                    <div class="mb-4 grid grid-cols-2 gap-4 items-center">
+                        <label for="status" class="text-sm font-medium text-gray-700 text-left">Update Status</label>
                         <select id="status" wire:model="status" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                             <option value="" disabled>Pilih Status</option>
                             <option value="3">Tidak Lolos</option>
                             <option value="4">Lolos</option>
+                        </select>
+                    </div>
+                    <div class="mb-4 grid grid-cols-2 gap-4 items-center">
+                        <label for="sesi_bq_wawancara" class="text-sm font-medium text-gray-700 text-left">Sesi BQ & Wawancara</label>
+                        <select id="sesi_bq_wawancara" wire:model="sesi_bq_wawancara" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            @foreach ($jadwalTesBqWawancara as $jadwalBq)
+                                <option value="{{ $jadwalBq['id'] }}">{{ $jadwalBq['label'] }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-4 grid grid-cols-2 gap-4 items-center">
+                        <label for="sesi_japres_tes_akademik" class="text-sm font-medium text-gray-700 text-left">Sesi Japres/Tes Akademik</label>
+                        <select id="sesi_japres_tes_akademik" wire:model="sesi_japres_tes_akademik" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            @foreach ($jadwalTesJapresTesAkademik as $jadwalJa)
+                                <option value="{{ $jadwalJa['id'] }}">{{ $jadwalJa['label'] }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

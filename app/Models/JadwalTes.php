@@ -22,6 +22,6 @@ class JadwalTes extends Model
 
     public function jenisTes()
     {
-        return $this->belongsTo(JenisTes::class, 'id_jenis_tes', 'id');
+        return $this->belongsTo(JenisTes::class, 'id_jenis_tes');
     }
 }
