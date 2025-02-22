@@ -10,20 +10,15 @@ class JenisTes extends Model
     use HasFactory;
 
     protected $table = 'jenis_tes';
-    protected $primaryKey = 'id_jenis_tes';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id_jalur',
+        'no_jalur',
         'nama',
     ];
 
-    public function jalurRegistrasi()
-    {
-        return $this->belongsTo(JalurRegistrasi::class, 'id_jalur', 'id_jalur');
-    }
-
     public function tes()
     {
-        return $this->hasMany(Tes::class, 'id_jenis_tes', 'id_jenis_tes');
+        return $this->hasMany(JadwalTes::class, 'id_jenis_tes', 'id');
     }
 }

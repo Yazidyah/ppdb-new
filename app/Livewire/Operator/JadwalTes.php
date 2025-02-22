@@ -3,11 +3,10 @@
 namespace App\Livewire\Operator;
 
 use Livewire\Component;
-use App\Models\Tes;
+use App\Models\JadwalTes as JadwalTesModel;
 use App\Models\JenisTes as JenisTesModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
 
 class JadwalTes extends Component
 {
@@ -27,21 +26,13 @@ class JadwalTes extends Component
 
     public function mount()
     {
-        // Ambil semua data jenis tes
         $this->jenisTes = JenisTesModel::all();
-        // Load data jadwal tes dengan join agar nama jenis tes tersedia
         $this->loadJadwalTes();
     }
 
     public function loadJadwalTes()
     {
-        // Lakukan join dengan melakukan cast pada kolom jenis_tes.id_jenis_tes ke VARCHAR
-        $this->jadwalTes = Tes::query()
-            ->join('jenis_tes', function($join) {
-                $join->on(DB::raw("CAST(jenis_tes.id_jenis_tes AS VARCHAR)"), '=', 'tes.id_jenis_tes');
-            })
-            ->select('tes.*', 'jenis_tes.nama as nama_jenis_tes')
-            ->get();
+        $this->jadwalTes = JadwalTesModel::all();
     }
 
     public function create()
@@ -55,7 +46,7 @@ class JadwalTes extends Component
     {
         $this->validate();
 
-        Tes::create([
+        JadwalTesModel::create([
             'id_jenis_tes' => $this->id_jenis_tes,
             'ruang'        => $this->ruang,
             'tanggal'      => $this->tanggal,
@@ -66,11 +57,12 @@ class JadwalTes extends Component
 
         $this->loadJadwalTes();
         $this->closeModal();
+        session()->flash('message', 'Jadwal Tes berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
-        $tes = Tes::find($id);
+        $tes = JadwalTesModel::find($id);
 
         if (!$tes) {
             session()->flash('error', 'Data tidak ditemukan.');
@@ -90,56 +82,23 @@ class JadwalTes extends Component
 
     public function update()
     {
-        \Log::info('Update method called');
+        $this->validate();
 
-        try {
-            \Log::info('Starting validation', [
-                'id_jenis_tes' => $this->id_jenis_tes,
-                'ruang' => $this->ruang,
-                'tanggal' => $this->tanggal,
-                'jam_mulai' => $this->jam_mulai,
-                'jam_selesai' => $this->jam_selesai,
-                'kuota' => $this->kuota,
-            ]);
-
-            $this->validate();
-
-            \Log::info('Validation passed');
-        } catch (\Exception $e) {
-            \Log::error('Validation failed', ['error' => $e->getMessage()]);
-            session()->flash('error', 'Validation failed: ' . $e->getMessage());
-            return;
-        }
-
-        $tes = Tes::find($this->id_tes);
+        $tes = JadwalTesModel::find($this->id_tes);
 
         if (!$tes) {
-            \Log::error('Tes not found', ['id_tes' => $this->id_tes]);
             session()->flash('error', 'Data tidak ditemukan.');
             return;
         }
-
-        // Log the data being updated
-        \Log::info('Updating Tes', [
-            'id_tes' => $this->id_tes,
-            'id_jenis_tes' => $this->id_jenis_tes,
-            'ruang' => $this->ruang,
-            'tanggal' => $this->tanggal,
-            'jam_mulai' => $this->jam_mulai,
-            'jam_selesai' => $this->jam_selesai,
-            'kuota' => $this->kuota,
-        ]);
 
         $tes->update([
             'id_jenis_tes' => $this->id_jenis_tes,
             'ruang'        => $this->ruang,
             'tanggal'      => $this->tanggal,
-            'jam_mulai'    => $this->jam_mulai ? date('H:i', strtotime($this->jam_mulai)) : $tes->jam_mulai,
-            'jam_selesai'  => $this->jam_selesai ? date('H:i', strtotime($this->jam_selesai)) : $tes->jam_selesai,
+            'jam_mulai'    => $this->jam_mulai,
+            'jam_selesai'  => $this->jam_selesai,
             'kuota'        => $this->kuota,
         ]);
-
-        \Log::info('Tes updated successfully');
 
         $this->closeModal();
         $this->loadJadwalTes();
@@ -147,7 +106,7 @@ class JadwalTes extends Component
 
     public function delete($id)
     {
-        $tes = Tes::find($id);
+        $tes = JadwalTesModel::find($id);
 
         if (!$tes) {
             session()->flash('error', 'Data tidak ditemukan.');

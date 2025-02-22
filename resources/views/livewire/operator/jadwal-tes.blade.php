@@ -1,7 +1,7 @@
 <div>
     {{-- Stop trying to control. --}}
     <div class="flex justify-end mb-3">
-        <button wire:click="create" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Jenis Tes</button>
+        <button wire:click="create" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Jadwal Tes</button>
     </div>
     <table class="table-auto w-full mt-4">
         <thead>
@@ -18,17 +18,16 @@
         <tbody>
             @foreach ($jadwalTes as $item)
                 <tr>
-                    <!-- Menggunakan alias hasil join -->
-                    <td class="border px-4 py-2">{{ $item->nama_jenis_tes }}</td>
+                    <td class="border px-4 py-2">{{ $item->jenisTes->nama }}</td>
                     <td class="border px-4 py-2">{{ $item->ruang }}</td>
                     <td class="border px-4 py-2">{{ $item->tanggal }}</td>
                     <td class="border px-4 py-2">{{ $item->jam_mulai }}</td>
                     <td class="border px-4 py-2">{{ $item->jam_selesai }}</td>
                     <td class="border px-4 py-2">{{ $item->kuota }}</td>
                     <td class="border px-4 py-2 flex justify-center space-x-2">
-                        <button wire:click="edit({{ $item->id_tes }})"
+                        <button wire:click="edit({{ $item->id }})"
                             class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
-                        <button wire:click="delete({{ $item->id_tes }})"
+                        <button wire:click="delete({{ $item->id }})"
                             class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
                     </td>
                 </tr>
@@ -41,14 +40,14 @@
             wire:keydown.escape="closeModal">
             <div class="bg-white rounded-lg shadow-lg w-1/3">
                 <div class="flex justify-between items-center px-4 py-2 border-b">
-                    <h5 class="text-lg font-semibold">{{ $isEdit ? 'update' : 'store' }} Jadwal Tes</h5>
+                    <h5 class="text-lg font-semibold">{{ $isEdit ? 'Update' : 'Tambah' }} Jadwal Tes</h5>
                     <button wire:click="closeModal" class="text-gray-500">&times;</button>
                 </div>
                 <div class="p-4">
                     <select wire:model="id_jenis_tes" class="border rounded w-full py-2 px-3 mb-3">
                         <option>Pilih Jenis Tes</option>
                         @foreach($jenisTes as $jenis)
-                            <option value="{{ $jenis->id_jenis_tes }}">{{ $jenis->nama }}</option>
+                            <option value="{{ $jenis->id }}">{{ $jenis->nama }}</option>
                         @endforeach
                     </select>
                     <input type="text" wire:model="ruang" class="border rounded w-full py-2 px-3 mb-3" placeholder="Ruang">

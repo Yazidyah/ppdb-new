@@ -15,11 +15,19 @@
             @foreach ($jenisTes as $item)
                 <tr>
                     <td class="border px-4 py-2">{{ $item->nama }}</td>
-                    <td class="border px-4 py-2">{{ $item->jalurRegistrasi->nama_jalur }}</td>
+                    <td class="border px-4 py-2">
+                        @if ($item->no_jalur == "0")
+                            Semua Jalur
+                        @elseif ($item->no_jalur == "1")
+                            Reguler
+                        @elseif ($item->no_jalur == "2")
+                            Afirmasi
+                        @endif
+                    </td>
                     <td class="border px-4 py-2 flex justify-center space-x-2">
-                        <button wire:click="edit({{ $item->id_jenis_tes }})"
+                        <button wire:click="edit({{ $item->id}})"
                             class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
-                        <button wire:click="delete({{ $item->id_jenis_tes }})"
+                        <button wire:click="delete({{ $item->id}})"
                             class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
                     </td>
                 </tr>
@@ -38,11 +46,11 @@
                 </div>
                 <div class="p-4">
                     <input type="text" wire:model="nama" class="border rounded w-full py-2 px-3 mb-3" placeholder="Nama">
-                    <select wire:model="id_jalur" class="border rounded w-full py-2 px-3">
-                        <option>Pilih Jalur</option>
-                        @foreach($jalur_registrasi as $jalur)
-                            <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
-                        @endforeach
+                    <select wire:model="no_jalur" class="border rounded w-full py-2 px-3">
+                        <option disabled="disabled" value="">Pilih Jalur</option> <!-- Add a default option -->
+                        <option value="0">Semua Jalur</option>
+                        <option value="1">Reguler</option>
+                        <option value="2">Afirmasi</option>
                     </select>
                 </div>
                 <div class="flex justify-end px-4 py-2 border-t">

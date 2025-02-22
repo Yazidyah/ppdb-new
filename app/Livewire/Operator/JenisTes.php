@@ -4,28 +4,21 @@ namespace App\Livewire\Operator;
 
 use Livewire\Component;
 use App\Models\JenisTes as JenisTesModel;
-use App\Models\JalurRegistrasi;
 
 class JenisTes extends Component
 {
-    public $id_jenis_tes, $nama, $id_jalur; 
-    public $jalur_registrasi;
+    public $id, $nama, $no_jalur = "";  
     public $isEdit = false;
     public $showModal = false;
 
     protected $rules = [
         'nama' => 'required|string|max:255',
-        'id_jalur' => 'required|exists:jalur_registrasi,id_jalur',
+        'no_jalur' => 'required|in:0,1,2',
     ];
-
-    public function mount()
-    {
-        $this->jalur_registrasi = JalurRegistrasi::all();
-    }
 
     public function create()
     {
-        $this->resetExcept(['jalur_registrasi']);
+        $this->reset(['id', 'nama', 'no_jalur']);
         $this->isEdit = false;
         $this->showModal = true;
     }
@@ -33,10 +26,10 @@ class JenisTes extends Component
     public function store()
     {
         $this->validate();
-        
         JenisTesModel::create([
+            'id' => null, // Auto increment
+            'no_jalur' => (string) $this->no_jalur, 
             'nama' => $this->nama,
-            'id_jalur' => (string) $this->id_jalur,
         ]);
 
         $this->closeModal();
@@ -44,19 +37,11 @@ class JenisTes extends Component
 
     public function edit($id)
     {
-        $jenis_tes = JenisTesModel::find($id);
+        $jenis_tes = JenisTesModel::findOrFail($id);
 
-        if (!$jenis_tes) {
-            session()->flash('error', 'Data tidak ditemukan.');
-            return;
-        }
-
-        $this->resetErrorBag();
-        $this->resetValidation();
-
-        $this->id_jenis_tes = $id;
+        $this->id = $id;
         $this->nama = $jenis_tes->nama;
-        $this->id_jalur = $jenis_tes->id_jalur;
+        $this->no_jalur = (string) $jenis_tes->no_jalur;
         $this->isEdit = true;
         $this->showModal = true;
     }
@@ -65,16 +50,11 @@ class JenisTes extends Component
     {
         $this->validate();
 
-        $jenis_tes = JenisTesModel::find($this->id_jenis_tes);
-        
-        if (!$jenis_tes) {
-            session()->flash('error', 'Data tidak ditemukan.');
-            return;
-        }
+        $jenis_tes = JenisTesModel::findOrFail($this->id);
 
         $jenis_tes->update([
+            'no_jalur' => (string) $this->no_jalur, 
             'nama' => $this->nama,
-            'id_jalur' => (string) $this->id_jalur,
         ]);
 
         $this->closeModal();
@@ -82,27 +62,20 @@ class JenisTes extends Component
 
     public function delete($id)
     {
-        $jenis_tes = JenisTesModel::find($id);
-
-        if (!$jenis_tes) {
-            session()->flash('error', 'Data tidak ditemukan.');
-            return;
-        }
-
-        $jenis_tes->delete();
+        JenisTesModel::findOrFail($id)->delete();
         session()->flash('success', 'Data berhasil dihapus.');
     }
 
     public function closeModal()
     {
-        $this->resetExcept(['jalur_registrasi']);
+        $this->reset(['id', 'nama', 'no_jalur']);
         $this->showModal = false;
     }
 
     public function render()
     {
         return view('livewire.operator.jenis-tes', [
-            'jenisTes' => JenisTesModel::latest()->get(),
+            'jenisTes' => JenisTesModel::orderBy('id', 'asc')->get(),
         ]);
     }
 }
