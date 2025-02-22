@@ -8,7 +8,7 @@
                 wire:click="$set('modalOpen', false)"></div>
             <div class="relative w-full py-6 bg-white border shadow-lg px-7 border-neutral-200 sm:max-w-lg sm:rounded-lg">
                 <div class="flex items-center justify-between pb-3">
-                    <h3 class="text-lg font-semibold">Verifikasi {{ $siswa->nama_lengkap }}</h3>
+                    <h3 class="text-lg font-semibold">Verifikasi {{ ucwords($siswa->nama_lengkap) }}</h3>
                     <button wire:click="$set('modalOpen', false)"
                         class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
                         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -18,10 +18,8 @@
                     </button>
                 </div>
                 <div class="relative w-auto pb-8">
-                    <div class="mb-4">
-                        <label class="text-sm font-medium text-gray-700">Jalur Registrasi:</label>
-                        <p>{{ $siswa->dataRegistrasi->jalur->nama_jalur }}</p>
-                    </div>
+                    <input type="hidden" wire:model="id_registrasi">
+                    <input type="hidden" wire:model="id_jadwal_tes">
                     <table class="w-full mb-4">
                         <thead>
                             <tr>
@@ -73,6 +71,7 @@
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
                         <label for="sesi_bq_wawancara" class="text-sm font-medium text-gray-700 text-left">Sesi BQ & Wawancara</label>
                         <select id="sesi_bq_wawancara" wire:model="sesi_bq_wawancara" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option value="">Tidak dijadwalkan</option>
                             @foreach ($jadwalTesBqWawancara as $jadwalBq)
                                 <option value="{{ $jadwalBq['id'] }}">{{ $jadwalBq['label'] }}</option>
                             @endforeach
@@ -81,6 +80,7 @@
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
                         <label for="sesi_japres_tes_akademik" class="text-sm font-medium text-gray-700 text-left">Sesi Japres/Tes Akademik</label>
                         <select id="sesi_japres_tes_akademik" wire:model="sesi_japres_tes_akademik" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option value="">Tidak dijawdalkan</option>
                             @foreach ($jadwalTesJapresTesAkademik as $jadwalJa)
                                 <option value="{{ $jadwalJa['id'] }}">{{ $jadwalJa['label'] }}</option>
                             @endforeach
