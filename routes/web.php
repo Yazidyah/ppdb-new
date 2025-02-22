@@ -14,6 +14,7 @@ use App\Livewire\Siswa\StepSatu;
 use App\Http\Controllers\PekerjaanOrangTuaController;
 use App\Http\Controllers\Operator\VerifOpController;
 use App\Livewire\Operator\StatusAcc;
+use App\Livewire\Operator\KonfigurasiTes;
 
 use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
@@ -132,6 +133,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::post('/operator/update-verif-status', [VerifOpController::class, 'updateVerifStatus'])->name('operator.updateVerifStatus');
     Route::get('/operator/get-status-verif/{id}', [VerifOpController::class, 'getStatusVerif'])->name('operator.getStatusVerif');
     Route::get('/operator/status-acc/{id}', StatusAcc::class)->name('operator.status-acc');
+    Route::get('/operator/konfigurasi-tes', KonfigurasiTes::class)->name('operator.konfigurasi-tes');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
