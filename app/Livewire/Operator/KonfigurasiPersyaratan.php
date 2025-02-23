@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Persyaratan;
 use App\Models\JalurRegistrasi;
 use Illuminate\Support\Facades\Log;
+use App\Models\KategoriBerkas;
+use Illuminate\Support\Str;
 
 class KonfigurasiPersyaratan extends Component
 {
@@ -85,19 +87,9 @@ class KonfigurasiPersyaratan extends Component
     public function store()
     {
         $this->validate();
-
-        foreach (array_unique($this->id_jalur) as $idJalur) {
-            Persyaratan::create([
-                'nama_persyaratan' => $this->nama_persyaratan,
-                'id_jalur' => $idJalur,
-                'deskripsi' => $this->deskripsi
-            ]);
-        }
-
+        $this->savePersyaratan();
         session()->flash('success', 'Persyaratan berhasil ditambahkan.');
-
         $this->closeModal();
-
         return redirect()->to(url()->previous());
     }
 
@@ -110,39 +102,40 @@ class KonfigurasiPersyaratan extends Component
         $this->id_jalur = is_array($persyaratan->id_jalur) ? $persyaratan->id_jalur : [$persyaratan->id_jalur];
         $this->deskripsi = $persyaratan->deskripsi;
         $this->resetValidation();
-        // Log the variables for debugging
         \Log::debug('Edit Data:', [
             'persyaratanId' => $this->persyaratanId,
             'nama_persyaratan' => $this->nama_persyaratan,
             'id_jalur' => $this->id_jalur,
-            'id_jalur_0' => $this->id_jalur[0] ?? null, // Pastikan elemen pertama ada
+            'id_jalur_0' => $this->id_jalur[0] ?? null,
             'deskripsi' => $this->deskripsi,
         ]);
-
         $this->openModal(true);
     }
 
     public function update()
     {
         $this->validatePersyaratan();
-
-        $persyaratan = Persyaratan::findOrFail($this->persyaratanId);
-        $persyaratan->update([
-            'nama_persyaratan' => $this->nama_persyaratan,
-            'id_jalur' => $this->id_jalur[0], 
-            'deskripsi' => $this->deskripsi
-        ]);
-
-        session()->flash('success', 'Persyaratan berhasil diperbarui.');
+        $this->savePersyaratan(true);
+        session()->flash('success', 'Persyaratan dan Kategori Berkas berhasil diperbarui.');
         $this->closeModal();
     }
 
     public function delete($id)
     {
         $persyaratan = Persyaratan::findOrFail($id);
+        $namaPersyaratan = $persyaratan->nama_persyaratan;
+        $jalur = $persyaratan->jalurRegistrasi->nama_jalur;
+
+        $kategoriBerkas = KategoriBerkas::where('key', 'jalur_' . Str::slug($jalur, '_'))
+                                        ->where('nama', $namaPersyaratan)
+                                        ->first();
+        if ($kategoriBerkas) {
+            $kategoriBerkas->delete();
+        }
+
         $persyaratan->delete();
 
-        session()->flash('success', 'Persyaratan berhasil dihapus.');
+        session()->flash('success', 'Persyaratan dan Kategori Berkas berhasil dihapus.');
     }
 
     public function validatePersyaratan()
@@ -156,6 +149,59 @@ class KonfigurasiPersyaratan extends Component
             'required' => 'Nilai tidak boleh kosong.',
             'exists' => 'Jalur yang dipilih tidak valid.',
         ]);
+    }
+
+    private function savePersyaratan($isUpdate = false)
+    {
+        $persyaratanData = [
+            'nama_persyaratan' => $this->nama_persyaratan,
+            'id_jalur' => $this->id_jalur[0],
+            'deskripsi' => $this->deskripsi
+        ];
+
+        if ($isUpdate) {
+            $persyaratan = Persyaratan::findOrFail($this->persyaratanId);
+            $oldNamaPersyaratan = $persyaratan->nama_persyaratan;
+            $oldJalur = $persyaratan->jalurRegistrasi->nama_jalur;
+            $persyaratan->update($persyaratanData);
+            $this->updateKategoriBerkas($oldNamaPersyaratan, $oldJalur);
+        } else {
+            foreach (array_unique($this->id_jalur) as $idJalur) {
+                $persyaratanData['id_jalur'] = $idJalur;
+                Persyaratan::create($persyaratanData);
+                $this->createKategoriBerkas($idJalur);
+            }
+        }
+    }
+
+    private function createKategoriBerkas($idJalur)
+    {
+        $jalur = JalurRegistrasi::find($idJalur);
+        $slug = 'jalur_' . Str::slug($jalur->nama_jalur, '_');
+        KategoriBerkas::create([
+            'key' => $slug,
+            'nama' => $this->nama_persyaratan,
+            'folder_name' => "pendaftaran/persyaratan",
+            'accepted_file_types' => "pdf",
+            'max_file_size' => "2000",
+            'is_multiple' => false,
+            'disk' => "local",
+        ]);
+    }
+
+    private function updateKategoriBerkas($oldNamaPersyaratan, $oldJalur)
+    {
+        $jalur = JalurRegistrasi::find($this->id_jalur[0]);
+        $slug = 'jalur_' . Str::slug($jalur->nama_jalur, '_');
+        $kategoriBerkas = KategoriBerkas::where('key', 'jalur_' . Str::slug($oldJalur, '_'))
+                                        ->where('nama', $oldNamaPersyaratan)
+                                        ->first();
+        if ($kategoriBerkas) {
+            $kategoriBerkas->update([
+                'key' => $slug,
+                'nama' => $this->nama_persyaratan,
+            ]);
+        }
     }
 
     public function render()
