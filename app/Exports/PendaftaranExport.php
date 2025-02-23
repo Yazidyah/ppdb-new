@@ -71,17 +71,6 @@ class PendaftaranExport extends DefaultValueBinder implements
     {
         return [
             'A' => 10, // Kolom "No"
-            'B' => 30, // Kolom "Nama Siswa"
-            'C' => 20, // Kolom "Tempat Lahir"
-            'D' => 20, // Kolom "Tanggal Lahir"
-            'E' => 15, // Kolom "Jenis Kelamin"
-            'F' => 15, // Kolom "Rombe"
-            'G' => 30, // Kolom "Nama Orang Tua"
-            'H' => 20, // Kolom "Agama"
-            'I' => 25, // Kolom "Pekerjaan"
-            'J' => 25, // Kolom "Pendidikan"
-            'K' => 20, // Kolom "No. Telp"
-            'L' => 15, // Kolom "No Induk"
         ];
     }
 
@@ -89,17 +78,6 @@ class PendaftaranExport extends DefaultValueBinder implements
     {
         return [
             'No',
-            'Nama Siswa',
-            'Tempat Lahir',
-            'Tanggal Lahir',
-            'Jenis Kelamin',
-            'Rombe',
-            'Nama Orang Tua',
-            'Agama',
-            'Pekerjaan',
-            'Pendidikan',
-            'No. Telp',
-            'No Induk',
         ];
     }
     public function collection()
