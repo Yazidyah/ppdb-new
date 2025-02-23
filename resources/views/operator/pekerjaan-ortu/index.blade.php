@@ -3,7 +3,7 @@
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
             <div class="container mx-auto text-center pt-7">
                 <h2 class="font-bold text-[24px] pb-4">Daftar Pekerjaan Orang Tua</h2>
-                <button onclick="showCreateModal()" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Pekerjaan</button>
+                <button onclick="showCreateModal()" class="w-1/2 inline-flex justify-center items-center px-4 py-2 bg-tertiary border mb-6 border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-secondaryactive:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Tambah Pekerjaan</button>
                 <table class="table-auto w-full mt-4">
                     <thead>
                         <tr>
@@ -16,11 +16,11 @@
                             <tr>
                                 <td class="border px-4 py-2">{{ $item->nama_pekerjaan }}</td>
                                 <td class="border px-4 py-2 flex justify-center space-x-2">
-                                    <button onclick="showEditModal({{ $item->id_pekerjaan }}, '{{ $item->nama_pekerjaan }}')" class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
+                                    <button onclick="showEditModal({{ $item->id_pekerjaan }}, '{{ $item->nama_pekerjaan }}')" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                                     <form action="{{ route('pekerjaan-ortu.destroy', $item->id_pekerjaan) }}" method="post" onsubmit="return confirm('Are you sure?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+                                        <button type="submit" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -45,8 +45,8 @@
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah</button>
-                    <button type="button" onclick="hideCreateModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                    <button type="submit" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Tambah</button>
+                    <button type="button" onclick="hideCreateModal()" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Cancel</button>
                 </form>
             </div>
         </div>
@@ -67,8 +67,8 @@
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
-                    <button type="button" onclick="hideEditModal()" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+                    <button type="submit" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Update</button>
+                    <button type="button" onclick="hideEditModal()" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Cancel</button>
                 </form>
             </div>
         </div>
