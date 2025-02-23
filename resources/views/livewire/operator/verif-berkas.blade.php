@@ -1,7 +1,6 @@
 <div>
     <button wire:click="$set('modalOpen', true)"
         class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium transition-colors bg-white border rounded-md hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Verif</button>
-
     @if ($modalOpen)
         <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen">
             <div class="absolute inset-0 w-full h-full bg-white backdrop-blur-sm bg-opacity-70"
@@ -62,15 +61,18 @@
                     </table>
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
                         <label for="status" class="text-sm font-medium text-gray-700 text-left">Update Status</label>
-                        <select id="status" wire:model="status" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <select id="status" wire:model="status"
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                             <option value="" disabled>Pilih Status</option>
                             <option value="3">Tidak Lolos</option>
                             <option value="4">Lolos</option>
                         </select>
                     </div>
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
-                        <label for="sesi_bq_wawancara" class="text-sm font-medium text-gray-700 text-left">Sesi BQ & Wawancara</label>
-                        <select id="sesi_bq_wawancara" wire:model="sesi_bq_wawancara" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <label for="sesi_bq_wawancara" class="text-sm font-medium text-gray-700 text-left">Sesi BQ &
+                            Wawancara</label>
+                        <select id="sesi_bq_wawancara" wire:model="sesi_bq_wawancara"
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                             <option value="">Tidak dijadwalkan</option>
                             @foreach ($jadwalTesBqWawancara as $jadwalBq)
                                 <option value="{{ $jadwalBq['id'] }}">{{ $jadwalBq['label'] }}</option>
@@ -78,8 +80,10 @@
                         </select>
                     </div>
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
-                        <label for="sesi_japres_tes_akademik" class="text-sm font-medium text-gray-700 text-left">Sesi Japres/Tes Akademik</label>
-                        <select id="sesi_japres_tes_akademik" wire:model="sesi_japres_tes_akademik" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                        <label for="sesi_japres_tes_akademik" class="text-sm font-medium text-gray-700 text-left">Sesi
+                            Japres/Tes Akademik</label>
+                        <select id="sesi_japres_tes_akademik" wire:model="sesi_japres_tes_akademik"
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
                             <option value="">Tidak dijawdalkan</option>
                             @foreach ($jadwalTesJapresTesAkademik as $jadwalJa)
                                 <option value="{{ $jadwalJa['id'] }}">{{ $jadwalJa['label'] }}</option>
