@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\JadwalTes;
 use App\Models\DataTes;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class VerifBerkas extends Component
 {
@@ -95,8 +96,39 @@ class VerifBerkas extends Component
         $this->updateRegistrasiStatus();
         $this->processDataTes();
 
+        // Send email notification
+        if ($this->status == 4) {
+            Mail::raw('Selamat kamu lolos', function ($message) {
+                $message->to($this->siswa->user->email)
+                        ->subject('Hasil Verifikasi Berkas');
+            });
+        } elseif ($this->status == 3) {
+            $missingDocuments = $this->getMissingDocuments();
+            $messageBody = "Maaf, Kamu belum lolos verifikasi berkas karena tidak mengupload berkas: " . implode(', ', $missingDocuments);
+            Mail::raw($messageBody, function ($message) {
+                $message->to($this->siswa->user->email)
+                        ->subject('Hasil Verifikasi Berkas');
+            });
+        }
+
         $this->modalOpen = false;
         return redirect(request()->header('Referer'));
+    }
+
+    /**
+     * Get the list of missing documents.
+     *
+     * @return array
+     */
+    protected function getMissingDocuments()
+    {
+        $missingDocuments = [];
+        foreach ($this->syarat as $item) {
+            if ($item->berkas->where('uploader_id', $this->siswa->id_user)->isEmpty()) {
+                $missingDocuments[] = $item->nama_persyaratan;
+            }
+        }
+        return $missingDocuments;
     }
 
     /**
