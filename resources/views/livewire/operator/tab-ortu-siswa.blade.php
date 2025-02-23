@@ -37,27 +37,27 @@
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-left">
                         <div>
-                            <p class="text-sm font-medium">Nama Lengkap</p>
-                            <p class="text-base">{{ @$ortu->nama_lengkap ?? 'Belum Di Lengkapi' }}</p>
+                            <label class="text-xs font-medium">Nama Lengkap</label>
+                            <input type="text" value="{{ ucfirst($ortu->nama_lengkap) }}" class="border p-2 w-full">
                         </div>
                         <div>
-                            <p class="text-sm font-medium">NIK</p>
-                            <p class="text-base">{{ @$ortu->nik ?? 'Belum Di Lengkapi' }}</p>
+                            <label class="text-xs font-medium">NIK</label>
+                            <input type="text" value="{{ $ortu->nik ?? 'Belum Di Lengkapi' }}" class="border p-2 w-full">
                         </div>
                         <div>
-                            <p class="text-sm font-medium">Pekerjaan</p>
-                            <p class="text-base">{{ @$ortu->kerjaan->nama_pekerjaan ?? 'Belum Di Lengkapi' }}</p>
+                            <label class="text-xs font-medium">Pekerjaan</label>
+                            <input type="text" value="{{ $ortu->kerjaan->nama_pekerjaan ?? 'Belum Di Lengkapi' }}" class="border p-2 w-full">
                         </div>
                         <div>
-                            <p class="text-sm font-medium">No Telpon</p>
-                            <p class="text-base">{{ @$ortu->no_telp ?? 'Belum Di Lengkapi' }}</p>
+                            <label class="text-xs font-medium">No Telpon</label>
+                            <input type="text" value="{{ $ortu->no_telp ?? 'Belum Di Lengkapi' }}" class="border p-2 w-full">
                         </div>
                     </div>
                 </div>
             @empty
                 <p class="text-sm text-gray-500">Tidak ada data orang tua.</p>
             @endforelse
-
+        </div>
         </div>
     </div>
 </div>
