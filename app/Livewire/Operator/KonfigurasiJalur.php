@@ -28,24 +28,9 @@ class KonfigurasiJalur extends Component
 
     public function store()
     {
-        $this->validate([
-            'nama_jalur' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'tanggal_buka' => 'required|date',
-            'tanggal_tutup' => 'required|date|after:tanggal_buka',
-            'is_open' => 'required|boolean',
-        ],[
-            'required' => 'Nilai tidak boleh kosong.',
-            'after' => 'Tanggal tutup tidak boleh lebih dari tanggal buka.',
-        ]);
+        $this->validateData();
 
-        JalurRegistrasi::create([
-            'nama_jalur' => $this->nama_jalur,
-            'deskripsi' => $this->deskripsi,
-            'tanggal_buka' => $this->tanggal_buka,
-            'tanggal_tutup' => $this->tanggal_tutup,
-            'is_open' => $this->is_open,
-        ]);
+        JalurRegistrasi::create($this->getInputData());
 
         session()->flash('success', 'Jalur Registrasi berhasil ditambahkan.');
         $this->closeModal();
@@ -55,12 +40,7 @@ class KonfigurasiJalur extends Component
     public function edit($id)
     {
         $jalur = JalurRegistrasi::findOrFail($id);
-        $this->jalurId = $jalur->id_jalur;
-        $this->nama_jalur = $jalur->nama_jalur;
-        $this->deskripsi = $jalur->deskripsi;
-        $this->tanggal_buka = $jalur->tanggal_buka;
-        $this->tanggal_tutup = $jalur->tanggal_tutup;
-        $this->is_open = $jalur->is_open;
+        $this->fillInputFields($jalur);
 
         $this->isEdit = true;
         $this->openModal();
@@ -68,25 +48,10 @@ class KonfigurasiJalur extends Component
 
     public function update()
     {
-        $this->validate([
-            'nama_jalur' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
-            'tanggal_buka' => 'required|date',
-            'tanggal_tutup' => 'required|date|after:tanggal_buka',
-            'is_open' => 'required|boolean',
-        ],[
-            'required' => 'Nilai tidak boleh kosong.',
-            'after' => 'Tanggal tutup tidak boleh lebih dari tanggal buka.',
-        ]);
+        $this->validateData();
 
         $jalur = JalurRegistrasi::findOrFail($this->jalurId);
-        $jalur->update([
-            'nama_jalur' => $this->nama_jalur,
-            'deskripsi' => $this->deskripsi,
-            'tanggal_buka' => $this->tanggal_buka,
-            'tanggal_tutup' => $this->tanggal_tutup,
-            'is_open' => $this->is_open,
-        ]);
+        $jalur->update($this->getInputData());
 
         session()->flash('success', 'Jalur Registrasi berhasil diperbarui.');
         $this->closeModal();
@@ -117,7 +82,42 @@ class KonfigurasiJalur extends Component
         $this->deskripsi = '';
         $this->tanggal_buka = '';
         $this->tanggal_tutup = '';
-        $this->is_open = '';
+        $this->is_open = null;
         $this->jalurId = null;
+    }
+
+    private function fillInputFields($jalur)
+    {
+        $this->jalurId = $jalur->id_jalur;
+        $this->nama_jalur = $jalur->nama_jalur;
+        $this->deskripsi = $jalur->deskripsi;
+        $this->tanggal_buka = $jalur->tanggal_buka;
+        $this->tanggal_tutup = $jalur->tanggal_tutup;
+        $this->is_open = $jalur->is_open ? '1' : '0';
+    }
+
+    private function validateData()
+    {
+        $this->validate([
+            'nama_jalur' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'tanggal_buka' => 'required|date',
+            'tanggal_tutup' => 'required|date|after:tanggal_buka',
+            'is_open' => 'required|boolean',
+        ],[
+            'required' => 'Nilai tidak boleh kosong.',
+            'after' => 'Tanggal tutup tidak boleh lebih dari tanggal buka.',
+        ]);
+    }
+
+    private function getInputData()
+    {
+        return [
+            'nama_jalur' => $this->nama_jalur,
+            'deskripsi' => $this->deskripsi,
+            'tanggal_buka' => $this->tanggal_buka,
+            'tanggal_tutup' => $this->tanggal_tutup,
+            'is_open' => $this->is_open,
+        ];
     }
 }
