@@ -23,6 +23,11 @@ class PersyaratanSeeder extends Seeder
                 'id_jalur' => 1, 
                 'nama_persyaratan' => 'Rapot',
                 'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah'
+            ],
+            [
+                'id_jalur' => 1, 
+                'nama_persyaratan' => 'Kartu Pelajar',
+                'deskripsi' => 'kartu Pelajar dari sekolah menengah pertama atau madrasah tsanawiyah'
             ]
         ]);
     }

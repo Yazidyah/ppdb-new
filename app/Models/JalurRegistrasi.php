@@ -23,4 +23,9 @@ class JalurRegistrasi extends Model
     {
         return $this->hasMany(Persyaratan::class, 'id_jalur', 'id_jalur');
     }
+
+    public function jenisTes()
+    {
+        return $this->hasMany(JenisTes::class, 'id_jalur', 'id_jalur');
+    }
 }
