@@ -14,8 +14,9 @@ use App\Livewire\Siswa\StepSatu;
 use App\Http\Controllers\PekerjaanOrangTuaController;
 use App\Http\Controllers\Operator\VerifOpController;
 use App\Livewire\Operator\StatusAcc;
-use App\Livewire\Operator\KonfigurasiTes;
+use App\Livewire\Operator\KonfigurasiPersyaratan;
 use App\Livewire\Operator\KonfigurasiJalur;
+use App\Livewire\Operator\KonfigurasiTes;
 
 use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
@@ -111,7 +112,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/data-tidaklulus', [OperatorController::class, 'showsiswaTidakLulus'])->name('operator.data-tidaklulus');
     Route::get('/operator/Lulus/{id}', [OperatorController::class, 'lulus'])->name('operator.lulus');
     Route::get('/operator/TidakLulus/{id}', [OperatorController::class, 'tidaklulus'])->name('operator.tidaklulus');
-    Route::get('/operator/tambah-persyaratan', [OperatorController::class, 'showPersyaratan'])->name('operator.show-persyaratan');
+    // Route::get('/operator/tambah-persyaratan', [OperatorController::class, 'showPersyaratan'])->name('operator.show-persyaratan');
     Route::get('/operator/edit-persyaratan/{id}', [OperatorController::class, 'editPersyaratan'])->name('operator.edit-persyaratan');
     Route::post('/operator/update-persyaratan/{id}', [OperatorController::class, 'updatePersyaratan'])->name('operator.update-persyaratan');
     Route::resource('operta/pekerjaan-ortu', PekerjaanOrangTuaController::class);
@@ -126,6 +127,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::post('/operator/update-verif-status', [VerifOpController::class, 'updateVerifStatus'])->name('operator.updateVerifStatus');
     Route::get('/operator/get-status-verif/{id}', [VerifOpController::class, 'getStatusVerif'])->name('operator.getStatusVerif');
     Route::get('/operator/status-acc/{id}', StatusAcc::class)->name('operator.status-acc');
+    Route::get('/operator/konfigurasi-persyaratan', KonfigurasiPersyaratan::class)->name('operator.konfigurasi-persyaratan');
     Route::get('/operator/konfigurasi-jalur', KonfigurasiJalur::class)->name('operator.konfigurasi-jalur');
     Route::get('/operator/konfigurasi-tes', KonfigurasiTes::class)->name('operator.konfigurasi-tes');
 });

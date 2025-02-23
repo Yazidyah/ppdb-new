@@ -11,75 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class OperatorController extends Controller
 {
-    public function tambahpersyaratan(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'nama_persyaratan' => 'required|string|max:255',
-            'id_jalur' => 'required|array',
-            'id_jalur.*' => 'integer|exists:jalur_registrasi,id_jalur',
-            'deskripsi' => 'nullable|string',
-        ], [
-            'required' => 'Nilai tidak boleh kosong.',
-            'exists' => 'Jalur yang dipilih tidak valid.',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $jalurIds = array_unique($request->input('id_jalur'));
-        foreach ($jalurIds as $idJalur) {
-            Persyaratan::create([
-                'nama_persyaratan' => $request->input('nama_persyaratan'),
-                'id_jalur' => $idJalur,
-                'deskripsi' => $request->input('deskripsi')
-            ]);
-        }
-        return redirect()->route('operator.show-persyaratan')->with('success', 'Persyaratan berhasil ditambahkan.');
-    }
-
-    public function editPersyaratan($id)
-    {
-        $persyaratan = Persyaratan::findOrFail($id);
-        $jalurRegistrasi = JalurRegistrasi::all();
-        return response()->json(['persyaratan' => $persyaratan, 'jalurRegistrasi' => $jalurRegistrasi]);
-    }
-
-    public function updatePersyaratan(Request $request, $id)
-    {
-        $validator = Validator::make($request->all(), [
-            'nama_persyaratan' => 'required|string|max:255',
-            'id_jalur' => 'required|array',
-            'id_jalur.*' => 'integer|exists:jalur_registrasi,id_jalur',
-            'deskripsi' => 'nullable|string',
-        ], [
-            'required' => 'Nilai tidak boleh kosong.',
-            'exists' => 'Jalur yang dipilih tidak valid.',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        $jalurIds = array_unique($request->input('id_jalur'));
-        $persyaratan = Persyaratan::findOrFail($id);
-        $persyaratan->update([
-            'nama_persyaratan' => $request->input('nama_persyaratan'),
-            'id_jalur' => $jalurIds[0], // Assuming only one id_jalur is needed for update
-            'deskripsi' => $request->input('deskripsi')
-        ]);
-
-        return redirect()->route('operator.show-persyaratan')->with('success', 'Persyaratan berhasil diperbarui.');
-    }
-
-    public function deletepersyaratan($id)
-    {
-        $persyaratan = Persyaratan::findOrFail($id);
-        $persyaratan->delete();
-
-        return redirect()->back()->with('success', 'Persyaratan berhasil dihapus.');
-    }
-
 
     public function showsiswa(Request $request)
     {
@@ -131,30 +62,6 @@ class OperatorController extends Controller
         })->get();
 
         return view('operator.data-lulus', compact('data'));
-    }
-
-    public function showPersyaratan(Request $request)
-    {
-        $filterJalur = $request->input('filter_jalur');
-        $query = Persyaratan::query();
-
-        if ($filterJalur) {
-            $query->where('id_jalur', $filterJalur);
-        }
-
-        $persyaratan = $query->orderBy('id_jalur', 'asc')->get();
-        $jalurRegistrasi = JalurRegistrasi::all();
-        return view('operator.tambah-persyaratan', compact('persyaratan', 'jalurRegistrasi'));
-    }
-
-    private function validatePersyaratan(Request $request)
-    {
-        return Validator::make($request->all(), [
-            'nama_persyaratan' => 'required|string|max:255',
-            'id_jalur' => 'required|array',
-            'id_jalur.*' => 'integer|in:1,2,3,4',
-            'deskripsi' => 'nullable|string',
-        ]);
     }
 
     private function buildSiswaQuery(Request $request)

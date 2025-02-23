@@ -32,7 +32,7 @@ switch ($userRole){
     $redirectUrlls = 'operator.data-lulus';
     $redirectUrstep1 = 'operator.data-lulus';
     $redirectUrstep2 = 'operator.data-lulus';
-    $redirectUrlsyarat = 'operator.tambah-persyaratan';
+    $redirectUrlsyarat = 'operator.konfigurasi-persyaratan';
     $redirectUrljalur = 'operator.konfigurasi-jalur';
     $redirectUrlpot = 'pekerjaan-ortu.index';
     $redirectUrltes = 'operator.konfigurasi-tes';
