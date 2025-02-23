@@ -195,22 +195,22 @@ class BiodataSiswa extends Component
 
     public function searchByNpsn()
     {
+        $this->npsn = preg_replace('/\s+/', '', $this->npsn); // Remove spaces
         $baseUrl = env('NPSN_API_BASE_URL');
         $url = "{$baseUrl}{$this->npsn}";
         $data = $this->fetchNpsnFromHtml($url);
         if ($data['npsn']) {
-            if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs'])) {
+            if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs', 'PKBM'])) {
                 $this->addError('sekolah_asal', 'Tingkat pendidikan harus SMP atau MTs');
                 $this->npsn = '';
                 return;
             }
             if (!$this->getErrorBag()->has('sekolah_asal')) {
                 $this->siswa->NPSN = $this->npsn;
-                $this->siswa->status_sekolah = $data['status_sekolah'];
+                $this->siswa->status_sekolah = strtolower($data['status_sekolah']);
                 $this->siswa->sekolah_asal = strtolower($data['nama_sekolah']);
                 $this->sekolah_asal = strtolower($data['nama_sekolah']);
                 $this->siswa->save();
-                // $this->updatedSekolahAsal($data['nama_sekolah']);
             }
         } else {
             $this->addError('npsn', 'NPSN not found');

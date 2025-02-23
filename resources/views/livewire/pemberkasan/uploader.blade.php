@@ -6,7 +6,7 @@
     <div class="grid gap-2 mb-2 ">
         @if ($uploaded != null)
             @foreach ($uploaded as $upl)
-                @livewire('pemberkasan.berkas', ['berkas' => $upl, 'editable' => $editable], key($upl->id))
+                @livewire('operator.berkas', ['berkas' => $upl, 'editable' => $editable, 'verifikasi' => true], key($upl->id))
             @endforeach
         @else
             <div class="py-2 text-xs text-center text-gray-600 border">Belum ada berkas diunggah</div>

@@ -13,17 +13,19 @@ class TabNilaiSiswa extends Component
     public $averageScores;
     public $grandAverageScore;
 
+    public $data_registrasi;
+
     public function mount()
     {
         $this->data_registrasi = DataRegistrasi::where('id_calon_siswa', $this->siswa->id_calon_siswa)->first();
-        
+
         $this->rapotData = Rapot::where('id_registrasi', $this->data_registrasi->id_registrasi)->get()->map(function ($rapot) {
-            $nilaiRapot = $rapot->nilai_rapot;
+            $nilaiRapot = $rapot->nilai_rapot ?? [];
             return array_map(function ($item) {
-                return [
-                    'semester' => $item['semester'] ?? 'Unknown',
-                    'data' => $item['data'] ?? []
-                ];
+            return [
+                'semester' => $item['semester'] ?? 'Unknown',
+                'data' => $item['data'] ?? []
+            ];
             }, $nilaiRapot);
         })->flatten(1)->toArray();
 

@@ -11,12 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_berkas', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('id_berkas')->nullable();
-            $table->string('data_berkas')->nullable();
-            $table->timestamps();
-        });
+        schema::dropIfExists('data_berkas');
     }
 
     /**
@@ -24,6 +19,11 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_berkas');
+        Schema::create('data_berkas', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('id_berkas')->nullable();
+            $table->string('data_berkas')->nullable();
+            $table->timestamps();
+        });
     }
 };
