@@ -45,10 +45,6 @@
                     @livewire('dokumen.rapot-modal', ['t' => $tab, 'regis' => $user->registrasi], key($user->id . '-rapot-' . rand()))
                 </div>
 
-                <div>
-                    @livewire('dokumen.berkas-modal', ['t' => $tab, 'regis' => $user->registrasi], key($user->id . '-berkas-' . rand()))
-                </div>
-
                 <div
                     class="navigation-buttons justify-center flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
                     <button wire:click="submit"
