@@ -15,6 +15,7 @@ use App\Http\Controllers\PekerjaanOrangTuaController;
 use App\Http\Controllers\Operator\VerifOpController;
 use App\Livewire\Operator\StatusAcc;
 use App\Livewire\Operator\KonfigurasiTes;
+use App\Livewire\Operator\KonfigurasiJalur;
 
 use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
@@ -113,15 +114,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/tambah-persyaratan', [OperatorController::class, 'showPersyaratan'])->name('operator.show-persyaratan');
     Route::get('/operator/edit-persyaratan/{id}', [OperatorController::class, 'editPersyaratan'])->name('operator.edit-persyaratan');
     Route::post('/operator/update-persyaratan/{id}', [OperatorController::class, 'updatePersyaratan'])->name('operator.update-persyaratan');
-    Route::get('/operator/tambah-jalur', function () {
-        return view('operator.tambah-jalur');
-    })->name('operator.tambah-jalur');
-    Route::get('/operator/tambah-jalur', [OperatorController::class, 'showJalur'])->name('operator.show-jalur');
-    Route::post('/operator/tambah-jalur', [OperatorController::class, 'tambahJalur'])->name('operator.tambah-jalur');
-    Route::post('/operator/delete-jalur/{id}', [OperatorController::class, 'deleteJalur'])->name('operator.delete-jalur');
-    Route::get('/operator/edit-jalur/{id}', [OperatorController::class, 'editJalur'])->name('operator.edit-jalur');
-    Route::post('/operator/update-jalur/{id}', [OperatorController::class, 'updateJalur'])->name('operator.update-jalur');
-    Route::resource('pekerjaan-ortu', PekerjaanOrangTuaController::class);
+    Route::resource('operta/pekerjaan-ortu', PekerjaanOrangTuaController::class);
     Route::get('/operator/tambah-pekerjaan-ortu', function () {
         return redirect()->route('pekerjaan-ortu.index');
     })->name('operator.tambah-pekerjaan-ortu');
@@ -133,6 +126,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::post('/operator/update-verif-status', [VerifOpController::class, 'updateVerifStatus'])->name('operator.updateVerifStatus');
     Route::get('/operator/get-status-verif/{id}', [VerifOpController::class, 'getStatusVerif'])->name('operator.getStatusVerif');
     Route::get('/operator/status-acc/{id}', StatusAcc::class)->name('operator.status-acc');
+    Route::get('/operator/konfigurasi-jalur', KonfigurasiJalur::class)->name('operator.konfigurasi-jalur');
     Route::get('/operator/konfigurasi-tes', KonfigurasiTes::class)->name('operator.konfigurasi-tes');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
