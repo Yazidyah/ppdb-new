@@ -17,6 +17,7 @@ use App\Livewire\Operator\StatusAcc;
 use App\Livewire\Operator\KonfigurasiPersyaratan;
 use App\Livewire\Operator\KonfigurasiJalur;
 use App\Livewire\Operator\KonfigurasiTes;
+use App\Livewire\Operator\DatasiswaModal;
 
 use App\Livewire\Registrasi\StepDua;
 use App\Livewire\Dokumen\StepTiga;
@@ -130,6 +131,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/konfigurasi-persyaratan', KonfigurasiPersyaratan::class)->name('operator.konfigurasi-persyaratan');
     Route::get('/operator/konfigurasi-jalur', KonfigurasiJalur::class)->name('operator.konfigurasi-jalur');
     Route::get('/operator/konfigurasi-tes', KonfigurasiTes::class)->name('operator.konfigurasi-tes');
+    Route::get('/operator/datasiswa-modal', DatasiswaModal::class)->name('operator.datasiswa-modal');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');

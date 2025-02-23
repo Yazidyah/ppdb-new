@@ -210,5 +210,29 @@ switch ($userRole){
     @yield('content')
 </main>
 @livewireScripts
+<script>
+    window.setTab = function(tab) {
+        // Hilangkan kelas aktif dari semua tombol tab
+        document.querySelectorAll('button[onclick^="setTab"]').forEach(button => {
+            button.classList.remove('text-indigo-700', 'border-indigo-500');
+            button.classList.add('text-gray-400', 'border-white');
+        });
+
+        // Tambahkan kelas aktif pada tombol yang dipilih
+        const activeButton = document.querySelector(`button[onclick="setTab('${tab}')"]`);
+        if (activeButton) {
+            activeButton.classList.add('text-indigo-700', 'border-indigo-500');
+            activeButton.classList.remove('text-gray-400', 'border-white');
+        }
+
+        // Sembunyikan semua konten tab
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.style.display = 'none';
+        });
+
+        // Tampilkan konten tab yang aktif
+        document.getElementById(`${tab}-content`).style.display = 'block';
+    }
+</script>
 </body>
 </html>
