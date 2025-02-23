@@ -39,7 +39,12 @@ class PendaftaranExport extends DefaultValueBinder implements
     public function bindValue(Cell $cell, $value)
     {
         // Jika kolom adalah nomor telepon, set sebagai string
-        if ($cell->getColumn() === 'K') { // 'K' adalah kolom "No Telp"
+        if ($cell->getColumn() === 'J') { // 'J' adalah kolom "No Telp"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
+        if ($cell->getColumn() === 'K') { // 'K' adalah kolom "NIK"
             $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
             return true;
         }
@@ -61,7 +66,7 @@ class PendaftaranExport extends DefaultValueBinder implements
 
         return [
             1 => [
-                'font' => ['bold' => false],
+                'font' => ['bold' => true],
                 'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
             ],
         ];
@@ -70,14 +75,40 @@ class PendaftaranExport extends DefaultValueBinder implements
     public function columnWidths(): array
     {
         return [
-            'A' => 10, // Kolom "No"
+            'A' => 10,
+            'B' => 20,
+            'C' => 20,
+            'D' => 20,
+            'E' => 20,
+            'F' => 20,
+            'G' => 20,
+            'H' => 20,
+            'I' => 20,
+            'J' => 20,
+            'K' => 20,
+            'L' => 20,
+            'M' => 20,
+            'O' => 20,
         ];
     }
 
     public function headings(): array
     {
         return [
-            'No',
+            'No', //A
+            'Jalur', //B
+            'NISN', //c
+            'No. Pendaftaran', //D
+            'Sekolah Asal', //E
+            'Nama', //F
+            'POB', //G
+            'DOB', //H
+            'Email', //I
+            'Telp', //J
+            'NIK', //K
+            'Gender', //L
+            'Alamat', //M
+            'Domisili', //O
         ];
     }
     public function collection()
