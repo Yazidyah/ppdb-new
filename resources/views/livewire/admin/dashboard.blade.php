@@ -6,10 +6,10 @@
                 <ul>
                     <li class="mb-2">
                         <button wire:click="$set('tab', 1)">
-                            <span @class([
-                                'block px-4 py-2',
+                            <span  @class([
+                                'block px-4 py-2 flex items-center p-2 rounded-lg  hover:bg-white hover:text-tertiary group',
                                 'text-white' => $tab != 1,
-                                'text-white bg-primary' => $tab == 1,
+                                'text-tertiary bg-white ' => $tab == 1,
                             ])>
                                 Dashboard
                             </span>
@@ -18,9 +18,9 @@
                     <li class="mb-2">
                         <button wire:click="$set('tab', 2)">
                             <span @class([
-                                'block px-4 py-2',
+                                'block px-4 py-2 flex items-center p-2 rounded-lg  hover:bg-white hover:text-tertiary group',
                                 'text-white' => $tab != 2,
-                                'text-white bg-primary' => $tab == 2,
+                                'text-tertiary bg-white ' => $tab == 2,
                             ])>
                                 Data Pendaftaran
                             </span>
@@ -29,9 +29,9 @@
                     <li class="mb-2">
                         <button wire:click="$set('tab', 3)">
                             <span @class([
-                                'block px-4 py-2',
+                                'block px-4 py-2 flex items-center p-2 rounded-lg  hover:bg-white hover:text-tertiary group',
                                 'text-white' => $tab != 3,
-                                'text-white bg-primary' => $tab == 3,
+                                'text-tertiary bg-white ' => $tab == 3,
                             ])>
                                 Kelola Operator
                             </span>
@@ -44,9 +44,11 @@
     </div>
 
     <!-- Main Content -->
-    <div class="ml-64 p-10">
         @if ($tab === 1)
-            <div class="bg-gray-100 py-10 w-[1460px]">
+        <div class="p-4 sm:ml-64">
+        <div class="p-4 border-2 border-gray-700 border-dashed rounded-lg  mt-14">
+            <div class="container mx-auto text-center pt-7">
+            <div class="bg-gray-100 py-10">
                 <h2 class="text-2xl font-bold mb-6 text-center">Data Pendaftaran</h2>
                 <div class="flex justify-center">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 ">
@@ -204,6 +206,9 @@
                     </div>
                 </div>
             </div>
+            </div>
+            </div>
+            </div>
         @endif
 
         @if ($tab == 2)
@@ -213,5 +218,6 @@
         @if ($tab == 3)
             @livewire('admin.data-operator', key('data-operator' . rand()))
         @endif
+    </div>
     </div>
 </div>

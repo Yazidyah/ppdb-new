@@ -1,8 +1,9 @@
 <div>
     {{-- The best athlete wants his opponent at his best. --}}
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14  w-[1460px]">
-        <div class="container mx-auto">
-            <div class="overflow-x-auto rounded-lg shadow-sm">
+    <div class="p-4 sm:ml-64">
+        <div class="p-4 border-2 border-gray-700 border-dashed rounded-lg  mt-14">
+    <div class="container mx-auto">
+        <div class="overflow-x-auto rounded-lg shadow-sm">
                 <table class="w-full text-sm text-left text-gray-500">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>
@@ -51,4 +52,6 @@
             </div>
         </div>
     </div>
+    </div>
+    
 </div>

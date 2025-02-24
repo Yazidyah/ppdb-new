@@ -1,6 +1,6 @@
 <div>
     <div class="p-4 sm:ml-64">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <div class="p-4 border-2 border-gray-700 border-dashed rounded-lg mt-14">
             <div class="container mx-auto text-center pt-7">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -85,7 +85,7 @@
                                     <x-reg-input-label for="deskripsi" :value="__('Deskripsi')" />
                                 </div>
                                 <div class="py-1 flex items-center justify-left col-span-3">
-                                    <div class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2">
+                                    <div class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                         <textarea wire:model="deskripsi" id="deskripsi" autocomplete="deskripsi" class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full h-full"></textarea>
                                     </div>
                                 </div>
@@ -109,7 +109,7 @@
                                 </div>
 
                                 <div class="py-1 flex items-center justify-left col-span-3">
-                                    <select wire:model="is_open" id="is_open" class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2">
+                                    <select wire:model="is_open" id="is_open" class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                         <option disabled="disabled" value="">Pilih Status</option>
                                         <option value="1">Buka</option>
                                         <option value="0">Tutup</option>
@@ -120,7 +120,9 @@
                         </div>
                         <x-primary-button class="mb-2 mx-auto w-full justify-center items-center">{{ $isEdit ? 'Update' : 'Submit' }}</x-primary-button>
                     </form>
-                    <button wire:click="closeModal" class="mt-4 px-4 py-2 bg-red-500 justify-center flex text-white rounded-lg">Tutup</button>
+                    <div class="flex justify-center">
+                        <button wire:click="closeModal" class="mt-4 px-4 py-2 bg-red-900 hover:bg-red-500 justify-center flex text-white rounded-lg">Tutup</button>
+                    </div>
                 </div>
             </div>
         </div>

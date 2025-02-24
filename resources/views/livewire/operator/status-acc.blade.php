@@ -15,8 +15,8 @@
                     </select>
                     <div class="flex justify-end">
                         <button type="button" wire:click="$set('modalOpen', false)"
-                            class="px-4 py-2 bg-gray-500 text-white rounded-lg mr-2">Batal</button>
-                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg">Simpan</button>
+                            class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded mr-2">Batal</button>
+                        <button type="submit" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Simpan</button>
                     </div>
                 </form>
             </div>

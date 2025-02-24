@@ -5,16 +5,23 @@
 switch ($userRole){
     //Admin
     case 'admin':
-        $redirectUrl = 'admin.dashboard';
+    $redirectUrl = 'admin.dashboard';
     $redirectUrlp = 'admin.persyaratan';
     $redirectUrlk = 'admin.alur-pendaftaran';
+    $redirectUrlpk = 'admin.data-afirmasi-prestasi';
     $redirectUrlpk = 'admin.data-afirmasi-prestasi';
     $redirectUrlc = 'admin.data-afirmasi-abk';
     $redirectUrlrr = 'admin.data-afirmasi-ketm';
     $redirectUrldk = 'admin.data-tidaklulus';
     $redirectUrlst = 'admin.data-reguler';
-    $redirectUrls = 'admin.datasiswa';
-    $redirectUrlls = 'admin.data-lulus';
+    $redirectUrls = 'admin.dashboard';
+    $redirectUrlls = 'admin.dashboard';
+    $redirectUrstep1 = 'admin.dashboard';
+    $redirectUrstep2 = 'admin.dashboard';
+    $redirectUrlsyarat = 'admin.dashboard';
+    $redirectUrljalur = 'admin.dashboard';
+    $redirectUrlpot = 'pekerjaan-ortu.index';
+    $redirectUrltes = 'admin.dashboard';
     # $redirectUrlcrud = 'admin.tambah-persyaratan';
     break;
     //Pembina
@@ -62,9 +69,9 @@ switch ($userRole){
        
             
                 <!-- Logo -->
-                <div x-data="{cheat:false}" class="flex items-center gap-1 justify- px-6">
+                <div x-data="{cheat:false}" class="flex items-center gap-1 justify-center px-6">
                     <a href={{ route($redirectUrl) }}>
-                        <x-application-logo class=" h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class=" h-9 w-auto fill-current text-gray-800 " />
                     </a>
 
 </div>

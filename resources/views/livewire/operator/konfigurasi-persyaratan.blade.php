@@ -1,6 +1,6 @@
 <div>
     <div class="p-4 sm:ml-64">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+        <div class="p-4 border-2 border-gray-700 border-dashed rounded-lg  mt-14">
             <div class="container mx-auto text-center pt-7">
                 @if ($showModal)
                     <div class="fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50" wire:key="modal-{{ $isEdit ? 'edit' : 'create' }}">
@@ -18,7 +18,7 @@
                                     </svg>
                                     <h1
                                         class="block text-xs lg:text-base items-center text-center justify-center font-semibold">
-                                        Peringatan: Isi Kegiatan dengan data yang benar.</h1>
+                                        Peringatan: Isi Dokumen yang diperlukan.</h1>
                                 </div>
                                 @if (session('success'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -52,7 +52,7 @@
                                             @if ($isEdit)
                                                 <div class="py-1 flex items-center justify-left col-span-3">
                                                     <select wire:model="id_jalur.0" wire:key="select-id_jalur-{{ $persyaratanId ?? 'new' }}"
-                                                        class="w-full rounded-md shadow-sm ring-1 ring-dasar2 focus:ring-2">
+                                                        class="w-full rounded-md shadow-sm ring-1 ring-tertiary focus:ring-2">
                                                         @foreach ($jalurRegistrasi as $jalur)
                                                             <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
                                                         @endforeach
@@ -80,7 +80,7 @@
                                             </div>
                                             <div class="py-1 flex items-center justify-left col-span-3">
                                                 <div
-                                                    class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2">
+                                                    class="w-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                                     <textarea wire:model="deskripsi" name="deskripsi" id="deskripsi"
                                                         autocomplete="deskripsi"
                                                         class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full h-full"
@@ -99,11 +99,10 @@
                     </div>
                 @endif
                 <div class="container mx-auto mt-10">
-                    
                     <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
                     <div class="mb-4 flex justify-between">
                         <select wire:model="filterJalur"
-                            class="w-1/4 flex rounded-md shadow-sm ring-1 ring-inset ring-dasar2 focus-within:ring-2 focus-within:ring-inset focus-within:ring-dasar2"
+                            class="w-1/4 flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary"
                             onchange="window.location.href='{{ route('operator.konfigurasi-persyaratan') }}?filter_jalur=' + (this.value ? this.value : 'Semua%20Jalur')">
                             <option value="">Semua Jalur</option>
                             @foreach ($jalurRegistrasi as $jalur)
@@ -111,7 +110,7 @@
                             @endforeach
                         </select>
                         <div
-                            class="w-1/4 inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                            class="w-1/4 inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                             <button wire:click="openModal(false)"
                                 class="text-center flex justify-center items-center w-full">TAMBAH PERSYARATAN</button>
                         </div>
