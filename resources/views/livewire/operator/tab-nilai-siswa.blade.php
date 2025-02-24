@@ -1,15 +1,3 @@
-<style>
-    .progress-bar {
-        background: repeating-linear-gradient(
-            45deg,
-            #2f855a,
-            #2f855a 10px,
-            #38a169 10px,
-            #38a169 20px
-        );
-        opacity: 0.8;
-    }
-</style>
 <div>
     <div class="p-8 bg-white rounded-lg">
         <div>
@@ -29,28 +17,22 @@
                     <h3 class="font-semibold text-left">Semester {{ $rapot['semester'] }}</h3>
                     <div class="mb-4 text-left">
                         <label class="font-medium">Rata-rata Nilai:</label>
-                        <span class="text-gray-700">{{ $averageScores[$index] }}</span>
+                        <span class="text-gray-700">{{ $averageScores[$index] ?? 0 }}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-4 mt-2">
                         <ul>
-                            @foreach(array_slice($rapot['data'], 0, 3) as $subject => $score)
+                            @foreach(array_slice($rapot['data'], 0, 3, true) as $subject => $score)
                                 <li class="text-left">
                                     <div class="font-bold">{{ strtoupper(str_replace('_', ' ', $subject)) }}</div>
-                                    <input type="number" value="{{ $score }}" class="w-full p-2 border rounded" />
-                                    <!-- <div class="w-full bg-gray-200 rounded h-4 dark:bg-gray-300">
-                                        <div class="progress-bar h-4 rounded" style="width: {{ $score }}%"></div>
-                                    </div> -->
+                                    <input type="number" wire:model="rapotData.{{ $index }}.data.{{ $subject }}" class="w-full p-2 border rounded" />
                                 </li>
                             @endforeach
                         </ul>
                         <ul>
-                            @foreach(array_slice($rapot['data'], 3) as $subject => $score)
+                            @foreach(array_slice($rapot['data'], 3, null, true) as $subject => $score)
                                 <li class="text-left">
                                     <div class="font-bold">{{ strtoupper(str_replace('_', ' ', $subject)) }}</div>
-                                    <input type="number" value="{{ $score }}" class="w-full p-2 border rounded" />
-                                    <!-- <div class="w-full bg-gray-200 rounded h-4 dark:bg-gray-300">
-                                        <div class="progress-bar h-4 rounded" style="width: {{ $score }}%"></div>
-                                    </div> -->
+                                    <input type="number" wire:model="rapotData.{{ $index }}.data.{{ $subject }}" class="w-full p-2 border rounded" />
                                 </li>
                             @endforeach
                         </ul>
@@ -59,6 +41,11 @@
             @empty
                 <p class="text-sm text-gray-500">Tidak ada data nilai siswa.</p>
             @endforelse
+
+            <!-- Tombol untuk menyimpan perubahan -->
+            <button wire:click="updateRapot" class="bg-blue-500 text-white px-4 py-2 rounded">
+                Simpan Perubahan
+            </button>
         </div>
     </div>
 </div>
