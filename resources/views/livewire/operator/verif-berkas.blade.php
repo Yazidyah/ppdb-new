@@ -1,9 +1,9 @@
 <div>
     <button wire:click="$set('modalOpen', true)"
-        class="inline-flex items-center justify-center text-white h-10 px-4 py-2 text-sm font-medium transition-colors bg-tertiary border rounded-md hover:bg-secondary hover:text-tertiary active:bg-seconadry focus:bg-seconadry focus:outline-none focus:ring-2 focus:ring-seconadry focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Verif</button>
+        class="inline-flex items-center justify-center text-white h-10 px-4 py-2 text-sm font-medium transition-colors bg-tertiary border rounded-md hover:bg-secondary hover:text-tertiary active:bg-seconadry focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-seconadry focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Verif</button>
     @if ($modalOpen)
         <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen">
-            <div class="absolute inset-0 w-full h-full bg-white backdrop-blur-sm bg-opacity-70"
+            <div class="absolute inset-0 w-full h-full bg-black backdrop-blur-sm bg-opacity-70"
                 wire:click="$set('modalOpen', false)"></div>
             <div class="relative w-full py-6 bg-white border shadow-lg px-7 border-neutral-200 sm:max-w-lg sm:rounded-lg">
                 <div class="flex items-center justify-between pb-3">

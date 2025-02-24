@@ -31,7 +31,7 @@
                             <template x-for="(step, index) in 5" :key="index">
                                 <div @click="currentStep = (index + 1); window.history.pushState({}, '', '?sem=' + (index + 1) + '&t={{ $t }}'); $wire.set('sem', (index + 1))"
                                     :class="{
-                                        'bg-blue-600 text-white': currentStep === (index + 1),
+                                        'bg-tertiary text-white': currentStep === (index + 1),
                                         'text-gray-700': currentStep !== (index + 1)
                                     }"
                                     class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
@@ -54,7 +54,7 @@
                                     <label for="{{ $subject }}"
                                         class="block text-lg font-semibold text-gray-700">{{ ucfirst(str_replace('_', ' ', $subject)) }}</label>
                                     <input
-                                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-blue-500 focus:border-blue-500"
+                                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-tertiary focus:border-tertiary"
                                         id="{{ $subject }}{{ $sem }}" type="text"
                                         name="{{ $subject }}{{ $sem }}" required autofocus
                                         autocomplete="{{ $subject }}{{ $sem }}"
@@ -79,11 +79,11 @@
 
                         <div class="sm:flex sm:flex-row-reverse sm:px-6 mt-8">
                             <button type="button" wire:click="kirim"
-                                class="inline-flex justify-center w-full px-8 py-3 text-lg font-semibold text-white bg-blue-600 rounded-md shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto">
+                                class="inline-flex justify-center w-full px-8 py-3 text-lg font-semibold text-white bg-tertiary rounded-md shadow-sm hover:bg-secondary hover:text-tertiary sm:ml-3 sm:w-auto">
                                 Kirim
                             </button>
                             <button type="button" wire:click="$set('modalSubmit', false)"
-                                class="inline-flex justify-center w-full px-8 py-3 mt-3 text-lg font-semibold text-gray-900 bg-white rounded-md shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">
+                                class="inline-flex justify-center w-full px-8 py-3 mt-3 text-lg font-semibold text-white bg-red-900 rounded-md shadow-sm ring-1 ring-inset ring-red-900 hover:bg-red-500 sm:mt-0 sm:w-auto">
                                 Batal
                             </button>
                         </div>

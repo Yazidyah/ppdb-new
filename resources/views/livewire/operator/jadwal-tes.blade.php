@@ -1,7 +1,11 @@
 <div>
     {{-- Stop trying to control. --}}
-    <div class="flex justify-center my-3 ">
-        <button wire:click="create" class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-secondaryactive:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Tambah Jadwal Tes</button>
+    <div class="flex justify-between my-3 ">
+    <div></div>    
+    <div class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-secondaryactive:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+            <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JADWAL TES</button>
+
+        </div>
     </div>
     <table class="table-auto w-full mt-4">
         <thead>

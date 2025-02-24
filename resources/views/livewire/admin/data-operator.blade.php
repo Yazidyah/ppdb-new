@@ -53,7 +53,7 @@
             <h1 class="text-lg font-bold">Kelola Akun Operator</h1>
             <button wire:click="create" class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Tambah Operator</button>
         </div>
-        <div class="container mx-auto overflow-x-auto max-w-full">
+        <div class="container mx-auto overflow-x-auto min-w-screen">
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-center bg-gray-200">
                     <tr>
