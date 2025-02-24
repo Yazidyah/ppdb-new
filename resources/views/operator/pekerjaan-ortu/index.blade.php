@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="p-4 sm:ml-64">
         <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto text-center pt-7">
+            <div class="container mx-auto w-1/2 text-center pt-7">
                 <h2 class="font-bold text-[24px] pb-4">Daftar Pekerjaan Orang Tua</h2>
                 <div class="flex justify-between">
                     <div></div>
@@ -10,18 +10,18 @@
                         <button onclick="showCreateModal()" class="text-center flex justify-center items-center w-full">+ PEKERJAAN</button>
                     </div>
                 </div>
-                <table class="table-auto w-full mt-4">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-2">Nama Pekerjaan</th>
-                            <th class="px-4 py-2">Aksi</th>
+                <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+                    <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+                        <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                            <th class="px-4 text-center py-2">Nama Pekerjaan</th>
+                            <th class="px-4 text-center py-2">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pekerjaanOrtu as $item)
-                            <tr>
-                                <td class="border px-4 py-2">{{ $item->nama_pekerjaan }}</td>
-                                <td class="border px-4 py-2 flex justify-center space-x-2">
+                            <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer text-center">
+                                <td class="border text-tertiary px-4 py-2">{{ $item->nama_pekerjaan }}</td>
+                                <td class="border text-tertiary px-4 py-2 flex justify-center space-x-2">
                                     <button onclick="showEditModal({{ $item->id_pekerjaan }}, '{{ $item->nama_pekerjaan }}')" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                                     <form action="{{ route('pekerjaan-ortu.destroy', $item->id_pekerjaan) }}" method="post" onsubmit="return confirm('Are you sure?');">
                                         @csrf

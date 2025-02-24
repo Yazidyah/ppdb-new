@@ -7,19 +7,19 @@
 
         </div>
     </div>
-    <table class="table-auto w-full mt-4">
-        <thead>
-            <tr>
-                <th class="px-4 py-2">Nama</th>
-                <th class="px-4 py-2">Jalur Registrasi</th>
-                <th class="px-4 py-2">Aksi</th>
+    <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+        <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+            <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                <th class="px-4 py-2 text-center">Nama</th>
+                <th class="px-4 py-2 text-center">Jalur Registrasi</th>
+                <th class="px-4 py-2 text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($jenisTes as $item)
-                <tr>
-                    <td class="border px-4 py-2">{{ $item->nama }}</td>
-                    <td class="border px-4 py-2">
+                <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                    <td class="border text-tertiary text-center px-4 py-2">{{ $item->nama }}</td>
+                    <td class="border text-tertiary text-center px-4 py-2">
                         @if ($item->no_jalur == "0")
                             Semua Jalur
                         @elseif ($item->no_jalur == "1")
@@ -50,7 +50,7 @@
                 </div>
                 <div class="p-4">
                     <input type="text" wire:model="nama" class="border rounded w-full py-2 px-3 mb-3" placeholder="Nama">
-                    <select wire:model="no_jalur" class="border rounded w-full py-2 px-3">
+                    <select wire:model="no_jalur" class="border border-tertiary rounded w-full py-2 px-3">
                         <option class="" disabled="disabled" value="">Pilih Jalur</option> <!-- Add a default option -->
                         <option class="" value="0">Semua Jalur</option>
                         <option class="" value="1">Reguler</option>

@@ -29,31 +29,31 @@
                     <div class="flex justify-between">
                         <div>
                             </div>
-                            <div class="w-1/4 inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                            <div class="w-1/6 inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                             <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JALUR REGISTRASI</button>
                         </div> 
                 </div>
             </div>
-                <table class="table-auto w-full">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-2">Nama Jalur</th>
-                            <th class="px-4 py-2">Deskripsi</th>
-                            <th class="px-4 py-2">Tanggal Buka</th>
-                            <th class="px-4 py-2">Tanggal Tutup</th>
-                            <th class="px-4 py-2">Status</th>
-                            <th class="px-4 py-2">Aksi</th>
+                <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+                    <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+                        <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                            <th class="px-4 py-2 text-center">Nama Jalur</th>
+                            <th class="px-4 py-2 text-center">Deskripsi</th>
+                            <th class="px-4 py-2 text-center">Tanggal Buka</th>
+                            <th class="px-4 py-2 text-center">Tanggal Tutup</th>
+                            <th class="px-4 py-2 text-center">Status</th>
+                            <th class="px-4 py-2 text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($jalurRegistrasi as $item)
-                            <tr>
-                                <td class="border px-4 py-2">{{ $item->nama_jalur }}</td>
-                                <td class="border px-4 py-2">{{ $item->deskripsi }}</td>
-                                <td class="border px-4 py-2">{{ $item->tanggal_buka }}</td>
-                                <td class="border px-4 py-2">{{ $item->tanggal_tutup }}</td>
-                                <td class="border px-4 py-2">{{ $item->is_open ? 'Buka' : 'Tutup' }}</td>
-                                <td class="border px-4 py-2 flex justify-center space-x-2">
+                            <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                                <td class=" px-4 py-2 text-tertiary text-center">{{ $item->nama_jalur }}</td>
+                                <td class=" px-4 py-2 text-tertiary text-center">{{ $item->deskripsi }}</td>
+                                <td class=" px-4 py-2 text-tertiary text-center">{{ $item->tanggal_buka }}</td>
+                                <td class=" px-4 py-2 text-tertiary text-center">{{ $item->tanggal_tutup }}</td>
+                                <td class=" px-4 py-2 text-tertiary text-center">{{ $item->is_open ? 'Buka' : 'Tutup' }}</td>
+                                <td class=" px-4 py-2 text-tertiary text-center flex justify-center space-x-2">
                                     <button wire:click="edit({{ $item->id_jalur }})" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                                     <button wire:click="delete({{ $item->id_jalur }})" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Delete</button>
                                 </td>
