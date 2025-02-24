@@ -36,10 +36,10 @@
                             @foreach(array_slice($rapot['data'], 0, 3) as $subject => $score)
                                 <li class="text-left">
                                     <div class="font-bold">{{ strtoupper(str_replace('_', ' ', $subject)) }}</div>
-                                    <div>Nilai: {{ $score }}</div>
-                                    <div class="w-full bg-gray-200 rounded h-4 dark:bg-gray-300">
+                                    <input type="number" value="{{ $score }}" class="w-full p-2 border rounded" />
+                                    <!-- <div class="w-full bg-gray-200 rounded h-4 dark:bg-gray-300">
                                         <div class="progress-bar h-4 rounded" style="width: {{ $score }}%"></div>
-                                    </div>
+                                    </div> -->
                                 </li>
                             @endforeach
                         </ul>
@@ -47,10 +47,10 @@
                             @foreach(array_slice($rapot['data'], 3) as $subject => $score)
                                 <li class="text-left">
                                     <div class="font-bold">{{ strtoupper(str_replace('_', ' ', $subject)) }}</div>
-                                    <div>Nilai: {{ $score }}</div>
-                                    <div class="w-full bg-gray-200 rounded h-4 dark:bg-gray-300">
+                                    <input type="number" value="{{ $score }}" class="w-full p-2 border rounded" />
+                                    <!-- <div class="w-full bg-gray-200 rounded h-4 dark:bg-gray-300">
                                         <div class="progress-bar h-4 rounded" style="width: {{ $score }}%"></div>
-                                    </div>
+                                    </div> -->
                                 </li>
                             @endforeach
                         </ul>

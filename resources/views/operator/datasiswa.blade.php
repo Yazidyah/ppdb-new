@@ -98,6 +98,9 @@
                                     <th scope="col" class="px-6 py-3 text-center">
                                         Penerimaan
                                     </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        Modal
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -154,6 +157,9 @@
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
                                             @livewire('operator.status-acc', ['siswa' => $siswa], key($siswa->user_id . '-status-' . $siswa->id_calon_siswa))
+                                        </td>
+                                        <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
+                                            @livewire('operator.datasiswa-modal', ['siswa' => $siswa], key($siswa->user_id . '-modal-' . $siswa->id_calon_siswa))
                                         </td>
                                     </tr>
                                 @empty

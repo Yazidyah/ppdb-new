@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="flex flex-col text-left sm:text-center">
-                            <div class="text-sm text-gray-600 font-semibold"> {{ $siswa->sekolah_asal }}</div>
+                            <div class="text-sm text-gray-600 font-semibold"> {{ strtoupper($siswa->sekolah_asal) }}</div>
                         </div>
                     </div>
                     <div class="flex justify-between items-start space-x-4 mt-2">
