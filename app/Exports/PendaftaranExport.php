@@ -126,6 +126,42 @@ class PendaftaranExport extends DefaultValueBinder implements
             'Y' => 20,
             'Z' => 20,
             'AA' => 20,
+            'AB' => 20,
+            'AC' => 20,
+            'AD' => 20,
+            'AE' => 20,
+            'AF' => 20,
+            'AG' => 20,
+            'AH' => 10,
+            'AI' => 10,
+            'AJ' => 10,
+            'AK' => 10,
+            'AL' => 10,
+            'AM' => 10,
+            'AN' => 10,
+            'AO' => 10,
+            'AP' => 10,
+            'AQ' => 10,
+            'AR' => 10,
+            'AS' => 10,
+            'AT' => 10,
+            'AU' => 10,
+            'AV' => 10,
+            'AW' => 10,
+            'AX' => 10,
+            'AY' => 10,
+            'AZ' => 10,
+            'BA' => 10,
+            'BB' => 10,
+            'BC' => 10,
+            'BD' => 10,
+            'BE' => 10,
+            'BF' => 10,
+            'BG' => 10,
+            'BH' => 10,
+            'BI' => 10,
+            'BJ' => 10,
+            'BK' => 10,
         ];
     }
 
@@ -158,6 +194,48 @@ class PendaftaranExport extends DefaultValueBinder implements
             'Pekerjaan Wali', //Y
             'NIK Wali', //Z
             'Telp Wali', //AA
+            'No KK', //AB
+            'Akreditasi Sekolah (Nilai)', //AC
+            'Akreditasi Sekolah (Predikat)', //AD
+            'Posisi', //AE
+            'Status Verifikasi', //AF
+            'Status Penerimaan', //AG
+            'Nomor Suket', //AH
+            //semester 1
+            'Eng 1', //AI
+            'Mat 1', //AJ
+            'Ind 1', //AK
+            'IPA 1', //AL
+            'IPS 1', //AM
+            'PAI 1', //AN
+            //semester 2
+            'Eng 2', //AO
+            'Mat 2', //AP
+            'Ind 2', //AQ
+            'IPA 2', //AR
+            'IPS 2', //AS
+            'PAI 2', //AT
+            //semester 3
+            'Eng 3', //AU
+            'Mat 3', //AV
+            'Ind 3', //AW
+            'IPA 3', //AX
+            'IPS 3', //AY
+            'PAI 3', //AZ
+            // semester 4
+            'Eng 4', //BA
+            'Mat 4', //BB
+            'Ind 4', //BC
+            'IPA 4', //BD
+            'IPS 4', //BE
+            'PAI 4', //BF
+            // semeseter 5
+            'Eng 5', //BG
+            'Mat 5', //BH
+            'Ind 5', //BI
+            'IPA 5', //BJ
+            'IPS 5', //BK
+            'PAI 5', //BL
         ];
     }
     public function collection()
