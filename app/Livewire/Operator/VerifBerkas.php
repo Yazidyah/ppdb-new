@@ -7,6 +7,7 @@ use App\Models\JadwalTes;
 use App\Models\DataTes;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class VerifBerkas extends Component
 {
@@ -24,8 +25,6 @@ class VerifBerkas extends Component
     public $jadwalTesJapresTesAkademik;
     public $id_registrasi;
     public $id_jadwal_tes;
-    // Meskipun variabel "jalur" tidak dideklarasikan sebelumnya, 
-    // clean code mengharuskan deklarasi jika digunakan di seluruh class.
     protected $jalur;
 
     public function mount()
@@ -34,6 +33,8 @@ class VerifBerkas extends Component
         $this->jadwalTesBqWawancara = $this->getJadwalTes(true);
         $this->jadwalTesJapresTesAkademik = $this->getJadwalTes(false);
         $this->setExistingDataTes();
+        $this->setExistingCatatan();
+        $this->setExistingVerif(); // Add this line
     }
 
     /**
@@ -81,6 +82,30 @@ class VerifBerkas extends Component
                 $this->sesi_bq_wawancara = $dataTes->id_jadwal_tes;
             } else {
                 $this->sesi_japres_tes_akademik = $dataTes->id_jadwal_tes;
+            }
+        }
+    }
+
+    /**
+     * Set existing catatan for each berkas.
+     */
+    protected function setExistingCatatan()
+    {
+        foreach ($this->syarat as $item) {
+            foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
+                $this->catatan[$berkas->id] = $berkas->verify_notes;
+            }
+        }
+    }
+
+    /**
+     * Set existing verification status for each berkas.
+     */
+    protected function setExistingVerif()
+    {
+        foreach ($this->syarat as $item) {
+            foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
+                $this->verif[$berkas->id] = $berkas->verify;
             }
         }
     }
@@ -141,6 +166,13 @@ class VerifBerkas extends Component
                 $berkas->verify       = $this->verif[$berkas->id] ?? null;
                 $berkas->verify_notes = $this->catatan[$berkas->id] ?? null;
                 $berkas->save();
+
+                // Log the verification notes
+                Log::info('Berkas verification updated', [
+                    'berkas_id' => $berkas->id,
+                    'verify' => $berkas->verify,
+                    'verify_notes' => $berkas->verify_notes,
+                ]);
             }
         }
     }

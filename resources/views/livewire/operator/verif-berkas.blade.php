@@ -5,7 +5,7 @@
         <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen">
             <div class="absolute inset-0 w-full h-full bg-black backdrop-blur-sm bg-opacity-70"
                 wire:click="$set('modalOpen', false)"></div>
-            <div class="relative w-full py-6 bg-white border shadow-lg px-7 border-neutral-200 sm:max-w-lg sm:rounded-lg">
+            <div class="relative w-full py-6 bg-white border shadow-lg px-7 border-neutral-200 sm:max-w-2xl sm:rounded-lg">
                 <div class="flex items-center justify-between pb-3">
                     <h3 class="text-lg font-semibold">Verifikasi {{ ucwords($siswa->nama_lengkap) }}</h3>
                     <button wire:click="$set('modalOpen', false)"
@@ -38,11 +38,11 @@
                                             @livewire('operator.berkas-verif', ['syarat' => $item, 'berkas' => $berkas], key($siswa->id_user . 'berkas' . $berkas->id))
                                         </td>
                                         <td class="px-4 py-2">
-                                            <input type="checkbox" wire:model="verif.{{ $berkas->id }}" value="1">
+                                            <input type="checkbox" wire:model="verif.{{ $berkas->id }}" value="1" {{ $berkas->verify ? 'checked' : '' }}>
                                         </td>
                                         <td class="px-4 py-2">
                                             <input wire:model="catatan.{{ $berkas->id }}" type="text"
-                                                name="catatan[{{ $berkas->id }}]" class="w-full border rounded-md">
+                                                name="catatan[{{ $berkas->id }}]" class="w-full border rounded-md" value="{{ $berkas->verify_notes }}">
                                         </td>
                                     </tr>
                                 @empty
