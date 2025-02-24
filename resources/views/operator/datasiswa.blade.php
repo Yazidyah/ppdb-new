@@ -41,8 +41,7 @@
                                 <option value="" {{ !request('jalur') ? 'selected' : '' }}>Semua jalur
                                 </option>
                                 @foreach ($jalurRegistrasi as $jalur)
-                                    <option value="{{ $jalur->id_jalur }}"
-                                        {{ request('jalur') == $jalur->id_jalur ? 'selected' : '' }}>
+                                    <option value="{{ $jalur->id_jalur }}" {{ request('jalur') == $jalur->id_jalur ? 'selected' : '' }}>
                                         {{ $jalur->nama_jalur }}
                                     </option>
                                 @endforeach
@@ -126,28 +125,7 @@
                                             {{ @$siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            @switch($siswa->dataRegistrasi->status)
-                                                @case(0)
-                                                    Jalur @break
-                                                @case(1)
-                                                    Upload @break
-                                                @case(2)
-                                                    Submit @break
-                                                @case(3)
-                                                    Tidak Lolos Verifikasi Berkas @break
-                                                @case(4)
-                                                    Lolos Verifikasi Berkas @break
-                                                @case(5)
-                                                    Belum Ditentukan @break
-                                                @case(6)
-                                                    Tidak Diterima @break
-                                                @case(7)
-                                                    Diterima @break
-                                                @case(8)
-                                                    Dicadangkan @break
-                                                @default
-                                                    -
-                                            @endswitch
+                                                {{ $siswa->dataRegistrasi->status_label }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}
@@ -181,16 +159,16 @@
                     debounceTimer = setTimeout(callback, delay);
                 };
 
-                document.getElementById('searchInput').addEventListener('input', function() {
+                document.getElementById('searchInput').addEventListener('input', function () {
                     debounce(() => {
                         document.getElementById('searchForm').submit();
                     }, 500);
                 });
 
-                document.getElementById('sekolahAsalInput').addEventListener('input', function() {
+                document.getElementById('sekolahAsalInput').addEventListener('input', function () {
                     debounce(() => {
                         document.getElementById('searchForm').submit();
                     }, 500);
                 });
             </script>
-    </x-app-layout>
+</x-app-layout>
