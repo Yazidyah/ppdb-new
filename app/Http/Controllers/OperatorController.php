@@ -31,7 +31,7 @@ class OperatorController extends Controller
         $jalurRegistrasi = JalurRegistrasi::all();
         $statuses = DataRegistrasi::select('status')->distinct()->get();
         return view('operator.datasiswa', compact('data', 'jalurRegistrasi', 'statuses'));
-    }
+    }   
 
     private function getStatusLabel($status)
     {
@@ -39,11 +39,12 @@ class OperatorController extends Controller
             0 => 'Jalur',
             1 => 'Upload',
             2 => 'Submit',
-            3 => 'Lolos Verifikasi Berkas',
-            4 => 'Tidak Lolos Verifikasi Berkas',
-            5 => 'Tidak Diterima',
-            6 => 'Diterima',
-            7 => 'Dicadangkan'
+            3 => 'Tidak Lolos Verifikasi Berkas',
+            4 => 'Lolos Verifikasi Berkas',
+            5 => 'Belum Ditentukan',
+            6 => 'Tidak Diterima',
+            7 => 'Diterima',
+            8 => 'Dicadangkan'
         ];
 
         return $statusLabels[$status] ?? '-';
