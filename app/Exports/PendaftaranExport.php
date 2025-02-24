@@ -49,6 +49,31 @@ class PendaftaranExport extends DefaultValueBinder implements
             return true;
         }
 
+        if ($cell->getColumn() === 'C') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
+        if ($cell->getColumn() === 'U') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
+        if ($cell->getColumn() === 'V') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
+        if ($cell->getColumn() === 'Q') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
+        if ($cell->getColumn() === 'R') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
         // Untuk nilai numerik lainnya
         if (is_numeric($value)) {
             $cell->setValueExplicit($value, DataType::TYPE_NUMERIC);
@@ -89,6 +114,18 @@ class PendaftaranExport extends DefaultValueBinder implements
             'L' => 20,
             'M' => 20,
             'O' => 20,
+            'P' => 20,
+            'Q' => 20,
+            'R' => 20,
+            'S' => 20,
+            'T' => 20,
+            'U' => 20,
+            'V' => 20,
+            'W' => 20,
+            'X' => 20,
+            'Y' => 20,
+            'Z' => 20,
+            'AA' => 20,
         ];
     }
 
@@ -109,6 +146,18 @@ class PendaftaranExport extends DefaultValueBinder implements
             'Gender', //L
             'Alamat', //M
             'Domisili', //O
+            'Ayah', //P
+            'Pekerjaan Ayah', //Q
+            'NIK Ayah', //R
+            'Telp Ayah', //S
+            'Ibu', //T
+            'Pekerjaan Ibu', //U
+            'NIK Ibu', //V
+            'Telp Ibu', //W
+            'Wali', //X
+            'Pekerjaan Wali', //Y
+            'NIK Wali', //Z
+            'Telp Wali', //AA
         ];
     }
     public function collection()
