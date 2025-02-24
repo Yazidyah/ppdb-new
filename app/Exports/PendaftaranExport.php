@@ -89,15 +89,6 @@ class PendaftaranExport extends DefaultValueBinder implements
 
     public function styles(Worksheet $sheet)
     {
-        // Set style for the first row (heading)
-        // $sheet->getRowDimension(1)->setRowHeight(25); // Atur tinggi heading menjadi 25
-
-        // return [
-        //     1 => [
-        //         'font' => ['bold' => true],
-        //         'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
-        //     ],
-        // ];
 
         $sheet->getRowDimension(1)->setRowHeight(25); // Atur tinggi heading menjadi 25
 
@@ -146,31 +137,31 @@ class PendaftaranExport extends DefaultValueBinder implements
             'B' => 20,
             'C' => 20,
             'D' => 20,
-            'E' => 20,
-            'F' => 20,
+            'E' => 30,
+            'F' => 30,
             'G' => 20,
             'H' => 20,
             'I' => 20,
             'J' => 20,
             'K' => 20,
             'L' => 20,
-            'M' => 20,
-            'N' => 20,
-            'O' => 20,
+            'M' => 30,
+            'N' => 30,
+            'O' => 30,
             'P' => 20,
             'Q' => 20,
             'R' => 20,
-            'S' => 20,
+            'S' => 30,
             'T' => 20,
             'U' => 20,
             'V' => 20,
-            'W' => 20,
+            'W' => 30,
             'X' => 20,
             'Y' => 20,
             'Z' => 20,
             'AA' => 20,
-            'AB' => 20,
-            'AC' => 20,
+            'AB' => 25,
+            'AC' => 25,
             'AD' => 20,
             'AE' => 20,
             'AF' => 20,
