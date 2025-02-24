@@ -15,6 +15,9 @@ use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\Cell\DataType;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 
@@ -87,14 +90,53 @@ class PendaftaranExport extends DefaultValueBinder implements
     public function styles(Worksheet $sheet)
     {
         // Set style for the first row (heading)
+        // $sheet->getRowDimension(1)->setRowHeight(25); // Atur tinggi heading menjadi 25
+
+        // return [
+        //     1 => [
+        //         'font' => ['bold' => true],
+        //         'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
+        //     ],
+        // ];
+
         $sheet->getRowDimension(1)->setRowHeight(25); // Atur tinggi heading menjadi 25
 
-        return [
-            1 => [
-                'font' => ['bold' => true],
-                'alignment' => ['horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER],
+        $sheet->getStyle('A1:BK1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'color' => ['argb' => 'FFFFFF'],
             ],
-        ];
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['argb' => '4F81BD'],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ]);
+
+        // Set style for all rows
+        $sheet->getStyle('A2:BK' . $sheet->getHighestRow())->applyFromArray([
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['argb' => '000000'],
+                ],
+            ],
+        ]);
+
+        return [];
     }
 
     public function columnWidths(): array
@@ -113,6 +155,7 @@ class PendaftaranExport extends DefaultValueBinder implements
             'K' => 20,
             'L' => 20,
             'M' => 20,
+            'N' => 20,
             'O' => 20,
             'P' => 20,
             'Q' => 20,
@@ -170,7 +213,7 @@ class PendaftaranExport extends DefaultValueBinder implements
         return [
             'No', //A
             'Jalur', //B
-            'NISN', //c
+            'NISN', //C
             'No. Pendaftaran', //D
             'Sekolah Asal', //E
             'Nama', //F
@@ -181,61 +224,61 @@ class PendaftaranExport extends DefaultValueBinder implements
             'NIK', //K
             'Gender', //L
             'Alamat', //M
-            'Domisili', //O
-            'Ayah', //P
-            'Pekerjaan Ayah', //Q
-            'NIK Ayah', //R
-            'Telp Ayah', //S
-            'Ibu', //T
-            'Pekerjaan Ibu', //U
-            'NIK Ibu', //V
-            'Telp Ibu', //W
-            'Wali', //X
-            'Pekerjaan Wali', //Y
-            'NIK Wali', //Z
-            'Telp Wali', //AA
-            'No KK', //AB
-            'Akreditasi Sekolah (Nilai)', //AC
-            'Akreditasi Sekolah (Predikat)', //AD
-            'Posisi', //AE
-            'Status Verifikasi', //AF
-            'Status Penerimaan', //AG
-            'Nomor Suket', //AH
+            'Domisili', //N
+            'Ayah', //O
+            'Pekerjaan Ayah', //P
+            'NIK Ayah', //Q
+            'Telp Ayah', //R
+            'Ibu', //S
+            'Pekerjaan Ibu', //T
+            'NIK Ibu', //U
+            'Telp Ibu', //V
+            'Wali', //W
+            'Pekerjaan Wali', //X
+            'NIK Wali', //Y
+            'Telp Wali', //Z
+            'No KK', //AA
+            'Akreditasi Sekolah (Nilai)', //AB
+            'Akreditasi Sekolah (Predikat)', //AC
+            'Posisi', //AD
+            'Status Verifikasi', //AE
+            'Status Penerimaan', //AF
+            'Nomor Suket', //AG
             //semester 1
-            'Eng 1', //AI
-            'Mat 1', //AJ
-            'Ind 1', //AK
-            'IPA 1', //AL
-            'IPS 1', //AM
-            'PAI 1', //AN
+            'Eng 1', //AH
+            'Mat 1', //AI
+            'Ind 1', //AJ
+            'IPA 1', //AK
+            'IPS 1', //AL
+            'PAI 1', //AM
             //semester 2
-            'Eng 2', //AO
-            'Mat 2', //AP
-            'Ind 2', //AQ
-            'IPA 2', //AR
-            'IPS 2', //AS
-            'PAI 2', //AT
+            'Eng 2', //AN
+            'Mat 2', //AO
+            'Ind 2', //AP
+            'IPA 2', //AQ
+            'IPS 2', //AR
+            'PAI 2', //AS
             //semester 3
-            'Eng 3', //AU
-            'Mat 3', //AV
-            'Ind 3', //AW
-            'IPA 3', //AX
-            'IPS 3', //AY
-            'PAI 3', //AZ
+            'Eng 3', //AT
+            'Mat 3', //AU
+            'Ind 3', //AV
+            'IPA 3', //AW
+            'IPS 3', //AX
+            'PAI 3', //AY
             // semester 4
-            'Eng 4', //BA
-            'Mat 4', //BB
-            'Ind 4', //BC
-            'IPA 4', //BD
-            'IPS 4', //BE
-            'PAI 4', //BF
+            'Eng 4', //AZ
+            'Mat 4', //BA
+            'Ind 4', //BB
+            'IPA 4', //BC
+            'IPS 4', //BD
+            'PAI 4', //BE
             // semeseter 5
-            'Eng 5', //BG
-            'Mat 5', //BH
-            'Ind 5', //BI
-            'IPA 5', //BJ
-            'IPS 5', //BK
-            'PAI 5', //BL
+            'Eng 5', //BF
+            'Mat 5', //BG
+            'Ind 5', //BH
+            'IPA 5', //BI
+            'IPS 5', //BJ
+            'PAI 5', //BK
         ];
     }
     public function collection()
