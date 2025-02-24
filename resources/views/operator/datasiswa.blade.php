@@ -125,7 +125,10 @@
                                             {{ @$siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
+                                            <span class="px-2 py-1 rounded-full text-white font-semibold {{ $siswa->dataRegistrasi->status_class }}">
                                                 {{ $siswa->dataRegistrasi->status_label }}
+                                               
+                                            </span>
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}

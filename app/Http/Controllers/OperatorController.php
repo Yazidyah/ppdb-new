@@ -25,6 +25,7 @@ class OperatorController extends Controller
             $item->nama_lengkap = ucwords(strtolower($item->nama_lengkap));
             $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
             $item->dataRegistrasi->status_label = $this->getStatusLabel($item->dataRegistrasi->status);
+            $item->dataRegistrasi->status_class = $this->getStatusClass($item->dataRegistrasi->status);
             return $item;
         });
 
@@ -33,7 +34,7 @@ class OperatorController extends Controller
         return view('operator.datasiswa', compact('data', 'jalurRegistrasi', 'statuses'));
     }   
 
-    private function getStatusLabel($status)
+    public function getStatusLabel($status)
     {
         $statusLabels = [
             0 => 'Jalur',
@@ -49,6 +50,22 @@ class OperatorController extends Controller
 
         return $statusLabels[$status] ?? '-';
     }
+    public function getStatusClass($status)
+{
+    $statusClasses = [
+        0 => 'bg-blue-500', // Jalur
+        1 => 'bg-yellow-500', // Upload
+        2 => 'bg-green-500', // Submit
+        3 => 'bg-red-500', // Tidak Lolos Verifikasi Berkas
+        4 => 'bg-green-300', // Lolos Verifikasi Berkas
+        5 => 'bg-gray-500', // Belum Ditentukan
+        6 => 'bg-red-700', // Tidak Diterima
+        7 => 'bg-tertiary', // Diterima
+        8 => 'bg-yellow-600', // Dicadangkan
+    ];
+
+    return $statusClasses[$status] ?? 'bg-gray-500';
+}
 
     public function showsiswaDetail($id)
     {
