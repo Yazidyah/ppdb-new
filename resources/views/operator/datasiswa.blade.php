@@ -41,8 +41,7 @@
                                 <option value="" {{ !request('jalur') ? 'selected' : '' }}>Semua jalur
                                 </option>
                                 @foreach ($jalurRegistrasi as $jalur)
-                                    <option value="{{ $jalur->id_jalur }}"
-                                        {{ request('jalur') == $jalur->id_jalur ? 'selected' : '' }}>
+                                    <option value="{{ $jalur->id_jalur }}" {{ request('jalur') == $jalur->id_jalur ? 'selected' : '' }}>
                                         {{ $jalur->nama_jalur }}
                                     </option>
                                 @endforeach
@@ -55,8 +54,6 @@
                             @endif
                         </div>
                     </form>
-                    @livewire('operator.export-data-siswa', key('export-data-' . rand()))
-
                     <div x-show="tahun"
                         class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6">
                         <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 my-3">
@@ -100,6 +97,9 @@
                                     <th scope="col" class="px-6 py-3 text-center">
                                         Penerimaan
                                     </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
+                                        Modal
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -125,88 +125,50 @@
                                             {{ @$siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            @switch($siswa->dataRegistrasi->status)
-                                                @case(0)
-                                                    Jalur
-                                                @break
-
-                                                @case(1)
-                                                    Upload
-                                                @break
-
-                                                @case(2)
-                                                    Submit
-                                                @break
-
-                                                @case(3)
-                                                    Tidak Lolos Verifikasi Berkas
-                                                @break
-
-                                                @case(4)
-                                                    Lolos Verifikasi Berkas
-                                                @break
-
-                                                @case(5)
-                                                    Belum Ditentukan
-                                                @break
-
-                                                @case(6)
-                                                    Tidak Diterima
-                                                @break
-
-                                                @case(7)
-                                                    Diterima
-                                                @break
-
-                                                @case(8)
-                                                    Dicadangkan
-                                                @break
-
-                                                @default
-                                                    -
-                                            @endswitch
+                                                {{ $siswa->dataRegistrasi->status_label }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}
                                         </td>
-                                        <td scope="col" class="px-6 py-3 text-center"
-                                            onclick="event.stopPropagation()">
+                                        <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
                                             @livewire('operator.verif-berkas', ['siswa' => $siswa], key($siswa->user_id . '-berkas-' . $siswa->id_calon_siswa))
                                         </td>
-                                        <td scope="col" class="px-6 py-3 text-center"
-                                            onclick="event.stopPropagation()">
+                                        <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
                                             @livewire('operator.status-acc', ['siswa' => $siswa], key($siswa->user_id . '-status-' . $siswa->id_calon_siswa))
                                         </td>
+                                        <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
+                                            @livewire('operator.datasiswa-modal', ['siswa' => $siswa], key($siswa->user_id . '-modal-' . $siswa->id_calon_siswa))
+                                        </td>
                                     </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="10" class="px-6 py-3 text-center text-red-500">
-                                                DATA TIDAK DITEMUKAN
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                @empty
+                                    <tr>
+                                        <td colspan="10" class="px-6 py-3 text-center text-red-500">
+                                            DATA TIDAK DITEMUKAN
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <script>
-                    let debounceTimer;
-                    const debounce = (callback, delay) => {
-                        clearTimeout(debounceTimer);
-                        debounceTimer = setTimeout(callback, delay);
-                    };
+            </div>
+            <script>
+                let debounceTimer;
+                const debounce = (callback, delay) => {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(callback, delay);
+                };
 
-                    document.getElementById('searchInput').addEventListener('input', function() {
-                        debounce(() => {
-                            document.getElementById('searchForm').submit();
-                        }, 500);
-                    });
+                document.getElementById('searchInput').addEventListener('input', function () {
+                    debounce(() => {
+                        document.getElementById('searchForm').submit();
+                    }, 500);
+                });
 
-                    document.getElementById('sekolahAsalInput').addEventListener('input', function() {
-                        debounce(() => {
-                            document.getElementById('searchForm').submit();
-                        }, 500);
-                    });
-                </script>
-    </x-app-layout>
+                document.getElementById('sekolahAsalInput').addEventListener('input', function () {
+                    debounce(() => {
+                        document.getElementById('searchForm').submit();
+                    }, 500);
+                });
+            </script>
+</x-app-layout>

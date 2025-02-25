@@ -1,8 +1,10 @@
 <div>
+<div class="p-4 sm:ml-64 ">
+<div class="p-4 border-2 border-gray-700 border-dashed rounded-lg  mt-14">
     {{-- Modal --}}
     @if($isOpen)
         <div class="fixed inset-0 z-10 overflow-y-auto">
-            <div class="flex items-center justify-center min-h-screen bg-gray-500 bg-opacity-50">
+            <div class="flex items-center justify-center min-h-screen bg-black bg-opacity-50">
                 <div class="bg-white p-6 rounded shadow-lg w-1/3">
                     <h2 class="text-lg font-bold">{{ $operator_id ? 'Edit' : 'Tambah' }} Operator</h2>
                     <form wire:submit.prevent="{{ $operator_id ? 'update' : 'store' }}">
@@ -35,8 +37,8 @@
                         @endif
                         <div class="mt-6 flex justify-end space-x-2">
                             <button type="button" wire:click="closeModal"
-                                class="px-4 py-2 bg-gray-500 text-white rounded">Batal</button>
-                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded">Simpan</button>
+                                class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Batal</button>
+                            <button type="submit" class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -45,12 +47,13 @@
     @endif
 
     {{-- Table --}}
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14 w-[1200px]">
-        <div class="flex justify-between mb-4">
+   
+            <div class="container mx-auto text-center pt-7 ">
+                <div class="flex justify-between mb-4">
             <h1 class="text-lg font-bold">Kelola Akun Operator</h1>
-            <button wire:click="create" class="bg-green-500 text-white px-4 py-2 rounded">Tambah Operator</button>
+            <button wire:click="create" class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Tambah Operator</button>
         </div>
-        <div class="container mx-auto overflow-x-auto max-w-full">
+        <div class="container mx-auto overflow-x-auto min-w-screen">
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-center bg-gray-200">
                     <tr>
@@ -68,9 +71,9 @@
                             <td class="px-6 py-3">{{ $operator->email }}</td>
                             <td class="px-6 py-3 space-x-2">
                                 <button wire:click="edit({{ $operator->id }})"
-                                    class="bg-blue-500 text-white px-3 py-1 rounded">Edit</button>
+                                    class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                                 <button wire:click="delete({{ $operator->id }})"
-                                    class="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+                                    class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Delete</button>
                             </td>
                         </tr>
                     @endforeach
@@ -79,4 +82,7 @@
             {{ $operators->links() }}
         </div>
     </div>
+    </div>
+    </div>
+    
 </div>

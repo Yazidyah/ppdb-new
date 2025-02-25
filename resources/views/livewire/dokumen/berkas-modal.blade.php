@@ -2,11 +2,11 @@
     @if ($modalSubmit)
         <div class="fixed inset-0 z-50 flex items-center justify-center">
             <div class="fixed inset-0 bg-black/50"></div>
-            <div class="relative w-full max-w-md p-6 bg-white dark:bg-gray-800 rounded-lg shadow-xl">
+            <div class="relative w-full max-w-md p-6 bg-white  rounded-lg shadow-xl">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Isi Data {{ $syarat->nama_persyaratan }}</h3>
                     <button wire:click="closeModal"
-                        class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                        class="text-gray-500 hover:text-red-800 " >
                         <svg class="h-4 w-4 inline-block ml-2" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true"
                             data-slot="icon">
@@ -25,7 +25,7 @@
 
                     <div class="flex justify-end gap-3">
                         <button wire:click="closeModal"
-                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-600">
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white hover:text-white border border-gray-300 rounded-md hover:bg-red-800    ">
                             Batal
                         </button>
                         <button wire:click="simpan"

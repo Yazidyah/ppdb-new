@@ -5,16 +5,23 @@
 switch ($userRole){
     //Admin
     case 'admin':
-        $redirectUrl = 'admin.dashboard';
+    $redirectUrl = 'admin.dashboard';
     $redirectUrlp = 'admin.persyaratan';
     $redirectUrlk = 'admin.alur-pendaftaran';
+    $redirectUrlpk = 'admin.data-afirmasi-prestasi';
     $redirectUrlpk = 'admin.data-afirmasi-prestasi';
     $redirectUrlc = 'admin.data-afirmasi-abk';
     $redirectUrlrr = 'admin.data-afirmasi-ketm';
     $redirectUrldk = 'admin.data-tidaklulus';
     $redirectUrlst = 'admin.data-reguler';
-    $redirectUrls = 'admin.datasiswa';
-    $redirectUrlls = 'admin.data-lulus';
+    $redirectUrls = 'admin.dashboard';
+    $redirectUrlls = 'admin.dashboard';
+    $redirectUrstep1 = 'admin.dashboard';
+    $redirectUrstep2 = 'admin.dashboard';
+    $redirectUrlsyarat = 'admin.dashboard';
+    $redirectUrljalur = 'admin.dashboard';
+    $redirectUrlpot = 'pekerjaan-ortu.index';
+    $redirectUrltes = 'admin.dashboard';
     # $redirectUrlcrud = 'admin.tambah-persyaratan';
     break;
     //Pembina
@@ -32,8 +39,8 @@ switch ($userRole){
     $redirectUrlls = 'operator.data-lulus';
     $redirectUrstep1 = 'operator.data-lulus';
     $redirectUrstep2 = 'operator.data-lulus';
-    $redirectUrlsyarat = 'operator.tambah-persyaratan';
-    $redirectUrljalur = 'operator.tambah-jalur';
+    $redirectUrlsyarat = 'operator.konfigurasi-persyaratan';
+    $redirectUrljalur = 'operator.konfigurasi-jalur';
     $redirectUrlpot = 'pekerjaan-ortu.index';
     $redirectUrltes = 'operator.konfigurasi-tes';
     break;
@@ -62,9 +69,9 @@ switch ($userRole){
        
             
                 <!-- Logo -->
-                <div x-data="{cheat:false}" class="flex items-center gap-1 justify- px-6">
+                <div x-data="{cheat:false}" class="flex items-center gap-1 justify-center px-6">
                     <a href={{ route($redirectUrl) }}>
-                        <x-application-logo class=" h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class=" h-9 w-auto fill-current text-gray-800 " />
                     </a>
 
 </div>
@@ -210,5 +217,29 @@ switch ($userRole){
     @yield('content')
 </main>
 @livewireScripts
+<script>
+    window.setTab = function(tab) {
+        // Hilangkan kelas aktif dari semua tombol tab
+        document.querySelectorAll('button[onclick^="setTab"]').forEach(button => {
+            button.classList.remove('text-indigo-700', 'border-indigo-500');
+            button.classList.add('text-gray-400', 'border-white');
+        });
+
+        // Tambahkan kelas aktif pada tombol yang dipilih
+        const activeButton = document.querySelector(`button[onclick="setTab('${tab}')"]`);
+        if (activeButton) {
+            activeButton.classList.add('text-indigo-700', 'border-indigo-500');
+            activeButton.classList.remove('text-gray-400', 'border-white');
+        }
+
+        // Sembunyikan semua konten tab
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.style.display = 'none';
+        });
+
+        // Tampilkan konten tab yang aktif
+        document.getElementById(`${tab}-content`).style.display = 'block';
+    }
+</script>
 </body>
 </html>

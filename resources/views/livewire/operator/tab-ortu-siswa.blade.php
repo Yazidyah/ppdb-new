@@ -1,63 +1,90 @@
 <div>
-    <div class="p-8 bg-white rounded-lg">
-        <div>
-            <div class="text-left">
-                <div>
-                    <h5 class="font-medium">Data Orang Tua</h5>
-                    <p class="text-sm text-gray-400">Data yang diisikan pada saat pendaftaran.</p>
-                </div>
-            </div>
-            <hr class="w-full mt-3 mb-5">
-
-            @forelse ($orangTua as $ortu)
-                <div class="mb-6 bg-green-50 rounded-lg shadow-md p-6">
-                    <div class="flex items-center mb-4">
-                        @if ($ortu->id_hubungan == 1)
-                            <svg class="w-6 h-6 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                            </svg>
-                            <h2 class="text-lg font-semibold">Ibu</h2>
-                        @elseif ($ortu->id_hubungan == 2)
-                            <svg class="w-6 h-6 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                            </svg>
-                            <h2 class="text-lg font-semibold">Ayah</h2>
-                        @elseif ($ortu->id_hubungan == 3)
-                            <svg class="w-6 h-6 text-blue-500 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                            </svg>
-                            <h2 class="text-lg font-semibold">Wali</h2>
-                        @endif
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700 text-left">
-                        <div>
-                            <p class="text-sm font-medium">Nama Lengkap</p>
-                            <p class="text-base">{{ @$ortu->nama_lengkap ?? 'Belum Di Lengkapi' }}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm font-medium">NIK</p>
-                            <p class="text-base">{{ @$ortu->nik ?? 'Belum Di Lengkapi' }}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm font-medium">Pekerjaan</p>
-                            <p class="text-base">{{ @$ortu->kerjaan->nama_pekerjaan ?? 'Belum Di Lengkapi' }}</p>
-                        </div>
-                        <div>
-                            <p class="text-sm font-medium">No Telpon</p>
-                            <p class="text-base">{{ @$ortu->no_telp ?? 'Belum Di Lengkapi' }}</p>
-                        </div>
-                    </div>
-                </div>
-            @empty
-                <p class="text-sm text-gray-500">Tidak ada data orang tua.</p>
-            @endforelse
-
+    <div class="p-8 bg-white rounded-lg shadow">
+        <div class="mb-4">
+            <h5 class="text-xl font-bold">Data Orang Tua</h5>
+            <p class="text-sm text-gray-400">Data yang diisikan pada saat pendaftaran.</p>
         </div>
+
+        {{-- Tampilkan pesan sukses apabila update berhasil --}}
+        @if (session()->has('message'))
+            <div class="mb-4 p-2 bg-green-100 text-green-700 rounded">
+                {{ session('message') }}
+            </div>
+        @endif
+
+        {{-- Looping setiap data orang tua untuk ditampilkan --}}
+        @foreach ($dataOrtu as $id_orang_tua => $ortu)
+            <form wire:submit.prevent="updateOrangTua({{ $id_orang_tua }})" class="mb-6 bg-green-50 rounded-lg shadow-md p-6">
+                <h6 class="text-lg font-semibold mb-4">
+                    {{-- Menampilkan label berdasarkan id_hubungan --}}
+                    @if ($ortu['id_hubungan'] == 1)
+                        Ibu
+                    @elseif ($ortu['id_hubungan'] == 2)
+                        Ayah
+                    @elseif ($ortu['id_hubungan'] == 3)
+                        Wali
+                    @endif
+                </h6>
+                
+                {{-- Pilihan Hubungan --}}
+                <div class="mb-4">
+                    <label for="id_hubungan_{{ $id_orang_tua }}" class="block text-sm font-medium mb-1">Hubungan</label>
+                    <select id="id_hubungan_{{ $id_orang_tua }}" wire:model="dataOrtu.{{ $id_orang_tua }}.id_hubungan" class="border p-2 w-full rounded">
+                        <option value="1">Ibu</option>
+                        <option value="2">Ayah</option>
+                        <option value="3">Wali</option>
+                    </select>
+                    @error("dataOrtu.{$id_orang_tua}.id_hubungan")
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                {{-- Input Data Lengkap --}}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                    <div>
+                        <label for="nama_lengkap_{{ $id_orang_tua }}" class="block text-xs font-medium mb-1">Nama Lengkap</label>
+                        <input id="nama_lengkap_{{ $id_orang_tua }}" type="text" wire:model="dataOrtu.{{ $id_orang_tua }}.nama_lengkap" class="border p-2 w-full rounded">
+                        @error("dataOrtu.{$id_orang_tua}.nama_lengkap")
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="nik_{{ $id_orang_tua }}" class="block text-xs font-medium mb-1">NIK</label>
+                        <input id="nik_{{ $id_orang_tua }}" type="text" wire:model="dataOrtu.{{ $id_orang_tua }}.nik" class="border p-2 w-full rounded">
+                        @error("dataOrtu.{$id_orang_tua}.nik")
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="nama_pekerjaan_{{ $id_orang_tua }}" class="block text-xs font-medium mb-1">Pekerjaan</label>
+                        <select id="nama_pekerjaan_{{ $id_orang_tua }}" wire:model="dataOrtu.{{ $id_orang_tua }}.nama_pekerjaan" class="border p-2 w-full rounded">
+                            <option value="">Pilih Pekerjaan</option>
+                            @foreach ($pekerjaanOrangTua as $pekerjaan)
+                                <option value="{{ $pekerjaan->id_pekerjaan }}">
+                                    {{ $pekerjaan->nama_pekerjaan }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error("dataOrtu.{$id_orang_tua}.nama_pekerjaan")
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="no_telp_{{ $id_orang_tua }}" class="block text-xs font-medium mb-1">No Telpon</label>
+                        <input id="no_telp_{{ $id_orang_tua }}" type="text" wire:model="dataOrtu.{{ $id_orang_tua }}.no_telp" class="border p-2 w-full rounded">
+                        @error("dataOrtu.{$id_orang_tua}.no_telp")
+                            <span class="text-red-500 text-xs">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+
+                {{-- Tombol Update untuk record ini --}}
+                <div class="mt-6">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
+                        Update Data Orang Tua
+                    </button>
+                </div>
+            </form>
+        @endforeach
     </div>
 </div>

@@ -1,76 +1,76 @@
-<div>
-    <div class="p-8 bg-white rounded-lg">
+<div class="p-8 bg-white rounded-lg">
+    <h5 class="font-medium">Edit Data Siswa</h5>
+    <p class="text-sm text-gray-400">Pastikan data sudah benar sebelum menyimpan.</p>
+
+    <!-- Input Form -->
+    <div class="grid grid-cols-2 gap-4 text-gray-700 text-left">
         <div>
-            <div class="text-left">
-                <div>
-                    <h5 class="font-medium">Data Siswa</h5>
-                    <p class="text-sm text-gray-400">Data yang diisikan pada saat pendaftaran.</p>
-                </div>
-            </div>
-            <hr class="w-full mt-3 mb-5">
-            <div class="grid grid-cols-2 gap-4 text-gray-700 text-left">
-                <div>
-                    <p class="text-xs font-medium">Nama Lengkap</p>
-                    <p>{{ ucfirst($siswa->nama_lengkap) }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Jenis Kelamin</p>
-                    <p>{{ $siswa->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Nomor Induk Kependidikan</p>
-                    <p>{{ @$siswa->NIK ?? 'Belum Di Lengkapi' }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">NISN</p>
-                    <p>{{ @$siswa->NISN ?? 'Belum Di Lengkapi' }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Email</p>
-                    <p>{{ @$siswa->user->email }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Alamat Domisili</p>
-                    <p>{{ @$siswa->alamat_domisili ?? 'Belum Di Lengkapi' }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Tempat Lahir</p>
-                    <p>{{ @$siswa->tempat_lahir ?? 'Belum Di Lengkapi' }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Tanggal Lahir</p>
-                    <p> {{ \Carbon\Carbon::parse(@$siswa->tanggal_lahir)->locale('id')->isoFormat('D MMMM YYYY') }}
-                    </p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">NPSN</p>
-                    <p>{{ @$siswa->NPSN ?? 'Belum Di Lengkapi' }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Sekolah Asal</p>
-                    <p>{{ @$siswa->sekolah_asal_formatted ?? 'Belum Di Lengkapi' }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Provinsi</p>
-                    <p>{{ @$siswa->provinsi ?? 'Belum Di Lengkapi' }}</p>
-                </div>
-
-                <div>
-                    <p class="text-xs font-medium">Kota</p>
-                    <p>{{ @$siswa->kota ?? 'Belum Di Lengkapi' }}</p>
-                </div>
-
-            </div>
+            <label class="text-xs font-medium">Nama Lengkap</label>
+            <input type="text" wire:model="nama_lengkap" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">NIK</label>
+            <input type="text" wire:model="nik" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">NISN</label>
+            <input type="text" wire:model="nisn" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">No Telepon</label>
+            <input type="text" wire:model="no_telp" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Jenis Kelamin</label>
+            <select wire:model="jenis_kelamin" class="border p-2 w-full">
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+            </select>
+        </div>
+        <div>
+            <label class="text-xs font-medium">Tempat Lahir</label>
+            <input type="text" wire:model="tempat_lahir" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Tanggal Lahir</label>
+            <input type="date" wire:model="tanggal_lahir" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">NPSN</label>
+            <input type="text" wire:model="npsn" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Sekolah Asal</label>
+            <input type="text" wire:model="sekolah_asal" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Status Sekolah</label>
+            <input type="text" wire:model="status_sekolah" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Alamat Domisili</label>
+            <input type="text" wire:model="alamat_domisili" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Alamat KK</label>
+            <input type="text" wire:model="alamat_kk" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Provinsi</label>
+            <input type="text" wire:model="provinsi" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Kota</label>
+            <input type="text" wire:model="kota" class="border p-2 w-full">
         </div>
     </div>
+
+    <!-- Tombol Update -->
+    <button wire:click="updateSiswa" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+        Simpan Perubahan
+    </button>
+
+    @if (session()->has('message'))
+        <p class="text-green-500 mt-2">{{ session('message') }}</p>
+    @endif
 </div>

@@ -46,7 +46,7 @@ class JenisTes extends Component
         $this->showModal = true;
     }
 
-    public function update()
+    public function Update()
     {
         $this->validate();
 

@@ -1,21 +1,25 @@
 <div>
     {{-- Tabel Jenis Tes --}}
-    <div class="flex justify-end mb-3">
-        <button wire:click="create" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Jenis Tes</button>
+    <div class="flex justify-between mb-3">
+        <diV></diV>
+        <div class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-secondaryactive:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+            <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JENIS TES</button>
+
+        </div>
     </div>
-    <table class="table-auto w-full mt-4">
-        <thead>
-            <tr>
-                <th class="px-4 py-2">Nama</th>
-                <th class="px-4 py-2">Jalur Registrasi</th>
-                <th class="px-4 py-2">Aksi</th>
+    <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+        <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+            <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                <th class="px-4 py-2 text-center">Nama</th>
+                <th class="px-4 py-2 text-center">Jalur Registrasi</th>
+                <th class="px-4 py-2 text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($jenisTes as $item)
-                <tr>
-                    <td class="border px-4 py-2">{{ $item->nama }}</td>
-                    <td class="border px-4 py-2">
+                <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                    <td class="border text-tertiary text-center px-4 py-2">{{ $item->nama }}</td>
+                    <td class="border text-tertiary text-center px-4 py-2">
                         @if ($item->no_jalur == "0")
                             Semua Jalur
                         @elseif ($item->no_jalur == "1")
@@ -26,9 +30,9 @@
                     </td>
                     <td class="border px-4 py-2 flex justify-center space-x-2">
                         <button wire:click="edit({{ $item->id}})"
-                            class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
+                            class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                         <button wire:click="delete({{ $item->id}})"
-                            class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
+                            class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
                     </td>
                 </tr>
             @endforeach
@@ -41,22 +45,22 @@
             wire:keydown.escape="closeModal">
             <div class="bg-white rounded-lg shadow-lg w-1/3">
                 <div class="flex justify-between items-center px-4 py-2 border-b">
-                    <h5 class="text-lg font-semibold">{{ $isEdit ? 'update' : 'store' }} Jenis Tes</h5>
+                    <h5 class="text-lg font-semibold">{{ $isEdit ? 'Update' : 'store' }} Jenis Tes</h5>
                     <button wire:click="closeModal" class="text-gray-500">&times;</button>
                 </div>
                 <div class="p-4">
                     <input type="text" wire:model="nama" class="border rounded w-full py-2 px-3 mb-3" placeholder="Nama">
-                    <select wire:model="no_jalur" class="border rounded w-full py-2 px-3">
-                        <option disabled="disabled" value="">Pilih Jalur</option> <!-- Add a default option -->
-                        <option value="0">Semua Jalur</option>
-                        <option value="1">Reguler</option>
-                        <option value="2">Afirmasi</option>
+                    <select wire:model="no_jalur" class="border border-tertiary rounded w-full py-2 px-3">
+                        <option class="" disabled="disabled" value="">Pilih Jalur</option> <!-- Add a default option -->
+                        <option class="" value="0">Semua Jalur</option>
+                        <option class="" value="1">Reguler</option>
+                        <option class="" value="2">Afirmasi</option>
                     </select>
                 </div>
                 <div class="flex justify-end px-4 py-2 border-t">
-                    <button wire:click="closeModal" class="bg-gray-300 text-black px-4 py-2 rounded mr-2">Batal</button>
-                    <button wire:click.prevent="{{ $isEdit ? 'update' : 'store' }}"
-                        class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
+                    <button wire:click="closeModal" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded mr-2">Batal</button>
+                    <button wire:click.prevent="{{ $isEdit ? 'Update' : 'store' }}"
+                        class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Simpan</button>
                 </div>
             </div>
         </div>

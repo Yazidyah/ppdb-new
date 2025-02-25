@@ -89,7 +89,7 @@
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
-                                placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+                                placeholder="Untuk MTs, Nilai Agama dibagi 4" />
                             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
                         </div>
                         <div>
@@ -131,7 +131,7 @@
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
-                                placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+                                placeholder="Untuk MTs, Nilai Agama dibagi 4" />
                             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
                         </div>
                         <div>
@@ -173,7 +173,7 @@
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
-                                placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+                                placeholder="Untuk MTs, Nilai Agama dibagi 4" />
                             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
                         </div>
                         <div>
@@ -215,7 +215,7 @@
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
-                                placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+                                placeholder="Untuk MTs, Nilai Agama dibagi 4" />
                             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
                         </div>
                         <div>
@@ -257,7 +257,7 @@
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
-                                placeholder="Untuk MTs, Nilai Agama nya dibagi 4" />
+                                placeholder="Untuk MTs, Nilai Agama dibagi 4" />
                             <x-input-error :messages="$errors->get('pai')" class="mt-2" />
                         </div>
                         <div>

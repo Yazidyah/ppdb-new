@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\JadwalTes;
 use App\Models\DataTes;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class VerifBerkas extends Component
 {
@@ -23,8 +25,6 @@ class VerifBerkas extends Component
     public $jadwalTesJapresTesAkademik;
     public $id_registrasi;
     public $id_jadwal_tes;
-    // Meskipun variabel "jalur" tidak dideklarasikan sebelumnya, 
-    // clean code mengharuskan deklarasi jika digunakan di seluruh class.
     protected $jalur;
 
     public function mount()
@@ -33,6 +33,8 @@ class VerifBerkas extends Component
         $this->jadwalTesBqWawancara = $this->getJadwalTes(true);
         $this->jadwalTesJapresTesAkademik = $this->getJadwalTes(false);
         $this->setExistingDataTes();
+        $this->setExistingCatatan();
+        $this->setExistingVerif(); // Add this line
     }
 
     /**
@@ -85,6 +87,30 @@ class VerifBerkas extends Component
     }
 
     /**
+     * Set existing catatan for each berkas.
+     */
+    protected function setExistingCatatan()
+    {
+        foreach ($this->syarat as $item) {
+            foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
+                $this->catatan[$berkas->id] = $berkas->verify_notes;
+            }
+        }
+    }
+
+    /**
+     * Set existing verification status for each berkas.
+     */
+    protected function setExistingVerif()
+    {
+        foreach ($this->syarat as $item) {
+            foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
+                $this->verif[$berkas->id] = $berkas->verify;
+            }
+        }
+    }
+
+    /**
      * Proses penyimpanan verifikasi berkas dan pengaturan data tes.
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -95,8 +121,39 @@ class VerifBerkas extends Component
         $this->updateRegistrasiStatus();
         $this->processDataTes();
 
+        // Send email notification
+        if ($this->status == 4) {
+            Mail::raw('Selamat kamu lolos', function ($message) {
+                $message->to($this->siswa->user->email)
+                        ->subject('Hasil Verifikasi Berkas');
+            });
+        } elseif ($this->status == 3) {
+            $missingDocuments = $this->getMissingDocuments();
+            $messageBody = "Maaf, Kamu belum lolos verifikasi berkas karena tidak mengupload berkas: " . implode(', ', $missingDocuments);
+            Mail::raw($messageBody, function ($message) {
+                $message->to($this->siswa->user->email)
+                        ->subject('Hasil Verifikasi Berkas');
+            });
+        }
+
         $this->modalOpen = false;
         return redirect(request()->header('Referer'));
+    }
+
+    /**
+     * Get the list of missing documents.
+     *
+     * @return array
+     */
+    protected function getMissingDocuments()
+    {
+        $missingDocuments = [];
+        foreach ($this->syarat as $item) {
+            if ($item->berkas->where('uploader_id', $this->siswa->id_user)->isEmpty()) {
+                $missingDocuments[] = $item->nama_persyaratan;
+            }
+        }
+        return $missingDocuments;
     }
 
     /**
@@ -109,6 +166,13 @@ class VerifBerkas extends Component
                 $berkas->verify       = $this->verif[$berkas->id] ?? null;
                 $berkas->verify_notes = $this->catatan[$berkas->id] ?? null;
                 $berkas->save();
+
+                // Log the verification notes
+                Log::info('Berkas verification updated', [
+                    'berkas_id' => $berkas->id,
+                    'verify' => $berkas->verify,
+                    'verify_notes' => $berkas->verify_notes,
+                ]);
             }
         }
     }

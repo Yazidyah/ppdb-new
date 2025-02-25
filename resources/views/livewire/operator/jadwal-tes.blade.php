@@ -1,34 +1,38 @@
 <div>
     {{-- Stop trying to control. --}}
-    <div class="flex justify-end mb-3">
-        <button wire:click="create" class="bg-blue-500 text-white px-4 py-2 rounded">Tambah Jadwal Tes</button>
+    <div class="flex justify-between my-3 ">
+    <div></div>    
+    <div class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-secondaryactive:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+            <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JADWAL TES</button>
+
+        </div>
     </div>
-    <table class="table-auto w-full mt-4">
-        <thead>
-            <tr>
-                <th class="px-4 py-2">Nama Jenis Tes</th>
-                <th class="px-4 py-2">Ruang</th>
-                <th class="px-4 py-2">Tanggal</th>
-                <th class="px-4 py-2">Jam Mulai</th>
-                <th class="px-4 py-2">Jam Selesai</th>
-                <th class="px-4 py-2">Kuota</th>
-                <th class="px-4 py-2">Aksi</th>
+    <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+        <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+            <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                <th class="px-4 py-2 text-center">Nama Jenis Tes</th>
+                <th class="px-4 py-2 text-center">Ruang</th>
+                <th class="px-4 py-2 text-center">Tanggal</th>
+                <th class="px-4 py-2 text-center">Jam Mulai</th>
+                <th class="px-4 py-2 text-center">Jam Selesai</th>
+                <th class="px-4 py-2 text-center">Kuota</th>
+                <th class="px-4 py-2 text-center">Aksi</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
             @foreach ($jadwalTes as $item)
-                <tr>
-                    <td class="border px-4 py-2">{{ $item->jenisTes->nama }}</td>
-                    <td class="border px-4 py-2">{{ $item->ruang }}</td>
-                    <td class="border px-4 py-2">{{ $item->tanggal }}</td>
-                    <td class="border px-4 py-2">{{ $item->jam_mulai }}</td>
-                    <td class="border px-4 py-2">{{ $item->jam_selesai }}</td>
-                    <td class="border px-4 py-2">{{ $item->kuota }}</td>
+                <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jenisTes->nama }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->ruang }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->tanggal }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jam_mulai }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jam_selesai }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->kuota }}</td>
                     <td class="border px-4 py-2 flex justify-center space-x-2">
                         <button wire:click="edit({{ $item->id }})"
-                            class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
+                            class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                         <button wire:click="delete({{ $item->id }})"
-                            class="bg-red-500 text-white px-4 py-2 rounded">Hapus</button>
+                            class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
                     </td>
                 </tr>
             @endforeach
@@ -61,9 +65,9 @@
                         placeholder="Kuota">
                 </div>
                 <div class="flex justify-end px-4 py-2 border-t">
-                    <button wire:click="closeModal" class="bg-gray-300 text-black px-4 py-2 rounded mr-2">Batal</button>
+                    <button wire:click="closeModal" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded mr-2">Batal</button>
                     <button wire:click.prevent="{{ $isEdit ? 'update' : 'store' }}"
-                        class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
+                        class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Simpan</button>
                 </div>
             </div>
         </div>
