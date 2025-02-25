@@ -36,10 +36,10 @@
                                 focus:ring-0 sm:text-sm sm:leading-6 w-full" type="text" name="nama_lengkap" required
                                     autofocus autocomplete="nama_lengkap" placeholder="Nama Lengkap"
                                     wire:model.live="nama_lengkap" />
+                                </div>
                                 @error('nama_lengkap')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                            </div>
                         </div>
 
                         <!-- NIK -->
@@ -51,10 +51,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NIK" required autofocus autocomplete="NIK" placeholder="NIK"
                                     wire:model.live="nik" />
+                                </div>
                                 @error('nik')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                            </div>
                         </div>
 
                         <!-- NISN -->
@@ -66,10 +66,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NISN" required autofocus autocomplete="NISN" placeholder="NISN"
                                     wire:model.live="nisn" />
+                                </div>
                                 @error('nisn')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                            </div>
                         </div>
 
                         <!-- NPSN -->
@@ -83,11 +83,11 @@
                                     wire:model="npsn" />
                                 <button wire:click="searchByNpsn"
                                     class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Check
-                                </button>
-                                @error('npsn')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
-                            </div>
+                                </div>
+                            </button>
+                            @error('npsn')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
                         <!-- ASAL SEKOLAH -->
                         <div class="col-span-2 mt-2">
@@ -99,10 +99,10 @@
                                     disabled="disabled" type="text" name="sekolah_asal" required autofocus
                                     autocomplete="sekolah_asal" placeholder="Asal Sekolah"
                                     value="{{ strtoupper($sekolah_asal) }}" />
+                                </div>
                                 @error('sekolah_asal')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                            </div>
                         </div>
 
                         <!-- Nomor Telepon -->
@@ -114,10 +114,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="no_telp" required autofocus autocomplete="no_telp"
                                     placeholder="Nomor Telepon" wire:model.live="no_telp" />
+                                </div>
                                 @error('no_telp')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                            </div>
                         </div>
                     </div>
 
@@ -150,10 +150,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="alamat_kk" required autofocus autocomplete="alamat_kk"
                                     placeholder="Alamat KK" wire:model.live='alamat_kk' />
+                                </div>
                                 @error('alamat_kk')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                            </div>
                         </div>
 
                         <!-- Alamat Domisili -->
@@ -172,10 +172,10 @@
                                     type="text" name="alamat_domisili" required autofocus autocomplete="alamat_domisili"
                                     placeholder="Alamat Domisili" wire:model.live='alamat_domisili'
                                     :disabled="$alamat_domisili_disabled" />
+                                </div>
                                 @error('alamat_domisili')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                            </div>
                         </div>
 
                         <!-- Provinsi -->
@@ -190,10 +190,10 @@
                                         <option value="{{ $province['id'] }}">{{ $province['name'] }}</option>
                                     @endforeach
                                 </select>
-                                @error('provinsi')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
                             </div>
+                            @error('provinsi')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Kota/Kab -->
@@ -208,10 +208,10 @@
                                         <option value="{{ $city['id'] }}">{{ $city['name'] }}</option>
                                     @endforeach
                                 </select>
-                                @error('kota')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
                             </div>
+                            @error('kota')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Tempat Lahir -->
@@ -223,11 +223,10 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="tempat_lahir" required autofocus autocomplete="tempat_lahir"
                                     placeholder="Tempat Lahir" wire:model.live='tempat_lahir' />
-                                @error('tempat_lahir')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
                             </div>
-
+                            @error('tempat_lahir')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Tanggal Lahir -->
@@ -240,10 +239,10 @@
                                     type="date" name="tanggal_lahir" required autofocus autocomplete="tanggal_lahir"
                                     placeholder="Tanggal Lahir" wire:model.live='tanggal_lahir'
                                     max="{{ now()->subYear(13)->format('Y-m-d') }}" />
+                                </div>
                                 @error('tanggal_lahir')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                            </div>
                         </div>
                     </div>
                 </div>
