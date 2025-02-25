@@ -20,7 +20,6 @@ class UploadDokumen extends Component
     public $user;
     public $id_jalur, $kbs, $id_persyaratan, $id_siswa, $berkas;
     public $syarat;
-
     public $kb;
 
     public function mount()
