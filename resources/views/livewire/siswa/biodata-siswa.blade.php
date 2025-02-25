@@ -50,7 +50,7 @@
                                 <x-reg-input-text id="NIK"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NIK" required autofocus autocomplete="NIK" placeholder="NIK"
-                                    wire:model.live="nik" />
+                                    wire:model.live="nik" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="16" />
                                 </div>
                                 @error('nik')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
@@ -65,7 +65,7 @@
                                 <x-reg-input-text id="NISN"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NISN" required autofocus autocomplete="NISN" placeholder="NISN"
-                                    wire:model.live="nisn" />
+                                    wire:model.live="nisn" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" />
                                 </div>
                                 @error('nisn')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
@@ -113,7 +113,7 @@
                                 <x-reg-input-text id="no_telp"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="no_telp" required autofocus autocomplete="no_telp"
-                                    placeholder="Nomor Telepon" wire:model.live="no_telp" />
+                                    placeholder="Nomor Telepon" wire:model.live="no_telp" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="15" />
                                 </div>
                                 @error('no_telp')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
