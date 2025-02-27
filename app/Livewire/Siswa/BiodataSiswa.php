@@ -26,9 +26,9 @@ class BiodataSiswa extends Component
     public $alamat_domisili_disabled = false;
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
-        'nik' => 'required|numeric',
-        'nisn' => 'required|numeric',
-        'no_telp' => 'required|numeric',
+        'nik' => 'required|numeric|digits_between:1,16',
+        'nisn' => 'required|numeric|digits_between:1,10',
+        'no_telp' => 'required|numeric|digits_between:1,15',
         'jenis_kelamin' => 'required',
         'tanggal_lahir' => 'required|date',
         'tempat_lahir' => 'required|string',
@@ -263,7 +263,7 @@ class BiodataSiswa extends Component
             $this->siswa->alamat_domisili = '';
             $this->siswa->save();
         }
-        $this->validateOnly('alamat_domisili'); // Add this line
+        $this->validateOnly('alamat_domisili');
     }
 
     public function render()

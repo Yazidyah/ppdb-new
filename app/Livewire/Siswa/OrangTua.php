@@ -40,7 +40,7 @@ class OrangTua extends Component
 
     public function tambahOrtu()
     {
-        $orangTua = ModelsOrangTua::create([
+        ModelsOrangTua::create([
             'id_calon_siswa' => $this->siswa->id_calon_siswa,
             'id_hubungan' => 1,
         ]);
