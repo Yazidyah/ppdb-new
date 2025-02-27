@@ -67,6 +67,10 @@ class UploadDokumen extends Component
 
             $this->syarat->berkas()->save($berkas);
 
+            // Update status in DataRegistrasi
+            DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
+                ->update(['status' => 1]);
+
             Log::info('File berhasil disimpan: ', ['path' => $path]);
             $this->berkas = null; // Reset variabel
         } else {
