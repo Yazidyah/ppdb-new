@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verifikasi Berkas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            margin: 0 auto;
+        }
+
+        .header img {
+            max-width: 100px;
+            height: auto;
+            float: left;
+            margin-right: 20px;
+        }
+
+        .header .text-container {
+            float: left;
+            width: calc(100% - 170px);
+            text-align: center;
+        }
+
+        .header .text-container p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .header .text-container p:first-child {
+            font-size: 20px;
+            font-weight: bold;
+            color: #004d40;
+
+        }
+
+        .header .text-container p:last-child {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .garis-bawah {
+            margin-top: 125px;
+            border: 1px solid #000000;
+        }
+
+        .surat-nomor {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #000000;
+        }
+
+        .judul-surat {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .garis-bawah-kedua {
+            margin-right: 210px;
+            margin-left: 210px;
+            margin-top: -5px;
+            border: 0.5px solid #000000;
+        }
+
+        .nomor-surat {
+            margin-top: -5px;
+            font-size: 14px;
+            color: #000000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="{{ './logoman.png' }}" alt="Logo MAN 1 Kota Bogor">
+        <div class="text-container">
+            <p>KEMENTERIAN AGAMA</p>
+            <p>PANITIA PENERIMAAN PESERTA DIDIK BARU (PPDB)</p>
+            <p>MAN 1 KOTA BOGOR</p>
+            <p>Jl. Dr. Sumeru Komplek Bumi Menteng Asri ( Jl. Terapi ), Kec. Bogor Barat, Kota Bogor</p>
+        </div>
+    </div>
+    <hr class="garis-bawah">
+
+    <div class="surat-nomor">
+        <p class="judul-surat">SURAT KETERANGAN HASIL SELEKSI</p>
+        <hr class="garis-bawah-kedua">
+        <p class="nomor-surat">39/Ma.10.60/PPDB-R.2024/06/2024</p>
+    </div>
+</body>
+
+</html>
