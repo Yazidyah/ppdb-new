@@ -79,6 +79,14 @@
             color: #000000;
             font-weight: bold;
         }
+
+        .announcement {
+            margin-top: 20px;
+            margin-left: 30px;
+            margin-right: 30px;
+            font-size: 16px;
+            color: #000000;
+        }
     </style>
 </head>
 
@@ -99,6 +107,27 @@
         <hr class="garis-bawah-kedua">
         <p class="nomor-surat">39/Ma.10.60/PPDB-R.2024/06/2024</p>
     </div>
+
+    <div class="announcement">
+        <p>
+            Panitia Penerimaan Peserta Didik Baru Madrasah Aliyah Negeri 1 Kota Bogor Tahun
+        </p>
+        <p style="margin-top: 5px;">
+            Pelajaran 2024/2025 dengan ini menerangkan bahwa :
+        </p>
+        <div class="isi-surat">
+            <p>Nama Lengkap
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                {{ $siswa->nama_lengkap }}</p>
+            <p>Tempat, Tanggal Lahir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $siswa->tempat_lahir }},
+                {{ \Carbon\Carbon::parse($siswa->tanggal_lahir)->locale('id')->translatedFormat('d F Y') }}</p>
+            <p>Sekolah/Madrasah Asal &nbsp;&nbsp;&nbsp;&nbsp;: {{ $siswa->sekolah_asal }}</p>
+            <p>Nomor Pendaftaran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
+                {{ $siswa->dataRegistrasi->kode_registrasi }}</p>
+        </div>
+
+    </div>
+
 </body>
 
 </html>
