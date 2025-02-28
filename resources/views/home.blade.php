@@ -56,9 +56,9 @@
             </div>
         </div>
         <div id="afirmatif" class="mx-auto container " x-data="{tahun:true}">
-            <button @click="tahun = !tahun"
+            <button
                 class="font-bold text-2xl pb-2 hover:underline text-center flex mx-auto">Jalur Afirmatif</button>
-            <div x-show="tahun" class="border border-primary rounded-t-xl mx-auto container">
+            <div class="border border-primary rounded-t-xl mx-auto container">
                 <div
                     class="mx-auto w-full  grid grid-cols-4 py-3 grid-flow-col gap-2 items-center text-center bg-tertiary rounded-t-xl">
                     <h1 class=" text-white text-xs md:text-md lg:text-xl font-bold uppercase row-span-2">No</h1>
@@ -121,9 +121,9 @@
 
         </div>
         <div id="reguler" class="mx-auto container my-6" x-data="{tahun:true}">
-            <button @click="tahun = !tahun"
+            <button
                 class="font-bold text-2xl pb-2 hover:underline text-center flex mx-auto">Jalur Reguler</button>
-            <div x-show="tahun" class="border border-primary rounded-t-xl mx-auto container">
+            <div class="border border-primary rounded-t-xl mx-auto container">
                 <div
                     class="mx-auto w-full  grid grid-cols-4 py-3 grid-flow-col gap-2 items-center text-center bg-tertiary rounded-t-xl">
                     <h1 class=" text-white text-xs md:text-md lg:text-xl font-bold uppercase row-span-2">No</h1>

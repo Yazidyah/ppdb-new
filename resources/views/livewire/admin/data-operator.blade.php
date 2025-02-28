@@ -1,6 +1,6 @@
 <div>
 <div class="p-4 sm:ml-64 ">
-<div class="p-4 border-2 border-gray-700 border-dashed rounded-lg  mt-14">
+<div class="p-4 sm:ml-64">
     {{-- Modal --}}
     @if($isOpen)
         <div class="fixed inset-0 z-10 overflow-y-auto">

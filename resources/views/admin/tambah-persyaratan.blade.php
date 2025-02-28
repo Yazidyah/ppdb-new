@@ -1,6 +1,6 @@
 <x-app-layout>
 <div class="p-4 sm:ml-64">
-   <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+   <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
 <div class="container mx-auto text-center pt-7">
                 <h1 class="font-bold text-[32px] pt-7 pb-7 ">Tambah Persyaratan</h1>
                 <div class="flex w-3/4 items-center justify-center border-2 border-dasar2 rounded-lg py-2 mx-auto my-6">
