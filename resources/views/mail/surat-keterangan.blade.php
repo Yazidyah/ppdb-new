@@ -110,8 +110,8 @@
         <img src="{{ './logoman.png' }}" alt="Logo MAN 1 Kota Bogor">
         <div class="text-container">
             <p>KEMENTERIAN AGAMA</p>
-            <p>PANITIA PENERIMAAN PESERTA DIDIK BARU (PPDB)</p>
-            <p>MAN 1 KOTA BOGOR</p>
+            <p><strong>PANITIA PENERIMAAN PESERTA DIDIK BARU (PPDB)</strong></p>
+            <p><strong>MAN 1 KOTA BOGOR</strong></p>
             <p>Jl. Dr. Sumeru Komplek Bumi Menteng Asri ( Jl. Terapi ), Kec. Bogor Barat, Kota Bogor</p>
         </div>
     </div>
@@ -133,10 +133,10 @@
         <div class="isi-surat">
             <p>Nama Lengkap
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                {{ $siswa->nama_lengkap }}</p>
-            <p>Tempat, Tanggal Lahir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ $siswa->tempat_lahir }},
+                {{ strtoupper($siswa->nama_lengkap) }}</p>
+            <p>Tempat, Tanggal Lahir &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {{ ucwords($siswa->tempat_lahir) }},
                 {{ \Carbon\Carbon::parse($siswa->tanggal_lahir)->locale('id')->translatedFormat('d F Y') }}</p>
-            <p>Sekolah/Madrasah Asal &nbsp;&nbsp;&nbsp;&nbsp;: {{ $siswa->sekolah_asal }}</p>
+            <p>Sekolah/Madrasah Asal &nbsp;&nbsp;&nbsp;&nbsp;: {{ ucwords($siswa->sekolah_asal) }}</p>
             <p>Nomor Pendaftaran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
                 {{ $siswa->dataRegistrasi->kode_registrasi }}</p>
         </div>

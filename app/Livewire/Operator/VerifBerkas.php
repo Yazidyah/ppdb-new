@@ -122,25 +122,30 @@ class VerifBerkas extends Component
         $this->updateRegistrasiStatus();
         $this->processDataTes();
 
-        $pdf = Pdf::loadView('mail.verifikasi-berkas', [
+        $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
+        $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
+
+        $pdf = Pdf::loadView('mail.kartu-peserta', [
             'siswa' => $this->siswa,
             'syarat' => $this->syarat,
+            'jadwal_bq_wawancara' => $jadwalBqWawancara,
+            'jadwal_japres_tes_akademik' => $jadwalJapresTesAkademik,
         ]);
 
-
-
+        $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->kode_registrasi . '.pdf';
 
         // Send email notification
         if ($this->status == 4) {
             $messageBody = "Selamat, Kamu telah lolos verifikasi berkas.";
-            Mail::send([], [], function ($message) use ($pdf, $messageBody) {
+            Mail::send([], [], function ($message) use ($pdf, $messageBody, $fileName) {
                 $message->to($this->siswa->user->email)
                     ->subject('Hasil Verifikasi Berkas')
                     ->text($messageBody)
-                    ->attachData($pdf->output(), 'verifikasi-berkas.pdf', [
+                    ->attachData($pdf->output(), $fileName, [
                         'mime' => 'application/pdf',
                     ]);
             });
+
             $this->modalOpen = false;
         } elseif ($this->status == 3) {
             $missingDocuments = $this->getMissingDocuments();
@@ -152,8 +157,23 @@ class VerifBerkas extends Component
             $this->modalOpen = false;
         }
 
-
         return redirect(request()->header('Referer'));
+    }
+
+    /**
+     * Format jadwal tes.
+     *
+     * @param int $idJadwalTes
+     * @return string
+     */
+    protected function formatJadwalTes($idJadwalTes)
+    {
+        $jadwalTes = JadwalTes::find($idJadwalTes);
+        if ($jadwalTes) {
+            $formattedDate = Carbon::parse($jadwalTes->tanggal)->format('Y-m-d');
+            return "{$formattedDate} {$jadwalTes->jam_mulai} - {$jadwalTes->jam_selesai} WIB / Ruang {$jadwalTes->ruang}";
+        }
+        return '';
     }
 
     /**
