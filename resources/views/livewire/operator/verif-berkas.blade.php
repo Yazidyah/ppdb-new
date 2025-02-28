@@ -1,6 +1,8 @@
 <div>
-    <button wire:click="$set('modalOpen', true)" type="button"
-        class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors bg-tertiary border rounded-md hover:bg-secondary hover:text-tertiary active:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Verif</button>
+<button wire:click="$set('modalOpen', true)" type="button"
+        class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors {{ $buttonColor }} border rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">
+        {!! $buttonIcon !!}
+    </button>
     @if ($modalOpen)
         <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen">
             <div class="absolute inset-0 w-full h-full bg-black backdrop-blur-sm bg-opacity-70"
@@ -63,7 +65,7 @@
                         <label for="status" class="text-sm font-medium text-gray-700 text-left">Update Status</label>
                         <select id="status" wire:model="status"
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            <option value="" disabled>Pilih Status</option>
+                            <option value="2">Pilih Status</option>
                             <option value="3">Tidak Lolos</option>
                             <option value="4">Lolos</option>
                         </select>
