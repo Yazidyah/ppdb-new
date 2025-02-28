@@ -68,8 +68,7 @@
                                             class="text-gray-700">Nama</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
-                                        <button type="submit" form="searchForm" name="sort_by" value="NISN"
-                                            class="text-gray-700">NISN</button>
+                                        Akun
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
                                         <button type="submit" form="searchForm" name="sort_by" value="sekolah_asal"
@@ -88,6 +87,10 @@
                                             class="text-gray-700">Status</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
+                                        <button type="submit" form="searchForm" name="sort_by" value="jalur"
+                                            class="text-gray-700">Jalur</button>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         <button type="submit" form="searchForm" name="sort_by" value="created_at"
                                             class="text-gray-700">Tanggal Daftar</button>
                                     </th>
@@ -104,8 +107,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($data as $siswa)
-                                    <tr onclick="window.location.href='{{ route('operator.datasiswa-detail', $siswa->id_calon_siswa) }}'"
-                                        class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                                    <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->id_calon_siswa }}
                                         </td>
@@ -113,7 +115,7 @@
                                             {{ @$siswa->nama_lengkap ?? 'Belum Di Lengkapi' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->NISN ?? 'Belum Di Lengkapi' }}
+                                            {{ @$siswa->NISN ?? 'Belum Di Lengkapi' }} / {{ @$siswa->dataRegistrasi->kode_registrasi ?? '-' }} / {{ @$siswa->user->email ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ strtoupper(@$siswa->sekolah_asal ?? 'Belum Di Lengkapi') }}
@@ -126,6 +128,9 @@
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                                 {{ $siswa->dataRegistrasi->status_label }}
+                                        </td>
+                                        <td scope="col" class="px-6 py-3 text-center">
+                                            {{ $siswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}
