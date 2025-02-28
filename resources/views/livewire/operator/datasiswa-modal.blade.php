@@ -44,8 +44,8 @@
                 <hr class="my-4 border-gray-300">
                 <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-gray-700">
                     <div class="flex flex-col text-left">
-                        <p class="text-xs font-medium">No Telpon</p>
-                        <p class="text-sm text-gray-500">{{ @$siswa->no_telp ?? 'Belum Di Lengkapi' }}</p>
+                        <p class="text-xs font-medium">Email</p>
+                        <p class="text-sm text-gray-500">{{ @$siswa->user->email ?? 'Belum Di Lengkapi' }}</p>
                     </div>
                     <div class="flex flex-col text-left">
                         <p class="text-xs font-medium">NISN</p>

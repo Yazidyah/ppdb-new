@@ -1,8 +1,4 @@
 @component('mail::message')
-
-{{-- Logo --}}
-<img src="{{ url('/logoman.png') }}" style="max-width: 150px; margin-bottom: 20px;" alt="Logo">
-
 # Reset Password
 
 Kamu meminta reset password untuk akun ini. Klik tombol di bawah untuk mengganti password baru:
