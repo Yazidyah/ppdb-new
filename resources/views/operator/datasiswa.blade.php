@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="p-4 sm:ml-64">
-        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+<div x-data="{ tahun: true }" class="p-4 transition-all duration-300" x-bind:class="$store.sidebar.isOpen ? 'sm:ml-64' : ' ml-0'">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
             <div class="container mx-auto text-center pt-7">
                 <div class="container mx-auto text-center pt-7 ">
                     <h1 @click="tahun = !tahun" class="font-bold text-[32px] pt-7 pb-7 ">Siswa Terdaftar</h1>
@@ -70,8 +70,7 @@
                                             class="text-gray-700">Nama</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
-                                        <button type="submit" form="searchForm" name="sort_by" value="NISN"
-                                            class="text-gray-700">NISN</button>
+                                        Akun
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
                                         <button type="submit" form="searchForm" name="sort_by" value="sekolah_asal"
@@ -90,6 +89,10 @@
                                             class="text-gray-700">Status</button>
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
+                                        <button type="submit" form="searchForm" name="sort_by" value="jalur"
+                                            class="text-gray-700">Jalur</button>
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-center">
                                         <button type="submit" form="searchForm" name="sort_by" value="created_at"
                                             class="text-gray-700">Tanggal Daftar</button>
                                     </th>
@@ -106,8 +109,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($data as $siswa)
-                                    <tr onclick="window.location.href='{{ route('operator.datasiswa-detail', $siswa->id_calon_siswa) }}'"
-                                        class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                                    <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->id_calon_siswa }}
                                         </td>
@@ -115,7 +117,7 @@
                                             {{ @$siswa->nama_lengkap ?? 'Belum Di Lengkapi' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->NISN ?? 'Belum Di Lengkapi' }}
+                                            {{ @$siswa->NISN ?? 'Belum Di Lengkapi' }} / {{ @$siswa->dataRegistrasi->kode_registrasi ?? '-' }} / {{ @$siswa->user->email ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ strtoupper(@$siswa->sekolah_asal ?? 'Belum Di Lengkapi') }}
@@ -128,6 +130,9 @@
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->dataRegistrasi->status_label }}
+                                        </td>
+                                        <td scope="col" class="px-6 py-3 text-center">
+                                            {{ $siswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}

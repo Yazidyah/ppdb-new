@@ -120,10 +120,11 @@
 
         // Tentukan URL gambar contoh berdasarkan jenis file
         let exampleFiles = {
-            "Pas Foto 3x4": "/contoh-pas-foto.jpg",
+            "Pas Foto 3x4": "/contoh_berkas/contoh-pas-foto.jpg",
+            "Kartu Pelajar": "/contoh_berkas/Contoh Kartu Pelajar.jpg",
+            "Ijazah SMP/MTs": "/contoh_berkas/Contoh Ijazah.jpeg",
+            "Rapot": "/contoh_berkas/Contoh Rapot",
             "Kartu Keluarga": "/logoman.webp",
-            "Ijazah SMP/MTs": "/contoh-pas-foto.jpg",
-            "Rapot": "/logoman.webpz",
             "Piagam Akreditasi Sekolah Asal": "https://example.com/contoh-pasfoto.jpg",
             "Piagam Kejuaraan": "https://example.com/contoh-pasfoto.jpg",
             // Tambahkan contoh file lainnya di sini...
