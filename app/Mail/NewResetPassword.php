@@ -1,4 +1,4 @@
-<?
+<?php
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -37,7 +37,7 @@ class NewResetPassword extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.NewResetPassword',
+            markdown: 'mail.new-reset-password', // updated path
             with: [
                 'token' => $this->token,
             ],

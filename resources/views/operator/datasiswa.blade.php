@@ -41,7 +41,8 @@
                                 <option value="" {{ !request('jalur') ? 'selected' : '' }}>Semua jalur
                                 </option>
                                 @foreach ($jalurRegistrasi as $jalur)
-                                    <option value="{{ $jalur->id_jalur }}" {{ request('jalur') == $jalur->id_jalur ? 'selected' : '' }}>
+                                    <option value="{{ $jalur->id_jalur }}"
+                                        {{ request('jalur') == $jalur->id_jalur ? 'selected' : '' }}>
                                         {{ $jalur->nama_jalur }}
                                     </option>
                                 @endforeach
@@ -54,6 +55,7 @@
                             @endif
                         </div>
                     </form>
+                    @livewire('operator.export-data-siswa', key('export-data-' . rand()))
                     <div x-show="tahun"
                         class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6">
                         <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 my-3">
@@ -127,7 +129,7 @@
                                             {{ @$siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                                {{ $siswa->dataRegistrasi->status_label }}
+                                            {{ $siswa->dataRegistrasi->status_label }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}
@@ -135,13 +137,16 @@
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}
                                         </td>
-                                        <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
+                                        <td scope="col" class="px-6 py-3 text-center"
+                                            onclick="event.stopPropagation()">
                                             @livewire('operator.verif-berkas', ['siswa' => $siswa], key($siswa->user_id . '-berkas-' . $siswa->id_calon_siswa))
                                         </td>
-                                        <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
+                                        <td scope="col" class="px-6 py-3 text-center"
+                                            onclick="event.stopPropagation()">
                                             @livewire('operator.status-acc', ['siswa' => $siswa], key($siswa->user_id . '-status-' . $siswa->id_calon_siswa))
                                         </td>
-                                        <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
+                                        <td scope="col" class="px-6 py-3 text-center"
+                                            onclick="event.stopPropagation()">
                                             @livewire('operator.datasiswa-modal', ['siswa' => $siswa], key($siswa->user_id . '-modal-' . $siswa->id_calon_siswa))
                                         </td>
                                     </tr>
@@ -164,13 +169,13 @@
                     debounceTimer = setTimeout(callback, delay);
                 };
 
-                document.getElementById('searchInput').addEventListener('input', function () {
+                document.getElementById('searchInput').addEventListener('input', function() {
                     debounce(() => {
                         document.getElementById('searchForm').submit();
                     }, 500);
                 });
 
-                document.getElementById('sekolahAsalInput').addEventListener('input', function () {
+                document.getElementById('sekolahAsalInput').addEventListener('input', function() {
                     debounce(() => {
                         document.getElementById('searchForm').submit();
                     }, 500);

@@ -5,6 +5,7 @@ namespace App\Livewire\Operator;
 use Livewire\Component;
 use App\Models\JadwalTes;
 use App\Models\DataTes;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
@@ -61,7 +62,7 @@ class VerifBerkas extends Component
         $operator = $isBq ? 'like' : 'not like';
         return JadwalTes::whereHas('jenisTes', function ($query) use ($operator) {
             $query->where('no_jalur', $this->jalur->id_jalur)
-                  ->where('nama', $operator, '%BQ%');
+                ->where('nama', $operator, '%BQ%');
         })->get()->map(function ($jadwal) {
             $formattedDate = Carbon::parse($jadwal->tanggal)->format('d-m-Y');
             return [
@@ -121,23 +122,58 @@ class VerifBerkas extends Component
         $this->updateRegistrasiStatus();
         $this->processDataTes();
 
+        $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
+        $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
+
+        $pdf = Pdf::loadView('mail.kartu-peserta', [
+            'siswa' => $this->siswa,
+            'syarat' => $this->syarat,
+            'jadwal_bq_wawancara' => $jadwalBqWawancara,
+            'jadwal_japres_tes_akademik' => $jadwalJapresTesAkademik,
+        ]);
+
+        $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->kode_registrasi . '.pdf';
+
         // Send email notification
         if ($this->status == 4) {
-            Mail::raw('Selamat kamu lolos', function ($message) {
+            $messageBody = "Selamat, Kamu telah lolos verifikasi berkas.";
+            Mail::send([], [], function ($message) use ($pdf, $messageBody, $fileName) {
                 $message->to($this->siswa->user->email)
-                        ->subject('Hasil Verifikasi Berkas');
+                    ->subject('Hasil Verifikasi Berkas')
+                    ->text($messageBody)
+                    ->attachData($pdf->output(), $fileName, [
+                        'mime' => 'application/pdf',
+                    ]);
             });
+
+            $this->modalOpen = false;
         } elseif ($this->status == 3) {
             $missingDocuments = $this->getMissingDocuments();
             $messageBody = "Maaf, Kamu belum lolos verifikasi berkas karena tidak mengupload berkas: " . implode(', ', $missingDocuments);
             Mail::raw($messageBody, function ($message) {
                 $message->to($this->siswa->user->email)
-                        ->subject('Hasil Verifikasi Berkas');
+                    ->subject('Hasil Verifikasi Berkas');
             });
+            $this->modalOpen = false;
         }
 
-        $this->modalOpen = false;
         return redirect(request()->header('Referer'));
+    }
+
+    /**
+     * Format jadwal tes.
+     *
+     * @param int $idJadwalTes
+     * @return string
+     */
+    protected function formatJadwalTes($idJadwalTes)
+    {
+        $jadwalTes = JadwalTes::find($idJadwalTes);
+        if ($jadwalTes) {
+            $formattedDate = Carbon::parse($jadwalTes->tanggal)->format('Y-m-d');
+            return "{$formattedDate} {$jadwalTes->jam_mulai} - {$jadwalTes->jam_selesai} WIB / Ruang {$jadwalTes->ruang}";
+        }
+        return '';
     }
 
     /**
