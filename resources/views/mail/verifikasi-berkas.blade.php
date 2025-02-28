@@ -81,11 +81,26 @@
         }
 
         .announcement {
-            margin-top: 20px;
+            margin-top: 60px;
             margin-left: 30px;
             margin-right: 30px;
             font-size: 16px;
             color: #000000;
+        }
+
+        .status-surat {
+            text-align: center;
+            margin-top: 80px;
+            font-size: 16px;
+            color: #000000;
+        }
+
+        .status-surat-peserta {
+            margin-top: 5px;
+        }
+
+        .status-surat-keterangan {
+            margin-top: 50px;
         }
     </style>
 </head>
@@ -126,6 +141,13 @@
                 {{ $siswa->dataRegistrasi->kode_registrasi }}</p>
         </div>
 
+    </div>
+
+    <div class="status-surat">
+        <h2>DITERIMA</h2>
+        <p class="status-surat-peserta">Sebagai peserta didik baru MAN 1 Kota Bogor Tahun Pelajaran 2024/2025</p>
+        <p class="status-surat-keterangan">Demikian Surat Keterangan ini disampaikan untuk dapat dipergunakan
+            sebagaimana mestinya.</p>
     </div>
 
 </body>
