@@ -117,8 +117,11 @@
             text-align: center;
         }
 
+        .table-footer {
+            margin-top: 50px;
+        }
+
         .footer {
-            margin-top: 30px;
             text-align: right;
             display: flex;
             justify-content: space-between;
@@ -137,12 +140,44 @@
 
         .notes {
             font-size: 12px;
-            margin-top: 20px;
+            margin-top: 35px;
         }
 
         .alamat {
             margin-left: 200px;
             margin-top: -70px;
+        }
+
+        .jadwal {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .tanda-tangan {
+            margin-right: 100px;
+            margin-top: -180px;
+        }
+
+        .tanda-tangan {
+            margin-right: -5px;
+        }
+
+        .nama {
+            margin-top: 20px;
+        }
+
+        .tempat-tangan {
+            margin-top: 60px;
+        }
+
+        .tempat {
+            margin-top: -10px;
+        }
+
+        .nama {
+            margin-top: 80px;
         }
     </style>
 </head>
@@ -193,27 +228,33 @@
         </table>
     </div>
 
-    {{-- <table class="table">
-            <tr>
-                <th>Tes Baca Al-Quran dan Wawancara</th>
-                <th>Tes Akademik</th>
-            </tr>
-            <tr>
-                <td>{{ $jadwal_bq_wawancara }}</td>
-                <td>{{ $jadwal_japres_tes_akademik }}</td>
-            </tr>
-        </table> --}}
-    {{-- </div>
-    <table class="footer-table">
+    <div class="jadwal">
+        <p>Jadwal</p>
+    </div>
+
+    <table class="table">
         <tr>
-            <td class="qrcode">QR Code: Hello World</td>
-            <td style="text-align: right;">
-                <p>Bogor, <br> Ketua Panitia</p>
-                <p>H. Muhammad Luthfi, SE., MM.<br>
-                NIP. 198106242003121002</p>
-            </td>
+            <th>Tes Baca Al-Quran dan Wawancara</th>
+            <th>Tes Akademik</th>
+        </tr>
+        <tr>
+            <td>{{ $jadwal_bq_wawancara }}</td>
+            <td>{{ $jadwal_japres_tes_akademik }}</td>
         </tr>
     </table>
+
+    <div class="table-footer">
+        <div class="footer">
+            <div class="qrcode">
+                QR Code: Hello World
+            </div>
+            <div class="tanda-tangan">
+                <p class="tempat">Bogor, <br> Ketua Panitia</p>
+                <p class="nama">H. Muhammad Luthfi, SE., MM.<br>
+                    NIP. 198106242003121002</p>
+            </div>
+        </div>
+    </div>
 
     <div class="notes">
         <p><strong>Catatan:</strong></p>
@@ -225,7 +266,7 @@
             <li>Selama tes peserta didik tidak diperkenankan menggunakan alat komunikasi/HP;</li>
             <li>Peserta didik datang sesuai jadwal yang sudah ditentukan oleh panitia.</li>
         </ol>
-    </div> --}}
+    </div>
 </body>
 
 </html>
