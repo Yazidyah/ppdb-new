@@ -1,7 +1,7 @@
 <div>
 <div class="p-4 sm:ml-64">
     <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto text-center pt-7">
+            <div class="container mx-auto text-center pt-3">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}

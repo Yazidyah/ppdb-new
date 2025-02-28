@@ -1,10 +1,10 @@
 <x-app-layout>
 <div class="p-4 sm:ml-64">
    <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
-      <div class="container mx-auto text-center pt-7">
+      <div class="container mx-auto text-center pt-3">
         
 
-<div class="container mx-auto text-center pt-7">
+<div class="container mx-auto text-center pt-3">
                 <h1 class="font-bold text-[32px] pt-7 pb-7 ">Siswa Terdaftar</h1>
 <div class="w-full overflow-x-auto   mx-auto flex  items-center relative shadow-md sm:rounded-lg my-6">
  

@@ -1,7 +1,7 @@
 <div>
 <div class="p-4 sm:ml-64">
     <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto text-center pt-7">
+            <div class="container mx-auto text-center pt-3">
                 @if ($showModal)
                     <div class="fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50" wire:key="modal-{{ $isEdit ? 'edit' : 'create' }}">
                         <div class="p-4 sm:ml-64">
