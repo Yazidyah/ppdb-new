@@ -2,6 +2,10 @@
     <!-- Form Pencarian -->
     <div class="max-w-md mx-auto bg-white rounded shadow p-6">
         <form wire:submit.prevent="search">
+            <!-- tambahkan teks "Sudah pernah mendaftar? cari disini -->
+            <div class="mb-4 text-left text-gray-700 text-sm font-bold">
+                Sudah pernah mendaftar? Silakan cari disini
+            </div>
             <div class="mb-4">
                 <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN</label>
                 <input type="text" id="nisn" wire:model="nisn" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" 
