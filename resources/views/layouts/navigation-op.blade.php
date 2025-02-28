@@ -70,6 +70,14 @@ switch ($userRole){
             
                 <!-- Logo -->
                 <div x-data="{cheat:false}" class="flex items-center gap-1 justify-center px-6">
+                <button @click="$store.sidebar.toggle()" class="fixed top-5 left-5 z-50 p-2 bg-white hover:bg-secondary text-tertiary rounded-md shadow-md">
+        <svg x-show="!$store.sidebar.isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg x-show="$store.sidebar.isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
                     <a href={{ route($redirectUrl) }}>
                         <x-application-logo class=" h-9 w-auto fill-current text-gray-800 " />
                     </a>
@@ -178,17 +186,10 @@ switch ($userRole){
 </nav>
 <div x-data="{ isOpen: false }">
     <!-- Toggle Button -->
-    <button @click="isOpen = !isOpen" class="fixed top-5 left-5 z-50 p-2 bg-gray-800 text-white rounded-md shadow-md">
-        <svg x-show="!isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        <svg x-show="isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-    </button>
+    
     
     <!-- Sidebar -->
-    <aside x-show="isOpen" @click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 border-r border-gray-200 bg-tertiary">
+    <aside  x-show="$store.sidebar.isOpen" @click.outside="$store.sidebar.isOpen = false" x-show="isOpen" @click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 border-r border-gray-200 bg-tertiary">
         <div class="h-full px-3 py-4 overflow-y-auto">
             <ul class="space-y-2 font-medium">
             <li>

@@ -60,6 +60,17 @@
         </main>
     </div>
     @livewireScripts
+    <script>
+document.addEventListener('alpine:init', () => {
+    Alpine.store('sidebar', {
+        isOpen: false,
+        toggle() {
+            this.isOpen = !this.isOpen;
+        }
+    });
+});
+</script>
+
 </body>
 
 </html>
