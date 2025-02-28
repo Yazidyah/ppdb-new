@@ -37,7 +37,7 @@ class NewResetPassword extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.newresetpassword',
+            markdown: 'mail.new-reset-password', // updated path
             with: [
                 'token' => $this->token,
             ],
