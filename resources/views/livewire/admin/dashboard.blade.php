@@ -46,7 +46,7 @@
     <!-- Main Content -->
         @if ($tab === 1)
         <div class="p-4 sm:ml-64">
-        <div class="p-4 sm:ml-64">
+
             <div class="container mx-auto text-center pt-7">
             <div class="bg-gray-100 py-10">
                 <h2 class="text-2xl font-bold mb-6 text-center">Data Pendaftaran</h2>
@@ -208,7 +208,6 @@
             </div>
             </div>
             </div>
-            </div>
         @endif
 
         @if ($tab == 2)
@@ -218,6 +217,5 @@
         @if ($tab == 3)
             @livewire('admin.data-operator', key('data-operator' . rand()))
         @endif
-    </div>
-    </div>
 </div>
+

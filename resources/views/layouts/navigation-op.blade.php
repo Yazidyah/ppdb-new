@@ -73,8 +73,7 @@ switch ($userRole){
                     <a href={{ route($redirectUrl) }}>
                         <x-application-logo class=" h-9 w-auto fill-current text-gray-800 " />
                     </a>
-
-</div>
+                </div>
             <div class="flex">
                 <!-- Navigation Links -->
                 <div class="items-center justify-center flex">
@@ -145,6 +144,12 @@ switch ($userRole){
         <div class=" pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrlp)">
+                {{ __('Alur Pendaftaran') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrlk)">
+                {{ __('Persyaratan') }}
             </x-responsive-nav-link>
            
         </div>

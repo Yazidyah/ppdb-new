@@ -32,15 +32,15 @@ switch ($userRole){
 @endphp
 
 
-<nav x-data="{ open: false }" class="sticky top-0 z-50 bg-tertiary mx-auto w-full right-0 left-0">
+<nav x-data="{ open: false }" class="fixed top-0 z-50 bg-tertiary mx-auto w-full right-0 left-0">
     <!-- Primary Navigation Menu -->
     <div class="flex justify-between items-center container mx-auto">
        
             
                 <!-- Logo -->
-                <div class="flex items-center gap-1 justify-center px-6">
-                    <a href="{{ route($redirectUrl) }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                <div x-data="{cheat:false}" class="flex items-center gap-1 justify-center px-6">
+                    <a href={{ route($redirectUrl) }}>
+                        <x-application-logo class=" h-9 w-auto fill-current text-gray-800 " />
                     </a>
                 </div>
             <div class="flex">
