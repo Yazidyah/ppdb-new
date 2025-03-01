@@ -4,6 +4,7 @@
             <h2 class="font-bold text-3xl md:text-4xl ">Selamat Datang Calon Siswa MAN 1 Kota Bogor</h2>
         </div>
     </div>
+    
     <section>
         <div class="container flex justify-center  mx-auto gap-2">
 
