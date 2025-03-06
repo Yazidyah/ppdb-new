@@ -120,7 +120,7 @@
     <div class="surat-nomor">
         <p class="judul-surat">SURAT KETERANGAN HASIL SELEKSI</p>
         <hr class="garis-bawah-kedua">
-        <p class="nomor-surat">39/Ma.10.60/PPDB-R.2024/06/2024</p>
+        <p class="nomor-surat">39/Ma.10.60/PPDB-R.2024/06/2025</p>
     </div>
 
     <div class="announcement">
@@ -144,7 +144,13 @@
     </div>
 
     <div class="status-surat">
-        <h2>DITERIMA</h2>
+    @if($status == 7)
+<h1>Diterima</h1>
+@elseif($status == 8)
+<h1>Dicadangkan</h1>
+@else
+<h1>Tidak Diterima</h1>
+@endif
         <p class="status-surat-peserta">Sebagai peserta didik baru MAN 1 Kota Bogor Tahun Pelajaran 2024/2025</p>
         <p class="status-surat-keterangan">Demikian Surat Keterangan ini disampaikan untuk dapat dipergunakan
             sebagaimana mestinya.</p>
