@@ -63,7 +63,7 @@ switch ($userRole){
 
 
 
-<nav x-data="{ open: false }" class="fixed top-0 z-50 bg-tertiary mx-auto w-full right-0 left-0">
+<nav x-data="{ open: false }" class="sticky top-0 z-50 bg-tertiary mx-auto w-full right-0 left-0">
     <!-- Primary Navigation Menu -->
     <div class="flex justify-between items-center container mx-auto">
        
