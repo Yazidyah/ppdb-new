@@ -41,6 +41,7 @@ class UploadDokumen extends Component
                     'berkas.mimes' => 'Format file harus jpeg, jpg, atau png.',
                     'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
                 ]);
+                $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error', $e->getMessage());
             } catch (\Exception $e) {
@@ -58,6 +59,7 @@ class UploadDokumen extends Component
                     'berkas.mimes' => 'Format file harus pdf.',
                     'berkas.max' => 'Ukuran file maksimal adalah 3MB.',
                 ]);
+                $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-rapot', $e->getMessage());
             } catch (\Exception $e) {

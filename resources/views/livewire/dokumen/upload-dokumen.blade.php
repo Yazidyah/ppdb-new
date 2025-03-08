@@ -86,9 +86,6 @@
                                 <p class="text-red-500 text-xs mt-2">{{ session('error') }}</p>
                             @endif
                         @endif
-                        {{-- @error('berkas')
-                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                        @enderror --}}
                     @endif
                     <button type="button" onclick="showExample('{{ $data->nama_persyaratan }}')"
                         class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
