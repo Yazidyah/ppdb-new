@@ -54,6 +54,11 @@ class User extends Authenticatable implements CanResetPassword
 
     protected $dates = ['deleted_at'];
 
+    public function berkas()
+    {
+        return $this->hasMany(Berkas::class, 'uploader_id', 'id');
+    }
+
     public function siswa()
     {
         return $this->belongsTo(CalonSiswa::class, 'id', 'id_user');
@@ -66,8 +71,8 @@ class User extends Authenticatable implements CanResetPassword
 
 
 
-public function sendPasswordResetNotification($token)
-{
-    Mail::to($this->email)->send(new NewResetPassword($token));
-}
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::to($this->email)->send(new NewResetPassword($token));
+    }
 }

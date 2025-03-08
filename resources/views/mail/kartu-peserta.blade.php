@@ -179,6 +179,31 @@
         .nama {
             margin-top: 80px;
         }
+
+        .photo {
+            width: 30mm;
+            height: 40mm;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+        }
+
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .photo img[src=""] {
+            display: none;
+        }
+
+        .photo .placeholder {
+            opacity: 0.5;
+        }
     </style>
 </head>
 
@@ -221,9 +246,25 @@
                     <p class="alamat">{{ $siswa->alamat_domisili }}</p>
                     </p>
                 </td>
-                <td style="width: 40mm; text-align: right;">
-                    <div class="photo">Foto 3x4 cm</div>
-                </td>
+                @php
+                    $berkas = $siswa->user->berkas;
+                @endphp
+                @foreach ($berkas as $br)
+                    @if ($br->persyaratan->nama_persyaratan == 'Pas Foto')
+                        @php
+                            $encodedPath = base64_encode($br->file_name);
+                            $url = route('local.temp', ['path' => $encodedPath]);
+                        @endphp
+
+                        <p>{{ $url }}</p>
+                        <div class="photo">
+                            <div class="placeholder" style="display: none;">
+                                <img src="{{ $br->file_name }} " alt="Pas Foto" loading="lazy"
+                                    style="max-width: 100%; height: auto;">
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </tr>
         </table>
     </div>

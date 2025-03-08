@@ -24,14 +24,14 @@ class OperatorController extends Controller
         $data = $query->get()->map(function ($item) {
             $item->nama_lengkap = ucwords(strtolower($item->nama_lengkap));
             $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
-            $item->dataRegistrasi->status_label = $this->getStatusLabel($item->dataRegistrasi->status);
+            $item->status_label = $this->getStatusLabel($item->dataRegistrasi->status ?? null);
             return $item;
         });
 
         $jalurRegistrasi = JalurRegistrasi::all();
         $statuses = DataRegistrasi::select('status')->distinct()->get();
         return view('operator.datasiswa', compact('data', 'jalurRegistrasi', 'statuses'));
-    }   
+    }
 
     private function getStatusLabel($status)
     {

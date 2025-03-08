@@ -26,7 +26,7 @@ class VerifBerkas extends Component
     public $id_registrasi;
     public $id_jadwal_tes;
     protected $jalur;
-    public $buttonColor= '';
+    public $buttonColor = '';
     public $buttonIcon = '';
 
     public function mount()
@@ -47,10 +47,17 @@ class VerifBerkas extends Component
     protected function initializeData()
     {
         $dataRegistrasi = $this->siswa->dataRegistrasi;
-        $this->syarat = $dataRegistrasi->syarat;
-        $this->status = $dataRegistrasi->status;
-        $this->jalur = $dataRegistrasi->jalur;
-        $this->id_registrasi = $dataRegistrasi->id_registrasi;
+        if ($dataRegistrasi) {
+            $this->syarat = $dataRegistrasi->syarat;
+            $this->status = $dataRegistrasi->status;
+            $this->jalur = $dataRegistrasi->jalur;
+            $this->id_registrasi = $dataRegistrasi->id_registrasi;
+        } else {
+            $this->syarat = collect();
+            $this->status = null;
+            $this->jalur = null;
+            $this->id_registrasi = null;
+        }
     }
 
     /**
@@ -73,8 +80,10 @@ class VerifBerkas extends Component
     {
         $operator = $isBq ? 'like' : 'not like';
         return JadwalTes::whereHas('jenisTes', function ($query) use ($operator) {
-            $query->where('no_jalur', $this->jalur->id_jalur)
-                ->where('nama', $operator, '%BQ%');
+            if ($this->jalur) {
+                $query->where('no_jalur', $this->jalur->id_jalur)
+                    ->where('nama', $operator, '%BQ%');
+            }
         })->get()->map(function ($jadwal) {
             $formattedDate = Carbon::parse($jadwal->tanggal)->format('d-m-Y');
             return [
