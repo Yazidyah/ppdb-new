@@ -85,8 +85,8 @@
                                     wire:model="npsn" />
                                 <button wire:click="searchByNpsn"
                                     class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Check
+                                </button>
                             </div>
-                            </button>
                             @error('npsn')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                             @enderror
@@ -97,15 +97,32 @@
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="sekolah_asal"
-                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
-                                    disabled="disabled" type="text" name="sekolah_asal" required autofocus
-                                    autocomplete="sekolah_asal" placeholder="Asal Sekolah"
-                                    value="{{ strtoupper($sekolah_asal) }}" />
+                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full {{ $sekolah_asal_enabled ? 'bg-gray-300' : 'bg-transparent' }}"
+                                    type="text" name="sekolah_asal" required autofocus autocomplete="sekolah_asal" placeholder="Asal Sekolah"
+                                    wire:model.live="sekolah_asal" :disabled="$sekolah_asal_enabled" />
                             </div>
                             @error('sekolah_asal')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        @if(!$sekolah_asal_enabled)
+                            <!-- Status Sekolah -->
+                            <div class="col-span-2 mt-2">
+                                <x-reg-input-label>Status Sekolah</x-reg-input-label>
+                                <div class="flex items-center gap-2">
+                                    <label class="text-xs">
+                                        <input type="radio" name="status_sekolah" value="negeri" wire:model.live="status_sekolah"> Negeri
+                                    </label>
+                                    <label class="text-xs">
+                                        <input type="radio" name="status_sekolah" value="swasta" wire:model.live="status_sekolah"> Swasta
+                                    </label>
+                                </div>
+                                @error('status_sekolah')
+                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @endif
 
                         <!-- Nomor Telepon -->
                         <div class="col-span-4 mt-2">
@@ -143,8 +160,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <!-- Alamat KK -->
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label>Alamat KK</x-reg-input-label>
@@ -164,7 +179,7 @@
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label class="flex items-center justify-between">Alamat Domisili
                                 <label class="ml-2 flex items-center">
-                                    <input type="checkbox" wire:click="toggleAlamatDomisili" class="mr-1">
+                                    <input type="checkbox" wire:click="toggleAlamatDomisili" class="mr-1" {{ $alamat_domisili_disabled ? 'checked' : '' }}>
                                     <span class="text-xs">Sama dengan Alamat KK</span>
                                 </label>
                             </x-reg-input-label>
