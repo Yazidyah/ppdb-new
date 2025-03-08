@@ -35,10 +35,10 @@ class UploadDokumen extends Component
         if ($this->syarat->nama_persyaratan != 'Rapot') {
             try {
                 $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
+                    'berkas' => 'required|mimes:jpeg,jpg|max:300', // Maksimal 300KB
                 ], [
                     'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg, atau png.',
+                    'berkas.mimes' => 'Format file harus jpeg, jpg.',
                     'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
                 ]);
                 $this->simpan();
