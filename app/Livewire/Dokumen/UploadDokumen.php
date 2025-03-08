@@ -21,7 +21,6 @@ class UploadDokumen extends Component
     public $id_jalur, $kbs, $id_persyaratan, $id_siswa, $berkas;
     public $syarat;
     public $kb;
-
     public function mount()
     {
         $this->user = Auth::user();
@@ -33,13 +32,38 @@ class UploadDokumen extends Component
 
     public function updatedBerkas()
     {
-        try {
-            $this->validate([
-                'berkas' => 'required|file|max:51200', // Maksimal 50MB
-            ]);
-            $this->simpan();
-        } catch (\Exception $e) {
-            \Log::info('terlalu besar');
+        if ($this->syarat->nama_persyaratan != 'Rapot') {
+            try {
+                $this->validate([
+                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
+                ], [
+                    'berkas.required' => 'File harus diunggah.',
+                    'berkas.mimes' => 'Format file harus jpeg, jpg, atau png.',
+                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
+                ]);
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                session()->flash('error', $e->getMessage());
+            } catch (\Exception $e) {
+                Log::error('Error saat mengunggah file: ' . $e->getMessage());
+                session()->flash('error', 'Terjadi kesalahan saat mengunggah file.');
+            }
+        }
+
+        if ($this->syarat->nama_persyaratan == 'Rapot') {
+            try {
+                $this->validate([
+                    'berkas' => 'required|mimes:pdf|max:3000', // Maksimal 3MB
+                ], [
+                    'berkas.required' => 'File harus diunggah.',
+                    'berkas.mimes' => 'Format file harus pdf.',
+                    'berkas.max' => 'Ukuran file maksimal adalah 3MB.',
+                ]);
+            } catch (\Illuminate\Validation\ValidationException $e) {
+                session()->flash('error-rapot', $e->getMessage());
+            } catch (\Exception $e) {
+                Log::error('Error saat mengunggah file: ' . $e->getMessage());
+                session()->flash('error-rapot', 'Terjadi kesalahan saat mengunggah file.');
+            }
         }
     }
 
