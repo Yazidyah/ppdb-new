@@ -25,6 +25,7 @@ class OperatorController extends Controller
             $item->nama_lengkap = ucwords(strtolower($item->nama_lengkap));
             $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
             $item->status_label = $this->getStatusLabel($item->dataRegistrasi->status ?? null);
+            $item->no_telp = $item->no_telp; 
             return $item;
         });
 
