@@ -254,16 +254,13 @@ class BiodataSiswa extends Component
 
     public function toggleAlamatDomisili()
     {
-        if ($this->alamat_domisili_disabled) {
-            $this->alamat_domisili = $this->alamat_kk;
-            $this->siswa->alamat_domisili = strtolower($this->alamat_kk);
-            $this->siswa->save();
-        } else {
-            $this->alamat_domisili = '';
-            $this->siswa->alamat_domisili = '';
-            $this->siswa->save();
-        }
-        $this->validateOnly('alamat_domisili');
+        $this->alamat_domisili = $this->alamat_kk;
+        $this->siswa->alamat_domisili = strtolower($this->alamat_kk);
+        $this->updatedAlamatDomisili($this->alamat_domisili);
+        $this->dispatch('fill-alamat-domisili', [
+            'alamat' => $this->alamat_domisili,
+        ]);
+        
     }
 
     public function render()

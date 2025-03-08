@@ -160,18 +160,16 @@
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label class="flex items-center justify-between">Alamat Domisili
                                 <label class="ml-2 flex items-center">
-                                    <input type="checkbox" wire:model="alamat_domisili_disabled"
-                                        wire:click="toggleAlamatDomisili" class="mr-1">
+                                    <input type="checkbox" wire:click="toggleAlamatDomisili" class="mr-1">
                                     <span class="text-xs">Sama dengan Alamat KK</span>
                                 </label>
                             </x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="alamat_domisili"
-                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full {{ $alamat_domisili_disabled ? 'bg-gray-300' : 'bg-transparent' }}"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="alamat_domisili" required autofocus autocomplete="alamat_domisili"
-                                    placeholder="Alamat Domisili" wire:model.live='alamat_domisili'
-                                    :disabled="$alamat_domisili_disabled" />
+                                    placeholder="Alamat Domisili" wire:model.live='alamat_domisili' />
                                 </div>
                                 @error('alamat_domisili')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
@@ -251,3 +249,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.addEventListener('fill-alamat-domisili', event => {
+            console.log('Event detail:', event.detail);
+            // Jika event.detail adalah array, ambil elemen pertama dan akses properti "alamat"
+            if (Array.isArray(event.detail) && event.detail.length > 0 && event.detail[0].alamat) {
+                document.getElementById('alamat_domisili').value = event.detail[0].alamat;
+            } else {
+                console.error('Data alamat tidak ditemukan dalam struktur event.detail.');
+            }
+        });
+    });
+</script>
