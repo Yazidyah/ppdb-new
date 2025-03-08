@@ -28,6 +28,13 @@ class UploadDokumen extends Component
         $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->pluck('id_jalur');
         $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get();
         $this->syarat = null;
+
+        // Check if at least one document has been uploaded
+        $uploadedDocumentsCount = Berkas::where('uploader_id', $this->user->id)->count();
+        if ($uploadedDocumentsCount > 0) {
+            DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
+                ->update(['status' => 1]);
+        }
     }
 
     public function updatedBerkas()
