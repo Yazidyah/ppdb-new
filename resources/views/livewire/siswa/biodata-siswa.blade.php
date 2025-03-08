@@ -238,7 +238,8 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="date" name="tanggal_lahir" required autofocus autocomplete="tanggal_lahir"
                                     placeholder="Tanggal Lahir" wire:model.live='tanggal_lahir'
-                                    max="{{ now()->subYear(13)->format('Y-m-d') }}" />
+                                    min="{{ now()->subYear(21)->format('Y-m-d') }}"
+                                    max="{{ now()->subYear(13)->format('Y-m-d') }}"/>
                                 </div>
                                 @error('tanggal_lahir')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
