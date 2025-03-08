@@ -74,7 +74,7 @@ class KonfigurasiPersyaratan extends Component
         if ($isEdit) {
             $persyaratan = Persyaratan::findOrFail($this->persyaratanId);
             $this->nama_persyaratan = $persyaratan->nama_persyaratan;
-            $this->id_jalur = $persyaratan->id_jalur;
+            $this->id_jalur = is_array($persyaratan->id_jalur) ? $persyaratan->id_jalur : [$persyaratan->id_jalur];
             $this->deskripsi = $persyaratan->deskripsi;
         }
     }
