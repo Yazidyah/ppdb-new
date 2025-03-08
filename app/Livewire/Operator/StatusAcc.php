@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\CalonSiswa;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StatusAcc as StatusAccMail;
-use Illuminate\Support\Facades\Log;
 
 class StatusAcc extends Component
 {
@@ -26,10 +25,8 @@ class StatusAcc extends Component
 
     public function mount($siswa = null)
     {
-        Log::info('Mount method called', ['siswa' => $siswa]);
         if ($siswa) {
             $this->siswa = $siswa;
-            Log::info('Siswa data retrieved:', ['siswa' => $this->siswa]);
             $this->initializeData();
         }
         $this->setButtonColor();
@@ -39,7 +36,6 @@ class StatusAcc extends Component
     protected function initializeData()
     {
         $dataRegistrasi = $this->siswa->dataRegistrasi;
-        Log::info('Data Registrasi:', ['dataRegistrasi' => $dataRegistrasi]);
         if ($dataRegistrasi) {
             $this->status = $dataRegistrasi->status;
         } else {
