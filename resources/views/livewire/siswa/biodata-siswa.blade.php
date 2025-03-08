@@ -172,9 +172,9 @@
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="alamat_domisili" :value="$alamat_domisili"
                                     wire:model="alamat_domisili"
-                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
+                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full {{ $alamat_domisili_disabled ? 'bg-gray-300' : 'bg-transparent' }}"
                                     type="text" name="alamat_domisili" required autofocus autocomplete="alamat_domisili"
-                                    placeholder="Alamat Domisili" />
+                                    placeholder="Alamat Domisili" :disabled="$alamat_domisili_disabled" />
                             </div>
                             @error('alamat_domisili')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
