@@ -32,6 +32,7 @@ class StepSatu extends Component
             $this->orangTua = OrangTua::create([
                 'id_calon_siswa' => $this->siswa->id_calon_siswa,
                 'id_hubungan' => 1,
+                'pekerjaan' => 1,
             ]);
         }
     }
