@@ -4,6 +4,7 @@ namespace App\Livewire\Siswa;
 
 use App\Models\CalonSiswa;
 use App\Models\OrangTua;
+use App\Models\DataRegistrasi; // Add this line
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -34,6 +35,11 @@ class StepSatu extends Component
                 'id_hubungan' => 1,
                 'pekerjaan' => 1,
             ]);
+        }
+
+        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $this->siswa->id_calon_siswa)->first();
+        if ($dataRegistrasi && $dataRegistrasi->status == 1) {
+            return redirect()->to('http://127.0.0.1:8000/siswa/dashboard');
         }
     }
 
