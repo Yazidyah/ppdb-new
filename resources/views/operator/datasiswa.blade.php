@@ -115,7 +115,8 @@
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->nama_lengkap ?? 'Belum Di Lengkapi' }}
                                         </td>
-                                        <td scope="col" class="px-6 py-3 text-center hover-underline" onclick="if('{{ $siswa->no_telp }}') { window.open('https://api.whatsapp.com/send/?phone={{ preg_replace('/^0/', '62', $siswa->no_telp) }}&text&type=phone_number&app_absent=0', '_blank'); } else { alert('Nomor HP tidak tersedia'); }">
+                                        <td scope="col" class="px-6 py-3 text-center hover-underline"
+                                            onclick="if('{{ $siswa->no_telp }}') { window.open('https://api.whatsapp.com/send/?phone={{ preg_replace('/^0/', '62', $siswa->no_telp) }}&text&type=phone_number&app_absent=0', '_blank'); } else { alert('Nomor HP tidak tersedia'); }">
                                             {{ $siswa->NISN ?? 'Belum Di Lengkapi' }} /
                                             {{ $siswa->dataRegistrasi->kode_registrasi ?? '-' }} /
                                             {{ $siswa->user->email ?? '-' }}
@@ -136,7 +137,7 @@
                                             {{ $siswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ $siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}
+                                            {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center"
                                             onclick="event.stopPropagation()">
