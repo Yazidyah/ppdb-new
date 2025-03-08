@@ -32,9 +32,14 @@ class JalurRegistrasi extends Component
     public function generateKodeRegistrasi($jalurId, $registrasiId)
     {
         $year = date('y');
-        $jalur = str_pad($jalurId, 2, '0', STR_PAD_LEFT);
+        $nextYear = date('y', strtotime('+1 year'));
         $registrasi = str_pad($registrasiId, 4, '0', STR_PAD_LEFT);
-        return $year . $jalur . $registrasi;
+
+        if ($jalurId == 1) {
+            return 'R' . $year . $nextYear . $registrasi;
+        } else {
+            return 'A' . $year . $nextYear . $registrasi;
+        }
     }
 
     public function updateJalur($value)
