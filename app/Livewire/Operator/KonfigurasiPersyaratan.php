@@ -23,6 +23,7 @@ class KonfigurasiPersyaratan extends Component
     public $persyaratan;
     public $filterJalur;
 
+
     protected $rules = [
         'nama_persyaratan' => 'required|string|max:255',
         'id_jalur' => 'required|array',
@@ -70,6 +71,12 @@ class KonfigurasiPersyaratan extends Component
         $this->resetForm();
         $this->isEdit = $isEdit;
         $this->showModal = true;
+        if ($isEdit) {
+            $persyaratan = Persyaratan::findOrFail($this->persyaratanId);
+            $this->nama_persyaratan = $persyaratan->nama_persyaratan;
+            $this->id_jalur = $persyaratan->id_jalur;
+            $this->deskripsi = $persyaratan->deskripsi;
+        }
     }
 
     public function closeModal()
@@ -127,8 +134,8 @@ class KonfigurasiPersyaratan extends Component
         $jalur = $persyaratan->jalurRegistrasi->nama_jalur;
 
         $kategoriBerkas = KategoriBerkas::where('key', 'jalur_' . Str::slug($jalur, '_'))
-                                        ->where('nama', $namaPersyaratan)
-                                        ->first();
+            ->where('nama', $namaPersyaratan)
+            ->first();
         if ($kategoriBerkas) {
             $kategoriBerkas->delete();
         }
@@ -194,8 +201,8 @@ class KonfigurasiPersyaratan extends Component
         $jalur = JalurRegistrasi::find($this->id_jalur[0]);
         $slug = 'jalur_' . Str::slug($jalur->nama_jalur, '_');
         $kategoriBerkas = KategoriBerkas::where('key', 'jalur_' . Str::slug($oldJalur, '_'))
-                                        ->where('nama', $oldNamaPersyaratan)
-                                        ->first();
+            ->where('nama', $oldNamaPersyaratan)
+            ->first();
         if ($kategoriBerkas) {
             $kategoriBerkas->update([
                 'key' => $slug,
