@@ -113,30 +113,30 @@
                                             {{ $siswa->id_calon_siswa }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->nama_lengkap ?? 'Belum Di Lengkapi' }}
+                                            {{ $siswa->nama_lengkap ?? 'Belum Di Lengkapi' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->NISN ?? 'Belum Di Lengkapi' }} /
-                                            {{ @$siswa->dataRegistrasi->kode_registrasi ?? '-' }} /
-                                            {{ @$siswa->user->email ?? '-' }}
+                                            {{ $siswa->NISN ?? 'Belum Di Lengkapi' }} /
+                                            {{ $siswa->dataRegistrasi->kode_registrasi ?? '-' }} /
+                                            {{ $siswa->user->email ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ strtoupper(@$siswa->sekolah_asal ?? 'Belum Di Lengkapi') }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->jenis_kelamin ?? 'Belum Di Lengkapi' }}
+                                            {{ $siswa->jenis_kelamin ?? 'Belum Di Lengkapi' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
+                                            {{ $siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->dataRegistrasi->status_label }}
+                                            {{ $siswa->status_label ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}
+                                            {{ $siswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}
+                                            {{ $siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-m-Y') : '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center"
                                             onclick="event.stopPropagation()">
