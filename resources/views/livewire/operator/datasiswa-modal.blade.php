@@ -61,8 +61,8 @@
                         </p>
                     </div>
                     <div class="flex flex-col text-left">
-                        <p class="text-xs font-medium">Kota</p>
-                        <p class="text-sm text-gray-500">{{ @$siswa->kota ?? 'Belum Di Lengkapi' }}</p>
+                        <p class="text-xs font-medium">Kode Registrasi</p>
+                        <p class="text-sm text-gray-500">{{ @$siswa->DataRegistrasi->kode_registrasi ?? 'Belum Di Lengkapi' }}</p>
                     </div>
 
                 </div>

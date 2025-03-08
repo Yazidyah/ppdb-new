@@ -36,6 +36,14 @@
             <input type="date" wire:model="tanggal_lahir" class="border p-2 w-full">
         </div>
         <div>
+            <label class="text-xs font-medium">Jalur</label>
+            <select wire:model="id_jalur" class="border p-2 w-full">
+                @foreach($jalurOptions as $jalur)
+                    <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
             <label class="text-xs font-medium">NPSN</label>
             <input type="text" wire:model="npsn" class="border p-2 w-full">
         </div>
@@ -62,6 +70,19 @@
         <div>
             <label class="text-xs font-medium">Kota</label>
             <input type="text" wire:model="kota" class="border p-2 w-full">
+        </div>
+        <!-- New fields for name, email, and password -->
+        <div>
+            <label class="text-xs font-medium">Name</label>
+            <input type="text" wire:model="name" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Email</label>
+            <input type="email" wire:model="email" class="border p-2 w-full">
+        </div>
+        <div>
+            <label class="text-xs font-medium">Password</label>
+            <input type="text" wire:model="password" class="border p-2 w-full">
         </div>
     </div>
 
