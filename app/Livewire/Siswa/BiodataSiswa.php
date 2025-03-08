@@ -254,13 +254,7 @@ class BiodataSiswa extends Component
 
     public function toggleAlamatDomisili()
     {
-        $this->alamat_domisili = $this->alamat_kk;
-        $this->siswa->alamat_domisili = strtolower($this->alamat_kk);
-        $this->updatedAlamatDomisili($this->alamat_domisili);
-        $this->dispatch('fill-alamat-domisili', [
-            'alamat' => $this->alamat_domisili,
-        ]);
-        
+        $this->copyAlamatKk();
     }
 
     public function render()
