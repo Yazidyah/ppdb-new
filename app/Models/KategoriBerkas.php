@@ -25,4 +25,9 @@ class KategoriBerkas extends Model
     {
         return $this->hasMany(Berkas::class);
     }
+
+    public function kategoriPersyaratan()
+    {
+        return $this->belongsToMany(Persyaratan::class, 'kategori_persyaratan', 'id_kategori_berkas', 'id_persyaratan');
+    }
 }

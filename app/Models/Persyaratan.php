@@ -21,4 +21,9 @@ class Persyaratan extends Model
     {
         return $this->belongsTo(JalurRegistrasi::class, 'id_jalur', 'id_jalur');
     }
+
+    public function kategoriBerkas()
+    {
+        return $this->belongsToMany(KategoriBerkas::class, 'kategori_persyaratan', 'id_persyaratan', 'id_kategori_berkas');
+    }
 }
