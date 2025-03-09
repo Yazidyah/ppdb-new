@@ -79,7 +79,7 @@ class KonfigurasiPersyaratan extends Component
     public function updatedFilterJalur()
     {
         $this->filter();
-        $this->emit('filterUpdated', $this->filterJalur);
+        $this->dispatch('filterUpdated', $this->filterJalur);
     }
 
     public function openModal($isEdit = false)
@@ -96,11 +96,14 @@ class KonfigurasiPersyaratan extends Component
             $this->accepted_file_types = $this->getFileType($this->persyaratanId);
             \Log::debug('openModal - accepted_file_types:', ['accepted_file_types' => $this->accepted_file_types]);
         }
+        $this->dispatch('modalOpened');
+        $this->filter();
     }
 
     public function closeModal()
     {
         $this->showModal = false;
+        $this->filter();
     }
 
     public function resetForm()
@@ -188,6 +191,7 @@ class KonfigurasiPersyaratan extends Component
         $persyaratan->delete();
 
         session()->flash('success', 'Persyaratan dan Kategori Berkas berhasil dihapus.');
+        $this->filter();
     }
 
     public function validatePersyaratan()
@@ -267,6 +271,11 @@ class KonfigurasiPersyaratan extends Component
             $persyaratan = Persyaratan::findOrFail($this->persyaratanId);
             $persyaratan->kategoriBerkas()->sync([$kategoriBerkas->id]);
         }
+    }
+
+    public function updatedAcceptedFileTypes()
+    {
+        \Log::debug('Accepted file types updated:', ['accepted_file_types' => $this->accepted_file_types]);
     }
 
     public function render()

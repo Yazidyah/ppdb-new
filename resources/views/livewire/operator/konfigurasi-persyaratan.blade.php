@@ -30,7 +30,7 @@
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         <ul class="mb-0">
                                             @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
+                                                <li class="text-red-500">{{ $error }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -118,7 +118,6 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-                                                <span class="text-red-500 text-sm">@error('accepted_file_types')                                  {{ $message }} @enderror</span>
                                             </div>
                                         </div>
                                     </div>
