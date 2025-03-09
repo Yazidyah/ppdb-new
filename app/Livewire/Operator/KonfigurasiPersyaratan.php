@@ -48,9 +48,11 @@ class KonfigurasiPersyaratan extends Component
 
     public function getFileType($persyaratanId)
     {
-        $persyaratan = Persyaratan::with(['kategoriBerkas' => function($query) {
-            $query->select('kategori_berkas.id', 'kategori_berkas.accepted_file_types');
-        }])->find($persyaratanId);
+        $persyaratan = Persyaratan::with([
+            'kategoriBerkas' => function ($query) {
+                $query->select('kategori_berkas.id', 'kategori_berkas.accepted_file_types');
+            }
+        ])->find($persyaratanId);
 
         if ($persyaratan && $persyaratan->kategoriBerkas->isNotEmpty()) {
             return $persyaratan->kategoriBerkas->first()->accepted_file_types;
@@ -70,10 +72,13 @@ class KonfigurasiPersyaratan extends Component
             }
         }
 
-        $this->persyaratan = $query->orderBy('id_jalur', 'asc')->get()->map(function ($item) {
-            $item->file_type = $this->getFileType($item->id_persyaratan);
-            return $item;
-        });
+        $this->persyaratan = $query->orderBy('id_jalur', 'asc')
+            ->orderBy('nama_persyaratan', 'asc')
+            ->get()
+            ->map(function ($item) {
+                $item->file_type = $this->getFileType($item->id_persyaratan);
+                return $item;
+            });
     }
 
     public function updatedFilterJalur()
