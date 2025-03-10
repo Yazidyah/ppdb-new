@@ -90,7 +90,6 @@
         .photo {
             width: 30mm;
             height: 40mm;
-            border: 1px solid black;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -183,7 +182,6 @@
         .photo {
             width: 30mm;
             height: 40mm;
-            border: 1px solid black;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -246,25 +244,17 @@
                     <p class="alamat">{{ $siswa->alamat_domisili }}</p>
                     </p>
                 </td>
-                @php
-                    $berkas = $siswa->user->berkas;
-                @endphp
-                @foreach ($berkas as $br)
-                    @if ($br->persyaratan->nama_persyaratan == 'Pas Foto')
-                        @php
-                            $encodedPath = base64_encode($br->file_name);
-                            $url = route('local.temp', ['path' => $encodedPath]);
-                        @endphp
 
-                        <p>{{ $url }}</p>
-                        <div class="photo">
-                            <div class="placeholder" style="display: none;">
-                                <img src="{{ $br->file_name }} " alt="Pas Foto" loading="lazy"
-                                    style="max-width: 100%; height: auto;">
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
+                {{-- <div class="photo">
+                    <img src="{{ $pas_foto }}" alt="Pas Foto">
+                </div> --}}
+                <div class="photo">
+                    <img src="{{ $pas_foto }}" alt="Pas Foto" style="max-width: 100%; height: auto;">
+                </div>
+
+                {{-- <div class="photo">
+                    <img src="{{ './logoman.png' }}" alt="Pas Foto" style="max-width: 100%; height: auto;">
+                </div> --}}
             </tr>
         </table>
     </div>

@@ -8,6 +8,7 @@ use App\Models\DataTes;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class VerifBerkas extends Component
 {
@@ -28,6 +29,8 @@ class VerifBerkas extends Component
     protected $jalur;
     public $buttonColor = '';
     public $buttonIcon = '';
+
+    public $urlPasFoto;
 
     public function mount()
     {
@@ -152,7 +155,7 @@ class VerifBerkas extends Component
     protected function setButtonIcon()
     {
         $iconTemplate = '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">';
-        
+
         if ($this->status == 3) {
             $this->buttonIcon = $iconTemplate . '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>';
         } elseif ($this->status >= 4) {
@@ -161,7 +164,19 @@ class VerifBerkas extends Component
             $this->buttonIcon = $iconTemplate . '<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg>';
         }
     }
-    
+
+    public function cekBerkasPasFoto()
+    {
+        $berkases = $this->siswa->user->berkas;
+        foreach ($berkases as $berkas) {
+            if ($berkas->persyaratan->nama_persyaratan == 'Pas Foto') {
+                $encodedPath = base64_encode($berkas->file_name);
+                // $this->urlPasFoto = route('local.temp', ['path' => $encodedPath]);
+                $this->urlPasFoto = $berkas->file_name;
+            }
+        }
+    }
+
 
     /**
      * Proses penyimpanan verifikasi berkas dan pengaturan data tes.
@@ -173,16 +188,19 @@ class VerifBerkas extends Component
         $this->updateBerkasVerifikasi();
         $this->updateRegistrasiStatus();
         $this->processDataTes();
+        $this->cekBerkasPasFoto();
 
         $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
         $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
 
         $pdf = Pdf::loadView('mail.kartu-peserta', [
+            'pas_foto' => Storage::path($this->urlPasFoto),
             'siswa' => $this->siswa,
             'syarat' => $this->syarat,
             'jadwal_bq_wawancara' => $jadwalBqWawancara,
             'jadwal_japres_tes_akademik' => $jadwalJapresTesAkademik,
         ]);
+
 
         $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->kode_registrasi . '.pdf';
 
