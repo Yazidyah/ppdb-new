@@ -63,12 +63,12 @@
         }
 
         .karper {
-            margin-top: 30px;
+            margin-top: 5px;
             text-align: center;
         }
 
         .tahpel {
-            margin-top: -90px;
+            margin-top: -140px;
             text-align: center;
         }
 
@@ -139,7 +139,7 @@
 
         .notes {
             font-size: 12px;
-            margin-top: 35px;
+            margin-top: 20px;
         }
 
         .alamat {
@@ -148,7 +148,7 @@
         }
 
         .jadwal {
-            margin-top: 20px;
+            margin-top: -20px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;
@@ -244,17 +244,9 @@
                     <p class="alamat">{{ $siswa->alamat_domisili }}</p>
                     </p>
                 </td>
-
-                {{-- <div class="photo">
-                    <img src="{{ $pas_foto }}" alt="Pas Foto">
-                </div> --}}
                 <div class="photo">
                     <img src="{{ $pas_foto }}" alt="Pas Foto" style="max-width: 100%; height: auto;">
                 </div>
-
-                {{-- <div class="photo">
-                    <img src="{{ './logoman.png' }}" alt="Pas Foto" style="max-width: 100%; height: auto;">
-                </div> --}}
             </tr>
         </table>
     </div>
