@@ -1,3 +1,4 @@
+<!-- filepath: /Users/andreasnugroho/Herd/ppdb-new/resources/views/mail/surat-keterangan.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,7 +82,7 @@
         }
 
         .announcement {
-            margin-top: 60px;
+            margin-top: 30px;
             margin-left: 30px;
             margin-right: 30px;
             font-size: 16px;
@@ -90,17 +91,53 @@
 
         .status-surat {
             text-align: center;
-            margin-top: 80px;
+            margin-top: 10px;
             font-size: 16px;
             color: #000000;
         }
 
         .status-surat-peserta {
-            margin-top: 5px;
+            /* margin-top: 5px; */
         }
 
         .status-surat-keterangan {
+            margin-top: 30px;
+        }
+
+        .table-footer {
+            display: flex;
             margin-top: 50px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .qrcode {
+            width: 40mm;
+            height: 40mm;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .tanda-tangan {
+            margin-top: -150px;
+            text-align: right;
+        }
+
+        .tempat {
+            margin-top: -7px;
+            margin-bottom: 120px;
+        }
+
+        .notes {
+            font-size: 14px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -144,18 +181,35 @@
     </div>
 
     <div class="status-surat">
-    @if($status == 7)
-<h1>Diterima</h1>
-@elseif($status == 8)
-<h1>Dicadangkan</h1>
-@else
-<h1>Tidak Diterima</h1>
-@endif
+        @if ($status == 7)
+            <h1>Diterima</h1>
+        @elseif($status == 8)
+            <h1>Dicadangkan</h1>
+        @else
+            <h1>Tidak Diterima</h1>
+        @endif
         <p class="status-surat-peserta">Sebagai peserta didik baru MAN 1 Kota Bogor Tahun Pelajaran 2024/2025</p>
         <p class="status-surat-keterangan">Demikian Surat Keterangan ini disampaikan untuk dapat dipergunakan
             sebagaimana mestinya.</p>
     </div>
 
+    <div class="table-footer">
+        <div class="footer">
+            <div class="qrcode">
+                QR Code: Hello World
+            </div>
+            <div class="tanda-tangan">
+                <p class="tempat">Bogor, <br> Ketua Panitia</p>
+                <p class="nama">H. Muhammad Luthfi, SE., MM.<br>
+                    NIP. 198106242003121002</p>
+            </div>
+        </div>
+    </div>
+    <div class="notes">
+        <p>Keterangan :</p>
+        <p>Daftar Ulang Pada SENIN, 01 JULI 2024, Pkl 10.00 S.D. 12.00, Ruang 2</p>
+        <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
+    </div>
 </body>
 
 </html>
