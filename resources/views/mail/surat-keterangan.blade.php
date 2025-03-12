@@ -153,6 +153,20 @@
             object-fit: cover;
             padding: 10mm 0;
         }
+
+        .contoh-surat-pernyataan {
+            margin-top: -40px;
+            text-align: center;
+        }
+
+        .contoh-surat-pernyataan img {
+            width: 95%;
+            height: 95%;
+            max-width: 210mm;
+            max-height: 297mm;
+            object-fit: cover;
+            padding: 10mm 0;
+        }
     </style>
 </head>
 
@@ -227,6 +241,10 @@
 
     <div class="contoh-satu">
         <img src="{{ 'surat/contoh_1.jpg' }}" alt="checklist surat">
+    </div>
+
+    <div class="contoh-surat-pernyataan">
+        <img src="{{ 'surat/contoh-surat-pernyataan.jpg' }}" alt="checklist surat">
     </div>
 </body>
 
