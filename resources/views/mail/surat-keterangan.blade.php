@@ -209,6 +209,20 @@
             object-fit: cover;
             padding: 10mm 0;
         }
+
+        .ukuran-seragam-pria {
+            margin-top: -40px;
+            text-align: center;
+        }
+
+        .ukuran-seragam-pria img {
+            width: 100%;
+            height: 100%;
+            max-width: 210mm;
+            max-height: 297mm;
+            object-fit: cover;
+            padding: 10mm 0;
+        }
     </style>
 </head>
 
@@ -282,7 +296,7 @@
     </div>
 
     <div class="contoh-satu">
-        <img src="{{ 'surat/contoh_1.jpg' }}" alt="checklist surat">
+        <img src="{{ 'surat/contoh_1.jpg' }}" alt="Checklist Data">
     </div>
 
     <div class="contoh-surat-pernyataan">
@@ -299,6 +313,10 @@
 
     <div class="ukuran-seragam-wanita">
         <img src="{{ 'surat/ukuran-seragam-wanita.jpg' }}" alt="ukuran Seragam Wanita">
+    </div>
+
+    <div class="ukuran-seragam-pria">
+        <img src="{{ 'surat/ukuran-seragam-wanita.jpg' }}" alt="ukuran Seragam Pria">
     </div>
 
 </body>
