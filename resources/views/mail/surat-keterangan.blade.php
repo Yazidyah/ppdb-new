@@ -139,6 +139,20 @@
             font-size: 14px;
             margin-top: 20px;
         }
+
+        .contoh-satu {
+            margin-top: -40px;
+            text-align: center;
+        }
+
+        .contoh-satu img {
+            width: 95%;
+            height: 95%;
+            max-width: 210mm;
+            max-height: 297mm;
+            object-fit: cover;
+            padding: 10mm 0;
+        }
     </style>
 </head>
 
@@ -209,6 +223,10 @@
         <p>Keterangan :</p>
         <p>Daftar Ulang Pada SENIN, 01 JULI 2024, Pkl 10.00 S.D. 12.00, Ruang 2</p>
         <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
+    </div>
+
+    <div class="contoh-satu">
+        <img src="{{ 'surat/contoh_1.jpg' }}" alt="checklist surat">
     </div>
 </body>
 
