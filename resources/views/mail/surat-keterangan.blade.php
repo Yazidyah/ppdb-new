@@ -160,8 +160,8 @@
         }
 
         .contoh-surat-pernyataan img {
-            width: 95%;
-            height: 95%;
+            width: 80%;
+            height: 80%;
             max-width: 210mm;
             max-height: 297mm;
             object-fit: cover;
@@ -174,8 +174,22 @@
         }
 
         .contoh-surat-pernyataan-orang-tua img {
-            width: 95%;
-            height: 95%;
+            width: 80%;
+            height: 80%;
+            max-width: 210mm;
+            max-height: 297mm;
+            object-fit: cover;
+            padding: 10mm 0;
+        }
+
+        .contoh-surat-pernyataan-aja {
+            margin-top: -40px;
+            text-align: center;
+        }
+
+        .contoh-surat-pernyataan-aja img {
+            width: 80%;
+            height: 80%;
             max-width: 210mm;
             max-height: 297mm;
             object-fit: cover;
@@ -260,8 +274,13 @@
     <div class="contoh-surat-pernyataan">
         <img src="{{ 'surat/contoh-surat-pernyataan.jpg' }}" alt="Surat Penyataan">
     </div>
+
     <div class="contoh-surat-pernyataan-orang-tua">
         <img src="{{ 'surat/contoh-surat-pernyataan-orang-tua.jpg' }}" alt="Surat Pernyataan Orang Tua">
+    </div>
+
+    <div class="contoh-surat-pernyataan-aja">
+        <img src="{{ 'surat/contoh-surat-pernyataan-aja.jpg' }}" alt="Surat Pernyataan Orang Tua">
     </div>
 </body>
 
