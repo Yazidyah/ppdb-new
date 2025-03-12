@@ -195,6 +195,20 @@
             object-fit: cover;
             padding: 10mm 0;
         }
+
+        .ukuran-seragam-wanita {
+            margin-top: -40px;
+            text-align: center;
+        }
+
+        .ukuran-seragam-wanita img {
+            width: 100%;
+            height: 100%;
+            max-width: 210mm;
+            max-height: 297mm;
+            object-fit: cover;
+            padding: 10mm 0;
+        }
     </style>
 </head>
 
@@ -282,6 +296,11 @@
     <div class="contoh-surat-pernyataan-aja">
         <img src="{{ 'surat/contoh-surat-pernyataan-aja.jpg' }}" alt="Surat Pernyataan Orang Tua">
     </div>
+
+    <div class="ukuran-seragam-wanita">
+        <img src="{{ 'surat/ukuran-seragam-wanita.jpg' }}" alt="ukuran Seragam Wanita">
+    </div>
+
 </body>
 
 </html>
