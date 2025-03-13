@@ -15,10 +15,10 @@
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="kode_registrasi" class="block text-gray-700 text-sm font-bold mb-2">Kode Registrasi</label>
-                <input type="text" id="kode_registrasi" wire:model="kode_registrasi"
+                <label for="nomor_peserta" class="block text-gray-700 text-sm font-bold mb-2">Kode Registrasi</label>
+                <input type="text" id="nomor_peserta" wire:model="nomor_peserta"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                @error('kode_registrasi')
+                @error('nomor_peserta')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
             </div>
@@ -60,7 +60,7 @@
                     <div>{{ $siswa->calonSiswa->NISN }}</div>
 
                     <div class="font-bold">Kode Registrasi:</div>
-                    <div>{{ $siswa->kode_registrasi }}</div>
+                    <div>{{ $siswa->nomor_peserta }}</div>
 
                     <div class="font-bold">Jalur:</div>
                     <div>{{ $siswa->jalur->nama_jalur}}</div>

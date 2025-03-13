@@ -202,7 +202,7 @@ class VerifBerkas extends Component
         ]);
 
 
-        $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->kode_registrasi . '.pdf';
+        $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
 
         // Send email notification
         if ($this->status == 4) {

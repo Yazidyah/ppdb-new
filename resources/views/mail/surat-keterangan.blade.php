@@ -259,7 +259,7 @@
                 {{ \Carbon\Carbon::parse($siswa->tanggal_lahir)->locale('id')->translatedFormat('d F Y') }}</p>
             <p>Sekolah/Madrasah Asal &nbsp;&nbsp;&nbsp;&nbsp;: {{ ucwords($siswa->sekolah_asal) }}</p>
             <p>Nomor Pendaftaran &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                {{ $siswa->dataRegistrasi->kode_registrasi }}</p>
+                {{ $siswa->dataRegistrasi->nomor_peserta }}</p>
         </div>
 
     </div>

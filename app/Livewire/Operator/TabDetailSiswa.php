@@ -86,13 +86,13 @@ class TabDetailSiswa extends Component
             'updated_at' => now(),
         ]);
         
-        $currentKodeRegistrasi = DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->first()->kode_registrasi;
-        $kode_registrasi = $this->id_jalur == 1 ? 'R' : 'A';
-        $newKodeRegistrasi = $kode_registrasi . substr($currentKodeRegistrasi, 1);
+        $currentKodeRegistrasi = DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->first()->nomor_peserta;
+        $nomor_peserta = $this->id_jalur == 1 ? 'R' : 'A';
+        $newKodeRegistrasi = $nomor_peserta . substr($currentKodeRegistrasi, 1);
 
         DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->update([
             'id_jalur' => $this->id_jalur,
-            'kode_registrasi' => $newKodeRegistrasi,
+            'nomor_peserta' => $newKodeRegistrasi,
         ]);
 
         $user = User::find($this->siswa->id_user);

@@ -48,7 +48,7 @@ class JalurRegistrasi extends Component
         $this->siswa->save();
 
         $kodeRegistrasi = $this->generateKodeRegistrasi($value, $this->siswa->id_calon_siswa);
-        $this->siswa->kode_registrasi = $kodeRegistrasi;
+        $this->siswa->nomor_peserta = $kodeRegistrasi;
         $this->siswa->save();
 
         return redirect()->to('/siswa/daftar-step-tiga?t=' . $value);

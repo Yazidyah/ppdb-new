@@ -19,12 +19,13 @@ return new class extends Migration
             $table->string('NISN')->nullable();
             $table->string('no_telp', 15)->nullable();
             $table->enum('jenis_kelamin', ['L', 'P'])->nullable();
-            $table->boolean('is_active')->default(true);
             $table->string('tempat_lahir', 50)->nullable();
             $table->date('tanggal_lahir')->nullable()->nullable();
             $table->string('NPSN', 15)->nullable();
             $table->string('sekolah_asal', 100)->nullable();
             $table->string('status_sekolah')->nullable();
+            $table->string('predikat_akreditasi_sekolah', 100)->nullable();
+            $table->string('nilai_akreditasi_sekolah', 100)->nullable();
             $table->text('alamat_domisili')->nullable();
             $table->text('alamat_kk')->nullable();
             $table->string('provinsi', 100)->nullable();

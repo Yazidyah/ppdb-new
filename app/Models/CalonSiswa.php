@@ -20,7 +20,6 @@ class CalonSiswa extends Model
         'NISN',
         'no_telp',
         'jenis_kelamin',
-        'is_active',
         'tanggal_lahir',
         'tempat_lahir',
         'NPSN',

@@ -118,7 +118,7 @@
                                         <td scope="col" class="px-6 py-3 text-center hover-underline"
                                             onclick="if('{{ $siswa->no_telp }}') { window.open('https://api.whatsapp.com/send/?phone={{ preg_replace('/^0/', '62', $siswa->no_telp) }}&text&type=phone_number&app_absent=0', '_blank'); } else { alert('Nomor HP tidak tersedia'); }">
                                             {{ $siswa->NISN ?? 'Belum Di Lengkapi' }} /
-                                            {{ $siswa->dataRegistrasi->kode_registrasi ?? '-' }} /
+                                            {{ $siswa->dataRegistrasi->nomor_peserta ?? '-' }} /
                                             {{ $siswa->user->email ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
