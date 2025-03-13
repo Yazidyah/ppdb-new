@@ -29,17 +29,22 @@ class JalurRegistrasi extends Component
         $this->jalurRegistrasi = JalurRegistrasiModel::where('is_open', true)->with('persyaratan')->get();
     }
 
-    public function generateKodeRegistrasi($jalurId, $registrasiId)
+    public function generateNomor($jalurId, $registrasiId)
     {
         $year = date('y');
         $nextYear = date('y', strtotime('+1 year'));
+        $currentYear = date('Y');
         $registrasi = str_pad($registrasiId, 4, '0', STR_PAD_LEFT);
 
         if ($jalurId == 1) {
-            return 'R' . $year . $nextYear . $registrasi;
+            $kodeRegistrasi = 'R' . $year . $nextYear . $registrasi;
+            $nomorSuket = $registrasi . '/Ma.10.60/PPDB-R.2025/06/' . $currentYear;
         } else {
-            return 'A' . $year . $nextYear . $registrasi;
+            $kodeRegistrasi = 'A' . $year . $nextYear . $registrasi;
+            $nomorSuket = $registrasi . '/Ma.10.60/PPDB.2025/06/' . $currentYear;
         }
+
+        return ['kodeRegistrasi' => $kodeRegistrasi, 'nomorSuket' => $nomorSuket];
     }
 
     public function updateJalur($value)
@@ -47,8 +52,9 @@ class JalurRegistrasi extends Component
         $this->siswa->id_jalur = $value;
         $this->siswa->save();
 
-        $kodeRegistrasi = $this->generateKodeRegistrasi($value, $this->siswa->id_calon_siswa);
-        $this->siswa->nomor_peserta = $kodeRegistrasi;
+        $kodeData = $this->generateNomor($value, $this->siswa->id_calon_siswa);
+        $this->siswa->nomor_peserta = $kodeData['kodeRegistrasi'];
+        $this->siswa->nomor_suket = $kodeData['nomorSuket'];
         $this->siswa->save();
 
         return redirect()->to('/siswa/daftar-step-tiga?t=' . $value);

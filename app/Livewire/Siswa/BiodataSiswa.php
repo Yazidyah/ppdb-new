@@ -14,7 +14,7 @@ class BiodataSiswa extends Component
 {
     public $user;
     public $siswa;
-    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk, $status_sekolah; // Add $status_sekolah
+    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk, $status_sekolah, $predikat_akreditasi_sekolah, $nilai_akreditasi_sekolah;
 
     public $kb;
     public $provinces;
@@ -38,6 +38,8 @@ class BiodataSiswa extends Component
         'npsn' => 'required|numeric',
         'alamat_domisili' => 'required|string',
         'alamat_kk' => 'required|string',
+        'predikat_akreditasi_sekolah' => 'required|string|max:100',
+        'nilai_akreditasi_sekolah' => 'required|numeric|max:100',
     ];
 
     public $messages = [
@@ -57,6 +59,9 @@ class BiodataSiswa extends Component
         'npsn.numeric' => 'NPSN harus berupa angka',
         'alamat_domisili.required' => 'Alamat Domisili tidak boleh kosong',
         'alamat_kk.required' => 'Alamat KK tidak boleh kosong',
+        'predikat_akreditasi_sekolah.required' => 'Predikat Akreditasi Sekolah tidak boleh kosong',
+        'nilai_akreditasi_sekolah.required' => 'Nilai Akreditasi Sekolah tidak boleh kosong',
+        'nilai_akreditasi_sekolah.numeric' => 'Nilai Akreditasi Sekolah harus berupa angka',
     ];
 
     public function mount()
@@ -80,6 +85,8 @@ class BiodataSiswa extends Component
         $this->alamat_domisili = ucwords($this->siswa->alamat_domisili ?? '');
         $this->provinsi = $this->siswa->provinsi ?? '';
         $this->kota = $this->siswa->kota ?? '';
+        $this->predikat_akreditasi_sekolah = $this->siswa->predikat_akreditasi_sekolah ?? '';
+        $this->nilai_akreditasi_sekolah = $this->siswa->nilai_akreditasi_sekolah ?? '';
         $this->provinces = Province::all()->map(function ($province) {
             return [
                 'id' => (string) $province->id,
@@ -186,6 +193,20 @@ class BiodataSiswa extends Component
             $this->siswa->kota =  $city->name;
             $this->siswa->save();
         }
+    }
+
+    public function updatedPredikatAkreditasiSekolah($value)
+    {
+        $this->validateOnly('predikat_akreditasi_sekolah');
+        $this->siswa->predikat_akreditasi_sekolah = strtolower($value);
+        $this->siswa->save();
+    }
+
+    public function updatedNilaiAkreditasiSekolah($value)
+    {
+        $this->validateOnly('nilai_akreditasi_sekolah');
+        $this->siswa->nilai_akreditasi_sekolah = strtolower($value);
+        $this->siswa->save();
     }
 
     public function updateCities() // Add this method

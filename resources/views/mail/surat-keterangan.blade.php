@@ -1,4 +1,3 @@
-<!-- filepath: /Users/andreasnugroho/Herd/ppdb-new/resources/views/mail/surat-keterangan.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,7 +73,7 @@
             border: 0.5px solid #000000;
         }
 
-        .nomor-surat {
+        .nomor-suket {
             margin-top: -5px;
             font-size: 14px;
             color: #000000;
@@ -241,7 +240,7 @@
     <div class="surat-nomor">
         <p class="judul-surat">SURAT KETERANGAN HASIL SELEKSI</p>
         <hr class="garis-bawah-kedua">
-        <p class="nomor-surat">39/Ma.10.60/PPDB-R.2024/06/2025</p>
+        <p class="nomor-suket">{{ $siswa->dataRegistrasi->nomor_suket }}</p>
     </div>
 
     <div class="announcement">

@@ -124,6 +124,36 @@
                             </div>
                         @endif
 
+                        <!-- Predikat Akreditasi Sekolah -->
+                        <div class="col-span-2 mt-2">
+                            <x-reg-input-label>Predikat Akreditasi Sekolah</x-reg-input-label>
+                            <div
+                                class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
+                                <x-reg-input-text id="predikat_akreditasi_sekolah"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
+                                    type="text" name="predikat_akreditasi_sekolah" required autofocus autocomplete="predikat_akreditasi_sekolah"
+                                    placeholder="Masukkan predikat akreditasi sekolah" wire:model.live="predikat_akreditasi_sekolah" />
+                            </div>
+                            @error('predikat_akreditasi_sekolah')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Nilai Akreditasi Sekolah -->
+                        <div class="col-span-2 mt-2">
+                            <x-reg-input-label>Nilai Akreditasi Sekolah</x-reg-input-label>
+                            <div
+                                class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
+                                <x-reg-input-text id="nilai_akreditasi_sekolah"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
+                                    type="text" name="nilai_akreditasi_sekolah" required autofocus autocomplete="nilai_akreditasi_sekolah"
+                                    placeholder="Nilai Akreditasi Sekolah" wire:model.live="nilai_akreditasi_sekolah" />
+                            </div>
+                            @error('nilai_akreditasi_sekolah')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <!-- Nomor Telepon -->
                         <div class="col-span-4 mt-2">
                             <x-reg-input-label>Nomor Telepon</x-reg-input-label>

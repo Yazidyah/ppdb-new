@@ -55,6 +55,14 @@
             <label for="alamat_kk" class="block text-sm font-medium text-gray-700">Alamat KK</label>
             <input type="text" id="alamat_kk" value="{{ strtoupper($calonSiswa->alamat_kk) ?: 'DATA INI KOSONG' }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->alamat_kk ? 'text-red-500' : '' }}">
         </div>
+        <div class="mb-4 mx-2">
+            <label for="predikat_akreditasi_sekolah" class="block text-sm font-medium text-gray-700">Predikat Akreditasi Sekolah</label>
+            <input type="text" id="predikat_akreditasi_sekolah" value="{{ strtoupper($calonSiswa->predikat_akreditasi_sekolah) ?: 'DATA INI KOSONG' }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->predikat_akreditasi_sekolah ? 'text-red-500' : '' }}">
+        </div>
+        <div class="mb-4 mx-2">
+            <label for="nilai_akreditasi_sekolah" class="block text-sm font-medium text-gray-700">Nilai Akreditasi Sekolah</label>
+            <input type="text" id="nilai_akreditasi_sekolah" value="{{ $calonSiswa->nilai_akreditasi_sekolah ?: 'DATA INI KOSONG' }}" disabled class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->nilai_akreditasi_sekolah ? 'text-red-500' : '' }}">
+        </div>
         </div>
         @if($orangTuaIbu)
         <h2 class="text-2xl font-bold mb-4 mx-2 text-start">Biodata Orang Tua Ibu</h2>

@@ -30,7 +30,7 @@ class StatusAcc extends Mailable
     // Generate PDF
     $this->pdf = Pdf::loadView('mail.surat-keterangan', [
         'siswa' => $this->siswa,
-        'status' => $this->status // Kirim status ke PDF view
+        'status' => $this->status,
     ]);
         $this->fileName = 'Surat_keterangan_ppdb_man1kotabogor_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
     }
@@ -42,7 +42,7 @@ class StatusAcc extends Mailable
     {
         return $this->subject($this->messageBody)
             ->markdown('mail.StatusAcc', [
-                'name' => $this->siswa->user->name,
+                'name' => strtoupper($this->siswa->nama_lengkap), // Mengubah nama_lengkap menjadi huruf besar semua
                 'status' => $this->status,
             ])
             ->attachData($this->pdf->output(), $this->fileName, [
