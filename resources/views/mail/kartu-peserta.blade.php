@@ -63,12 +63,12 @@
         }
 
         .karper {
-            margin-top: 30px;
+            margin-top: 5px;
             text-align: center;
         }
 
         .tahpel {
-            margin-top: -90px;
+            margin-top: -140px;
             text-align: center;
         }
 
@@ -90,7 +90,6 @@
         .photo {
             width: 30mm;
             height: 40mm;
-            border: 1px solid black;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -140,7 +139,7 @@
 
         .notes {
             font-size: 12px;
-            margin-top: 35px;
+            margin-top: 20px;
         }
 
         .alamat {
@@ -149,7 +148,7 @@
         }
 
         .jadwal {
-            margin-top: 20px;
+            margin-top: -20px;
             text-align: center;
             font-size: 16px;
             font-weight: bold;
@@ -183,7 +182,6 @@
         .photo {
             width: 30mm;
             height: 40mm;
-            border: 1px solid black;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -246,25 +244,9 @@
                     <p class="alamat">{{ $siswa->alamat_domisili }}</p>
                     </p>
                 </td>
-                @php
-                    $berkas = $siswa->user->berkas;
-                @endphp
-                @foreach ($berkas as $br)
-                    @if ($br->persyaratan->nama_persyaratan == 'Pas Foto')
-                        @php
-                            $encodedPath = base64_encode($br->file_name);
-                            $url = route('local.temp', ['path' => $encodedPath]);
-                        @endphp
-
-                        <p>{{ $url }}</p>
-                        <div class="photo">
-                            <div class="placeholder" style="display: none;">
-                                <img src="{{ $br->file_name }} " alt="Pas Foto" loading="lazy"
-                                    style="max-width: 100%; height: auto;">
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
+                <div class="photo">
+                    <img src="{{ $pas_foto }}" alt="Pas Foto" style="max-width: 100%; height: auto;">
+                </div>
             </tr>
         </table>
     </div>
