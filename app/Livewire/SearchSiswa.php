@@ -26,7 +26,7 @@ class SearchSiswa extends Component
 
     protected $rules = [
         'nisn'            => 'required',
-        'kode_registrasi' => 'required',
+        'kode_registrasi' => 'required'
     ];
 
     public function search()

@@ -4,6 +4,7 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\GetPersyaratan;
 use App\Livewire\Admin\DataSiswa;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
@@ -36,9 +37,9 @@ Route::get('/', function () {
 Route::get('/alurpendaftaran', function () {
     return view('alurpendaftaran');
 });
-Route::get('/persyaratan', function () {
-    return view('persyaratan');
-});
+
+Route::get('/persyaratan', [GetPersyaratan::class, 'showPersyaratan'])->name('persyaratan.show');
+
 Route::get('/daftar/step1', function () {
     return view('daftar');
 });
