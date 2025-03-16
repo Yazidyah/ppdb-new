@@ -82,10 +82,10 @@
                                             <tr>
                                                 <th
                                                     class="py-4 px-6 bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
-                                                    Gender</th>
+                                                    Jenis Kelamin</th>
                                                 <th
                                                     class="py-4 px-6 text-center bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
-                                                    Count</th>
+                                                    Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -113,20 +113,20 @@
                                             <tr>
                                                 <th
                                                     class="py-4 px-6 bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
-                                                    School Status</th>
+                                                    Status Sekolah</th>
                                                 <th
                                                     class="py-4 px-6 text-center bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
-                                                    Count</th>
+                                                    Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Public</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Negeri</td>
                                                 <td class="py-4 px-6 text-center border-b border-gray-200">
                                                     {{ $countSekolahNegeri }}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Private</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Swasta</td>
                                                 <td class="py-4 px-6 text-center border-b border-gray-200">
                                                     {{ $countSekolahSwasta }}</td>
                                             </tr>
@@ -144,20 +144,20 @@
                                             <tr>
                                                 <th
                                                     class="py-4 px-6 bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
-                                                    Domicile</th>
+                                                    Domisili</th>
                                                 <th
                                                     class="py-4 px-6 text-center bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
-                                                    Count</th>
+                                                    Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Outside City</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Luar Kota</td>
                                                 <td class="py-4 px-6 text-center border-b border-gray-200">
                                                     {{ $countLuarBogor }}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Within City</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Dalam Kota</td>
                                                 <td class="py-4 px-6 text-center border-b border-gray-200">
                                                     {{ $countDalamBogor }}</td>
                                             </tr>
@@ -166,7 +166,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Overall Status Table -->
+                        <!-- Overall Status Document Table -->
                         <div class="rounded-lg bg-white shadow-xl" id="status">
                             <div class="w-11/12 mx-auto">
                                 <div class="bg-white my-6">
@@ -175,28 +175,101 @@
                                             <tr>
                                                 <th
                                                     class="py-4 px-6 bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
-                                                    Status</th>
+                                                    Status Pendaftaran</th>
                                                 <th
                                                     class="py-4 px-6 text-center bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
-                                                    Count</th>
+                                                    Jumlah</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Not Known</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Jalur</td>
                                                 <td class="py-4 text-center px-6 border-b border-gray-200">
-                                                    {{ $countBelumDiproses }}</td>
+                                                    {{ $countJalur }}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Passed</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Upload</td>
                                                 <td class="py-4 text-center px-6 border-b border-gray-200">
-                                                    {{ $countLulus }}
+                                                    {{ $countUpload }}
                                                 </td>
                                             </tr>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Failed</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Submit</td>
                                                 <td class="py-4 text-center px-6 border-b border-gray-200">
-                                                    {{ $countTidakLulus }}</td>
+                                                    {{ $countSubmit }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Overall Status Document Table -->
+                        <div class="rounded-lg bg-white shadow-xl" id="status">
+                            <div class="w-11/12 mx-auto">
+                                <div class="bg-white my-6">
+                                    <table class="text-left w-full border-collapse">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="py-4 px-6 bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
+                                                    Status Administrasi</th>
+                                                <th
+                                                    class="py-4 px-6 text-center bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
+                                                    Jumlah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="hover:bg-gray-100">
+                                                <td class="py-4 px-6 border-b border-gray-200">Tidak Lolos Administrasi</td>
+                                                <td class="py-4 text-center px-6 border-b border-gray-200">
+                                                    {{ $countTidakLolosAdministrasi }}</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-100">
+                                                <td class="py-4 px-6 border-b border-gray-200">Lolos Administrasi</td>
+                                                <td class="py-4 text-center px-6 border-b border-gray-200">
+                                                    {{ $countLolosAdministrasi }}
+                                                </td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Overall Status Accepted Table -->
+                        <div class="rounded-lg bg-white shadow-xl" id="status">
+                            <div class="w-11/12 mx-auto">
+                                <div class="bg-white my-6">
+                                    <table class="text-left w-full border-collapse">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="py-4 px-6 bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
+                                                    Status Penerimaan</th>
+                                                <th
+                                                    class="py-4 px-6 text-center bg-secondary font-bold uppercase text-sm text-tertiary border-b border-gray-200">
+                                                    Jumlah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="hover:bg-gray-100">
+                                                <td class="py-4 px-6 border-b border-gray-200">Belum Ditentukan</td>
+                                                <td class="py-4 text-center px-6 border-b border-gray-200">
+                                                    {{ $countBelumDitentukan }}</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-100">
+                                                <td class="py-4 px-6 border-b border-gray-200">Tidak Diterima</td>
+                                                <td class="py-4 text-center px-6 border-b border-gray-200">
+                                                    {{ $countDiterima }}
+                                                </td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-100">
+                                                <td class="py-4 px-6 border-b border-gray-200">Diterima</td>
+                                                <td class="py-4 text-center px-6 border-b border-gray-200">
+                                                    {{ $countTidakDiterima }}</td>
+                                            </tr>
+                                            <tr class="hover:bg-gray-100">
+                                                <td class="py-4 px-6 border-b border-gray-200">Dicadangkan</td>
+                                                <td class="py-4 text-center px-6 border-b border-gray-200">
+                                                    {{ $countDicadangkan }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
