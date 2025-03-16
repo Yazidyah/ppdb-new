@@ -21,21 +21,15 @@
                             <select name="filter" class="px-4 py-2 border rounded-lg"
                                 onchange="document.getElementById('searchForm').submit()">
                                 <option value="" {{ !request('filter') ? 'selected' : '' }}>Semua status</option>
-                                <option value="0" {{ request('filter') == '0' ? 'selected' : '' }}>Jalur</option>
-                                <option value="1" {{ request('filter') == '1' ? 'selected' : '' }}>Upload</option>
-                                <option value="2" {{ request('filter') == '2' ? 'selected' : '' }}>Submit</option>
-                                <option value="3" {{ request('filter') == '3' ? 'selected' : '' }}>Tidak Lolos
-                                    Verifikasi Berkas</option>
-                                <option value="4" {{ request('filter') == '4' ? 'selected' : '' }}>Lolos Verifikasi
-                                    Berkas</option>
-                                <option value="5" {{ request('filter') == '5' ? 'selected' : '' }}>Belum Ditentukan
-                                </option>
-                                <option value="6" {{ request('filter') == '6' ? 'selected' : '' }}>Tidak Diterima
-                                </option>
-                                <option value="7" {{ request('filter') == '7' ? 'selected' : '' }}>Diterima
-                                </option>
-                                <option value="8" {{ request('filter') == '8' ? 'selected' : '' }}>Dicadangkan
-                                </option>
+                                <option value="1" {{ request('filter') == '1' ? 'selected' : '' }}>Jalur</option>
+                                <option value="2" {{ request('filter') == '2' ? 'selected' : '' }}>Upload</option>
+                                <option value="3" {{ request('filter') == '3' ? 'selected' : '' }}>Submit</option>
+                                <option value="4" {{ request('filter') == '4' ? 'selected' : '' }}>Tidak Lolos</option>
+                                <option value="5" {{ request('filter') == '5' ? 'selected' : '' }}>Lolos</option>
+                                <option value="6" {{ request('filter') == '6' ? 'selected' : '' }}>Belum Ditentukan</option>
+                                <option value="7" {{ request('filter') == '7' ? 'selected' : '' }}>Tidak Diterima</option>
+                                <option value="8" {{ request('filter') == '8' ? 'selected' : '' }}>Diterima</option>
+                                <option value="9" {{ request('filter') == '9' ? 'selected' : '' }}>Dicadangkan</option>
                             </select>
                             <select name="jalur" class="px-4 py-2 border rounded-lg"
                                 onchange="document.getElementById('searchForm').submit()">
