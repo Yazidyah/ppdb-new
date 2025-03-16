@@ -125,7 +125,7 @@
                                         class="mb-2 mx-auto w-full justify-center items-center">{{ __('Submit') }}</x-primary-button>
                                 </form>
                                 <button wire:click="closeModal"
-                                    class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
+                                    class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Tutup</button>
                             </div>
                         </div>
                     </div>
@@ -173,7 +173,7 @@
                                         <button type="button" wire:click="edit({{ $item->id_persyaratan }})"
                                             class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                                         <button wire:click="delete({{ $item->id_persyaratan }})"
-                                            class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Delete</button>
+                                            class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
                                     </td>
                                 </tr>
                             @empty

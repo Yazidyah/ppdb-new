@@ -43,7 +43,7 @@
             @endforelse
 
             <!-- Tombol untuk menyimpan perubahan -->
-            <button wire:click="updateRapot" class="bg-blue-500 text-white px-4 py-2 rounded">
+            <button wire:click="updateRapot" class="mt-4 px-4 py-2 inline-flex justify-center items-center  bg-tertiary border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2  transition ease-in-out duration-150 rounded">
                 Simpan Perubahan
             </button>
         </div>

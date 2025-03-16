@@ -86,7 +86,7 @@
                             Japres/Tes Akademik</label>
                         <select id="sesi_japres_tes_akademik" wire:model="sesi_japres_tes_akademik"
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            <option value="">Tidak dijawdalkan</option>
+                            <option value="">Tidak dijadwalkan</option>
                             @foreach ($jadwalTesJapresTesAkademik as $jadwalJa)
                                 <option value="{{ $jadwalJa['id'] }}">{{ $jadwalJa['label'] }}</option>
                             @endforeach
