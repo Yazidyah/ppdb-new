@@ -1,7 +1,7 @@
 <div>
     @if ($modalSubmit)
         <div class="fixed inset-0 z-50 flex items-center justify-center">
-            <div class="fixed inset-0 bg-black/50"></div>
+            <div class="fixed inset-0 bg-black/50">
             <div class="relative w-full max-w-md p-6 bg-white  rounded-lg shadow-xl">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Isi Data {{ $syarat->nama_persyaratan }}</h3>
