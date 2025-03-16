@@ -46,10 +46,16 @@
                             @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
                             <div>
                                 @if ($data->nama_persyaratan === 'Rapot')
-                                    <button type="button" onclick="rapotModal()"
-                                        class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
-                                        Isi data rapot
-                                    </button>
+                                    <div class="flex gap-2">
+                                        <button type="button" onclick="rapotModal()"
+                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                            Isi data rapot
+                                        </button>
+                                        <button type="button" onclick="berkasModal({{ $berkas->id }})"
+                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                            Isi data berkas
+                                        </button>
+                                    </div>
                                 @else
                                     @if (isset($berkas) && isset($berkas->id))
                                         <button type="button" onclick="berkasModal({{ $berkas->id }})"
