@@ -13,15 +13,16 @@ class SearchSiswa extends Component
     public $siswa;
     public $showModal = false;
     public $statusLabels = [
-        0 => 'Memilih Jalur',
-        1 => 'Upload Dokumen',
-        2 => 'Submit Dokumen',
-        3 => 'Tidak Lolos Verifikasi Berkas',
-        4 => 'Lolos Verifikasi Berkas, Silahkan Cek Email secara berkala',
-        5 => 'Belum Ditentukan',
-        6 => 'Tidak Diterima',
-        7 => 'Diterima',
-        8 => 'Dicadangkan'
+        0 => 'Mengisi Biodata',
+        1 => 'Memilih Jalur',
+        2 => 'Upload Dokumen',
+        3 => 'Submit Dokumen',
+        4 => 'Tidak Lolos Verifikasi Berkas',
+        5 => 'Lolos Verifikasi Berkas, Silahkan Cek Email secara berkala',
+        6 => 'Belum Ditentukan',
+        7 => 'Tidak Diterima',
+        8 => 'Diterima',
+        9 => 'Dicadangkan'
     ];
 
     protected $rules = [
