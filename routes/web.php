@@ -62,9 +62,10 @@ Route::get('/daftar/step4', function () {
 Route::get('/coba', Counter::class)->name('testing');
 
 Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
-    Route::get('/siswa/dashboard', function () {
-        return view('siswa.dashboard');
-    })->name('siswa.dashboard');
+    Route::get('/siswa/', function () {
+        return redirect()->route('siswa.dashboard');
+    });
+    Route::get('/siswa/dashboard', [SiswaController::class, 'index'])->name('siswa.dashboard');
     Route::get('/siswa/alurpendaftaran', function () {
         return view('siswa.alurpendaftaran');
     })->name('siswa.alurpendaftaran');

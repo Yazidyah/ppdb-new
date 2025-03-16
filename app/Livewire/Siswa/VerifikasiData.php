@@ -62,9 +62,18 @@ class VerifikasiData extends Component
             ->update(['status' => 1]);
 
         if ($updated) {
+            $this->deleteCookie();
             return redirect()->to('/siswa/daftar-step-dua?t=1');
         } else {
             return redirect()->to('/siswa/daftar-step-satu?t=3');
+        }
+    }
+
+    private function deleteCookie()
+    {
+        if (isset($_COOKIE['alamat_domisili_disabled'])) {
+            unset($_COOKIE['alamat_domisili_disabled']);
+            setcookie('alamat_domisili_disabled', '', time() - 3600, '/');
         }
     }
 

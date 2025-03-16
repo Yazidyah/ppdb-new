@@ -27,9 +27,10 @@
 
                         <!-- Tab Semester -->
                         <div x-data="{ currentStep: @entangle('sem').defer }" x-init="currentStep = parseInt(new URLSearchParams(window.location.search).get('sem')) || 1"
+                            x-effect="$watch('currentStep', value => $wire.set('sem', value))"
                             class="flex flex-row justify-center lg:justify-between px-4 sm:px-6 items-center mx-auto bg-gray-100 mb-8 rounded-lg">
                             <template x-for="(step, index) in 5" :key="index">
-                                <div @click="currentStep = (index + 1); window.history.pushState({}, '', '?sem=' + (index + 1) + '&t={{ $t }}'); $wire.set('sem', (index + 1))"
+                                <div @click="currentStep = (index + 1); window.history.pushState({}, '', '?sem=' + (index + 1) + '&t={{ $t }}')"
                                     :class="{
                                         'bg-tertiary text-white': currentStep === (index + 1),
                                         'text-gray-700': currentStep !== (index + 1)
@@ -78,10 +79,17 @@
                         </div>
 
                         <div class="sm:flex sm:flex-row-reverse sm:px-6 mt-8">
-                            <button type="button" wire:click="kirim"
-                                class="inline-flex justify-center w-full px-8 py-3 text-lg font-semibold text-white bg-tertiary rounded-md shadow-sm hover:bg-secondary hover:text-tertiary sm:ml-3 sm:w-auto">
-                                Kirim
-                            </button>
+                            @if ($sem == 5)
+                                <button type="button" wire:click="kirim"
+                                    class="inline-flex justify-center w-full px-8 py-3 text-lg font-semibold text-white bg-tertiary rounded-md shadow-sm hover:bg-secondary hover:text-tertiary sm:ml-3 sm:w-auto">
+                                    Kirim
+                                </button>
+                            @else
+                                <button type="button" @click="currentStep = {{ $sem + 1 }}; window.history.pushState({}, '', '?sem=' + ({{ $sem + 1 }}) + '&t={{ $t }}')"
+                                    class="inline-flex justify-center w-full px-8 py-3 text-lg font-semibold text-white bg-tertiary rounded-md shadow-sm hover:bg-secondary hover:text-tertiary sm:ml-3 sm:w-auto">
+                                    Next
+                                </button>
+                            @endif
                             <button type="button" wire:click="$set('modalSubmit', false)"
                                 class="inline-flex justify-center w-full px-8 py-3 mt-3 text-lg font-semibold text-white bg-red-900 rounded-md shadow-sm ring-1 ring-inset ring-red-900 hover:bg-red-500 sm:mt-0 sm:w-auto">
                                 Batal

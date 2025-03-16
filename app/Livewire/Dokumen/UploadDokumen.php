@@ -135,7 +135,7 @@ class UploadDokumen extends Component
                 return redirect()->to('/siswa/daftar-step-empat?t=1');
             } else {
                 if (!$rapotDataFilled) {
-                    session()->flash('message', 'Rapot belum diisi.');
+                    session()->flash('message', 'Niai Rapot belum diisi.');
                 }
             }
         } else {
