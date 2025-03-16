@@ -37,15 +37,16 @@ class OperatorController extends Controller
     private function getStatusLabel($status)
     {
         $statusLabels = [
-            0 => 'Jalur',
-            1 => 'Upload',
-            2 => 'Submit',
-            3 => 'Tidak Lolos',
-            4 => 'Lolos',
-            5 => 'Belum Ditentukan',
-            6 => 'Tidak Diterima',
-            7 => 'Diterima',
-            8 => 'Dicadangkan'
+            0 => 'Biodata',
+            1 => 'Jalur',
+            2 => 'Upload',
+            3 => 'Submit',
+            4 => 'Tidak Lolos',
+            5 => 'Lolos',
+            6 => 'Belum Ditentukan',
+            7 => 'Tidak Diterima',
+            8 => 'Diterima',
+            9 => 'Dicadangkan'
         ];
 
         return $statusLabels[$status] ?? '-';

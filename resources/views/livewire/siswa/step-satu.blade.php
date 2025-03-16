@@ -65,15 +65,6 @@
         @endif
         @if ($tab === 3)
             @livewire('siswa.verifikasi-data', key('verifikasi-data'))
-            <div
-                class="navigation-buttons justify-between flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
-                <button wire:click="$set('tab', 2)"
-                    class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
-                    type="button" id="nextBtn">Previous</button>
-                <button wire:click="submit"
-                    class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
-                    type="button" id="submitBtn">Submit</button>
-            </div>
         @endif
     </div>
 </div>

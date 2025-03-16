@@ -94,12 +94,7 @@ class KonfigurasiPersyaratan extends Component
         $this->isEdit = $isEdit;
         $this->showModal = true;
         if ($isEdit) {
-            $persyaratan = Persyaratan::findOrFail($this->persyaratanId);
-            $this->nama_persyaratan = $persyaratan->nama_persyaratan;
-            $this->id_jalur = is_array($persyaratan->id_jalur) ? $persyaratan->id_jalur : [$persyaratan->id_jalur];
-            $this->deskripsi = $persyaratan->deskripsi;
-            $this->accepted_file_types = $this->getFileType($this->persyaratanId);
-            \Log::debug('openModal - accepted_file_types:', ['accepted_file_types' => $this->accepted_file_types]);
+            $this->loadPersyaratanData($this->persyaratanId);
         }
         $this->dispatch('modalOpened');
         $this->filter();
@@ -121,19 +116,12 @@ class KonfigurasiPersyaratan extends Component
 
     public function store()
     {
-        \Log::debug('Storing Persyaratan:', [
-            'nama_persyaratan' => $this->nama_persyaratan,
-            'id_jalur' => $this->id_jalur,
-            'deskripsi' => $this->deskripsi,
-            'accepted_file_types' => $this->accepted_file_types,
-        ]);
+        \Log::debug('Storing Persyaratan:', $this->getPersyaratanData());
 
         try {
             $this->validate();
         } catch (\Illuminate\Validation\ValidationException $e) {
-            \Log::error('Validation Error:', [
-                'errors' => $e->errors(),
-            ]);
+            \Log::error('Validation Error:', ['errors' => $e->errors()]);
             throw $e;
         }
 
@@ -146,32 +134,20 @@ class KonfigurasiPersyaratan extends Component
     public function edit($id)
     {
         $this->isEdit = true;
-        $persyaratan = Persyaratan::findOrFail($id);
         $this->persyaratanId = $id;
-        $this->nama_persyaratan = $persyaratan->nama_persyaratan;
-        $this->id_jalur = is_array($persyaratan->id_jalur) ? $persyaratan->id_jalur : [$persyaratan->id_jalur];
-        $this->deskripsi = $persyaratan->deskripsi;
-        $this->accepted_file_types = $this->getFileType($this->persyaratanId);
+        $this->loadPersyaratanData($id);
         $this->resetValidation();
-        \Log::debug('edit - accepted_file_types:', ['accepted_file_types' => $this->accepted_file_types]);
         $this->openModal(true);
     }
 
     public function update()
     {
-        \Log::debug('Updating Persyaratan:', [
-            'nama_persyaratan' => $this->nama_persyaratan,
-            'id_jalur' => $this->id_jalur,
-            'deskripsi' => $this->deskripsi,
-            'accepted_file_types' => $this->accepted_file_types,
-        ]);
+        \Log::debug('Updating Persyaratan:', $this->getPersyaratanData());
 
         try {
             $this->validatePersyaratan();
         } catch (\Illuminate\Validation\ValidationException $e) {
-            \Log::error('Validation Error:', [
-                'errors' => $e->errors(),
-            ]);
+            \Log::error('Validation Error:', ['errors' => $e->errors()]);
             throw $e;
         }
 
@@ -213,21 +189,14 @@ class KonfigurasiPersyaratan extends Component
                 'exists' => 'Jalur yang dipilih tidak valid.',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
-            \Log::error('Validation Error:', [
-                'errors' => $e->errors(),
-            ]);
+            \Log::error('Validation Error:', ['errors' => $e->errors()]);
             throw $e;
         }
     }
 
     private function savePersyaratan($isUpdate = false)
     {
-        $persyaratanData = [
-            'nama_persyaratan' => $this->nama_persyaratan,
-            'id_jalur' => $this->id_jalur[0],
-            'deskripsi' => $this->deskripsi,
-            'accepted_file_types' => $this->accepted_file_types,
-        ];
+        $persyaratanData = $this->getPersyaratanData();
 
         if ($isUpdate) {
             $persyaratan = Persyaratan::findOrFail($this->persyaratanId);
@@ -248,12 +217,13 @@ class KonfigurasiPersyaratan extends Component
     {
         $jalur = JalurRegistrasi::find($idJalur);
         $slug = 'jalur_' . Str::slug($jalur->nama_jalur, '_');
+        $maxFileSize = $this->getMaxFileSize();
         $kategoriBerkas = KategoriBerkas::create([
             'key' => $slug,
             'nama' => $this->nama_persyaratan,
             'folder_name' => "pendaftaran/persyaratan",
             'accepted_file_types' => $this->accepted_file_types,
-            'max_file_size' => "300",
+            'max_file_size' => $maxFileSize,
             'is_multiple' => false,
             'disk' => "local",
         ]);
@@ -264,6 +234,7 @@ class KonfigurasiPersyaratan extends Component
     {
         $jalur = JalurRegistrasi::find($this->id_jalur[0]);
         $newKey = 'jalur_' . Str::slug(strtolower($jalur->nama_jalur), '_');
+        $maxFileSize = $this->getMaxFileSize();
         $kategoriBerkas = KategoriBerkas::where('key', 'jalur_' . Str::slug(strtolower($oldJalur), '_'))
             ->where('nama', $oldNamaPersyaratan)
             ->first();
@@ -272,10 +243,36 @@ class KonfigurasiPersyaratan extends Component
                 'nama' => $this->nama_persyaratan,
                 'key' => $newKey,
                 'accepted_file_types' => $this->accepted_file_types,
+                'max_file_size' => $maxFileSize,
             ]);
             $persyaratan = Persyaratan::findOrFail($this->persyaratanId);
             $persyaratan->kategoriBerkas()->sync([$kategoriBerkas->id]);
         }
+    }
+
+    private function getMaxFileSize()
+    {
+        return $this->accepted_file_types === 'pdf' ? "3000" : "300";
+    }
+
+    private function getPersyaratanData()
+    {
+        return [
+            'nama_persyaratan' => $this->nama_persyaratan,
+            'id_jalur' => $this->id_jalur[0],
+            'deskripsi' => $this->deskripsi,
+            'accepted_file_types' => $this->accepted_file_types,
+        ];
+    }
+
+    private function loadPersyaratanData($id)
+    {
+        $persyaratan = Persyaratan::findOrFail($id);
+        $this->nama_persyaratan = $persyaratan->nama_persyaratan;
+        $this->id_jalur = is_array($persyaratan->id_jalur) ? $persyaratan->id_jalur : [$persyaratan->id_jalur];
+        $this->deskripsi = $persyaratan->deskripsi;
+        $this->accepted_file_types = $this->getFileType($id);
+        \Log::debug('loadPersyaratanData - accepted_file_types:', ['accepted_file_types' => $this->accepted_file_types]);
     }
 
     public function updatedAcceptedFileTypes()

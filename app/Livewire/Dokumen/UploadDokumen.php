@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Persyaratan;
 use App\Models\CalonSiswa;
 use App\Models\DataRegistrasi;
+use App\Models\Rapot;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\WithFileUploads;
@@ -33,7 +34,7 @@ class UploadDokumen extends Component
         $uploadedDocumentsCount = Berkas::where('uploader_id', $this->user->id)->count();
         if ($uploadedDocumentsCount > 0) {
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
-                ->update(['status' => 1]);
+                ->update(['status' => 2]);
         }
     }
 
@@ -42,10 +43,10 @@ class UploadDokumen extends Component
         if ($this->syarat->nama_persyaratan != 'Rapot') {
             try {
                 $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg|max:300', // Maksimal 300KB
+                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
                 ], [
                     'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg.',
+                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
                     'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
                 ]);
                 $this->simpan();
@@ -102,7 +103,7 @@ class UploadDokumen extends Component
 
             // Update status in DataRegistrasi
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
-                ->update(['status' => 1]);
+                ->update(['status' => 2]);
 
             Log::info('File berhasil disimpan: ', ['path' => $path]);
             $this->berkas = null; // Reset variabel
@@ -110,6 +111,62 @@ class UploadDokumen extends Component
             Log::info('Tidak ada file yang diterima');
         }
     }
+
+    public function validateAndSubmit()
+    {
+        $allDocumentsUploaded = true;
+        $rapotUploaded = false;
+        $rapotDataFilled = true;
+
+        foreach ($this->persyaratan as $syarat) {
+            if ($syarat->nama_persyaratan === 'Rapot') {
+                $rapotUploaded = $this->isRapotUploaded($syarat);
+                $rapotDataFilled = $this->isRapotDataFilled();
+            } else {
+                if (!$this->isDocumentUploaded($syarat)) {
+                    $allDocumentsUploaded = false;
+                    break;
+                }
+            }
+        }
+
+        if ($allDocumentsUploaded) {
+            if ($rapotUploaded && $rapotDataFilled) {
+                return redirect()->to('/siswa/daftar-step-empat?t=1');
+            } else {
+                if (!$rapotDataFilled) {
+                    session()->flash('message', 'Rapot belum diisi.');
+                }
+            }
+        } else {
+            session()->flash('message', 'Pastikan semua dokumen telah diunggah.');
+        }
+    }
+
+    private function isRapotUploaded($syarat)
+    {
+        return Berkas::where('uploader_id', $this->user->id)
+            ->where('id_syarat', $syarat->id_persyaratan)
+            ->exists();
+    }
+
+    private function isRapotDataFilled()
+    {
+        $registrasi = $this->user->registrasi;
+        if ($registrasi) {
+            $rapotData = Rapot::where('id_registrasi', $registrasi->id_registrasi)->first();
+            return $rapotData && !is_null($rapotData->nilai_rapot);
+        }
+        return false;
+    }
+
+    private function isDocumentUploaded($syarat)
+    {
+        return Berkas::where('uploader_id', $this->user->id)
+            ->where('id_syarat', $syarat->id_persyaratan)
+            ->exists();
+    }
+
     public function render()
     {
         return view('livewire.dokumen.upload-dokumen', [

@@ -21,10 +21,9 @@ class JalurRegistrasi extends Component
     {
         $this->user = Auth::user();
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
-        $this->siswa = DataRegistrasi::firstOrCreate([
-            'id_calon_siswa' => $this->id_siswa,
-            'status' => '0'
-        ]);
+        $this->siswa = DataRegistrasi::updateOrCreate(
+            ['id_calon_siswa' => $this->id_siswa],
+        );
         $this->id_jalur = $this->siswa->jalurRegistrasi->id_jalur ?? '';
         $this->jalurRegistrasi = JalurRegistrasiModel::where('is_open', true)->with('persyaratan')->get();
     }
@@ -50,6 +49,7 @@ class JalurRegistrasi extends Component
     public function updateJalur($value)
     {
         $this->siswa->id_jalur = $value;
+        $this->siswa->status = 2;
         $this->siswa->save();
 
         $kodeData = $this->generateNomor($value, $this->siswa->id_calon_siswa);
