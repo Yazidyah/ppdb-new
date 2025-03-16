@@ -192,6 +192,7 @@
     }
 
     function berkasModal(id) {
+        console.log('Opening berkas modal with ID:', id);
         Livewire.dispatch('openBerkasModal', {
             id: id
         });
