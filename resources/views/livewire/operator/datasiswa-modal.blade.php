@@ -64,9 +64,7 @@
                         <p class="text-xs font-medium">Kode Registrasi</p>
                         <p class="text-sm text-gray-500">{{ @$siswa->DataRegistrasi->nomor_peserta ?? 'Belum Di Lengkapi' }}</p>
                     </div>
-
                 </div>
-
             </div>
 
             <div class="mt-5 relative w-full">

@@ -55,9 +55,7 @@
                             <p class="text-xs font-medium">Kota</p>
                             <p class="text-sm text-gray-500">{{ @$siswa->kota ?? 'Belum Di Lengkapi' }}</p>
                         </div>
-
                     </div>
-
                 </div>
 
                 <div class="mt-5 relative w-full">
