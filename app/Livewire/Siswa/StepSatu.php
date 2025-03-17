@@ -3,6 +3,7 @@
 namespace App\Livewire\Siswa;
 
 use App\Models\CalonSiswa;
+use App\Models\DataRegistrasi;
 use App\Models\OrangTua;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -13,6 +14,7 @@ class StepSatu extends Component
     public $siswa;
     public $user;
     public $orangTua;
+    public $regis;
     protected $queryString = [
         'tab' => ['except' => 'konsep', 'as' => 't'],
     ];
@@ -28,6 +30,15 @@ class StepSatu extends Component
     private function initializeUser()
     {
         $this->user = Auth::user();
+        // dd($this->user->siswa->dataRegistrasi);
+        if ($this->user->siswa->dataRegistrasi == null) {
+            $this->regis = DataRegistrasi::firstOrCreate([
+                'id_calon_siswa' => $this->user->siswa->id_calon_siswa,
+                'status' => 0,
+            ]);
+        }
+
+        // }
     }
 
     private function initializeSiswa()
