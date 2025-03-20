@@ -1,5 +1,5 @@
 <div>
-    @if (session()->has('message'))
+    {{-- @if (session()->has('message'))
         <div id="toast-warning"
             class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm"
             role="alert">
@@ -23,7 +23,7 @@
                 </svg>
             </button>
         </div>
-    @endif
+    @endif --}}
 
     <div class="flex w-3/4 items-center justify-center border-2 border-dasar2 rounded-lg py-2 gap-2 mx-auto">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

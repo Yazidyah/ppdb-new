@@ -44,6 +44,10 @@
                 <div>
                     @livewire('dokumen.rapot-modal', ['t' => $tab, 'regis' => $user->registrasi], key($user->id . '-rapot-' . rand()))
                 </div>
+
+                <div>
+                    @livewire('dokumen.berkas-modal', ['t' => $tab, 'regis' => $user->registrasi], key($user->id . '-berkas-' . rand()))
+                </div>
             @endif
         </div>
     </div>

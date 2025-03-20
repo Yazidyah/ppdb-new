@@ -112,60 +112,60 @@ class UploadDokumen extends Component
         }
     }
 
-    public function validateAndSubmit()
-    {
-        $allDocumentsUploaded = true;
-        $rapotUploaded = false;
-        $rapotDataFilled = true;
+    // public function validateAndSubmit()
+    // {
+    //     $allDocumentsUploaded = true;
+    //     $rapotUploaded = false;
+    //     $rapotDataFilled = true;
 
-        foreach ($this->persyaratan as $syarat) {
-            if ($syarat->nama_persyaratan === 'Rapot') {
-                $rapotUploaded = $this->isRapotUploaded($syarat);
-                $rapotDataFilled = $this->isRapotDataFilled();
-            } else {
-                if (!$this->isDocumentUploaded($syarat)) {
-                    $allDocumentsUploaded = false;
-                    break;
-                }
-            }
-        }
+    //     foreach ($this->persyaratan as $syarat) {
+    //         if ($syarat->nama_persyaratan === 'Rapot') {
+    //             $rapotUploaded = $this->isRapotUploaded($syarat);
+    //             $rapotDataFilled = $this->isRapotDataFilled();
+    //         } else {
+    //             if (!$this->isDocumentUploaded($syarat)) {
+    //                 $allDocumentsUploaded = false;
+    //                 break;
+    //             }
+    //         }
+    //     }
 
-        if ($allDocumentsUploaded) {
-            if ($rapotUploaded && $rapotDataFilled) {
-                return redirect()->to('/siswa/daftar-step-empat?t=1');
-            } else {
-                if (!$rapotDataFilled) {
-                    session()->flash('message', 'Niai Rapot belum diisi.');
-                }
-            }
-        } else {
-            session()->flash('message', 'Pastikan semua dokumen telah diunggah.');
-        }
-    }
+    //     if ($allDocumentsUploaded) {
+    //         if ($rapotUploaded && $rapotDataFilled) {
+    //             return redirect()->to('/siswa/daftar-step-empat?t=1');
+    //         } else {
+    //             if (!$rapotDataFilled) {
+    //                 session()->flash('message', 'Niai Rapot belum diisi.');
+    //             }
+    //         }
+    //     } else {
+    //         session()->flash('message', 'Pastikan semua dokumen telah diunggah.');
+    //     }
+    // }
 
-    private function isRapotUploaded($syarat)
-    {
-        return Berkas::where('uploader_id', $this->user->id)
-            ->where('id_syarat', $syarat->id_persyaratan)
-            ->exists();
-    }
+    // private function isRapotUploaded($syarat)
+    // {
+    //     return Berkas::where('uploader_id', $this->user->id)
+    //         ->where('id_syarat', $syarat->id_persyaratan)
+    //         ->exists();
+    // }
 
-    private function isRapotDataFilled()
-    {
-        $registrasi = $this->user->registrasi;
-        if ($registrasi) {
-            $rapotData = Rapot::where('id_registrasi', $registrasi->id_registrasi)->first();
-            return $rapotData && !is_null($rapotData->nilai_rapot);
-        }
-        return false;
-    }
+    // private function isRapotDataFilled()
+    // {
+    //     $registrasi = $this->user->registrasi;
+    //     if ($registrasi) {
+    //         $rapotData = Rapot::where('id_registrasi', $registrasi->id_registrasi)->first();
+    //         return $rapotData && !is_null($rapotData->nilai_rapot);
+    //     }
+    //     return false;
+    // }
 
-    private function isDocumentUploaded($syarat)
-    {
-        return Berkas::where('uploader_id', $this->user->id)
-            ->where('id_syarat', $syarat->id_persyaratan)
-            ->exists();
-    }
+    // private function isDocumentUploaded($syarat)
+    // {
+    //     return Berkas::where('uploader_id', $this->user->id)
+    //         ->where('id_syarat', $syarat->id_persyaratan)
+    //         ->exists();
+    // }
 
     public function render()
     {
