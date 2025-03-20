@@ -26,7 +26,7 @@
             <div class="">
                 <div class="md:flex gap-3 w-full">
                     <!-- Left Column -->
-                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-4 py-2 w-full">
+                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-5 gap-4 py-2 w-full">
                         <!-- Nama Lengkap -->
                         <div class="col-span-4 mt-2">
                             <x-reg-input-label>Nama Lengkap</x-reg-input-label>
@@ -36,10 +36,10 @@
                                 focus:ring-0 sm:text-sm sm:leading-6 w-full" type="text" name="nama_lengkap" required
                                     autofocus autocomplete="nama_lengkap" placeholder="Nama Lengkap"
                                     wire:model.live="nama_lengkap" />
-                                </div>
-                                @error('nama_lengkap')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
+                            </div>
+                            @error('nama_lengkap')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- NIK -->
@@ -50,11 +50,12 @@
                                 <x-reg-input-text id="NIK"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NIK" required autofocus autocomplete="NIK" placeholder="NIK"
-                                    wire:model.live="nik" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="16" />
-                                </div>
-                                @error('nik')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
+                                    wire:model.live="nik" inputmode="numeric" pattern="[0-9]*"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="16" />
+                            </div>
+                            @error('nik')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- NISN -->
@@ -65,11 +66,12 @@
                                 <x-reg-input-text id="NISN"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="tel" name="NISN" required autofocus autocomplete="NISN" placeholder="NISN"
-                                    wire:model.live="nisn" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" />
-                                </div>
-                                @error('nisn')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
+                                    wire:model.live="nisn" inputmode="numeric" pattern="[0-9]*"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" />
+                            </div>
+                            @error('nisn')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- NPSN -->
@@ -83,8 +85,8 @@
                                     wire:model="npsn" />
                                 <button wire:click="searchByNpsn"
                                     class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Check
-                                </div>
-                            </button>
+                                </button>
+                            </div>
                             @error('npsn')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                             @enderror
@@ -95,39 +97,72 @@
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="sekolah_asal"
-                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
-                                    disabled="disabled" type="text" name="sekolah_asal" required autofocus
-                                    autocomplete="sekolah_asal" placeholder="Asal Sekolah"
-                                    value="{{ strtoupper($sekolah_asal) }}" />
-                                </div>
-                                @error('sekolah_asal')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
+                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full {{ $sekolah_asal_enabled ? 'bg-gray-300' : 'bg-transparent' }}"
+                                    type="text" name="sekolah_asal" required autofocus autocomplete="sekolah_asal" placeholder="Asal Sekolah"
+                                    wire:model.live="sekolah_asal" :disabled="$sekolah_asal_enabled" />
+                            </div>
+                            @error('sekolah_asal')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
-                        <!-- Nomor Telepon -->
-                        <div class="col-span-4 mt-2">
-                            <x-reg-input-label>Nomor Telepon</x-reg-input-label>
+                        <!-- Predikat Akreditasi Sekolah -->
+                        <div class="col-span-2 mt-2">
+                            <x-reg-input-label>Predikat Akreditasi Sekolah</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <x-reg-input-text id="no_telp"
+                                <x-reg-input-text id="predikat_akreditasi_sekolah"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
-                                    type="tel" name="no_telp" required autofocus autocomplete="no_telp"
-                                    placeholder="Nomor Telepon" wire:model.live="no_telp" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="15" />
+                                    type="text" name="predikat_akreditasi_sekolah" required autofocus autocomplete="predikat_akreditasi_sekolah"
+                                    placeholder="Masukkan predikat akreditasi sekolah" wire:model.live="predikat_akreditasi_sekolah" />
+                            </div>
+                            @error('predikat_akreditasi_sekolah')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <!-- Nilai Akreditasi Sekolah -->
+                        <div class="col-span-2 mt-2">
+                            <x-reg-input-label>Nilai Akreditasi Sekolah</x-reg-input-label>
+                            <div
+                                class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
+                                <x-reg-input-text id="nilai_akreditasi_sekolah"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
+                                    type="text" name="nilai_akreditasi_sekolah" required autofocus autocomplete="nilai_akreditasi_sekolah"
+                                    placeholder="Nilai Akreditasi Sekolah" wire:model.live="nilai_akreditasi_sekolah" />
+                            </div>
+                            @error('nilai_akreditasi_sekolah')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        @if(!$sekolah_asal_enabled)
+                            <!-- Status Sekolah -->
+                            <div class="col-span-4 mt-2">
+                                <x-reg-input-label>Status Sekolah</x-reg-input-label>
+                                <div class="flex items-center my-auto justify-center gap-2">
+                                    <label class="text-xs">
+                                        <input type="radio" name="status_sekolah" value="negeri" wire:model.live="status_sekolah"> Negeri
+                                    </label>
+                                    <label class="text-xs">
+                                        <input type="radio" name="status_sekolah" value="swasta" wire:model.live="status_sekolah"> Swasta
+                                    </label>
                                 </div>
-                                @error('no_telp')
+                                @error('status_sekolah')
                                     <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                                 @enderror
-                        </div>
+                            </div>
+                        @endif
+
                     </div>
 
                     <!-- Right Column -->
-                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-4 py-2 w-full">
+                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-5 gap-4 py-2 w-full">
                         <!-- Jenis Kelamin -->
-                        <div class="col-span-4 mt-2">
-                            <div class="flex items-center justify-center gap-2">
-                                <p>Jenis Kelamin:</p>
-                                <div class="flex items-center justify-center gap-2">
+                        <div class="col-span-2 mt-2">
+                            
+                                <p class="block text-sm font-medium text-center leading-2 text-gray-900">Jenis Kelamin</p>
+                                <div class="flex items-center my-auto justify-center gap-2">
                                     <label class="text-xs">
                                         <input type="radio" name="jenis_kelamin" value="L"
                                             wire:model.live="jenis_kelamin"> Laki-laki
@@ -137,9 +172,25 @@
                                             wire:model.live="jenis_kelamin"> Perempuan
                                     </label>
                                 </div>
-                            </div>
+                          
                         </div>
 
+                        <!-- Nomor Telepon -->
+                        <div class="col-span-2 mt-2">
+                            <x-reg-input-label>Nomor Telepon</x-reg-input-label>
+                            <div
+                                class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
+                                <x-reg-input-text id="no_telp"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
+                                    type="tel" name="no_telp" required autofocus autocomplete="no_telp"
+                                    placeholder="Nomor Telepon" wire:model.live="no_telp" inputmode="numeric"
+                                    pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                    maxlength="15" />
+                            </div>
+                            @error('no_telp')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
+                        </div>
 
                         <!-- Alamat KK -->
                         <div class="col-span-2 mt-2">
@@ -150,32 +201,31 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="alamat_kk" required autofocus autocomplete="alamat_kk"
                                     placeholder="Alamat KK" wire:model.live='alamat_kk' />
-                                </div>
-                                @error('alamat_kk')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
+                            </div>
+                            @error('alamat_kk')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Alamat Domisili -->
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label class="flex items-center justify-between">Alamat Domisili
                                 <label class="ml-2 flex items-center">
-                                    <input type="checkbox" wire:model="alamat_domisili_disabled"
-                                        wire:click="toggleAlamatDomisili" class="mr-1">
+                                    <input type="checkbox" wire:click="toggleAlamatDomisili" class="mr-1" {{ $alamat_domisili_disabled ? 'checked' : '' }}>
                                     <span class="text-xs">Sama dengan Alamat KK</span>
                                 </label>
                             </x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <x-reg-input-text id="alamat_domisili"
+                                <x-reg-input-text id="alamat_domisili" :value="$alamat_domisili"
+                                    wire:model="alamat_domisili"
                                     class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full {{ $alamat_domisili_disabled ? 'bg-gray-300' : 'bg-transparent' }}"
                                     type="text" name="alamat_domisili" required autofocus autocomplete="alamat_domisili"
-                                    placeholder="Alamat Domisili" wire:model.live='alamat_domisili'
-                                    :disabled="$alamat_domisili_disabled" />
-                                </div>
-                                @error('alamat_domisili')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
+                                    placeholder="Alamat Domisili" :disabled="$alamat_domisili_disabled" />
+                            </div>
+                            @error('alamat_domisili')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <!-- Provinsi -->
@@ -238,11 +288,12 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="date" name="tanggal_lahir" required autofocus autocomplete="tanggal_lahir"
                                     placeholder="Tanggal Lahir" wire:model.live='tanggal_lahir'
+                                    min="{{ now()->subYear(21)->format('Y-m-d') }}"
                                     max="{{ now()->subYear(13)->format('Y-m-d') }}" />
-                                </div>
-                                @error('tanggal_lahir')
-                                    <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
+                            </div>
+                            @error('tanggal_lahir')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
                 </div>

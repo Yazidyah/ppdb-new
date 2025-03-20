@@ -1,7 +1,7 @@
 <div>
-<div x-data class="p-4 transition-all duration-300" x-bind:class="$store.sidebar.isOpen ? 'sm:ml-64' : ' ml-0'">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto text-center pt-7">
+<div class="p-4 sm:ml-64">
+    <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
+            <div class="container mx-auto text-center pt-3">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('success') }}
@@ -31,7 +31,7 @@
                             </div>
                             <div class="w-1/6 inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                             <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JALUR REGISTRASI</button>
-                        </div> 
+                        </div>
                 </div>
             </div>
                 <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
@@ -55,7 +55,7 @@
                                 <td class=" px-4 py-2 text-tertiary text-center">{{ $item->is_open ? 'Buka' : 'Tutup' }}</td>
                                 <td class=" px-4 py-2 text-tertiary text-center flex justify-center space-x-2">
                                     <button wire:click="edit({{ $item->id_jalur }})" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
-                                    <button wire:click="delete({{ $item->id_jalur }})" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Delete</button>
+                                    <button wire:click="delete({{ $item->id_jalur }})" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
                                 </td>
                             </tr>
                         @empty
@@ -124,7 +124,7 @@
                         <x-primary-button class="mb-2 mx-auto w-full justify-center items-center">{{ $isEdit ? 'Update' : 'Submit' }}</x-primary-button>
                     </form>
                     <div class="flex justify-center">
-                        <button wire:click="closeModal" class="mt-4 px-4 py-2 bg-red-900 hover:bg-red-500 justify-center flex text-white rounded-lg">Tutup</button>
+                        <button wire:click="closeModal" class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Tutup</button>
                     </div>
                 </div>
             </div>

@@ -10,18 +10,9 @@ class Dashboard extends Component
 {
 
     public $tab = 1;
-    public $statistik;
     public $filterNamaStatistik = '';
     public $allNamaStatistik = [];
-    public $countLakiLaki;
-    public $countPerempuan;
-    public $countSekolahNegeri;
-    public $countSekolahSwasta;
-    public $countLuarBogor;
-    public $countDalamBogor;
-    public $countBelumDiproses;
-    public $countLulus;
-    public $countTidakLulus;
+    public $statistik, $countLakiLaki, $countPerempuan, $countSekolahNegeri, $countSekolahSwasta, $countLuarBogor, $countDalamBogor, $countJalur, $countUpload, $countSubmit, $countTidakLolosAdministrasi, $countLolosAdministrasi, $countBelumDitentukan, $countDiterima, $countTidakDiterima, $countDicadangkan;
 
 
     protected $queryString = [
@@ -44,13 +35,19 @@ class Dashboard extends Component
         $countJalurAfirmasiABK = DB::table('data_registrasi')->where('id_jalur', 4)->count();
         $this->countLakiLaki = DB::table('calon_siswa')->where('jenis_kelamin', 'L')->count();
         $this->countPerempuan = $totalCalonSiswa - $this->countLakiLaki;
-        $this->countSekolahNegeri = DB::table('calon_siswa')->where('status_sekolah', 'NEGERI')->count();
+        $this->countSekolahNegeri = DB::table('calon_siswa')->where('status_sekolah', 'negeri')->count();
         $this->countSekolahSwasta = $totalCalonSiswa - $this->countSekolahNegeri;
         $this->countLuarBogor = DB::table('calon_siswa')->where('kota', '!=', 'KOTA BOGOR')->count();
         $this->countDalamBogor = $totalCalonSiswa - $this->countLuarBogor;
-        $this->countBelumDiproses = DB::table('data_registrasi')->where('status', '0')->count();
-        $this->countLulus = DB::table('data_registrasi')->where('status', '1')->count();
-        $this->countTidakLulus = DB::table('data_registrasi')->where('status', '2')->count();
+        $this->countJalur = DB::table('data_registrasi')->where('status', '0')->count();
+        $this->countUpload = DB::table('data_registrasi')->where('status', '1')->count();
+        $this->countSubmit = DB::table('data_registrasi')->where('status', '2')->count();
+        $this->countTidakLolosAdministrasi = DB::table('data_registrasi')->where('status', '3')->count();
+        $this->countLolosAdministrasi = DB::table('data_registrasi')->where('status', '4')->count();
+        $this->countBelumDitentukan = DB::table('data_registrasi')->where('status', '5')->count();
+        $this->countTidakDiterima = DB::table('data_registrasi')->where('status', '6')->count();
+        $this->countDiterima = DB::table('data_registrasi')->where('status', '7')->count();
+        $this->countDicadangkan = DB::table('data_registrasi')->where('status', '8')->count();
 
         $statistikData = [
             'Total Pendaftar' => $totalCalonSiswa,
@@ -64,9 +61,15 @@ class Dashboard extends Component
             'Dari Sekolah Swasta' => $this->countSekolahSwasta,
             'Dari Luar Kota' => $this->countLuarBogor,
             'Dari Dalam Kota' => $this->countDalamBogor,
-            'Pendaftar Belum di Proses' => $this->countBelumDiproses,
-            'Pendaftar Lulus' => $this->countLulus,
-            'Pendaftar Tidak Lulus' => $this->countTidakLulus,
+            'Pendaftar Memilih Jalur' => $this->countJalur,
+            'Pendaftar Upload Dokumen' => $this->countUpload,
+            'Pendaftar Submit' => $this->countSubmit,
+            'Pendaftar Tidak Lolos Administrasi' => $this->countTidakLolosAdministrasi,
+            'Pendaftar Lolos Administrasi' => $this->countLolosAdministrasi,
+            'Pendaftar Belum Ditentukan' => $this->countBelumDitentukan,
+            'Pendaftar Diterima' => $this->countDiterima,
+            'Pendaftar Tidak Diterima' => $this->countTidakDiterima,
+            'Pendaftar Dicadangkan' => $this->countDicadangkan,
         ];
 
         foreach ($statistikData as $nama_statistik => $count) {

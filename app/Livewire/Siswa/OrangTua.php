@@ -28,13 +28,23 @@ class OrangTua extends Component
         $this->user = Auth::user();
         $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
         $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();
+
         if ($this->siswa != null) {
-            if (count($this->orangTua) == 0) {
-                $this->orangTua = ModelsOrangTua::create([
+            if ($this->orangTua->where('id_hubungan', 1)->isEmpty()) {
+                ModelsOrangTua::create([
                     'id_calon_siswa' => $this->siswa->id_calon_siswa,
                     'id_hubungan' => 1,
+                    'pekerjaan' => 1,
                 ]);
             }
+            if ($this->orangTua->where('id_hubungan', 2)->isEmpty()) {
+                ModelsOrangTua::create([
+                    'id_calon_siswa' => $this->siswa->id_calon_siswa,
+                    'id_hubungan' => 2,
+                    'pekerjaan' => 2,   
+                ]);
+            }
+            $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();
         }
     }
 
@@ -42,7 +52,7 @@ class OrangTua extends Component
     {
         ModelsOrangTua::create([
             'id_calon_siswa' => $this->siswa->id_calon_siswa,
-            'id_hubungan' => 1,
+            'id_hubungan' => 3,
         ]);
 
         $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();

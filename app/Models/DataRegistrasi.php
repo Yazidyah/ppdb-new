@@ -11,9 +11,10 @@ class DataRegistrasi extends Model
     protected $fillable = [
         'id_calon_siswa',
         'id_jalur',
-        'kode_registrasi',
+        'nomor_peserta',
+        'nomor_suket', 
         'status',
-        'id_jadwal_tes', // new field
+        'id_jadwal_tes',
     ];
     protected $dates = ['deleted_at', 'updated_at'];
 

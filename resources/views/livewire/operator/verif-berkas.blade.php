@@ -1,6 +1,8 @@
 <div>
-    <button wire:click="$set('modalOpen', true)" type="button"
-        class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors bg-tertiary border rounded-md hover:bg-secondary hover:text-tertiary active:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Verif</button>
+<button wire:click="$set('modalOpen', true)" type="button"
+        class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors {{ $buttonColor }} border rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">
+        {!! $buttonIcon !!}
+    </button>
     @if ($modalOpen)
         <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen">
             <div class="absolute inset-0 w-full h-full bg-black backdrop-blur-sm bg-opacity-70"
@@ -63,7 +65,7 @@
                         <label for="status" class="text-sm font-medium text-gray-700 text-left">Update Status</label>
                         <select id="status" wire:model="status"
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            <option value="" disabled>Pilih Status</option>
+                            <option value="2">Pilih Status</option>
                             <option value="3">Tidak Lolos</option>
                             <option value="4">Lolos</option>
                         </select>
@@ -84,7 +86,7 @@
                             Japres/Tes Akademik</label>
                         <select id="sesi_japres_tes_akademik" wire:model="sesi_japres_tes_akademik"
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            <option value="">Tidak dijawdalkan</option>
+                            <option value="">Tidak dijadwalkan</option>
                             @foreach ($jadwalTesJapresTesAkademik as $jadwalJa)
                                 <option value="{{ $jadwalJa['id'] }}">{{ $jadwalJa['label'] }}</option>
                             @endforeach
@@ -93,9 +95,9 @@
                 </div>
                 <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
                     <button wire:click="$set('modalOpen', false)" type="button"
-                        class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Cancel</button>
+                        class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Cancel</button>
                     <button wire:click="simpan" type="button"
-                        class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">Simpan</button>
+                        class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2  transition ease-in-out duration-150">Simpan</button>
                 </div>
             </div>
         </div>

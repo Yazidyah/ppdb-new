@@ -1,12 +1,4 @@
 <div>
-    <!-- <div class="navigation-buttons justify-center flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
-        <button
-            class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
-            wire:click="$set('modalSubmit', true)">
-            Isi data rapot
-        </button>
-    </div> -->
-
     @if ($modalSubmit)
         <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
@@ -29,11 +21,9 @@
                         <div x-data="{ currentStep: @entangle('sem').defer }" x-init="currentStep = parseInt(new URLSearchParams(window.location.search).get('sem')) || 1"
                             class="flex flex-row justify-center lg:justify-between px-4 sm:px-6 items-center mx-auto bg-gray-100 mb-8 rounded-lg">
                             <template x-for="(step, index) in 5" :key="index">
-                                <div @click="currentStep = (index + 1); window.history.pushState({}, '', '?sem=' + (index + 1) + '&t={{ $t }}'); $wire.set('sem', (index + 1))"
-                                    :class="{
-                                        'bg-tertiary text-white': currentStep === (index + 1),
-                                        'text-gray-700': currentStep !== (index + 1)
-                                    }"
+                                <div @click="currentStep = (index + 1); $wire.set('sem', (index + 1))"
+                                    :class="{ 'bg-tertiary text-white': currentStep === (index +
+                                        1), 'text-gray-700': currentStep !== (index + 1) }"
                                     class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
                                     <div
                                         class="bg-white rounded-full flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12">
@@ -59,16 +49,7 @@
                                         name="{{ $subject }}{{ $sem }}" required autofocus
                                         autocomplete="{{ $subject }}{{ $sem }}"
                                         wire:model.live="{{ $subject }}{{ $sem }}"
-                                        x-on:input="
-                                            let value = $event.target.value.replace(/[^\d.]/g, '');
-                                            if (!/^\d*\.?\d*$/.test(value) || parseFloat(value) > 100) {
-                                            value = value.slice(0, 5);
-                                            if (parseFloat(value) > 100) {
-                                                value = '100';
-                                            }
-                                            }
-                                            $event.target.value = value;
-                                        "
+                                        x-on:input="let value = $event.target.value.replace(/[^\d.]/g, ''); if (!/^\d*\.?\d*$/.test(value) || parseFloat(value) > 100) { value = value.slice(0, 5); if (parseFloat(value) > 100) { value = '100'; } } $event.target.value = value;"
                                         x-on:focus="if ($event.target.value == 0) $event.target.value = ''" />
                                     @error($subject . $sem)
                                         <span class="text-red-500 text-sm">{{ $message }}</span>

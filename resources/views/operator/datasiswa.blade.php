@@ -1,9 +1,12 @@
 <x-app-layout>
-<div x-data="{ tahun: true }" class="p-4 transition-all duration-300" x-bind:class="$store.sidebar.isOpen ? 'sm:ml-64' : ' ml-0'">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto text-center pt-7">
-                <div class="container mx-auto text-center pt-7 ">
-                    <h1 @click="tahun = !tahun" class="font-bold text-[32px] pt-7 pb-7 ">Siswa Terdaftar</h1>
+    <div class="p-4 sm:ml-64">
+        <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
+            <div class="container mx-auto text-center pt-3">
+                <div class="container mx-auto text-center pt-3">
+                    <h1 class="font-bold text-[32px] pt-3 pb-3">Siswa Terdaftar</h1>
+                    <div wire:ignore>
+                        @livewire('operator.export-data-siswa', key('export-data-' . rand()))
+                    </div>
                     <!-- Search and Filter Form -->
                     <form method="GET" action="{{ route('operator.datasiswa') }}" class="mb-4 flex justify-between"
                         id="searchForm">
@@ -17,29 +20,20 @@
                         <div>
                             <select name="filter" class="px-4 py-2 border rounded-lg"
                                 onchange="document.getElementById('searchForm').submit()">
-                                <option value="" {{ !request('filter') ? 'selected' : '' }}>Semua
-                                    status
-                                </option>
-                                <option value="0" {{ request('filter') == '0' ? 'selected' : '' }}>Jalur</option>
-                                <option value="1" {{ request('filter') == '1' ? 'selected' : '' }}>Upload</option>
-                                <option value="2" {{ request('filter') == '2' ? 'selected' : '' }}>Submit</option>
-                                <option value="3" {{ request('filter') == '3' ? 'selected' : '' }}>Tidak Lolos
-                                    Verifikasi Berkas</option>
-                                <option value="4" {{ request('filter') == '4' ? 'selected' : '' }}>Lolos Verifikasi
-                                    Berkas</option>
-                                <option value="5" {{ request('filter') == '5' ? 'selected' : '' }}>Belum Ditentukan
-                                </option>
-                                <option value="6" {{ request('filter') == '6' ? 'selected' : '' }}>Tidak Diterima
-                                </option>
-                                <option value="7" {{ request('filter') == '7' ? 'selected' : '' }}>Diterima
-                                </option>
-                                <option value="8" {{ request('filter') == '8' ? 'selected' : '' }}>Dicadangkan
-                                </option>
+                                <option value="" {{ !request('filter') ? 'selected' : '' }}>Semua status</option>
+                                <option value="1" {{ request('filter') == '1' ? 'selected' : '' }}>Jalur</option>
+                                <option value="2" {{ request('filter') == '2' ? 'selected' : '' }}>Upload</option>
+                                <option value="3" {{ request('filter') == '3' ? 'selected' : '' }}>Submit</option>
+                                <option value="4" {{ request('filter') == '4' ? 'selected' : '' }}>Tidak Lolos</option>
+                                <option value="5" {{ request('filter') == '5' ? 'selected' : '' }}>Lolos</option>
+                                <option value="6" {{ request('filter') == '6' ? 'selected' : '' }}>Belum Ditentukan</option>
+                                <option value="7" {{ request('filter') == '7' ? 'selected' : '' }}>Tidak Diterima</option>
+                                <option value="8" {{ request('filter') == '8' ? 'selected' : '' }}>Diterima</option>
+                                <option value="9" {{ request('filter') == '9' ? 'selected' : '' }}>Dicadangkan</option>
                             </select>
                             <select name="jalur" class="px-4 py-2 border rounded-lg"
                                 onchange="document.getElementById('searchForm').submit()">
-                                <option value="" {{ !request('jalur') ? 'selected' : '' }}>Semua jalur
-                                </option>
+                                <option value="" {{ !request('jalur') ? 'selected' : '' }}>Semua jalur</option>
                                 @foreach ($jalurRegistrasi as $jalur)
                                     <option value="{{ $jalur->id_jalur }}"
                                         {{ request('jalur') == $jalur->id_jalur ? 'selected' : '' }}>
@@ -55,9 +49,8 @@
                             @endif
                         </div>
                     </form>
-                    @livewire('operator.export-data-siswa', key('export-data-' . rand()))
-                    <div x-show="tahun"
-                        class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6">
+
+                    <div class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6">
                         <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 my-3">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                                 <tr>
@@ -103,7 +96,7 @@
                                         Penerimaan
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-center">
-                                        Modal
+                                        Detail
                                     </th>
                                 </tr>
                             </thead>
@@ -114,22 +107,25 @@
                                             {{ $siswa->id_calon_siswa }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->nama_lengkap ?? 'Belum Di Lengkapi' }}
+                                            {{ $siswa->nama_lengkap ?? 'Belum Di Lengkapi' }}
                                         </td>
-                                        <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->NISN ?? 'Belum Di Lengkapi' }} / {{ @$siswa->dataRegistrasi->kode_registrasi ?? '-' }} / {{ @$siswa->user->email ?? '-' }}
+                                        <td scope="col" class="px-6 py-3 text-center hover-underline"
+                                            onclick="if('{{ $siswa->no_telp }}') { window.open('https://api.whatsapp.com/send/?phone={{ preg_replace('/^0/', '62', $siswa->no_telp) }}&text&type=phone_number&app_absent=0', '_blank'); } else { alert('Nomor HP tidak tersedia'); }">
+                                            {{ $siswa->NISN ?? 'Belum Di Lengkapi' }} /
+                                            {{ $siswa->dataRegistrasi->nomor_peserta ?? '-' }} /
+                                            {{ $siswa->user->email ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ strtoupper(@$siswa->sekolah_asal ?? 'Belum Di Lengkapi') }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->jenis_kelamin ?? 'Belum Di Lengkapi' }}
+                                            {{ $siswa->jenis_kelamin ?? 'Belum Di Lengkapi' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ @$siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
+                                            {{ $siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ $siswa->dataRegistrasi->status_label }}
+                                            {{ $siswa->status_label ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}
@@ -162,6 +158,12 @@
                     </div>
                 </div>
             </div>
+            <style>
+                .hover-underline:hover {
+                    text-decoration: underline;
+                    text-decoration-color: blue;
+                }
+            </style>
             <script>
                 let debounceTimer;
                 const debounce = (callback, delay) => {
@@ -181,4 +183,6 @@
                     }, 500);
                 });
             </script>
+        </div>
+    </div>
 </x-app-layout>

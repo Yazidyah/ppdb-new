@@ -4,12 +4,18 @@ namespace App\Livewire\Operator;
 
 use Livewire\Component;
 use App\Models\CalonSiswa;
+use App\Models\JalurRegistrasi;
+use App\Models\DataRegistrasi;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class TabDetailSiswa extends Component
 {
     public $id_calon_siswa;
     public $siswa;
-    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $npsn, $sekolah_asal, $status_sekolah, $alamat_domisili, $alamat_kk, $provinsi, $kota;
+    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $npsn, $sekolah_asal, $status_sekolah, $alamat_domisili, $alamat_kk, $provinsi, $kota, $id_jalur;
+    public $name, $email, $password;
+    public $jalurOptions;
 
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
@@ -26,6 +32,10 @@ class TabDetailSiswa extends Component
         'alamat_kk' => 'nullable|string|max:255',
         'provinsi' => 'nullable|string|max:255',
         'kota' => 'nullable|string|max:255',
+        'id_jalur' => 'required|exists:jalur_registrasi,id_jalur',
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'password' => 'nullable|string|min:8',
     ];
 
     public function mount(CalonSiswa $siswa)
@@ -46,6 +56,11 @@ class TabDetailSiswa extends Component
         $this->alamat_kk = ucwords($siswa->alamat_kk);
         $this->provinsi = $siswa->provinsi;
         $this->kota = $siswa->kota;
+        $this->id_jalur = $siswa->dataRegistrasi->jalur->id_jalur;
+        $this->jalurOptions = JalurRegistrasi::all();
+        $user = $siswa->user;
+        $this->name = $user->name;
+        $this->email = $user->email;
     }
     
 
@@ -71,6 +86,22 @@ class TabDetailSiswa extends Component
             'updated_at' => now(),
         ]);
         
+        $currentKodeRegistrasi = DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->first()->nomor_peserta;
+        $nomor_peserta = $this->id_jalur == 1 ? 'R' : 'A';
+        $newKodeRegistrasi = $nomor_peserta . substr($currentKodeRegistrasi, 1);
+
+        DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->update([
+            'id_jalur' => $this->id_jalur,
+            'nomor_peserta' => $newKodeRegistrasi,
+        ]);
+
+        $user = User::find($this->siswa->id_user);
+        $user->update([
+            'name' => $this->name,
+            'email' => $this->email,
+            'password' => $this->password ? Hash::make($this->password) : $user->password,
+        ]);
+
         session()->flash('message', 'Data berhasil diperbarui.');
     }
 

@@ -8,13 +8,13 @@ use App\Models\Province;
 use App\Models\Regency;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Illuminate\Support\Facades\Http; // Add this line
+use Illuminate\Support\Facades\Http; 
 
 class BiodataSiswa extends Component
 {
     public $user;
     public $siswa;
-    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk;
+    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tanggal_lahir, $tempat_lahir, $npsn, $sekolah_asal, $alamat_domisili, $alamat_kk, $status_sekolah, $predikat_akreditasi_sekolah, $nilai_akreditasi_sekolah;
 
     public $kb;
     public $provinces;
@@ -24,6 +24,7 @@ class BiodataSiswa extends Component
     public $searchNpsn;
     public $sekolahs = [];
     public $alamat_domisili_disabled = false;
+    public $sekolah_asal_enabled = true; 
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'nik' => 'required|numeric|digits_between:1,16',
@@ -33,9 +34,12 @@ class BiodataSiswa extends Component
         'tanggal_lahir' => 'required|date',
         'tempat_lahir' => 'required|string',
         'sekolah_asal' => 'required|string',
+        'status_sekolah' => 'required|string', 
         'npsn' => 'required|numeric',
         'alamat_domisili' => 'required|string',
         'alamat_kk' => 'required|string',
+        'predikat_akreditasi_sekolah' => 'required|string|max:100',
+        'nilai_akreditasi_sekolah' => 'required|numeric|max:100',
     ];
 
     public $messages = [
@@ -55,6 +59,9 @@ class BiodataSiswa extends Component
         'npsn.numeric' => 'NPSN harus berupa angka',
         'alamat_domisili.required' => 'Alamat Domisili tidak boleh kosong',
         'alamat_kk.required' => 'Alamat KK tidak boleh kosong',
+        'predikat_akreditasi_sekolah.required' => 'Predikat Akreditasi Sekolah tidak boleh kosong',
+        'nilai_akreditasi_sekolah.required' => 'Nilai Akreditasi Sekolah tidak boleh kosong',
+        'nilai_akreditasi_sekolah.numeric' => 'Nilai Akreditasi Sekolah harus berupa angka',
     ];
 
     public function mount()
@@ -72,11 +79,14 @@ class BiodataSiswa extends Component
         $this->tanggal_lahir = $this->siswa->tanggal_lahir ?? '';
         $this->tempat_lahir = $this->siswa->tempat_lahir ?? '';
         $this->npsn = $this->siswa->NPSN ?? '';
-        $this->sekolah_asal = $this->siswa->sekolah_asal ?? '';
+        $this->sekolah_asal = strtoupper($this->siswa->sekolah_asal ?? '');
+        $this->status_sekolah = strtoupper($this->siswa->status_sekolah ?? ''); 
         $this->alamat_kk = ucwords($this->siswa->alamat_kk ?? '');
         $this->alamat_domisili = ucwords($this->siswa->alamat_domisili ?? '');
         $this->provinsi = $this->siswa->provinsi ?? '';
         $this->kota = $this->siswa->kota ?? '';
+        $this->predikat_akreditasi_sekolah = $this->siswa->predikat_akreditasi_sekolah ?? '';
+        $this->nilai_akreditasi_sekolah = $this->siswa->nilai_akreditasi_sekolah ?? '';
         $this->provinces = Province::all()->map(function ($province) {
             return [
                 'id' => (string) $province->id,
@@ -86,6 +96,8 @@ class BiodataSiswa extends Component
         $this->provinsi = @Province::where('name', $this->siswa->provinsi)->first()->id ?? '';
         $this->kota = @Regency::where('name', $this->siswa->kota)->first()->id ?? '';
         $this->updateCities();
+        $this->sekolah_asal_enabled = !empty($this->sekolah_asal); 
+        $this->alamat_domisili_disabled = $this->getAlamatDomisiliDisabledFromLocalStorage(); 
     }
 
     public function updatedNamaLengkap($value)
@@ -116,12 +128,19 @@ class BiodataSiswa extends Component
         $this->siswa->save();
     }
 
-    // public function updatedSekolahAsal($value)
-    // {
-    //     $this->validateOnly('sekolah_asal');
-    //     $this->siswa->sekolah_asal = $value;
-    //     $this->siswa->save();
-    // }
+    public function updatedSekolahAsal($value)
+    {
+        $this->validateOnly('sekolah_asal');
+        $this->siswa->sekolah_asal = $value;
+        $this->siswa->save();
+    }
+
+    public function updatedStatusSekolah($value)
+    {
+        $this->validateOnly('status_sekolah');
+        $this->siswa->status_sekolah = $value;
+        $this->siswa->save();
+    }
 
     public function updatedAlamatDomisili($value)
     {
@@ -176,6 +195,20 @@ class BiodataSiswa extends Component
         }
     }
 
+    public function updatedPredikatAkreditasiSekolah($value)
+    {
+        $this->validateOnly('predikat_akreditasi_sekolah');
+        $this->siswa->predikat_akreditasi_sekolah = strtolower($value);
+        $this->siswa->save();
+    }
+
+    public function updatedNilaiAkreditasiSekolah($value)
+    {
+        $this->validateOnly('nilai_akreditasi_sekolah');
+        $this->siswa->nilai_akreditasi_sekolah = strtolower($value);
+        $this->siswa->save();
+    }
+
     public function updateCities() // Add this method
     {
         if ($this->provinsi) {
@@ -209,11 +242,16 @@ class BiodataSiswa extends Component
                 $this->siswa->NPSN = $this->npsn;
                 $this->siswa->status_sekolah = strtolower($data['status_sekolah']);
                 $this->siswa->sekolah_asal = strtolower($data['nama_sekolah']);
-                $this->sekolah_asal = strtolower($data['nama_sekolah']);
+                $this->sekolah_asal = strtoupper($data['nama_sekolah']); // Change to uppercase
+                $this->sekolah_asal_enabled = true; 
                 $this->siswa->save();
+                $this->resetErrorBag('npsn');  
+                return redirect()->to(request()->header('Referer'));
             }
         } else {
-            $this->addError('npsn', 'NPSN not found');
+            $this->sekolah_asal_enabled = false; 
+            $this->siswa->NPSN = $this->npsn; // Save the NPSN even if not found
+            $this->siswa->save();
         }
     }
 
@@ -254,16 +292,21 @@ class BiodataSiswa extends Component
 
     public function toggleAlamatDomisili()
     {
+        $this->alamat_domisili_disabled = !$this->alamat_domisili_disabled;
+        $this->setAlamatDomisiliDisabledToLocalStorage($this->alamat_domisili_disabled); 
         if ($this->alamat_domisili_disabled) {
-            $this->alamat_domisili = $this->alamat_kk;
-            $this->siswa->alamat_domisili = strtolower($this->alamat_kk);
-            $this->siswa->save();
-        } else {
-            $this->alamat_domisili = '';
-            $this->siswa->alamat_domisili = '';
-            $this->siswa->save();
+            $this->copyAlamatKk();
         }
-        $this->validateOnly('alamat_domisili');
+    }
+
+    public function getAlamatDomisiliDisabledFromLocalStorage()
+    {
+        return json_decode(request()->cookie('alamat_domisili_disabled', 'false'));
+    }
+
+    public function setAlamatDomisiliDisabledToLocalStorage($value)
+    {
+        cookie()->queue('alamat_domisili_disabled', json_encode($value), 60 * 24 * 30); // Store for 30 days
     }
 
     public function render()

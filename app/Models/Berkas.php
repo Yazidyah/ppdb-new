@@ -28,6 +28,11 @@ class Berkas extends Model
         );
     }
 
+    public function persyaratan()
+    {
+        return $this->belongsTo(Persyaratan::class, 'id_syarat', 'id_persyaratan');
+    }
+
     public function uploader()
     {
         return $this->belongsTo(User::class, 'uploader_id', 'id');

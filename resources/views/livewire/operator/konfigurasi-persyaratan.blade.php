@@ -1,9 +1,10 @@
 <div>
-<div x-data class="p-4 transition-all duration-300" x-bind:class="$store.sidebar.isOpen ? 'sm:ml-64' : ' ml-0'">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto text-center pt-7">
+    <div class="p-4 sm:ml-64">
+        <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
+            <div class="container mx-auto text-center pt-3">
                 @if ($showModal)
-                    <div class="fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50" wire:key="modal-{{ $isEdit ? 'edit' : 'create' }}">
+                    <div class="fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50"
+                        wire:key="modal-{{ $isEdit ? 'edit-' . $persyaratanId : 'create' }}">
                         <div class="p-4 sm:ml-64">
                             <div class="p-4 border-2 border-tertiary border-dashed rounded-lg bg-white mt-14">
                                 <h1 class="font-bold text-[32px] pt-7 pb-7">
@@ -29,7 +30,7 @@
                                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         <ul class="mb-0">
                                             @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
+                                                <li class="text-red-500">{{ $error }}</li>
                                             @endforeach
                                         </ul>
                                     </div>
@@ -44,20 +45,21 @@
                                                 <x-reg-input-text wire:model.defer="nama_persyaratan" id="nama_persyaratan"
                                                     class="block mt-1 w-full" type="text" name="nama_persyaratan" required
                                                     autofocus autocomplete="nama_persyaratan" />
-                                                <span class="text-red-500 text-sm">@error('nama_persyaratan') {{ $message }}                         @enderror</span>
+                                                <span class="text-red-500 text-sm">@error('nama_persyaratan') {{ $message }}                                   @enderror</span>
                                             </div>
                                             <div class="py-1 flex items-center justify-left col-span-1">
                                                 <x-reg-input-label for="id_jalur" :value="__('Jenis Jalur')" />
                                             </div>
                                             @if ($isEdit)
                                                 <div class="py-1 flex items-center justify-left col-span-3">
-                                                    <select wire:model="id_jalur.0" wire:key="select-id_jalur-{{ $persyaratanId ?? 'new' }}"
+                                                    <select wire:model="id_jalur.0"
+                                                        wire:key="select-id_jalur-{{ $persyaratanId ?? 'new' }}"
                                                         class="w-full rounded-md shadow-sm ring-1 ring-tertiary focus:ring-2">
                                                         @foreach ($jalurRegistrasi as $jalur)
                                                             <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span class="text-red-500 text-sm">@error('id_jalur') {{ $message }}                @enderror</span>
+                                                    <span class="text-red-500 text-sm">@error('id_jalur') {{ $message }}                            @enderror</span>
                                                 </div>
                                             @else
                                                 <div class="py-1 flex items-center justify-left col-span-3">
@@ -72,7 +74,7 @@
                                                             </div>
                                                         @endforeach
                                                     </div>
-                                                    <span class="text-red-500 text-sm">@error('id_jalur') {{ $message }}                       @enderror</span>
+                                                    <span class="text-red-500 text-sm">@error('id_jalur') {{ $message }}                                      @enderror</span>
                                                 </div>
                                             @endif
                                             <div class="py-1 flex items-center justify-left col-span-1">
@@ -87,13 +89,43 @@
                                                         placeholder=""></textarea>
                                                 </div>
                                             </div>
+                                            <div class="py-1 flex items-center justify-left col-span-1">
+                                                <x-reg-input-label for="accepted_file_types" :value="__('Jenis Berkas')" />
+                                            </div>
+                                            <div class="py-1 flex items-center justify-left col-span-3">
+                                                <ul
+                                                    class="items-center w-full text-sm font-medium text-gray-900 bg-green-50 border border-gray-200 rounded-lg sm:flex">
+                                                    <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r">
+                                                        <div class="flex items-center ps-3">
+                                                            <input id="horizontal-list-radio-image" type="radio"
+                                                                value="jpg/jpeg/png" wire:model="accepted_file_types"
+                                                                name="list-radio"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                                                {{ $accepted_file_types == 'jpg/jpeg/png' ? 'checked' : '' }}>
+                                                            <label for="horizontal-list-radio-image"
+                                                                class="w-full py-3 ms-2 text-sm font-medium text-gray-900">Gambar (JPG,JPEG,PNG)</label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="w-full">
+                                                        <div class="flex items-center ps-3">
+                                                            <input id="horizontal-list-radio-document" type="radio"
+                                                                value="pdf" wire:model="accepted_file_types"
+                                                                name="list-radio"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
+                                                                {{ $accepted_file_types == 'pdf' ? 'checked' : '' }}>
+                                                            <label for="horizontal-list-radio-document"
+                                                                class="w-full py-3 ms-2 text-sm font-medium text-gray-900">Dokumen (PDF)</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     <x-primary-button
                                         class="mb-2 mx-auto w-full justify-center items-center">{{ __('Submit') }}</x-primary-button>
                                 </form>
                                 <button wire:click="closeModal"
-                                    class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
+                                    class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Tutup</button>
                             </div>
                         </div>
                     </div>
@@ -115,31 +147,38 @@
                                 class="text-center flex justify-center items-center w-full">+ PERSYARATAN</button>
                         </div>
                     </div>
-                    <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+                    <table
+                        class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
                         <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
                             <tr class="text-sm text-tertiary uppercase bg-gray-50">
                                 <th class="px-4 py-2 text-center">Nama Persyaratan</th>
                                 <th class="px-4 py-2 text-center">Jenis Jalur</th>
                                 <th class="px-4 py-2 text-center">Deskripsi</th>
+                                <th class="px-4 py-2 text-center">Jenis Berkas</th>
                                 <th class="px-4 py-2 text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($persyaratan as $item)
                                 <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
-                                    <td class="border text-tertiary text-center px-4 py-2">{{ $item->nama_persyaratan }}</td>
-                                    <td class="border text-tertiary text-center px-4 py-2">{{ $item->jalurRegistrasi->nama_jalur }}</td>
+                                    <td class="border text-tertiary text-center px-4 py-2">{{ $item->nama_persyaratan }}
+                                    </td>
+                                    <td class="border text-tertiary text-center px-4 py-2">
+                                        {{ $item->jalurRegistrasi->nama_jalur }}</td>
                                     <td class="border text-tertiary text-center px-4 py-2">{{ $item->deskripsi }}</td>
+                                    <td class="border text-tertiary text-center px-4 py-2">
+                                        {{ $item->file_type === 'jpg/jpeg/png' ? 'GAMBAR' : ($item->file_type === 'pdf' ? 'DOKUMEN' : '') }}
+                                    </td>
                                     <td class="border text-tertiary text-center px-4 py-2 flex justify-center space-x-2">
                                         <button type="button" wire:click="edit({{ $item->id_persyaratan }})"
                                             class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                                         <button wire:click="delete({{ $item->id_persyaratan }})"
-                                            class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Delete</button>
+                                            class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="border px-4 py-2 text-center text-red-500">SYARAT UNTUK JALUR INI
+                                    <td colspan="5" class="border px-4 py-2 text-center text-red-500">SYARAT UNTUK JALUR INI
                                         BELUM DITAMBAHKAN</td>
                                 </tr>
                             @endforelse

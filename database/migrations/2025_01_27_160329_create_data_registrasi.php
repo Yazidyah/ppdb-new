@@ -15,10 +15,11 @@ return new class extends Migration
             $table->id("id_registrasi");
             $table->unsignedBigInteger('id_calon_siswa');
             $table->unsignedBigInteger('id_jalur')->nullable();
-            $table->string('kode_registrasi')->nullable();
+            $table->string('nomor_peserta')->nullable();
+            $table->string('nomor_suket')->nullable();
             $table->string('status', 20)->default('0')->nullable();
-            $table->timestamps(); // created_at and updated_at
-            $table->softDeletes(); // deleted_at
+            $table->timestamps();
+            $table->softDeletes();
             $table->foreign('id_calon_siswa')->references('id_calon_siswa')->on('calon_siswa')->onDelete('cascade');
         });
     }

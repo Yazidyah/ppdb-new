@@ -13,22 +13,29 @@ class PersyaratanSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('persyaratan')->insert([
-            [
-                'id_jalur' => 1, 
-                'nama_persyaratan' => 'Ijazah SMP/MTs',
-                'deskripsi' => 'Ijazah dari sekolah menengah pertama atau madrasah tsanawiyah'
-            ],
+        $persyaratan = [
             [
                 'id_jalur' => 1, 
                 'nama_persyaratan' => 'Rapot',
-                'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah'
+                'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
+            ],
+            [
+                'id_jalur' => 1, 
+                'nama_persyaratan' => 'Ijazah SMP/MTs',
+                'deskripsi' => 'Ijazah dari sekolah menengah pertama atau madrasah tsanawiyah',
             ],
             [
                 'id_jalur' => 1, 
                 'nama_persyaratan' => 'Kartu Pelajar',
-                'deskripsi' => 'kartu Pelajar dari sekolah menengah pertama atau madrasah tsanawiyah'
+                'deskripsi' => 'Kartu Pelajar dari sekolah menengah pertama atau madrasah tsanawiyah',
             ]
-        ]);
+        ];
+
+        foreach ($persyaratan as $item) {
+            DB::table('persyaratan')->insert(array_merge($item, [
+                'created_at' => now(),
+                'updated_at' => now()
+            ]));
+        }
     }
 }

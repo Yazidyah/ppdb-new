@@ -1,6 +1,43 @@
 <div>
-<div class="p-4 sm:ml-64 ">
-<div class="p-4 border-2 border-gray-700 border-dashed rounded-lg  mt-14">
+    {{-- Table --}}
+    <div class="p-4 sm:ml-64 mx-auto justify-center flex">
+    <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
+            <div class="container mx-auto text-center pt-3">
+                <div class="flex justify-between mb-4 ">
+            <h1 class="text-lg font-bold">Kelola Akun Operator</h1>
+            <button wire:click="create" class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Tambah Operator</button>
+        </div>
+        <div class="container mx-auto mt-10">
+            <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+                <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+                    <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                        <th scope="col" class="px-4 py-2 text-center">No</th>
+                        <th scope="col" class="px-4 py-2 text-center">Name</th>
+                        <th scope="col" class="px-4 py-2 text-center">Email</th>
+                        <th scope="col" class="px-4 py-2 text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($operators as $index => $operator)
+                        <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                            <td class="border text-tertiary text-center px-4 py-2">{{ $operator->id }}</td>
+                            <td class="border text-tertiary text-center px-4 py-2">{{ $operator->name }}</td>
+                            <td class="border text-tertiary text-center px-4 py-2">{{ $operator->email }}</td>
+                            <td class="border text-tertiary text-center px-4 py-2 space-x-2">
+                                <button wire:click="edit({{ $operator->id }})"
+                                    class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Edit</button>
+                                <button wire:click="delete({{ $operator->id }})"
+                                    class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Delete</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{ $operators->links() }}
+        </div>
+    </div>
+    </div>
+    </div>
     {{-- Modal --}}
     @if($isOpen)
         <div class="fixed inset-0 z-10 overflow-y-auto">
@@ -45,44 +82,4 @@
             </div>
         </div>
     @endif
-
-    {{-- Table --}}
-   
-            <div class="container mx-auto text-center pt-7 ">
-                <div class="flex justify-between mb-4">
-            <h1 class="text-lg font-bold">Kelola Akun Operator</h1>
-            <button wire:click="create" class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Tambah Operator</button>
-        </div>
-        <div class="container mx-auto overflow-x-auto min-w-screen">
-            <table class="w-full text-sm text-left text-gray-500">
-                <thead class="text-center bg-gray-200">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 whitespace-nowrap">No</th>
-                        <th scope="col" class="px-6 py-3 whitespace-nowrap">Name</th>
-                        <th scope="col" class="px-6 py-3 whitespace-nowrap">Email</th>
-                        <th scope="col" class="px-6 py-3 whitespace-nowrap">Action</th>
-                    </tr>
-                </thead>
-                <tbody class="text-center">
-                    @foreach($operators as $index => $operator)
-                        <tr class="border-b">
-                            <td class="px-6 py-3">{{ $operator->id }}</td>
-                            <td class="px-6 py-3">{{ $operator->name }}</td>
-                            <td class="px-6 py-3">{{ $operator->email }}</td>
-                            <td class="px-6 py-3 space-x-2">
-                                <button wire:click="edit({{ $operator->id }})"
-                                    class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Edit</button>
-                                <button wire:click="delete({{ $operator->id }})"
-                                    class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Delete</button>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            {{ $operators->links() }}
-        </div>
-    </div>
-    </div>
-    </div>
-    
 </div>

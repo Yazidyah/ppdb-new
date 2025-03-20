@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PersyaratanSeeder::class);
         $this->call(JenisTesSeeder::class);
         $this->call(JadwalTesSeeder::class);
+        $this->call(KategoriPersyaratanSeeder::class);
         $this->call(IndoRegionProvinceSeeder::class);
         $this->call(IndoRegionRegencySeeder::class);
     }

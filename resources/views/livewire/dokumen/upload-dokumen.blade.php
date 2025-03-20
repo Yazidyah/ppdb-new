@@ -1,66 +1,118 @@
 <div>
-    {{-- Be like water. --}}
-    {{-- <form method="post" action="{{ route('register') }}" id="multiStepForm" enctype="multipart/form-data">
-        @csrf --}}
-        <!-- Step 1 - Data Diri-->
-        <div class="flex w-3/4 items-center justify-center border-2 border-dasar2 rounded-lg py-2 gap-2 mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="w-7 h-7">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                    d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-            </svg>
-            <h1 class="block text-xs lg:text-base items-center text-center justify-center font-semibold">
-                Peringatan : Isi Data Diri Anda yang Sebenar-benarnya.
-            </h1>
+    {{-- @if (session()->has('message'))
+        <div id="toast-warning"
+            class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm"
+            role="alert">
+            <div
+                class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg">
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                    viewBox="0 0 20 20">
+                    <path
+                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+                </svg>
+                <span class="sr-only">Warning icon</span>
+            </div>
+            <div class="ms-3 text-sm font-normal">{{ session('message') }}</div>
+            <button type="button"
+                class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
+                onclick="closeToast()" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+            </button>
         </div>
+    @endif --}}
 
-        <div class="flex w-3/4 mx-auto mt-4">
-            <div class="md:grid flex flex-col grid-cols-4 grid-rows-2 gap-8 w-full">
-                @foreach ($persyaratan as $data)
-                    <div class="flex flex-col col-span-1 row-span-1">
-                        <h1>{{ $data->nama_persyaratan }}</h1>
-                        @if (count($data->berkas) !== 0)
-                            @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
-                                @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
-                                <div>
-                                    @if ($data->nama_persyaratan === 'Rapot')
+    <div class="flex w-3/4 items-center justify-center border-2 border-dasar2 rounded-lg py-2 gap-2 mx-auto">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="w-7 h-7">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+        </svg>
+        <h1 class="block text-xs lg:text-base items-center text-center justify-center font-semibold">
+            Peringatan : Isi Data Diri Anda yang Sebenar-benarnya.
+        </h1>
+    </div>
+
+    <div class="flex w-3/4 mx-auto mt-4">
+        <div class="md:grid flex flex-col grid-cols-4 grid-rows-2 gap-8 w-full">
+            @foreach ($persyaratan as $data)
+                <div class="flex flex-col col-span-1 row-span-1">
+                    <h1>{{ $data->nama_persyaratan }}</h1>
+                    @if (count($data->berkas) !== 0)
+                        @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
+                            @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
+                            <div>
+                                @if ($data->nama_persyaratan === 'Rapot')
+                                    <div class="flex gap-2">
                                         <button type="button" onclick="rapotModal()"
                                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                                             Isi data rapot
                                         </button>
-                                    @else
-                                        @if (isset($berkas) && isset($berkas->id))
-                                            <button type="button" onclick="berkasModal({{ $berkas->id }})"
-                                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
-                                                Isi data berkas
-                                            </button>
-                                        @endif
+                                        <button type="button" onclick="berkasModal({{ $berkas->id }})"
+                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                            Isi data berkas
+                                        </button>
+                                    </div>
+                                @else
+                                    @if (isset($berkas) && isset($berkas->id))
+                                        <button type="button" onclick="berkasModal({{ $berkas->id }})"
+                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                            Isi data berkas
+                                        </button>
                                     @endif
-                                </div>
-                            @empty
+                                @endif
+                            </div>
+                        @empty
+                            @if ($data->nama_persyaratan === 'Rapot')
                                 <div class="flex items-center justify-center w-full h-full">
                                     <label
                                         class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
                                         <div class="flex flex-col items-center justify-center py-5 ">
-                                            <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                fill="none" viewBox="0 0 20 16">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2"
+                                            <svg class="w-8 h-8 mb-4" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
                                                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                             </svg>
-                                            <p class="mb-2 text-sm"><span class="font-semibold">Click to upload</span> or
-                                                drag
-                                                and
-                                                drop</p>
-                                            <p class="text-xs">SVG, PNG, JPG, or GIF (MAX. 800x400px)</p>
+                                            <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
+                                                    unggah</span>
+                                            </p>
+                                            <p class="text-xs">PDF (MAX. 3MB)</p>
                                         </div>
-                                        <input wire:model.live="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
+                                        <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
                                             type="file" class="hidden" />
                                     </label>
                                 </div>
-                            @endforelse
-                        @endif
-                        @if (count($data->berkas) === 0)
+                            @endif
+
+                            @if ($data->nama_persyaratan !== 'Rapot')
+                                <div class="flex items-center justify-center w-full h-full">
+                                    <label
+                                        class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
+                                        <div class="flex flex-col items-center justify-center py-5 ">
+                                            <svg class="w-8 h-8 mb-4" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                            </svg>
+                                            <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
+                                                    unggah</span>
+                                            </p>
+                                            <p class="text-xs">JPG,JPEG (MAX. 300KB)</p>
+                                        </div>
+                                        <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
+                                            type="file" class="hidden" />
+                                    </label>
+                                </div>
+                            @endif
+                        @endforelse
+                    @endif
+                    @if (count($data->berkas) === 0)
+                        @if ($data->nama_persyaratan === 'Rapot')
                             <div class="flex items-center justify-center w-full h-full">
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -71,29 +123,61 @@
                                                 stroke-width="2"
                                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                         </svg>
-                                        <p class="mb-2 text-sm"><span class="font-semibold">Click to upload</span> or
-                                            drag
-                                            and
-                                            drop</p>
-                                        <p class="text-xs">SVG, PNG, JPG, or GIF (MAX. 800x400px)</p>
+                                        <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk unggah</span>
+                                        </p>
+                                        <p class="text-xs">PDF (MAX. 3MB)</p>
                                     </div>
-                                    <input wire:model.live="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
+                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
                                         type="file" class="hidden" />
                                 </label>
                             </div>
                         @endif
-                        <button type="button" onclick="showExample('{{ $data->nama_persyaratan }}')"
-                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
-                                Lihat Contoh
-                            </button>
-                    </div>
-                @endforeach
-            </div>
+
+                        @if ($data->nama_persyaratan !== 'Rapot')
+                            <div class="flex items-center justify-center w-full h-full">
+                                <label
+                                    class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
+                                    <div class="flex flex-col items-center justify-center py-5 ">
+                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                        </svg>
+                                        <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk unggah</span>
+                                        </p>
+                                        <p class="text-xs">JPG,JPEG,PNG (MAX. 300KB)</p>
+                                    </div>
+                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
+                                        type="file" class="hidden" />
+                                </label>
+                            </div>
+                        @endif
+
+                        @if ($data->nama_persyaratan === 'Rapot')
+                            @if (session()->has('error-rapot'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-rapot') }}</p>
+                            @endif
+                        @else
+                            @if (session()->has('error'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error') }}</p>
+                            @endif
+                        @endif
+                    @endif
+                    <button type="button" onclick="showExample('{{ $data->nama_persyaratan }}')"
+                        class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                        Lihat Contoh
+                    </button>
+                </div>
+            @endforeach
         </div>
-
-    </form>
+    </div>
+    <div class="navigation-buttons justify-center flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
+        <button wire:click="validateAndSubmit"
+            class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
+            type="button" id="submitBtn">Lanjutkan ke tahap verifikasi</button>
+    </div>
 </div>
-
 
 <script>
     function handleFileUpload(event, labelId) {
@@ -108,6 +192,7 @@
     }
 
     function berkasModal(id) {
+        console.log('Opening berkas modal with ID:', id);
         Livewire.dispatch('openBerkasModal', {
             id: id
         });
@@ -137,5 +222,10 @@
     // Fungsi untuk menutup modal contoh file
     function closeExample() {
         document.getElementById('exampleModal').classList.add('hidden');
+    }
+
+    // Fungsi untuk menutup toast
+    function closeToast() {
+        document.getElementById('toast-warning').classList.add('hidden');
     }
 </script>

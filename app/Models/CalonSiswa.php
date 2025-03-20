@@ -20,7 +20,6 @@ class CalonSiswa extends Model
         'NISN',
         'no_telp',
         'jenis_kelamin',
-        'is_active',
         'tanggal_lahir',
         'tempat_lahir',
         'NPSN',
@@ -30,7 +29,9 @@ class CalonSiswa extends Model
         'alamat_kk',
         'id_provinsi',
         'id_kota',
-        'status_sekolah'
+        'status_sekolah',
+        'predikat_akreditasi_sekolah',
+        'nilai_akreditasi_sekolah'
     ];
 
     protected $dates = ['deleted_at', 'created_at', 'updated_at'];

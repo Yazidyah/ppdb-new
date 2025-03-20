@@ -24,27 +24,29 @@ class OperatorController extends Controller
         $data = $query->get()->map(function ($item) {
             $item->nama_lengkap = ucwords(strtolower($item->nama_lengkap));
             $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
-            $item->dataRegistrasi->status_label = $this->getStatusLabel($item->dataRegistrasi->status);
+            $item->status_label = $this->getStatusLabel($item->dataRegistrasi->status ?? null);
+            $item->no_telp = $item->no_telp; 
             return $item;
         });
 
         $jalurRegistrasi = JalurRegistrasi::all();
         $statuses = DataRegistrasi::select('status')->distinct()->get();
         return view('operator.datasiswa', compact('data', 'jalurRegistrasi', 'statuses'));
-    }   
+    }
 
     private function getStatusLabel($status)
     {
         $statusLabels = [
-            0 => 'Jalur',
-            1 => 'Upload',
-            2 => 'Submit',
-            3 => 'Tidak Lolos Verifikasi Berkas',
-            4 => 'Lolos Verifikasi Berkas',
-            5 => 'Belum Ditentukan',
-            6 => 'Tidak Diterima',
-            7 => 'Diterima',
-            8 => 'Dicadangkan'
+            0 => 'Biodata',
+            1 => 'Jalur',
+            2 => 'Upload',
+            3 => 'Submit',
+            4 => 'Tidak Lolos',
+            5 => 'Lolos',
+            6 => 'Belum Ditentukan',
+            7 => 'Tidak Diterima',
+            8 => 'Diterima',
+            9 => 'Dicadangkan'
         ];
 
         return $statusLabels[$status] ?? '-';

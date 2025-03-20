@@ -63,11 +63,11 @@ switch ($userRole){
 
 
 
-<nav x-data="{ open: false }" class="fixed top-0 z-50 bg-tertiary mx-auto w-full right-0 left-0">
+<nav x-data="{ open: false }" class="sticky top-0 z-50 bg-tertiary mx-auto w-full right-0 left-0">
     <!-- Primary Navigation Menu -->
     <div class="flex justify-between items-center container mx-auto">
-       
-            
+
+
                 <!-- Logo -->
                 <div x-data="{cheat:false}" class="flex items-center gap-1 justify-center px-6">
                 <button @click="$store.sidebar.toggle()" class="fixed top-5 left-5 z-50 p-2 bg-white hover:bg-secondary text-tertiary rounded-md shadow-md">
@@ -81,26 +81,25 @@ switch ($userRole){
                     <a href={{ route($redirectUrl) }}>
                         <x-application-logo class=" h-9 w-auto fill-current text-gray-800 " />
                     </a>
-
-</div>
+                </div>
             <div class="flex">
                 <!-- Navigation Links -->
                 <div class="items-center justify-center flex">
                 <div class=" text-white text-xs xl:text-base font-semibold lg:flex gap-4 hidden">
                     <x-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
-                        {{ __('Beranda') }} 
+                        {{ __('Beranda') }}
                     </x-nav-link>
                     <x-nav-link :href="route($redirectUrlp)" :active="request()->routeIs($redirectUrlp)">
-                        {{ __('Persyaratan') }} 
+                        {{ __('Persyaratan') }}
                     </x-nav-link>
                     <x-nav-link :href="route($redirectUrlk)" :active="request()->routeIs($redirectUrlk)">
-                        {{ __('Alur Pendaftaran') }} 
-                    </x-nav-link>                   
+                        {{ __('Alur Pendaftaran') }}
+                    </x-nav-link>
                     <div class="border-l py-3" ></div>
                 </div>
             </div>
-            
-            
+
+
             <!-- Settings Dropdown -->
             <div class="py-4 pl-6 lg:flex hidden gap-4">
                 <x-dropdown align="right" width="48">
@@ -154,7 +153,13 @@ switch ($userRole){
             <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-           
+            <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrlp)">
+                {{ __('Alur Pendaftaran') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrlk)">
+                {{ __('Persyaratan') }}
+            </x-responsive-nav-link>
+
         </div>
 
         <!-- Responsive Settings Options -->
@@ -167,7 +172,7 @@ switch ($userRole){
             <div class=" mt-3">
             <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>             
+                </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
@@ -184,14 +189,9 @@ switch ($userRole){
         </div>
     </div>
 </nav>
-<div x-data="{ isOpen: false }">
-    <!-- Toggle Button -->
-    
-    
-    <!-- Sidebar -->
-    <aside  x-show="$store.sidebar.isOpen" @click.outside="$store.sidebar.isOpen = false" x-show="isOpen" @click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-200 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 border-r border-gray-200 bg-tertiary">
-        <div class="h-full px-3 py-4 overflow-y-auto">
-            <ul class="space-y-2 font-medium">
+<aside x-show="cheat" id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full border-r border-gray-200 sm:translate-x-0" aria-label="Sidebar">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-tertiary">
+        <ul class="space-y-2 font-medium">
             <li>
                 <x-side-nav :href="route($redirectUrls)" :active="request()->routeIs($redirectUrls)">
                     {{ __('Data Pendaftar') }}
@@ -225,7 +225,6 @@ switch ($userRole){
             </ul>
         </div>
     </aside>
-</div>
 
 <main>
     @yield('content')

@@ -8,7 +8,7 @@ use App\Models\DataTes;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class VerifBerkas extends Component
 {
@@ -27,6 +27,10 @@ class VerifBerkas extends Component
     public $id_registrasi;
     public $id_jadwal_tes;
     protected $jalur;
+    public $buttonColor = '';
+    public $buttonIcon = '';
+
+    public $urlPasFoto;
 
     public function mount()
     {
@@ -35,7 +39,9 @@ class VerifBerkas extends Component
         $this->jadwalTesJapresTesAkademik = $this->getJadwalTes(false);
         $this->setExistingDataTes();
         $this->setExistingCatatan();
-        $this->setExistingVerif(); // Add this line
+        $this->setExistingVerif();
+        $this->setButtonColor();
+        $this->setButtonIcon();
     }
 
     /**
@@ -44,10 +50,26 @@ class VerifBerkas extends Component
     protected function initializeData()
     {
         $dataRegistrasi = $this->siswa->dataRegistrasi;
-        $this->syarat   = $dataRegistrasi->syarat;
-        $this->status   = $dataRegistrasi->status;
-        $this->jalur    = $dataRegistrasi->jalur;
-        $this->id_registrasi = $dataRegistrasi->id_registrasi;
+        if ($dataRegistrasi) {
+            $this->syarat = $dataRegistrasi->syarat;
+            $this->status = $dataRegistrasi->status;
+            $this->jalur = $dataRegistrasi->jalur;
+            $this->id_registrasi = $dataRegistrasi->id_registrasi;
+        } else {
+            $this->syarat = collect();
+            $this->status = null;
+            $this->jalur = null;
+            $this->id_registrasi = null;
+        }
+    }
+
+    /**
+     * Set default status to "Tidak Lolos" (3) when opening the modal.
+     */
+    public function openModal()
+    {
+        $this->modalOpen = true;
+        $this->updateRegistrasiStatus();
     }
 
     /**
@@ -61,12 +83,14 @@ class VerifBerkas extends Component
     {
         $operator = $isBq ? 'like' : 'not like';
         return JadwalTes::whereHas('jenisTes', function ($query) use ($operator) {
-            $query->where('no_jalur', $this->jalur->id_jalur)
-                ->where('nama', $operator, '%BQ%');
+            if ($this->jalur) {
+                $query->where('no_jalur', $this->jalur->id_jalur)
+                    ->where('nama', $operator, '%BQ%');
+            }
         })->get()->map(function ($jadwal) {
             $formattedDate = Carbon::parse($jadwal->tanggal)->format('d-m-Y');
             return [
-                'id'    => $jadwal->id,
+                'id' => $jadwal->id,
                 'label' => "{$jadwal->id}) Tgl {$formattedDate} - Ruang {$jadwal->ruang} - Jam {$jadwal->jam_mulai} - {$jadwal->jam_selesai} ({$jadwal->terisi}/{$jadwal->kuota})",
             ];
         });
@@ -112,6 +136,49 @@ class VerifBerkas extends Component
     }
 
     /**
+     * Set button color based on status.
+     */
+    protected function setButtonColor()
+    {
+        if ($this->status == 4) {
+            $this->buttonColor = 'bg-red-500 hover:bg-red-700';
+        } elseif ($this->status >= 5) {
+            $this->buttonColor = 'bg-green-500 hover:bg-green-700';
+        } else {
+            $this->buttonColor = 'bg-blue-500 hover:bg-blue-700';
+        }
+    }
+
+    /**
+     * Set button icon based on status.
+     */
+    protected function setButtonIcon()
+    {
+        $iconTemplate = '<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">';
+
+        if ($this->status == 4) {
+            $this->buttonIcon = $iconTemplate . '<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>';
+        } elseif ($this->status >= 5) {
+            $this->buttonIcon = $iconTemplate . '<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>';
+        } else {
+            $this->buttonIcon = $iconTemplate . '<path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg>';
+        }
+    }
+
+    public function cekBerkasPasFoto()
+    {
+        $berkases = $this->siswa->user->berkas;
+        foreach ($berkases as $berkas) {
+            if ($berkas->persyaratan->nama_persyaratan == 'Pas Foto') {
+                $encodedPath = base64_encode($berkas->file_name);
+                // $this->urlPasFoto = route('local.temp', ['path' => $encodedPath]);
+                $this->urlPasFoto = $berkas->file_name;
+            }
+        }
+    }
+
+
+    /**
      * Proses penyimpanan verifikasi berkas dan pengaturan data tes.
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -121,18 +188,21 @@ class VerifBerkas extends Component
         $this->updateBerkasVerifikasi();
         $this->updateRegistrasiStatus();
         $this->processDataTes();
+        $this->cekBerkasPasFoto();
 
         $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
         $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
 
         $pdf = Pdf::loadView('mail.kartu-peserta', [
+            'pas_foto' => Storage::path($this->urlPasFoto),
             'siswa' => $this->siswa,
             'syarat' => $this->syarat,
             'jadwal_bq_wawancara' => $jadwalBqWawancara,
             'jadwal_japres_tes_akademik' => $jadwalJapresTesAkademik,
         ]);
 
-        $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->kode_registrasi . '.pdf';
+
+        $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
 
         // Send email notification
         if ($this->status == 4) {
@@ -199,26 +269,19 @@ class VerifBerkas extends Component
     {
         foreach ($this->syarat as $item) {
             foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
-                $berkas->verify       = $this->verif[$berkas->id] ?? null;
+                $berkas->verify = $this->verif[$berkas->id] ?? null;
                 $berkas->verify_notes = $this->catatan[$berkas->id] ?? null;
                 $berkas->save();
-
-                // Log the verification notes
-                Log::info('Berkas verification updated', [
-                    'berkas_id' => $berkas->id,
-                    'verify' => $berkas->verify,
-                    'verify_notes' => $berkas->verify_notes,
-                ]);
             }
         }
     }
 
     /**
-     * Update status registrasi jika nilainya 3 atau 4.
+     * Update status registrasi jika nilainya 2, 3, atau 4.
      */
     protected function updateRegistrasiStatus()
     {
-        if (in_array($this->status, [3, 4])) {
+        if (in_array($this->status, [2, 3, 4])) {
             $this->siswa->dataRegistrasi->status = $this->status;
             $this->siswa->dataRegistrasi->save();
         }
@@ -254,7 +317,7 @@ class VerifBerkas extends Component
         }
 
         return [
-            'bq'    => $previousBq,
+            'bq' => $previousBq,
             'japres' => $previousJapres,
         ];
     }

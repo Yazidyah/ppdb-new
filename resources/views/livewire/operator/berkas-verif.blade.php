@@ -1,6 +1,6 @@
 <div>
     {{-- Be like water. --}}
-    <a wire:click="$toggle('preview')">{{ $syarat->nama_persyaratan }}</a>
+    <a wire:click="$toggle('preview')" class="text-blue-500 underline">{{ $syarat->nama_persyaratan }}</a>
     @if ($preview)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" @click.self="preview = false">
             <div

@@ -1,6 +1,6 @@
 <x-app-layout>
-<div x-data class="p-4 transition-all duration-300" x-bind:class="$store.sidebar.isOpen ? 'sm:ml-64' : ' ml-0'">
-    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
+<div x-data class="p-4 border-2 border-gray-700 border-dashed rounded-lg  mt-14">
+    <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
             <div  class="container mx-auto text-center pt-7">
                 <div id="persyaratan" class="hidden fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50">
                 <div class="p-4 sm:ml-64">
@@ -31,7 +31,7 @@
                     </div>
                 @endif
 
-                <form id="persyaratan-form" action="{{ route('operator.tambah-persyaratan') }}" method="post" 
+                <form id="persyaratan-form" action="{{ route('operator.tambah-persyaratan') }}" method="post"
                 enctype="multipart/form-data" onsubmit="return validateForm()">
                     @csrf
                     <div class="container py-5 mx-auto px-12 lg:px-32 flex items-center justify-center">
@@ -94,7 +94,7 @@
                 </div>
                 <div class="container mx-auto mt-10">
                     <div class="w-1/2 inline-flex justify-center items-center px-4 py-2 bg-tertiary  border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary  focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150' ">
-                    <button onclick="openModal('Tambah Persyaratan', '{{ route('operator.tambah-persyaratan') }}', true)" 
+                    <button onclick="openModal('Tambah Persyaratan', '{{ route('operator.tambah-persyaratan') }}', true)"
                     class="text-center flex justify-center items-center w-full">TAMBAH PERSYARATAN</button>
                         </div>
         </div>
@@ -108,7 +108,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        
+
                     <table class="table-auto w-full">
                         <thead>
                             <tr>
@@ -126,7 +126,7 @@
                                         <td class="border px-4 py-2">{{ $item->jalurRegistrasi->nama_jalur }}</td>
                                         <td class="border px-4 py-2">{{ $item->deskripsi }}</td>
                                         <td class="border px-4 py-2 flex justify-center space-x-2">
-                                            <button  type="button" onclick="editPersyaratan({{ $item->id_persyaratan }})" 
+                                            <button  type="button" onclick="editPersyaratan({{ $item->id_persyaratan }})"
                                             class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
                                             <form action="{{ route('operator.delete-persyaratan', $item->id_persyaratan) }}" method="post">
                                                 @csrf

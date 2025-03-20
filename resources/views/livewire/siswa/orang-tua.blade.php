@@ -10,13 +10,20 @@
             <h1 class=" block text-xs lg:text-base items-center text-center justify-center font-semibold">Peringatan :
                 Isi Data yang Sebenar-benarnya.</h1>
         </div>
-        @foreach ($orangTua as $ortu)
+        @foreach ($orangTua as $index => $ortu)
+            @if ($index == 0)
+                <h2 class="font-semibold py-2">Isi Informasi Ibu Kandung</h2>
+            @elseif ($index == 1)
+                <h2 class="font-semibold py-2">Isi Informasi Ayah Kandung</h2>
+            @elseif ($index == 2)
+                <h2 class="font-semibold py-2">Isi Informasi Wali</h2>
+            @endif
             @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua' . $ortu->id))
         @endforeach
-        @if (count($orangTua) < 2)
+        @if (count($orangTua) < 3)
             <button wire:click="tambahOrtu"
                 class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Tambah Data
+                Tambah Data Wali
             </button>
         @endif
     </div>

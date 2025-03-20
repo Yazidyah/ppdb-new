@@ -28,7 +28,6 @@ class RapotModal extends Component
     public $ipa1, $ipa2, $ipa3, $ipa4, $ipa5;
     public $ips1, $ips2, $ips3, $ips4, $ips5;
     protected $queryString = [
-        'sem' => ['except' => 1],
         't' => ['except' => 1],
     ];
 
