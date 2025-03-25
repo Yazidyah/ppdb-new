@@ -26,6 +26,10 @@ class KategoriPersyaratanSeeder extends Seeder
                 'id_persyaratan' => 3,
                 'id_kategori_berkas' => 3,
             ],
+            [
+                'id_persyaratan' => 4,
+                'id_kategori_berkas' => 4,
+            ],
         ];
 
         DB::table('kategori_persyaratan')->insert($kategoriPersyaratan);
