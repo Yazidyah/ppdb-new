@@ -6,6 +6,7 @@ use App\Models\CalonSiswa;
 use App\Models\DataRegistrasi;
 use App\Models\OrangTua;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class StepSatu extends Component
@@ -15,6 +16,7 @@ class StepSatu extends Component
     public $user;
     public $orangTua;
     public $regis;
+    public $isCompleteBiodata = false;
     protected $queryString = [
         'tab' => ['except' => 'konsep', 'as' => 't'],
     ];
@@ -30,22 +32,24 @@ class StepSatu extends Component
     public function initializeUser()
     {
         $this->user = Auth::user();
-        // dd($this->user->siswa->dataRegistrasi);
         if ($this->user->siswa == null) {
-            $this->user->siswa = CalonSiswa::create([
+            $calonSiswa = CalonSiswa::create([
                 'id_user' => $this->user->id,
             ]);
+            $this->user->siswa()->associate($calonSiswa);
+            $this->user->save();
         }
 
         if ($this->user->siswa->dataRegistrasi == null) {
-        if ($this->user->siswa && $this->user->siswa->dataRegistrasi == null) {
-            $this->regis = DataRegistrasi::firstOrCreate([
-                'id_calon_siswa' => $this->user->siswa->id_calon_siswa,
-                'status' => '0',
-            ]);
+            if ($this->user->siswa && $this->user->siswa->dataRegistrasi == null) {
+                $this->regis = DataRegistrasi::firstOrCreate([
+                    'id_calon_siswa' => $this->user->siswa->id_calon_siswa,
+                    'status' => '0',
+                ]);
+            }
         }
     }
-}
+
 
     public function initializeSiswa()
     {
@@ -88,6 +92,15 @@ class StepSatu extends Component
                 'id_hubungan' => 1,
                 'pekerjaan' => 1,
             ]);
+        }
+    }
+
+    #[On('biodata-updated')]
+    public function isBiodataComplete()
+    {
+        $siswa = $this->siswa;
+        if ($siswa->nama_lengkap && $siswa->NIK && $siswa->NISN && $siswa->no_telp && $siswa->jenis_kelamin && $siswa->tanggal_lahir && $siswa->tempat_lahir  && $siswa->sekolah_asal && $siswa->status_sekolah && $siswa->alamat_kk && $siswa->alamat_domisili && $siswa->provinsi && $siswa->kota && $siswa->predikat_akreditasi_sekolah && $siswa->nilai_akreditasi_sekolah) {
+            $this->isCompleteBiodata = true;
         }
     }
 
