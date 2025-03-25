@@ -194,7 +194,7 @@ class VerifBerkas extends Component
         $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
 
         $pdf = Pdf::loadView('mail.kartu-peserta', [
-            'pas_foto' => Storage::path($this->urlPasFoto),
+            'pas_foto' => $this->urlPasFoto ? Storage::path($this->urlPasFoto) : null,
             'siswa' => $this->siswa,
             'syarat' => $this->syarat,
             'jadwal_bq_wawancara' => $jadwalBqWawancara,
