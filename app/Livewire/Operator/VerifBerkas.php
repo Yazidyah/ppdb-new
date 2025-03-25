@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\SendVerificationEmail;
 
 class VerifBerkas extends Component
 {
@@ -193,39 +194,17 @@ class VerifBerkas extends Component
         $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
         $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
 
-        $pdf = Pdf::loadView('mail.kartu-peserta', [
-            'pas_foto' => $this->urlPasFoto ? Storage::path($this->urlPasFoto) : null,
-            'siswa' => $this->siswa,
-            'syarat' => $this->syarat,
-            'jadwal_bq_wawancara' => $jadwalBqWawancara,
-            'jadwal_japres_tes_akademik' => $jadwalJapresTesAkademik,
-        ]);
+        // Dispatch the email job
+        SendVerificationEmail::dispatch(
+            $this->siswa,
+            $this->status,
+            $this->urlPasFoto,
+            $this->syarat,
+            $jadwalBqWawancara,
+            $jadwalJapresTesAkademik
+        );
 
-
-        $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
-
-        // Send email notification
-        if ($this->status == 4) {
-            $messageBody = "Selamat, Kamu telah lolos verifikasi berkas.";
-            Mail::send([], [], function ($message) use ($pdf, $messageBody, $fileName) {
-                $message->to($this->siswa->user->email)
-                    ->subject('Hasil Verifikasi Berkas')
-                    ->text($messageBody)
-                    ->attachData($pdf->output(), $fileName, [
-                        'mime' => 'application/pdf',
-                    ]);
-            });
-
-            $this->modalOpen = false;
-        } elseif ($this->status == 3) {
-            $missingDocuments = $this->getMissingDocuments();
-            $messageBody = "Maaf, Kamu belum lolos verifikasi berkas karena tidak mengupload berkas: " . implode(', ', $missingDocuments);
-            Mail::raw($messageBody, function ($message) {
-                $message->to($this->siswa->user->email)
-                    ->subject('Hasil Verifikasi Berkas');
-            });
-            $this->modalOpen = false;
-        }
+        $this->modalOpen = false;
 
         return redirect(request()->header('Referer'));
     }
@@ -240,26 +219,10 @@ class VerifBerkas extends Component
     {
         $jadwalTes = JadwalTes::find($idJadwalTes);
         if ($jadwalTes) {
-            $formattedDate = Carbon::parse($jadwalTes->tanggal)->format('Y-m-d');
+            $formattedDate = Carbon::parse($jadwalTes->tanggal)->format('d-m-Y');
             return "{$formattedDate} {$jadwalTes->jam_mulai} - {$jadwalTes->jam_selesai} WIB / Ruang {$jadwalTes->ruang}";
         }
         return '';
-    }
-
-    /**
-     * Get the list of missing documents.
-     *
-     * @return array
-     */
-    protected function getMissingDocuments()
-    {
-        $missingDocuments = [];
-        foreach ($this->syarat as $item) {
-            if ($item->berkas->where('uploader_id', $this->siswa->id_user)->isEmpty()) {
-                $missingDocuments[] = $item->nama_persyaratan;
-            }
-        }
-        return $missingDocuments;
     }
 
     /**
@@ -277,11 +240,11 @@ class VerifBerkas extends Component
     }
 
     /**
-     * Update status registrasi jika nilainya 2, 3, atau 4.
+     * Update status registrasi jika nilainya 3, 4, atau 5.
      */
     protected function updateRegistrasiStatus()
     {
-        if (in_array($this->status, [2, 3, 4])) {
+        if (in_array($this->status, [3, 4, 5])) {
             $this->siswa->dataRegistrasi->status = $this->status;
             $this->siswa->dataRegistrasi->save();
         }

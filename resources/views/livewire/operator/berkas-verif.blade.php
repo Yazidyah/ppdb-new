@@ -13,9 +13,11 @@
                     </svg>
                 </button>
                 <div class="px-6 py-5 sm:p-6">
-                    <label for="dataBerkas" class="font-semibold">Nomor {{ $syarat->nama_persyaratan }}:</label>
-                    <p id="dataBerkas" class="text-xl">{{ $berkas->data_berkas }}</p>
-                    <p class="text-red-600 font-bold">Harap cocokkan nomor data dengan berkas dengan seksama</p>
+                    @if (!empty($berkas->data_berkas))
+                        <label for="dataBerkas" class="font-semibold">Nomor {{ $syarat->nama_persyaratan }}:</label>
+                        <p id="dataBerkas" class="text-xl">{{ $berkas->data_berkas }}</p>
+                        <p class="text-red-600 font-bold">Harap cocokkan nomor data dengan berkas dengan seksama</p>
+                    @endif
                     @if ($url)
                         @if (Str::endsWith($berkas->original_name, '.pdf'))
                             <iframe src="{{ $url }}" frameborder="0"

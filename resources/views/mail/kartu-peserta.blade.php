@@ -269,7 +269,7 @@
     <div class="table-footer">
         <div class="footer">
             <div class="qrcode">
-                QR Code: Hello World
+                {{ $siswa->dataRegistrasi->nomor_peserta }}
             </div>
             <div class="tanda-tangan">
                 <p class="tempat">Bogor, <br> Ketua Panitia</p>

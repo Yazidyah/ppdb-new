@@ -264,9 +264,9 @@
     </div>
 
     <div class="status-surat">
-        @if ($status == 7)
+        @if ($status == 8)
             <h1>Diterima</h1>
-        @elseif($status == 8)
+        @elseif($status == 9)
             <h1>Dicadangkan</h1>
         @else
             <h1>Tidak Diterima</h1>

@@ -65,9 +65,9 @@
                         <label for="status" class="text-sm font-medium text-gray-700 text-left">Update Status</label>
                         <select id="status" wire:model="status"
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            <option value="2">Pilih Status</option>
-                            <option value="3">Tidak Lolos</option>
-                            <option value="4">Lolos</option>
+                            <option value="3">Pilih Status</option>
+                            <option value="4">Tidak Lolos</option>
+                            <option value="5">Lolos</option>
                         </select>
                     </div>
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">

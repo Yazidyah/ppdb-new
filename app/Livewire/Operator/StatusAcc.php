@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\CalonSiswa;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StatusAcc as StatusAccMail;
+use App\Jobs\SendStatusAccEmail;
 
 class StatusAcc extends Component
 {
@@ -87,15 +88,15 @@ class StatusAcc extends Component
         $this->siswa->dataRegistrasi->status = $this->status;
         $this->siswa->dataRegistrasi->save();
 
-        if (in_array($this->status, [7, 8, 9])) {
-            $messageBody = $this->status == 8 
+        if (in_array($this->status, ['7', '8', '9'])) {
+            $messageBody = $this->status === '8' 
                 ? "Selamat, Kamu telah diterima."
-                : ($this->status == 7 
+                : ($this->status === '7' 
                     ? "Maaf, Kamu tidak diterima."
                     : "Kamu dicadangkan.");
-            };        
 
-            Mail::to($this->siswa->user->email)->send(new StatusAccMail($this->siswa, $messageBody, $this->status));
+            SendStatusAccEmail::dispatch($this->siswa, $messageBody, $this->status);
+        }
 
         $this->modalOpen = false;
         return redirect()->route('operator.datasiswa')->with('success', 'Status berhasil diubah.');
