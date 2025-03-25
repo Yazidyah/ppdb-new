@@ -30,7 +30,6 @@ class StepSatu extends Component
     public function initializeUser()
     {
         $this->user = Auth::user();
-        // Ensure $this->user->siswa is not null before accessing its properties
         if ($this->user->siswa && $this->user->siswa->dataRegistrasi == null) {
             $this->regis = DataRegistrasi::firstOrCreate([
                 'id_calon_siswa' => $this->user->siswa->id_calon_siswa,
