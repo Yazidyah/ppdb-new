@@ -27,8 +27,8 @@ class BiodataSiswa extends Component
     public $sekolah_asal_enabled = true; 
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
-        'nik' => 'required|numeric|digits_between:1,16',
-        'nisn' => 'required|numeric|digits_between:1,10',
+        'nik' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK',
+        'nisn' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN',
         'no_telp' => 'required|numeric|digits_between:1,15',
         'jenis_kelamin' => 'required',
         'tanggal_lahir' => 'required|date',
@@ -46,8 +46,10 @@ class BiodataSiswa extends Component
         'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong',
         'nik.required' => 'NIK tidak boleh kosong',
         'nik.numeric' => 'NIK harus berupa angka',
+        'nik.unique' => 'NIK sudah terdaftar',
         'nisn.required' => 'NISN tidak boleh kosong',
         'nisn.numeric' => 'NISN harus berupa angka',
+        'nisn.unique' => 'NISN sudah terdaftar',
         'no_telp.required' => 'No. Telp tidak boleh kosong',
         'no_telp.numeric' => 'No. Telp harus berupa angka',
         'jenis_kelamin.required' => 'Jenis Kelamin tidak boleh kosong',
