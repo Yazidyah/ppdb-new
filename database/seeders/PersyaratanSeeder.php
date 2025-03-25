@@ -16,6 +16,11 @@ class PersyaratanSeeder extends Seeder
         $persyaratan = [
             [
                 'id_jalur' => 1, 
+                'nama_persyaratan' => 'Pas Foto',
+                'deskripsi' => 'Pas Foto berwarna ukuran 3x4 cm',
+            ],
+            [
+                'id_jalur' => 1, 
                 'nama_persyaratan' => 'Rapot',
                 'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
             ],
@@ -28,11 +33,6 @@ class PersyaratanSeeder extends Seeder
                 'id_jalur' => 1, 
                 'nama_persyaratan' => 'Kartu Pelajar',
                 'deskripsi' => 'Kartu Pelajar dari sekolah menengah pertama atau madrasah tsanawiyah',
-            ],
-            [
-                'id_jalur' => 1, 
-                'nama_persyaratan' => 'Pas Foto',
-                'deskripsi' => 'Pas Foto berwarna ukuran 3x4 cm',
             ]
         ];
 

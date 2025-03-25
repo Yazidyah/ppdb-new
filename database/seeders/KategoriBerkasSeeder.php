@@ -14,7 +14,15 @@ class KategoriBerkasSeeder extends Seeder
     public function run(): void
     {
         $kategoriBerkas = [
-
+            [
+                'nama' => 'Pas Foto',
+                'folder_name' => 'pendaftaran/persyaratan',
+                'accepted_file_types' => 'jpg,jpeg,png',
+                'max_file_size' => 300,
+                'is_multiple' => false,
+                'key' => 'jalur_reguler',
+                'disk' => 'local',
+            ],
             [
                 'nama' => 'Rapot',
                 'folder_name' => 'pendaftaran/persyaratan',
@@ -41,16 +49,7 @@ class KategoriBerkasSeeder extends Seeder
                 'is_multiple' => false,
                 'key' => 'jalur_reguler',
                 'disk' => 'local',
-            ],
-            [
-                'nama' => 'Pas Foto',
-                'folder_name' => 'pendaftaran/persyaratan',
-                'accepted_file_types' => 'jpg,jpeg,png',
-                'max_file_size' => 300,
-                'is_multiple' => false,
-                'key' => 'jalur_reguler',
-                'disk' => 'local',
-            ],
+            ]
         ];
 
         foreach ($kategoriBerkas as $item) {

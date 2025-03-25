@@ -1,5 +1,10 @@
 <div>
     <div class="px-5 py-3 text-sm border text-primary-700 bg-primary-100 rounded-xl">
+        <div class="mb-4">
+            @if (!is_null($berkas->data_berkas))
+            <h2 class="text-center text-lg font-bold">Nomor Berkas : {{ $berkas->data_berkas }}</h2>
+            @endif
+        </div>
         <div class="flex flex-col gap-3 sm:flex-row sm:justify-between">
             <div class="flex items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

@@ -23,6 +23,7 @@ class BerkasModal extends Component
         $this->data_berkas = Berkas::find($id);
         $this->modalSubmit = true;
         $this->syarat = Persyaratan::find($this->data_berkas->id_syarat);
+        $this->isian_berkas = $this->data_berkas->data_berkas;
     }
 
     public function simpan()
