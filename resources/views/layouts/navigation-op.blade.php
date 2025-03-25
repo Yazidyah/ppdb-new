@@ -209,11 +209,6 @@ switch ($userRole){
                         {{ __('Konfigurasi Jadwal Tes') }}
                     </x-side-nav>
                 </li>
-                <li>
-                    <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
-                        {{ __('Data Pendaftar Melaju ke (Step 2)') }}
-                    </x-side-nav>
-                </li>
             </ul>
         </div>
     </aside>
