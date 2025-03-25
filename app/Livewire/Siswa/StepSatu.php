@@ -27,21 +27,18 @@ class StepSatu extends Component
         $this->initializeOrangTua();
     }
 
-    private function initializeUser()
+    public function initializeUser()
     {
         $this->user = Auth::user();
-        // dd($this->user->siswa->dataRegistrasi);
-        if ($this->user->siswa->dataRegistrasi == null) {
+        if ($this->user->siswa && $this->user->siswa->dataRegistrasi == null) {
             $this->regis = DataRegistrasi::firstOrCreate([
                 'id_calon_siswa' => $this->user->siswa->id_calon_siswa,
                 'status' => 0,
             ]);
         }
-
-        // }
     }
 
-    private function initializeSiswa()
+    public function initializeSiswa()
     {
         $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
         if ($this->siswa == null) {
@@ -51,7 +48,7 @@ class StepSatu extends Component
         }
     }
 
-    private function checkRegistrationStatus()
+    public function checkRegistrationStatus()
     {
         if (!$this->siswa || !$this->siswa->dataregistrasi) {
             return;
@@ -73,7 +70,7 @@ class StepSatu extends Component
         }
     }
 
-    private function initializeOrangTua()
+    public function initializeOrangTua()
     {
         $this->orangTua = OrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->first();
         if ($this->orangTua == null) {
