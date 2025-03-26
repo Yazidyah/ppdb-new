@@ -11,14 +11,16 @@
                 Isi Data yang Sebenar-benarnya.</h1>
         </div>
         @foreach ($orangTua as $index => $ortu)
-            @if ($index == 0)
+            @if ($ortu->id_hubungan == 1)
                 <h2 class="font-semibold py-2">Isi Informasi Ibu Kandung</h2>
-            @elseif ($index == 1)
+                @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua-' . $ortu->id_orang_tua))
+            @elseif ($ortu->id_hubungan == 2)
                 <h2 class="font-semibold py-2">Isi Informasi Ayah Kandung</h2>
-            @elseif ($index == 2)
+                @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua-' . $ortu->id_orang_tua))
+            @elseif ($ortu->id_hubungan == 3)
                 <h2 class="font-semibold py-2">Isi Informasi Wali</h2>
+                @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua-' . $ortu->id_orang_tua))
             @endif
-            @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua' . $ortu->id))
         @endforeach
         @if (count($orangTua) < 3)
             <button wire:click="tambahOrtu"

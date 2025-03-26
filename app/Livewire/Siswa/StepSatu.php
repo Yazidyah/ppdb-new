@@ -17,6 +17,7 @@ class StepSatu extends Component
     public $orangTua;
     public $regis;
     public $isCompleteBiodata = false;
+    public $isCompleteOrangtua = false;
     protected $queryString = [
         'tab' => ['except' => 'konsep', 'as' => 't'],
     ];
@@ -27,6 +28,8 @@ class StepSatu extends Component
         $this->initializeSiswa();
         $this->checkRegistrationStatus();
         $this->initializeOrangTua();
+        $this->isBiodataComplete();
+        $this->isOrangtuaComplete();
     }
 
     public function initializeUser()
@@ -103,6 +106,19 @@ class StepSatu extends Component
             $this->isCompleteBiodata = true;
         }
     }
+
+    #[On('orangtua-updated')]
+    public function isOrangtuaComplete()
+    {
+        $ibu = $this->siswa->ortu->where('id_hubungan', 1)->first();
+        $ayah = $this->siswa->ortu->where('id_hubungan', 2)->first();
+
+        if ($ibu->nama_lengkap && $ibu->nik && $ibu->pekerjaan && $ibu->no_telp && $ayah->nama_lengkap && $ayah->nik && $ayah->pekerjaan && $ayah->no_telp) {
+            $this->isCompleteOrangtua = true;
+        }
+    }
+
+
 
     public function render()
     {

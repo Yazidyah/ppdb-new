@@ -71,9 +71,15 @@
                 <button wire:click="$set('tab', 1)"
                     class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
                     type="button" id="nextBtn">Previous</button>
-                <button wire:click="$set('tab', 3)"
+                {{-- <button wire:click="$set('tab', 3)"
                     class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
-                    type="button" id="nextBtn">Next</button>
+                    type="button" id="nextBtn">Next</button> --}}
+                <button wire:click="$set('tab', 3)" wire:loading.attr="disabled"
+                    class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
+           @if (!$isCompleteOrangtua) cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary @else bg-tertiary hover:bg-secondary hover:text-black text-secondary @endif"
+                    type="button" id="nextBtn" @if (!$isCompleteOrangtua) disabled @endif>
+                    Next
+                </button>
             </div>
         @endif
         @if ($tab === 3)

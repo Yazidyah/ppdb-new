@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\OrangTua as ModelsOrangTua;
 use App\Models\HubunganOrangTua;
@@ -50,44 +51,61 @@ class OrangTuaForm extends Component
         $this->no_telp = $this->orangTua->no_telp;
     }
 
+    #[On('orangtuaAdded')]
     public function cekOrangTua()
     {
         redirect(request()->header('Referer'));
     }
-    public function updatedNamaLengkap($value)
+
+    public function updated($propertyName)
     {
-        $this->validateOnly('nama_lengkap');
-        $this->orangTua->nama_lengkap = $value;
+        $this->validateOnly($propertyName);
+        $this->orangTua->$propertyName = $this->$propertyName;
         $this->orangTua->save();
+        $this->dispatch('orangtua-updated', ['complete' => $this->isOrangTuaComplete()]);
     }
 
-    public function updatedIdHubungan($value)
+    public function isOrangTuaComplete()
     {
-        $this->validateOnly('id_hubungan');
-        $this->orangTua->id_hubungan = $value;
-        $this->orangTua->save();
+        $orangTua = $this->orangTua;
+        if ($orangTua->nama_lengkap && $orangTua->nik && $orangTua->pekerjaan && $orangTua->no_telp) {
+            return true;
+        }
     }
+    // public function updatedNamaLengkap($value)
+    // {
+    //     $this->validateOnly('nama_lengkap');
+    //     $this->orangTua->nama_lengkap = $value;
+    //     $this->orangTua->save();
+    // }
 
-    public function updatedNik($value)
-    {
-        $this->validateOnly('nik');
-        $this->orangTua->nik = $value;
-        $this->orangTua->save();
-    }
+    // public function updatedIdHubungan($value)
+    // {
+    //     $this->validateOnly('id_hubungan');
+    //     $this->orangTua->id_hubungan = $value;
+    //     $this->orangTua->save();
+    // }
 
-    public function updatedPekerjaan($value)
-    {
-        $this->validateOnly('pekerjaan');
-        $this->orangTua->pekerjaan = $value;
-        $this->orangTua->save();
-    }
+    // public function updatedNik($value)
+    // {
+    //     $this->validateOnly('nik');
+    //     $this->orangTua->nik = $value;
+    //     $this->orangTua->save();
+    // }
 
-    public function updatedNoTelp($value)
-    {
-        $this->validateOnly('no_telp');
-        $this->orangTua->no_telp = $value;
-        $this->orangTua->save();
-    }
+    // public function updatedPekerjaan($value)
+    // {
+    //     $this->validateOnly('pekerjaan');
+    //     $this->orangTua->pekerjaan = $value;
+    //     $this->orangTua->save();
+    // }
+
+    // public function updatedNoTelp($value)
+    // {
+    //     $this->validateOnly('no_telp');
+    //     $this->orangTua->no_telp = $value;
+    //     $this->orangTua->save();
+    // }
 
     public function render()
     {
