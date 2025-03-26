@@ -27,7 +27,7 @@
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->tanggal }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jam_mulai }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jam_selesai }}</td>
-                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->kuota }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->terisi }}/{{ $item->kuota }}</td>
                     <td class="border px-4 py-2 flex justify-center space-x-2">
                         <button wire:click="edit({{ $item->id }})"
                             class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>

@@ -7,6 +7,7 @@ use App\Models\JadwalTes as JadwalTesModel;
 use App\Models\JenisTes as JenisTesModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon; // Added for date formatting
 
 class JadwalTes extends Component
 {
@@ -32,7 +33,10 @@ class JadwalTes extends Component
 
     public function loadJadwalTes()
     {
-        $this->jadwalTes = JadwalTesModel::all();
+        $this->jadwalTes = JadwalTesModel::orderBy('id_jenis_tes', 'asc')->get()->map(function ($item) {
+            $item->tanggal = Carbon::parse($item->tanggal)->format('d-m-Y');
+            return $item;
+        });
     }
 
     public function create()
@@ -45,7 +49,7 @@ class JadwalTes extends Component
     public function store()
     {
         $this->validate();
-
+        
         JadwalTesModel::create([
             'id_jenis_tes' => $this->id_jenis_tes,
             'ruang'        => $this->ruang,
