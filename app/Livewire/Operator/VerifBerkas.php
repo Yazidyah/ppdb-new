@@ -195,14 +195,14 @@ class VerifBerkas extends Component
         $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
 
         // Dispatch the email job
-        // SendVerificationEmail::dispatch(
-        //     $this->siswa,
-        //     $this->status,
-        //     $this->urlPasFoto,
-        //     $this->syarat,
-        //     $jadwalBqWawancara,
-        //     $jadwalJapresTesAkademik
-        // );
+        SendVerificationEmail::dispatch(
+            $this->siswa,
+            $this->status,
+            $this->urlPasFoto,
+            $this->syarat,
+            $jadwalBqWawancara,
+            $jadwalJapresTesAkademik
+        );
 
         $this->modalOpen = false;
 
