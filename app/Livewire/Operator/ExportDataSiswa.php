@@ -15,8 +15,8 @@ class ExportDataSiswa extends Component
         $exportedCollection = collect();
 
         $siswa = DB::table('calon_siswa as cs')
-            ->join('data_registrasi as dr', 'cs.id_calon_siswa', '=', 'dr.id_calon_siswa')
-            ->join('jalur_registrasi as jr', 'dr.id_jalur', '=', 'jr.id_jalur')
+            ->leftJoin('data_registrasi as dr', 'cs.id_calon_siswa', '=', 'dr.id_calon_siswa')
+            ->leftJoin('jalur_registrasi as jr', 'dr.id_jalur', '=', 'jr.id_jalur')
             ->join('users as u', 'cs.id_user', '=', 'u.id')
             // ->join('orang_tua as ot', 'cs.id_calon_siswa', '=', 'ot.id_calon_siswa')
             ->leftJoin('orang_tua as ibu', function ($join) {
@@ -107,7 +107,7 @@ class ExportDataSiswa extends Component
                 'rp.nilai_rapot->4->data->ips as ips_5',
             )
             ->get();
-        // dd($siswa);
+        dd($siswa);
         foreach ($siswa as $index => $s) {
             // dd($s);
             $exportedCollection->push([

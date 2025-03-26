@@ -21,7 +21,7 @@
 
             <button wire:click="$set('tab', 2)"
                 class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ $tab == 2 ? 'bg-tertiary text-white' : '' }}
-                @if (!$isCompleteBiodata) cursor-not-allowed  @else @endif"
+                @if (!$isCompleteBiodata) cursor-not-allowed @endif"
                 @if (!$isCompleteBiodata) disabled @endif>
                 <a class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
                     <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">2</h1>
@@ -32,7 +32,9 @@
             </button>
 
             <button wire:click="$set('tab', 3)"
-                class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ $tab == 3 ? 'bg-tertiary text-white' : '' }}">
+                class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ $tab == 3 ? 'bg-tertiary text-white' : '' }}
+                @if (!$isCompleteOrangtua) cursor-not-allowed @endif  @if (!$isCompleteBiodata) cursor-not-allowed @endif"
+                @if (!$isCompleteOrangtua) disabled @endif @if (!$isCompleteBiodata) disabled @endif>
                 <a class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
                     <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">3</h1>
                 </a>
