@@ -127,6 +127,27 @@ class BiodataSiswa extends Component
         }
     }
 
+    public function updatedProvinsi($value)
+    {
+        $province = Province::find($value);
+        if ($province) {
+            $this->siswa->provinsi = $province->name;
+            $this->siswa->save();
+            $this->updateCities();
+            $this->updateCities();
+        }
+    }
+
+    public function updatedKota($value)
+    {
+        $city = Regency::find($value);
+        if ($city) {
+            $this->siswa->kota = $city->name;
+            $this->siswa->save();
+        }
+    }
+
+
     public function searchByNpsn()
     {
         $this->npsn = preg_replace('/\s+/', '', $this->npsn); // Remove spaces
