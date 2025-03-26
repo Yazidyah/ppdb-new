@@ -195,14 +195,14 @@ class VerifBerkas extends Component
         $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
 
         // Dispatch the email job
-        SendVerificationEmail::dispatch(
-            $this->siswa,
-            $this->status,
-            $this->urlPasFoto,
-            $this->syarat,
-            $jadwalBqWawancara,
-            $jadwalJapresTesAkademik
-        );
+        // SendVerificationEmail::dispatch(
+        //     $this->siswa,
+        //     $this->status,
+        //     $this->urlPasFoto,
+        //     $this->syarat,
+        //     $jadwalBqWawancara,
+        //     $jadwalJapresTesAkademik
+        // );
 
         $this->modalOpen = false;
 
@@ -286,41 +286,80 @@ class VerifBerkas extends Component
     }
 
     /**
-     * Update atau hapus data tes berdasarkan sesi yang diberikan.
+     * Update or delete test data based on the given session.
      *
-     * @param mixed $sesiTes
-     * @param mixed $previousSesi Tes sebelumnya, untuk keperluan decrement jika dihapus.
-     * @param bool  $isBq      Menentukan tipe tes (BQ atau Japres).
+     * @param mixed $sessionTest
+     * @param mixed $previousSession Previous session for decrement purposes if deleted.
+     * @param bool  $isBq           Determines the test type (BQ or Japres).
      */
-    protected function updateDataTes($sesiTes, $previousSesi, $isBq)
+    protected function updateDataTes($sessionTest, $previousSession, $isBq)
     {
-        // Jika ada sesi tes yang dipilih, gunakan updateOrCreate
-        if ($sesiTes) {
-            $dataTes = DataTes::updateOrCreate(
-                [
-                    'id_registrasi' => $this->id_registrasi,
-                    'id_jadwal_tes' => $sesiTes,
-                ],
-                [
-                    'id_jadwal_tes' => $sesiTes,
-                ]
-            );
-
-            if ($dataTes->wasRecentlyCreated) {
-                JadwalTes::where('id', $sesiTes)->increment('terisi');
-            }
+        if (empty($sessionTest)) {
+            $this->deleteTestData($isBq, $previousSession);
             return;
         }
 
-        // Jika sesi tidak dipilih, hapus data tes terkait
+        $this->saveOrUpdateTestData($sessionTest, $isBq);
+        $this->updateJadwalTesTerisi($sessionTest);
+    }
+
+    /**
+     * Delete test data and decrement the filled count if necessary.
+     *
+     * @param bool  $isBq
+     * @param mixed $previousSession
+     */
+    protected function deleteTestData($isBq, $previousSession)
+    {
         $operator = $isBq ? 'like' : 'not like';
         $deleted = DataTes::where('id_registrasi', $this->id_registrasi)
             ->whereHas('jadwalTes.jenisTes', function ($query) use ($operator) {
                 $query->where('nama', $operator, '%BQ%');
             })->delete();
 
-        if ($deleted > 0 && $previousSesi) {
-            JadwalTes::where('id', $previousSesi)->decrement('terisi');
+        if ($deleted > 0 && $previousSession) {
+            JadwalTes::where('id', $previousSession)->decrement('terisi');
+        }
+    }
+
+    /**
+     * Save or update test data based on the session.
+     *
+     * @param mixed $sessionTest
+     * @param bool  $isBq
+     */
+    protected function saveOrUpdateTestData($sessionTest, $isBq)
+    {
+        $operator = $isBq ? 'like' : 'not like';
+        $existingDataTes = DataTes::where('id_registrasi', $this->id_registrasi)
+            ->whereHas('jadwalTes.jenisTes', function ($query) use ($operator) {
+                $query->where('nama', $operator, '%BQ%');
+            })->first();
+
+        if ($existingDataTes) {
+            $existingDataTes->update(['id_jadwal_tes' => $sessionTest]);
+        } else {
+            DataTes::create([
+                'id_registrasi' => $this->id_registrasi,
+                'id_jadwal_tes' => $sessionTest,
+            ]);
+        }
+    }
+
+    /**
+     * Update the filled count for all test schedules.
+     *
+     * @param int $sessionTest
+     */
+    protected function updateJadwalTesTerisi($sessionTest)
+    {
+        $jadwalTesData = JadwalTes::leftJoin('data_tes', 'jadwal_tes.id', '=', 'data_tes.id_jadwal_tes')
+            ->selectRaw('jadwal_tes.id, COUNT(data_tes.id_jadwal_tes) AS total')
+            ->groupBy('jadwal_tes.id')
+            ->get();
+
+        foreach ($jadwalTesData as $data) {
+            JadwalTes::where('id', $data->id)->update(['terisi' => $data->total]);
         }
     }
 
