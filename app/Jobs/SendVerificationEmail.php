@@ -40,6 +40,8 @@ class SendVerificationEmail implements ShouldQueue
      */
     public function handle()
     {
+        $this->delay(now()->addSeconds(5));
+
         $pdf = Pdf::loadView('mail.kartu-peserta', [
             'pas_foto' => $this->urlPasFoto ? Storage::path($this->urlPasFoto) : null,
             'siswa' => $this->siswa,
