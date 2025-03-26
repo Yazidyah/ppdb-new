@@ -150,18 +150,18 @@ class BiodataSiswa extends Component
 
     public function searchByNpsn()
     {
-        $this->npsn = preg_replace('/\s+/', '', $this->npsn); // Remove spaces
+        $this->NPSN = preg_replace('/\s+/', '', $this->NPSN); // Remove spaces
         $baseUrl = env('NPSN_API_BASE_URL');
-        $url = "{$baseUrl}{$this->npsn}";
+        $url = "{$baseUrl}{$this->NPSN}";
         $data = $this->fetchNpsnFromHtml($url);
         if ($data['npsn']) {
             if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs', 'PKBM'])) {
                 $this->addError('sekolah_asal', 'Tingkat pendidikan harus SMP atau MTs');
-                $this->npsn = '';
+                $this->NPSN = '';
                 return;
             }
             if (!$this->getErrorBag()->has('sekolah_asal')) {
-                $this->siswa->NPSN = $this->npsn;
+                $this->siswa->NPSN = $this->NPSN;
                 $this->siswa->status_sekolah = strtolower($data['status_sekolah']);
                 $this->siswa->sekolah_asal = strtolower($data['nama_sekolah']);
                 $this->sekolah_asal = strtoupper($data['nama_sekolah']); // Change to uppercase
@@ -172,7 +172,7 @@ class BiodataSiswa extends Component
             }
         } else {
             $this->sekolah_asal_enabled = false;
-            $this->siswa->NPSN = $this->npsn; // Save the NPSN even if not found
+            $this->siswa->NPSN = $this->NPSN; // Save the NPSN even if not found
             $this->siswa->save();
         }
     }
