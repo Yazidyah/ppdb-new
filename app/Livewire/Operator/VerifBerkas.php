@@ -94,7 +94,7 @@ class VerifBerkas extends Component
                 'id' => $jadwal->id,
                 'label' => "{$jadwal->id}) Tgl {$formattedDate} - Ruang {$jadwal->ruang} - Jam {$jadwal->jam_mulai} - {$jadwal->jam_selesai} ({$jadwal->terisi}/{$jadwal->kuota})",
             ];
-        });
+        })->sortBy('id');
     }
 
     /**
@@ -190,9 +190,12 @@ class VerifBerkas extends Component
         $this->updateRegistrasiStatus();
         $this->processDataTes();
         $this->cekBerkasPasFoto();
-
-        $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
-        $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
+        if ($this->sesi_bq_wawancara != null) {
+            $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
+        }
+        if ($this->sesi_japres_tes_akademik != null) {
+            $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
+        }
 
         // Dispatch the email job
         SendVerificationEmail::dispatch(
@@ -200,8 +203,8 @@ class VerifBerkas extends Component
             $this->status,
             $this->urlPasFoto,
             $this->syarat,
-            $jadwalBqWawancara,
-            $jadwalJapresTesAkademik
+            @$jadwalBqWawancara,
+            @$jadwalJapresTesAkademik
         );
 
         $this->modalOpen = false;
