@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class SendVerificationEmail implements ShouldQueue
 {
@@ -42,6 +43,7 @@ class SendVerificationEmail implements ShouldQueue
     {
         $this->delay(now()->addSeconds(5));
 
+        // Generate PDF
         $pdf = Pdf::loadView('mail.kartu-peserta', [
             'pas_foto' => $this->urlPasFoto ? Storage::path($this->urlPasFoto) : null,
             'siswa' => $this->siswa,
@@ -63,13 +65,17 @@ class SendVerificationEmail implements ShouldQueue
                     ]);
             });
         } elseif ($this->status == 4) {
-            // $missingDocuments = $this->getMissingDocuments();
-            // $messageBody = "Maaf, Kamu belum lolos verifikasi berkas karena: " . implode(', ', $missingDocuments) . "\n";
             $messageBody = "Maaf {$this->siswa->nama_lengkap}, Kamu belum lolos verifikasi berkas";
             Mail::raw($messageBody, function ($message) {
-            $message->to($this->siswa->user->email)
-                ->subject('Hasil Verifikasi Berkas');
+                $message->to($this->siswa->user->email)
+                    ->subject('Hasil Verifikasi Berkas');
             });
+
+            // Clean up QR code file
+            $qrCodePath = public_path('qrcode/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png');
+            if (File::exists($qrCodePath)) {
+                File::delete($qrCodePath);
+            }
         }
     }
 

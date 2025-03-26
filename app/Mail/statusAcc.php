@@ -42,7 +42,7 @@ class StatusAcc extends Mailable
     {
         return $this->subject($this->messageBody)
             ->markdown('mail.StatusAcc', [
-                'name' => strtoupper($this->siswa->nama_lengkap), // Mengubah nama_lengkap menjadi huruf besar semua
+                'name' => strtoupper($this->siswa->nama_lengkap),
                 'status' => $this->status,
             ])
             ->attachData($this->pdf->output(), $this->fileName, [

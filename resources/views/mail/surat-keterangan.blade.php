@@ -117,7 +117,6 @@
         .qrcode {
             width: 40mm;
             height: 40mm;
-            border: 1px solid black;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -279,44 +278,59 @@
     <div class="table-footer">
         <div class="footer">
             <div class="qrcode">
-                QR Code: Hello World
+                @if ($status != 7)
+                <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
+                @endif
             </div>
             <div class="tanda-tangan">
-                <p class="tempat">Bogor, <br> Ketua Panitia</p>
-                <p class="nama">H. Muhammad Luthfi, SE., MM.<br>
-                    NIP. 198106242003121002</p>
+            <p class="tempat">Bogor, <br> Ketua Panitia</p>
+            <p class="nama">H. Muhammad Luthfi, SE., MM.<br>
+                NIP. 198106242003121002</p>
             </div>
         </div>
     </div>
-    <div class="notes">
-        <p>Keterangan :</p>
-        <p>Daftar Ulang Pada SENIN, 01 JULI 2024, Pkl 10.00 S.D. 12.00, Ruang 2</p>
-        <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
-    </div>
+    @if ($status == 8)
+        <div class="notes">
+            <p>Keterangan :</p>
+            <p>Daftar Ulang Pada SENIN, 01 JULI 2024, Pkl 10.00 S.D. 12.00, Ruang 2</p>
+            <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
+        </div>
+    @elseif ($status == 9)
+        <div class="notes">
+            <p>Keterangan :</p>
+            <p>Silahkan menghubungi Contact Person Panitia yang tertera pada WEB (tanggal 02 Juli 2024, Pukul 15.00 WIB)</p>
+        </div>
+    @else
+        <div class="notes">
+            <p>Keterangan :</p>
+        </div>
+    @endif
 
-    <div class="contoh-satu">
-        <img src="{{ 'surat/contoh_1.jpg' }}" alt="Checklist Data">
-    </div>
+    @if ($status != 7)
+        <div class="contoh-satu">
+            <img src="{{ 'surat/contoh_1.jpg' }}" alt="Checklist Data">
+        </div>
 
-    <div class="contoh-surat-pernyataan">
-        <img src="{{ 'surat/contoh-surat-pernyataan.jpg' }}" alt="Surat Penyataan">
-    </div>
+        <div class="contoh-surat-pernyataan">
+            <img src="{{ 'surat/contoh-surat-pernyataan.jpg' }}" alt="Surat Penyataan">
+        </div>
 
-    <div class="contoh-surat-pernyataan-orang-tua">
-        <img src="{{ 'surat/contoh-surat-pernyataan-orang-tua.jpg' }}" alt="Surat Pernyataan Orang Tua">
-    </div>
+        <div class="contoh-surat-pernyataan-orang-tua">
+            <img src="{{ 'surat/contoh-surat-pernyataan-orang-tua.jpg' }}" alt="Surat Pernyataan Orang Tua">
+        </div>
 
-    <div class="contoh-surat-pernyataan-aja">
-        <img src="{{ 'surat/contoh-surat-pernyataan-aja.jpg' }}" alt="Surat Pernyataan Orang Tua">
-    </div>
+        <div class="contoh-surat-pernyataan-aja">
+            <img src="{{ 'surat/contoh-surat-pernyataan-aja.jpg' }}" alt="Surat Pernyataan Orang Tua">
+        </div>
 
-    <div class="ukuran-seragam-wanita">
-        <img src="{{ 'surat/ukuran-seragam-wanita.jpg' }}" alt="ukuran Seragam Wanita">
-    </div>
+        <div class="ukuran-seragam-wanita">
+            <img src="{{ 'surat/ukuran-seragam-wanita.jpg' }}" alt="ukuran Seragam Wanita">
+        </div>
 
-    <div class="ukuran-seragam-pria">
-        <img src="{{ 'surat/ukuran-seragam-wanita.jpg' }}" alt="ukuran Seragam Pria">
-    </div>
+        <div class="ukuran-seragam-pria">
+            <img src="{{ 'surat/ukuran-seragam-wanita.jpg' }}" alt="ukuran Seragam Pria">
+        </div>
+    @endif
 
 </body>
 

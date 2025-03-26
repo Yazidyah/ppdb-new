@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StatusAcc;
+use Illuminate\Support\Facades\File;
 
 class SendStatusAccEmail implements ShouldQueue
 {
@@ -40,5 +41,11 @@ class SendStatusAccEmail implements ShouldQueue
             $this->messageBody,
             $this->status
         ));
+
+        // Clean up QR code file
+        $qrCodePath = public_path('qrcode/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png');
+        if (File::exists($qrCodePath)) {
+            File::delete($qrCodePath);
+        }
     }
 }

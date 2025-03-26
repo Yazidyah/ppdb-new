@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use App\Jobs\SendVerificationEmail;
+use Illuminate\Support\Facades\File;
 
 class VerifBerkas extends Component
 {
@@ -190,12 +191,23 @@ class VerifBerkas extends Component
         $this->updateRegistrasiStatus();
         $this->processDataTes();
         $this->cekBerkasPasFoto();
+
         if ($this->sesi_bq_wawancara != null) {
             $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
         }
         if ($this->sesi_japres_tes_akademik != null) {
             $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
         }
+
+        // Generate QR code and save to public\qrcode
+        $qrCodeDirectory = public_path('qrcode');
+        if (!File::exists($qrCodeDirectory)) {
+            File::makeDirectory($qrCodeDirectory, 0755, true);
+        }
+
+        $qrCodePath = $qrCodeDirectory . '/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png';
+        $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . urlencode($this->siswa->dataRegistrasi->nomor_peserta);
+        file_put_contents($qrCodePath, file_get_contents($qrCodeUrl));
 
         // Dispatch the email job
         SendVerificationEmail::dispatch(
