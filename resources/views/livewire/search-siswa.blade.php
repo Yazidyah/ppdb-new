@@ -41,7 +41,7 @@
 
     <!-- Modal Tampilan Detail Siswa (read-only) -->
     @if ($showModal)
-        <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
             <div class="relative w-3/4 max-w-md p-6 bg-white rounded-lg">
                 <button wire:click="$set('showModal', false)"
                     class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-red-400 rounded-full hover:text-white hover:bg-red-400">

@@ -4,17 +4,30 @@ namespace App\Livewire\Operator;
 
 use Livewire\Component;
 use App\Models\JenisTes as JenisTesModel;
+use Illuminate\Support\Facades\Cookie;
 
 class JenisTes extends Component
 {
     public $id, $nama, $no_jalur = "";  
     public $isEdit = false;
     public $showModal = false;
+    public $isTableVisible = true;
 
     protected $rules = [
         'nama' => 'required|string|max:255',
         'no_jalur' => 'required|in:0,1,2',
     ];
+
+    public function mount()
+    {
+        $this->isTableVisible = Cookie::get('isTableVisible', true) == 'true';
+    }
+
+    public function toggleTable()
+    {
+        $this->isTableVisible = !$this->isTableVisible;
+        Cookie::queue('isTableVisible', $this->isTableVisible ? 'true' : 'false', 60 * 24);
+    }
 
     public function create()
     {

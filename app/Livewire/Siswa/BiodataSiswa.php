@@ -228,7 +228,7 @@ class BiodataSiswa extends Component
 
     public function setAlamatDomisiliDisabledToLocalStorage($value)
     {
-        cookie()->queue('alamat_domisili_disabled', json_encode($value), 60 * 24 * 30); // Store for 30 days
+        cookie()->queue('alamat_domisili_disabled', json_encode($value), 60 * 24); // Store for 1 day
     }
 
     public function isBiodataComplete()

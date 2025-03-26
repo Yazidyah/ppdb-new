@@ -1,43 +1,67 @@
 <div>
     {{-- Tabel Jenis Tes --}}
-    <div class="flex justify-between mb-3">
-        <diV></diV>
-        <div class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-secondaryactive:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-            <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JENIS TES</button>
-
+    <div class="border-2 border-gray-300 rounded p-4">
+        <div class="flex justify-between mb-3">
+            <div>
+                <button wire:click="toggleTable"
+                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-300">
+                    @if($isTableVisible)
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
+                            <path fill-rule="evenodd"
+                                d="M9.47 6.47a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 1 1-1.06 1.06L10 8.06l-3.72 3.72a.75.75 0 0 1-1.06-1.06l4.25-4.25Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    @else
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
+                            <path fill-rule="evenodd"
+                                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    @endif
+                </button>
+            </div>
+            <div
+                class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-secondaryactive:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JENIS
+                    TES</button>
+            </div>
+        </div>
+        <div class="overflow-hidden transition-all duration-500"
+            style="max-height: {{ $isTableVisible ? '1000px' : '0' }};">
+            <table
+                class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+                <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+                    <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                        <th class="px-4 py-2 text-center">Nama</th>
+                        <th class="px-4 py-2 text-center">Jalur Registrasi</th>
+                        <th class="px-4 py-2 text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($jenisTes as $item)
+                        <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                            <td class="border text-tertiary text-center px-4 py-2">{{ $item->nama }}</td>
+                            <td class="border text-tertiary text-center px-4 py-2">
+                                @if ($item->no_jalur == "0")
+                                    Semua Jalur
+                                @elseif ($item->no_jalur == "1")
+                                    Reguler
+                                @elseif ($item->no_jalur == "2")
+                                    Afirmasi
+                                @endif
+                            </td>
+                            <td class="border px-4 py-2 flex justify-center space-x-2">
+                                <button wire:click="edit({{ $item->id}})"
+                                    class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
+                                <button wire:click="delete({{ $item->id}})"
+                                    class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-    <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
-        <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
-            <tr class="text-sm text-tertiary uppercase bg-gray-50">
-                <th class="px-4 py-2 text-center">Nama</th>
-                <th class="px-4 py-2 text-center">Jalur Registrasi</th>
-                <th class="px-4 py-2 text-center">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($jenisTes as $item)
-                <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
-                    <td class="border text-tertiary text-center px-4 py-2">{{ $item->nama }}</td>
-                    <td class="border text-tertiary text-center px-4 py-2">
-                        @if ($item->no_jalur == "0")
-                            Semua Jalur
-                        @elseif ($item->no_jalur == "1")
-                            Reguler
-                        @elseif ($item->no_jalur == "2")
-                            Afirmasi
-                        @endif
-                    </td>
-                    <td class="border px-4 py-2 flex justify-center space-x-2">
-                        <button wire:click="edit({{ $item->id}})"
-                            class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
-                        <button wire:click="delete({{ $item->id}})"
-                            class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
 
     {{-- Modal --}}
     @if($showModal)
@@ -51,14 +75,15 @@
                 <div class="p-4">
                     <input type="text" wire:model="nama" class="border rounded w-full py-2 px-3 mb-3" placeholder="Nama">
                     <select wire:model="no_jalur" class="border border-tertiary rounded w-full py-2 px-3">
-                        <option class="" disabled="disabled" value="">Pilih Jalur</option> <!-- Add a default option -->
+                        <option class="" disabled="disabled" value="">Pilih Jalur</option>
                         <option class="" value="0">Semua Jalur</option>
                         <option class="" value="1">Reguler</option>
                         <option class="" value="2">Afirmasi</option>
                     </select>
                 </div>
                 <div class="flex justify-end px-4 py-2 border-t">
-                    <button wire:click="closeModal" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded mr-2">Batal</button>
+                    <button wire:click="closeModal"
+                        class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded mr-2">Batal</button>
                     <button wire:click.prevent="{{ $isEdit ? 'Update' : 'store' }}"
                         class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Simpan</button>
                 </div>

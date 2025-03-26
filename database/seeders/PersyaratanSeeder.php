@@ -15,24 +15,34 @@ class PersyaratanSeeder extends Seeder
     {
         $persyaratan = [
             [
-                'id_jalur' => 1, 
+                'id_jalur' => 1,
                 'nama_persyaratan' => 'Pas Foto',
                 'deskripsi' => 'Pas Foto berwarna ukuran 3x4 cm',
             ],
             [
-                'id_jalur' => 1, 
+                'id_jalur' => 1,
                 'nama_persyaratan' => 'Rapot',
                 'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
             ],
             [
-                'id_jalur' => 1, 
+                'id_jalur' => 1,
                 'nama_persyaratan' => 'Ijazah SMP/MTs',
                 'deskripsi' => 'Ijazah dari sekolah menengah pertama atau madrasah tsanawiyah',
             ],
             [
-                'id_jalur' => 1, 
-                'nama_persyaratan' => 'Kartu Pelajar',
-                'deskripsi' => 'Kartu Pelajar dari sekolah menengah pertama atau madrasah tsanawiyah',
+                'id_jalur' => 1,
+                'nama_persyaratan' => 'Kartu Keluarga',
+                'deskripsi' => 'Kartu Keluarga yang diterbitkan oleh pemerintah Indonesia',
+            ],
+            [
+                'id_jalur' => 1,
+                'nama_persyaratan' => 'Akta Kelahiran',
+                'deskripsi' => 'Akta Kelahiran resmi yang diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil',
+            ],
+            [
+                'id_jalur' => 1,
+                'nama_persyaratan' => 'Sertifikat Akreditasi',
+                'deskripsi' => 'Sertifikat Akreditasi dari Sekolah Asal',
             ]
         ];
 

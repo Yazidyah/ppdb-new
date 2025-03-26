@@ -15,6 +15,7 @@ class JadwalTesSeeder extends Seeder
     public function run(): void
     {
         $data = [
+            // Data asli
             [
                 'id_jenis_tes' => 1,
                 'ruang' => 'A',
@@ -22,7 +23,7 @@ class JadwalTesSeeder extends Seeder
                 'jam_mulai' => '09:30:00',
                 'jam_selesai' => '10:30:00',
                 'terisi' => 0,
-                'kuota' => 15,
+                'kuota' => 25,
             ],
             [
                 'id_jenis_tes' => 2,
@@ -31,7 +32,7 @@ class JadwalTesSeeder extends Seeder
                 'jam_mulai' => '09:30:00',
                 'jam_selesai' => '10:30:00',
                 'terisi' => 0,
-                'kuota' => 15,
+                'kuota' => 25,
             ],
             [
                 'id_jenis_tes' => 4,
@@ -51,7 +52,43 @@ class JadwalTesSeeder extends Seeder
                 'terisi' => 0,
                 'kuota' => 15,
             ],
-        ];
+            [
+                'id_jenis_tes' => 1,
+                'ruang' => 'A',
+                'tanggal' => '2025-02-24 00:00:00.000',
+                'jam_mulai' => '10:45:00', 
+                'jam_selesai' => '11:45:00',
+                'terisi' => 0,
+                'kuota' => 25,
+            ],
+            [
+                'id_jenis_tes' => 2,
+                'ruang' => 'A',
+                'tanggal' => '2025-02-24 00:00:00.000',
+                'jam_mulai' => '10:45:00', 
+                'jam_selesai' => '11:45:00',
+                'terisi' => 0,
+                'kuota' => 25,
+            ],
+            [
+                'id_jenis_tes' => 4,
+                'ruang' => 'B',
+                'tanggal' => '2025-02-24 00:00:00.000',
+                'jam_mulai' => '13:45:00',
+                'jam_selesai' => '14:45:00',
+                'terisi' => 0,
+                'kuota' => 15,
+            ],
+            [
+                'id_jenis_tes' => 3,
+                'ruang' => 'B',
+                'tanggal' => '2025-02-25 00:00:00.000',
+                'jam_mulai' => '13:45:00',
+                'jam_selesai' => '14:45:00',
+                'terisi' => 0,
+                'kuota' => 15,
+            ],
+        ];        
 
         foreach ($data as &$record) {
             $record['created_at'] = Carbon::now();
