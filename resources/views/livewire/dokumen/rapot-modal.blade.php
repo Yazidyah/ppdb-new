@@ -1,6 +1,6 @@
 <div>
     @if ($modalSubmit)
-        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true" wire:click="$set('modalSubmit', false)">
+        <div class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true">
             <div class="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75"></div>
             <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
                 <div class="flex items-center justify-center min-h-full p-4 text-center sm:items-center sm:p-0">
@@ -22,8 +22,11 @@
                             class="flex flex-row justify-center lg:justify-between px-4 sm:px-6 items-center mx-auto bg-gray-100 mb-8 rounded-lg">
                             <template x-for="(step, index) in 5" :key="index">
                                 <div @click="currentStep = (index + 1); $wire.set('sem', (index + 1))"
-                                    :class="{ 'bg-tertiary text-white': currentStep === (index +
-                                        1), 'text-gray-700': currentStep !== (index + 1) }"
+                                    :class="{
+                                        'bg-tertiary text-white': currentStep === (index +
+                                            1),
+                                        'text-gray-700': currentStep !== (index + 1)
+                                    }"
                                     class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
                                     <div
                                         class="bg-white rounded-full flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12">
