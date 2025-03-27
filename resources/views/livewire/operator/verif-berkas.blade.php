@@ -40,7 +40,7 @@
                                             @livewire('operator.berkas-verif', ['syarat' => $item, 'berkas' => $berkas], key($siswa->id_user . 'berkas' . $berkas->id))
                                         </td>
                                         <td class="px-4 py-2">
-                                            <input type="checkbox" wire:model="verif.{{ $berkas->id }}" value="1" {{ $berkas->verify ? 'checked' : '' }}>
+                                            <input type="checkbox" wire:model="verif.{{ $berkas->id }}" value="1" {{ $berkas->verify ? 'checked' : '' }} class=" h-6 w-6 accent-tertiary text-tertiary  rounded cursor-pointer active:border active:border-tertiary  focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 ">
                                         </td>
                                         <td class="px-4 py-2">
                                             <input wire:model="catatan.{{ $berkas->id }}" type="text"
@@ -64,7 +64,7 @@
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
                         <label for="status" class="text-sm font-medium text-gray-700 text-left">Update Status</label>
                         <select id="status" wire:model="status"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md appearance-auto">
                             <option value="3">Pilih Status</option>
                             <option value="4">Tidak Lolos</option>
                             <option value="5">Lolos</option>
@@ -74,7 +74,7 @@
                         <label for="sesi_bq_wawancara" class="text-sm font-medium text-gray-700 text-left">Sesi BQ &
                             Wawancara</label>
                         <select id="sesi_bq_wawancara" wire:model="sesi_bq_wawancara"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md">
                             <option value="">Tidak dijadwalkan</option>
                             @foreach ($jadwalTesBqWawancara as $jadwalBq)
                                 <option class="" value="{{ $jadwalBq['id'] }}">{{ $jadwalBq['label'] }}</option>
@@ -85,7 +85,7 @@
                         <label for="sesi_japres_tes_akademik" class="text-sm font-medium text-gray-700 text-left">Sesi
                             Japres/Tes Akademik</label>
                         <select id="sesi_japres_tes_akademik" wire:model="sesi_japres_tes_akademik"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md">
                             <option value="">Tidak dijadwalkan</option>
                             @foreach ($jadwalTesJapresTesAkademik as $jadwalJa)
                                 <option value="{{ $jadwalJa['id'] }}">{{ $jadwalJa['label'] }}</option>
