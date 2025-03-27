@@ -195,12 +195,12 @@ class TabDetailSiswa extends Component
             'jadwal_japres_tes_akademik' => $jadwalJapres,
         ]);
 
-        $filePath = 'temp/kartu-peserta-' . $siswa->id_calon_siswa . '.pdf';
-        Storage::disk('public')->put($filePath, $pdf->output());
+        $filePath = 'temp/kartu-peserta-' . $siswa->id_calon_siswa . '-' . uniqid() . '.pdf';
+        Storage::disk('local')->put($filePath, $pdf->output());
 
-        $this->previewUrlKartuPeserta = Storage::disk('public')->url($filePath);
+        $this->previewUrlKartuPeserta = Storage::disk('local')->temporaryUrl($filePath, now()->addMinutes(5));
 
-        $this->showModalKartuPeserta = true;
+        return redirect($this->previewUrlKartuPeserta);
     }
 
     public function closeModalKartuPeserta()
@@ -217,12 +217,12 @@ class TabDetailSiswa extends Component
             'status' => $status,
         ]);
 
-        $filePath = 'temp/surat-keterangan-' . $siswa->id_calon_siswa . '.pdf';
-        Storage::disk('public')->put($filePath, $pdf->output());
+        $filePath = 'temp/surat-keterangan-' . $siswa->id_calon_siswa . '-' . uniqid() . '.pdf';
+        Storage::disk('local')->put($filePath, $pdf->output());
 
-        $this->previewUrlSuratKeterangan = Storage::disk('public')->url($filePath);
+        $this->previewUrlSuratKeterangan = Storage::disk('local')->temporaryUrl($filePath, now()->addMinutes(5));
 
-        $this->showModalSuratKeterangan = true;
+        return redirect($this->previewUrlSuratKeterangan);
     }
 
     public function closeModalSuratKeterangan()

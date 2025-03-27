@@ -14,7 +14,7 @@
         </div> --}}
 
 
-        @if ($showModalKartuPeserta)
+        {{-- @if ($showModalKartuPeserta)
             <div class="fixed inset-0 z-50 flex items-center justify-center">
                 <div class="bg-white rounded-lg shadow-2xl w-3/4 max-w-5xl mt-[600px] border border-gray-300">
                     <div class="flex justify-between items-center p-4 border-b">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endif --}}
     </div>
     <h5 class="font-medium">Edit Data Siswa</h5>
     <p class="text-sm text-gray-400">Pastikan data sudah benar sebelum menyimpan.</p>
@@ -182,6 +182,7 @@
             Cetak Surat Keterangan
         </button>
     </div>
+
 
 
 
