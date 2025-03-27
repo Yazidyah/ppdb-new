@@ -18,7 +18,16 @@
                 @endforelse
                 <div class="mt-2">
                     <input type="file" name="berkas" id="berkas" wire:model.live="berkas"
-                        wire:change="setSyarat({{ $data->id_persyaratan }})"
+                        wire:click="$set('berkasBaru', false)" wire:change="setSyarat({{ $data->id_persyaratan }})"
+                        class="block w-full px-3 py-2 text-gray-900 transition transform border-0 rounded-md shadow-sm uploader ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:scale-105">
+                </div>
+            @else
+                {{-- <div class="mt-2 mb-2">
+                    @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
+                </div> --}}
+                <div class="mt-2">
+                    <input type="file" name="berkas" id="berkas" wire:model.live="berkas"
+                        wire:change="setSyarat({{ $data->id_persyaratan }})" wire:click="$set('berkasBaru', true)"
                         class="block w-full px-3 py-2 text-gray-900 transition transform border-0 rounded-md shadow-sm uploader ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 hover:scale-105">
                 </div>
             @endif
