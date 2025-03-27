@@ -21,12 +21,12 @@ class PersyaratanSeeder extends Seeder
             ],
             [
                 'id_jalur' => 1,
-                'nama_persyaratan' => 'Rapot',
+                'nama_persyaratan' => 'Rapot MTs/SMP',
                 'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
             ],
             [
                 'id_jalur' => 1,
-                'nama_persyaratan' => 'Ijazah SMP/MTs',
+                'nama_persyaratan' => 'Ijazah MTs/SMP',
                 'deskripsi' => 'Ijazah dari sekolah menengah pertama atau madrasah tsanawiyah',
             ],
             [
