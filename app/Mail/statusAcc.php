@@ -18,20 +18,22 @@ class StatusAcc extends Mailable
     public $pdf;
     public $fileName;
 
+    public $status;
+
     /**
      * Create a new message instance.
      */
     public function __construct($siswa, $messageBody, $status)
-{
-    $this->siswa = $siswa;
-    $this->messageBody = $messageBody;
-    $this->status = $status; // Simpan status dalam properti objek
+    {
+        $this->siswa = $siswa;
+        $this->messageBody = $messageBody;
+        $this->status = $status; // Simpan status dalam properti objek
 
-    // Generate PDF
-    $this->pdf = Pdf::loadView('mail.surat-keterangan', [
-        'siswa' => $this->siswa,
-        'status' => $this->status,
-    ]);
+        // Generate PDF
+        $this->pdf = Pdf::loadView('mail.surat-keterangan', [
+            'siswa' => $this->siswa,
+            'status' => $this->status,
+        ]);
         $this->fileName = 'Surat_keterangan_ppdb_man1kotabogor_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
     }
 
