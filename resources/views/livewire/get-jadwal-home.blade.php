@@ -9,7 +9,7 @@
                     Pendaftaran dibuka {{ $tanggalBukaAfirmatif }} - {{ $tanggalTutupAfirmatif }}.
                 </p>
                 <a href="#afirmatif"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 hover:text-tertiary">
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-2 focus:outline-none focus:ring-tertiary hover:text-tertiary">
                     Read more
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 14 10">
@@ -26,7 +26,7 @@
                     Pendaftaran dibuka {{ $tanggalBukaReguler }} - {{ $tanggalTutupReguler }}.
                 </p>
                 <a href="#reguler"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:text-tertiary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300">
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:text-tertiary hover:bg-secondary focus:ring-2 focus:outline-none focus:ring-tertiary">
                     Read more
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 14 10">

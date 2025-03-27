@@ -21,9 +21,11 @@ class TabDetailSiswa extends Component
     public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $npsn, $sekolah_asal, $status_sekolah, $alamat_domisili, $alamat_kk, $provinsi, $kota, $id_jalur;
     public $name, $email, $password;
     public $jalurOptions;
-
     public $urlPasFoto;
-
+    public $previewUrlKartuPeserta;
+    public $previewUrlSuratKeterangan;
+    public $showModalKartuPeserta = false;
+    public $showModalSuratKeterangan = false;
 
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
@@ -124,12 +126,49 @@ class TabDetailSiswa extends Component
     }
 
 
-    public function cetakKartuPeserta()
+    // public function cetakKartuPeserta()
+    // {
+    //     $berkases = $this->siswa->user->berkas;
+    //     foreach ($berkases as $berkas) {
+    //         if ($berkas->persyaratan->nama_persyaratan == 'Pas Foto') {
+    //             $encodedPath = base64_encode($berkas->file_name);
+    //             $this->urlPasFoto = $berkas->file_name;
+    //         }
+    //     }
+
+    //     $siswa = $this->siswa;
+    //     $id_registrasi = $siswa->dataRegistrasi->id_registrasi;
+    //     $jadwalWawancara = DataTes::where('id_registrasi', $id_registrasi)->get();
+
+    //     foreach ($jadwalWawancara as $jadwal) {
+    //         if (strpos($jadwal->jadwalTes->jenisTes->nama, 'BQ') !== false) {
+    //             $jadwalBqWawancara = $jadwal->id_jadwal_tes;
+    //         } else {
+    //             $jadwalJapresWawancara = $jadwal->id_jadwal_tes;
+    //         }
+    //     }
+
+    //     $jadwalBq = $this->formatJadwalTes($jadwalBqWawancara);
+    //     $jadwalJapres = $this->formatJadwalTes($jadwalJapresWawancara);
+
+    //     $pdf = Pdf::loadView('mail.kartu-peserta', [
+    //         'pas_foto' => $this->urlPasFoto ? Storage::path($this->urlPasFoto) : null,
+    //         'siswa' => $this->siswa,
+    //         'jadwal_bq_wawancara' => $jadwalBq,
+    //         'jadwal_japres_tes_akademik' => $jadwalJapres,
+    //     ]);
+
+    //     return response()->streamDownload(
+    //         fn() => print($pdf->output()),
+    //         'kartu-peserta-' . $siswa->nama_lengkap . '.pdf'
+    //     );
+    // }
+
+    public function previewKartuPeserta()
     {
         $berkases = $this->siswa->user->berkas;
         foreach ($berkases as $berkas) {
             if ($berkas->persyaratan->nama_persyaratan == 'Pas Foto') {
-                $encodedPath = base64_encode($berkas->file_name);
                 $this->urlPasFoto = $berkas->file_name;
             }
         }
@@ -156,13 +195,20 @@ class TabDetailSiswa extends Component
             'jadwal_japres_tes_akademik' => $jadwalJapres,
         ]);
 
-        return response()->streamDownload(
-            fn() => print($pdf->output()),
-            'kartu-peserta-' . $siswa->nama_lengkap . '.pdf'
-        );
+        $filePath = 'temp/kartu-peserta-' . $siswa->id_calon_siswa . '.pdf';
+        Storage::disk('public')->put($filePath, $pdf->output());
+
+        $this->previewUrlKartuPeserta = Storage::disk('public')->url($filePath);
+
+        $this->showModalKartuPeserta = true;
     }
 
-    public function cetakSuratKeterangan()
+    public function closeModalKartuPeserta()
+    {
+        $this->showModalKartuPeserta = false;
+    }
+
+    public function previewSuratKeterangan()
     {
         $siswa = $this->siswa;
         $status = $siswa->dataRegistrasi->status;
@@ -171,11 +217,34 @@ class TabDetailSiswa extends Component
             'status' => $status,
         ]);
 
-        return response()->streamDownload(
-            fn() => print($pdf->output()),
-            'surat-keterangan-' . $siswa->nama_lengkap . '.pdf'
-        );
+        $filePath = 'temp/surat-keterangan-' . $siswa->id_calon_siswa . '.pdf';
+        Storage::disk('public')->put($filePath, $pdf->output());
+
+        $this->previewUrlSuratKeterangan = Storage::disk('public')->url($filePath);
+
+        $this->showModalSuratKeterangan = true;
     }
+
+    public function closeModalSuratKeterangan()
+    {
+        $this->showModalSuratKeterangan = false;
+    }
+
+
+    // public function cetakSuratKeterangan()
+    // {
+    //     $siswa = $this->siswa;
+    //     $status = $siswa->dataRegistrasi->status;
+    //     $pdf = Pdf::loadView('mail.surat-keterangan', [
+    //         'siswa' => $this->siswa,
+    //         'status' => $status,
+    //     ]);
+
+    //     // return response()->streamDownload(
+    //     //     fn() => print($pdf->output()),
+    //     //     'surat-keterangan-' . $siswa->nama_lengkap . '.pdf'
+    //     // );
+    // }
 
     public function render()
     {

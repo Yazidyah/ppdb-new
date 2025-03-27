@@ -1,6 +1,6 @@
 <div class="container mx-auto p-4">
     <!-- Form Pencarian -->
-    <div class="max-w-md mx-auto bg-white rounded shadow p-6">
+    <div class="max-w-md mx-auto bg-white border-4 border-tertiary rounded-lg shadow-lg p-6">
         <form wire:submit.prevent="search">
             <!-- tambahkan teks "Sudah pernah mendaftar? cari disini -->
             <div class="mb-4 text-left text-gray-700 text-sm font-bold">
@@ -9,7 +9,7 @@
             <div class="mb-4">
                 <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN</label>
                 <input type="text" id="nisn" wire:model="nisn" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" 
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  focus:border-tertiary  focus:ring-tertiary">
                 @error('nisn')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
@@ -17,7 +17,7 @@
             <div class="mb-4">
                 <label for="nomor_peserta" class="block text-gray-700 text-sm font-bold mb-2">Kode Registrasi</label>
                 <input type="text" id="nomor_peserta" wire:model="nomor_peserta"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-tertiary  focus:ring-tertiary">
                 @error('nomor_peserta')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
@@ -27,7 +27,8 @@
             @enderror
             <div class="flex items-center justify-end mt-4">
                 <button type="submit"
-                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 hover:text-tertiary">
+                    class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-2 focus:outline-none focus:ring-tertiary hover:text-tertiary
+                     border border-transparent tracking-widest  focus:bg-tertiary active:text-white active:bg-tertiary active:border active:border-tertiary  focus:ring-offset-2  transition ease-in-out duration-150">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
