@@ -1,4 +1,9 @@
 <x-guest-layout>
+    @if (session('status') === 'verification-required')
+        <div class="mb-4 text-sm text-gray-600">
+            {{ __('Silakan verifikasi email Anda sebelum melanjutkan.') }}
+        </div>
+    @endif
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
