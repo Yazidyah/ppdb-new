@@ -185,6 +185,11 @@ switch ($userRole){
     <div class="h-full px-3 py-4 overflow-y-auto bg-tertiary">
         <ul class="space-y-2 font-medium">
             <li>
+                <x-side-nav :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
+                    {{ __('Dashboard') }}
+                </x-side-nav>
+            </li>
+            <li>
                 <x-side-nav :href="route($redirectUrls)" :active="request()->routeIs($redirectUrls)">
                     {{ __('Data Pendaftar') }}
                 </x-side-nav>
