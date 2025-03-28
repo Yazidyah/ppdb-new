@@ -22,20 +22,31 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $request->authenticate();
+        $request->validate([
+            'email' => ['required', 'string', 'email'],
+            'password' => ['required', 'string'],
+        ]);
 
-        $request->session()->regenerate();
+        $remember = $request->has('remember');
 
-        $loggedInUserRole = $request->user()->role;
+        if (Auth::attempt($request->only('email', 'password'), $remember)) {
+            $request->session()->regenerate();
 
-        if ($loggedInUserRole == 'admin'){
-            return redirect()->intended(route('admin.dashboard', absolute: false));
-        } elseif ($loggedInUserRole == 'operator'){
-            return redirect()->intended(route('operator.dashboard', absolute: false));
+            $loggedInUserRole = $request->user()->role;
+
+            if ($loggedInUserRole == 'admin'){
+                return redirect()->intended(route('admin.dashboard', absolute: false));
+            } elseif ($loggedInUserRole == 'operator'){
+                return redirect()->intended(route('operator.dashboard', absolute: false));
+            }
+            return redirect()->intended(route('siswa.dashboard', absolute: false));
         }
-        return redirect()->intended(route('siswa.dashboard', absolute: false));
+
+        return back()->withErrors([
+            'email' => __('The provided credentials do not match our records.'),
+        ]);
     }
 
     /**

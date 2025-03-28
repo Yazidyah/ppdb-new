@@ -6,13 +6,14 @@ namespace App\Models;
 use App\Mail\NewResetPassword;
 use App\Notifications\NewResetPasswordNotification;
 use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Mail;
 
-class User extends Authenticatable implements CanResetPassword
+class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, SoftDeletes;
@@ -27,6 +28,7 @@ class User extends Authenticatable implements CanResetPassword
         'email',
         'password',
         'role',
+        'remember_token', // Pastikan ini ada jika menggunakan $fillable
     ];
 
     /**

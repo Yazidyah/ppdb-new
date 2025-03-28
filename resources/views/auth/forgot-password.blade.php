@@ -1,6 +1,6 @@
 <x-guest-layout>
     <div class="mb-4 text-sm text-tertiary">
-        {{ __('Lupa kata sandi? Tak masalah. Masukkan alamat email Anda, dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi.') }}
+        {{ __('Lupa kata sandi? Jangan khawatir. Masukkan email Anda, dan kami akan bantu Anda mengatur ulang.') }}
     </div>
 
     <!-- Session Status -->
@@ -18,7 +18,7 @@
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button>
-                {{ __('Email Password Reset Link') }}
+                {{ __('Link Pemulihan Kata Sandi Email') }}
             </x-primary-button>
         </div>
     </form>

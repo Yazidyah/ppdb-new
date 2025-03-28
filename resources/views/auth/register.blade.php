@@ -1,10 +1,15 @@
 <x-guest-layout>
+    @if (session('status') === 'verification-required')
+        <div class="mb-4 text-sm text-gray-600">
+            {{ __('Silakan verifikasi email Anda sebelum melanjutkan.') }}
+        </div>
+    @endif
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Username')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
