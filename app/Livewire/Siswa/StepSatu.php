@@ -66,23 +66,19 @@ class StepSatu extends Component
 
     public function checkRegistrationStatus()
     {
-        if (!$this->siswa || !$this->siswa->dataregistrasi) {
+        if (!$this->siswa || !$this->siswa->dataRegistrasi) {
             return;
         }
 
-        $status = $this->siswa->dataregistrasi->status;
-
-        if ($status == 3) {
-            session()->flash('message', 'Kamu sudah pernah mendaftar');
-            return redirect()->to('/siswa/dashboard');
-        }
-
-        if ($status == 2) {
-            return redirect()->to('/siswa/daftar-step-tiga?t=1');
-        }
+        $status = $this->siswa->dataRegistrasi->status;
 
         if ($status == 1) {
             return redirect()->to('/siswa/daftar-step-dua?t=1');
+        } elseif ($status == 2) {
+            return redirect()->to('/siswa/daftar-step-tiga?t=1');
+        } elseif ($status >= 3) {
+            session()->flash('message', 'Kamu sudah pernah mendaftar');
+            return redirect()->to('/siswa/dashboard');
         }
     }
 

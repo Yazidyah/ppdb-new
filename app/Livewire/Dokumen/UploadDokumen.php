@@ -40,7 +40,7 @@ class UploadDokumen extends Component
 
     public function updatedBerkas()
     {
-        if ($this->syarat->nama_persyaratan != 'Rapot') {
+        if ($this->syarat->nama_persyaratan != 'Rapot MTs/SMP') {
             try {
                 $this->validate([
                     'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
@@ -58,7 +58,7 @@ class UploadDokumen extends Component
             }
         }
 
-        if ($this->syarat->nama_persyaratan == 'Rapot') {
+        if ($this->syarat->nama_persyaratan == 'Rapot MTs/SMP') {
             try {
                 $this->validate([
                     'berkas' => 'required|mimes:pdf|max:3000', // Maksimal 3MB

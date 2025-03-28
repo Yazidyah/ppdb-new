@@ -23,6 +23,7 @@ class StepEmpat extends Component
         $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $calonSiswa->id_calon_siswa)->first();
 
         if ($dataRegistrasi->status == 3) {
+            session()->flash('message', 'Kamu sudah pernah mendaftar');
             return redirect('/siswa/dashboard');
         }
     }

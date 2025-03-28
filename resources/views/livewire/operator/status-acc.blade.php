@@ -2,10 +2,11 @@
     <button wire:click="$set('modalOpen', true)" type="button"
         class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors {{ $buttonColor }} border rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">
         {!! $buttonIcon !!}
+        
     </button>
 
     @if ($modalOpen)
-        <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm" wire:click="$set('modalOpen', false)">
             <div class="relative w-3/4 max-w-md p-6 bg-white rounded-lg">
                 <button wire:click="$set('modalOpen', false)"
                     class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-red-400 rounded-full hover:text-white hover:bg-red-400">
