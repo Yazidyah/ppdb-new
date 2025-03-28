@@ -12,7 +12,7 @@
             @if (count($data->berkas) !== 0)
                 @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
                     <div class="mt-2 mb-2">
-                        @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
+                        @livewire('pemberkasan.berkas-operator', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
                     </div>
                 @empty
                 @endforelse
