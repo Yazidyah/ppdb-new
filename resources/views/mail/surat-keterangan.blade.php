@@ -306,7 +306,7 @@
         </div>
     @endif
 
-    @if ($status != 7)
+    @if ($status == 8)
         <div class="contoh-satu">
             <img src="{{ 'surat/contoh_1.jpg' }}" alt="Checklist Data">
         </div>

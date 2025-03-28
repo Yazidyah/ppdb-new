@@ -20,6 +20,7 @@ class TabDetailSiswa extends Component
     public $siswa;
     public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $npsn, $sekolah_asal, $status_sekolah, $alamat_domisili, $alamat_kk, $provinsi, $kota, $id_jalur;
     public $name, $email, $password;
+    public $jadwalTesBQ, $jadwalTesJapres;
     public $jalurOptions;
     public $urlPasFoto;
     public $previewUrlKartuPeserta;
@@ -46,6 +47,8 @@ class TabDetailSiswa extends Component
         'name' => 'required|string|max:255',
         'email' => 'required|email|max:255',
         'password' => 'nullable|string|min:8',
+        'jadwalTesBQ' => 'nullable|integer',
+        'jadwalTesJapres' => 'nullable|integer',
     ];
 
     public function mount(CalonSiswa $siswa)
@@ -71,8 +74,15 @@ class TabDetailSiswa extends Component
         $user = $siswa->user;
         $this->name = $user->name;
         $this->email = $user->email;
-    }
 
+        $jadwalTes = $siswa->dataRegistrasi->dataTes()
+            ->with('jadwalTes')
+            ->orderBy('id_registrasi')
+            ->get();
+
+        $this->jadwalTesBQ = $jadwalTes->first()?->id_jadwal_tes;
+        $this->jadwalTesJapres = $jadwalTes->skip(1)->first()?->id_jadwal_tes;
+    }
 
     public function updateSiswa()
     {
