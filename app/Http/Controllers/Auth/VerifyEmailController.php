@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
-use App\Jobs\SendEmailVerificationNotification;
 
 class VerifyEmailController extends Controller
 {
@@ -21,7 +20,6 @@ class VerifyEmailController extends Controller
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
-            SendEmailVerificationNotification::dispatch($request->user())->delay(now()->addSeconds(5));
         }
 
         return redirect()->intended(route('siswa.dashboard', absolute: false).'?verified=1');
