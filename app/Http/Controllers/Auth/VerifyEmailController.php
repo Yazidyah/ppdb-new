@@ -24,6 +24,6 @@ class VerifyEmailController extends Controller
             SendEmailVerificationNotification::dispatch($request->user())->delay(now()->addSeconds(5));
         }
 
-        return redirect()->intended(route('dashboard', absolute: false).'?verified=1');
+        return redirect()->intended(route('siswa.dashboard', absolute: false).'?verified=1');
     }
 }
