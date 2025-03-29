@@ -4,7 +4,7 @@
     @if ($preview)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" @click.self="preview = false">
             <div
-                class="bg-white rounded-lg overflow-hidden overflow-y-auto shadow-xl transform transition-all sm:max-w-4xl sm:w-full sm:max-h-[90vh] border border-gray-300 relative">
+                class="bg-white rounded-lg overflow-hidden overflow-y-auto shadow-xl transform transition-all sm:max-w-4xl sm:w-full sm:max-h-[90vh] border border-gray-300 relative ">
                 <button wire:click="$toggle('preview')"
                     class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-red-400 rounded-full hover:text-white hover:bg-red-400">
                     <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -21,7 +21,7 @@
                     @if ($url)
                         @if (Str::endsWith($berkas->original_name, '.pdf'))
                             <iframe src="{{ $url }}" frameborder="0"
-                                class="w-full h-[70vh] sm:h-[80vh] over pt-2 pb-5 transform transition-all duration-300"
+                                class="w-full h-[70vh] sm:h-[80vh] over pt-2 pb-5 transform transition-all duration-300 "
                                 style="object-fit: cover;"></iframe>
                         @else
                             <img src="{{ $url }}" alt="Uploaded File" loading="lazy"

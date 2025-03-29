@@ -85,53 +85,53 @@
             <h6 class="font-medium mb-2">Informasi Pribadi</h6>
             <div>
                 <label class="text-xs font-medium">Nama Lengkap</label>
-                <input type="text" wire:model="nama_lengkap" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="nama_lengkap" class="border p-2 w-full rounded-lg w-full focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">NIK</label>
-                <input type="text" wire:model="nik" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="nik" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">No Telepon</label>
-                <input type="text" wire:model="no_telp" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="no_telp" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Jenis Kelamin</label>
-                <select wire:model="jenis_kelamin" class="border p-2 w-full rounded-lg">
+                <select wire:model="jenis_kelamin" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                     <option value="L">Laki-laki</option>
                     <option value="P">Perempuan</option>
                 </select>
             </div>
             <div>
                 <label class="text-xs font-medium">Tempat Lahir</label>
-                <input type="text" wire:model="tempat_lahir" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="tempat_lahir" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Tanggal Lahir</label>
-                <input type="date" wire:model="tanggal_lahir" class="border p-2 w-full rounded-lg">
+                <input type="date" wire:model="tanggal_lahir" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Alamat Domisili</label>
-                <input type="text" wire:model="alamat_domisili" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="alamat_domisili" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Alamat KK</label>
-                <input type="text" wire:model="alamat_kk" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="alamat_kk" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Provinsi</label>
-                <input type="text" wire:model="provinsi" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="provinsi" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Kota</label>
-                <input type="text" wire:model="kota" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="kota" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
         </div>
         <div class="border p-4 rounded-lg">
             <h6 class="font-medium mb-2">Informasi Pendidikan</h6>
             <div>
                 <label class="text-xs font-medium">Jalur</label>
-                <select wire:model="id_jalur" class="border p-2 w-full rounded-lg">
+                <select wire:model="id_jalur" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                     @foreach ($jalurOptions as $jalur)
                         <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
                     @endforeach
@@ -139,32 +139,32 @@
             </div>
             <div>
                 <label class="text-xs font-medium">NISN</label>
-                <input type="text" wire:model="nisn" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="nisn" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">NPSN</label>
-                <input type="text" wire:model="npsn" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="npsn" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Sekolah Asal</label>
-                <input type="text" wire:model="sekolah_asal" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="sekolah_asal" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Status Sekolah</label>
-                <input type="text" wire:model="status_sekolah" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="status_sekolah" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <h6 class="font-medium mb-2 mt-4">Informasi Akun</h6>
             <div>
                 <label class="text-xs font-medium">Username</label>
-                <input type="text" wire:model="name" class="border p-2 w-full rounded-lg">
+                <input type="text" wire:model="name" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Email</label>
-                <input type="email" wire:model="email" class="border p-2 w-full rounded-lg">
+                <input type="email" wire:model="email" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
             </div>
             <div>
                 <label class="text-xs font-medium">Password</label>
-                <input type="text" wire:model="password" class="border p-2 w-full rounded-lg" placeholder="(Kosongkan jika tidak ingin mengubah)">
+                <input type="text" wire:model="password" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm" placeholder="(Kosongkan jika tidak ingin mengubah)">
             </div>
         </div>
         <div class="border p-4 rounded-lg col-span-2">
@@ -172,11 +172,11 @@
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label class="text-xs font-medium">BQ & Wawancara</label>
-                    <input type="text" wire:model="jadwalTesBQ" class="border p-2 w-full rounded-lg">
+                    <input type="text" wire:model="jadwalTesBQ" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                 </div>
                 <div>
                     <label class="text-xs font-medium">Seleksi Japres</label>
-                    <input type="text" wire:model="jadwalTesJapres" class="border p-2 w-full rounded-lg">
+                    <input type="text" wire:model="jadwalTesJapres" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                 </div>
             </div>
         </div>

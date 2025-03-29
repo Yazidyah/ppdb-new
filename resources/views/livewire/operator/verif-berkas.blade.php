@@ -44,7 +44,7 @@
                                         </td>
                                         <td class="px-4 py-2">
                                             <input wire:model="catatan.{{ $berkas->id }}" type="text"
-                                                name="catatan[{{ $berkas->id }}]" class="w-full border rounded-md" value="{{ $berkas->verify_notes }}">
+                                                name="catatan[{{ $berkas->id }}]" class="w-full border focus:border-tertiary  focus:ring-tertiary rounded-md shadow-sm" value="{{ $berkas->verify_notes }}">
                                         </td>
                                     </tr>
                                 @empty
@@ -64,7 +64,7 @@
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
                         <label for="status" class="text-sm font-medium text-gray-700 text-left">Update Status</label>
                         <select id="status" wire:model="status"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md appearance-auto">
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md">
                             <option value="3">Pilih Status</option>
                             <option value="4">Tidak Lolos</option>
                             <option value="5">Lolos</option>
@@ -97,7 +97,7 @@
                     <button wire:click="$set('modalOpen', false)" type="button"
                         class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Cancel</button>
                     <button wire:click="simpan" type="button"
-                        class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2  transition ease-in-out duration-150">Simpan</button>
+                        class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white focus:text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2  transition ease-in-out duration-150">Simpan</button>
                 </div>
             </div>
         </div>

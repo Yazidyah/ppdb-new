@@ -20,7 +20,7 @@
             <form wire:submit.prevent="simpan">
                 <div class="flex items-center mb-4">
                 <label for="status" class="mr-4">Penerimaan</label>
-                <select id="status" wire:model="status" class="px-4 py-2 border rounded-lg">
+                <select id="status" wire:model="status" class="px-4 py-2 border rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                     @foreach ($statusList as $key => $value)
                     <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
