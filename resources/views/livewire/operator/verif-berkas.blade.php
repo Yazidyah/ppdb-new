@@ -4,7 +4,7 @@
         {!! $buttonIcon !!}
     </button>
     @if ($modalOpen)
-        <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen">
+        <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen backdrop-blur-sm">
             <div class="absolute inset-0 w-full h-full bg-black backdrop-blur-sm bg-opacity-70"
                 wire:click="$set('modalOpen', false)"></div>
             <div class="relative w-full py-6 bg-white border shadow-lg px-7 border-neutral-200 sm:max-w-2xl sm:rounded-lg">
@@ -40,11 +40,11 @@
                                             @livewire('operator.berkas-verif', ['syarat' => $item, 'berkas' => $berkas], key($siswa->id_user . 'berkas' . $berkas->id))
                                         </td>
                                         <td class="px-4 py-2">
-                                            <input type="checkbox" wire:model="verif.{{ $berkas->id }}" value="1" {{ $berkas->verify ? 'checked' : '' }}>
+                                            <input type="checkbox" wire:model="verif.{{ $berkas->id }}" value="1" {{ $berkas->verify ? 'checked' : '' }} class=" h-6 w-6 accent-tertiary text-tertiary  rounded cursor-pointer active:border active:border-tertiary  focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 ">
                                         </td>
                                         <td class="px-4 py-2">
                                             <input wire:model="catatan.{{ $berkas->id }}" type="text"
-                                                name="catatan[{{ $berkas->id }}]" class="w-full border rounded-md" value="{{ $berkas->verify_notes }}">
+                                                name="catatan[{{ $berkas->id }}]" class="w-full border focus:border-tertiary  focus:ring-tertiary rounded-md shadow-sm" value="{{ $berkas->verify_notes }}">
                                         </td>
                                     </tr>
                                 @empty
@@ -64,17 +64,17 @@
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
                         <label for="status" class="text-sm font-medium text-gray-700 text-left">Update Status</label>
                         <select id="status" wire:model="status"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                            <option value="2">Pilih Status</option>
-                            <option value="3">Tidak Lolos</option>
-                            <option value="4">Lolos</option>
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md">
+                            <option value="3">Pilih Status</option>
+                            <option value="4">Tidak Lolos</option>
+                            <option value="5">Lolos</option>
                         </select>
                     </div>
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
                         <label for="sesi_bq_wawancara" class="text-sm font-medium text-gray-700 text-left">Sesi BQ &
                             Wawancara</label>
                         <select id="sesi_bq_wawancara" wire:model="sesi_bq_wawancara"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md">
                             <option value="">Tidak dijadwalkan</option>
                             @foreach ($jadwalTesBqWawancara as $jadwalBq)
                                 <option class="" value="{{ $jadwalBq['id'] }}">{{ $jadwalBq['label'] }}</option>
@@ -85,7 +85,7 @@
                         <label for="sesi_japres_tes_akademik" class="text-sm font-medium text-gray-700 text-left">Sesi
                             Japres/Tes Akademik</label>
                         <select id="sesi_japres_tes_akademik" wire:model="sesi_japres_tes_akademik"
-                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md">
                             <option value="">Tidak dijadwalkan</option>
                             @foreach ($jadwalTesJapresTesAkademik as $jadwalJa)
                                 <option value="{{ $jadwalJa['id'] }}">{{ $jadwalJa['label'] }}</option>
@@ -97,7 +97,7 @@
                     <button wire:click="$set('modalOpen', false)" type="button"
                         class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Cancel</button>
                     <button wire:click="simpan" type="button"
-                        class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2  transition ease-in-out duration-150">Simpan</button>
+                        class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white focus:text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2  transition ease-in-out duration-150">Simpan</button>
                 </div>
             </div>
         </div>

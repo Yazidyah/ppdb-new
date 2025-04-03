@@ -25,6 +25,8 @@ class TabBerkasSiswa extends Component
 
     public $persyaratan;
 
+    public $berkasBaru = true;
+
     public function mount()
     {
         $this->user = $this->siswa->user;
@@ -72,8 +74,9 @@ class TabBerkasSiswa extends Component
 
             Log::info('File berhasil disimpan: ', ['path' => $path]);
             $this->berkas = null;
-            $this->deleteExistsBerkas($this->syarat->berkas->where('uploader_id', $this->user->id)->sortBy('id')->first());
-            // dd($this->syarat->berkas->where('uploader_id', $this->user->id)->sortBy('id'));
+            if ($this->berkasBaru == false) {
+                $this->deleteExistsBerkas($this->syarat->berkas->where('uploader_id', $this->user->id)->sortBy('id')->first());
+            }
         } else {
             Log::info('Tidak ada file yang diterima');
         }

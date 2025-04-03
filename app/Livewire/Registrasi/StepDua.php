@@ -24,6 +24,9 @@ class StepDua extends Component
             return redirect()->to('/siswa/daftar-step-satu?t=1');
         } elseif ($dataRegistrasi->status == 2) {
             return redirect()->to('/siswa/daftar-step-tiga?t=1');
+        } elseif ($dataRegistrasi->status >=3) {
+            session()->flash('message', 'Kamu sudah pernah mendaftar');
+            return redirect()->to('/siswa/dashboard');
         }
     }
 

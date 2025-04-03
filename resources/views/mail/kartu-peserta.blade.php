@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kartu Peserta</title>
-    <style type="text/css">
+    <style type="text/css" media="all">
         @import url("https://www.w3.org/StyleSheets/Core/Traditional");
-
+        /* CSS2 styles explicitly defined */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -130,7 +130,6 @@
         .qrcode {
             width: 40mm;
             height: 40mm;
-            border: 1px solid black;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -269,7 +268,7 @@
     <div class="table-footer">
         <div class="footer">
             <div class="qrcode">
-                QR Code: Hello World
+                <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
             </div>
             <div class="tanda-tangan">
                 <p class="tempat">Bogor, <br> Ketua Panitia</p>

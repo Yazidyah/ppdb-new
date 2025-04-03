@@ -22,8 +22,11 @@
                             class="flex flex-row justify-center lg:justify-between px-4 sm:px-6 items-center mx-auto bg-gray-100 mb-8 rounded-lg">
                             <template x-for="(step, index) in 5" :key="index">
                                 <div @click="currentStep = (index + 1); $wire.set('sem', (index + 1))"
-                                    :class="{ 'bg-tertiary text-white': currentStep === (index +
-                                        1), 'text-gray-700': currentStep !== (index + 1) }"
+                                    :class="{
+                                        'bg-tertiary text-white': currentStep === (index +
+                                            1),
+                                        'text-gray-700': currentStep !== (index + 1)
+                                    }"
                                     class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-2xl flex flex-col items-center justify-center cursor-pointer transition duration-300 ease-in-out transform hover:scale-105">
                                     <div
                                         class="bg-white rounded-full flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12">

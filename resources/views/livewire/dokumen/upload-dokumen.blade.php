@@ -45,28 +45,23 @@
                         @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
                             @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
                             <div>
-                                @if ($data->nama_persyaratan === 'Rapot')
-                                    <div class="flex gap-2">
+                                <div class="flex gap-2">
+                                    @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
                                         <button type="button" onclick="rapotModal()"
                                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                                             Isi data rapot
                                         </button>
-                                        <button type="button" onclick="berkasModal({{ $berkas->id }})"
-                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
-                                            Isi data berkas
-                                        </button>
-                                    </div>
-                                @else
-                                    @if (isset($berkas) && isset($berkas->id))
+                                    @endif
+                                    @if (isset($berkas) && isset($berkas->id) && $data->nama_persyaratan !== 'Pas Foto' && $data->nama_persyaratan !== 'Rapot MTs/SMP')
                                         <button type="button" onclick="berkasModal({{ $berkas->id }})"
                                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                                             Isi data berkas
                                         </button>
                                     @endif
-                                @endif
+                                </div>
                             </div>
                         @empty
-                            @if ($data->nama_persyaratan === 'Rapot')
+                            @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
                                 <div class="flex items-center justify-center w-full h-full">
                                     <label
                                         class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -88,7 +83,7 @@
                                 </div>
                             @endif
 
-                            @if ($data->nama_persyaratan !== 'Rapot')
+                            @if ($data->nama_persyaratan !== 'Rapot MTs/SMP')
                                 <div class="flex items-center justify-center w-full h-full">
                                     <label
                                         class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -112,7 +107,7 @@
                         @endforelse
                     @endif
                     @if (count($data->berkas) === 0)
-                        @if ($data->nama_persyaratan === 'Rapot')
+                        @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
                             <div class="flex items-center justify-center w-full h-full">
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -132,8 +127,7 @@
                                 </label>
                             </div>
                         @endif
-
-                        @if ($data->nama_persyaratan !== 'Rapot')
+                        @if ($data->nama_persyaratan !== 'Rapot MTs/SMP')
                             <div class="flex items-center justify-center w-full h-full">
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -154,7 +148,7 @@
                             </div>
                         @endif
 
-                        @if ($data->nama_persyaratan === 'Rapot')
+                        @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
                             @if (session()->has('error-rapot'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-rapot') }}</p>
                             @endif
@@ -173,7 +167,10 @@
         </div>
     </div>
     <div class="navigation-buttons justify-center flex items-center py-10 sm:py-6 px-2 sm:px-4 max-w-7xl mx-auto">
-        <button wire:click="validateAndSubmit"
+        <!-- <button wire:click="validateAndSubmit"
+            class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
+            type="button" id="submitBtn">Lanjutkan ke tahap verifikasi</button> -->
+        <button onclick="window.location.href='/siswa/daftar-step-empat?t=1'"
             class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
             type="button" id="submitBtn">Lanjutkan ke tahap verifikasi</button>
     </div>
@@ -205,10 +202,10 @@
 
         // Tentukan URL gambar contoh berdasarkan jenis file
         let exampleFiles = {
-            "Pas Foto 3x4": "/contoh_berkas/contoh-pas-foto.jpg",
+            "Pas Foto": "/contoh_berkas/contoh-pas-foto.jpg",
             "Kartu Pelajar": "/contoh_berkas/Contoh Kartu Pelajar.jpg",
             "Ijazah SMP/MTs": "/contoh_berkas/Contoh Ijazah.jpeg",
-            "Rapot": "/contoh_berkas/Contoh Rapot",
+            "Rapot MTs/SMP": "/contoh_berkas/Contoh Rapot.webp",
             "Kartu Keluarga": "/logoman.webp",
             "Piagam Akreditasi Sekolah Asal": "https://example.com/contoh-pasfoto.jpg",
             "Piagam Kejuaraan": "https://example.com/contoh-pasfoto.jpg",

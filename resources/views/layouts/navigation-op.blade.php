@@ -193,6 +193,11 @@ switch ($userRole){
     <div class="h-full px-3 py-4 overflow-y-auto bg-tertiary">
         <ul class="space-y-2 font-medium">
             <li>
+                <x-side-nav :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
+                    {{ __('Dashboard') }}
+                </x-side-nav>
+            </li>
+            <li>
                 <x-side-nav :href="route($redirectUrls)" :active="request()->routeIs($redirectUrls)">
                     {{ __('Data Pendaftar') }}
                 </x-side-nav>
@@ -215,11 +220,6 @@ switch ($userRole){
                 <li>
                     <x-side-nav :href="route($redirectUrltes)" :active="request()->routeIs($redirectUrltes)">
                         {{ __('Konfigurasi Jadwal Tes') }}
-                    </x-side-nav>
-                </li>
-                <li>
-                    <x-side-nav :href="route($redirectUrlls)" :active="request()->routeIs($redirectUrlls)">
-                        {{ __('Data Pendaftar Melaju ke (Step 2)') }}
                     </x-side-nav>
                 </li>
             </ul>

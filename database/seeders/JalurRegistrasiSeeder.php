@@ -26,21 +26,21 @@ class JalurRegistrasiSeeder extends Seeder
                 'deskripsi' => 'Jalur afirmasi untuk siswa berprestasi',
                 'tanggal_buka' => '2025-02-01',
                 'tanggal_tutup' => '2025-02-28',
-                'is_open' => true,
+                'is_open' => false,
             ],
             [
                 'nama_jalur' => 'Afirmasi KETM',
                 'deskripsi' => 'Jalur afirmasi untuk siswa dari keluarga ekonomi tidak mampu',
                 'tanggal_buka' => '2025-03-01',
                 'tanggal_tutup' => '2025-03-31',
-                'is_open' => true,
+                'is_open' => false,
             ],
             [
                 'nama_jalur' => 'Afirmasi ABK',
                 'deskripsi' => 'Jalur afirmasi untuk siswa berkebutuhan khusus',
                 'tanggal_buka' => '2025-04-01',
                 'tanggal_tutup' => '2025-04-30',
-                'is_open' => true,
+                'is_open' => false,
             ],
         ];
 

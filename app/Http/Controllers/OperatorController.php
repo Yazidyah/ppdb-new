@@ -41,8 +41,8 @@ class OperatorController extends Controller
             1 => 'Jalur',
             2 => 'Upload',
             3 => 'Submit',
-            4 => 'Tidak Lolos',
-            5 => 'Lolos',
+            4 => 'Tidak Lolos Verifikasi',
+            5 => 'Lolos Verifikasi',
             6 => 'Belum Ditentukan',
             7 => 'Tidak Diterima',
             8 => 'Diterima',
@@ -69,7 +69,7 @@ class OperatorController extends Controller
 
     private function buildSiswaQuery(Request $request)
     {
-        $query = CalonSiswa::with(['dataRegistrasi.rapot']);
+        $query = CalonSiswa::with(['dataRegistrasi.rapot', 'dataRegistrasi.dataTes']); // Added 'dataTes'
 
         if ($request->has('search')) {
             $search = strtolower($request->input('search'));

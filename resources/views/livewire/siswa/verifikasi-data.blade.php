@@ -161,7 +161,7 @@
         <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
             <div class="relative p-6 bg-white rounded-lg shadow md:p-10">
                 <button id="close-modal-icon" type="button"
-                    class="absolute top-3 right-3 p-2 text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 hover:text-gray-900 focus:z-10"
+                    class="absolute top-3 right-3 p-2 text-gray-500 hover:text-white bg-white rounded-lg border border-gray-200 hover:border-red-900 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-gray-300 focus:z-10"
                     onclick="document.getElementById('info-popup').classList.add('hidden')">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
@@ -170,10 +170,12 @@
                 </button>
                 <div class="mb-6 text-base font-light text-gray-500">
                     <h3 class="mb-4 text-3xl font-bold text-gray-900">Konfirmasi Pengisian Data</h3>
-                    <p class="text-xl">
+                    <p class="text-md text-justify ">
                         Dengan ini saya menyatakan bahwa saya meyakini sepenuhnya bahwa data isian biodata dan data
-                        orang tua yang telah saya masukkan ke dalam sistem adalah valid, benar, dan dapat
-                        dipertanggungjawabkan. Saya memahami bahwa kebenaran informasi tersebut sangat penting untuk
+                        orang tua yang telah saya masukkan ke dalam sistem adalah <span class="font-bold text-tertiary"> Valid, Benar, dan Dapat Dipertanggungjawabkan.</span>
+                    </p>
+                    <p class="text-md text-justify">
+                        Saya memahami bahwa kebenaran informasi tersebut sangat penting untuk
                         kelancaran proses administrasi, dan saya siap mempertanggungjawabkan kebenaran setiap data yang
                         telah saya berikan sesuai dengan ketentuan yang berlaku.
                     </p>
@@ -181,10 +183,10 @@
                 <div class="justify-between items-center pt-0 space-y-4 sm:flex sm:space-y-0">
                     <div class="items-center space-y-4 sm:space-x-4 sm:flex sm:space-y-0">
                         <button id="close-modal" type="button"
-                            class="py-3 px-5 w-full text-base font-medium text-gray-500 bg-white rounded-lg border border-gray-200 sm:w-auto hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 hover:text-gray-900 focus:z-10"
+                            class="py-3 px-5 w-full text-base font-medium text-white bg-red-900 rounded-lg border border-red-900 sm:w-auto hover:bg-red-500 focus:ring-4 focus:outline-none focus:ring-red-500  focus:z-10"
                             onclick="document.getElementById('info-popup').classList.add('hidden')">Batal</button>
                         <button id="confirm-button" type="button"
-                            class="py-3 px-5 w-full text-base font-medium text-center text-secondary rounded-lg bg-tertiary sm:w-auto hover:bg-secondary hover:text-tertiary focus:ring-4 focus:outline-none focus:ring-blue-300"
+                            class="py-3 px-5 w-full text-base font-medium text-center text-secondary rounded-lg bg-tertiary sm:w-auto hover:bg-secondary hover:text-tertiary focus:ring-4 focus:outline-none focus:ring-tertiary"
                             wire:click="updateStatus">Ya, Saya Yakin</button>
                     </div>
                 </div>

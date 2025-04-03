@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Dokumen;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use App\Models\CalonSiswa;
+use App\Models\DataRegistrasi;
+use Illuminate\Support\Facades\Auth;
 
 class StepTiga extends Component
 {
@@ -18,6 +20,17 @@ class StepTiga extends Component
     {
         $this->tab = request()->query('t', 1);
         $this->user = Auth::user();
+        $calonSiswa = CalonSiswa::where('id_user', $this->user->id)->first();
+        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $calonSiswa->id_calon_siswa)->first();
+
+        if ($dataRegistrasi->status == 0) {
+            return redirect()->to('/siswa/daftar-step-satu?t=1');
+        } elseif ($dataRegistrasi->status == 1) {
+            return redirect()->to('/siswa/daftar-step-dua?t=1');
+        } elseif ($dataRegistrasi->status >= 3) {
+            session()->flash('message', 'Kamu sudah pernah mendaftar');
+            return redirect()->to('/siswa/daftar-step-empat?t=1');
+        }
     }
 
     public function submit()

@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GetPersyaratan;
+use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\DataSiswa;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
@@ -27,6 +28,9 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\NpsnController;
 
 use App\Livewire\Admin\Dashboard;
+
+// Route::get('/log-viewer', 'LogViewerController@index')->middleware('auth');
+
 
 Route::get('/sementara', function () {
     return view('sementara');
@@ -90,9 +94,7 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/daftar-step3', [SiswaController::class, 'persyaratan'])->name('siswa.daftar-step3');
 });
 Route::middleware(['auth', 'verified', 'operator'])->group(function () {
-    Route::get('/operator/dashboard', function () {
-        return view('operator.dashboard');
-    })->name('operator.dashboard');
+    Route::get('/operator/dashboard', [DashboardController::class, 'index'])->name('operator.dashboard');
 
     Route::get('/operator/data-afirmasi-prestasi', [OperatorController::class, 'showsiswaPrestasi'])->name('operator.data-afirmasi-prestasi');
     Route::get('/operator/data-afirmasi-abk', [OperatorController::class, 'showsiswaAbk'])->name('operator.data-afirmasi-abk');
@@ -199,6 +201,6 @@ Route::get('local/temp/{path}', function (string $path) {
     }
 })->name('local.temp');
 
-Route::get('/fetch-npsn', [NpsnController::class, 'getNpsn']);
+// Route::get('/fetch-npsn', [NpsnController::class, 'getNpsn']);
 
 require __DIR__ . '/auth.php';

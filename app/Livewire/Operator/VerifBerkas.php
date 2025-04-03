@@ -9,6 +9,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\SendVerificationEmail;
+use Illuminate\Support\Facades\File;
 
 class VerifBerkas extends Component
 {
@@ -93,7 +95,7 @@ class VerifBerkas extends Component
                 'id' => $jadwal->id,
                 'label' => "{$jadwal->id}) Tgl {$formattedDate} - Ruang {$jadwal->ruang} - Jam {$jadwal->jam_mulai} - {$jadwal->jam_selesai} ({$jadwal->terisi}/{$jadwal->kuota})",
             ];
-        });
+        })->sortBy('id');
     }
 
     /**
@@ -190,42 +192,34 @@ class VerifBerkas extends Component
         $this->processDataTes();
         $this->cekBerkasPasFoto();
 
-        $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
-        $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
-
-        $pdf = Pdf::loadView('mail.kartu-peserta', [
-            'pas_foto' => Storage::path($this->urlPasFoto),
-            'siswa' => $this->siswa,
-            'syarat' => $this->syarat,
-            'jadwal_bq_wawancara' => $jadwalBqWawancara,
-            'jadwal_japres_tes_akademik' => $jadwalJapresTesAkademik,
-        ]);
-
-
-        $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
-
-        // Send email notification
-        if ($this->status == 4) {
-            $messageBody = "Selamat, Kamu telah lolos verifikasi berkas.";
-            Mail::send([], [], function ($message) use ($pdf, $messageBody, $fileName) {
-                $message->to($this->siswa->user->email)
-                    ->subject('Hasil Verifikasi Berkas')
-                    ->text($messageBody)
-                    ->attachData($pdf->output(), $fileName, [
-                        'mime' => 'application/pdf',
-                    ]);
-            });
-
-            $this->modalOpen = false;
-        } elseif ($this->status == 3) {
-            $missingDocuments = $this->getMissingDocuments();
-            $messageBody = "Maaf, Kamu belum lolos verifikasi berkas karena tidak mengupload berkas: " . implode(', ', $missingDocuments);
-            Mail::raw($messageBody, function ($message) {
-                $message->to($this->siswa->user->email)
-                    ->subject('Hasil Verifikasi Berkas');
-            });
-            $this->modalOpen = false;
+        if ($this->sesi_bq_wawancara != null) {
+            $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
         }
+        if ($this->sesi_japres_tes_akademik != null) {
+            $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
+        }
+
+        // Generate QR code and save to public\qrcode
+        $qrCodeDirectory = public_path('qrcode');
+        if (!File::exists($qrCodeDirectory)) {
+            File::makeDirectory($qrCodeDirectory, 0755, true);
+        }
+
+        $qrCodePath = $qrCodeDirectory . '/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png';
+        $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . urlencode($this->siswa->dataRegistrasi->nomor_peserta);
+        file_put_contents($qrCodePath, file_get_contents($qrCodeUrl));
+
+        // Dispatch the email job
+        SendVerificationEmail::dispatch(
+            $this->siswa,
+            $this->status,
+            $this->urlPasFoto,
+            $this->syarat,
+            @$jadwalBqWawancara,
+            @$jadwalJapresTesAkademik
+        );
+
+        $this->modalOpen = false;
 
         return redirect(request()->header('Referer'));
     }
@@ -240,26 +234,10 @@ class VerifBerkas extends Component
     {
         $jadwalTes = JadwalTes::find($idJadwalTes);
         if ($jadwalTes) {
-            $formattedDate = Carbon::parse($jadwalTes->tanggal)->format('Y-m-d');
+            $formattedDate = Carbon::parse($jadwalTes->tanggal)->format('d-m-Y');
             return "{$formattedDate} {$jadwalTes->jam_mulai} - {$jadwalTes->jam_selesai} WIB / Ruang {$jadwalTes->ruang}";
         }
         return '';
-    }
-
-    /**
-     * Get the list of missing documents.
-     *
-     * @return array
-     */
-    protected function getMissingDocuments()
-    {
-        $missingDocuments = [];
-        foreach ($this->syarat as $item) {
-            if ($item->berkas->where('uploader_id', $this->siswa->id_user)->isEmpty()) {
-                $missingDocuments[] = $item->nama_persyaratan;
-            }
-        }
-        return $missingDocuments;
     }
 
     /**
@@ -277,11 +255,11 @@ class VerifBerkas extends Component
     }
 
     /**
-     * Update status registrasi jika nilainya 2, 3, atau 4.
+     * Update status registrasi jika nilainya 3, 4, atau 5.
      */
     protected function updateRegistrasiStatus()
     {
-        if (in_array($this->status, [2, 3, 4])) {
+        if (in_array($this->status, [3, 4, 5])) {
             $this->siswa->dataRegistrasi->status = $this->status;
             $this->siswa->dataRegistrasi->save();
         }
@@ -323,41 +301,80 @@ class VerifBerkas extends Component
     }
 
     /**
-     * Update atau hapus data tes berdasarkan sesi yang diberikan.
+     * Update or delete test data based on the given session.
      *
-     * @param mixed $sesiTes
-     * @param mixed $previousSesi Tes sebelumnya, untuk keperluan decrement jika dihapus.
-     * @param bool  $isBq      Menentukan tipe tes (BQ atau Japres).
+     * @param mixed $sessionTest
+     * @param mixed $previousSession Previous session for decrement purposes if deleted.
+     * @param bool  $isBq           Determines the test type (BQ or Japres).
      */
-    protected function updateDataTes($sesiTes, $previousSesi, $isBq)
+    protected function updateDataTes($sessionTest, $previousSession, $isBq)
     {
-        // Jika ada sesi tes yang dipilih, gunakan updateOrCreate
-        if ($sesiTes) {
-            $dataTes = DataTes::updateOrCreate(
-                [
-                    'id_registrasi' => $this->id_registrasi,
-                    'id_jadwal_tes' => $sesiTes,
-                ],
-                [
-                    'id_jadwal_tes' => $sesiTes,
-                ]
-            );
-
-            if ($dataTes->wasRecentlyCreated) {
-                JadwalTes::where('id', $sesiTes)->increment('terisi');
-            }
+        if (empty($sessionTest)) {
+            $this->deleteTestData($isBq, $previousSession);
             return;
         }
 
-        // Jika sesi tidak dipilih, hapus data tes terkait
+        $this->saveOrUpdateTestData($sessionTest, $isBq);
+        $this->updateJadwalTesTerisi($sessionTest);
+    }
+
+    /**
+     * Delete test data and decrement the filled count if necessary.
+     *
+     * @param bool  $isBq
+     * @param mixed $previousSession
+     */
+    protected function deleteTestData($isBq, $previousSession)
+    {
         $operator = $isBq ? 'like' : 'not like';
         $deleted = DataTes::where('id_registrasi', $this->id_registrasi)
             ->whereHas('jadwalTes.jenisTes', function ($query) use ($operator) {
                 $query->where('nama', $operator, '%BQ%');
             })->delete();
 
-        if ($deleted > 0 && $previousSesi) {
-            JadwalTes::where('id', $previousSesi)->decrement('terisi');
+        if ($deleted > 0 && $previousSession) {
+            JadwalTes::where('id', $previousSession)->decrement('terisi');
+        }
+    }
+
+    /**
+     * Save or update test data based on the session.
+     *
+     * @param mixed $sessionTest
+     * @param bool  $isBq
+     */
+    protected function saveOrUpdateTestData($sessionTest, $isBq)
+    {
+        $operator = $isBq ? 'like' : 'not like';
+        $existingDataTes = DataTes::where('id_registrasi', $this->id_registrasi)
+            ->whereHas('jadwalTes.jenisTes', function ($query) use ($operator) {
+                $query->where('nama', $operator, '%BQ%');
+            })->first();
+
+        if ($existingDataTes) {
+            $existingDataTes->update(['id_jadwal_tes' => $sessionTest]);
+        } else {
+            DataTes::create([
+                'id_registrasi' => $this->id_registrasi,
+                'id_jadwal_tes' => $sessionTest,
+            ]);
+        }
+    }
+
+    /**
+     * Update the filled count for all test schedules.
+     *
+     * @param int $sessionTest
+     */
+    protected function updateJadwalTesTerisi($sessionTest)
+    {
+        $jadwalTesData = JadwalTes::leftJoin('data_tes', 'jadwal_tes.id', '=', 'data_tes.id_jadwal_tes')
+            ->selectRaw('jadwal_tes.id, COUNT(data_tes.id_jadwal_tes) AS total')
+            ->groupBy('jadwal_tes.id')
+            ->get();
+
+        foreach ($jadwalTesData as $data) {
+            JadwalTes::where('id', $data->id)->update(['terisi' => $data->total]);
         }
     }
 

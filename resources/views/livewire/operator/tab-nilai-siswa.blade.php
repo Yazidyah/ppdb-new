@@ -24,7 +24,7 @@
                             @foreach(array_slice($rapot['data'], 0, 3, true) as $subject => $score)
                                 <li class="text-left">
                                     <div class="font-bold">{{ strtoupper(str_replace('_', ' ', $subject)) }}</div>
-                                    <input type="number" wire:model="rapotData.{{ $index }}.data.{{ $subject }}" class="w-full p-2 border rounded" />
+                                    <input type="number" wire:model="rapotData.{{ $index }}.data.{{ $subject }}" class="w-full p-2 border rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm" />
                                 </li>
                             @endforeach
                         </ul>
@@ -32,7 +32,7 @@
                             @foreach(array_slice($rapot['data'], 3, null, true) as $subject => $score)
                                 <li class="text-left">
                                     <div class="font-bold">{{ strtoupper(str_replace('_', ' ', $subject)) }}</div>
-                                    <input type="number" wire:model="rapotData.{{ $index }}.data.{{ $subject }}" class="w-full p-2 border rounded" />
+                                    <input type="number" wire:model="rapotData.{{ $index }}.data.{{ $subject }}" class="w-full p-2 border rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm" />
                                 </li>
                             @endforeach
                         </ul>

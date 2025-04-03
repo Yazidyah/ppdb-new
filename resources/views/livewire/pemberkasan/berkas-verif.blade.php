@@ -1,5 +1,10 @@
 <div>
     <div class="px-5 py-3 text-sm border text-primary-700 bg-primary-100 rounded-xl">
+        <div class="mb-4">
+            @if (!is_null($berkas->data_berkas))
+                <h2 class="text-center text-lg font-bold">Nomor Berkas : {{ $berkas->data_berkas }}</h2>
+            @endif
+        </div>
         <div class="flex flex-col gap-3 sm:flex-row sm:justify-between">
             <div class="flex items-center gap-3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -35,11 +40,13 @@
     @if ($url)
         @if (Str::endsWith($berkas->original_name, '.pdf'))
             <iframe src="{{ $url }}" frameborder="0"
-                class="w-full h-[300px] sm:h-[500px] md:h-[800px] pt-2 pb-5  transform transition-all duration-300"
+                class="w-full h-[150px] sm:h-[250px] md:h-[400px] pt-2 pb-5  transform transition-all duration-300"
                 style="object-fit: cover;"></iframe>
         @else
-            <img src="{{ $url }}" alt="Uploaded File" loading="lazy"
-                class="max-w-full object-contain transform transition-all duration-300 mt-3">
+            <div class="max-h-[300px] overflow-y-auto mt-3">
+                <img src="{{ $url }}" alt="Uploaded File" loading="lazy"
+                    class="max-w-full object-contain transform transition-all duration-300">
+            </div>
         @endif
     @endif
 

@@ -47,4 +47,9 @@ class DataRegistrasi extends Model
     {
         return $this->belongsTo(JadwalTes::class, 'id_jadwal_tes', 'id');
     }
+
+    public function dataTes()
+    {
+        return $this->hasMany(DataTes::class, 'id_registrasi'); // Updated to hasMany
+    }
 }

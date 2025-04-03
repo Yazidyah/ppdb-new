@@ -14,34 +14,60 @@ class KategoriBerkasSeeder extends Seeder
     public function run(): void
     {
         $kategoriBerkas = [
-
             [
-                'nama' => 'Rapot',
+                'nama' => 'Pas Foto',
                 'folder_name' => 'pendaftaran/persyaratan',
-                'accepted_file_types' => 'pdf',
+                'accepted_file_types' => 'jpg/jpeg/png',
                 'max_file_size' => 300,
                 'is_multiple' => false,
                 'key' => 'jalur_reguler',
                 'disk' => 'local',
             ],
             [
-                'nama' => 'Ijazah SMP/MTs',
+                'nama' => 'Rapot MTs/SMP',
                 'folder_name' => 'pendaftaran/persyaratan',
                 'accepted_file_types' => 'pdf',
+                'max_file_size' => 3000,
+                'is_multiple' => false,
+                'key' => 'jalur_reguler',
+                'disk' => 'local',
+            ],
+            [
+                'nama' => 'Ijazah MTs/SMP',
+                'folder_name' => 'pendaftaran/persyaratan',
+                'accepted_file_types' => 'jpg/jpeg/png',
                 'max_file_size' => 300,
                 'is_multiple' => false,
                 'key' => 'jalur_reguler',
                 'disk' => 'local',
             ],
             [
-                'nama' => 'Kartu Pelajar',
+                'nama' => 'Kartu Keluarga',
                 'folder_name' => 'pendaftaran/persyaratan',
-                'accepted_file_types' => 'pdf',
+                'accepted_file_types' => 'jpg/jpeg/png',
                 'max_file_size' => 300,
                 'is_multiple' => false,
                 'key' => 'jalur_reguler',
                 'disk' => 'local',
             ],
+            [
+                'nama' => 'Akta Kelahiran',
+                'folder_name' => 'pendaftaran/persyaratan',
+                'accepted_file_types' => 'jpg/jpeg/png',
+                'max_file_size' => 300,
+                'is_multiple' => false,
+                'key' => 'jalur_reguler',
+                'disk' => 'local',
+            ],
+            [
+                'nama' => 'Sertifikat Akreditasi',
+                'folder_name' => 'pendaftaran/persyaratan',
+                'accepted_file_types' => 'jpg/jpeg/png',
+                'max_file_size' => 300,
+                'is_multiple' => false,
+                'key' => 'jalur_reguler',
+                'disk' => 'local',
+            ]
         ];
 
         foreach ($kategoriBerkas as $item) {

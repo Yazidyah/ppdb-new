@@ -32,8 +32,8 @@
     @endif
     <!-- Stepper -->
     <section>
-        <div class="container flex justify-center mx-auto gap-2">
-            <div class="w-full flex justify-center items-center flex-col">
+        <div class="container flex justify-center my-4 mx-auto gap-2">
+            <div class="w-full flex justify-center my-4 items-center flex-col">
                 <ol class="items-center w-full max-w-4xl mx-auto space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse">
                     <!-- Step 1: Daftar Diri -->
                     <li class="flex items-center {{ $activeStep >= 1 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
@@ -86,16 +86,17 @@
     <!-- Contoh link pendaftaran -->
     @if ($status < 3)
     <section>
-        <div class="container flex justify-center mx-auto gap-2">
+        <div class="container flex justify-center my-4 mx-auto gap-2">
             <div class="w-1/2 flex justify-center items-center flex-col p-6 bg-primary border border-gray-200 rounded-lg shadow-sm">
                 <a href="/siswa/daftar-step-satu">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">PENDAFTARAN</h5>
                 </a>
                 <p class="mb-3 font-normal text-white text-center">
-                    {{ $status != 0 ? 'LANJUTKAN MENDAFTAR' : 'KLIK TOMBOL DI BAWAH INI UNTUK MENDAFTAR' }}
+                    {{ $status != 0 ? 'LANJUTKAN PENDAFTARAN' : 'KLIK TOMBOL DI BAWAH INI UNTUK MENDAFTAR' }}
                 </p>
                 <a href="{{ route('siswa.daftar-step-satu', ['t' => 1]) }}"
-                   class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-primary bg-secondary rounded-lg hover:bg-tertiary focus:ring-4 focus:outline-none focus:ring-blue-300 hover:text-white">
+                   class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-2 focus:outline-none focus:ring-tertiary hover:text-tertiary
+                     border border-transparent tracking-widest  focus:bg-tertiary active:text-white focus:text-white active:bg-tertiary active:border active:border-tertiary  focus:ring-offset-2  transition ease-in-out duration-150">
                     PENDAFTARAN
                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                          fill="none" viewBox="0 0 14 10">
