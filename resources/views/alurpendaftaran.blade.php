@@ -5,8 +5,12 @@
         <p class="font-bold text-xl md:text-4xl ">Penerimaan Peserta Didik Baru</p>
     </div>
 </div>
+<div class="container mx-auto">
+    <img src="alur.jpeg" class="container mx-auto w-3/4 rounded">
 
-<div class="container mx-auto px-6 pt-4">
+</div>
+
+<div class="container mx-auto px-6 pt-4 mb-8">
     <div class="h-full">
 
         <ol class="items-start sm:flex">
@@ -19,10 +23,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="mt-3 sm:pe-8 ">
-                    <h3 class="text-lg font-semibold text-gray-900 ">Registrasi</h3>
-                    <time class="block mb-2 text-sm font-normal leading-none text-gray-400 ">Released Soon</time>
-                    <p class="text-base font-normal text-wrap text-tertiary ">Mulai registrasi dengan memasukkan NISN.
-                    </p>
+                    <h3 class="text-lg font-semibold text-gray-900 ">Klik www.man1kotabogor.sch.id dan Pilih Menu PPDB</h3>
                 </div>
             </li>
             <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
@@ -34,11 +35,8 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="mt-3 sm:pe-8">
-                    <h3 class="text-lg font-semibold text-gray-900 ">Isi Biodata</h3>
-                    <time class="block mb-2 text-sm font-normal leading-none text-gray-400 ">Released Soon</time>
-                    <p class="text-base font-normal text-wrap text-tertiary ">Lengkapi formulir biodata. Setelah
-                        disimpan kemudian sistem akan mengirimkan pesan konfirmasi ke email yang didaftarkan.</p>
-                </div>
+                    <h3 class="text-lg font-semibold text-gray-900 ">Membuat Akun PPDB dan masuk dengan akun yang sudah Dibuat</h3>
+                    </div>
             </li>
             <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
                 <div class="flex items-center">
@@ -49,10 +47,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="mt-3 sm:pe-8">
-                    <h3 class="text-lg font-semibold text-gray-900 ">Pilih Jalur</h3>
-                    <time class="block mb-2 text-sm font-normal leading-none text-gray-400 ">Released Soon</time>
-                    <p class="text-base font-normal text-wrap text-tertiary ">Pilih salah satu jalur PPDB yang akan
-                        diambil, pastikan hasil scan dokumen persyaratan sudah siap.</p>
+                    <h3 class="text-lg font-semibold text-gray-900 ">Mengisi Formulir dan Melengkapi Berkas</h3>
                 </div>
             </li>
             <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
@@ -64,10 +59,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="mt-3 sm:pe-8">
-                    <h3 class="text-lg font-semibold text-gray-900 ">Unggah Persyaratan</h3>
-                    <time class="block mb-2 text-sm font-normal leading-none text-gray-400 ">Released Soon</time>
-                    <p class="text-base font-normal text-wrap text-tertiary ">Unggah dokumen persyaratan sesuai jalur
-                        yang dipilih dengan file .jpg, .jpeg atau .pdf.</p>
+                    <h3 class="text-lg font-semibold text-gray-900 ">Verifikasi Data dan Berkas</h3>
                 </div>
             </li>
             <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
@@ -79,10 +71,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="mt-3 sm:pe-8">
-                    <h3 class="text-lg font-semibold text-gray-900 ">Tes Luring</h3>
-                    <time class="block mb-2 text-sm font-normal leading-none text-gray-400 ">Released Soon</time>
-                    <p class="text-base font-normal text-wrap text-tertiary ">Mengikuti tes BQ dan akademik secara
-                        offline, dengan menaati protokol kesehatan.</p>
+                    <h3 class="text-lg font-semibold text-gray-900 ">Cetak Kartu Pendaftaran</h3>
                 </div>
             </li>
             <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
@@ -94,10 +83,19 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="mt-3 sm:pe-8">
-                    <h3 class="text-lg font-semibold text-gray-900 ">Pengumuman</h3>
-                    <time class="block mb-2 text-sm font-normal leading-none text-gray-400 ">Released Soon</time>
-                    <p class="text-base font-normal text-wrap text-tertiary ">Hasil penerimaan diumumkan sesuai jadwal,
-                        melalui website ini dan melalui email yang didaftarkan.</p>
+                    <h3 class="text-lg font-semibold text-gray-900 ">Tes Kemampuan Prestasi/Akademik dan Tes Baca Al Quran</h3>
+                </div>
+            </li>
+            <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
+                <div class="flex items-center">
+                    <div
+                        class="z-10 flex items-center justify-center w-6 h-6 bg-primary rounded-full ring-0 ring-white  sm:ring-8  shrink-0">
+                        <h1 class="text-white">6</h1>
+                    </div>
+                    <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
+                </div>
+                <div class="mt-3 sm:pe-8">
+                    <h3 class="text-lg font-semibold text-gray-900 ">Tes Kemampuan Prestasi/Akademik dan Tes Baca Al Quran</h3>
                 </div>
             </li>
         </ol>

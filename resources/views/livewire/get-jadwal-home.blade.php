@@ -64,15 +64,15 @@
                                 <li>Jalur Anak Berkebutuhan Khusus</li>
                                 </ul>
                         </span></h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaAfirmatifShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">05 - 09 Mei 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran online melalui
-                        website <span><a href="#">ppdb.man1kotabogor.com</a></span></h1>
+                        website <span class="hover:underline"><a href="#">ppdb.man1kotabogor.com</a></span></h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">2</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Verifikasi, Validasi berkas
                         dan Pencetakan Kartu Ujian</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaAfirmatifShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">14 Mei 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Verifikasi dan Validasi
                         dilakukan secara Tatap muka sesuai Jadwal</h1>
                 </div>
@@ -80,28 +80,28 @@
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">3</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes Baca Quran dan
                         Wawancara</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaAfirmatifShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">15 - 16 Mei 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes dilakukan secara Tatap
                         muka sesuai Jadwal di Kartu Peserta</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">4</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Seleksi Japres</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaAfirmatifShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">19 Mei 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes dilakukan secara Tatap
                         muka sesuai Jadwal di Kartu Peserta</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">5</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pengumuman</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaAfirmatifShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">21 Mei 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pengumuman Online, dengan
-                        memasukkan NISN, Email dan Kode Verifikasi</h1>
+                        memasukkan NISN, Email dan Kode Registrasi</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">6</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Daftar Ulang</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaAfirmatifShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">22 - 23 Mei 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Daftar Ulang dilakukan
                         secara Tatap muka dengan membawa Berkas - berkas</h1>
                 </div>
@@ -121,51 +121,51 @@
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center  bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">1</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaRegulerShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">26 Mei - 05 Juni 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran online melalui
-                        website <span><a href="#">ppdb.man1kotabogor.com</a></span></h1>
+                        website <span class="hover:underline"><a href="#">ppdb.man1kotabogor.com</a></span></h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">2</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Verifikasi dan Validasi
                         berkas</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaRegulerShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">10 - 12 Juni 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Online dilakukan oleh
                         panitia</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">3</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pencetakan Kartu Ujian</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaRegulerShort }}</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Online dilakukan oleh Calon
-                        Siswa</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">13 Juni 2025</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Online dilakukan oleh calon
+                        siswa</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">4</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes Baca Quran dan
                         Wawancara</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaRegulerShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">16 - 19 Juni 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes dilakukan secara Tatap
                         muka sesuai Jadwal di Kartu Peserta</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">5</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Seleksi Japres</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaRegulerShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes Akademik</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">20, 23, 24 Juni 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes dilakukan secara Tatap
                         muka sesuai Jadwal di Kartu Peserta</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">6</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pengumuman</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaRegulerShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">26 Juni 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pengumuman Online, dengan
-                        memasukkan NISN, Email dan Kode Verifikasi</h1>
+                    memasukkan NISN, Email dan Kode Registrasi</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">7</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Daftar Ulang</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">{{ $tanggalBukaRegulerShort }}</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">30 Mei - 03 Juli 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Daftar Ulang dilakukan
                         secara Tatap muka dengan membawa Berkas - berkas</h1>
                 </div>
