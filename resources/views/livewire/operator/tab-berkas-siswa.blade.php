@@ -19,7 +19,7 @@
                 <div class="mt-2">
                     <input type="file" name="berkas" id="berkas" wire:model.live="berkas"
                         wire:click="$set('berkasBaru', false)" wire:change="setSyarat({{ $data->id_persyaratan }})"
-                        class="block w-full px-3 py-2 text-gray-900 transition transform border-0 rounded-md shadow-sm uploader ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tertiary sm:text-sm sm:leading-6 hover:scale-105">
+                        class="block w-full px-3 py-2 text-gray-900 transition transform border-0 rounded-md shadow-sm uploader placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tertiary sm:text-sm sm:leading-6 hover:scale-105 focus:border-tertiary  active:ring-tertiary ">
                 </div>
             @else
                 {{-- <div class="mt-2 mb-2">
@@ -28,7 +28,7 @@
                 <div class="mt-2">
                     <input type="file" name="berkas" id="berkas" wire:model.live="berkas"
                         wire:change="setSyarat({{ $data->id_persyaratan }})" wire:click="$set('berkasBaru', true)"
-                        class="block w-full px-3 py-2 text-gray-900 transition transform border-0 rounded-md shadow-sm uploader ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tertiary sm:text-sm sm:leading-6 hover:scale-105">
+                        class="block w-full px-3 py-2 text-gray-900 transition transform border-0 rounded-md shadow-sm uploader placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-tertiary sm:text-sm sm:leading-6 hover:scale-105 focus:border-tertiary  active:ring-tertiary ">
                 </div>
             @endif
         @empty

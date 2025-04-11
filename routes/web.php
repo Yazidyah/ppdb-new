@@ -29,6 +29,9 @@ use App\Http\Controllers\NpsnController;
 
 use App\Livewire\Admin\Dashboard;
 
+// Route::get('/log-viewer', 'LogViewerController@index')->middleware('auth');
+
+
 Route::middleware(['web'])->group(function () {
     Route::get('/sementara', function () {
         return view('sementara');
@@ -199,7 +202,6 @@ Route::middleware(['web'])->group(function () {
         }
     })->name('local.temp');
 
-    Route::get('/fetch-npsn', [NpsnController::class, 'getNpsn']);
-});
+// Route::get('/fetch-npsn', [NpsnController::class, 'getNpsn']);
 
 require __DIR__ . '/auth.php';

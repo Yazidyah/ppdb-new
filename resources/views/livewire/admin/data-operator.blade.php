@@ -1,14 +1,14 @@
-<div>
+<div class="w-screen">
     {{-- Table --}}
-    <div class="p-4 sm:ml-64 mx-auto justify-center flex">
-    <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto text-center pt-3">
-                <div class="flex justify-between mb-4 ">
+    <div class="p-4 mx-auto justify-center flex ">
+
+            <div class="container mx-auto text-center pt-3 w-full">
+                <div class="flex justify-between w-1/2 mx-auto mb-4 ">
             <h1 class="text-lg font-bold">Kelola Akun Operator</h1>
             <button wire:click="create" class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Tambah Operator</button>
         </div>
-        <div class="container mx-auto mt-10">
-            <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+        <div class="w-screen container mx-auto mt-10">
+            <table class=" table-auto overflow-x-auto mx-auto items-center relative shadow-md w-1/2 sm:rounded-lg my-6 rtl:justify-left text-sm text-left text-gray-500">
                 <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
                     <tr class="text-sm text-tertiary uppercase bg-gray-50">
                         <th scope="col" class="px-4 py-2 text-center">No</th>
@@ -35,7 +35,6 @@
             </table>
             {{ $operators->links() }}
         </div>
-    </div>
     </div>
     </div>
     {{-- Modal --}}

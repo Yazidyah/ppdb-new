@@ -1,11 +1,11 @@
-<div class="flex">
+<div class="w-screen">
     {{-- The best athlete wants his opponent at his best. --}}
-    <div class="p-4 sm:ml-64">
-    <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
+    <div class="p-4 mx-auto justify-center flex ">
+    
             <div class="container mx-auto text-center pt-3">
-                <div class="container mx-auto mt-10">
+                <div class="w-screen container mx-auto mt-10">
             <h1 class="text-3xl font-bold">DATA PENDAFTAR CALON SISWA MAN 1 KOTA BOGOR</h1>
-                <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+                <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-1/2 max-w-full rtl:justify-left text-sm text-left text-gray-500">
                     <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
                         <tr class="text-sm text-tertiary uppercase bg-gray-50">
                             <th scope="col" class="px-4 py-2 text-center">No</th>

@@ -26,7 +26,7 @@
             <div class="">
                 <div class="md:flex gap-3 w-full">
                     <!-- Left Column -->
-                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-5 gap-4 py-2 w-full">
+                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-5 gap-8 py-2 w-full">
                         <!-- Nama Lengkap -->
                         <div class="col-span-4 mt-2">
                             <x-reg-input-label>Nama Lengkap</x-reg-input-label>
@@ -81,8 +81,8 @@
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="NPSN"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
-                                    type="tel" name="NPSN" required autofocus autocomplete="NPSN"
-                                    placeholder="NPSN" wire:model="NPSN" />
+                                    type="text" name="NPSN" required autofocus autocomplete="NPSN"
+                                    placeholder="NPSN" wire:model="NPSN" maxlength="8" />
                                 <button wire:click="searchByNpsn"
                                     class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Check
                                 </button>
@@ -164,7 +164,7 @@
                         </div>
                         </div>
                 <!-- Right Column -->
-                <div class="md:grid flex flex-col grid-cols-4 grid-rows-5 gap-4 py-2 w-full">
+                <div class="md:grid flex flex-col grid-cols-4 grid-rows-5 gap-8 py-2 w-full">
                     <!-- Jenis Kelamin -->
                     <div class="col-span-2 mt-2">
                         <x-reg-input-label>Jenis Kelamin</x-reg-input-label>
@@ -296,8 +296,9 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="date" name="tanggal_lahir" required autofocus
                                     autocomplete="tanggal_lahir" placeholder="Tanggal Lahir"
-                                    wire:model.live='tanggal_lahir' min="{{ now()->subYear(21)->format('Y-m-d') }}"
-                                    max="{{ now()->subYear(13)->format('Y-m-d') }}" />
+                                    wire:model.live='tanggal_lahir' 
+                                    min="{{ now()->subYear(21)->translatedFormat('Y-m-d') }}"
+                                    max="{{ now()->subYear(13)->translatedFormat('Y-m-d') }}" />
                             </div>
                             @error('tanggal_lahir')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
