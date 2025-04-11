@@ -205,3 +205,4 @@ Route::middleware(['web'])->group(function () {
 // Route::get('/fetch-npsn', [NpsnController::class, 'getNpsn']);
 
 require __DIR__ . '/auth.php';
+});
