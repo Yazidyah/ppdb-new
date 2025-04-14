@@ -51,7 +51,7 @@ class StatusAcc extends Component
         } elseif ($this->status == 8) {
             $this->buttonColor = 'bg-green-500 hover:bg-green-700';
         } elseif ($this->status == 9) {
-            $this->buttonColor = 'bg-yellow-500 hover:bg-yellow-700';
+            $this->buttonColor = 'bg-yellow-600 hover:bg-yellow-800';
         } else {
             $this->buttonColor = 'bg-blue-500 hover:bg-blue-700';
         }
