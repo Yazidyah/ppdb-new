@@ -104,9 +104,9 @@ class BiodataSiswa extends Component
 
     public function updated($propertyName)
     {
-        $this->validateOnly($propertyName);
-        $this->siswa->$propertyName = $this->$propertyName;
+        $this->siswa->$propertyName = $this->$propertyName ?: null; // Set to null if empty
         $this->siswa->save();
+        $this->validateOnly($propertyName);
         $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
     }
 
