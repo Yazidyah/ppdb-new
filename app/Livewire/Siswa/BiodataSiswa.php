@@ -33,7 +33,8 @@ class BiodataSiswa extends Component
         'tanggal_lahir' => 'required|date',
         'tempat_lahir' => 'required|string',
         'sekolah_asal' => 'required|string',
-        'NPSN' => 'required|string|max:8',
+        'status_sekolah' => 'required|string',
+        'NPSN' => 'required|numeric|max:8',
         'alamat_domisili' => 'required|string',
         'alamat_kk' => 'required|string',
         'predikat_akreditasi_sekolah' => 'required|string|max:100',
@@ -69,8 +70,6 @@ class BiodataSiswa extends Component
     public function mount()
     {
         $this->kb = KategoriBerkas::where('key', 'test')->first();
-        // dd($this->kb);
-
         $this->user = Auth::user();
         $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
         $this->nama_lengkap = ucwords($this->siswa->nama_lengkap ?? '');
@@ -103,10 +102,34 @@ class BiodataSiswa extends Component
 
     public function updated($propertyName)
     {
-        $this->validateOnly($propertyName);
-        $this->siswa->$propertyName = $this->$propertyName;
-        $this->siswa->save();
-        $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
+        if ($propertyName == 'NIK') {
+            $this->validateOnly($propertyName, [
+                'NIK' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
+            ]);
+            $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
+            $this->siswa->save();
+        }
+
+        if ($propertyName == 'NISN') {
+            $this->validateOnly($propertyName, [
+                'NISN' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
+            ]);
+            $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
+            $this->siswa->save();
+        }
+
+        if ($propertyName != 'NIK' && $propertyName != 'NISN') {
+            $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
+            $this->siswa->save();
+            $this->validateOnly($propertyName);
+        }
+
+        // $this->siswa->$propertyName = $this->$propertyName ?: null;
+        // $this->siswa->save();
+        // $this->validateOnly($propertyName);
     }
 
     public function updateCities() // Add this method
@@ -149,7 +172,7 @@ class BiodataSiswa extends Component
 
     public function searchByNpsn()
     {
-        $this->NPSN = preg_replace('/\s+/', '', $this->NPSN); // Remove spaces
+        $this->NPSN = preg_replace('/\s+/', '', $this->NPSN);
         $baseUrl = env('NPSN_API_BASE_URL');
         $url = "{$baseUrl}{$this->NPSN}";
         $data = $this->fetchNpsnFromHtml($url);
@@ -170,16 +193,13 @@ class BiodataSiswa extends Component
                 $this->siswa->NPSN = $this->NPSN;
                 $this->siswa->status_sekolah = strtolower($data['status_sekolah']);
                 $this->siswa->sekolah_asal = strtolower($data['nama_sekolah']);
-                $this->sekolah_asal = strtoupper($data['nama_sekolah']);
+                $this->sekolah_asal = strtoupper($data['nama_sekolah']); // Change to uppercase
+                $this->sekolah_asal_enabled = true;
                 $this->siswa->save();
             }
         } else {
-            $this->resetErrorBag(['sekolah_asal']); 
-            $this->sekolah_asal = ''; 
-            $this->siswa->sekolah_asal = null; 
-            $this->siswa->status_sekolah = null; 
-            $this->siswa->NPSN = null;
-            $this->addError('npsn', 'NPSN tidak ditemukan di https://referensi.data.kemdikbud.go.id/');
+            $this->sekolah_asal_enabled = false;
+            $this->siswa->NPSN = $this->NPSN; // Save the NPSN even if not found
             $this->siswa->save();
         }
     }
