@@ -4,6 +4,7 @@ namespace App\Livewire\Dokumen;
 
 use App\Models\Berkas;
 use App\Models\KategoriBerkas;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Persyaratan;
 use App\Models\CalonSiswa;
@@ -22,6 +23,8 @@ class UploadDokumen extends Component
     public $id_jalur, $kbs, $id_persyaratan, $id_siswa, $berkas;
     public $syarat;
     public $kb;
+
+    #[On('isian-updated')]
     public function mount()
     {
         $this->user = Auth::user();
