@@ -39,10 +39,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::prefix('ppdb')->group(function () {
-    Route::get('/alurpendaftaran', function () {
-        return view('alurpendaftaran');
-    });
+Route::get('/alurpendaftaran', function () {
+    return view('alurpendaftaran');
 });
 
 Route::get('/persyaratan', [GetPersyaratan::class, 'showPersyaratan'])->name('persyaratan.show');
