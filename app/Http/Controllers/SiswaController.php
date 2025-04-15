@@ -17,7 +17,7 @@ class SiswaController extends Controller
         ->first();
     
     $status = ($calonSiswa && $calonSiswa->dataRegistrasi) ? $calonSiswa->dataRegistrasi->status : 0;
-    
+    $nomor_peserta = $calonSiswa && $calonSiswa->dataRegistrasi ? $calonSiswa->dataRegistrasi->nomor_peserta : 'Belum tersedia';
 
         // --- Tahap Daftar Diri ---
         if (isset($status) && $status <= 2) {
@@ -73,6 +73,6 @@ class SiswaController extends Controller
         }
 
         // Kirim data ke view
-        return view('siswa.dashboard', compact('daftarDiriDetail', 'verifikasiDetail', 'tesWawancaraDetail', 'penetapanDetail', 'activeStep', 'status'));
+        return view('siswa.dashboard', compact('daftarDiriDetail', 'verifikasiDetail', 'tesWawancaraDetail', 'penetapanDetail', 'activeStep', 'status', 'nomor_peserta'));
     }
 }

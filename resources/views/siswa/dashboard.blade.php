@@ -1,7 +1,13 @@
 <x-app-layout>
     <div class="container mx-auto pt-5 px-4">
         <div class="my-4 bg-tertiary rounded-lg text-white text-center py-8 leading-tight">
-            <h2 class="font-bold text-3xl md:text-4xl">Selamat Datang Calon Siswa MAN 1 Kota Bogor</h2>
+            <h2 class="font-bold text-3xl md:text-4xl">
+                @if ($status <= 3)
+                Pendaftaran Berhasil!<br>Silakan Cek Email/Akun Kamu untuk Informasi Lebih Lanjut.
+                @else
+                    Selamat Datang Calon Siswa MAN 1 Kota Bogor
+                @endif
+            </h2>
         </div>
     </div>
 
@@ -63,7 +69,7 @@
                             3
                         </span>
                         <span>
-                            <h3 class="font-medium leading-tight text-lg">Tes Wawancara</h3>
+                            <h3 class="font-medium leading-tight text-lg">Tes & Wawancara</h3>
                             <p class="text-base">{{ $tesWawancaraDetail }}</p>
                         </span>
                     </li>
