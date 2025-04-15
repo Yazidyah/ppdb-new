@@ -49,7 +49,7 @@
                     <x-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
                         {{ __('Beranda') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('ppdb.' . $redirectUrlp)" :active="request()->routeIs('ppdb.' . $redirectUrlp)">
+                    <x-nav-link :href="route($redirectUrlp)" :active="request()->routeIs($redirectUrlp)">
                         {{ __('Alur Pendaftaran') }}
                     </x-nav-link>
                     <x-nav-link :href="route($redirectUrlk)" :active="request()->routeIs($redirectUrlk)">
