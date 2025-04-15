@@ -38,8 +38,11 @@ Route::get('/sementara', function () {
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/alurpendaftaran', function () {
-    return view('alurpendaftaran');
+
+Route::prefix('ppdb')->group(function () {
+    Route::get('/alurpendaftaran', function () {
+        return view('alurpendaftaran');
+    });
 });
 
 Route::get('/persyaratan', [GetPersyaratan::class, 'showPersyaratan'])->name('persyaratan.show');
