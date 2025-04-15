@@ -9,7 +9,7 @@ use App\Models\DataRegistrasi;
 class SearchSiswa extends Component
 {
     public $nisn;
-    public $nomor_peserta;
+    public $nik; // Changed from nomor_peserta to nik
     public $siswa;
     public $showModal = false;
     public $statusLabels = [
@@ -26,20 +26,20 @@ class SearchSiswa extends Component
     ];
 
     protected $rules = [
-        'nisn'            => 'required',
-        'nomor_peserta' => 'required'
+        'nisn' => 'required',
+        'nik'  => 'required' // Updated rule
     ];
 
     public function search()
     {
         $this->validate();
 
-        $this->siswa = DataRegistrasi::where('nomor_peserta', $this->nomor_peserta)
-            ->whereHas('calonSiswa', function ($query) {
-                $query->where('NISN', $this->nisn);
-            })
-            ->with('calonSiswa')
-            ->first();
+        $this->siswa = DataRegistrasi::whereHas('calonSiswa', function ($query) {
+            $query->where('NISN', $this->nisn)
+                  ->where('NIK', $this->nik); // Updated condition to use NIK
+        })
+        ->with('calonSiswa')
+        ->first();
 
         if ($this->siswa) {
             $this->showModal = true;

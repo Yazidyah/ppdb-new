@@ -7,18 +7,18 @@
                 Sudah pernah mendaftar? Silakan cari disini
             </div>
             <div class="mb-4">
-                <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN</label>
-                <input type="text" id="nisn" wire:model="nisn" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" 
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  focus:border-tertiary  focus:ring-tertiary">
-                @error('nisn')
+                <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> <!-- Updated label -->
+                <input type="text" id="nik" wire:model="nik" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="16"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-tertiary focus:ring-tertiary">
+                @error('nik')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
             </div>
             <div class="mb-4">
-                <label for="nomor_peserta" class="block text-gray-700 text-sm font-bold mb-2">Kode Registrasi</label>
-                <input type="text" id="nomor_peserta" wire:model="nomor_peserta"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-tertiary  focus:ring-tertiary">
-                @error('nomor_peserta')
+                <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN</label>
+                <input type="text" id="nisn" wire:model="nisn" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" 
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  focus:border-tertiary  focus:ring-tertiary">
+                @error('nisn')
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
             </div>
