@@ -20,8 +20,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Route::prefix('ppdb')
-            ->middleware('web')
-            ->group(base_path('routes/web.php'));
+        // Route::prefix('ppdb')
+        //     ->middleware('web')
+        //     ->group(base_path('routes/web.php'));
     }
 }
