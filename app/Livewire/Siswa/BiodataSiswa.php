@@ -24,7 +24,6 @@ class BiodataSiswa extends Component
     public $searchNpsn;
     public $sekolahs = [];
     public $alamat_domisili_disabled = false;
-    public $sekolah_asal_enabled = true;
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'NIK' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK',
@@ -34,8 +33,7 @@ class BiodataSiswa extends Component
         'tanggal_lahir' => 'required|date',
         'tempat_lahir' => 'required|string',
         'sekolah_asal' => 'required|string',
-        'status_sekolah' => 'required|string',
-        'NPSN' => 'required|numeric|max:8',
+        'NPSN' => 'required|string|max:8',
         'alamat_domisili' => 'required|string',
         'alamat_kk' => 'required|string',
         'predikat_akreditasi_sekolah' => 'required|string|max:100',
@@ -98,7 +96,6 @@ class BiodataSiswa extends Component
         $this->provinsi = @Province::where('name', $this->siswa->provinsi)->first()->id ?? '';
         $this->kota = @Regency::where('name', $this->siswa->kota)->first()->id ?? '';
         $this->updateCities();
-        $this->sekolah_asal_enabled = !empty($this->sekolah_asal);
         $this->alamat_domisili_disabled = $this->getAlamatDomisiliDisabledFromLocalStorage();
     }
 
@@ -180,8 +177,15 @@ class BiodataSiswa extends Component
         $data = $this->fetchNpsnFromHtml($url);
         if ($data['npsn']) {
             if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs', 'PKBM'])) {
-                $this->addError('sekolah_asal', 'Tingkat pendidikan harus SMP atau MTs');
-                $this->NPSN = '';
+                $this->resetErrorBag(['npsn']); 
+                $this->addError('sekolah_asal', 'Tingkat pendidikan harus MTs atau SMP');
+                $this->NPSN = ''; 
+                $this->sekolah_asal = ''; 
+                $this->siswa->NPSN = null; 
+                $this->siswa->sekolah_asal = null; 
+                $this->siswa->status_sekolah = null; 
+                $this->siswa->save();
+
                 return;
             }
             if (!$this->getErrorBag()->has('sekolah_asal')) {
@@ -189,15 +193,15 @@ class BiodataSiswa extends Component
                 $this->siswa->status_sekolah = strtolower($data['status_sekolah']);
                 $this->siswa->sekolah_asal = strtolower($data['nama_sekolah']);
                 $this->sekolah_asal = strtoupper($data['nama_sekolah']);
-                $this->sekolah_asal_enabled = true;
                 $this->siswa->save();
-                $this->resetErrorBag('npsn');
-                return redirect()->to(request()->header('Referer'));
             }
         } else {
-            $this->addError('NPSN', 'NPSN tidak ditemukan');
-            $this->sekolah_asal_enabled = false;
-            $this->siswa->NPSN = $this->NPSN;
+            $this->resetErrorBag(['sekolah_asal']); 
+            $this->sekolah_asal = ''; 
+            $this->siswa->sekolah_asal = null; 
+            $this->siswa->status_sekolah = null; 
+            $this->siswa->NPSN = null;
+            $this->addError('NPSN', 'NPSN tidak ditemukan di basis data kementerian');
             $this->siswa->save();
         }
     }
