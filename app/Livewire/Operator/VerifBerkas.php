@@ -86,8 +86,13 @@ class VerifBerkas extends Component
         $operator = $isBq ? 'like' : 'not like';
         return JadwalTes::whereHas('jenisTes', function ($query) use ($operator) {
             if ($this->jalur) {
-                $query->where('no_jalur', $this->jalur->id_jalur)
-                    ->where('nama', $operator, '%BQ%');
+                if ($this->jalur->id_jalur == 1) {
+                    $query->where('no_jalur', 1)
+                        ->where('nama', $operator, '%BQ%');
+                } else {
+                    $query->where('no_jalur', '!=', 1)
+                        ->where('nama', $operator, '%BQ%');
+                }
             }
         })->get()->map(function ($jadwal) {
             $formattedDate = Carbon::parse($jadwal->tanggal)->format('d-m-Y');
