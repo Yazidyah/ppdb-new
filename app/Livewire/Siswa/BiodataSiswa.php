@@ -201,7 +201,7 @@ class BiodataSiswa extends Component
             $this->siswa->sekolah_asal = null; 
             $this->siswa->status_sekolah = null; 
             $this->siswa->NPSN = null;
-            $this->addError('npsn', 'NPSN tidak ditemukan di https://referensi.data.kemdikbud.go.id/');
+            $this->addError('NPSN', 'NPSN tidak ditemukan di basis data kementerian');
             $this->siswa->save();
         }
     }
