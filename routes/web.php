@@ -38,6 +38,7 @@ Route::get('/sementara', function () {
 Route::get('/', function () {
     return view('home');
 });
+
 Route::get('/alurpendaftaran', function () {
     return view('alurpendaftaran');
 });
@@ -93,6 +94,7 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::post('/siswa/daftar-step2', [SiswaController::class, 'jalur'])->name('siswa.daftar-step2');
     Route::get('/siswa/daftar-step3', [SiswaController::class, 'persyaratan'])->name('siswa.daftar-step3');
 });
+
 Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/dashboard', [DashboardController::class, 'index'])->name('operator.dashboard');
 
