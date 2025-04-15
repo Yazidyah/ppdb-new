@@ -35,7 +35,7 @@ class BiodataSiswa extends Component
         'tempat_lahir' => 'required|string',
         'sekolah_asal' => 'required|string',
         'status_sekolah' => 'required|string',
-        'NPSN' => 'required|string|max:8',
+        'NPSN' => 'required|numeric|max:8',
         'alamat_domisili' => 'required|string',
         'alamat_kk' => 'required|string',
         'predikat_akreditasi_sekolah' => 'required|string|max:100',
@@ -71,8 +71,6 @@ class BiodataSiswa extends Component
     public function mount()
     {
         $this->kb = KategoriBerkas::where('key', 'test')->first();
-        // dd($this->kb);
-
         $this->user = Auth::user();
         $this->siswa = CalonSiswa::where('id_user', $this->user->id)->first();
         $this->nama_lengkap = ucwords($this->siswa->nama_lengkap ?? '');
@@ -106,9 +104,31 @@ class BiodataSiswa extends Component
 
     public function updated($propertyName)
     {
-        $this->siswa->$propertyName = $this->$propertyName ?: null; // Set to null if empty
-        $this->siswa->save();
-        $this->validateOnly($propertyName);
+        if ($propertyName == 'NIK') {
+            $this->validateOnly($propertyName, [
+                'NIK' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
+            ]);
+            $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->siswa->save();
+        }
+
+        if ($propertyName == 'NISN') {
+            $this->validateOnly($propertyName, [
+                'NISN' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
+            ]);
+            $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->siswa->save();
+        }
+
+        if ($propertyName != 'NIK' && $propertyName != 'NISN') {
+            $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->siswa->save();
+            $this->validateOnly($propertyName);
+        }
+
+        // $this->siswa->$propertyName = $this->$propertyName ?: null;
+        // $this->siswa->save();
+        // $this->validateOnly($propertyName);
         $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
     }
 
@@ -152,7 +172,7 @@ class BiodataSiswa extends Component
 
     public function searchByNpsn()
     {
-        $this->NPSN = preg_replace('/\s+/', '', $this->NPSN); // Remove spaces
+        $this->NPSN = preg_replace('/\s+/', '', $this->NPSN);
         $baseUrl = env('NPSN_API_BASE_URL');
         $url = "{$baseUrl}{$this->NPSN}";
         $data = $this->fetchNpsnFromHtml($url);
@@ -166,15 +186,16 @@ class BiodataSiswa extends Component
                 $this->siswa->NPSN = $this->NPSN;
                 $this->siswa->status_sekolah = strtolower($data['status_sekolah']);
                 $this->siswa->sekolah_asal = strtolower($data['nama_sekolah']);
-                $this->sekolah_asal = strtoupper($data['nama_sekolah']); // Change to uppercase
+                $this->sekolah_asal = strtoupper($data['nama_sekolah']);
                 $this->sekolah_asal_enabled = true;
                 $this->siswa->save();
                 $this->resetErrorBag('npsn');
                 return redirect()->to(request()->header('Referer'));
             }
         } else {
+            $this->addError('NPSN', 'NPSN tidak ditemukan');
             $this->sekolah_asal_enabled = false;
-            $this->siswa->NPSN = $this->NPSN; // Save the NPSN even if not found
+            $this->siswa->NPSN = $this->NPSN;
             $this->siswa->save();
         }
     }
