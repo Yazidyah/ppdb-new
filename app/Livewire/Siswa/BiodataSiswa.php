@@ -109,6 +109,7 @@ class BiodataSiswa extends Component
                 'NIK' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
             ]);
             $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             $this->siswa->save();
         }
 
@@ -117,11 +118,13 @@ class BiodataSiswa extends Component
                 'NISN' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
             ]);
             $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             $this->siswa->save();
         }
 
         if ($propertyName != 'NIK' && $propertyName != 'NISN') {
             $this->siswa->$propertyName = $this->$propertyName ?: null;
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             $this->siswa->save();
             $this->validateOnly($propertyName);
         }
@@ -129,7 +132,6 @@ class BiodataSiswa extends Component
         // $this->siswa->$propertyName = $this->$propertyName ?: null;
         // $this->siswa->save();
         // $this->validateOnly($propertyName);
-        $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
     }
 
     public function updateCities() // Add this method
