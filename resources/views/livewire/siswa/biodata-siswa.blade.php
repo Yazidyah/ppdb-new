@@ -84,7 +84,7 @@
                                     type="text" name="NPSN" required autofocus autocomplete="NPSN"
                                     placeholder="NPSN" wire:model="NPSN" maxlength="8" />
                                 <button wire:click="searchByNpsn"
-                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Check
+                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Cek Sekolah
                                 </button>
                             </div>
                             @error('npsn')
@@ -97,37 +97,15 @@
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="sekolah_asal"
-                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full {{ $sekolah_asal_enabled ? 'bg-gray-300' : 'bg-transparent' }}"
-                                    type="text" name="sekolah_asal" required autofocus autocomplete="sekolah_asal"
-                                    placeholder="Asal Sekolah" wire:model.live="sekolah_asal" :disabled="$sekolah_asal_enabled" />
+                                class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
+                                    disabled="disabled" type="text" name="sekolah_asal" required autofocus
+                                    autocomplete="sekolah_asal" placeholder="Asal Sekolah"
+                                    value="{{ strtoupper($sekolah_asal) }}" />
                             </div>
                             @error('sekolah_asal')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                             @enderror
                         </div>
-                        @if (!$sekolah_asal_enabled)
-                        <!-- Status Sekolah -->
-                        <div class="col-span-4 mt-2">
-                            <x-reg-input-label>Status Sekolah</x-reg-input-label>
-                            <ul class="items-center w-full h-full text-sm font-medium rounded-lg sm:flex ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <li class="w-full border-b border-gray-500 sm:border-b-0 sm:border-r">
-                                    <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-negeri" type="radio" name="status_sekolah" value="negeri" wire:model.live="status_sekolah" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="horizontal-list-radio-negeri" class="w-full py-3 ms-2 text-sm font-medium text-gray-900">Negeri</label>
-                                    </div>
-                                </li>
-                                <li class="w-full">
-                                    <div class="flex items-center ps-3">
-                                        <input id="horizontal-list-radio-swasta" type="radio" name="status_sekolah" value="swasta" wire:model.live="status_sekolah" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
-                                        <label for="horizontal-list-radio-swasta" class="w-full py-3 ms-2 text-sm font-medium text-gray-900">Swasta</label>
-                                    </div>
-                                </li>
-                            </ul>
-                                @error('status_sekolah')
-                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            @endif
                         <!-- Predikat Akreditasi Sekolah -->
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label>Predikat Akreditasi Sekolah</x-reg-input-label>
@@ -145,7 +123,6 @@
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                             @enderror
                         </div>
-
                         <!-- Nilai Akreditasi Sekolah -->
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label>Nilai Akreditasi Sekolah</x-reg-input-label>
