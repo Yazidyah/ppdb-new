@@ -101,6 +101,14 @@ class BiodataSiswa extends Component
 
     public function updated($propertyName)
     {
+        if ($propertyName == 'nama_lengkap') {
+            $this->siswa->$propertyName = strtolower($this->$propertyName ?: null);
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
+            $this->siswa->save();
+            $this->validateOnly($propertyName);
+            return;
+        }
+
         if ($propertyName == 'NIK') {
             $this->validateOnly($propertyName, [
                 'NIK' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
