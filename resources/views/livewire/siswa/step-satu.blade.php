@@ -48,7 +48,7 @@
         @if ($tab === 1)
             @livewire('siswa.biodata-siswa', key('biodata-siswa-' . $siswa->id_calon_siswa))
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
                 <button wire:click="$set('tab', 2)" wire:loading.attr="disabled"
                     class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
            @if (!$isCompleteBiodata) cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary @else bg-tertiary hover:bg-secondary hover:text-black text-secondary @endif"
