@@ -100,25 +100,27 @@
         }
 
         .status-surat-keterangan {
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .table-footer {
-            margin-top: 50px;
-            width: 100%;
+            display: flex;
+            margin-top: 10px;
         }
 
-        .table-footer table {
-            width: 100%;
-            border-collapse: collapse;
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .table-footer td {
-            vertical-align: top;
-        }
-
-        .table-footer .qrcode {
-            text-align: center;
+        .qrcode {
+            width: 40mm;
+            height: 40mm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
         }
 
         .table-footer .tempat {
@@ -127,7 +129,7 @@
 
         .table-footer .tanda-tangan {
             text-align: left;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .table-footer .tanda-tangan img {
@@ -278,17 +280,19 @@
     </div>
 
     <div class="table-footer">
-        <table>
+        <table style="width: 100%">
             <tr>
-                <td class="qrcode">
-                    @if ($status != 7)
-                    <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
-                    @endif
+                <td style="width: 60%; text-align: left;">
+                    <div class="qrcode">
+                        @if ($status != 7)
+                        <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
+                        @endif
+                    </div>
                 </td>
-                <td>
+                <td style="width: 40%; text-align: left; vertical-align: top;">
                     <p class="tempat">Bogor, <br> Ketua Panitia</p>
                     <div class="tanda-tangan">
-                        <img src="{{ public_path('surat\ttd-ketua.jpg') }}" alt="ttd">
+                        <img src="{{ public_path('surat\ttd-ketua.jpg') }}" alt="ttd" style="width: 150px; height: 150px;">
                         <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
                             NIP. Masih kosong</p>
                     </div>
