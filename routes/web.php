@@ -65,7 +65,7 @@ Route::get('/daftar/step4', function () {
 
 Route::get('/coba', Counter::class)->name('testing');
 
-Route::prefix('ppdb')->middleware(['auth', 'verified', 'siswa'])->group(function () {
+Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/', function () {
         return redirect()->route('siswa.dashboard');
     });
