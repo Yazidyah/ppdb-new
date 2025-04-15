@@ -114,4 +114,82 @@
         </div>
     </section>
     @endif
+
+    <!-- Display User Data -->
+    <section>
+        <div class="container mx-auto my-8">
+            <h3 class="text-xl font-bold mb-4">Data yang Telah Diisi</h3>
+            <div class="grid grid-cols-2 gap-4 text-gray-700 text-left">
+                <div class="border p-4 rounded-lg">
+                    <h6 class="font-medium mb-2">Informasi Pribadi</h6>
+                    <div>
+                        <label class="text-xs font-medium">Nama Lengkap</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ $calonSiswa->nama_lengkap ?? '-' }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">NIK</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ $calonSiswa->NIK ?? '-' }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">No Telepon</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ $calonSiswa->no_telp ?? '-' }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">Jenis Kelamin</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ $calonSiswa->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">Tempat Lahir</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ ucwords($calonSiswa->tempat_lahir ?? '-') }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">Tanggal Lahir</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">
+                            {{ $calonSiswa->tanggal_lahir ? \Carbon\Carbon::parse($calonSiswa->tanggal_lahir)->locale('id')->translatedFormat('d F Y') : '-' }}
+                        </p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">Alamat Domisili</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ ucwords($calonSiswa->alamat_domisili ?? '-' )}}</p>
+                    </div>
+                </div>
+                <div class="border p-4 rounded-lg">
+                    <h6 class="font-medium mb-2">Informasi Pendidikan</h6>
+                    <div>
+                        <label class="text-xs font-medium">Jalur</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ $calonSiswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">NISN</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ $calonSiswa->NISN ?? '-' }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">NPSN</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ strtoupper($calonSiswa->NPSN ?? '-') }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">Sekolah Asal</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ strtoupper($calonSiswa->sekolah_asal ?? '-') }}</p>
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">Status Sekolah</label>
+                        <p class="border p-2 w-full rounded-lg bg-gray-100">{{ strtoupper($calonSiswa->status_sekolah ?? '-') }}</p>
+                    </div>
+                </div>
+                <div class="border p-4 rounded-lg col-span-2">
+                    <h6 class="font-medium mb-2">Jadwal Tes</h6>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-xs font-medium">BQ & Wawancara</label>
+                            <p class="border p-2 w-full rounded-lg bg-gray-100">{{ $calonSiswa->dataRegistrasi->jadwalTes->bq ?? '-' }}</p>
+                        </div>
+                        <div>
+                            <label class="text-xs font-medium">Seleksi Japres</label>
+                            <p class="border p-2 w-full rounded-lg bg-gray-100">{{ $calonSiswa->dataRegistrasi->jadwalTes->japres ?? '-' }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </x-app-layout>
