@@ -35,36 +35,39 @@ use App\Livewire\Admin\Dashboard;
 Route::get('/sementara', function () {
     return view('sementara');
 });
-Route::get('/', function () {
-    return view('home');
+Route::middleware([\App\Http\Middleware\RedirectToPpdb::class])->group(function () {
+    Route::get('/', function () {
+        return view('home');
+    });
+    Route::get('/alurpendaftaran', function () {
+        return view('alurpendaftaran');
+    });
+
+    Route::get('/persyaratan', [GetPersyaratan::class, 'showPersyaratan'])->name('persyaratan.show');
+
+    Route::get('/daftar/step1', function () {
+        return view('daftar');
+    });
+    Route::get('/daftar/step2', function () {
+        return view('daftar-step2');
+    });
+    Route::get('/daftar/step3/prestasi', function () {
+        return view('daftar-step3-prestasi');
+    });
+    Route::get('/daftar/step3/KETM', function () {
+        return view('daftar-step3-ketm');
+    });
+    Route::get('/daftar/step3/AnakBerkemampuanKhusus', function () {
+        return view('daftar-step3-abk');
+    });
+    Route::get('/daftar/step4', function () {
+        return view('daftar-step4');
+    });
 });
 
-Route::get('/alurpendaftaran', function () {
-    return view('alurpendaftaran');
-});
-
-Route::get('/persyaratan', [GetPersyaratan::class, 'showPersyaratan'])->name('persyaratan.show');
-
-Route::get('/daftar/step1', function () {
-    return view('daftar');
-});
-Route::get('/daftar/step2', function () {
-    return view('daftar-step2');
-});
-Route::get('/daftar/step3/prestasi', function () {
-    return view('daftar-step3-prestasi');
-});
-Route::get('/daftar/step3/KETM', function () {
-    return view('daftar-step3-ketm');
-});
-Route::get('/daftar/step3/AnakBerkemampuanKhusus', function () {
-    return view('daftar-step3-abk');
-});
-Route::get('/daftar/step4', function () {
-    return view('daftar-step4');
-});
 
 Route::get('/coba', Counter::class)->name('testing');
+
 
 Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/', function () {
