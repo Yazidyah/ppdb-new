@@ -85,7 +85,7 @@
                             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
                         </div>
                         <div>
-                            <x-input-label for="pai" :value="__('PAI')" />
+                            <x-input-label for="pai" :value="__('Agama')" />
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
@@ -127,7 +127,7 @@
                             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
                         </div>
                         <div>
-                            <x-input-label for="pai" :value="__('PAI')" />
+                            <x-input-label for="pai" :value="__('Agama')" />
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
@@ -169,7 +169,7 @@
                             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
                         </div>
                         <div>
-                            <x-input-label for="pai" :value="__('PAI')" />
+                            <x-input-label for="pai" :value="__('Agama')" />
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
@@ -211,7 +211,7 @@
                             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
                         </div>
                         <div>
-                            <x-input-label for="pai" :value="__('PAI')" />
+                            <x-input-label for="pai" :value="__('Agama')" />
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"
@@ -253,7 +253,7 @@
                             <x-input-error :messages="$errors->get('bahasainggris')" class="mt-2" />
                         </div>
                         <div>
-                            <x-input-label for="pai" :value="__('PAI')" />
+                            <x-input-label for="pai" :value="__('Agama')" />
                             <x-text-input class="bg-white" id="pai"
                                 class="block mt-1 w-full placeholder:text-white" type="text" name="pai"
                                 :value="old('pai')" required autofocus autocomplete="pai"

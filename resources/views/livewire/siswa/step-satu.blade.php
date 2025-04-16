@@ -44,11 +44,11 @@
         </div>
     </div>
 
-    <div>
+    <div class="h-full">
         @if ($tab === 1)
             @livewire('siswa.biodata-siswa', key('biodata-siswa-' . $siswa->id_calon_siswa))
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 relative">
+            <div class="navigation-buttons justify-between flex items-center py-10 sm:py-6 px-2 sm:px-4 lg:px-8 max-w-7xl mx-auto mt-5">
     <button wire:click="$set('tab', 2)" wire:loading.attr="disabled"
         @if (!$isCompleteBiodata) disabled data-tooltip-target="tooltip-incomplete" @endif
         class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
@@ -90,7 +90,9 @@
                     type="button" id="nextBtn">Next</button> --}}
                 <button wire:click="$set('tab', 3)" wire:loading.attr="disabled"
                     class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
-           @if (!$isCompleteOrangtua) cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary @else bg-tertiary hover:bg-secondary hover:text-black text-secondary @endif"
+           @if (!$isCompleteOrangtua) cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary
+           @else bg-tertiary hover:bg-secondary hover:text-black text-secondary
+           @endif"
                     type="button" id="nextBtn" @if (!$isCompleteOrangtua) disabled @endif>
                     Next
                 </button>
