@@ -52,7 +52,7 @@
                                             Isi data rapot
                                         </button>
                                         <div class="mt-2 p-2 rounded-lg bg-gray-100">
-                                            @if (count($rapot->nilai_rapot) != 0)
+                                            @if (count(@$rapot->nilai_rapot) != 0)
                                                 <p class="text-xs text-green-600 font-semibold">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -63,7 +63,7 @@
                                                     Data sudah diisi
                                                 </p>
                                             @endif
-                                            @if (count($rapot->nilai_rapot) == 0)
+                                            @if (count(@$rapot->nilai_rapot) == 0)
                                                 <p class="text-xs text-red-600 font-semibold">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
