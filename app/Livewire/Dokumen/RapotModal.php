@@ -124,7 +124,45 @@ class RapotModal extends Component
 
     public function kirim()
     {
-        $this->validateRapotInput();
+        $this->validate(
+            [
+                'matematika1' => 'required|numeric|gt:0|lte:100',
+                'matematika2' => 'required|numeric|gt:0|lte:100',
+                'matematika3' => 'required|numeric|gt:0|lte:100',
+                'matematika4' => 'required|numeric|gt:0|lte:100',
+                'matematika5' => 'required|numeric|gt:0|lte:100',
+                'bahasa_indonesia1' => 'required|numeric|gt:0|lte:100',
+                'bahasa_indonesia2' => 'required|numeric|gt:0|lte:100',
+                'bahasa_indonesia3' => 'required|numeric|gt:0|lte:100',
+                'bahasa_indonesia4' => 'required|numeric|gt:0|lte:100',
+                'bahasa_indonesia5' => 'required|numeric|gt:0|lte:100',
+                'bahasa_inggris1' => 'required|numeric|gt:0|lte:100',
+                'bahasa_inggris2' => 'required|numeric|gt:0|lte:100',
+                'bahasa_inggris3' => 'required|numeric|gt:0|lte:100',
+                'bahasa_inggris4' => 'required|numeric|gt:0|lte:100',
+                'bahasa_inggris5' => 'required|numeric|gt:0|lte:100',
+                'agama1' => 'required|numeric|gt:0|lte:100',
+                'agama2' => 'required|numeric|gt:0|lte:100',
+                'agama3' => 'required|numeric|gt:0|lte:100',
+                'agama4' => 'required|numeric|gt:0|lte:100',
+                'agama5' => 'required|numeric|gt:0|lte:100',
+                'ipa1' => 'required|numeric|gt:0|lte:100',
+                'ipa2' => 'required|numeric|gt:0|lte:100',
+                'ipa3' => 'required|numeric|gt:0|lte:100',
+                'ipa4' => 'required|numeric|gt:0|lte:100',
+                'ipa5' => 'required|numeric|gt:0|lte:100',
+                'ips1' => 'required|numeric|gt:0|lte:100',
+                'ips2' => 'required|numeric|gt:0|lte:100',
+                'ips3' => 'required|numeric|gt:0|lte:100',
+                'ips4' => 'required|numeric|gt:0|lte:100',
+                'ips5' => 'required|numeric|gt:0|lte:100',
+            ],
+            [
+                'required' => 'Nilai tidak boleh kosong.',
+                'gt' => 'Nilai tidak boleh kurang dari 0.',
+                'lte' => 'Nilai tidak boleh lebih dari 100.',
+            ]
+        );
 
         $formattedData = [];
         $totalAverage = 0;
