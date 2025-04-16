@@ -52,18 +52,30 @@
                                             Isi data rapot
                                         </button>
                                         <div class="mt-2 p-2 rounded-lg bg-gray-100">
-                                            @if (count(@$rapot->nilai_rapot) != 0)
-                                                <p class="text-xs text-green-600 font-semibold">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                        stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                    Data sudah diisi
-                                                </p>
-                                            @endif
-                                            @if (count(@$rapot->nilai_rapot) == 0)
+                                            @if (!empty($rapot))
+                                                @if ($rapot->nilai_rapot != null)
+                                                    <p class="text-xs text-green-600 font-semibold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="inline w-4 h-4 mr-1" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        Data sudah diisi
+                                                    </p>
+                                                @endif
+                                                @if ($rapot->nilai_rapot == null)
+                                                    <p class="text-xs text-red-600 font-semibold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="inline w-4 h-4 mr-1" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                        Data belum diisi
+                                                    </p>
+                                                @endif
+                                            @else
                                                 <p class="text-xs text-red-600 font-semibold">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
                                                         fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -150,8 +162,9 @@
                                             </p>
                                             <p class="text-xs">JPG,JPEG (MAX. 300KB)</p>
                                         </div>
-                                        <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
-                                            type="file" class="hidden" />
+                                        <input wire:model="berkas"
+                                            wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
+                                            class="hidden" />
                                     </label>
                                 </div>
                             @endif
