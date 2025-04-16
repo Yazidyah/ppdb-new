@@ -42,13 +42,16 @@
 
                         <!-- Input Nilai -->
                         <div class="steps space-y-6">
-                            @foreach (['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'pai', 'ipa', 'ips'] as $subject)
+                            @foreach (['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'agama', 'ipa', 'ips'] as $subject)
                                 <div>
                                     <label for="{{ $subject }}"
                                         class="block text-lg font-semibold text-gray-700">{{ ucfirst(str_replace('_', ' ', $subject)) }}</label>
                                     <input
                                         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-tertiary focus:border-tertiary"
                                         id="{{ $subject }}{{ $sem }}" type="text"
+                                        @if ('agama' === $subject)
+                                         placeholder="Untuk MTs, Nilai Agama dibagi 4"
+                                        @endif
                                         name="{{ $subject }}{{ $sem }}" required autofocus
                                         autocomplete="{{ $subject }}{{ $sem }}"
                                         wire:model.live="{{ $subject }}{{ $sem }}"

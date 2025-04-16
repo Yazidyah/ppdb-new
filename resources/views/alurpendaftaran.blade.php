@@ -5,10 +5,6 @@
         <p class="font-bold text-xl md:text-4xl ">Penerimaan Peserta Didik Baru</p>
     </div>
 </div>
-<div class="container mx-auto">
-    <img src="alur.jpeg" class="container mx-auto w-3/4 rounded">
-
-</div>
 
 <div class="container mx-auto px-6 pt-4 mb-8">
     <div class="h-full">

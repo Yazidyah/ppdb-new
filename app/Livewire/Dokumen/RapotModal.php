@@ -24,7 +24,7 @@ class RapotModal extends Component
     public $matematika1, $matematika2, $matematika3, $matematika4, $matematika5;
     public $bahasa_indonesia1, $bahasa_indonesia2, $bahasa_indonesia3, $bahasa_indonesia4, $bahasa_indonesia5;
     public $bahasa_inggris1, $bahasa_inggris2, $bahasa_inggris3, $bahasa_inggris4, $bahasa_inggris5;
-    public $pai1, $pai2, $pai3, $pai4, $pai5;
+    public $agama1, $agama2, $agama3, $agama4, $agama5;
     public $ipa1, $ipa2, $ipa3, $ipa4, $ipa5;
     public $ips1, $ips2, $ips3, $ips4, $ips5;
     protected $queryString = [
@@ -65,11 +65,11 @@ class RapotModal extends Component
         $this->bahasa_inggris3 = (float)($rapot[2]['data']['bahasa_inggris'] ?? 0);
         $this->bahasa_inggris4 = (float)($rapot[3]['data']['bahasa_inggris'] ?? 0);
         $this->bahasa_inggris5 = (float)($rapot[4]['data']['bahasa_inggris'] ?? 0);
-        $this->pai1 = (float)($rapot[0]['data']['pai'] ?? 0);
-        $this->pai2 = (float)($rapot[1]['data']['pai'] ?? 0);
-        $this->pai3 = (float)($rapot[2]['data']['pai'] ?? 0);
-        $this->pai4 = (float)($rapot[3]['data']['pai'] ?? 0);
-        $this->pai5 = (float)($rapot[4]['data']['pai'] ?? 0);
+        $this->agama1 = (float)($rapot[0]['data']['agama'] ?? 0);
+        $this->agama2 = (float)($rapot[1]['data']['agama'] ?? 0);
+        $this->agama3 = (float)($rapot[2]['data']['agama'] ?? 0);
+        $this->agama4 = (float)($rapot[3]['data']['agama'] ?? 0);
+        $this->agama5 = (float)($rapot[4]['data']['agama'] ?? 0);
         $this->ipa1 = (float)($rapot[0]['data']['ipa'] ?? 0);
         $this->ipa2 = (float)($rapot[1]['data']['ipa'] ?? 0);
         $this->ipa3 = (float)($rapot[2]['data']['ipa'] ?? 0);
@@ -100,11 +100,11 @@ class RapotModal extends Component
             'bahasa_inggris3' => 'required|min:0|max:100',
             'bahasa_inggris4' => 'required|min:0|max:100',
             'bahasa_inggris5' => 'required|min:0|max:100',
-            'pai1' => 'required|min:0|max:100',
-            'pai2' => 'required|min:0|max:100',
-            'pai3' => 'required|min:0|max:100',
-            'pai4' => 'required|min:0|max:100',
-            'pai5' => 'required|min:0|max:100',
+            'agama1' => 'required|min:0|max:100',
+            'agama2' => 'required|min:0|max:100',
+            'agama3' => 'required|min:0|max:100',
+            'agama4' => 'required|min:0|max:100',
+            'agama5' => 'required|min:0|max:100',
             'ipa1' => 'required|min:0|max:100',
             'ipa2' => 'required|min:0|max:100',
             'ipa3' => 'required|min:0|max:100',
@@ -153,7 +153,7 @@ class RapotModal extends Component
             'matematika' => (float)$this->{"matematika$semester"},
             'bahasa_indonesia' => (float)$this->{"bahasa_indonesia$semester"},
             'bahasa_inggris' => (float)$this->{"bahasa_inggris$semester"},
-            'pai' => (float)$this->{"pai$semester"},
+            'agama' => (float)$this->{"agama$semester"},
             'ipa' => (float)$this->{"ipa$semester"},
             'ips' => (float)$this->{"ips$semester"},
         ];

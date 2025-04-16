@@ -49,7 +49,7 @@ class Rapot extends Component
             'nilai_rapot.*.semester' => 'required|integer',
             'nilai_rapot.*.matematika' => 'required|integer',
             'nilai_rapot.*.bahasaindo' => 'required|integer',
-            'nilai_rapot.*.pai' => 'required|integer',
+            'nilai_rapot.*.agama' => 'required|integer',
             'nilai_rapot.*.bahasainggris' => 'required|integer',
             'nilai_rapot.*.ipa' => 'required|integer',
             'nilai_rapot.*.ips' => 'required|integer',
