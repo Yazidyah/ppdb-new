@@ -26,7 +26,7 @@
             <div class="">
                 <div class="md:flex gap-3 w-full">
                     <!-- Left Column -->
-                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-5 gap-8 py-2 w-full">
+                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-8 py-2 w-full">
                         <!-- Nama Lengkap -->
                         <div class="col-span-4 mt-2">
                             <x-reg-input-label>Nama Lengkap</x-reg-input-label>
@@ -142,7 +142,7 @@
                         </div>
                     </div>
                     <!-- Right Column -->
-                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-5 gap-8 py-2 w-full">
+                    <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-8 py-2 w-full">
                         <!-- Jenis Kelamin -->
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label>Jenis Kelamin</x-reg-input-label>
