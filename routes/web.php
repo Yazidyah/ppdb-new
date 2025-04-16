@@ -37,7 +37,7 @@ Route::get('/sementara', function () {
 });
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 Route::get('/alurpendaftaran', function () {
     return view('alurpendaftaran');
 });

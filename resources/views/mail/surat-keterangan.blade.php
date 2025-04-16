@@ -100,12 +100,12 @@
         }
 
         .status-surat-keterangan {
-            margin-top: 30px;
+            margin-top: 10px;
         }
 
         .table-footer {
             display: flex;
-            margin-top: 50px;
+            margin-top: 10px;
         }
 
         .footer {
@@ -123,14 +123,18 @@
             font-size: 12px;
         }
 
-        .tanda-tangan {
-            margin-top: -150px;
-            text-align: right;
+        .table-footer .tempat {
+            text-align: left;
         }
 
-        .tempat {
-            margin-top: -7px;
-            margin-bottom: 120px;
+        .table-footer .tanda-tangan {
+            text-align: left;
+            margin-top: 5px;
+        }
+
+        .table-footer .tanda-tangan img {
+            width: 100px;
+            height: 100px;
         }
 
         .notes {
@@ -264,11 +268,11 @@
 
     <div class="status-surat">
         @if ($status == 8)
-            <h1>Diterima</h1>
+            <h1>DITERIMA</h1>
         @elseif($status == 9)
-            <h1>Dicadangkan</h1>
+            <h1>DICADANGKAN</h1>
         @else
-            <h1>Tidak Diterima</h1>
+            <h1>TIDAK DITERIMA</h1>
         @endif
         <p class="status-surat-peserta">Sebagai peserta didik baru MAN 1 Kota Bogor Tahun Pelajaran 2024/2025</p>
         <p class="status-surat-keterangan">Demikian Surat Keterangan ini disampaikan untuk dapat dipergunakan
@@ -276,19 +280,27 @@
     </div>
 
     <div class="table-footer">
-        <div class="footer">
-            <div class="qrcode">
-                @if ($status != 7)
-                <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
-                @endif
-            </div>
-            <div class="tanda-tangan">
-            <p class="tempat">Bogor, <br> Ketua Panitia</p>
-            <p class="nama">H. Muhammad Luthfi, SE., MM.<br>
-                NIP. 198106242003121002</p>
-            </div>
-        </div>
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 60%; text-align: left;">
+                    <div class="qrcode">
+                        @if ($status != 7)
+                        <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
+                        @endif
+                    </div>
+                </td>
+                <td style="width: 40%; text-align: left; vertical-align: top;">
+                    <p class="tempat">Bogor, <br> Ketua Panitia</p>
+                    <div class="tanda-tangan">
+                        <img src="{{ public_path('surat\ttd-ketua.jpg') }}" alt="ttd" style="width: 150px; height: 150px;">
+                        <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
+                            NIP. Masih kosong</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
+
     @if ($status == 8)
         <div class="notes">
             <p>Keterangan :</p>

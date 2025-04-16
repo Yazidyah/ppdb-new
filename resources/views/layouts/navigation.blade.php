@@ -21,7 +21,8 @@
             break;
 
         default:
-            $redirectUrl = 'siswa.dashboard';
+            # $redirectUrl = 'siswa.dashboard';
+            $redirectUrl = 'home';
             $redirectUrlp = 'siswa.alurpendaftaran';
             $redirectUrlk = 'siswa.persyaratan';
             $redirectUrlpk = 'siswa.dashboard';
