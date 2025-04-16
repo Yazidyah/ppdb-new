@@ -36,7 +36,7 @@ class BiodataSiswa extends Component
         'NPSN' => 'required|string|max:8',
         'alamat_domisili' => 'required|string',
         'alamat_kk' => 'required|string',
-        'predikat_akreditasi_sekolah' => 'required|string|max:100',
+        'predikat_akreditasi_sekolah' => 'required|string',
         'nilai_akreditasi_sekolah' => 'required|numeric|max:100',
     ];
 
@@ -64,6 +64,7 @@ class BiodataSiswa extends Component
         'predikat_akreditasi_sekolah.required' => 'Predikat Akreditasi Sekolah tidak boleh kosong',
         'nilai_akreditasi_sekolah.required' => 'Nilai Akreditasi Sekolah tidak boleh kosong',
         'nilai_akreditasi_sekolah.numeric' => 'Nilai Akreditasi Sekolah harus berupa angka',
+        'nilai_akreditasi_sekolah.max' => 'Nilai Akreditasi Sekolah tidak boleh lebih dari 100',
     ];
 
     public function mount()

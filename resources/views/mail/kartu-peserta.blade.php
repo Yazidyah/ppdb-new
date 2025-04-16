@@ -74,7 +74,7 @@
 
 
         .content {
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .info-table {
@@ -83,7 +83,7 @@
         }
 
         .info-table td {
-            padding: 5px;
+            padding: 1px;
             vertical-align: top;
         }
 
@@ -100,7 +100,7 @@
         .table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 20px;
+            margin-top: 10px;
             border: 2px solid black;
         }
 
@@ -112,12 +112,13 @@
 
         .table th,
         .table td {
-            padding: 10px;
+            padding: 5px;
             text-align: center;
         }
 
         .table-footer {
-            margin-top: 50px;
+            text-align: left;
+            margin-top: 5px;
         }
 
         .footer {
@@ -138,7 +139,7 @@
 
         .notes {
             font-size: 12px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .alamat {
@@ -153,29 +154,21 @@
             font-weight: bold;
         }
 
-        .tanda-tangan {
-            margin-right: 100px;
-            margin-top: -180px;
+        .table-footer .tanda-tangan {
+            text-align: left;
+            margin-top: 5px;
         }
 
-        .tanda-tangan {
-            margin-right: -5px;
+        .table-footer .tanda-tangan img {
+            width: 100px;
+            height: 100px;
         }
-
         .nama {
             margin-top: 20px;
         }
-
-        .tempat-tangan {
-            margin-top: 60px;
-        }
-
-        .tempat {
-            margin-top: -10px;
-        }
-
-        .nama {
-            margin-top: 80px;
+        
+        .table-footer .tempat {
+            text-align: left;
         }
 
         .photo {
@@ -236,12 +229,11 @@
                         {{ strtoupper($siswa->nama_lengkap) }}</p>
                     <p>Jenis
                         Kelamin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                        {{ $siswa->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</p>
-                    <p>Sekolah/Madrasah Asal&nbsp;&nbsp;&nbsp;&nbsp;: {{ ucwords($siswa->sekolah_asal) }}</p>
-                    <p class="address-details"">
+                        {{ strtoupper($siswa->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki') }}</p>
+                    <p>Sekolah/Madrasah Asal&nbsp;&nbsp;&nbsp;&nbsp;: {{ strtoupper($siswa->sekolah_asal) }}</p>
+                    <p class="address-details">
                         Alamat&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:
-                    <p class="alamat">{{ $siswa->alamat_domisili }}</p>
-                    </p>
+                    <p class="alamat">{{ ucwords($siswa->alamat_domisili) }}</p>
                 </td>
                 <div class="photo">
                     <img src="{{ $pas_foto }}" alt="Pas Foto" style="max-width: 100%; height: auto;">
@@ -266,16 +258,23 @@
     </table>
 
     <div class="table-footer">
-        <div class="footer">
-            <div class="qrcode">
-                <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
-            </div>
-            <div class="tanda-tangan">
-                <p class="tempat">Bogor, <br> Ketua Panitia</p>
-                <p class="nama">H. Muhammad Luthfi, SE., MM.<br>
-                    NIP. 198106242003121002</p>
-            </div>
-        </div>
+        <table style="width: 100%;">
+            <tr>
+            <td style="width: 60%; text-align: left;">
+                <div class="qrcode">
+                    <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
+                </div>
+            </td>
+            <td style="width: 40%; text-align: left; vertical-align: top;">
+                    <p class="tempat">Bogor, <br> Ketua Panitia</p>
+                    <div class="tanda-tangan">
+                        <img src="{{ public_path('surat\ttd-ketua.jpg') }}" alt="ttd" style="width: 150px; height: 150px;">
+                        <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
+                            NIP. Masih kosong</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="notes">

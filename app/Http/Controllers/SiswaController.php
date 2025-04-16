@@ -20,10 +20,12 @@ class SiswaController extends Controller
         $status = ($calonSiswa && $calonSiswa->dataRegistrasi) ? $calonSiswa->dataRegistrasi->status : 0;
         $nomor_peserta = $calonSiswa && $calonSiswa->dataRegistrasi ? $calonSiswa->dataRegistrasi->nomor_peserta : 'Belum tersedia';
 
-        $jadwalTes = $calonSiswa->dataRegistrasi->dataTes()
-            ->with('jadwalTes')
-            ->orderBy('id_registrasi')
-            ->get();
+        $jadwalTes = ($calonSiswa && $calonSiswa->dataRegistrasi)
+            ? $calonSiswa->dataRegistrasi->dataTes()
+                ->with('jadwalTes')
+                ->orderBy('id_registrasi')
+                ->get()
+            : collect();
 
         $jadwalTesBQ = $this->formatJadwalTes($jadwalTes->first()?->id_jadwal_tes);
         $jadwalTesJapres = $this->formatJadwalTes($jadwalTes->skip(1)->first()?->id_jadwal_tes);

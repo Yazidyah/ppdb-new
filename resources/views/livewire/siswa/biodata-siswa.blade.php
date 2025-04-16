@@ -133,8 +133,8 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="nilai_akreditasi_sekolah" required autofocus
                                     autocomplete="nilai_akreditasi_sekolah" placeholder="Nilai Akreditasi Sekolah"
-                                    wire:model.live="nilai_akreditasi_sekolah" inputmode="numeric" pattern="[0-9]*"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
+                                    wire:model.live="nilai_akreditasi_sekolah" inputmode="decimal" 
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '');" />
                             </div>
                             @error('nilai_akreditasi_sekolah')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
