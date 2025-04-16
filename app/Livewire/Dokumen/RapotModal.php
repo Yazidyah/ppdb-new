@@ -182,6 +182,7 @@ class RapotModal extends Component
         $this->rapot->nilai_rapot = $jsonData;
         $this->rapot->total_rata_nilai = $totalAverage;
         $this->rapot->save();
+        $this->dispatch('isian-updated');
         $this->modalSubmit = false;
     }
 
