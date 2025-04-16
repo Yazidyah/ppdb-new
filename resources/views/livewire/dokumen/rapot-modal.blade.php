@@ -58,7 +58,9 @@
                                             @if ('agama' === $subject) placeholder="Untuk MTs, Nilai Agama dibagi 4" @endif
                                             name="{{ $subject }}{{ $sem }}" required autofocus
                                             autocomplete="{{ $subject }}{{ $sem }}"
-                                            wire:model.live="{{ $subject }}{{ $sem }}" />
+                                            wire:model.live="{{ $subject }}{{ $sem }}"
+                                            maxlength="5"
+                                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" />
                                         @error($subject . $sem)
                                             <span class="text-red-500 text-sm">{{ $message }}</span>
                                         @enderror
