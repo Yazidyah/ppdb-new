@@ -1,4 +1,4 @@
-<x-layout></x-layout>
+<x-layout>
 <div class="container mx-auto pt-5 px-4">
     <div class="my-4 bg-tertiary rounded-lg text-white text-center py-8 leading-tight">
         <h2 class="font-bold text-3xl md:text-4xl ">Persyaratan PPDB MAN 1 Kota Bogor</h2>
@@ -68,7 +68,7 @@
         $index = 1;
     @endphp
     @foreach($jalurRegistrasi as $jalur)
-    <div class="mx-auto container bg-secondary p-6 text-tertiary w-3/4 rounded-xl mt-10">
+    <div class="mx-auto container bg-secondary p-6 text-tertiary w-3/4 rounded-xl my-10">
         <h1 class="text-lg font-bold">{{ $alphabet[$index] }}. Berkas Syarat Jalur {{ $jalur->nama_jalur }}</h1>
         <ol class="list-decimal items-center">
             @foreach($jalur->persyaratan as $persyaratan)
@@ -81,4 +81,4 @@
 </section>
 
 
-
+</x-layout>

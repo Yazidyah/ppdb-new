@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CalonSiswa;
 use App\Models\JadwalTes;
+use App\Models\JalurRegistrasi;
 use Carbon\Carbon;
 
 class SiswaController extends Controller
@@ -109,5 +110,10 @@ class SiswaController extends Controller
             return "{$formattedDate} {$jamMulai} - Jam {$jamSelesai} WIB / Ruang {$jadwalTes->ruang}";
         }
         return '';
+    }
+    public function showPersyaratan()
+    {
+        $jalurRegistrasi = JalurRegistrasi::with('persyaratan')->get();
+        return view('siswa.persyaratan', ['jalurRegistrasi' => $jalurRegistrasi]);
     }
 }
