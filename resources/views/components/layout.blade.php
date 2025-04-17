@@ -10,7 +10,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <title>MAN 1 KOTA BOGOR</title>
+    <title>PPDB MAN 1 KOTA BOGOR</title>
 </head>
 
 <body>
