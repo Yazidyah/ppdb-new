@@ -11,7 +11,7 @@ Kami dengan hormat ingin menginformasikan hasil seleksi Penerimaan Peserta Didik
         Kami dengan bangga mengumumkan bahwa Anda telah **DITERIMA** sebagai siswa baru di MAN 1 Kota Bogor. 
         Silakan segera melakukan proses daftar ulang sesuai dengan informasi yang terlampir.
 
-        ### Langkah Selanjutnya:
+        Langkah Selanjutnya:
         - Silakan periksa lampiran untuk **Surat Keterangan Kelulusan**.
         - Kunjungi situs resmi untuk informasi daftar ulang.
         - Jika ada pertanyaan, silakan hubungi panitia PPDB.
