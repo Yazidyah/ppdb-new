@@ -170,7 +170,7 @@
                             @endif
                         @endforelse
                     @endif
-                    @if (count($data->berkas) === 0)
+                    @if (count($data->berkas) === 0 or $data->berkas->contains(fn($berkas) => $berkas->trashed()))
                         @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
                             <div class="flex items-center justify-center w-full h-full">
                                 <label
@@ -216,9 +216,35 @@
                             @if (session()->has('error-rapot'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-rapot') }}</p>
                             @endif
-                        @else
-                            @if (session()->has('error'))
-                                <p class="text-red-500 text-xs mt-2">{{ session('error') }}</p>
+                        @endif
+
+                        @if ($data->nama_persyaratan === 'Pas Foto')
+                            @if (session()->has('error-foto'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-foto') }}</p>
+                            @endif
+                        @endif
+
+                        @if ($data->nama_persyaratan === 'Ijazah MTs/SMP')
+                            @if (session()->has('error-ijazah'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-ijazah') }}</p>
+                            @endif
+                        @endif
+
+                        @if ($data->nama_persyaratan === 'Kartu Keluarga')
+                            @if (session()->has('error-kk'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-kk') }}</p>
+                            @endif
+                        @endif
+
+                        @if ($data->nama_persyaratan === 'Akta Kelahiran')
+                            @if (session()->has('error-akte'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-akte') }}</p>
+                            @endif
+                        @endif
+
+                        @if ($data->nama_persyaratan === 'Sertifikat Akreditasi')
+                            @if (session()->has('error-akreditasi'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-akreditasi') }}</p>
                             @endif
                         @endif
                     @endif
