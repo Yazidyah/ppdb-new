@@ -35,7 +35,7 @@ class BerkasModal extends Component
         if ($this->data_berkas) {
             $this->data_berkas->data_berkas = $this->isian_berkas;
             $this->data_berkas->save();
-            Log::debug('Berkas berhasil disimpan.', ['id' => $this->berkasId]);
+            Log::debug('Berkas berhasil disimpan. user id: ' . $this->data_berkas->uploader_id, ['id' => $this->berkasId, 'user_id' => $this->data_berkas->uploader_id]);
         } else {
             Log::error('Berkas ID tidak ditemukan saat simpan.', ['id' => $this->berkasId]);
         }
