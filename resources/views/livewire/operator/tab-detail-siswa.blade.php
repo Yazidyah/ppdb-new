@@ -142,7 +142,7 @@
             </div>
         </div>
         <div>
-            <div class="border p-4 rounded-lg mb-4 bg-purple-50">
+            <div class="border p-4 rounded-lg mb-4 bg-green-50">
                 <h6 class="font-medium mb-2">Informasi Pendidikan</h6>
                 <div class="col-start-2 row-start-1 grid grid-cols-2 gap-4">
                     <div>
@@ -176,7 +176,7 @@
                     </div>
                 </div>
             </div>
-            <div class="border p-4 rounded-lg bg-blue-50">
+            <div class="border p-4 rounded-lg bg-green-50">
                 <h6 class="font-medium mb-2">Informasi Akun</h6>
                 <div>
                     <label class="text-xs font-medium">Username</label>
@@ -198,7 +198,7 @@
                 </div>
             </div>
         </div>
-        <div class="border p-4 rounded-lg col-span-2 bg-red-50">
+        <div class="border p-4 rounded-lg col-span-2 bg-green-50">
             <h6 class="mb-4">Jadwal Tes</h6>
             <div class="grid grid-cols-2 gap-4">
                 <div>
