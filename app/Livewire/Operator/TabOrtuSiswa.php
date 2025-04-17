@@ -11,10 +11,10 @@ class TabOrtuSiswa extends Component
     public $siswa;
     public $dataOrtu = []; // Array untuk menyimpan data masing-masing orang tua
     public $pekerjaanOrangTua;
+    public $message = ''; // Property to store success messages
     
     // Aturan validasi untuk tiap record, sesuaikan jika diperlukan
     protected $rules = [
-        'dataOrtu.*.id_hubungan'    => 'required|integer',
         'dataOrtu.*.nama_lengkap'   => 'required|string|max:255',
         'dataOrtu.*.nik'            => 'nullable|string|max:16',
         'dataOrtu.*.nama_pekerjaan' => 'nullable|string|max:255',
@@ -49,7 +49,6 @@ class TabOrtuSiswa extends Component
     {
         // Validasi data untuk record yang spesifik
         $this->validate([
-            'dataOrtu.' . $id_orang_tua . '.id_hubungan'    => 'required|integer',
             'dataOrtu.' . $id_orang_tua . '.nama_lengkap'   => 'required|string|max:255',
             'dataOrtu.' . $id_orang_tua . '.nik'            => 'nullable|string|max:16',
             'dataOrtu.' . $id_orang_tua . '.nama_pekerjaan' => 'nullable|integer|max:255',
@@ -58,14 +57,30 @@ class TabOrtuSiswa extends Component
 
         OrangTua::where('id_orang_tua', $id_orang_tua)->update([
             'id_calon_siswa' => $this->siswa->id_calon_siswa,
-            'id_hubungan'    => $this->dataOrtu[$id_orang_tua]['id_hubungan'],
             'nama_lengkap'   => strtolower($this->dataOrtu[$id_orang_tua]['nama_lengkap']),
             'nik'            => $this->dataOrtu[$id_orang_tua]['nik'],
             'pekerjaan'      => $this->dataOrtu[$id_orang_tua]['nama_pekerjaan'],
             'no_telp'        => $this->dataOrtu[$id_orang_tua]['no_telp'],
         ]);
 
-        session()->flash('message', "Data orang tua (ID: {$id_orang_tua}) berhasil diperbarui.");
+        session()->flash('message', 'Data berhasil diperbarui.');
+    }
+
+    public function clearOrangTua($id_orang_tua)
+    {
+        $this->dataOrtu[$id_orang_tua]['nama_lengkap'] = '';
+        $this->dataOrtu[$id_orang_tua]['nik'] = '';
+        $this->dataOrtu[$id_orang_tua]['nama_pekerjaan'] = '';
+        $this->dataOrtu[$id_orang_tua]['no_telp'] = '';
+
+        OrangTua::where('id_orang_tua', $id_orang_tua)->update([
+            'nama_lengkap'   => null,
+            'nik'            => null,
+            'pekerjaan'      => null,
+            'no_telp'        => null,
+        ]);
+
+        session()->flash('message', 'Data berhasil dihapus.');
     }
 
     public function render()

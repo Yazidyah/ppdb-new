@@ -7,9 +7,7 @@
 
         {{-- Tampilkan pesan sukses apabila update berhasil --}}
         @if (session()->has('message'))
-            <div class="mb-4 p-2 bg-green-100 text-green-700 rounded">
-                {{ session('message') }}
-            </div>
+            <p class="text-green-500 mt-2">{{ session('message') }}</p>
         @endif
 
         {{-- Looping setiap data orang tua untuk ditampilkan --}}
@@ -30,15 +28,9 @@
                 {{-- Pilihan Hubungan --}}
                 <div class="mb-4">
                     <label for="id_hubungan_{{ $id_orang_tua }}" class="block text-sm font-medium mb-1">Hubungan</label>
-                    <select id="id_hubungan_{{ $id_orang_tua }}" wire:model="dataOrtu.{{ $id_orang_tua }}.id_hubungan"
-                        class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
-                        <option value="1">Ibu</option>
-                        <option value="2">Ayah</option>
-                        <option value="3">Wali</option>
-                    </select>
-                    @error("dataOrtu.{$id_orang_tua}.id_hubungan")
-                        <span class="text-red-500 text-xs">{{ $message }}</span>
-                    @enderror
+                    <input type="text" id="id_hubungan_{{ $id_orang_tua }}" 
+                           value="@if ($ortu['id_hubungan'] == 1) Ibu @elseif ($ortu['id_hubungan'] == 2) Ayah @elseif ($ortu['id_hubungan'] == 3) Wali @endif" 
+                           class="border p-2 w-full rounded-lg bg-gray-100 text-gray-500 shadow-sm" disabled>
                 </div>
 
                 {{-- Input Data Lengkap --}}
@@ -87,9 +79,13 @@
                 </div>
 
                 {{-- Tombol Update untuk record ini --}}
-                <div class="mt-6">
+                <div class="mt-6 flex justify-center gap-4">
+                    <button type="button" wire:click="clearOrangTua({{ $id_orang_tua }})"
+                        class="px-4 py-2 inline-flex justify-center items-center bg-red-500 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-600 focus:bg-red-500 active:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150 rounded">
+                        Hapus Data Orang Tua
+                    </button>
                     <button type="submit"
-                        class="mt-4 px-4 py-2 inline-flex justify-center items-center  bg-tertiary border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2  transition ease-in-out duration-150 rounded">
+                        class="px-4 py-2 inline-flex justify-center items-center bg-tertiary border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 transition ease-in-out duration-150 rounded">
                         Update Data Orang Tua
                     </button>
                 </div>
