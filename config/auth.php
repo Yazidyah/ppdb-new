@@ -108,6 +108,10 @@ return [
         ],
     ],
 
+    'verification' => [
+        'expire' => 60, // Expiration time in minutes
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
