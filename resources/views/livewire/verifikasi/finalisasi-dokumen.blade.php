@@ -9,7 +9,7 @@
             @empty
                 <div class="mb-2 p-4 bg-white shadow rounded">
                     <p class="font-semibold text-lg text-red-600">Belum ada dokumen {{ $pr->nama_persyaratan }}</p>
-                </div>)
+                </div>
             @endforelse
         </div>
     @empty
