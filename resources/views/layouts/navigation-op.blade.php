@@ -66,10 +66,18 @@ switch ($userRole){
 <nav x-data="{ open: false }" class="sticky top-0 z-50 bg-tertiary mx-auto w-full right-0 left-0">
     <!-- Primary Navigation Menu -->
     <div class="flex justify-between items-center container mx-auto">
-       
-            
+
+
                 <!-- Logo -->
                 <div x-data="{cheat:false}" class="flex items-center gap-1 justify-center px-6">
+                <button @click="$store.sidebar.toggle()" class="fixed top-5 left-5 z-50 p-2 bg-white hover:bg-secondary text-tertiary rounded-md shadow-md">
+        <svg x-show="!$store.sidebar.isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg x-show="$store.sidebar.isOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
                     <a href={{ route($redirectUrl) }}>
                         <x-application-logo class=" h-9 w-auto fill-current text-gray-800 " />
                     </a>
@@ -79,19 +87,19 @@ switch ($userRole){
                 <div class="items-center justify-center flex">
                 <div class=" text-white text-xs xl:text-base font-semibold lg:flex gap-4 hidden">
                     <x-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrl)">
-                        {{ __('Beranda') }} 
+                        {{ __('Beranda') }}
                     </x-nav-link>
                     <x-nav-link :href="route($redirectUrlp)" :active="request()->routeIs($redirectUrlp)">
-                        {{ __('Persyaratan') }} 
+                        {{ __('Persyaratan') }}
                     </x-nav-link>
                     <x-nav-link :href="route($redirectUrlk)" :active="request()->routeIs($redirectUrlk)">
-                        {{ __('Alur Pendaftaran') }} 
-                    </x-nav-link>                   
+                        {{ __('Alur Pendaftaran') }}
+                    </x-nav-link>
                     <div class="border-l py-3" ></div>
                 </div>
             </div>
-            
-            
+
+
             <!-- Settings Dropdown -->
             <div class="py-4 pl-6 lg:flex hidden gap-4">
                 <x-dropdown align="right" width="48">
@@ -151,7 +159,7 @@ switch ($userRole){
             <x-responsive-nav-link :href="route($redirectUrl)" :active="request()->routeIs($redirectUrlk)">
                 {{ __('Persyaratan') }}
             </x-responsive-nav-link>
-           
+
         </div>
 
         <!-- Responsive Settings Options -->
@@ -164,7 +172,7 @@ switch ($userRole){
             <div class=" mt-3">
             <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
-                </x-responsive-nav-link>             
+                </x-responsive-nav-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
