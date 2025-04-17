@@ -75,9 +75,8 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/alurpendaftaran', function () {
         return view('siswa.alurpendaftaran');
     })->name('siswa.alurpendaftaran');
-    Route::get('/siswa/persyaratan', function () {
-        return view('siswa.persyaratan');
-    })->name('siswa.persyaratan');
+    Route::get('/siswa/persyaratan', [SiswaController::class, 'showPersyaratan'])->name('siswa.persyaratan');
+    
 
     Route::get('/siswa/daftar-reguler', function () {
         return view('siswa.daftar-reguler');
