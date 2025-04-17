@@ -69,7 +69,7 @@ class TabDetailSiswa extends Component
         $this->alamat_kk = ucwords($siswa->alamat_kk);
         $this->provinsi = $siswa->provinsi;
         $this->kota = $siswa->kota;
-        $this->id_jalur = $siswa->dataRegistrasi->jalur->id_jalur;
+        $this->id_jalur = $siswa->dataRegistrasi->jalur->id_jalur ?? ""; // Default to empty string if null
         $this->jalurOptions = JalurRegistrasi::all();
         $user = $siswa->user;
         $this->name = $user->name;
