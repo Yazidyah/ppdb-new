@@ -4,7 +4,6 @@
             <h5 class="text-xl font-bold">Data Orang Tua</h5>
             <p class="text-sm text-gray-400">Data yang diisikan pada saat pendaftaran.</p>
         </div>
-
         {{-- Tampilkan pesan sukses apabila update berhasil --}}
         @if (session()->has('message'))
             <p class="text-green-500 mt-2">{{ session('message') }}</p>
@@ -28,9 +27,9 @@
                 {{-- Pilihan Hubungan --}}
                 <div class="mb-4">
                     <label for="id_hubungan_{{ $id_orang_tua }}" class="block text-sm font-medium mb-1">Hubungan</label>
-                    <input type="text" id="id_hubungan_{{ $id_orang_tua }}" 
-                           value="@if ($ortu['id_hubungan'] == 1) Ibu @elseif ($ortu['id_hubungan'] == 2) Ayah @elseif ($ortu['id_hubungan'] == 3) Wali @endif" 
-                           class="border p-2 w-full rounded-lg bg-gray-100 text-gray-500 shadow-sm" disabled>
+                    <input type="text" id="id_hubungan_{{ $id_orang_tua }}"
+                        value="@if ($ortu['id_hubungan'] == 1) Ibu @elseif ($ortu['id_hubungan'] == 2) Ayah @elseif ($ortu['id_hubungan'] == 3) Wali @endif"
+                        class="border p-2 w-full rounded-lg bg-gray-100 text-gray-500 shadow-sm" disabled>
                 </div>
 
                 {{-- Input Data Lengkap --}}
@@ -39,23 +38,27 @@
                         <label for="nama_lengkap_{{ $id_orang_tua }}" class="block text-xs font-medium mb-1">Nama
                             Lengkap</label>
                         <input id="nama_lengkap_{{ $id_orang_tua }}" type="text"
-                            wire:model="dataOrtu.{{ $id_orang_tua }}.nama_lengkap" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
+                            wire:model="dataOrtu.{{ $id_orang_tua }}.nama_lengkap"
+                            class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                         @error("dataOrtu.{$id_orang_tua}.nama_lengkap")
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
                     <div>
                         <label for="nik_{{ $id_orang_tua }}" class="block text-xs font-medium mb-1">NIK</label>
-                        <input id="nik_{{ $id_orang_tua }}" type="text" wire:model="dataOrtu.{{ $id_orang_tua }}.nik"
+                        <input id="nik_{{ $id_orang_tua }}" type="text"
+                            wire:model="dataOrtu.{{ $id_orang_tua }}.nik"
                             class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                         @error("dataOrtu.{$id_orang_tua}.nik")
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
                     </div>
                     <div>
-                        <label for="no_telp_{{ $id_orang_tua }}" class="block text-xs font-medium mb-1">No Telpon</label>
+                        <label for="no_telp_{{ $id_orang_tua }}" class="block text-xs font-medium mb-1">No
+                            Telpon</label>
                         <input id="no_telp_{{ $id_orang_tua }}" type="text"
-                            wire:model="dataOrtu.{{ $id_orang_tua }}.no_telp" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
+                            wire:model="dataOrtu.{{ $id_orang_tua }}.no_telp"
+                            class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                         @error("dataOrtu.{$id_orang_tua}.no_telp")
                             <span class="text-red-500 text-xs">{{ $message }}</span>
                         @enderror
@@ -64,7 +67,8 @@
                         <label for="nama_pekerjaan_{{ $id_orang_tua }}"
                             class="block text-xs font-medium mb-1">Pekerjaan</label>
                         <select id="nama_pekerjaan_{{ $id_orang_tua }}"
-                            wire:model="dataOrtu.{{ $id_orang_tua }}.nama_pekerjaan" class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
+                            wire:model="dataOrtu.{{ $id_orang_tua }}.nama_pekerjaan"
+                            class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                             <option value="">Pilih Pekerjaan</option>
                             @foreach ($pekerjaanOrangTua as $pekerjaan)
                                 <option value="{{ $pekerjaan->id_pekerjaan }}">

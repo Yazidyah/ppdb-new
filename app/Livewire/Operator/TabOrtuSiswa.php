@@ -4,6 +4,7 @@ namespace App\Livewire\Operator;
 
 use App\Models\OrangTua;
 use App\Models\PekerjaanOrangTua;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class TabOrtuSiswa extends Component
@@ -12,7 +13,7 @@ class TabOrtuSiswa extends Component
     public $dataOrtu = []; // Array untuk menyimpan data masing-masing orang tua
     public $pekerjaanOrangTua;
     public $message = ''; // Property to store success messages
-    
+
     // Aturan validasi untuk tiap record, sesuaikan jika diperlukan
     protected $rules = [
         'dataOrtu.*.nama_lengkap'   => 'required|string|max:255',
@@ -21,13 +22,20 @@ class TabOrtuSiswa extends Component
         'dataOrtu.*.no_telp'        => 'nullable|string|max:15',
     ];
 
-    public function mount($siswa)
+    #[On('deleted-orang-tua')]
+    public function handleDeletedOrtu()
     {
-        $this->siswa = $siswa;
+        $this->mount();
+    }
+
+    public function mount()
+    {
+        // dd($siswa);
+        // $this->siswa = $siswa;
         // Ambil semua record orang tua dengan id_calon_siswa yang sama dan urutkan berdasarkan id_orang_tua secara ascending
-        $orangTuaCollection = OrangTua::where('id_calon_siswa', $siswa->id_calon_siswa)
-                          ->orderBy('id_orang_tua', 'asc')
-                          ->get();
+        $orangTuaCollection = OrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)
+            ->orderBy('id_orang_tua', 'asc')
+            ->get();
 
         // Siapkan array data untuk setiap record
         foreach ($orangTuaCollection as $ortu) {
@@ -49,10 +57,10 @@ class TabOrtuSiswa extends Component
     {
         // Validasi data untuk record yang spesifik
         $this->validate([
-            'dataOrtu.' . $id_orang_tua . '.nama_lengkap'   => 'required|string|max:255',
-            'dataOrtu.' . $id_orang_tua . '.nik'            => 'nullable|string|max:16',
-            'dataOrtu.' . $id_orang_tua . '.nama_pekerjaan' => 'nullable|integer|max:255',
-            'dataOrtu.' . $id_orang_tua . '.no_telp'        => 'nullable|string|max:15',
+            "dataOrtu.{$id_orang_tua}.nama_lengkap"   => 'required|string|max:255',
+            "dataOrtu.{$id_orang_tua}.nik"            => 'nullable|string|max:16',
+            "dataOrtu.{$id_orang_tua}.nama_pekerjaan" => 'nullable|integer|max:255',
+            "dataOrtu.{$id_orang_tua}.no_telp"        => 'nullable|string|max:15',
         ]);
 
         OrangTua::where('id_orang_tua', $id_orang_tua)->update([
@@ -68,10 +76,10 @@ class TabOrtuSiswa extends Component
 
     public function clearOrangTua($id_orang_tua)
     {
-        $this->dataOrtu[$id_orang_tua]['nama_lengkap'] = '';
-        $this->dataOrtu[$id_orang_tua]['nik'] = '';
-        $this->dataOrtu[$id_orang_tua]['nama_pekerjaan'] = '';
-        $this->dataOrtu[$id_orang_tua]['no_telp'] = '';
+        $this->dataOrtu[$id_orang_tua]['nama_lengkap'] = null;
+        $this->dataOrtu[$id_orang_tua]['nik'] = null;
+        $this->dataOrtu[$id_orang_tua]['nama_pekerjaan'] = null;
+        $this->dataOrtu[$id_orang_tua]['no_telp'] = null;
 
         OrangTua::where('id_orang_tua', $id_orang_tua)->update([
             'nama_lengkap'   => null,
@@ -80,6 +88,10 @@ class TabOrtuSiswa extends Component
             'no_telp'        => null,
         ]);
 
+        $this->reset(['dataOrtu']);
+
+
+        $this->dispatch('deleted-orang-tua', ['siswa' => $this->siswa]);
         session()->flash('message', 'Data berhasil dihapus.');
     }
 
