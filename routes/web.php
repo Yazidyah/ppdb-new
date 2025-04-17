@@ -37,7 +37,7 @@ Route::get('/sementara', function () {
 });
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 Route::get('/alurpendaftaran', function () {
     return view('alurpendaftaran');
 });
@@ -63,7 +63,9 @@ Route::get('/daftar/step4', function () {
     return view('daftar-step4');
 });
 
+
 Route::get('/coba', Counter::class)->name('testing');
+
 
 Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/', function () {
@@ -73,9 +75,8 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::get('/siswa/alurpendaftaran', function () {
         return view('siswa.alurpendaftaran');
     })->name('siswa.alurpendaftaran');
-    Route::get('/siswa/persyaratan', function () {
-        return view('siswa.persyaratan');
-    })->name('siswa.persyaratan');
+    Route::get('/siswa/persyaratan', [SiswaController::class, 'showPersyaratan'])->name('siswa.persyaratan');
+    
 
     Route::get('/siswa/daftar-reguler', function () {
         return view('siswa.daftar-reguler');
@@ -93,6 +94,7 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
     Route::post('/siswa/daftar-step2', [SiswaController::class, 'jalur'])->name('siswa.daftar-step2');
     Route::get('/siswa/daftar-step3', [SiswaController::class, 'persyaratan'])->name('siswa.daftar-step3');
 });
+
 Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/dashboard', [DashboardController::class, 'index'])->name('operator.dashboard');
 

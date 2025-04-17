@@ -1,4 +1,4 @@
-<div class=" bg-primary mx-auto w-full sticky z-10 top-0 right-0 left-0">
+<div class=" bg-tertiary mx-auto w-full sticky z-10 top-0 right-0 left-0">
     <!-- Navigation -->
     <nav class="flex justify-between items-center container mx-auto">
         <a href="/" class=" flex items-center gap-4 justify-center px-6">

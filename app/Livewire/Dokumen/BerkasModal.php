@@ -32,13 +32,14 @@ class BerkasModal extends Component
             'isian_berkas' => 'required|string',
         ]);
 
-        if ( $this->data_berkas) {
+        if ($this->data_berkas) {
             $this->data_berkas->data_berkas = $this->isian_berkas;
             $this->data_berkas->save();
             Log::debug('Berkas berhasil disimpan.', ['id' => $this->berkasId]);
         } else {
             Log::error('Berkas ID tidak ditemukan saat simpan.', ['id' => $this->berkasId]);
         }
+        $this->dispatch('isian-updated', ['id' => $this->berkasId]);
         $this->closeModal();
     }
 

@@ -4,6 +4,7 @@ namespace App\Livewire\Dokumen;
 
 use App\Models\Berkas;
 use App\Models\KategoriBerkas;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use App\Models\Persyaratan;
 use App\Models\CalonSiswa;
@@ -22,9 +23,13 @@ class UploadDokumen extends Component
     public $id_jalur, $kbs, $id_persyaratan, $id_siswa, $berkas;
     public $syarat;
     public $kb;
+    public $rapot;
+
+    #[On('isian-updated')]
     public function mount()
     {
         $this->user = Auth::user();
+        $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
         $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->pluck('id_jalur');
         $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get();
