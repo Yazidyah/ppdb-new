@@ -95,6 +95,13 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
+            'ssh' => [
+                'host' => env('DB_SSH_HOST'),
+                'user' => env('DB_SSH_USER'),
+                'port' => env('DB_SSH_PORT', 22),
+                'password' => env('DB_SSH_PASSWORD'),
+                'key_path' => env('DB_SSH_KEY_PATH'),
+            ],
         ],
 
         'sqlsrv' => [

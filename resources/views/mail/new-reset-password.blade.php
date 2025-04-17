@@ -1,4 +1,5 @@
 @component('mail::message')
+
 # Reset Password
 
 Kamu meminta reset password untuk akun ini. Klik tombol di bawah untuk mengganti password baru:

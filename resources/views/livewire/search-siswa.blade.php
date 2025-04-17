@@ -4,7 +4,15 @@
         <form wire:submit.prevent="search">
             <!-- tambahkan teks "Sudah pernah mendaftar? cari disini -->
             <div class="mb-4 text-left text-gray-700 text-sm font-bold">
-                Sudah pernah mendaftar? Silakan cari disini
+                Sudah pernah mendaftar PPDB MAN 1 Kota Bogor?<br> Silakan cari disini
+            </div>
+            <div class="mb-4">
+                <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> <!-- Updated label -->
+                <input type="text" id="nik" wire:model="nik" inputmode="numeric" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="16"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-tertiary focus:ring-tertiary">
+                @error('nik')
+                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="nisn" class="block text-gray-700 text-sm font-bold mb-2">NISN</label>
@@ -14,14 +22,12 @@
                     <span class="text-red-500 text-xs italic">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="mb-4">
-                <label for="nomor_peserta" class="block text-gray-700 text-sm font-bold mb-2">Kode Registrasi</label>
-                <input type="text" id="nomor_peserta" wire:model="nomor_peserta"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-tertiary  focus:ring-tertiary">
-                @error('nomor_peserta')
-                    <span class="text-red-500 text-xs italic">{{ $message }}</span>
-                @enderror
-            </div>
+            @if ($notFound)
+                <div class="text-gray-700 text-sm font-bold">
+                    Anda telah terdaftar! Jangan lupa untuk menyelesaikan pendaftaran Anda. Klik/akses 
+                    <a href="/siswa/daftar-step-satu?t=1" class="text-blue-500 underline">Lanjutkan Pendaftaran</a> untuk melanjutkan.
+                </div>
+            @endif
             @error('not_found')
                 <div class="text-red-500 text-xs italic mt-2">{{ $message }}</div>
             @enderror
@@ -51,24 +57,29 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <h2 class="mb-4 text-xl font-bold">Detail Siswa</h2>
-                <hr class="mb-4">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="font-bold">Nama:</div>
-                    <div>{{ ucwords($siswa->calonSiswa->nama_lengkap) }}</div>
+                @if (empty($siswa->nomor_peserta))
+                    <h2 class="mb-4 text-xl font-bold">Informasi Pendaftaran</h2>
+                    <p class="text-gray-700">Anda telah terdaftar! Jangan lupa untuk menyelesaikan pendaftaran Anda. Klik/akses <a href="#" class="text-blue-500 underline">[link/tombol]</a> untuk melanjutkan.</p>
+                @else
+                    <h2 class="mb-4 text-xl font-bold">Detail Siswa</h2>
+                    <hr class="mb-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="font-bold">Nama:</div>
+                        <div>{{ ucwords($siswa->calonSiswa->nama_lengkap) }}</div>
 
-                    <div class="font-bold">NISN:</div>
-                    <div>{{ $siswa->calonSiswa->NISN }}</div>
+                        <div class="font-bold">NISN:</div>
+                        <div>{{ $siswa->calonSiswa->NISN }}</div>
 
-                    <div class="font-bold">Kode Registrasi:</div>
-                    <div>{{ $siswa->nomor_peserta }}</div>
+                        <div class="font-bold">Kode Registrasi:</div>
+                        <div>{{ $siswa->nomor_peserta }}</div>
 
-                    <div class="font-bold">Jalur:</div>
-                    <div>{{ $siswa->jalur->nama_jalur}}</div>
+                        <div class="font-bold">Jalur:</div>
+                        <div>{{ $siswa->jalur->nama_jalur}}</div>
 
-                    <div class="font-bold">Status:</div>
-                    <div>{{ $statusLabels[$siswa->status] }}</div>
-                </div>
+                        <div class="font-bold">Status:</div>
+                        <div>{{ $statusLabels[$siswa->status] }}</div>
+                    </div>
+                @endif
             </div>
         </div>
     @endif

@@ -1,13 +1,9 @@
-<x-layout></x-layout>
+<x-layout>
 <div class="container mx-auto pt-5 px-4">
     <div class="my-4 bg-tertiary rounded-lg text-white text-center py-8 leading-tight">
         <h2 class="font-bold text-3xl md:text-4xl ">Alur Pendaftaran</h2>
         <p class="font-bold text-xl md:text-4xl ">Penerimaan Peserta Didik Baru</p>
     </div>
-</div>
-<div class="container mx-auto">
-    <img src="alur.jpeg" class="container mx-auto w-3/4 rounded">
-
 </div>
 
 <div class="container mx-auto px-6 pt-4 mb-8">
@@ -101,3 +97,4 @@
         </ol>
     </div>
 </div>
+</x-layout>

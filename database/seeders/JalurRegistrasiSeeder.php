@@ -22,7 +22,7 @@ class JalurRegistrasiSeeder extends Seeder
                 'is_open' => true,
             ],
             [
-                'nama_jalur' => 'Afirmasi Prestasi',
+                'nama_jalur' => 'Prestasi',
                 'deskripsi' => 'Jalur afirmasi untuk siswa berprestasi',
                 'tanggal_buka' => '2025-02-01',
                 'tanggal_tutup' => '2025-02-28',
@@ -38,6 +38,13 @@ class JalurRegistrasiSeeder extends Seeder
             [
                 'nama_jalur' => 'Afirmasi ABK',
                 'deskripsi' => 'Jalur afirmasi untuk siswa berkebutuhan khusus',
+                'tanggal_buka' => '2025-04-01',
+                'tanggal_tutup' => '2025-04-30',
+                'is_open' => false,
+            ],
+            [
+                'nama_jalur' => 'Afirmasi Kepemimpinan',
+                'deskripsi' => 'Jalur Kepemimpinan',
                 'tanggal_buka' => '2025-04-01',
                 'tanggal_tutup' => '2025-04-30',
                 'is_open' => false,

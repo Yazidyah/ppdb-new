@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Support\Facades\Auth;
 use App\Models\CalonSiswa;
+use App\Models\JadwalTes;
+use App\Models\JalurRegistrasi;
+use Carbon\Carbon;
 
 class SiswaController extends Controller
 {
@@ -12,12 +14,22 @@ class SiswaController extends Controller
     {
         // Mengambil data user yang sedang login
         $user = Auth::user();
-        $calonSiswa = CalonSiswa::with('dataRegistrasi')
-        ->where('id_user', $user->id)
-        ->first();
-    
-    $status = ($calonSiswa && $calonSiswa->dataRegistrasi) ? $calonSiswa->dataRegistrasi->status : 0;
-    
+        $calonSiswa = CalonSiswa::with(['dataRegistrasi.jalur', 'dataRegistrasi.jadwalTes'])
+            ->where('id_user', $user->id)
+            ->first();
+
+        $status = ($calonSiswa && $calonSiswa->dataRegistrasi) ? $calonSiswa->dataRegistrasi->status : 0;
+        $nomor_peserta = $calonSiswa && $calonSiswa->dataRegistrasi ? $calonSiswa->dataRegistrasi->nomor_peserta : 'Belum tersedia';
+
+        $jadwalTes = ($calonSiswa && $calonSiswa->dataRegistrasi)
+            ? $calonSiswa->dataRegistrasi->dataTes()
+                ->with('jadwalTes')
+                ->orderBy('id_registrasi')
+                ->get()
+            : collect();
+
+        $jadwalTesBQ = $this->formatJadwalTes($jadwalTes->first()?->id_jadwal_tes);
+        $jadwalTesJapres = $this->formatJadwalTes($jadwalTes->skip(1)->first()?->id_jadwal_tes);
 
         // --- Tahap Daftar Diri ---
         if (isset($status) && $status <= 2) {
@@ -72,7 +84,36 @@ class SiswaController extends Controller
             $activeStep = 4;
         }
 
+
         // Kirim data ke view
-        return view('siswa.dashboard', compact('daftarDiriDetail', 'verifikasiDetail', 'tesWawancaraDetail', 'penetapanDetail', 'activeStep', 'status'));
+        return view('siswa.dashboard', compact(
+            'calonSiswa', 
+            'daftarDiriDetail', 
+            'verifikasiDetail', 
+            'tesWawancaraDetail', 
+            'penetapanDetail', 
+            'activeStep', 
+            'status', 
+            'nomor_peserta', 
+            'jadwalTesBQ', 
+            'jadwalTesJapres'
+        ));
+    }
+
+    protected function formatJadwalTes($idJadwalTes)
+    {
+        $jadwalTes = JadwalTes::find($idJadwalTes);
+        if ($jadwalTes) {
+            $formattedDate = Carbon::parse($jadwalTes->tanggal)->format('d-M-Y');
+            $jamMulai = Carbon::parse($jadwalTes->jam_mulai)->format('H:i');
+            $jamSelesai = Carbon::parse($jadwalTes->jam_selesai)->format('H:i');
+            return "{$formattedDate} {$jamMulai} - Jam {$jamSelesai} WIB / Ruang {$jadwalTes->ruang}";
+        }
+        return '';
+    }
+    public function showPersyaratan()
+    {
+        $jalurRegistrasi = JalurRegistrasi::with('persyaratan')->get();
+        return view('siswa.persyaratan', ['jalurRegistrasi' => $jalurRegistrasi]);
     }
 }

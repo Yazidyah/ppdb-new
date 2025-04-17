@@ -24,12 +24,17 @@
                                 <option value="1" {{ request('filter') == '1' ? 'selected' : '' }}>Jalur</option>
                                 <option value="2" {{ request('filter') == '2' ? 'selected' : '' }}>Upload</option>
                                 <option value="3" {{ request('filter') == '3' ? 'selected' : '' }}>Submit</option>
-                                <option value="4" {{ request('filter') == '4' ? 'selected' : '' }}>Tidak Lolos</option>
+                                <option value="4" {{ request('filter') == '4' ? 'selected' : '' }}>Tidak Lolos
+                                </option>
                                 <option value="5" {{ request('filter') == '5' ? 'selected' : '' }}>Lolos</option>
-                                <option value="6" {{ request('filter') == '6' ? 'selected' : '' }}>Belum Ditentukan</option>
-                                <option value="7" {{ request('filter') == '7' ? 'selected' : '' }}>Tidak Diterima</option>
-                                <option value="8" {{ request('filter') == '8' ? 'selected' : '' }}>Diterima</option>
-                                <option value="9" {{ request('filter') == '9' ? 'selected' : '' }}>Dicadangkan</option>
+                                <option value="6" {{ request('filter') == '6' ? 'selected' : '' }}>Belum Ditentukan
+                                </option>
+                                <option value="7" {{ request('filter') == '7' ? 'selected' : '' }}>Tidak Diterima
+                                </option>
+                                <option value="8" {{ request('filter') == '8' ? 'selected' : '' }}>Diterima
+                                </option>
+                                <option value="9" {{ request('filter') == '9' ? 'selected' : '' }}>Dicadangkan
+                                </option>
                             </select>
                             <select name="jalur" class="px-4 py-2 border rounded-lg"
                                 onchange="document.getElementById('searchForm').submit()">
@@ -129,7 +134,8 @@
                                             {{ $siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
-                                            {{ $siswa->dataRegistrasi->dataTes->pluck('id_jadwal_tes')->join(' / ') ?? '-' }} <!-- Display multiple id_jadwal_tes -->
+                                            {{ $siswa->dataRegistrasi->dataTes->pluck('id_jadwal_tes')->join(' / ') ?? '-' }}
+                                            <!-- Display multiple id_jadwal_tes -->
                                         </td>
                                         <td scope="col" class="px-6 py-3 text-center">
                                             {{ $siswa->status_label ?? '-' }}

@@ -22,6 +22,7 @@ class StepSatu extends Component
         'tab' => ['except' => 'konsep', 'as' => 't'],
     ];
 
+    #[On('biodata-updated')]
     public function mount()
     {
         $this->initializeUser();
@@ -100,6 +101,8 @@ class StepSatu extends Component
         $siswa = $this->siswa;
         if ($siswa->nama_lengkap && $siswa->NIK && $siswa->NISN && $siswa->no_telp && $siswa->jenis_kelamin && $siswa->tanggal_lahir && $siswa->tempat_lahir  && $siswa->sekolah_asal && $siswa->status_sekolah && $siswa->alamat_kk && $siswa->alamat_domisili && $siswa->provinsi && $siswa->kota && $siswa->predikat_akreditasi_sekolah && $siswa->nilai_akreditasi_sekolah) {
             $this->isCompleteBiodata = true;
+        } else {
+            $this->isCompleteBiodata = false;
         }
     }
 

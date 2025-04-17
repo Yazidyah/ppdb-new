@@ -49,7 +49,7 @@ class GetJadwalHome extends Component
     private function formatTanggal($tanggal, $isTanggalBuka = true)
     {
         return $tanggal 
-            ? Carbon::parse($tanggal)->locale('id')->isoFormat($isTanggalBuka ? 'D' : 'D MMMM Y') 
+            ? Carbon::parse($tanggal)->locale('id')->isoFormat($isTanggalBuka ? 'D MMMM' : 'D MMMM Y') 
             : null;
     }
 
