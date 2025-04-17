@@ -1,7 +1,7 @@
 <div class="max-w-7xl mx-auto p-4">
     @forelse($persyaratan as $pr)
         <div class="mb-4">
-            @forelse ($pr->berkas as $berkas)
+            @forelse ($pr->berkas->where('uploader_id', $user->id) as $berkas)
                 <div class="mb-2 p-4 bg-white shadow rounded">
                     <h1 class="p-3 font-semibold text-lg text-gray-600">{{ $pr->nama_persyaratan }}</h1>
                     @livewire('pemberkasan.berkas-verif', ['berkas' => $berkas, 'editable' => false], key('berkas-finalisasi-' . $berkas->id))
