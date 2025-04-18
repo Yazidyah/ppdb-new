@@ -21,8 +21,8 @@
             break;
 
         default:
-            # $redirectUrl = 'siswa.dashboard';
-            $redirectUrl = 'home';
+            $redirectUrl = 'siswa.dashboard';
+            $redirectUrlHome = 'home';
             $redirectUrlp = 'siswa.alurpendaftaran';
             $redirectUrlk = 'siswa.persyaratan';
             $redirectUrlpk = 'siswa.dashboard';
@@ -39,7 +39,7 @@
 
         <!-- Logo -->
         <div x-data="{ cheat: false }" class="flex items-center gap-1 justify-center px-6">
-            <a href={{ route($redirectUrl) }}>
+            <a href={{ route($redirectUrlHome) }}>
                 <x-application-logo class=" h-9 w-auto fill-current text-gray-800 " />
             </a>
         </div>

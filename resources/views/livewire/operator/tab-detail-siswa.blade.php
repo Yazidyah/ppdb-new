@@ -149,6 +149,7 @@
                         <label class="text-xs font-medium">Jalur</label>
                         <select wire:model="id_jalur"
                             class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
+                            <option disabled value="">Belum memilih jalur</option>
                             @foreach ($jalurOptions as $jalur)
                                 <option value="{{ $jalur->id_jalur }}">{{ $jalur->nama_jalur }}</option>
                             @endforeach

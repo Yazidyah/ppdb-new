@@ -132,7 +132,7 @@
             <div class="container mx-auto my-8">
                 <h3 class="text-xl font-bold mb-4">Data yang Telah Diisi</h3>
                 <div class="grid grid-cols-2 gap-4 text-gray-700 text-left">
-                    <div class="border p-4 rounded-lg col-span-2 bg-primary text-white">
+                    <div class="border-4 p-4 rounded-lg col-span-2">
                         <h6 class="font-medium mb-2">Data Registrasi</h6>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border p-4 rounded-lg bg-primary text-white">
+                    <div class="border-4 p-4 rounded-lg">
                         <h6 class="font-medium mb-2">Informasi Pribadi</h6>
                         <div>
                             <label class="text-xs font-medium">Nama Lengkap</label>
@@ -202,25 +202,25 @@
                             </p>
                         </div>
                     </div>
-                    <div class="border p-4 rounded-lg bg-primary text-white">
+                    <div class="border-4 p-4 rounded-lg">
                         <h6 class="font-medium mb-2 ">Informasi Pendidikan</h6>
                         <div>
-                            <label class="text-xs font-medium">NISN</label>
+                            <label class="text-xs font-medium">NISN (Nomor Induk Siswa Nasional)</label>
                             <p class="border p-2 w-full rounded-lg bg-gray-100 text-black">{{ $calonSiswa->NISN ?? '-' }}</p>
                         </div>
                         <div>
-                            <label class="text-xs font-medium">NPSN</label>
+                            <label class="text-xs font-medium">NPSN (Nomor Pokok Sekolah Nasional)</label>
                             <p class="border p-2 w-full rounded-lg bg-gray-100 text-black">{{ strtoupper($calonSiswa->NPSN ?? '-') }}
                             </p>
                         </div>
                         <div>
-                            <label class="text-xs font-medium">Sekolah Asal</label>
+                            <label class="text-xs font-medium">Nama Sekolah Asal</label>
                             <p class="border p-2 w-full rounded-lg bg-gray-100 text-black">
                                 {{ strtoupper($calonSiswa->sekolah_asal ?? '-') }}
                             </p>
                         </div>
                         <div>
-                            <label class="text-xs font-medium">Status Sekolah</label>
+                            <label class="text-xs font-medium">Status Sekolah Asal</label>
                             <p class="border p-2 w-full rounded-lg bg-gray-100 text-black">
                                 {{ strtoupper($calonSiswa->status_sekolah ?? '-') }}
                             </p>
