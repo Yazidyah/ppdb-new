@@ -15,17 +15,23 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-tertiary ">
-            <div class="">
-                <a href="/" class="flex flex-col justify-center items-center">
-                    <img src="/logoman.webp" class="justify-center items-center w-40 fill-current" >
-                    <h1 class="text-3xl fill-current text-white font-bold text-center mt-4"> PPDB MAN 1 Kota Bogor</h1>
-                </a>
-            </div>
+    <div class="relative min-h-screen flex flex-col sm:justify-center bg-cover bg-center items-center pt-6 sm:pt-0 bg-no-repeat bg-[url('/public/alur.jpeg')]">
+        
+        <!-- Overlay hitam transparan -->
+        <div class="absolute inset-0 bg-black bg-opacity-40 z-0"></div>
 
-            <div class="w-full sm:max-w-md mt-4 px-6 py-4 bg-white  shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+        <!-- Konten utama di atas overlay -->
+        <div class="relative z-10">
+            <a href="/" class="flex flex-col justify-center items-center">
+                <img src="/logoman.webp" class="w-40">
+                <h1 class="text-3xl text-white font-bold text-center mt-4">PPDB MAN 1 Kota Bogor</h1>
+            </a>
         </div>
-    </body>
+
+        <div class="relative z-10 w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+            {{ $slot }}
+        </div>
+    </div>
+</body>
+
 </html>
