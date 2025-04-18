@@ -81,6 +81,6 @@ class SyncDbBackup extends Command
                 Log::channel('scheduler')->info("User " . $u->name . " updated successfully.");
             }
         }
-        $this->info("User data synced successfully.");
+        Log::channel('scheduler')->info("User data synced successfully.");
     }
 }
