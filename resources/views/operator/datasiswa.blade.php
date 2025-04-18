@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-4 sm:ml-64">
-        <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
+
             <div class="container mx-auto text-center pt-3">
                 <div class="container mx-auto text-center pt-3">
                     <h1 class="font-bold text-[32px] pt-3 pb-3">Siswa Terdaftar</h1>
@@ -161,7 +161,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="10" class="px-6 py-3 text-center text-red-500">
+                                        <td colspan="13" class="px-6 py-3 text-center text-red-500">
                                             DATA TIDAK DITEMUKAN
                                         </td>
                                     </tr>

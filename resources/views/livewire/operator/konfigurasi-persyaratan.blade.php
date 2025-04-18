@@ -1,9 +1,8 @@
 <div>
     <div class="p-4 sm:ml-64">
-        <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
             <div class="container mx-auto text-center pt-3">
                 @if ($showModal)
-                    <div class="fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50"
+                    <div class="fixed inset-0 z-50 flex-col items-center justify-center bg-black bg-opacity-50 overflow-auto"
                         wire:key="modal-{{ $isEdit ? 'edit-' . $persyaratanId : 'create' }}">
                         <div class="p-4 sm:ml-64">
                             <div class="p-4 border-2 border-tertiary border-dashed rounded-lg bg-white mt-14">
@@ -134,7 +133,7 @@
                     <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
                     <div class="mb-4 flex justify-between">
                         <select wire:model="filterJalur"
-                            class="w-1/4 flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary"
+                            class="md:w-1/4 w-1/2 flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary"
                             onchange="window.location.href='{{ route('operator.konfigurasi-persyaratan') }}?filter_jalur=' + (this.value ? this.value : 'Semua%20Jalur')">
                             <option value="">Semua Jalur</option>
                             @foreach ($jalurRegistrasi as $jalur)
@@ -142,15 +141,15 @@
                             @endforeach
                         </select>
                         <div
-                            class="w-1/6 inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                            class="md:w-1/6 inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                             <button wire:click="openModal(false)"
                                 class="text-center flex justify-center items-center w-full">+ PERSYARATAN</button>
                         </div>
                     </div>
-                    <table
-                        class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
-                        <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
-                            <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                    <div class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6">
+                    <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 my-3">
+                        <thead class="text-sm text-tertiary uppercase bg-gray-50">
+                            <tr>
                                 <th class="px-4 py-2 text-center">Nama Persyaratan</th>
                                 <th class="px-4 py-2 text-center">Jenis Jalur</th>
                                 <th class="px-4 py-2 text-center">Deskripsi</th>
@@ -184,6 +183,7 @@
                             @endforelse
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

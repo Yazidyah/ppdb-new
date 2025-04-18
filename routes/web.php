@@ -101,9 +101,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/data-afirmasi-prestasi', [OperatorController::class, 'showsiswaPrestasi'])->name('operator.data-afirmasi-prestasi');
     Route::get('/operator/data-afirmasi-abk', [OperatorController::class, 'showsiswaAbk'])->name('operator.data-afirmasi-abk');
     Route::get('/operator/data-afirmasi-ketm', [OperatorController::class, 'showsiswaKetm'])->name('operator.data-afirmasi-ketm');
-    Route::get('/operator/persyaratan', function () {
-        return view('operator.persyaratan');
-    })->name('operator.persyaratan');
+    Route::get('/operator/persyaratan', [OperatorController::class, 'showPersyaratan'])->name('operator.persyaratan');
     Route::get('/operator/tambah-persyaratan', function () {
         return view('operator.tambah-persyaratan');
     })->name('operator.tambah-persyaratan');
