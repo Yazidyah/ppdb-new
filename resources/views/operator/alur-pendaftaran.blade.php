@@ -20,8 +20,9 @@
                     </div>
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
-                <div class="mt-3 sm:pe-8 ">
-                    <h3 class="text-lg font-semibold text-gray-900 ">Klik www.man1kotabogor.sch.id dan Pilih Menu PPDB</h3>
+                <div class="ml-6 mt-3 sm:pe-8">
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">05 Mei - 26 Juni 2025</time>
+                    <h3 class="text-lg font-semibold text-gray-900 "><span><a href="ppdb.man1kotabogor.com">Klik www.man1kotabogor.com</a></span> dan Pilih Menu PPDB</h3>
                 </div>
             </li>
             <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
@@ -32,7 +33,8 @@
                     </div>
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
-                <div class="mt-3 sm:pe-8">
+                <div class="ml-6 mt-3 sm:pe-8">
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">05 Mei - 05 Juni 2025</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Membuat Akun PPDB dan masuk dengan akun yang sudah Dibuat</h3>
                     </div>
             </li>
@@ -44,7 +46,8 @@
                     </div>
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
-                <div class="mt-3 sm:pe-8">
+                <div class="ml-6 mt-3 sm:pe-8">
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">05 Mei - 05 Juni 2025</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Mengisi Formulir dan Melengkapi Berkas</h3>
                 </div>
             </li>
@@ -56,7 +59,8 @@
                     </div>
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
-                <div class="mt-3 sm:pe-8">
+                <div class="ml-6 mt-3 sm:pe-8">
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">14 Mei & 10 - 12 Juni 2025</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Verifikasi Data dan Berkas</h3>
                 </div>
             </li>
@@ -68,7 +72,8 @@
                     </div>
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
-                <div class="mt-3 sm:pe-8">
+                <div class="ml-6 mt-3 sm:pe-8">
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">14 Mei & 13 Juni 2025</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Cetak Kartu Pendaftaran</h3>
                 </div>
             </li>
@@ -80,7 +85,8 @@
                     </div>
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
-                <div class="mt-3 sm:pe-8">
+                <div class="ml-6 mt-3 sm:pe-8">
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">15 - 16 Mei & 16 - 19 Juni 2025</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Tes Kemampuan Prestasi/Akademik dan Tes Baca Al Quran</h3>
                 </div>
             </li>
@@ -88,12 +94,13 @@
                 <div class="flex items-center">
                     <div
                         class="z-10 flex items-center justify-center w-6 h-6 bg-primary rounded-full ring-0 ring-white  sm:ring-8  shrink-0">
-                        <h1 class="text-white">6</h1>
+                        <h1 class="text-white">7</h1>
                     </div>
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
-                <div class="mt-3 sm:pe-8">
-                    <h3 class="text-lg font-semibold text-gray-900 ">Tes Kemampuan Prestasi/Akademik dan Tes Baca Al Quran</h3>
+                <div class="ml-6 mt-3 sm:pe-8">
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">21 Mei & 26 Juni 2025</time>
+                    <h3 class="text-lg font-semibold text-gray-900 ">Pengumuman</h3>
                 </div>
             </li>
         </ol>
