@@ -6,6 +6,7 @@
         //Admin
         case 'admin':
             $redirectUrl = 'admin.dashboard';
+            $redirectUrlHome = 'home';
             $redirectUrlp = 'admin.alur-pendaftaran';
             $redirectUrlk = 'admin.persyaratan';
             $redirectUrlpk = 'admin.dashboard';
@@ -13,10 +14,11 @@
             break;
         //Operator
         case 'operator':
-            $redirectUrl = 'operator.dashboard';
+            $redirectUrlHome = 'home';
             $redirectUrlp = 'operator.alurpendaftaran';
             $redirectUrlk = 'operator.persyaratan';
             $redirectUrlpk = 'operator.dashboard';
+            $redirectUrlc = 'operator.dashboard';
             $redirectUrlc = 'operator.dashboard';
             break;
 
