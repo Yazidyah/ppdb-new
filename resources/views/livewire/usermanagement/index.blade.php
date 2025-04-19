@@ -41,7 +41,7 @@
                                 </td>
                                 <td class=" py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
                                     @livewire(
-                                        'user-management.user-detail',
+                                        'usermanagement.user-detail',
                                         [
                                             'user' => $user,
                                         ],
