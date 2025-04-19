@@ -7,6 +7,7 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GetPersyaratan;
 use App\Http\Controllers\DashboardController;
 use App\Livewire\Admin\DataSiswa;
+use App\Livewire\Usermanagement\Index as UserManagement;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\Siswa;
@@ -76,7 +77,7 @@ Route::middleware(['auth', 'verified', 'siswa'])->group(function () {
         return view('siswa.alurpendaftaran');
     })->name('siswa.alurpendaftaran');
     Route::get('/siswa/persyaratan', [SiswaController::class, 'showPersyaratan'])->name('siswa.persyaratan');
-    
+
 
     Route::get('/siswa/daftar-reguler', function () {
         return view('siswa.daftar-reguler');
@@ -138,6 +139,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/datasiswa-modal', DatasiswaModal::class)->name('operator.datasiswa-modal');
 });
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
+    Route::get('/user-management', UserManagement::class)->name('admin.user-management');
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
     Route::get('/admin/persyaratan', function () {
         return view('admin.persyaratan');
