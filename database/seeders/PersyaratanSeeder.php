@@ -15,32 +15,152 @@ class PersyaratanSeeder extends Seeder
     {
         $persyaratan = [
             [
-                'id_jalur' => 1,2,3,4,5,
+                'id_jalur' => 1,
                 'nama_persyaratan' => 'Pas Foto',
                 'deskripsi' => 'Pas Foto berwarna ukuran 3x4 cm Background Merah',
             ],
             [
-                'id_jalur' => 1,2,3,4,5,
+                'id_jalur' => 1,
                 'nama_persyaratan' => 'Rapot MTs/SMP',
                 'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
             ],
             [
-                'id_jalur' => 1,2,3,4,5,
+                'id_jalur' => 1,
                 'nama_persyaratan' => 'NISN',
                 'deskripsi' => 'NISN yang dapat dicek di https://nisn.data.kemdikbud.go.id/',
             ],
             [
-                'id_jalur' => 1,2,3,4,5,
+                'id_jalur' => 1,
                 'nama_persyaratan' => 'Kartu Keluarga',
                 'deskripsi' => 'Kartu Keluarga yang diterbitkan oleh pemerintah Indonesia',
             ],
             [
-                'id_jalur' => 1,2,3,4,5,
+                'id_jalur' => 1,
                 'nama_persyaratan' => 'Akta Kelahiran',
                 'deskripsi' => 'Akta Kelahiran resmi yang diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil',
             ],
             [
-                'id_jalur' => 1,2,3,4,5,
+                'id_jalur' => 1,
+                'nama_persyaratan' => 'Sertifikat Akreditasi',
+                'deskripsi' => 'Sertifikat Akreditasi dari Sekolah Asal',
+            ],
+            [
+                'id_jalur' => 2,
+                'nama_persyaratan' => 'Pas Foto',
+                'deskripsi' => 'Pas Foto berwarna ukuran 3x4 cm Background Merah',
+            ],
+            [
+                'id_jalur' => 2,
+                'nama_persyaratan' => 'Rapot MTs/SMP',
+                'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
+            ],
+            [
+                'id_jalur' => 2,
+                'nama_persyaratan' => 'NISN',
+                'deskripsi' => 'NISN yang dapat dicek di https://nisn.data.kemdikbud.go.id/',
+            ],
+            [
+                'id_jalur' => 2,
+                'nama_persyaratan' => 'Kartu Keluarga',
+                'deskripsi' => 'Kartu Keluarga yang diterbitkan oleh pemerintah Indonesia',
+            ],
+            [
+                'id_jalur' => 2,
+                'nama_persyaratan' => 'Akta Kelahiran',
+                'deskripsi' => 'Akta Kelahiran resmi yang diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil',
+            ],
+            [
+                'id_jalur' => 2,
+                'nama_persyaratan' => 'Sertifikat Akreditasi',
+                'deskripsi' => 'Sertifikat Akreditasi dari Sekolah Asal',
+            ],
+            [
+                'id_jalur' => 3,
+                'nama_persyaratan' => 'Pas Foto',
+                'deskripsi' => 'Pas Foto berwarna ukuran 3x4 cm Background Merah',
+            ],
+            [
+                'id_jalur' => 3,
+                'nama_persyaratan' => 'Rapot MTs/SMP',
+                'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
+            ],
+            [
+                'id_jalur' => 3,
+                'nama_persyaratan' => 'NISN',
+                'deskripsi' => 'NISN yang dapat dicek di https://nisn.data.kemdikbud.go.id/',
+            ],
+            [
+                'id_jalur' => 3,
+                'nama_persyaratan' => 'Kartu Keluarga',
+                'deskripsi' => 'Kartu Keluarga yang diterbitkan oleh pemerintah Indonesia',
+            ],
+            [
+                'id_jalur' => 3,
+                'nama_persyaratan' => 'Akta Kelahiran',
+                'deskripsi' => 'Akta Kelahiran resmi yang diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil',
+            ],
+            [
+                'id_jalur' => 3,
+                'nama_persyaratan' => 'Sertifikat Akreditasi',
+                'deskripsi' => 'Sertifikat Akreditasi dari Sekolah Asal',
+            ],
+            [
+                'id_jalur' => 4,
+                'nama_persyaratan' => 'Pas Foto',
+                'deskripsi' => 'Pas Foto berwarna ukuran 3x4 cm Background Merah',
+            ],
+            [
+                'id_jalur' => 4,
+                'nama_persyaratan' => 'Rapot MTs/SMP',
+                'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
+            ],
+            [
+                'id_jalur' => 4,
+                'nama_persyaratan' => 'NISN',
+                'deskripsi' => 'NISN yang dapat dicek di https://nisn.data.kemdikbud.go.id/',
+            ],
+            [
+                'id_jalur' => 4,
+                'nama_persyaratan' => 'Kartu Keluarga',
+                'deskripsi' => 'Kartu Keluarga yang diterbitkan oleh pemerintah Indonesia',
+            ],
+            [
+                'id_jalur' => 4,
+                'nama_persyaratan' => 'Akta Kelahiran',
+                'deskripsi' => 'Akta Kelahiran resmi yang diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil',
+            ],
+            [
+                'id_jalur' => 4,
+                'nama_persyaratan' => 'Sertifikat Akreditasi',
+                'deskripsi' => 'Sertifikat Akreditasi dari Sekolah Asal',
+            ],
+            [
+                'id_jalur' => 5,
+                'nama_persyaratan' => 'Pas Foto',
+                'deskripsi' => 'Pas Foto berwarna ukuran 3x4 cm Background Merah',
+            ],
+            [
+                'id_jalur' => 5,
+                'nama_persyaratan' => 'Rapot MTs/SMP',
+                'deskripsi' => 'Rapot dari sekolah menengah pertama atau madrasah tsanawiyah',
+            ],
+            [
+                'id_jalur' => 5,
+                'nama_persyaratan' => 'NISN',
+                'deskripsi' => 'NISN yang dapat dicek di https://nisn.data.kemdikbud.go.id/',
+            ],
+            [
+                'id_jalur' => 5,
+                'nama_persyaratan' => 'Kartu Keluarga',
+                'deskripsi' => 'Kartu Keluarga yang diterbitkan oleh pemerintah Indonesia',
+            ],
+            [
+                'id_jalur' => 5,
+                'nama_persyaratan' => 'Akta Kelahiran',
+                'deskripsi' => 'Akta Kelahiran resmi yang diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil',
+            ],
+            [
+                'id_jalur' => 5,
                 'nama_persyaratan' => 'Sertifikat Akreditasi',
                 'deskripsi' => 'Sertifikat Akreditasi dari Sekolah Asal',
             ],

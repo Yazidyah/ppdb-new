@@ -7,6 +7,7 @@ use App\Models\JadwalTes as JadwalTesModel;
 use App\Models\JenisTes as JenisTesModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cookie;
 use Carbon\Carbon; // Added for date formatting
 
 class JadwalTes extends Component
@@ -16,6 +17,8 @@ class JadwalTes extends Component
     public $isEdit = false;
     public $showModal = false;
 
+    public $isTableVisible = true;
+    
     protected $rules = [
         'id_jenis_tes' => 'required',
         'ruang' => 'required|string',
@@ -127,6 +130,12 @@ class JadwalTes extends Component
         $this->resetValidation();
         $this->reset(['id_tes', 'id_jenis_tes', 'ruang', 'tanggal', 'jam_mulai', 'jam_selesai', 'kuota']);
         $this->showModal = false;
+    }
+
+    public function toggleTable()
+    {
+        $this->isTableVisible = !$this->isTableVisible;
+        Cookie::queue('isTableVisible', $this->isTableVisible ? 'true' : 'false', 60 * 24);
     }
 
     public function render()

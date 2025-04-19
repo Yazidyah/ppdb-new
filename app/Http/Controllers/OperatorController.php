@@ -121,4 +121,10 @@ class OperatorController extends Controller
 
         return $query;
     }
+
+    public function showPersyaratan()
+    {
+        $jalurRegistrasi = JalurRegistrasi::with('persyaratan')->get();
+        return view('operator.persyaratan', ['jalurRegistrasi' => $jalurRegistrasi]);
+    }
 }

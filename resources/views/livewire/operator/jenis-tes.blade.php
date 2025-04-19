@@ -26,12 +26,12 @@
                     TES</button>
             </div>
         </div>
-        <div class="overflow-hidden transition-all duration-500"
+        <div class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6 transition-all duration-500"
             style="max-height: {{ $isTableVisible ? '1000px' : '0' }};">
             <table
-                class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
-                <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
-                    <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 my-3">
+                <thead class="text-sm text-tertiary uppercase bg-gray-50">
+                    <tr>
                         <th class="px-4 py-2 text-center">Nama</th>
                         <th class="px-4 py-2 text-center">Jalur Registrasi</th>
                         <th class="px-4 py-2 text-center">Aksi</th>
@@ -39,9 +39,9 @@
                 </thead>
                 <tbody>
                     @foreach ($jenisTes as $item)
-                        <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                        <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer items-center">
                             <td class="border text-tertiary text-center px-4 py-2">{{ $item->nama }}</td>
-                            <td class="border text-tertiary text-center px-4 py-2">
+                            <td class="border text-tertiary text-center px-4 py-2 my-auto">
                                 @if ($item->no_jalur == "0")
                                     Semua Jalur
                                 @elseif ($item->no_jalur == "1")
@@ -50,11 +50,11 @@
                                     Afirmasi
                                 @endif
                             </td>
-                            <td class="border px-4 py-2 flex justify-center space-x-2">
+                            <td class="border px-4 py-2 flex justify-center mx-auto   space-x-2 items-center">
                                 <button wire:click="edit({{ $item->id}})"
-                                    class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
+                                    class="bg-tertiary text-white px-4 py-2 flex justify-center items-center  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                                 <button wire:click="delete({{ $item->id}})"
-                                    class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
+                                    class="bg-red-900 text-white px-4 py-2 flex justify-center items-center  hover:bg-red-500  rounded">Hapus</button>
                             </td>
                         </tr>
                     @endforeach
@@ -67,7 +67,7 @@
     @if($showModal)
         <div class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50"
             wire:keydown.escape="closeModal">
-            <div class="bg-white rounded-lg shadow-lg w-1/3">
+            <div class="bg-white rounded-lg shadow-lg md:w-1/3">
                 <div class="flex justify-between items-center px-4 py-2 border-b">
                     <h5 class="text-lg font-semibold">{{ $isEdit ? 'Update' : 'store' }} Jenis Tes</h5>
                     <button wire:click="closeModal" class="text-gray-500">&times;</button>

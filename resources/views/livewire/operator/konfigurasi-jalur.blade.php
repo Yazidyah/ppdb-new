@@ -1,6 +1,5 @@
 <div>
 <div class="p-4 sm:ml-64">
-    <div class="p-4 rounded-lg dark:border-gray-700 mt-14">
             <div class="container mx-auto text-center pt-3">
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,14 +28,15 @@
                     <div class="flex justify-between">
                         <div>
                             </div>
-                            <div class="w-1/6 inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                            <div class="md:w-1/6 inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                             <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JALUR REGISTRASI</button>
                         </div>
                 </div>
             </div>
-                <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
-                    <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
-                        <tr class="text-sm text-tertiary uppercase bg-gray-50">
+            <div class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6">
+                <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 my-3">
+                    <thead class="text-sm text-tertiary uppercase bg-gray-50">
+                        <tr >
                             <th class="px-4 py-2 text-center">Nama Jalur</th>
                             <th class="px-4 py-2 text-center">Deskripsi</th>
                             <th class="px-4 py-2 text-center">Tanggal Buka</th>
@@ -64,15 +64,15 @@
                         @endforelse
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
-    </div>
 
     @if($isModalOpen)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div class="p-4 sm:ml-64">
                 <div class="p-4 border-2 border-tertiary border-dashed rounded-lg bg-white mt-14">
-                    <h1 class="font-bold text-[32px] pt-7 pb-7">{{ $jalurId ? 'Edit Jalur Registrasi' : 'Tambah Jalur Registrasi' }}</h1>
+                    <h1 class="font-bold text-[32px] pt-7 pb-7 text-center">{{ $jalurId ? 'Edit Jalur Registrasi' : 'Tambah Jalur Registrasi' }}</h1>
                     <form wire:submit.prevent="{{ $isEdit ? 'update' : 'store' }}">
                         <div class="container py-5 mx-auto px-12 lg:px-32 flex items-center justify-center">
                             <div class="md:grid grid-cols-4 py-2 w-6/7 gap-2">
@@ -130,5 +130,5 @@
             </div>
         </div>
     @endif
-</div>
+
 

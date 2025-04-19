@@ -42,10 +42,10 @@
         <div class="container flex justify-center my-4 mx-auto gap-2">
             <div class="w-full flex justify-center my-4 items-center flex-col">
                 <ol
-                    class="items-center w-full max-w-4xl mx-auto space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse">
+                    class=" items-center w-full max-w-4xl mx-auto space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse">
                     <!-- Step 1: Daftar Diri -->
                     <li
-                        class="flex items-center {{ $activeStep >= 1 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
+                        class="ml-12 md:ml-0 flex items-center {{ $activeStep >= 1 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
                         <span
                             class="flex items-center justify-center w-8 h-8 border {{ $activeStep >= 1 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0">
                             1
@@ -58,7 +58,7 @@
 
                     <!-- Step 2: Verifikasi Berkas -->
                     <li
-                        class="flex items-center {{ $activeStep >= 2 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
+                        class="ml-12 md:ml-0 flex items-center {{ $activeStep >= 2 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
                         <span
                         class="flex items-center justify-center w-8 h-8 border {{ $activeStep >= 2 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0">
                             2
@@ -71,7 +71,7 @@
 
                     <!-- Step 3: Tes Wawancara -->
                     <li
-                        class="flex items-center {{ $activeStep >= 3 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
+                        class="ml-12 md:ml-0 flex items-center {{ $activeStep >= 3 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
                         <span
                         class="flex items-center justify-center w-8 h-8 border {{ $activeStep >= 3 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0">
                             3
@@ -84,7 +84,7 @@
 
                     <!-- Step 4: Penetapan Siswa Baru -->
                     <li
-                        class="flex items-center {{ $activeStep >= 4 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
+                        class="ml-12 md:ml-0 flex items-center {{ $activeStep >= 4 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
                         <span
                         class="flex items-center justify-center w-8 h-8 border {{ $activeStep >= 4 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0">
                             4
@@ -104,7 +104,7 @@
         <section>
             <div class="container flex justify-center my-4 mx-auto gap-2">
                 <div
-                    class="w-1/2 flex justify-center items-center flex-col p-6 bg-primary border border-gray-200 rounded-lg shadow-sm">
+                    class="w-3/4 md:w-1/2 flex justify-center items-center flex-col p-6 bg-primary border border-gray-200 rounded-lg shadow-sm">
                     <a href="/siswa/daftar-step-satu">
                         <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">PENDAFTARAN</h5>
                     </a>

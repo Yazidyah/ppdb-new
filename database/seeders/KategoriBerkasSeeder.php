@@ -33,7 +33,7 @@ class KategoriBerkasSeeder extends Seeder
                 'disk' => 'local',
             ],
             [
-                'nama' => 'Ijazah MTs/SMP',
+                'nama' => 'NISN',
                 'folder_name' => 'pendaftaran/persyaratan',
                 'accepted_file_types' => 'jpg/jpeg/png',
                 'max_file_size' => 300,
