@@ -4,7 +4,7 @@
             <div class="w-full sm:w-64 flex relative items-center">
                 <input type="text" wire:model.live="search" autocomplete="off"
                     class="block w-full rounded-full text-sm focus:ring-4 focus:ring-indigo-100 border-gray-300 py-1.5 shadow-sm focus:border-indigo-300 peer"
-                    placeholder="search role.." autofocus>
+                    placeholder="cari berdasarkan email atau nama.." autofocus>
                 <div class="absolute right-3 w-6">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                         class="size-5 text-gray-300 peer:focus:text-indigo-600">
