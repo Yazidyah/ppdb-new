@@ -182,7 +182,7 @@ class UploadDokumen extends Component
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
                 ->update(['status' => 2]);
 
-            Log::channel('upload')->info('File berhasil disimpan: ', ['path' => $path]);
+            Log::channel('upload')->info('File berhasil disimpan: ', ['path' => $path, 'user_id' => Auth::user()->id]);
             $this->berkas = null; // Reset variabel
         } else {
             Log::info('Tidak ada file yang diterima');
