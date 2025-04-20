@@ -47,13 +47,20 @@ class UploadDokumen extends Component
     {
         if ($this->syarat->nama_persyaratan == 'Pas Foto') {
             try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
+                try {
+                    $this->validate([
+                        'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
+                    ], [
+                        'berkas.required' => 'File harus diunggah.',
+                        'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
+                        'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
+                    ]);
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
+                    $errorMessages = implode(', ', $e->validator->errors()->all());
+                    session()->flash('error-foto', $errorMessages);
+                    return;
+                }
                 $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-foto', $e->getMessage());
@@ -65,13 +72,20 @@ class UploadDokumen extends Component
 
         if ($this->syarat->nama_persyaratan == 'Ijazah MTs/SMP') {
             try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
+                try {
+                    $this->validate([
+                        'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
+                    ], [
+                        'berkas.required' => 'File harus diunggah.',
+                        'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
+                        'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
+                    ]);
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
+                    $errorMessages = implode(', ', $e->validator->errors()->all());
+                    session()->flash('error-ijazah', $errorMessages);
+                    return;
+                }
                 $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-ijazah', $e->getMessage());
@@ -83,13 +97,20 @@ class UploadDokumen extends Component
 
         if ($this->syarat->nama_persyaratan == 'Kartu Keluarga') {
             try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
+                try {
+                    $this->validate([
+                        'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
+                    ], [
+                        'berkas.required' => 'File harus diunggah.',
+                        'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
+                        'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
+                    ]);
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
+                    $errorMessages = implode(', ', $e->validator->errors()->all());
+                    session()->flash('error-kk', $errorMessages);
+                    return;
+                }
                 $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-kk', $e->getMessage());
@@ -101,13 +122,20 @@ class UploadDokumen extends Component
 
         if ($this->syarat->nama_persyaratan == 'Akta Kelahiran') {
             try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
+                try {
+                    $this->validate([
+                        'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
+                    ], [
+                        'berkas.required' => 'File harus diunggah.',
+                        'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
+                        'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
+                    ]);
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
+                    $errorMessages = implode(', ', $e->validator->errors()->all());
+                    session()->flash('error-akte', $errorMessages);
+                    return;
+                }
                 $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-akte', $e->getMessage());
@@ -119,13 +147,20 @@ class UploadDokumen extends Component
 
         if ($this->syarat->nama_persyaratan == 'Sertifikat Akreditasi') {
             try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
+                try {
+                    $this->validate([
+                        'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
+                    ], [
+                        'berkas.required' => 'File harus diunggah.',
+                        'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
+                        'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
+                    ]);
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
+                    $errorMessages = implode(', ', $e->validator->errors()->all());
+                    session()->flash('error-akreditasi', $errorMessages);
+                    return;
+                }
                 $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-akreditasi', $e->getMessage());
@@ -137,13 +172,20 @@ class UploadDokumen extends Component
 
         if ($this->syarat->nama_persyaratan == 'Rapot MTs/SMP') {
             try {
-                $this->validate([
-                    'berkas' => 'required|mimes:pdf|max:3000', // Maksimal 3MB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus pdf.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 3MB.',
-                ]);
+                try {
+                    $this->validate([
+                        'berkas' => 'required|mimes:pdf|max:3000',
+                    ], [
+                        'berkas.required' => 'File harus diunggah.',
+                        'berkas.mimes' => 'Format file harus pdf.',
+                        'berkas.max' => 'Ukuran file maksimal adalah 3MB.',
+                    ]);
+                } catch (\Illuminate\Validation\ValidationException $e) {
+                    Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
+                    $errorMessages = implode(', ', $e->validator->errors()->all());
+                    session()->flash('error-rapot', $errorMessages);
+                    return;
+                }
                 $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-rapot', $e->getMessage());
@@ -182,7 +224,7 @@ class UploadDokumen extends Component
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
                 ->update(['status' => 2]);
 
-            Log::channel('upload')->info('File berhasil disimpan: ', ['path' => $path, 'user_id' => Auth::user()->id]);
+            Log::channel('upload')->info('File ' . $this->syarat->nama_persyaratan . ' berhasil disimpan', ['path' => $path, 'user_id' => Auth::user()->id]);
             $this->berkas = null; // Reset variabel
         } else {
             Log::info('Tidak ada file yang diterima');
