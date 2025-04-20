@@ -117,17 +117,9 @@ return [
         //     'verify_server_certificate' => true,
         // ],
         //
-        // 'production' => [
-        //     'name' => 'Production',
-        //     'host' => 'https://example.com/log-viewer',
-        //     'auth' => [      // Example of Bearer token auth
-        //         'token' => env('LOG_VIEWER_PRODUCTION_TOKEN'),
-        //     ],
-        //     'headers' => [
-        //         'X-Foo' => 'Bar',
-        //     ],
-        //     'verify_server_certificate' => true,
-        // ],
+        'production' => [
+            'name' => ucfirst(env('APP_ENV', 'production')),
+        ],
     ],
 
     /*
