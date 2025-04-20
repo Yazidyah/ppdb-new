@@ -58,7 +58,7 @@ class UploadDokumen extends Component
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-foto', $e->getMessage());
             } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
+                Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
                 session()->flash('error-foto', 'Terjadi kesalahan saat mengunggah file.');
             }
         }
@@ -76,7 +76,7 @@ class UploadDokumen extends Component
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-ijazah', $e->getMessage());
             } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
+                Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
                 session()->flash('error-ijazah', 'Terjadi kesalahan saat mengunggah file.');
             }
         }
@@ -94,7 +94,7 @@ class UploadDokumen extends Component
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-kk', $e->getMessage());
             } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
+                Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
                 session()->flash('error-kk', 'Terjadi kesalahan saat mengunggah file.');
             }
         }
@@ -112,7 +112,7 @@ class UploadDokumen extends Component
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-akte', $e->getMessage());
             } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
+                Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
                 session()->flash('error-akte', 'Terjadi kesalahan saat mengunggah file.');
             }
         }
@@ -130,7 +130,7 @@ class UploadDokumen extends Component
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-akreditasi', $e->getMessage());
             } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
+                Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
                 session()->flash('error-akreditasi', 'Terjadi kesalahan saat mengunggah file.');
             }
         }
@@ -148,7 +148,7 @@ class UploadDokumen extends Component
             } catch (\Illuminate\Validation\ValidationException $e) {
                 session()->flash('error-rapot', $e->getMessage());
             } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
+                Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
                 session()->flash('error-rapot', 'Terjadi kesalahan saat mengunggah file.');
             }
         }
@@ -182,67 +182,13 @@ class UploadDokumen extends Component
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
                 ->update(['status' => 2]);
 
-            Log::info('File berhasil disimpan: ', ['path' => $path]);
+            Log::channel('upload')->info('File berhasil disimpan: ', ['path' => $path]);
             $this->berkas = null; // Reset variabel
         } else {
             Log::info('Tidak ada file yang diterima');
         }
     }
 
-    // public function validateAndSubmit()
-    // {
-    //     $allDocumentsUploaded = true;
-    //     $rapotUploaded = false;
-    //     $rapotDataFilled = true;
-
-    //     foreach ($this->persyaratan as $syarat) {
-    //         if ($syarat->nama_persyaratan === 'Rapot') {
-    //             $rapotUploaded = $this->isRapotUploaded($syarat);
-    //             $rapotDataFilled = $this->isRapotDataFilled();
-    //         } else {
-    //             if (!$this->isDocumentUploaded($syarat)) {
-    //                 $allDocumentsUploaded = false;
-    //                 break;
-    //             }
-    //         }
-    //     }
-
-    //     if ($allDocumentsUploaded) {
-    //         if ($rapotUploaded && $rapotDataFilled) {
-    //             return redirect()->to('/siswa/daftar-step-empat?t=1');
-    //         } else {
-    //             if (!$rapotDataFilled) {
-    //                 session()->flash('message', 'Niai Rapot belum diisi.');
-    //             }
-    //         }
-    //     } else {
-    //         session()->flash('message', 'Pastikan semua dokumen telah diunggah.');
-    //     }
-    // }
-
-    // private function isRapotUploaded($syarat)
-    // {
-    //     return Berkas::where('uploader_id', $this->user->id)
-    //         ->where('id_syarat', $syarat->id_persyaratan)
-    //         ->exists();
-    // }
-
-    // private function isRapotDataFilled()
-    // {
-    //     $registrasi = $this->user->registrasi;
-    //     if ($registrasi) {
-    //         $rapotData = Rapot::where('id_registrasi', $registrasi->id_registrasi)->first();
-    //         return $rapotData && !is_null($rapotData->nilai_rapot);
-    //     }
-    //     return false;
-    // }
-
-    // private function isDocumentUploaded($syarat)
-    // {
-    //     return Berkas::where('uploader_id', $this->user->id)
-    //         ->where('id_syarat', $syarat->id_persyaratan)
-    //         ->exists();
-    // }
 
     public function render()
     {
