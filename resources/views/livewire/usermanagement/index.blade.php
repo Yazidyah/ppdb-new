@@ -1,7 +1,7 @@
 <div>
     <div class="py-3 px-2 sm:py-6 sm:px-8 space-y-4 max-w-7xl mx-auto">
-        <div class="flex justify-end gap-4 items-center p-4">
-            <div class="w-full sm:w-64 flex relative items-center">
+        <div class="flex justify-end gap-4 items-center pb-4">
+            <div class="w-full sm:w-96 flex relative items-center">
                 <input type="text" wire:model.live="search" autocomplete="off"
                     class="block w-full rounded-full text-sm focus:ring-4 focus:ring-indigo-100 border-gray-300 py-1.5 shadow-sm focus:border-indigo-300 peer"
                     placeholder="cari berdasarkan email atau nama.." autofocus>
