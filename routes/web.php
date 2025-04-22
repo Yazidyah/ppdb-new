@@ -121,7 +121,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     // Route::get('/operator/tambah-persyaratan', [OperatorController::class, 'showPersyaratan'])->name('operator.show-persyaratan');
     Route::get('/operator/edit-persyaratan/{id}', [OperatorController::class, 'editPersyaratan'])->name('operator.edit-persyaratan');
     Route::post('/operator/update-persyaratan/{id}', [OperatorController::class, 'updatePersyaratan'])->name('operator.update-persyaratan');
-    Route::resource('operta/pekerjaan-ortu', PekerjaanOrangTuaController::class);
+    Route::resource('operator/pekerjaan-ortu', PekerjaanOrangTuaController::class);
     Route::get('/operator/tambah-pekerjaan-ortu', function () {
         return redirect()->route('pekerjaan-ortu.index');
     })->name('operator.tambah-pekerjaan-ortu');
