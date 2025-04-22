@@ -46,7 +46,7 @@
                             @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
                             <div>
                                 <div class="flex gap-2">
-                                    @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
+                                    @if ($data->nama_persyaratan === 'Rapor MTs/SMP/ Sederajat')
                                         <button type="button" onclick="rapotModal()"
                                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                                             Isi data rapot
