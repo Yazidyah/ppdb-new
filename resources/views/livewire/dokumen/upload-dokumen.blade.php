@@ -91,7 +91,7 @@
                                     @if (isset($berkas) &&
                                             isset($berkas->id) &&
                                             $data->nama_persyaratan !== 'Pas Foto' &&
-                                            $data->nama_persyaratan !== 'Rapot MTs/SMP')
+                                            $data->nama_persyaratan !== 'Rapor MTs/SMP/ Sederajat')
                                         <button type="button" onclick="berkasModal({{ $berkas->id }})"
                                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                                             Isi data berkas
