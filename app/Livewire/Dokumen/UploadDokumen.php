@@ -45,111 +45,32 @@ class UploadDokumen extends Component
 
     public function updatedBerkas()
     {
-        if ($this->syarat->nama_persyaratan == 'Pas Foto') {
-            try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
-                $this->simpan();
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                session()->flash('error-foto', $e->getMessage());
-            } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
-                session()->flash('error-foto', 'Terjadi kesalahan saat mengunggah file.');
-            }
-        }
+        $validationRules = [
+            'Pas Foto' => ['required|mimes:jpeg,jpg,png|max:300', 'error-foto'],
+            'Ijazah MTs/SMP' => ['required|mimes:jpeg,jpg,png|max:300', 'error-ijazah'],
+            'Kartu Keluarga' => ['required|mimes:jpeg,jpg,png|max:300', 'error-kk'],
+            'Akta Kelahiran' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akte'],
+            'Sertifikat Akreditasi' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akreditasi'],
+            'Rapot MTs/SMP' => ['required|mimes:pdf|max:3000', 'error-rapot'],
+        ];
 
-        if ($this->syarat->nama_persyaratan == 'Ijazah MTs/SMP') {
-            try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
-                $this->simpan();
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                session()->flash('error-ijazah', $e->getMessage());
-            } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
-                session()->flash('error-ijazah', 'Terjadi kesalahan saat mengunggah file.');
-            }
-        }
+        if (isset($validationRules[$this->syarat->nama_persyaratan])) {
+            [$rules, $errorKey] = $validationRules[$this->syarat->nama_persyaratan];
 
-        if ($this->syarat->nama_persyaratan == 'Kartu Keluarga') {
             try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
+                $this->validate(['berkas' => $rules], [
                     'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
+                    'berkas.mimes' => 'Format file tidak sesuai.',
+                    'berkas.max' => 'Ukuran file melebihi batas maksimal.',
                 ]);
                 $this->simpan();
             } catch (\Illuminate\Validation\ValidationException $e) {
-                session()->flash('error-kk', $e->getMessage());
+                $errorMessages = implode(', ', $e->validator->errors()->all());
+                session()->flash($errorKey, $errorMessages);
+                Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
             } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
-                session()->flash('error-kk', 'Terjadi kesalahan saat mengunggah file.');
-            }
-        }
-
-        if ($this->syarat->nama_persyaratan == 'Akta Kelahiran') {
-            try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
-                $this->simpan();
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                session()->flash('error-akte', $e->getMessage());
-            } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
-                session()->flash('error-akte', 'Terjadi kesalahan saat mengunggah file.');
-            }
-        }
-
-        if ($this->syarat->nama_persyaratan == 'Sertifikat Akreditasi') {
-            try {
-                $this->validate([
-                    'berkas' => 'required|mimes:jpeg,jpg,png|max:300', // Maksimal 300KB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus jpeg, jpg atau png.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 300KB.',
-                ]);
-                $this->simpan();
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                session()->flash('error-akreditasi', $e->getMessage());
-            } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
-                session()->flash('error-akreditasi', 'Terjadi kesalahan saat mengunggah file.');
-            }
-        }
-
-        if ($this->syarat->nama_persyaratan == 'Rapot MTs/SMP') {
-            try {
-                $this->validate([
-                    'berkas' => 'required|mimes:pdf|max:3000', // Maksimal 3MB
-                ], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file harus pdf.',
-                    'berkas.max' => 'Ukuran file maksimal adalah 3MB.',
-                ]);
-                $this->simpan();
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                session()->flash('error-rapot', $e->getMessage());
-            } catch (\Exception $e) {
-                Log::error('Error saat mengunggah file: ' . $e->getMessage());
-                session()->flash('error-rapot', 'Terjadi kesalahan saat mengunggah file.');
+                session()->flash($errorKey, 'Terjadi kesalahan saat mengunggah file.');
+                Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
             }
         }
     }
@@ -182,67 +103,13 @@ class UploadDokumen extends Component
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
                 ->update(['status' => 2]);
 
-            Log::info('File berhasil disimpan: ', ['path' => $path]);
+            Log::channel('upload')->info('File ' . $this->syarat->nama_persyaratan . ' berhasil disimpan', ['path' => $path, 'user_id' => Auth::user()->id]);
             $this->berkas = null; // Reset variabel
         } else {
             Log::info('Tidak ada file yang diterima');
         }
     }
 
-    // public function validateAndSubmit()
-    // {
-    //     $allDocumentsUploaded = true;
-    //     $rapotUploaded = false;
-    //     $rapotDataFilled = true;
-
-    //     foreach ($this->persyaratan as $syarat) {
-    //         if ($syarat->nama_persyaratan === 'Rapot') {
-    //             $rapotUploaded = $this->isRapotUploaded($syarat);
-    //             $rapotDataFilled = $this->isRapotDataFilled();
-    //         } else {
-    //             if (!$this->isDocumentUploaded($syarat)) {
-    //                 $allDocumentsUploaded = false;
-    //                 break;
-    //             }
-    //         }
-    //     }
-
-    //     if ($allDocumentsUploaded) {
-    //         if ($rapotUploaded && $rapotDataFilled) {
-    //             return redirect()->to('/siswa/daftar-step-empat?t=1');
-    //         } else {
-    //             if (!$rapotDataFilled) {
-    //                 session()->flash('message', 'Niai Rapot belum diisi.');
-    //             }
-    //         }
-    //     } else {
-    //         session()->flash('message', 'Pastikan semua dokumen telah diunggah.');
-    //     }
-    // }
-
-    // private function isRapotUploaded($syarat)
-    // {
-    //     return Berkas::where('uploader_id', $this->user->id)
-    //         ->where('id_syarat', $syarat->id_persyaratan)
-    //         ->exists();
-    // }
-
-    // private function isRapotDataFilled()
-    // {
-    //     $registrasi = $this->user->registrasi;
-    //     if ($registrasi) {
-    //         $rapotData = Rapot::where('id_registrasi', $registrasi->id_registrasi)->first();
-    //         return $rapotData && !is_null($rapotData->nilai_rapot);
-    //     }
-    //     return false;
-    // }
-
-    // private function isDocumentUploaded($syarat)
-    // {
-    //     return Berkas::where('uploader_id', $this->user->id)
-    //         ->where('id_syarat', $syarat->id_persyaratan)
-    //         ->exists();
-    // }
 
     public function render()
     {

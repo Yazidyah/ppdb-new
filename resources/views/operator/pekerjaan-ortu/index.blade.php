@@ -1,7 +1,6 @@
 <x-app-layout>
 <div class="p-4 sm:ml-64">
-    <div class="p-4  rounded-lg dark:border-gray-700 mt-14">
-            <div class="container mx-auto w-1/2 text-center pt-7">
+            <div class="container mx-auto md:w-1/2 text-center pt-7">
                 <h2 class="font-bold text-[24px] pb-4">Daftar Pekerjaan Orang Tua</h2>
                 <div class="flex justify-between">
                     <div></div>
@@ -34,7 +33,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+
     </div>
 
     <!-- Create Modal -->
