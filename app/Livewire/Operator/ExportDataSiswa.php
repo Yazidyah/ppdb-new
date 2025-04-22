@@ -107,7 +107,7 @@ class ExportDataSiswa extends Component
                 'rp.nilai_rapot->4->data->ips as ips_5',
             )
             ->get();
-        dd($siswa);
+        // dd($siswa);
         foreach ($siswa as $index => $s) {
             // dd($s);
             $exportedCollection->push([
@@ -165,9 +165,9 @@ class ExportDataSiswa extends Component
                 'Eng 4' => @$s->eng_4,
                 'Mat 4' => @$s->mat_4,
                 'Ind 4' => @$s->bind_4,
-                'IPA 4' => @$s->agama_4,
+                'IPA 4' => @$s->ipa_4,
                 'IPS 4' => @$s->ips_4,
-                'PAI 4' => @$s->pai_4,
+                'PAI 4' => @$s->agama_4,
                 'Eng 5' => @$s->eng_5,
                 'Mat 5' => @$s->mat_5,
                 'Ind 5' => @$s->bind_5,
