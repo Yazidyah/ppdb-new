@@ -125,6 +125,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
     Route::get('/operator/tambah-pekerjaan-ortu', function () {
         return redirect()->route('pekerjaan-ortu.index');
     })->name('operator.tambah-pekerjaan-ortu');
+    Route::put('/pekerjaan-ortu/{id}', [PekerjaanOrangTuaController::class, 'update'])->name('pekerjaan-ortu.update');
     Route::post('/operator/update-status', [VerifOpController::class, 'updateStatus'])->name('operator.updateStatus');
     Route::get('/operator/get-status/{id}', [VerifOpController::class, 'getStatus']);
     Route::post('/operator/update-verif-berkas', [VerifOpController::class, 'updateVerifBerkas'])->name('operator.updateVerifBerkas');
