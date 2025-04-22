@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Mail\NewResetPassword;
+use App\Notifications\CustomVerifyEmail;   
 use App\Notifications\NewResetPasswordNotification;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -71,10 +72,15 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         return $query->where('role', 'operator');
     }
 
-
-
     public function sendPasswordResetNotification($token)
     {
         Mail::to($this->email)->send(new NewResetPassword($token));
     }
+
+
+public function sendEmailVerificationNotification()
+{
+    $this->notify(new CustomVerifyEmail);
+}
+
 }
