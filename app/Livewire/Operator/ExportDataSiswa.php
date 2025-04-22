@@ -173,7 +173,7 @@ class ExportDataSiswa extends Component
                 'Ind 5' => @$s->bind_5,
                 'IPA 5' => @$s->agama_5,
                 'IPS 5' => @$s->ips_5,
-                'PAI 5' => @$s->pai_5,
+                'PAI 5' => @$s->agama_5,
             ]);
         }
         return Excel::download(new PendaftaranExport($exportedCollection), 'data-pendaftaran-' . now()->timestamp . '.xlsx');
