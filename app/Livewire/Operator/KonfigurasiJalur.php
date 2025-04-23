@@ -5,6 +5,7 @@ namespace App\Livewire\Operator;
 use Livewire\Component;
 use App\Models\JalurRegistrasi;
 use Illuminate\Validation\Validator;
+use Carbon\Carbon;
 
 class KonfigurasiJalur extends Component
 {
@@ -15,7 +16,12 @@ class KonfigurasiJalur extends Component
 
     public function render()
     {
-        $jalurRegistrasi = JalurRegistrasi::orderBy('id_jalur', 'asc')->get();
+        $jalurRegistrasi = JalurRegistrasi::orderBy('id_jalur', 'asc')->get()->map(function ($jalur) {
+            $jalur->tanggal_buka = Carbon::parse($jalur->tanggal_buka)->format('d-M-Y');
+            $jalur->tanggal_tutup = Carbon::parse($jalur->tanggal_tutup)->format('d-M-Y');
+            return $jalur;
+        });
+
         return view('livewire.operator.konfigurasi-jalur', compact('jalurRegistrasi'))->layout('layouts.app');
     }
 
