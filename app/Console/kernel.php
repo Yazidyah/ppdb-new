@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('app:sync-db-backup')->daily();
+        $schedule->command('app:sync-db-backup')->dailyAt('00:00');
         $schedule->command('app:check-status-jalur')
         ->dailyAt('00:00')
         ->withoutOverlapping(); // Biar ga bentrok
