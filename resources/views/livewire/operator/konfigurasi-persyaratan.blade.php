@@ -120,11 +120,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <x-primary-button
+                                    <div class="justify-between flex  px-4 py-2 border-t">
+
+                                        <div>
+                                        <button wire:click="closeModal"
+                                        class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Tutup</button>
+                                            
+                                        </div>
+                                        <div>
+                                        <x-primary-button
                                         class="mb-2 mx-auto w-full justify-center items-center">{{ __('Submit') }}</x-primary-button>
-                                </form>
-                                <button wire:click="closeModal"
-                                    class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Tutup</button>
+                                        </div> 
+                                    </div>
+                            </form>
                             </div>
                         </div>
                     </div>

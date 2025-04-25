@@ -55,8 +55,14 @@
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Tambah</button>
-                    <button type="button" onclick="hideCreateModal()" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Cancel</button>
+                    <div class="flex justify-between px-4 py-2 border-t">
+                        <div>
+                            <button type="button" onclick="hideCreateModal()" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Cancel</button>
+                        </div>
+                        <div>
+                            <button type="submit" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Tambah</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -82,8 +88,15 @@
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-                    <button type="submit" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Update</button>
-                    <button type="button" onclick="hideEditModal()" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Cancel</button>
+                    <div class="flex justify-between px-4 py-2 border-t">
+                        <div>
+                            <button type="button" onclick="hideEditModal()" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Cancel</button>
+
+                        </div>
+                        <div>
+                            <button type="submit" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Update</button>
+
+                        </div>
                 </form>
             </div>
         </div>

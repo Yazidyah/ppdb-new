@@ -81,11 +81,13 @@
                         <option class="" value="2">Afirmasi</option>
                     </select>
                 </div>
-                <div class="flex justify-end px-4 py-2 border-t">
-                    <button wire:click="closeModal"
-                        class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded mr-2">Batal</button>
-                    <button wire:click.prevent="{{ $isEdit ? 'Update' : 'store' }}"
-                        class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Simpan</button>
+                <div class="flex justify-between px-4 py-2 border-t">
+                <div>
+                        <button wire:click="closeModal" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded mr-2">Batal</button>
+                    </div>
+                    <div>
+                        <button wire:click.prevent="{{ $isEdit ? 'update' : 'store' }}" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Simpan</button>
+                    </div>
                 </div>
             </div>
         </div>
