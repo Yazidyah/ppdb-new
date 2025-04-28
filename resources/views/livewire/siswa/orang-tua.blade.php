@@ -24,7 +24,7 @@
         @endforeach
         @if (count($orangTua) < 3)
             <button wire:click="tambahOrtu"
-                class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                class="mt-4 bg-tertiary hover:bg-secondary hover:text-tertiary text-white font-bold py-2 px-4 rounded">
                 Tambah Data Wali
             </button>
         @endif
