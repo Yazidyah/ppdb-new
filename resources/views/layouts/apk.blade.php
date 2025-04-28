@@ -28,6 +28,22 @@
     <link rel="stylesheet" href="/path/to/flickity.css" media="screen">
     <link rel="icon" type="image/png" sizes="32x32" href="/logoman.webp">
     <title>{{ config('app.name', 'MAN 1 KOTA BOGOR') }}</title>
+    <meta name="description" content="Penerimaan Peserta Didik Baru Man 1 Kota Bogor.">
+    <meta property="og:url" content="{{ Request::url() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PPDB Man 1 Kota Bogor">
+    <meta property="og:description" content="Penerimaan Peserta Didik Baru Man 1 Kota Bogor.">
+    <meta property="og:image" content="{{ '/logoman.webp' }}">
+    <meta property="og:image:alt" content="Logo Man 1 Kota Bogor">
+    <meta property="og:locale" content="id_ID">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ Request::url() }}">
+    <meta name="twitter:title" content="PPDB Man 1 Kota Bogor">
+    <meta name="twitter:description" content="Penerimaan Peserta Didik Baru Man 1 Kota Bogor.">
+    <meta name="twitter:image" content="{{ '/logoman.webp' }}">
+    <meta name="twitter:image:alt" content="Logo Man 1 Kota Bogor">
+
+    @yield('meta')
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
