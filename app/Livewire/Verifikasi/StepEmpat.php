@@ -45,15 +45,12 @@ class StepEmpat extends Component
     public function isSyaratComplete()
     {
         foreach ($this->persyaratan as $syarat) {
-            if (count($syarat->berkas)  == 0) {
-                $this->isValid = false;
-            } else {
-                $this->isValid = true;
+            if (count($syarat->berkas) == 0) {
+                $this->isValid = false; // Set ke false jika ada syarat tanpa berkas
+                break; // Hentikan iterasi lebih awal
             }
         }
     }
-
-    
 
     public function render()
     {

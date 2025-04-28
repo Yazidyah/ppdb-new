@@ -28,14 +28,12 @@
                     <button onclick="window.location.href='/siswa/daftar-step-tiga?t=1'"
                         class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
                         type="button" id="nextBtn">Previous</button>
-                    <button onclick="document.getElementById('info-popup').classList.remove('hidden')"
-                        class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
-                        @if (!$isValid)
-                            cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary
-                        @else
-                            bg-tertiary hover:bg-secondary hover:text-black text-secondary
-                        @endif"
-                        type="button" id="submitBtn" @if (!$isValid) disabled @endif
+                    <button onclick="document.getElementById('info-popup').classList.remove('hidden')" class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
+                            @if (!$isValid)
+                                cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary
+                            @else
+                                bg-tertiary hover:bg-secondary hover:text-black text-secondary
+                            @endif" type="button" id="submitBtn" @if (!$isValid) disabled @endif
                         data-tooltip-target="tooltip-incomplete">
                         Submit
                     </button>
@@ -54,7 +52,8 @@
         class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
         <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
             <div class="relative p-6 bg-white rounded-lg shadow md:p-10">
-                <button id="close-modal-icon" type="button" class="absolute top-3 right-3 p-2 text-gray-500 hover:text-white bg-white rounded-lg border border-gray-200 hover:border-red-900 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-gray-300 focus:z-10"
+                <button id="close-modal-icon" type="button"
+                    class="absolute top-3 right-3 p-2 text-gray-500 hover:text-white bg-white rounded-lg border border-gray-200 hover:border-red-900 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-gray-300 focus:z-10"
                     onclick=" document.getElementById('info-popup').classList.add('hidden')">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
