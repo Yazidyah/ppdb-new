@@ -15,6 +15,8 @@ class StepEmpat extends Component
     ];
 
     public $user;
+    public $persyaratan;
+    public $isValid = true;
 
     public function mount()
     {
@@ -26,6 +28,9 @@ class StepEmpat extends Component
             session()->flash('message', 'Kamu sudah pernah mendaftar');
             return redirect('/siswa/dashboard');
         }
+
+        $this->persyaratan = $dataRegistrasi->syarat;
+        $this->isSyaratComplete();
     }
 
     public function updateStatus()
@@ -36,6 +41,19 @@ class StepEmpat extends Component
 
         return redirect('/siswa/dashboard');
     }
+
+    public function isSyaratComplete()
+    {
+        foreach ($this->persyaratan as $syarat) {
+            if (count($syarat->berkas)  == 0) {
+                $this->isValid = false;
+            } else {
+                $this->isValid = true;
+            }
+        }
+    }
+
+    
 
     public function render()
     {
