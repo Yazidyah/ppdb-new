@@ -90,7 +90,7 @@
                                     @endif
                                     @if (isset($berkas) &&
                                             isset($berkas->id) &&
-                                            $data->nama_persyaratan !== 'Pas Foto' &&
+                                            !Str::contains($data->nama_persyaratan, 'Kelahiran') &&
                                             !(Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport')))
                                         <button type="button" onclick="berkasModal({{ $berkas->id }})"
                                             class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">

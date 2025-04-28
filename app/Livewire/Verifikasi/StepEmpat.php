@@ -46,8 +46,8 @@ class StepEmpat extends Component
     {
         foreach ($this->persyaratan as $syarat) {
             if (count($syarat->berkas) == 0) {
-                $this->isValid = false; // Set ke false jika ada syarat tanpa berkas
-                break; // Hentikan iterasi lebih awal
+                $this->isValid = false;
+                break;
             }
         }
     }

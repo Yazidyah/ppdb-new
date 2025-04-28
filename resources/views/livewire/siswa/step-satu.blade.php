@@ -47,7 +47,6 @@
     <div class="h-full">
         @if ($tab === 1)
             @livewire('siswa.biodata-siswa', key('biodata-siswa-' . $siswa->id_calon_siswa))
-
             <div class="navigation-buttons justify-between flex items-center py-10 sm:py-6 px-2 sm:px-4 lg:px-8 max-w-7xl mx-auto mt-5">
     <button wire:click="$set('tab', 2)" wire:loading.attr="disabled"
         @if (!$isCompleteBiodata) disabled data-tooltip-target="tooltip-incomplete" @endif
