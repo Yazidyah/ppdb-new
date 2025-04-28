@@ -142,7 +142,7 @@ class KonfigurasiPersyaratan extends Component
 
     public function update()
     {
-        Log::channel('operator')->error('Updating Persyaratan', $this->getPersyaratanData());
+        Log::channel('operator')->debug('Updating Persyaratan', $this->getPersyaratanData());
 
 
         try {
