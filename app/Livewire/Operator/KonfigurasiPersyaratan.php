@@ -142,12 +142,13 @@ class KonfigurasiPersyaratan extends Component
 
     public function update()
     {
-        \Log::debug('Updating Persyaratan:', $this->getPersyaratanData());
+        Log::channel('operator')->error('Updating Persyaratan', $this->getPersyaratanData());
+
 
         try {
             $this->validatePersyaratan();
         } catch (\Illuminate\Validation\ValidationException $e) {
-            \Log::error('Validation Error:', ['errors' => $e->errors()]);
+            Log::channel('operator')->error($e->getMessage());
             throw $e;
         }
 
@@ -189,7 +190,7 @@ class KonfigurasiPersyaratan extends Component
                 'exists' => 'Jalur yang dipilih tidak valid.',
             ]);
         } catch (\Illuminate\Validation\ValidationException $e) {
-            \Log::error('Validation Error:', ['errors' => $e->errors()]);
+            Log::channel('operator')->error($e->getMessage());
             throw $e;
         }
     }
@@ -272,12 +273,11 @@ class KonfigurasiPersyaratan extends Component
         $this->id_jalur = is_array($persyaratan->id_jalur) ? $persyaratan->id_jalur : [$persyaratan->id_jalur];
         $this->deskripsi = $persyaratan->deskripsi;
         $this->accepted_file_types = $this->getFileType($id);
-        \Log::debug('loadPersyaratanData - accepted_file_types:', ['accepted_file_types' => $this->accepted_file_types]);
     }
 
     public function updatedAcceptedFileTypes()
     {
-        \Log::debug('Accepted file types updated:', ['accepted_file_types' => $this->accepted_file_types]);
+        Log::channel('operator')->debug('Accepted file types updated:', ['accepted_file_types' => $this->accepted_file_types]);
     }
 
     public function render()
