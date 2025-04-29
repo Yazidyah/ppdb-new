@@ -45,13 +45,17 @@ class UploadDokumen extends Component
 
     public function updatedBerkas()
     {
+        $rapot = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'rapot') !== false;
+        })->first();
+
         $validationRules = [
             'Pas Foto' => ['required|mimes:jpeg,jpg,png|max:300', 'error-foto'],
             'Ijazah MTs/SMP' => ['required|mimes:jpeg,jpg,png|max:300', 'error-ijazah'],
             'Kartu Keluarga' => ['required|mimes:jpeg,jpg,png|max:300', 'error-kk'],
             'Akta Kelahiran' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akte'],
             'Sertifikat Akreditasi' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akreditasi'],
-            'Rapot MTs/SMP' => ['required|mimes:pdf|max:3000', 'error-rapot'],
+            $rapot->nama_persyaratan => ['required|mimes:pdf|max:3000', 'error-rapot'],
         ];
 
         if (isset($validationRules[$this->syarat->nama_persyaratan])) {
