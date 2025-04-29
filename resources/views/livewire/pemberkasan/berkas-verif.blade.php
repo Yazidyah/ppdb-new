@@ -1,8 +1,16 @@
 <div>
     <div class="px-5 py-3 text-sm border text-primary-700 bg-primary-100 rounded-xl">
         <div class="mb-4">
-            @if (!is_null($berkas->data_berkas))
-                <h2 class="text-center text-lg font-bold">Nomor Berkas : {{ $berkas->data_berkas }}</h2>
+            @if (!$this->isException())
+                <h2 class="text-center text-lg font-bold">
+                    Nomor 
+                    <span class="{{ $berkas->kategoriBerkas->nama ? '' : 'text-red-500' }}">
+                        {{ $berkas->kategoriBerkas->nama ?? 'Belum diisi' }}
+                    </span> : 
+                    <span class="{{ $berkas->data_berkas ? '' : 'text-red-500' }}">
+                        {{ $berkas->data_berkas ?? 'Belum diisi' }}
+                    </span>
+                </h2>
             @endif
         </div>
         <div class="flex flex-col gap-3 sm:flex-row sm:justify-between">

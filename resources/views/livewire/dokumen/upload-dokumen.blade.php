@@ -1,30 +1,4 @@
 <div>
-    {{-- @if (session()->has('message'))
-        <div id="toast-warning"
-            class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm"
-            role="alert">
-            <div
-                class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg">
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                    viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
-                </svg>
-                <span class="sr-only">Warning icon</span>
-            </div>
-            <div class="ms-3 text-sm font-normal">{{ session('message') }}</div>
-            <button type="button"
-                class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8"
-                onclick="closeToast()" aria-label="Close">
-                <span class="sr-only">Close</span>
-                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                </svg>
-            </button>
-        </div>
-    @endif --}}
-
     <div class="flex w-3/4 items-center justify-center border-2 border-dasar2 rounded-lg py-2 gap-2 mx-auto">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="w-7 h-7">
@@ -40,135 +14,141 @@
         <div class="md:grid flex flex-col grid-cols-4 grid-rows-2 gap-8 w-full">
             @foreach ($persyaratan as $data)
                 <div class="flex flex-col col-span-1 row-span-1">
-                    <h1>{{ $data->nama_persyaratan }}</h1>
+                    <h1 class="flex items-center gap-2 relative group">
+                        {{ $data->nama_persyaratan }}
+                        <button data-tooltip-target="tooltip-top-{{ $data->id_persyaratan }}" data-tooltip-placement="top"
+                            type="button" class="text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="tooltip-top-{{ $data->id_persyaratan }}" role="tooltip"
+                            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-xs opacity-0 tooltip dark:bg-gray-700">
+                            {{ $data->deskripsi }}
+                            <div class="tooltip-arrow" data-popper-arrow></div>
+                        </div>
+                    </h1>
                     @if (count($data->berkas) !== 0)
-                        @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
-                            @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
-                            <div>
-                                <div class="flex gap-2">
-                                    @if (Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport'))
-                                        <button type="button" onclick="rapotModal()"
-                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
-                                            Isi data rapot
-                                        </button>
-                                        <div class="mt-2 p-2 rounded-lg bg-gray-100">
-                                            @if (!empty($rapot))
-                                                @if ($rapot->nilai_rapot != null)
-                                                    <p class="text-xs text-green-600 font-semibold">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="inline w-4 h-4 mr-1" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M5 13l4 4L19 7" />
-                                                        </svg>
-                                                        Data sudah diisi
-                                                    </p>
-                                                @endif
-                                                @if ($rapot->nilai_rapot == null)
-                                                    <p class="text-xs text-red-600 font-semibold">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            class="inline w-4 h-4 mr-1" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M6 18L18 6M6 6l12 12" />
-                                                        </svg>
-                                                        Data belum diisi
-                                                    </p>
-                                                @endif
-                                            @else
-                                                <p class="text-xs text-red-600 font-semibold">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                        stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                    Data belum diisi
-                                                </p>
+                            @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
+                                    @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
+                                    <div>
+                                        <div class="flex gap-2">
+                                            @if (Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport'))
+                                                <button type="button" onclick="rapotModal()"
+                                                    class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                                    Isi data rapot
+                                                </button>
+                                                <div class="mt-2 p-2 rounded-lg bg-gray-100">
+                                                    @if (!empty($rapot))
+                                                        @if ($rapot->nilai_rapot != null)
+                                                            <p class="text-xs text-green-600 font-semibold">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
+                                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                                </svg>
+                                                                Data sudah diisi
+                                                            </p>
+                                                        @endif
+                                                        @if ($rapot->nilai_rapot == null)
+                                                            <p class="text-xs text-red-600 font-semibold">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
+                                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                                </svg>
+                                                                Data belum diisi
+                                                            </p>
+                                                        @endif
+                                                    @else
+                                                        <p class="text-xs text-red-600 font-semibold">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
+                                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                            </svg>
+                                                            Data belum diisi
+                                                        </p>
+                                                    @endif
+                                                </div>
+                                            @endif
+                                            @if (
+                                                isset($berkas) &&
+                                                isset($berkas->id) &&
+                                                $data->nama_persyaratan !== 'Pas Foto' && !Str::contains($data->nama_persyaratan, 'Kelahiran') &&
+                                                !(Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport'))
+                                            )
+                                                            <button type="button" onclick="berkasModal({{ $berkas->id }})"
+                                                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                                                Isi data berkas
+                                                            </button>
+                                                            <div class="mt-2 p-2 rounded-lg bg-gray-100">
+                                                                @if ($berkas->data_berkas != null)
+                                                                    <p class="text-xs text-green-600 font-semibold">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
+                                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                                                                        </svg>
+                                                                        Data sudah diisi
+                                                                    </p>
+                                                                @endif
+                                                                @if ($berkas->data_berkas == null)
+                                                                    <p class="text-xs text-red-600 font-semibold">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
+                                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                                                                        </svg>
+                                                                        Data belum diisi
+                                                                    </p>
+                                                                @endif
+                                                            </div>
                                             @endif
                                         </div>
-                                    @endif
-                                    @if (isset($berkas) &&
-                                            isset($berkas->id) &&
-                                            $data->nama_persyaratan !== 'Pas Foto' && !Str::contains($data->nama_persyaratan, 'Kelahiran') &&
-                                            !(Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport')))
-                                        <button type="button" onclick="berkasModal({{ $berkas->id }})"
-                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
-                                            Isi data berkas
-                                        </button>
-                                        <div class="mt-2 p-2 rounded-lg bg-gray-100">
-                                            @if ($berkas->data_berkas != null)
-                                                <p class="text-xs text-green-600 font-semibold">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                        stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M5 13l4 4L19 7" />
-                                                    </svg>
-                                                    Data sudah diisi
+                                    </div>
+                            @empty
+                                @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
+                                    <div class="flex items-center justify-center w-full h-full">
+                                        <label
+                                            class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
+                                            <div class="flex flex-col items-center justify-center py-5 ">
+                                                <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 20 16">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                </svg>
+                                                <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
+                                                        unggah</span>
                                                 </p>
-                                            @endif
-                                            @if ($berkas->data_berkas == null)
-                                                <p class="text-xs text-red-600 font-semibold">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
-                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                        stroke-width="2">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M6 18L18 6M6 6l12 12" />
-                                                    </svg>
-                                                    Data belum diisi
-                                                </p>
-                                            @endif
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        @empty
-                            @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
-                                <div class="flex items-center justify-center w-full h-full">
-                                    <label
-                                        class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
-                                        <div class="flex flex-col items-center justify-center py-5 ">
-                                            <svg class="w-8 h-8 mb-4" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                            </svg>
-                                            <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
-                                                    unggah</span>
-                                            </p>
-                                            <p class="text-xs">PDF (MAX. 3MB)</p>
-                                        </div>
-                                        <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
-                                            type="file" class="hidden" />
-                                    </label>
-                                </div>
-                            @endif
+                                                <p class="text-xs">PDF (MAX. 3MB)</p>
+                                            </div>
+                                            <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
+                                                class="hidden" />
+                                        </label>
+                                    </div>
+                                @endif
 
-                            @if (!(Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport')))
-                                <div class="flex items-center justify-center w-full h-full">
-                                    <label
-                                        class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
-                                        <div class="flex flex-col items-center justify-center py-5 ">
-                                            <svg class="w-8 h-8 mb-4" aria-hidden="true"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                            </svg>
-                                            <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
-                                                    unggah</span>
-                                            </p>
-                                            <p class="text-xs">JPG,JPEG (MAX. 300KB)</p>
-                                        </div>
-                                        <input wire:model="berkas"
-                                            wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
-                                            class="hidden" />
-                                    </label>
-                                </div>
-                            @endif
-                        @endforelse
+                                @if (!(Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport')))
+                                    <div class="flex items-center justify-center w-full h-full">
+                                        <label
+                                            class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
+                                            <div class="flex flex-col items-center justify-center py-5 ">
+                                                <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 20 16">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                </svg>
+                                                <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
+                                                        unggah</span>
+                                                </p>
+                                                <p class="text-xs">JPG,JPEG (MAX. 300KB)</p>
+                                            </div>
+                                            <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
+                                                class="hidden" />
+                                        </label>
+                                    </div>
+                                @endif
+                            @endforelse
                     @endif
                     @if (count($data->berkas) === 0 or $data->berkas->contains(fn($berkas) => $berkas->trashed()))
                         @if (Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport'))
@@ -176,18 +156,18 @@
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
                                     <div class="flex flex-col items-center justify-center py-5 ">
-                                        <svg class="w-8 h-8 mb-4" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2"
+                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
                                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                         </svg>
                                         <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk unggah</span>
                                         </p>
                                         <p class="text-xs">PDF (MAX. 3MB)</p>
                                     </div>
-                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
-                                        type="file" class="hidden" />
+                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
+                                        class="hidden" />
                                 </label>
                             </div>
                         @endif
@@ -196,18 +176,18 @@
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
                                     <div class="flex flex-col items-center justify-center py-5 ">
-                                        <svg class="w-8 h-8 mb-4" aria-hidden="true"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                            <path stroke="currentColor" stroke-linecap="round"
-                                                stroke-linejoin="round" stroke-width="2"
+                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
                                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                         </svg>
                                         <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk unggah</span>
                                         </p>
                                         <p class="text-xs">JPG,JPEG,PNG (MAX. 300KB)</p>
                                     </div>
-                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
-                                        type="file" class="hidden" />
+                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
+                                        class="hidden" />
                                 </label>
                             </div>
                         @endif
@@ -297,7 +277,8 @@
             // Tambahkan contoh file lainnya di sini...
         };
 
-        exampleImage.src = exampleFiles[type] || "https://via.placeholder.com/300";
+        // Gunakan default-image.jpg jika contoh file tidak ditemukan
+        exampleImage.src = exampleFiles[type] || "/default-no-image.png";
         exampleModal.classList.remove('hidden');
     }
 
