@@ -55,17 +55,39 @@ class UploadDokumen extends Component
             return $this->isSimpleSyarat($item->nama_persyaratan);
         })->first();
 
+
         $rapot = $this->persyaratan->filter(function ($item) {
             return stripos($item->nama_persyaratan, 'rapot') !== false;
-        })->first();
+        })->pluck('nama_persyaratan')->first();
+
+        $pasFoto = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'foto') !== false;
+        })->pluck('nama_persyaratan')->first();
+
+        $ijazah = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'ijazah') !== false;
+        })->pluck('nama_persyaratan')->first();
+
+        $akta = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'akta') !== false;
+        })->pluck('nama_persyaratan')->first();
+
+        $kartuKeluarga = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'kartu keluarga') !== false;
+        })->pluck('nama_persyaratan')->first();
+
+        $akreditasi = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'akreditasi') !== false;
+        })->pluck('nama_persyaratan')->first();
+
 
         $validationRules = [
-            $simpleRequirement->nama_persyaratan => ['required|mimes:jpeg,jpg,png|max:300', 'error-simple'],
-            'Ijazah MTs/SMP' => ['required|mimes:jpeg,jpg,png|max:300', 'error-ijazah'],
-            'Kartu Keluarga' => ['required|mimes:jpeg,jpg,png|max:300', 'error-kk'],
-            'Akta Kelahiran' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akte'],
-            'Sertifikat Akreditasi' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akreditasi'],
-            $rapot->nama_persyaratan => ['required|mimes:pdf|max:3000', 'error-rapot'],
+            $ijazah => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-ijazah'],
+            $pasFoto => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-foto'],
+            $kartuKeluarga => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-kk'],
+            $akta => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-akte'],
+            $akreditasi => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-akreditasi'],
+            $rapot => [['required', 'mimes:pdf', 'max:3000'], 'error-rapot'],
         ];
 
         if (isset($validationRules[$this->syarat->nama_persyaratan])) {
@@ -81,7 +103,7 @@ class UploadDokumen extends Component
             } catch (\Illuminate\Validation\ValidationException $e) {
                 $errorMessages = implode(', ', $e->validator->errors()->all());
                 session()->flash($errorKey, $errorMessages);
-                Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
+                Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $errorMessages);
             } catch (\Exception $e) {
                 session()->flash($errorKey, 'Terjadi kesalahan saat mengunggah file.');
                 Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
