@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pemberkasan;
 
+use App\Helpers\DocumentHelper;
 use App\Models\Berkas as ModelsBerkas;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -15,7 +16,7 @@ class BerkasVerif extends Component
 
     public function mount()
     {
-        $this->berkas->load('kategoriBerkas'); // Ensure the relationship is loaded
+        $this->berkas->load('kategoriBerkas'); 
         $this->updatedPreview();
     }
 
@@ -31,11 +32,7 @@ class BerkasVerif extends Component
     {
         $nama = strtolower($this->berkas->kategoriBerkas->nama);
 
-        return str_contains($nama, 'foto') || // Updated to check for "foto"
-               str_starts_with($nama, 'rapot') ||
-               str_starts_with($nama, 'rapor') ||
-               str_starts_with($nama, 'raport') ||
-               str_contains($nama, 'kelahiran');
+        return DocumentHelper::isSimpleSyarat($nama);
     }
 
     public function download()

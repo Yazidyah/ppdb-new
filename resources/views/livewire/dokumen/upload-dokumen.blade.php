@@ -74,8 +74,7 @@
                                             @if (
                                                 isset($berkas) &&
                                                 isset($berkas->id) &&
-                                                $data->nama_persyaratan !== 'Pas Foto' && $data->nama_persyaratan !== 'Kelahiran' &&
-                                                $data->nama_persyaratan !== 'Rapot'
+                                                !$data->is_simple
                                             )
                                                             <button type="button" onclick="berkasModal({{ $berkas->id }})"
                                                                 class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">

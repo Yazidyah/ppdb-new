@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use App\Models\DataRegistrasi;
 use App\Models\CalonSiswa;
-
+use App\Helpers\DocumentHelper;
 class StepEmpat extends Component
 {
     public $tab = 1;
@@ -45,11 +45,22 @@ class StepEmpat extends Component
     public function isSyaratComplete()
     {
         foreach ($this->persyaratan as $syarat) {
+            // Jika tidak ada berkas yang diupload
             if (count($syarat->berkas) == 0) {
                 $this->isValid = false;
-                break;
+                return false;
+            }
+            
+            foreach ($syarat->berkas as $berkas) {
+                $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
+                if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) && empty($berkas->data_berkas)) {
+                    $this->isValid = false;
+                    return false;
+                }
             }
         }
+        
+        return $this->isValid;
     }
 
     public function render()

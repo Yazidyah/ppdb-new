@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Dokumen;
 
+use App\Helpers\DocumentHelper;
 use App\Models\Berkas;
 use App\Models\KategoriBerkas;
 use Livewire\Attributes\On;
@@ -32,7 +33,7 @@ class UploadDokumen extends Component
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
         $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->pluck('id_jalur');
-        $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get();
+        $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->orderBy('id_persyaratan', 'asc')->get();
         $this->syarat = null;
 
         // Check if at least one document has been uploaded
@@ -43,14 +44,23 @@ class UploadDokumen extends Component
         }
     }
 
+    private function isSimpleSyarat($namaSyarat) //Buat syarat yang ga butuh ngisi data
+    {
+        return DocumentHelper::isSimpleSyarat($namaSyarat);
+    }
+
     public function updatedBerkas()
     {
+        $simpleRequirement = $this->persyaratan->filter(function ($item) {
+            return $this->isSimpleSyarat($item->nama_persyaratan);
+        })->first();
+
         $rapot = $this->persyaratan->filter(function ($item) {
             return stripos($item->nama_persyaratan, 'rapot') !== false;
         })->first();
 
         $validationRules = [
-            'Pas Foto' => ['required|mimes:jpeg,jpg,png|max:300', 'error-foto'],
+            $simpleRequirement->nama_persyaratan => ['required|mimes:jpeg,jpg,png|max:300', 'error-simple'],
             'Ijazah MTs/SMP' => ['required|mimes:jpeg,jpg,png|max:300', 'error-ijazah'],
             'Kartu Keluarga' => ['required|mimes:jpeg,jpg,png|max:300', 'error-kk'],
             'Akta Kelahiran' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akte'],
@@ -114,11 +124,13 @@ class UploadDokumen extends Component
         }
     }
 
-
     public function render()
     {
         return view('livewire.dokumen.upload-dokumen', [
-            'persyaratan' => $this->persyaratan
+            'persyaratan' => $this->persyaratan->map(function ($item) {
+                $item->is_simple = $this->isSimpleSyarat($item->nama_persyaratan);
+                return $item;
+            }),
         ]);
     }
 }
