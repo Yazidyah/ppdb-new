@@ -105,7 +105,7 @@
                                         </div>
                                     </div>
                             @empty
-                                @if ($data->nama_persyaratan === 'Rapot MTs/SMP')
+                                @if ($data->nama_persyaratan === 'Rapot')
                                     <div class="flex items-center justify-center w-full h-full">
                                         <label
                                             class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
