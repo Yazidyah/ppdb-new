@@ -82,13 +82,12 @@ class UploadDokumen extends Component
 
 
         $validationRules = [
-            // $simpleRequirement->nama_persyaratan => ['required|mimes:jpeg,jpg,png|max:300', 'error-simple'],
-            $ijazah => ['required|mimes:jpeg,jpg,png|max:300', 'error-ijazah'],
-            $pasFoto => ['required|mimes:jpeg,jpg,png|max:300', 'error-foto'],
-            $kartuKeluarga => ['required|mimes:jpeg,jpg,png|max:300', 'error-kk'],
-            $akta => ['required|mimes:jpeg,jpg,png|max:300', 'error-akte'],
-            $akreditasi => ['required|mimes:jpeg,jpg,png|max:300', 'error-akreditasi'],
-            $rapot => ['required|mimes:pdf|max:3000', 'error-rapot'],
+            $ijazah => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-ijazah'],
+            $pasFoto => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-foto'],
+            $kartuKeluarga => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-kk'],
+            $akta => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-akte'],
+            $akreditasi => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-akreditasi'],
+            $rapot => [['required', 'mimes:pdf', 'max:3000'], 'error-rapot'],
         ];
 
         if (isset($validationRules[$this->syarat->nama_persyaratan])) {
@@ -104,7 +103,7 @@ class UploadDokumen extends Component
             } catch (\Illuminate\Validation\ValidationException $e) {
                 $errorMessages = implode(', ', $e->validator->errors()->all());
                 session()->flash($errorKey, $errorMessages);
-                Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
+                Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $errorMessages);
             } catch (\Exception $e) {
                 session()->flash($errorKey, 'Terjadi kesalahan saat mengunggah file.');
                 Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());

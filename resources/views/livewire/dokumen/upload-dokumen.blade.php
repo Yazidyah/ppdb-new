@@ -16,9 +16,10 @@
                 <div class="flex flex-col col-span-1 row-span-1">
                     <h1 class="flex items-center gap-2 relative group">
                         {{ $data->nama_persyaratan }}
-                        <button data-tooltip-target="tooltip-top-{{ $data->id_persyaratan }}" data-tooltip-placement="top"
-                            type="button" class="text-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                        <button data-tooltip-target="tooltip-top-{{ $data->id_persyaratan }}"
+                            data-tooltip-placement="top" type="button" class="text-blue-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="size-5">
                                 <path fill-rule="evenodd"
                                     d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-7-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM9 9a.75.75 0 0 0 0 1.5h.253a.25.25 0 0 1 .244.304l-.459 2.066A1.75 1.75 0 0 0 10.747 15H11a.75.75 0 0 0 0-1.5h-.253a.25.25 0 0 1-.244-.304l.459-2.066A1.75 1.75 0 0 0 9.253 9H9Z"
                                     clip-rule="evenodd" />
@@ -31,123 +32,131 @@
                         </div>
                     </h1>
                     @if (count($data->berkas) !== 0)
-                            @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
-                                    @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
-                                    <div>
-                                        <div class="flex gap-2">
-                                            @if ($data->nama_persyaratan === 'Rapot')
-                                                <button type="button" onclick="rapotModal()"
-                                                    class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
-                                                    Isi data rapot
-                                                </button>
-                                                <div class="mt-2 p-2 rounded-lg bg-gray-100">
-                                                    @if (!empty($rapot))
-                                                        @if ($rapot->nilai_rapot != null)
-                                                            <p class="text-xs text-green-600 font-semibold">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
-                                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                                                </svg>
-                                                                Data sudah diisi
-                                                            </p>
-                                                        @endif
-                                                        @if ($rapot->nilai_rapot == null)
-                                                            <p class="text-xs text-red-600 font-semibold">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
-                                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                                                </svg>
-                                                                Data belum diisi
-                                                            </p>
-                                                        @endif
-                                                    @else
-                                                        <p class="text-xs text-red-600 font-semibold">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
-                                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                                            </svg>
-                                                            Data belum diisi
-                                                        </p>
-                                                    @endif
-                                                </div>
-                                            @endif
-                                            @if (
-                                                isset($berkas) &&
-                                                isset($berkas->id) &&
-                                                !$data->is_simple
-                                            )
-                                                            <button type="button" onclick="berkasModal({{ $berkas->id }})"
-                                                                class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
-                                                                Isi data berkas
-                                                            </button>
-                                                            <div class="mt-2 p-2 rounded-lg bg-gray-100">
-                                                                @if ($berkas->data_berkas != null)
-                                                                    <p class="text-xs text-green-600 font-semibold">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
-                                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                                                                        </svg>
-                                                                        Data sudah diisi
-                                                                    </p>
-                                                                @endif
-                                                                @if ($berkas->data_berkas == null)
-                                                                    <p class="text-xs text-red-600 font-semibold">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1" fill="none"
-                                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                                                        </svg>
-                                                                        Data belum diisi
-                                                                    </p>
-                                                                @endif
-                                                            </div>
+                        @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
+                            @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
+                            <div>
+                                <div class="flex gap-2">
+                                    @if ($data->nama_persyaratan === 'Rapot')
+                                        <button type="button" onclick="rapotModal()"
+                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                            Isi data rapot
+                                        </button>
+                                        <div class="mt-2 p-2 rounded-lg bg-gray-100">
+                                            @if (!empty($rapot))
+                                                @if ($rapot->nilai_rapot != null)
+                                                    <p class="text-xs text-green-600 font-semibold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="inline w-4 h-4 mr-1" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M5 13l4 4L19 7" />
+                                                        </svg>
+                                                        Data sudah diisi
+                                                    </p>
+                                                @endif
+                                                @if ($rapot->nilai_rapot == null)
+                                                    <p class="text-xs text-red-600 font-semibold">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="inline w-4 h-4 mr-1" fill="none"
+                                                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M6 18L18 6M6 6l12 12" />
+                                                        </svg>
+                                                        Data belum diisi
+                                                    </p>
+                                                @endif
+                                            @else
+                                                <p class="text-xs text-red-600 font-semibold">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                        stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18L18 6M6 6l12 12" />
+                                                    </svg>
+                                                    Data belum diisi
+                                                </p>
                                             @endif
                                         </div>
-                                    </div>
-                            @empty
-                                @if ($data->nama_persyaratan === 'Rapot')
-                                    <div class="flex items-center justify-center w-full h-full">
-                                        <label
-                                            class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
-                                            <div class="flex flex-col items-center justify-center py-5 ">
-                                                <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 20 16">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                </svg>
-                                                <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
-                                                        unggah</span>
+                                    @endif
+                                    @if (isset($berkas) && isset($berkas->id) && !$data->is_simple)
+                                        <button type="button" onclick="berkasModal({{ $berkas->id }})"
+                                            class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
+                                            Isi data berkas
+                                        </button>
+                                        <div class="mt-2 p-2 rounded-lg bg-gray-100">
+                                            @if ($berkas->data_berkas != null)
+                                                <p class="text-xs text-green-600 font-semibold">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                        stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M5 13l4 4L19 7" />
+                                                    </svg>
+                                                    Data sudah diisi
                                                 </p>
-                                                <p class="text-xs">PDF (MAX. 3MB)</p>
-                                            </div>
-                                            <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
-                                                class="hidden" />
-                                        </label>
-                                    </div>
-                                @endif
+                                            @endif
+                                            @if ($berkas->data_berkas == null)
+                                                <p class="text-xs text-red-600 font-semibold">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="inline w-4 h-4 mr-1"
+                                                        fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                                                        stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18L18 6M6 6l12 12" />
+                                                    </svg>
+                                                    Data belum diisi
+                                                </p>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @empty
+                            @if ($data->nama_persyaratan === 'Rapot')
+                                <div class="flex items-center justify-center w-full h-full">
+                                    <label
+                                        class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
+                                        <div class="flex flex-col items-center justify-center py-5 ">
+                                            <svg class="w-8 h-8 mb-4" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                            </svg>
+                                            <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
+                                                    unggah</span>
+                                            </p>
+                                            <p class="text-xs">PDF (MAX. 3MB)</p>
+                                        </div>
+                                        <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
+                                            type="file" class="hidden" />
+                                    </label>
+                                </div>
+                            @endif
 
-                                @if ($data->nama_persyaratan !== 'Rapot')
-                                    <div class="flex items-center justify-center w-full h-full">
-                                        <label
-                                            class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
-                                            <div class="flex flex-col items-center justify-center py-5 ">
-                                                <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 20 16">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                </svg>
-                                                <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
-                                                        unggah</span>
-                                                </p>
-                                                <p class="text-xs">JPG,JPEG (MAX. 300KB)</p>
-                                            </div>
-                                            <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
-                                                class="hidden" />
-                                        </label>
-                                    </div>
-                                @endif
-                            @endforelse
+                            @if ($data->nama_persyaratan !== 'Rapot')
+                                <div class="flex items-center justify-center w-full h-full">
+                                    <label
+                                        class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
+                                        <div class="flex flex-col items-center justify-center py-5 ">
+                                            <svg class="w-8 h-8 mb-4" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 20 16">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                            </svg>
+                                            <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
+                                                    unggah</span>
+                                            </p>
+                                            <p class="text-xs">JPG,JPEG (MAX. 300KB)</p>
+                                        </div>
+                                        <input wire:model="berkas"
+                                            wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
+                                            class="hidden" />
+                                    </label>
+                                </div>
+                            @endif
+                        @endforelse
                     @endif
                     @if (count($data->berkas) === 0 or $data->berkas->contains(fn($berkas) => $berkas->trashed()))
                         @if ($data->nama_persyaratan === 'Rapot')
@@ -155,18 +164,18 @@
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
                                     <div class="flex flex-col items-center justify-center py-5 ">
-                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                            viewBox="0 0 20 16">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
+                                        <svg class="w-8 h-8 mb-4" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
                                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                         </svg>
                                         <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk unggah</span>
                                         </p>
                                         <p class="text-xs">PDF (MAX. 3MB)</p>
                                     </div>
-                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
-                                        class="hidden" />
+                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
+                                        type="file" class="hidden" />
                                 </label>
                             </div>
                         @endif
@@ -175,47 +184,46 @@
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
                                     <div class="flex flex-col items-center justify-center py-5 ">
-                                        <svg class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                            viewBox="0 0 20 16">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                stroke-width="2"
+                                        <svg class="w-8 h-8 mb-4" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                                            <path stroke="currentColor" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2"
                                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                         </svg>
                                         <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk unggah</span>
                                         </p>
                                         <p class="text-xs">JPG,JPEG,PNG (MAX. 300KB)</p>
                                     </div>
-                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
-                                        class="hidden" />
+                                    <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
+                                        type="file" class="hidden" />
                                 </label>
                             </div>
                         @endif
-
-                        @if ($data->nama_persyaratan === 'Rapot')
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'rapot'))
                             @if (session()->has('error-rapot'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-rapot') }}</p>
                             @endif
                         @endif
 
-                        @if ($data->nama_persyaratan === 'Pas Foto')
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'pas foto'))
                             @if (session()->has('error-foto'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-foto') }}</p>
                             @endif
                         @endif
 
-                        @if ($data->nama_persyaratan === 'Kartu Keluarga')
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'kartu keluarga'))
                             @if (session()->has('error-kk'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-kk') }}</p>
                             @endif
                         @endif
 
-                        @if ($data->nama_persyaratan === 'Akta Kelahiran')
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'akta kelahiran'))
                             @if (session()->has('error-akte'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-akte') }}</p>
                             @endif
                         @endif
 
-                        @if ($data->nama_persyaratan === 'Sertifikat Akreditasi')
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'sertifikat akreditasi'))
                             @if (session()->has('error-akreditasi'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-akreditasi') }}</p>
                             @endif
