@@ -24,7 +24,7 @@ class FinalisasiDokumen extends Component
         $this->user = Auth::user();
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->pluck('id_calon_siswa');
         $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->value('id_jalur');
-        $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get();
+        $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->orderBy('id_persyaratan', 'asc')->get();
         $this->syarat = null;
     }
     public function render()
