@@ -297,7 +297,8 @@
             // Tambahkan contoh file lainnya di sini...
         };
 
-        exampleImage.src = exampleFiles[type] || "https://via.placeholder.com/300";
+        // Gunakan default-image.jpg jika contoh file tidak ditemukan
+        exampleImage.src = exampleFiles[type] || "/default-no-image.png";
         exampleModal.classList.remove('hidden');
     }
 
