@@ -82,17 +82,16 @@ class UploadDokumen extends Component
 
 
         $validationRules = [
-            $ijazah => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-ijazah'],
-            $pasFoto => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-foto'],
-            $kartuKeluarga => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-kk'],
-            $akta => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-akte'],
-            $akreditasi => [['required', 'mimes:jpeg,jpg,png', 'max:300'], 'error-akreditasi'],
-            $rapot => [['required', 'mimes:pdf', 'max:3000'], 'error-rapot'],
+            $ijazah => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-ijazah'],
+            $pasFoto => [['required', 'file', 'mimes:jpeg,jpg,png', 'max:300'], 'error-foto'],
+            $kartuKeluarga => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-kk'],
+            $akta => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-akte'],
+            $akreditasi => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-akreditasi'],
+            $rapot => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-rapot'],
         ];
-
         if (isset($validationRules[$this->syarat->nama_persyaratan])) {
             [$rules, $errorKey] = $validationRules[$this->syarat->nama_persyaratan];
-
+            // dd($rules, $errorKey);
             try {
                 $this->validate(['berkas' => $rules], [
                     'berkas.required' => 'File harus diunggah.',

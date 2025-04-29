@@ -199,6 +199,11 @@
                                 </label>
                             </div>
                         @endif
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'ijazah'))
+                            @if (session()->has('error-ijazah'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-ijazah') }}</p>
+                            @endif
+                        @endif
                         @if (Str::contains(Str::lower($data->nama_persyaratan), 'rapot'))
                             @if (session()->has('error-rapot'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-rapot') }}</p>
