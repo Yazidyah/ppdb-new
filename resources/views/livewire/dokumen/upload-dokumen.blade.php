@@ -35,7 +35,7 @@
                                     @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
                                     <div>
                                         <div class="flex gap-2">
-                                            @if (Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport'))
+                                            @if ($data->nama_persyaratan === 'Rapot')
                                                 <button type="button" onclick="rapotModal()"
                                                     class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                                                     Isi data rapot
@@ -74,8 +74,8 @@
                                             @if (
                                                 isset($berkas) &&
                                                 isset($berkas->id) &&
-                                                $data->nama_persyaratan !== 'Pas Foto' && !Str::contains($data->nama_persyaratan, 'Kelahiran') &&
-                                                !(Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport'))
+                                                $data->nama_persyaratan !== 'Pas Foto' && $data->nama_persyaratan !== 'Kelahiran' &&
+                                                $data->nama_persyaratan !== 'Rapot'
                                             )
                                                             <button type="button" onclick="berkasModal({{ $berkas->id }})"
                                                                 class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
@@ -127,7 +127,7 @@
                                     </div>
                                 @endif
 
-                                @if (!(Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport')))
+                                @if ($data->nama_persyaratan !== 'Rapot')
                                     <div class="flex items-center justify-center w-full h-full">
                                         <label
                                             class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -151,7 +151,7 @@
                             @endforelse
                     @endif
                     @if (count($data->berkas) === 0 or $data->berkas->contains(fn($berkas) => $berkas->trashed()))
-                        @if (Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport'))
+                        @if ($data->nama_persyaratan === 'Rapot')
                             <div class="flex items-center justify-center w-full h-full">
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -171,7 +171,7 @@
                                 </label>
                             </div>
                         @endif
-                        @if (!(Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport')))
+                        @if ($data->nama_persyaratan !== 'Rapot')
                             <div class="flex items-center justify-center w-full h-full">
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -192,7 +192,7 @@
                             </div>
                         @endif
 
-                        @if (Str::startsWith($data->nama_persyaratan, 'Rapot') || Str::startsWith($data->nama_persyaratan, 'Rapor') || Str::startsWith($data->nama_persyaratan, 'Raport'))
+                        @if ($data->nama_persyaratan === 'Rapot')
                             @if (session()->has('error-rapot'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-rapot') }}</p>
                             @endif

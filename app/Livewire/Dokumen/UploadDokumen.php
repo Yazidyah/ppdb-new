@@ -13,6 +13,7 @@ use App\Models\Rapot;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Str;
 
 class UploadDokumen extends Component
 {
@@ -32,7 +33,13 @@ class UploadDokumen extends Component
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
         $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->pluck('id_jalur');
-        $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get();
+        $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get()->map(function ($item) {
+            // Normalisasi nama persyaratan
+            if (Str::contains($item->nama_persyaratan, ['Rapot', 'Rapor', 'Raport'])) {
+                $item->nama_persyaratan = 'Rapot';
+            }
+            return $item;
+        });
         $this->syarat = null;
 
         // Check if at least one document has been uploaded
@@ -51,27 +58,33 @@ class UploadDokumen extends Component
             'Kartu Keluarga' => ['required|mimes:jpeg,jpg,png|max:300', 'error-kk'],
             'Akta Kelahiran' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akte'],
             'Sertifikat Akreditasi' => ['required|mimes:jpeg,jpg,png|max:300', 'error-akreditasi'],
-            'Rapot MTs/SMP' => ['required|mimes:pdf|max:3000', 'error-rapot'],
+            'Rapot' => ['required|mimes:pdf|max:3000', 'error-rapot'],
         ];
 
-        if (isset($validationRules[$this->syarat->nama_persyaratan])) {
+        // Gunakan pengkondisian untuk nama persyaratan yang mengandung kata "Rapot", "Rapor", atau "Raport"
+        if (Str::contains($this->syarat->nama_persyaratan, ['Rapot', 'Rapor', 'Raport'])) {
+            [$rules, $errorKey] = $validationRules['Rapot'];
+        } elseif (isset($validationRules[$this->syarat->nama_persyaratan])) {
             [$rules, $errorKey] = $validationRules[$this->syarat->nama_persyaratan];
+        } else {
+            session()->flash('error', 'Persyaratan tidak dikenali.');
+            return;
+        }
 
-            try {
-                $this->validate(['berkas' => $rules], [
-                    'berkas.required' => 'File harus diunggah.',
-                    'berkas.mimes' => 'Format file tidak sesuai.',
-                    'berkas.max' => 'Ukuran file melebihi batas maksimal.',
-                ]);
-                $this->simpan();
-            } catch (\Illuminate\Validation\ValidationException $e) {
-                $errorMessages = implode(', ', $e->validator->errors()->all());
-                session()->flash($errorKey, $errorMessages);
-                Log::channel('upload')->error('Error saat mengunggah file ' . $this->syarat->nama_persyaratan . ' pada user id ' . Auth::user()->id . ': ' . $e->getMessage());
-            } catch (\Exception $e) {
-                session()->flash($errorKey, 'Terjadi kesalahan saat mengunggah file.');
-                Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
-            }
+        try {
+            $this->validate(['berkas' => $rules], [
+                'berkas.required' => 'File harus diunggah.',
+                'berkas.mimes' => 'Format file tidak sesuai.',
+                'berkas.max' => 'Ukuran file melebihi batas maksimal.',
+            ]);
+            $this->simpan();
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            $errorMessages = implode(', ', $e->validator->errors()->all());
+            session()->flash($errorKey, $errorMessages);
+            Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
+        } catch (\Exception $e) {
+            session()->flash($errorKey, 'Terjadi kesalahan saat mengunggah file.');
+            Log::channel('upload')->error('Error saat mengunggah file: ' . $e->getMessage());
         }
     }
 
@@ -87,13 +100,12 @@ class UploadDokumen extends Component
     {
         if ($this->berkas) {
             $path = $this->berkas->store('pendaftaran/persyaratan', 'local');
-
             $berkas = new Berkas([
                 'kategori_berkas_id' => $this->kb->id,
                 'id_syarat' => $this->syarat->id_persyaratan,
+                'uploader_id' => Auth::user()->id,
                 'original_name' => $this->berkas->getClientOriginalName(),
                 'file_name' => $path,
-                'uploader_id' => Auth::user()->id,
                 'disk' => 'local',
             ]);
 
@@ -109,7 +121,6 @@ class UploadDokumen extends Component
             Log::info('Tidak ada file yang diterima');
         }
     }
-
 
     public function render()
     {
