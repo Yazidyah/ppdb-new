@@ -31,7 +31,7 @@
             </label>
         </div>
         
-        <h2>Belum Punya Akun? <span class="text-blue-900 text-wrap"><a class="hover:text-primary" href="/register">Buat Akun</a></span></h2>
+        <!-- <h2>Belum Punya Akun? <span class="text-blue-900 text-wrap"><a class="hover:text-primary" href="/register">Buat Akun</a></span></h2> -->
         <div class="flex items-center justify-end mt-4">
             
             @if (Route::has('password.request'))
