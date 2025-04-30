@@ -18,7 +18,7 @@ class DataPendaftaran extends Component
                     $query->whereNull('deleted_at');
                 })
                 ->orderBy('id_calon_siswa')
-                ->paginate(10)
+                ->paginate(5)
         ]);
     }
 }
