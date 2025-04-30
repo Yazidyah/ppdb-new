@@ -25,6 +25,7 @@ class RapotModal extends Component
     public $bahasa_indonesia1, $bahasa_indonesia2, $bahasa_indonesia3, $bahasa_indonesia4, $bahasa_indonesia5;
     public $bahasa_inggris1, $bahasa_inggris2, $bahasa_inggris3, $bahasa_inggris4, $bahasa_inggris5;
     public $agama1, $agama2, $agama3, $agama4, $agama5;
+    public $pai3, $pai4, $pai5;
     public $ipa1, $ipa2, $ipa3, $ipa4, $ipa5;
     public $ips1, $ips2, $ips3, $ips4, $ips5;
     protected $queryString = [
@@ -34,7 +35,7 @@ class RapotModal extends Component
     public function mount()
     {
         $this->user = Auth::user();
-        $this->sem = request()->query('sem', 1);
+        $this->sem = request()->query('sem', 3);
         $this->t = request()->query('t', 1);
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
         if ($this->rapot && $this->rapot->nilai_rapot != null) {
@@ -50,33 +51,37 @@ class RapotModal extends Component
 
     private function initializeRapotValues($rapot)
     {
-        $this->matematika1 = (float)($rapot[0]['data']['matematika'] ?? 0);
-        $this->matematika2 = (float)($rapot[1]['data']['matematika'] ?? 0);
+        // matematika sem 3 - 5
         $this->matematika3 = (float)($rapot[2]['data']['matematika'] ?? 0);
         $this->matematika4 = (float)($rapot[3]['data']['matematika'] ?? 0);
         $this->matematika5 = (float)($rapot[4]['data']['matematika'] ?? 0);
-        $this->bahasa_indonesia1 = (float)($rapot[0]['data']['bahasa_indonesia'] ?? 0);
-        $this->bahasa_indonesia2 = (float)($rapot[1]['data']['bahasa_indonesia'] ?? 0);
+
+        // bahasa indonesia sem 3 - 5
         $this->bahasa_indonesia3 = (float)($rapot[2]['data']['bahasa_indonesia'] ?? 0);
         $this->bahasa_indonesia4 = (float)($rapot[3]['data']['bahasa_indonesia'] ?? 0);
         $this->bahasa_indonesia5 = (float)($rapot[4]['data']['bahasa_indonesia'] ?? 0);
-        $this->bahasa_inggris1 = (float)($rapot[0]['data']['bahasa_inggris'] ?? 0);
-        $this->bahasa_inggris2 = (float)($rapot[1]['data']['bahasa_inggris'] ?? 0);
+
+        // bahasa inggris sem 3 - 5
         $this->bahasa_inggris3 = (float)($rapot[2]['data']['bahasa_inggris'] ?? 0);
         $this->bahasa_inggris4 = (float)($rapot[3]['data']['bahasa_inggris'] ?? 0);
         $this->bahasa_inggris5 = (float)($rapot[4]['data']['bahasa_inggris'] ?? 0);
-        $this->agama1 = (float)($rapot[0]['data']['agama'] ?? 0);
-        $this->agama2 = (float)($rapot[1]['data']['agama'] ?? 0);
-        $this->agama3 = (float)($rapot[2]['data']['agama'] ?? 0);
-        $this->agama4 = (float)($rapot[3]['data']['agama'] ?? 0);
-        $this->agama5 = (float)($rapot[4]['data']['agama'] ?? 0);
-        $this->ipa1 = (float)($rapot[0]['data']['ipa'] ?? 0);
-        $this->ipa2 = (float)($rapot[1]['data']['ipa'] ?? 0);
+
+        // agama sem 3 - 5
+        // $this->agama3 = (float)($rapot[2]['data']['agama'] ?? 0);
+        // $this->agama4 = (float)($rapot[3]['data']['agama'] ?? 0);
+        // $this->agama5 = (float)($rapot[4]['data']['agama'] ?? 0);
+
+        // pai sem 3 - 5
+        $this->pai3 = (float)($rapot[2]['data']['pai'] ?? 0);
+        $this->pai4 = (float)($rapot[3]['data']['pai'] ?? 0);
+        $this->pai5 = (float)($rapot[4]['data']['pai'] ?? 0);
+
+        // ipa sem 3 - 5
         $this->ipa3 = (float)($rapot[2]['data']['ipa'] ?? 0);
         $this->ipa4 = (float)($rapot[3]['data']['ipa'] ?? 0);
         $this->ipa5 = (float)($rapot[4]['data']['ipa'] ?? 0);
-        $this->ips1 = (float)($rapot[0]['data']['ips'] ?? 0);
-        $this->ips2 = (float)($rapot[1]['data']['ips'] ?? 0);
+
+        // ips sem 3 - 5
         $this->ips3 = (float)($rapot[2]['data']['ips'] ?? 0);
         $this->ips4 = (float)($rapot[3]['data']['ips'] ?? 0);
         $this->ips5 = (float)($rapot[4]['data']['ips'] ?? 0);
@@ -85,33 +90,37 @@ class RapotModal extends Component
     public function validateRapotInput()
     {
         $this->validate([
-            'matematika1' => 'required|min:0|max:100',
-            'matematika2' => 'required|min:0|max:100',
+            // matematika sem 3 - 5
             'matematika3' => 'required|min:0|max:100',
             'matematika4' => 'required|min:0|max:100',
             'matematika5' => 'required|min:0|max:100',
-            'bahasa_indonesia1' => 'required|min:0|max:100',
-            'bahasa_indonesia2' => 'required|min:0|max:100',
+
+            // bahasa indonesia sem 3 - 5
             'bahasa_indonesia3' => 'required|min:0|max:100',
             'bahasa_indonesia4' => 'required|min:0|max:100',
             'bahasa_indonesia5' => 'required|min:0|max:100',
-            'bahasa_inggris1' => 'required|min:0|max:100',
-            'bahasa_inggris2' => 'required|min:0|max:100',
+
+            // bahasa inggris sem 3 - 5
             'bahasa_inggris3' => 'required|min:0|max:100',
             'bahasa_inggris4' => 'required|min:0|max:100',
             'bahasa_inggris5' => 'required|min:0|max:100',
-            'agama1' => 'required|min:0|max:100',
-            'agama2' => 'required|min:0|max:100',
-            'agama3' => 'required|min:0|max:100',
-            'agama4' => 'required|min:0|max:100',
-            'agama5' => 'required|min:0|max:100',
-            'ipa1' => 'required|min:0|max:100',
-            'ipa2' => 'required|min:0|max:100',
+
+            // agama sem 3 - 5
+            // 'agama3' => 'required|min:0|max:100',
+            // 'agama4' => 'required|min:0|max:100',
+            // 'agama5' => 'required|min:0|max:100',
+
+            // pai sem 3 - 5
+            'pai3' => 'required|min:0|max:100',
+            'pai4' => 'required|min:0|max:100',
+            'pai5' => 'required|min:0|max:100',
+
+            // ipa sem 3 - 5
             'ipa3' => 'required|min:0|max:100',
             'ipa4' => 'required|min:0|max:100',
             'ipa5' => 'required|min:0|max:100',
-            'ips1' => 'required|min:0|max:100',
-            'ips2' => 'required|min:0|max:100',
+
+            // ips sem 3 - 5
             'ips3' => 'required|min:0|max:100',
             'ips4' => 'required|min:0|max:100',
             'ips5' => 'required|min:0|max:100',
@@ -122,37 +131,29 @@ class RapotModal extends Component
         ]);
     }
 
+
     public function kirim()
     {
         $this->validate(
             [
-                'matematika1' => 'required|numeric|gt:0|lte:100',
-                'matematika2' => 'required|numeric|gt:0|lte:100',
                 'matematika3' => 'required|numeric|gt:0|lte:100',
                 'matematika4' => 'required|numeric|gt:0|lte:100',
                 'matematika5' => 'required|numeric|gt:0|lte:100',
-                'bahasa_indonesia1' => 'required|numeric|gt:0|lte:100',
-                'bahasa_indonesia2' => 'required|numeric|gt:0|lte:100',
                 'bahasa_indonesia3' => 'required|numeric|gt:0|lte:100',
                 'bahasa_indonesia4' => 'required|numeric|gt:0|lte:100',
                 'bahasa_indonesia5' => 'required|numeric|gt:0|lte:100',
-                'bahasa_inggris1' => 'required|numeric|gt:0|lte:100',
-                'bahasa_inggris2' => 'required|numeric|gt:0|lte:100',
                 'bahasa_inggris3' => 'required|numeric|gt:0|lte:100',
                 'bahasa_inggris4' => 'required|numeric|gt:0|lte:100',
                 'bahasa_inggris5' => 'required|numeric|gt:0|lte:100',
-                'agama1' => 'required|numeric|gt:0|lte:100',
-                'agama2' => 'required|numeric|gt:0|lte:100',
-                'agama3' => 'required|numeric|gt:0|lte:100',
-                'agama4' => 'required|numeric|gt:0|lte:100',
-                'agama5' => 'required|numeric|gt:0|lte:100',
-                'ipa1' => 'required|numeric|gt:0|lte:100',
-                'ipa2' => 'required|numeric|gt:0|lte:100',
+                // 'agama3' => 'required|numeric|gt:0|lte:100',
+                // 'agama4' => 'required|numeric|gt:0|lte:100',
+                // 'agama5' => 'required|numeric|gt:0|lte:100',
+                'pai3' => 'required|numeric|gt:0|lte:100',
+                'pai4' => 'required|numeric|gt:0|lte:100',
+                'pai5' => 'required|numeric|gt:0|lte:100',
                 'ipa3' => 'required|numeric|gt:0|lte:100',
                 'ipa4' => 'required|numeric|gt:0|lte:100',
                 'ipa5' => 'required|numeric|gt:0|lte:100',
-                'ips1' => 'required|numeric|gt:0|lte:100',
-                'ips2' => 'required|numeric|gt:0|lte:100',
                 'ips3' => 'required|numeric|gt:0|lte:100',
                 'ips4' => 'required|numeric|gt:0|lte:100',
                 'ips5' => 'required|numeric|gt:0|lte:100',
@@ -166,7 +167,8 @@ class RapotModal extends Component
 
         $formattedData = [];
         $totalAverage = 0;
-        for ($i = 1; $i <= 5; $i++) {
+
+        for ($i = 3; $i <= 5; $i++) {
             $rapotData = $this->getRapotData($i);
             $formattedData[] = [
                 'semester' => $i,
@@ -175,16 +177,19 @@ class RapotModal extends Component
             $totalAverage += array_sum($rapotData) / count($rapotData);
         }
 
-        $totalAverage /= 5;
+        $totalAverage /= 3;
 
-        // convert to json
         $jsonData = json_encode($formattedData, JSON_PRETTY_PRINT);
+        // dd($jsonData);
+
         $this->rapot->nilai_rapot = $jsonData;
         $this->rapot->total_rata_nilai = $totalAverage;
         $this->rapot->save();
+
         $this->dispatch('isian-updated');
         $this->modalSubmit = false;
     }
+
 
     private function getRapotData($semester)
     {
@@ -192,7 +197,7 @@ class RapotModal extends Component
             'matematika' => (float)$this->{"matematika$semester"},
             'bahasa_indonesia' => (float)$this->{"bahasa_indonesia$semester"},
             'bahasa_inggris' => (float)$this->{"bahasa_inggris$semester"},
-            'agama' => (float)$this->{"agama$semester"},
+            'pai' => (float)$this->{"pai$semester"},
             'ipa' => (float)$this->{"ipa$semester"},
             'ips' => (float)$this->{"ips$semester"},
         ];
