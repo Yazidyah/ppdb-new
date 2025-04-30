@@ -14,8 +14,11 @@ class DataPendaftaran extends Component
     {
         return view('livewire.admin.data-pendaftaran', [
             'pendaftarans' => CalonSiswa::query()
+                ->whereHas('user', function ($query) {
+                    $query->whereNull('deleted_at');
+                })
                 ->orderBy('id_calon_siswa')
-                ->paginate(5)
+                ->paginate(10)
         ]);
     }
 }

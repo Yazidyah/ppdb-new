@@ -35,15 +35,27 @@
                                         {{ @$pendaftaran->sekolah_asal ?? 'Belum Di Lengkapi' }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">
-                                        {{ @$siswa->jenis_kelamin ?? 'Belum Di Lengkapi' }}
+                                        {{ @$pendaftaran->jenis_kelamin == 'L' ? 'Laki-laki' : (@$pendaftaran->jenis_kelamin == 'P' ? 'Perempuan' : 'Belum Di Lengkapi') }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">
-                                        {{ @$siswa->dataRegistrasi->rapot->total_rata_nilai ?? 'Belum Di Lengkapi' }}
+                                        {{ @$pendaftaran->dataRegistrasi->rapot->total_rata_nilai ?? 'Belum Di Lengkapi' }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">Dalam Kota</td>
                                     <td class="border px-6 py-3 text-center">
-                                        <span class="bg-green-100 text-green-800 text-xs font-medium px-3 py-1 rounded">
-                                            Lulus
+                                        @php
+                                            $statusMapping = [
+                                                7 => ['label' => 'Tidak Diterima', 'color' => 'bg-red-100 text-red-800'],
+                                                8 => ['label' => 'Diterima', 'color' => 'bg-green-100 text-green-800'],
+                                                9 => ['label' => 'Dicadangkan', 'color' => 'bg-yellow-100 text-yellow-800'],
+                                            ];
+                                            if (($pendaftaran->dataRegistrasi->status ?? 6) <= 6) {
+                                                $status = ['label' => 'Dalam Proses', 'color' => 'bg-gray-100 text-gray-800'];
+                                            } else {
+                                                $status = $statusMapping[$pendaftaran->dataRegistrasi->status] ?? ['label' => 'Unknown', 'color' => 'bg-gray-100 text-gray-800'];
+                                            }
+                                        @endphp
+                                        <span class="{{ $status['color'] }} text-xs font-medium px-3 py-1 rounded">
+                                            {{ $status['label'] }}
                                         </span>
                                     </td>
                                 </tr>
