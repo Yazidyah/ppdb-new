@@ -92,7 +92,7 @@ class PendaftaranExport extends DefaultValueBinder implements
 
         $sheet->getRowDimension(1)->setRowHeight(25); // Atur tinggi heading menjadi 25
 
-        $sheet->getStyle('A1:BK1')->applyFromArray([
+        $sheet->getStyle('A1:AY1')->applyFromArray([
             'font' => [
                 'bold' => true,
                 'color' => ['argb' => 'FFFFFF'],
@@ -114,7 +114,7 @@ class PendaftaranExport extends DefaultValueBinder implements
         ]);
 
         // Set style for all rows
-        $sheet->getStyle('A2:BK' . $sheet->getHighestRow())->applyFromArray([
+        $sheet->getStyle('A2:AY' . $sheet->getHighestRow())->applyFromArray([
             'alignment' => [
                 'horizontal' => Alignment::HORIZONTAL_CENTER,
                 'vertical' => Alignment::VERTICAL_CENTER,
@@ -184,18 +184,6 @@ class PendaftaranExport extends DefaultValueBinder implements
             'AW' => 10,
             'AX' => 10,
             'AY' => 10,
-            'AZ' => 10,
-            'BA' => 10,
-            'BB' => 10,
-            'BC' => 10,
-            'BD' => 10,
-            'BE' => 10,
-            'BF' => 10,
-            'BG' => 10,
-            'BH' => 10,
-            'BI' => 10,
-            'BJ' => 10,
-            'BK' => 10,
         ];
     }
 
@@ -235,20 +223,6 @@ class PendaftaranExport extends DefaultValueBinder implements
             'Status Verifikasi', //AE
             'Status Penerimaan', //AF
             'Nomor Suket', //AG
-            //semester 1
-            'Eng 1', //AH
-            'Mat 1', //AI
-            'Ind 1', //AJ
-            'IPA 1', //AK
-            'IPS 1', //AL
-            'PAI 1', //AM
-            //semester 2
-            'Eng 2', //AN
-            'Mat 2', //AO
-            'Ind 2', //AP
-            'IPA 2', //AQ
-            'IPS 2', //AR
-            'PAI 2', //AS
             //semester 3
             'Eng 3', //AT
             'Mat 3', //AU
