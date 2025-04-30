@@ -18,14 +18,17 @@ class OperatorController extends Controller
 
         $sortBy = $request->input('sort_by', 'id_calon_siswa');
         $sortOrder = $request->input('sort_order', 'asc');
+        $perPage = $request->input('per_page', 10); // Default to 10 items per page
 
         $query = $this->applySorting($query, $sortBy, $sortOrder);
 
-        $data = $query->get()->map(function ($item) {
+        $data = $query->paginate($perPage)->withQueryString(); // Use pagination with per_page
+
+        $data->getCollection()->transform(function ($item) {
             $item->nama_lengkap = ucwords(strtolower($item->nama_lengkap));
             $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
             $item->status_label = $this->getStatusLabel($item->dataRegistrasi->status ?? null);
-            $item->no_telp = $item->no_telp; 
+            $item->no_telp = $item->no_telp;
             return $item;
         });
 
@@ -106,7 +109,7 @@ class OperatorController extends Controller
 
     private function applySorting($query, $sortBy, $sortOrder)
     {
-        $validSortByColumns = ['id_calon_siswa', 'nama_lengkap', 'NISN', 'sekolah_asal', 'jenis_kelamin', 'status'];
+        $validSortByColumns = ['id_calon_siswa', 'nama_lengkap', 'NISN', 'sekolah_asal', 'jenis_kelamin', 'status', 'total_rata_nilai'];
         if (!in_array($sortBy, $validSortByColumns)) {
             $sortBy = 'id_calon_siswa';
         }
@@ -118,6 +121,10 @@ class OperatorController extends Controller
         if ($sortBy == 'status') {
             $query->join('data_registrasi', 'calon_siswa.id_calon_siswa', '=', 'data_registrasi.id_calon_siswa')
                 ->orderBy('data_registrasi.status', $sortOrder);
+        } elseif ($sortBy == 'total_rata_nilai') {
+            $query->join('data_registrasi', 'calon_siswa.id_calon_siswa', '=', 'data_registrasi.id_calon_siswa')
+                ->join('rapot', 'data_registrasi.id_registrasi', '=', 'rapot.id_registrasi')
+                ->orderBy('rapot.total_rata_nilai', $sortOrder);
         } else {
             $query->orderBy($sortBy, $sortOrder);
         }
