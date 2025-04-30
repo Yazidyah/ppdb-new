@@ -250,11 +250,6 @@
                                         </thead>
                                         <tbody>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Belum Ditentukan</td>
-                                                <td class="py-4 text-center px-6 border-b border-gray-200">
-                                                    {{ $countBelumDitentukan }}</td>
-                                            </tr>
-                                            <tr class="hover:bg-gray-100">
                                                 <td class="py-4 px-6 border-b border-gray-200">Tidak Diterima</td>
                                                 <td class="py-4 text-center px-6 border-b border-gray-200">
                                                     {{ $countDiterima }}

@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DataRegistrasi extends Model
 {
+    use SoftDeletes;
     protected $table = 'data_registrasi';
     protected $primaryKey = 'id_registrasi';
     protected $fillable = [

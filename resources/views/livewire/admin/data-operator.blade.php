@@ -1,15 +1,13 @@
-<div class="w-screen">
-    {{-- Table --}}
-    <div class="p-4 mx-auto justify-center flex ">
-
-            <div class="container mx-auto text-center pt-3 w-full">
-                <div class="flex justify-between w-1/2 mx-auto mb-4 ">
-            <h1 class="text-lg font-bold">Kelola Akun Operator</h1>
-            <button wire:click="create" class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Tambah Operator</button>
+<div class="w-screen bg-gray-100 min-h-screen p-4 sm:ml-64">
+    <div class="p-6 mx-auto flex justify-center">
+        <div class="container mx-auto text-center pt-6">
+            <div class="w-full container mx-auto mt-10">
+                <h1 class="text-4xl font-extrabold text-gray-800 mb-6">Kelola Akun Operator</h1>
+            <button wire:click="create" class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded mb-10">Tambah Operator</button>
         </div>
-        <div class="w-screen container mx-auto mt-10">
-            <table class=" table-auto overflow-x-auto mx-auto items-center relative shadow-md w-1/2 sm:rounded-lg my-6 rtl:justify-left text-sm text-left text-gray-500">
-                <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+        <div class="overflow-x-auto shadow-lg rounded-lg bg-white">
+        <table class="table-auto w-full text-sm text-left text-gray-600">
+        <thead class="bg-gray-200 text-gray-700 uppercase text-sm">
                     <tr class="text-sm text-tertiary uppercase bg-gray-50">
                         <th scope="col" class="px-4 py-2 text-center">No</th>
                         <th scope="col" class="px-4 py-2 text-center">Name</th>
