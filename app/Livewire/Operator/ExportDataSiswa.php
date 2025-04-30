@@ -70,20 +70,6 @@ class ExportDataSiswa extends Component
                 'wali.nik as NIK_wali',
                 'pekerjaan_wali.nama_pekerjaan as pekerjaan_wali',
                 'wali.no_telp as no_telp_wali',
-                // //rapot sem 1
-                // 'rp.nilai_rapot->0->data->matematika as mat_1',
-                // 'rp.nilai_rapot->0->data->bahasa_indonesia as bind_1',
-                // 'rp.nilai_rapot->0->data->bahasa_inggris as eng_1',
-                // 'rp.nilai_rapot->0->data->agama as agama_1',
-                // 'rp.nilai_rapot->0->data->ipa as ipa_1',
-                // 'rp.nilai_rapot->0->data->ips as ips_1',
-                // // rapot sem 2
-                // 'rp.nilai_rapot->1->data->matematika as mat_2',
-                // 'rp.nilai_rapot->1->data->bahasa_indonesia as bind_2',
-                // 'rp.nilai_rapot->1->data->bahasa_inggris as eng_2',
-                // 'rp.nilai_rapot->1->data->agama as agama_2',
-                // 'rp.nilai_rapot->1->data->ipa as ipa_2',
-                // 'rp.nilai_rapot->1->data->ips as ips_2',
                 // rapot sem 3
                 'rp.nilai_rapot->0->data->matematika as mat_3',
                 'rp.nilai_rapot->0->data->bahasa_indonesia as bind_3',
