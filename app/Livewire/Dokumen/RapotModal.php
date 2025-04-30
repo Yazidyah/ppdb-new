@@ -52,39 +52,34 @@ class RapotModal extends Component
     private function initializeRapotValues($rapot)
     {
         // matematika sem 3 - 5
-        $this->matematika3 = (float)($rapot[2]['data']['matematika'] ?? 0);
-        $this->matematika4 = (float)($rapot[3]['data']['matematika'] ?? 0);
-        $this->matematika5 = (float)($rapot[4]['data']['matematika'] ?? 0);
+        $this->matematika3 = (float)($rapot[0]['data']['matematika'] ?? 0);
+        $this->matematika4 = (float)($rapot[1]['data']['matematika'] ?? 0);
+        $this->matematika5 = (float)($rapot[2]['data']['matematika'] ?? 0);
 
         // bahasa indonesia sem 3 - 5
-        $this->bahasa_indonesia3 = (float)($rapot[2]['data']['bahasa_indonesia'] ?? 0);
-        $this->bahasa_indonesia4 = (float)($rapot[3]['data']['bahasa_indonesia'] ?? 0);
-        $this->bahasa_indonesia5 = (float)($rapot[4]['data']['bahasa_indonesia'] ?? 0);
+        $this->bahasa_indonesia3 = (float)($rapot[0]['data']['bahasa_indonesia'] ?? 0);
+        $this->bahasa_indonesia4 = (float)($rapot[1]['data']['bahasa_indonesia'] ?? 0);
+        $this->bahasa_indonesia5 = (float)($rapot[2]['data']['bahasa_indonesia'] ?? 0);
 
         // bahasa inggris sem 3 - 5
-        $this->bahasa_inggris3 = (float)($rapot[2]['data']['bahasa_inggris'] ?? 0);
-        $this->bahasa_inggris4 = (float)($rapot[3]['data']['bahasa_inggris'] ?? 0);
-        $this->bahasa_inggris5 = (float)($rapot[4]['data']['bahasa_inggris'] ?? 0);
-
-        // agama sem 3 - 5
-        // $this->agama3 = (float)($rapot[2]['data']['agama'] ?? 0);
-        // $this->agama4 = (float)($rapot[3]['data']['agama'] ?? 0);
-        // $this->agama5 = (float)($rapot[4]['data']['agama'] ?? 0);
+        $this->bahasa_inggris3 = (float)($rapot[0]['data']['bahasa_inggris'] ?? 0);
+        $this->bahasa_inggris4 = (float)($rapot[1]['data']['bahasa_inggris'] ?? 0);
+        $this->bahasa_inggris5 = (float)($rapot[2]['data']['bahasa_inggris'] ?? 0);
 
         // pai sem 3 - 5
-        $this->pai3 = (float)($rapot[2]['data']['pai'] ?? 0);
-        $this->pai4 = (float)($rapot[3]['data']['pai'] ?? 0);
-        $this->pai5 = (float)($rapot[4]['data']['pai'] ?? 0);
+        $this->pai3 = (float)($rapot[0]['data']['pai'] ?? 0);
+        $this->pai4 = (float)($rapot[1]['data']['pai'] ?? 0);
+        $this->pai5 = (float)($rapot[2]['data']['pai'] ?? 0);
 
         // ipa sem 3 - 5
-        $this->ipa3 = (float)($rapot[2]['data']['ipa'] ?? 0);
-        $this->ipa4 = (float)($rapot[3]['data']['ipa'] ?? 0);
-        $this->ipa5 = (float)($rapot[4]['data']['ipa'] ?? 0);
+        $this->ipa3 = (float)($rapot[0]['data']['ipa'] ?? 0);
+        $this->ipa4 = (float)($rapot[1]['data']['ipa'] ?? 0);
+        $this->ipa5 = (float)($rapot[2]['data']['ipa'] ?? 0);
 
         // ips sem 3 - 5
-        $this->ips3 = (float)($rapot[2]['data']['ips'] ?? 0);
-        $this->ips4 = (float)($rapot[3]['data']['ips'] ?? 0);
-        $this->ips5 = (float)($rapot[4]['data']['ips'] ?? 0);
+        $this->ips3 = (float)($rapot[0]['data']['ips'] ?? 0);
+        $this->ips4 = (float)($rapot[1]['data']['ips'] ?? 0);
+        $this->ips5 = (float)($rapot[2]['data']['ips'] ?? 0);
     }
 
     public function validateRapotInput()
@@ -105,10 +100,6 @@ class RapotModal extends Component
             'bahasa_inggris4' => 'required|min:0|max:100',
             'bahasa_inggris5' => 'required|min:0|max:100',
 
-            // agama sem 3 - 5
-            // 'agama3' => 'required|min:0|max:100',
-            // 'agama4' => 'required|min:0|max:100',
-            // 'agama5' => 'required|min:0|max:100',
 
             // pai sem 3 - 5
             'pai3' => 'required|min:0|max:100',
@@ -145,9 +136,6 @@ class RapotModal extends Component
                 'bahasa_inggris3' => 'required|numeric|gt:0|lte:100',
                 'bahasa_inggris4' => 'required|numeric|gt:0|lte:100',
                 'bahasa_inggris5' => 'required|numeric|gt:0|lte:100',
-                // 'agama3' => 'required|numeric|gt:0|lte:100',
-                // 'agama4' => 'required|numeric|gt:0|lte:100',
-                // 'agama5' => 'required|numeric|gt:0|lte:100',
                 'pai3' => 'required|numeric|gt:0|lte:100',
                 'pai4' => 'required|numeric|gt:0|lte:100',
                 'pai5' => 'required|numeric|gt:0|lte:100',

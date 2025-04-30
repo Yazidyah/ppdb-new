@@ -54,7 +54,7 @@
                                         <input
                                             class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-tertiary focus:border-tertiary"
                                             id="{{ $subject }}{{ $sem }}" type="text"
-                                            @if ('pai' === $subject) placeholder="Untuk MTs, Nilai Agama dibagi 4" @endif
+                                            @if ('pai' === $subject) placeholder="Untuk MTs, Nilai Qur'an Hadis, Akidah Akhlak, Fikih, dan SKI dijumlahkan kemudian dibagi 4" @endif
                                             name="{{ $subject }}{{ $sem }}" required autofocus
                                             autocomplete="{{ $subject }}{{ $sem }}"
                                             wire:model.live="{{ $subject }}{{ $sem }}" maxlength="5"
