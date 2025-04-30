@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class TabDetailSiswa extends Component
 {
@@ -123,6 +124,19 @@ class TabDetailSiswa extends Component
         ]);
 
         session()->flash('message', 'Data berhasil diperbarui.');
+    }
+
+    public function deleteSiswa()
+    {
+        $user = User::find($this->siswa->id_user);
+
+        if ($user) {
+            $user->delete(); 
+            session()->flash('message', 'Siswa berhasil dihapus.');
+            return redirect()->route('operator.datasiswa');
+        } else {
+            session()->flash('message', 'Siswa tidak ditemukan.');
+        }
     }
 
     protected function formatJadwalTes($idJadwalTes)

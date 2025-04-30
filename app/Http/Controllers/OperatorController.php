@@ -69,7 +69,10 @@ class OperatorController extends Controller
 
     private function buildSiswaQuery(Request $request)
     {
-        $query = CalonSiswa::with(['dataRegistrasi.rapot', 'dataRegistrasi.dataTes']); // Added 'dataTes'
+        $query = CalonSiswa::with(['dataRegistrasi.rapot', 'dataRegistrasi.dataTes'])
+            ->whereHas('user', function ($q) {
+                $q->whereNull('deleted_at'); // Only include users where deleted_at is null
+            });
 
         if ($request->has('search')) {
             $search = strtolower($request->input('search'));
