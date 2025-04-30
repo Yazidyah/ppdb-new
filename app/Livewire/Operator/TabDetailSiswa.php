@@ -131,8 +131,16 @@ class TabDetailSiswa extends Component
         $user = User::find($this->siswa->id_user);
 
         if ($user) {
-            $user->delete(); 
-            session()->flash('message', 'Siswa berhasil dihapus.');
+            // Soft delete related CalonSiswa
+            CalonSiswa::where('id_user', $user->id)->update(['deleted_at' => now()]);
+
+            // Soft delete related DataRegistrasi
+            DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->update(['deleted_at' => now()]);
+
+            // Soft delete the user
+            $user->delete();
+
+            session()->flash('message', 'Siswa dan data terkait berhasil dihapus.');
             return redirect()->route('operator.datasiswa');
         } else {
             session()->flash('message', 'Siswa tidak ditemukan.');
