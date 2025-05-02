@@ -83,7 +83,7 @@
                         </span></h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">05 - 09 Mei 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran online melalui
-                        website <span class="hover:underline"><a href="#">ppdb.man1kotabogor.com</a></span></h1>
+                        website <span class="hover:underline"><a href="#">ppdb.man1kotabogor.id</a></span></h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">2</h1>
@@ -140,7 +140,7 @@
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">26 Mei - 05 Juni 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran online melalui
-                        website <span class="hover:underline"><a href="#">ppdb.man1kotabogor.com</a></span></h1>
+                        website <span class="hover:underline"><a href="#">ppdb.man1kotabogor.id</a></span></h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">2</h1>
