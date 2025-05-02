@@ -233,6 +233,18 @@
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-akreditasi') }}</p>
                             @endif
                         @endif
+
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'sertifikat prestasi'))
+                            @if (session()->has('error-prestasi'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-prestasi') }}</p>
+                            @endif
+                        @endif
+
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'nisn'))
+                            @if (session()->has('error-nisn'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-nisn') }}</p>
+                            @endif
+                        @endif
                     @endif
                     <button type="button" onclick="showExample('{{ $data->nama_persyaratan }}')"
                         class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">

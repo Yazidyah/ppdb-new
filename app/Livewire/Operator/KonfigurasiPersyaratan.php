@@ -103,7 +103,8 @@ class KonfigurasiPersyaratan extends Component
     public function closeModal()
     {
         $this->showModal = false;
-        $this->filter();
+        $this->resetForm();
+        // $this->filter();
     }
 
     public function resetForm()
@@ -116,7 +117,7 @@ class KonfigurasiPersyaratan extends Component
 
     public function store()
     {
-        \Log::debug('Storing Persyaratan:', $this->getPersyaratanData());
+        // \Log::debug('Storing Persyaratan:', $this->getPersyaratanData());
 
         try {
             $this->validate();

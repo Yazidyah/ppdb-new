@@ -20,6 +20,10 @@
             @elseif ($ortu->id_hubungan == 3)
                 <h2 class="font-semibold py-2">Isi Informasi Wali</h2>
                 @livewire('orang-tua-form', ['orangTua' => $ortu], key('form-orang-tua-' . $ortu->id_orang_tua))
+                <button wire:click="batalTambahOrtu"
+                    class="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Hapus data wali
+                </button>
             @endif
         @endforeach
         @if (count($orangTua) < 3)

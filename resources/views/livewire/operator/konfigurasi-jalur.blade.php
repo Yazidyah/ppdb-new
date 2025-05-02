@@ -39,7 +39,7 @@
                 <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 my-3">
                     <thead class="text-sm text-tertiary uppercase bg-gray-50">
                         <tr>
-                            <th class="px-4 py-2 text-center">Nama Jalur</th>
+                            <th class="px-4 py-2 pl-12 text-left">Nama Jalur</th>
                             <th class="px-4 py-2 text-center">Deskripsi</th>
                             <th class="px-4 py-2 text-center">Tanggal Buka</th>
                             <th class="px-4 py-2 text-center">Tanggal Tutup</th>
@@ -50,8 +50,8 @@
                     <tbody>
                         @forelse ($jalurRegistrasi as $item)
                             <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
-                                <td class=" px-4 py-2 text-tertiary text-center">{{ $item->nama_jalur }}</td>
-                                <td class=" px-4 py-2 text-tertiary text-center">{{ $item->deskripsi }}</td>
+                                <td class=" px-4 py-2 pl-12 text-tertiary text-left">{{ $item->nama_jalur }}</td>
+                                <td class=" px-4 py-2 text-tertiary text-left">{{ $item->deskripsi }}</td>
                                 <td class=" px-4 py-2 text-tertiary text-center">{{ $item->tanggal_buka }}</td>
                                 <td class=" px-4 py-2 text-tertiary text-center">{{ $item->tanggal_tutup }}</td>
                                 <td class=" px-4 py-2 text-tertiary text-center">{{ $item->is_open ? 'Buka' : 'Tutup' }}

@@ -80,6 +80,14 @@ class UploadDokumen extends Component
             return stripos($item->nama_persyaratan, 'akreditasi') !== false;
         })->pluck('nama_persyaratan')->first();
 
+        $prestasi = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'prestasi') !== false;
+        })->pluck('nama_persyaratan')->first();
+
+        $nisn = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'nisn') !== false;
+        })->pluck('nama_persyaratan')->first();
+
 
         $validationRules = [
             $ijazah => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-ijazah'],
@@ -87,11 +95,12 @@ class UploadDokumen extends Component
             $kartuKeluarga => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-kk'],
             $akta => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-akte'],
             $akreditasi => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-akreditasi'],
-            $rapot => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-rapot'],
+            $rapot => [['required', 'file', 'mimes:pdf', 'max:5000'], 'error-rapot'],
+            $prestasi => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-prestasi'],
+            $nisn => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-nisn'],
         ];
         if (isset($validationRules[$this->syarat->nama_persyaratan])) {
             [$rules, $errorKey] = $validationRules[$this->syarat->nama_persyaratan];
-            // dd($rules, $errorKey);
             try {
                 $this->validate(['berkas' => $rules], [
                     'berkas.required' => 'File harus diunggah.',
@@ -114,7 +123,10 @@ class UploadDokumen extends Component
     {
         $this->syarat = Persyaratan::find($id);
         if ($this->syarat->id_jalur == 1) {
-            $this->kb = KategoriBerkas::where('nama', $this->syarat->nama_persyaratan)->where('key', 'jalur_reguler')->first();
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_reguler')->first();
+        }
+        if ($this->syarat->id_jalur == 2) {
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_prestasi')->first();
         }
     }
 
