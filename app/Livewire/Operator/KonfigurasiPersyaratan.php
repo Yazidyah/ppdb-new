@@ -103,8 +103,8 @@ class KonfigurasiPersyaratan extends Component
     public function closeModal()
     {
         $this->showModal = false;
-        // $this->resetForm();
-        $this->filter();
+        $this->resetForm();
+        // $this->filter();
     }
 
     public function resetForm()
