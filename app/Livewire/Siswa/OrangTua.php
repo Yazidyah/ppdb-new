@@ -44,7 +44,9 @@ class OrangTua extends Component
                     'pekerjaan' => 2,   
                 ]);
             }
-            $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();
+            $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)
+                ->orderBy('id_hubungan', 'asc')
+                ->get();
         }
     }
 
@@ -57,6 +59,23 @@ class OrangTua extends Component
 
         $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();
         $this->dispatch('orangtuaAdded');
+        return redirect('/siswa/daftar-step-satu?t=2');
+    }
+
+    public function batalTambahOrtu()
+    {
+        $ortu = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)
+            ->where('id_hubungan', 3)
+            ->latest()
+            ->first();
+
+        if ($ortu) {
+            $ortu->delete();
+            $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();
+            $this->dispatch('orangtuaDeleted');
+        }
+
+        return redirect('/siswa/daftar-step-satu?t=2');
     }
 
     public function render()

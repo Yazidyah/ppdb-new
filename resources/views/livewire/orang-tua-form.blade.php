@@ -32,8 +32,11 @@
                     <select id="pekerjaan" name="pekerjaan" 
                         class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                         wire:model.live="pekerjaan">
+                        <option value="" disabled selected>Pilih Pekerjaan</option>
                         @foreach ($pekerjaanOptions as $option)
-                            <option value="{{ $option->id_pekerjaan }}">{{ $option->nama_pekerjaan }}</option>
+                            <option value="{{ $option->id_pekerjaan }}" {{ $pekerjaan == $option->id_pekerjaan ? 'selected' : '' }}>
+                                {{ $option->nama_pekerjaan }}
+                            </option>
                         @endforeach
                     </select>
                     @error('pekerjaan')

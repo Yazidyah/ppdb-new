@@ -40,14 +40,17 @@ class OrangTuaForm extends Component
 
     public function mount()
     {
-
         $this->hubunganOptions = HubunganOrangTua::orderBy('id_hubungan', 'asc')->get();
-        $this->pekerjaanOptions = PekerjaanOrangTua::query()->when($this->orangTua->id_hubungan != 1, function ($query) {
-            return $query->where('id_pekerjaan', '!=', 1);
-        })->orderBy('id_pekerjaan', 'asc')->get();
+        $this->pekerjaanOptions = PekerjaanOrangTua::query()
+            ->when($this->orangTua->id_hubungan != 1, function ($query) {
+                return $query->where('id_pekerjaan', '!=', 1);
+            })
+            ->orderBy('id_pekerjaan', 'asc')
+            ->get();
         $this->nama_lengkap = $this->orangTua->nama_lengkap;
         $this->id_hubungan = $this->orangTua->id_hubungan;
         $this->nik = $this->orangTua->nik;
+        $this->pekerjaan = $this->orangTua->pekerjaan;
         $this->no_telp = $this->orangTua->no_telp;
     }
 
