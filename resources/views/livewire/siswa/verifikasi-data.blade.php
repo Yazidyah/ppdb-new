@@ -142,6 +142,32 @@
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaAyah->no_telp ? 'text-red-500' : '' }}">
             </div>
         @endif
+        @if($orangTuaWali != null)
+            <h2 class="text-2xl font-bold mb-4 mx-2 text-start">Biodata Orang Tua Wali</h2>
+            <div class="mb-4 mx-2">
+                <label for="nama_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Nama Lengkap Wali</label>
+                <input type="text" id="nama_orang_tua_ayah"
+                    value="{{ strtoupper($orangTuaWali->nama_lengkap) ?: 'DATA INI KOSONG' }}" disabled
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->nama_lengkap ? 'text-red-500' : '' }}">
+            </div>
+            <div class="mb-4 mx-2">
+                <label for="nik_orang_tua_ayah" class="block text-sm font-medium text-gray-700">NIK Ayah</label>
+                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaWali->nik ?: 'DATA INI KOSONG' }}" disabled
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->nik ? 'text-red-500' : '' }}">
+            </div>
+            <div class="mb-4 mx-2">
+                <label for="pekerjaan_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
+                <input type="text" id="pekerjaan_orang_tua_ayah"
+                    value="{{ strtoupper($orangTuaWali->pekerjaan) ?: 'DATA INI KOSONG' }}" disabled
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->pekerjaan ? 'text-red-500' : '' }}">
+            </div>
+            <div class="mb-4 mx-2">
+                <label for="no_telp_orang_tua_ayah" class="block text-sm font-medium text-gray-700">No Telp Ayah</label>
+                <input type="text" id="no_telp_orang_tua_ayah" value="{{ $orangTuaWali->no_telp ?: 'DATA INI KOSONG' }}"
+                    disabled
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->no_telp ? 'text-red-500' : '' }}">
+            </div>
+        @endif
         @if (session()->has('error'))
             <div class="alert alert-danger">
                 {{ session('error') }}
@@ -172,7 +198,8 @@
                     <h3 class="mb-4 text-3xl font-bold text-gray-900">Konfirmasi Pengisian Data</h3>
                     <p class="text-md text-justify ">
                         Dengan ini saya menyatakan bahwa saya meyakini sepenuhnya bahwa data isian biodata dan data
-                        orang tua yang telah saya masukkan ke dalam sistem adalah <span class="font-bold text-tertiary"> Valid, Benar, dan Dapat Dipertanggungjawabkan.</span>
+                        orang tua yang telah saya masukkan ke dalam sistem adalah <span class="font-bold text-tertiary">
+                            Valid, Benar, dan Dapat Dipertanggungjawabkan.</span>
                     </p>
                     <p class="text-md text-justify">
                         Saya memahami bahwa kebenaran informasi tersebut sangat penting untuk

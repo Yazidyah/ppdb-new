@@ -27,6 +27,7 @@
     <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
         <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
             <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                <th class="px-4 py-2 text-center">ID</th>
                 <th class="px-4 py-2 text-center">Nama Jenis Tes</th>
                 <th class="px-4 py-2 text-center">Ruang</th>
                 <th class="px-4 py-2 text-center">Tanggal</th>
@@ -39,6 +40,7 @@
         <tbody >
             @foreach ($jadwalTes as $item)
                 <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->id }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jenisTes->nama }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->ruang }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->tanggal }}</td>

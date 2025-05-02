@@ -31,12 +31,16 @@ class VerifikasiData extends Component
     {
         $this->orangTuaIbu = OrangTua::where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)->where('id_hubungan', 1)->first();
         $this->orangTuaAyah = OrangTua::where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)->where('id_hubungan', 2)->first();
+        $this->orangTuaWali = OrangTua::where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)->where('id_hubungan', 3)->first();
 
         if ($this->orangTuaIbu) {
             $this->orangTuaIbu->pekerjaan = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaIbu->pekerjaan)->first()->nama_pekerjaan;
         }
         if ($this->orangTuaAyah) {
             $this->orangTuaAyah->pekerjaan = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaAyah->pekerjaan)->first()->nama_pekerjaan;
+        }
+        if ($this->orangTuaWali) {
+            $this->orangTuaWali->pekerjaan = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaWali->pekerjaan)->first()->nama_pekerjaan;
         }
     }
 
@@ -83,6 +87,7 @@ class VerifikasiData extends Component
             'calonSiswa' => $this->calonSiswa,
             'orangTuaIbu' => $this->orangTuaIbu,
             'orangTuaAyah' => $this->orangTuaAyah,
+            'orangTuaWali' => $this->orangTuaWali,
         ]);
     }
 }
