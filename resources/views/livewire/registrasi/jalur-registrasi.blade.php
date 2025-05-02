@@ -5,7 +5,7 @@
     @csrf
     <div class="container md:flex justify-center mx-auto gap-2">
     @foreach($jalurRegistrasi as $jalur)
-    <div class="md:grid-row-2 flex flex-col md:grid-cols-1 md:grid gap-x-4 gap-y-1">
+    <di v class="md:grid-row-2 flex flex-col md:grid-cols-1 md:grid gap-x-4 gap-y-1">
         <div class="md:w-full md:h-full p-6 bg-primary border border-gray-200 rounded-lg shadow-sm ">
             <a href="javascript:void(0)" wire:click="updateJalur({{ $jalur->id_jalur }})">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white ">{{ $jalur->nama_jalur }}</h5>
@@ -25,7 +25,15 @@
                 <li class="">Memiliki NISN yang tercatat di <span><a href="https://nisn.data.kemdikbud.go.id">https://nisn.data.kemdikbud.go.id</a></span></li>
                 <li class="">Memiliki Email Aktif</li>
                 @foreach($jalur->persyaratan as $persyaratan)
-                <li class="">Memiliki {{ $persyaratan->nama_persyaratan }} (Upload Max 1MB/PDF)</li>
+                <li class="">Memiliki {{ $persyaratan->nama_persyaratan }} 
+                    @if ($persyaratan->nama_persyaratan === 'Rapot MTs/SMP')
+                    (Upload Max 3mb/PDF)
+                    @elseif($persyaratan->nama_persyaratan === 'Pas Foto')
+                    (Upload Max 200kb/JPG, JPEG)
+                    @else
+                    (Upload Max 200kb/PDF) 
+                    @endif
+                </li>
                 @endforeach
             </ol>
         </div>
