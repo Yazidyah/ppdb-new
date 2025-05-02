@@ -22,7 +22,7 @@
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
                     <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">05 Mei - 26 Juni 2025</time>
-                    <h3 class="text-lg font-semibold text-gray-900 "><span><a href="ppdb.man1kotabogor.com">Klik www.man1kotabogor.com</a></span> dan Pilih Menu PPDB</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 "><span><a href="ppdb.man1kotabogor.id">Klik ppdb.man1kotabogor.id</a></span> dan Pilih Menu PPDB</h3>
                 </div>
             </li>
             <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
