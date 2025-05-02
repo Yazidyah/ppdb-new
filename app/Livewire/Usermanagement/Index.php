@@ -11,6 +11,13 @@ class Index extends Component
     use WithPagination;
     public $search;
     public $filterRole;
+    public $showDeleted = false;
+
+    public function toggleShowDeleted()
+    {
+        $this->showDeleted = !$this->showDeleted;
+    }
+
     public function render()
     {
         return view('livewire.usermanagement.index', [
@@ -22,8 +29,13 @@ class Index extends Component
                 ->when($this->filterRole, function ($q) {
                     $q->role($this->filterRole);
                 })
+                ->when($this->showDeleted, function ($q) {
+                    $q->onlyTrashed(); 
+                }, function ($q) {
+                    $q->whereNull('deleted_at');
+                })
                 ->orderBy('id')
-                ->paginate(5),
+                ->paginate(10),
         ])->layout('layouts.app');
     }
 }
