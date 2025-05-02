@@ -294,7 +294,7 @@
                     <div class="tanda-tangan">
                         <img src="{{ public_path('surat\ttd-ketua.jpg') }}" alt="ttd" style="width: 150px; height: 150px;">
                         <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
-                            NIP. Masih kosong</p>
+                            NIP. 198208222014111004</p>
                     </div>
                 </td>
             </tr>
