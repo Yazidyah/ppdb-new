@@ -95,7 +95,7 @@ class UploadDokumen extends Component
             $kartuKeluarga => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-kk'],
             $akta => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-akte'],
             $akreditasi => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-akreditasi'],
-            $rapot => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-rapot'],
+            $rapot => [['required', 'file', 'mimes:pdf', 'max:5000'], 'error-rapot'],
             $prestasi => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-prestasi'],
             $nisn => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-nisn'],
         ];
