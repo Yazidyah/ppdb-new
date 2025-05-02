@@ -5,7 +5,7 @@
     @csrf
     <div class="container md:flex justify-center mx-auto gap-2">
     @foreach($jalurRegistrasi as $jalur)
-    <di v class="md:grid-row-2 flex flex-col md:grid-cols-1 md:grid gap-x-4 gap-y-1">
+    <div class="md:grid-row-2 flex flex-col md:grid-cols-1 md:grid gap-x-4 gap-y-1">
         <div class="md:w-full md:h-full p-6 bg-primary border border-gray-200 rounded-lg shadow-sm ">
             <a href="javascript:void(0)" wire:click="updateJalur({{ $jalur->id_jalur }})">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-white ">{{ $jalur->nama_jalur }}</h5>

@@ -34,7 +34,7 @@
 
 <body class="font-sans text-gray-900 antialiased">
     <div
-        class="relative min-h-screen flex flex-col sm:justify-center bg-cover bg-center items-center pt-6 sm:pt-0 bg-no-repeat bg-[url('/public/alur.jpeg')]">
+        class="relative min-h-screen flex flex-col sm:justify-center bg-cover bg-center items-center pt-6 sm:pt-0 bg-no-repeat bg-[url('/public/cover-man-1.jpeg')]">
 
         <!-- Overlay hitam transparan -->
         <div class="absolute inset-0 bg-black bg-opacity-40 z-0"></div>
