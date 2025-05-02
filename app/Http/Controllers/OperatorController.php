@@ -137,4 +137,9 @@ class OperatorController extends Controller
         $jalurRegistrasi = JalurRegistrasi::with('persyaratan')->get();
         return view('operator.persyaratan', ['jalurRegistrasi' => $jalurRegistrasi]);
     }
+    public function showPersyaratanAdmin()
+    {
+        $jalurRegistrasi = JalurRegistrasi::with('persyaratan')->get();
+        return view('admin.persyaratan', ['jalurRegistrasi' => $jalurRegistrasi]);
+    }
 }
