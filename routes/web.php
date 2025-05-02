@@ -142,9 +142,7 @@ Route::middleware(['auth', 'verified', 'operator'])->group(function () {
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/user-management', UserManagement::class)->name('admin.user-management');
     Route::get('/admin/dashboard', Dashboard::class)->name('admin.dashboard');
-    Route::get('/admin/persyaratan', function () {
-        return view('admin.persyaratan');
-    })->name('admin.persyaratan');
+    Route::get('/admin/persyaratan',  [OperatorController::class, 'showPersyaratanAdmin'])->name('admin.persyaratan');
     Route::get('/admin/alur-pendaftaran', function () {
         return view('admin.alur-pendaftaran');
     })->name('admin.alur-pendaftaran');
