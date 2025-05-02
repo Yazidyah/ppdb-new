@@ -19,7 +19,7 @@
                     <tbody>
                         @foreach ($pekerjaanOrtu as $item)
                             <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer text-center">
-                                <td class="border text-tertiary px-4 py-2">{{ $item->nama_pekerjaan }}</td>
+                                <td class="border text-tertiary px-4 py-2 text-lg">{{ $item->nama_pekerjaan }}</td>
                                 <td class="border text-tertiary px-4 py-2 flex justify-center space-x-2">
                                     <button onclick="showEditModal({{ $item->id_pekerjaan }}, '{{ $item->nama_pekerjaan }}')" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
                                     <form action="{{ route('pekerjaan-ortu.destroy', $item->id_pekerjaan) }}" method="post" onsubmit="return confirm('Are you sure?');">

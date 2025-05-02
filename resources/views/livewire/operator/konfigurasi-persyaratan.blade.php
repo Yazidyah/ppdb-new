@@ -182,12 +182,12 @@
                         <tbody>
                             @forelse ($persyaratan as $item)
                                 <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
-                                    <td class="border text-tertiary text-center px-4 py-2">
+                                    <td class="border text-tertiary text-left px-4 py-2 pl-12">
                                         {{ $item->nama_persyaratan }}
                                     </td>
                                     <td class="border text-tertiary text-center px-4 py-2">
                                         {{ $item->jalurRegistrasi->nama_jalur }}</td>
-                                    <td class="border text-tertiary text-center px-4 py-2">{{ $item->deskripsi }}</td>
+                                    <td class="border text-tertiary text-left px-4 py-2">{{ $item->deskripsi }}</td>
                                     <td class="border text-tertiary text-center px-4 py-2">
                                         {{ $item->file_type === 'jpg/jpeg/png' ? 'GAMBAR' : ($item->file_type === 'pdf' ? 'DOKUMEN' : '') }}
                                     </td>
