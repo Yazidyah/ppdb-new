@@ -114,7 +114,10 @@ class UploadDokumen extends Component
     {
         $this->syarat = Persyaratan::find($id);
         if ($this->syarat->id_jalur == 1) {
-            $this->kb = KategoriBerkas::where('nama', $this->syarat->nama_persyaratan)->where('key', 'jalur_reguler')->first();
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_reguler')->first();
+        }
+        if ($this->syarat->id_jalur == 2) {
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_prestasi')->first();
         }
     }
 
