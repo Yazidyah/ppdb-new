@@ -42,6 +42,7 @@ class TabBerkasSiswa extends Component
             $this->validate([
                 'berkas' => 'required|mimes:jpeg,jpg,png,pdf|max:51200', // Maksimal 50MB
             ]);
+            dd($this->berkas);
             $this->simpan();
         } catch (\Exception $e) {
             \Log::info('terlalu besar');
@@ -56,7 +57,6 @@ class TabBerkasSiswa extends Component
         }
         if ($this->syarat->id_jalur == 2) {
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_prestasi')->first();
-            dd($this->kb);
         }
         if ($this->syarat->id_jalur == 3) {
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_afirmasi_ketm')->first();
