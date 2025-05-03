@@ -64,8 +64,8 @@ class TabBerkasSiswa extends Component
 
     public function simpan()
     {
-        dd($this->berkas);
         if ($this->berkas) {
+            dd('ada');
             $path = $this->berkas->store('pendaftaran/persyaratan', 'local');
 
             $berkas = new Berkas([
