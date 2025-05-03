@@ -66,6 +66,9 @@ class TabBerkasSiswa extends Component
         if ($this->syarat->id_jalur == 3) {
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_afirmasi_ketm')->first();
         }
+        if ($this->syarat->id_jalur == 4) {
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_afirmasi_abk')->first();
+        }
     }
 
     public function simpan()
