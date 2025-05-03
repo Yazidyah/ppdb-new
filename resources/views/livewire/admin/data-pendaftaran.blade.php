@@ -33,7 +33,7 @@
                                         {{ @$pendaftaran->NISN ?? 'Belum Di Lengkapi' }}
                                     </td>
                                     <td class="border px-6 py-3 text-left">
-                                        {{ strtoupper(@$pendaftaran->sekolah_asal) ?? 'Belum Di Lengkapi' }}
+                                        {{ @$pendaftaran->sekolah_asal === null ? 'Belum Dilengkapi' : strtoupper(@$pendaftaran->sekolah_asal) }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">
                                         {{ @$pendaftaran->jenis_kelamin == 'L' ? 'Laki-laki' : (@$pendaftaran->jenis_kelamin == 'P' ? 'Perempuan' : 'Belum Di Lengkapi') }}
