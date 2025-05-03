@@ -145,7 +145,7 @@
                                             <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
                                                     unggah</span>
                                             </p>
-                                            <p class="text-xs">JPG, JPEG (MAX. 200kb)</p>
+                                            <p class="text-xs">JPG, JPEG (MAX. 200KB)</p>
                                         </div>
                                         <input wire:model="berkas" wire:change="setSyarat({{ $data->id_persyaratan }})"
                                             type="file" class="hidden" />
@@ -166,7 +166,7 @@
                                             <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
                                                     unggah</span>
                                             </p>
-                                            <p class="text-xs">JPG,JPEG (MAX. 300KB)</p>
+                                            <p class="text-xs">PDF (MAX. 200KB)</p>
                                         </div>
                                         <input wire:model="berkas"
                                             wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
