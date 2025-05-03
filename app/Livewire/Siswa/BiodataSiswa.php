@@ -246,7 +246,7 @@ class BiodataSiswa extends Component
     public function copyAlamatKk()
     {
         $this->alamat_domisili = $this->alamat_kk;
-        $this->siswa->alamat_domisili = strtolower($this->alamat_kk);
+        $this->siswa->alamat_domisili = $this->alamat_kk;
         $this->siswa->save();
     }
 
