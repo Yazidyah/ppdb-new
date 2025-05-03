@@ -26,7 +26,7 @@
                 <li class="">Memiliki Email Aktif</li>
                 @foreach($jalur->persyaratan as $persyaratan)
                 <li class="">Memiliki {{ $persyaratan->nama_persyaratan }} 
-                    @if ($persyaratan->nama_persyaratan === 'Rapot MTs/SMP')
+                    @if ($persyaratan->nama_persyaratan === 'Rapot MTs/SMP (Sem 1-5)')
                     (Upload Max 3mb/PDF)
                     @elseif($persyaratan->nama_persyaratan === 'Pas Foto')
                     (Upload Max 200kb/JPG, JPEG)
