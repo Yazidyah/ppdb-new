@@ -18,6 +18,26 @@ class Index extends Component
         $this->showDeleted = !$this->showDeleted;
     }
 
+    public function recoverUser($userId)
+    {
+        $user = User::withTrashed()->find($userId);
+        if ($user && $user->trashed()) {
+            $user->restore();
+
+            // Restore related CalonSiswa record
+            $calonSiswa = $user->siswa()->withTrashed()->first();
+            if ($calonSiswa) {
+                $calonSiswa->restore();
+
+                // Restore related DataRegistrasi record
+                $dataRegistrasi = $calonSiswa->dataRegistrasi()->withTrashed()->first();
+                if ($dataRegistrasi) {
+                    $dataRegistrasi->restore();
+                }
+            }
+        }
+    }
+
     public function render()
     {
         return view('livewire.usermanagement.index', [

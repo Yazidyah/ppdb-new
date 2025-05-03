@@ -42,13 +42,20 @@
                                     {{ strtoupper($user->role) }}
                                 </td>
                                 <td class=" py-4 pl-3 pr-4 text-sm font-medium sm:pr-6">
-                                    @livewire(
-                                        'usermanagement.user-detail',
-                                        [
-                                            'user' => $user,
-                                        ],
-                                        key(rand() . $user->id)
-                                    )
+                                    @if ($user->trashed())
+                                        <button wire:click="recoverUser({{ $user->id }})"
+                                            class="text-green-600 hover:text-green-900">
+                                            Recover
+                                        </button>
+                                    @else
+                                        @livewire(
+                                            'usermanagement.user-detail',
+                                            [
+                                                'user' => $user,
+                                            ],
+                                            key(rand() . $user->id)
+                                        )
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

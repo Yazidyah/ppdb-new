@@ -46,12 +46,6 @@
                         class="px-4 py-2 text-sm font-semibold text-gray-600 border rounded hover:bg-gray-200">
                         Close
                     </button>
-                    @if ($user->trashed())
-                        <button wire:click="recoverUser"
-                            class="px-4 py-2 text-sm font-semibold bg-green-500 text-white rounded hover:scale-105">
-                            Recovery user
-                        </button>
-                    @endif
                     <button class="px-4 py-2 text-sm font-semibold bg-primary hover:scale-105 text-white rounded"
                         wire:click="loginAs">
                         Login As User
