@@ -40,7 +40,10 @@ class TabBerkasSiswa extends Component
     {
         try {
             $this->validate([
-                'berkas' => 'required|file|max:51200', // Maksimal 50MB
+                'berkas' => 'required',
+                'file',
+                'mimes:jpeg,jpg,png,pdf',
+                'max:5120', // Maksimal 50MB
             ]);
             $this->simpan();
         } catch (\Exception $e) {
