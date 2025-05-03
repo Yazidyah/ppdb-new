@@ -65,7 +65,6 @@ class TabBerkasSiswa extends Component
     public function simpan()
     {
         if ($this->berkas) {
-            dd('ada');
             $path = $this->berkas->store('pendaftaran/persyaratan', 'local');
 
             $berkas = new Berkas([
@@ -76,6 +75,8 @@ class TabBerkasSiswa extends Component
                 'uploader_id' => $this->user->id,
                 'disk' => 'local',
             ]);
+
+            dd($berkas);
             $this->syarat->berkas()->save($berkas);
 
             Log::info('File berhasil disimpan: ', ['path' => $path]);
