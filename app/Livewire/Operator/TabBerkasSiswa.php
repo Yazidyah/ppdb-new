@@ -42,7 +42,6 @@ class TabBerkasSiswa extends Component
             $this->validate([
                 'berkas' => 'required|mimes:jpeg,jpg,png,pdf|max:51200', // Maksimal 50MB
             ]);
-            dd($this->berkas);
             $this->simpan();
         } catch (\Exception $e) {
             \Log::info('terlalu besar');
@@ -65,6 +64,7 @@ class TabBerkasSiswa extends Component
 
     public function simpan()
     {
+        dd($this->berkas);
         if ($this->berkas) {
             $path = $this->berkas->store('pendaftaran/persyaratan', 'local');
 
