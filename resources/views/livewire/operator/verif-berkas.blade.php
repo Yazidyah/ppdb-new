@@ -4,7 +4,7 @@
         {!! $buttonIcon !!}
     </button>
     @if ($modalOpen)
-        <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen backdrop-blur-sm">
+        <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen backdrop-blur-sm overflow-y-auto">
             <div class="absolute inset-0 w-full h-full bg-black backdrop-blur-sm bg-opacity-70"
                 wire:click="$set('modalOpen', false)"></div>
             <div class="relative w-full py-6 bg-white border shadow-lg px-7 border-neutral-200 sm:max-w-2xl sm:rounded-lg">
