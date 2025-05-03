@@ -17,8 +17,10 @@ class DataPendaftaran extends Component
                 ->whereHas('user', function ($query) {
                     $query->whereNull('deleted_at');
                 })
+                ->select('id_calon_siswa', 'nama_lengkap', 'NISN', 'sekolah_asal', 'jenis_kelamin', 'kota') // Include 'kota'
+                ->with(['dataRegistrasi.rapot']) // Ensure related data is loaded
                 ->orderBy('id_calon_siswa')
-                ->paginate(5)
+                ->paginate(10)
         ]);
     }
 }

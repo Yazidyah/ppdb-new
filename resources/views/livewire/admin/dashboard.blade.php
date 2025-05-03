@@ -89,12 +89,12 @@
                                         </thead>
                                         <tbody>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Male</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Laki-laki</td>
                                                 <td class="py-4 px-6 text-center border-b border-gray-200">
                                                     {{ $countLakiLaki }}</td>
                                             </tr>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Female</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Perempuan</td>
                                                 <td class="py-4 px-6 text-center border-b border-gray-200">
                                                     {{ $countPerempuan }}</td>
                                             </tr>

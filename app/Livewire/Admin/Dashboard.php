@@ -38,18 +38,18 @@ class Dashboard extends Component
         $countJalurAfirmasiKETM = (clone $cteDataRegistrasi)->where('id_jalur', 3)->count();
         $countJalurAfirmasiABK = (clone $cteDataRegistrasi)->where('id_jalur', 4)->count();
 
-        $this->countLakiLaki = $cteCalonSiswa->where('jenis_kelamin', 'L')->count();
+        $this->countLakiLaki = (clone $cteCalonSiswa)->where('jenis_kelamin', 'L')->count();
         $this->countPerempuan = $totalCalonSiswa - $this->countLakiLaki;
-        $this->countSekolahNegeri = $cteCalonSiswa->where('status_sekolah', 'negeri')->count();
+        $this->countSekolahNegeri = (clone $cteCalonSiswa)->where('status_sekolah', 'negeri')->count();
         $this->countSekolahSwasta = $totalCalonSiswa - $this->countSekolahNegeri;
-        $this->countLuarBogor = $cteCalonSiswa->where('kota', '!=', 'KOTA BOGOR')->count();
+        $this->countLuarBogor = (clone $cteCalonSiswa)->where('kota', '!=', 'KOTA BOGOR')->count();
         $this->countDalamBogor = $totalCalonSiswa - $this->countLuarBogor;
 
         $this->countJalur = (clone $cteDataRegistrasi)->where('status', '1')->count();
         $this->countUpload = (clone $cteDataRegistrasi)->where('status', '2')->count();
         $this->countSubmit = (clone $cteDataRegistrasi)->where('status', '3')->count();
         $this->countTidakLolosAdministrasi = (clone $cteDataRegistrasi)->where('status', '4')->count();
-        $this->countLolosAdministrasi = (clone $cteDataRegistrasi)->where('status', '5')->count();
+        $this->countLolosAdministrasi = (clone $cteDataRegistrasi)->whereIn('status', ['5', '6'])->count();
         $this->countTidakDiterima = (clone $cteDataRegistrasi)->where('status', '7')->count();
         $this->countDiterima = (clone $cteDataRegistrasi)->where('status', '8')->count();
         $this->countDicadangkan = (clone $cteDataRegistrasi)->where('status', '9')->count();
