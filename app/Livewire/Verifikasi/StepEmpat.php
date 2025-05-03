@@ -41,27 +41,32 @@ class StepEmpat extends Component
 
         return redirect('/siswa/dashboard');
     }
-
     public function isSyaratComplete()
     {
         foreach ($this->persyaratan as $syarat) {
-            // Jika tidak ada berkas yang diupload
-            if (count($syarat->berkas) == 0) {
+            if (count($syarat->berkas) === 0) {
                 $this->isValid = false;
                 return false;
             }
-            
+        }
+
+        foreach ($this->persyaratan as $syarat) {
             foreach ($syarat->berkas as $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
-                if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) && empty($berkas->data_berkas)) {
+
+                if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) 
+                    && empty($berkas->data_berkas)
+                ) {
                     $this->isValid = false;
                     return false;
                 }
             }
         }
-        
-        return $this->isValid;
+
+        $this->isValid = true;
+        return true;
     }
+    
 
     public function render()
     {
