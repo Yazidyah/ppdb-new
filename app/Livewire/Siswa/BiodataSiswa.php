@@ -128,6 +128,14 @@ class BiodataSiswa extends Component
             $this->siswa->save();
         }
 
+        if ($propertyName == 'nilai_akreditasi_sekolah') {
+            $this->siswa->$propertyName = $this->$propertyName === '0' ? 0 : ($this->$propertyName ?: null);
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
+            $this->siswa->save();
+            $this->validateOnly($propertyName);
+            return;
+        }
+
         if ($propertyName != 'NIK' && $propertyName != 'NISN') {
             $this->siswa->$propertyName = $this->$propertyName ?: null;
             $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
