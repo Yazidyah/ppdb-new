@@ -88,6 +88,14 @@ class UploadDokumen extends Component
             return stripos($item->nama_persyaratan, 'nisn') !== false;
         })->pluck('nama_persyaratan')->first();
 
+        $kip = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'kip') !== false;
+        })->pluck('nama_persyaratan')->first();
+
+        $tabungan = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'tabungan') !== false;
+        })->pluck('nama_persyaratan')->first();
+
 
         $validationRules = [
             $ijazah => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-ijazah'],
@@ -98,6 +106,8 @@ class UploadDokumen extends Component
             $rapot => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-rapot'],
             $prestasi => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-prestasi'],
             $nisn => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-nisn'],
+            $kip => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-kip'],
+            $tabungan => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-tabungan'],
         ];
         if (isset($validationRules[$this->syarat->nama_persyaratan])) {
             [$rules, $errorKey] = $validationRules[$this->syarat->nama_persyaratan];
@@ -127,6 +137,9 @@ class UploadDokumen extends Component
         }
         if ($this->syarat->id_jalur == 2) {
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_prestasi')->first();
+        }
+        if ($this->syarat->id_jalur == 3) {
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_afirmasi_ketm')->first();
         }
     }
 

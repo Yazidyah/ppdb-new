@@ -198,7 +198,7 @@
                                 </label>
                             </div>
                         @elseif ($data->nama_persyaratan !== 'Rapot MTs/SMP')
-                        <div class="flex items-center justify-center w-full h-full">
+                            <div class="flex items-center justify-center w-full h-full">
                                 <label
                                     class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
                                     <div class="flex flex-col items-center justify-center py-5 ">
@@ -261,6 +261,18 @@
                         @if (Str::contains(Str::lower($data->nama_persyaratan), 'nisn'))
                             @if (session()->has('error-nisn'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-nisn') }}</p>
+                            @endif
+                        @endif
+
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'kip'))
+                            @if (session()->has('error-kip'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-kip') }}</p>
+                            @endif
+                        @endif
+
+                        @if (Str::contains(Str::lower($data->nama_persyaratan), 'tabungan'))
+                            @if (session()->has('error-tabungan'))
+                                <p class="text-red-500 text-xs mt-2">{{ session('error-tabungan') }}</p>
                             @endif
                         @endif
                     @endif
