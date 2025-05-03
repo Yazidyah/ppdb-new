@@ -75,7 +75,7 @@ class TabBerkasSiswa extends Component
                 'uploader_id' => $this->user->id,
                 'disk' => 'local',
             ]);
-
+            dd($berkas);
             $this->syarat->berkas()->save($berkas);
 
             Log::info('File berhasil disimpan: ', ['path' => $path]);
