@@ -51,6 +51,9 @@ class TabBerkasSiswa extends Component
     public function setSyarat($id)
     {
         $this->syarat = Persyaratan::find($id);
+        if ($this->syarat->berkas->where('uploader_id', $this->user->id)->count() > 0) {
+            $this->berkasBaru = false;
+        }
         if ($this->syarat->id_jalur == 1) {
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_reguler')->first();
         }
@@ -76,9 +79,6 @@ class TabBerkasSiswa extends Component
                 'disk' => 'local',
             ]);
 
-            // dd($berkas);
-            // $this->syarat->berkas()->sace($berkas);
-            // $this->berkas->save();
             $this->syarat->berkas()->save($berkas);
 
             Log::info('File berhasil disimpan: ', ['path' => $path]);
