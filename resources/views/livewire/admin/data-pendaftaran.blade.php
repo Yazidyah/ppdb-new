@@ -26,22 +26,24 @@
                                 <tr onclick="window.location.href='{{ route('admin.data-siswa', ['id' => $pendaftaran->id_calon_siswa]) }}'"
                                     class="hover:bg-gray-100 transition duration-200 cursor-pointer">
                                     <td class="border px-6 py-3 text-center">{{ $pendaftaran->id_calon_siswa }}</td>
-                                    <td class="border px-6 py-3 text-center font-medium">
+                                    <td class="border px-6 py-3 text-left font-medium">
                                         {{ ucwords(@$pendaftaran->nama_lengkap ?? 'Belum Di Lengkapi') }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">
                                         {{ @$pendaftaran->NISN ?? 'Belum Di Lengkapi' }}
                                     </td>
-                                    <td class="border px-6 py-3 text-center">
-                                        {{ @$pendaftaran->sekolah_asal ?? 'Belum Di Lengkapi' }}
+                                    <td class="border px-6 py-3 text-left">
+                                        {{ @$pendaftaran->sekolah_asal === null ? 'Belum Dilengkapi' : strtoupper(@$pendaftaran->sekolah_asal) }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">
                                         {{ @$pendaftaran->jenis_kelamin == 'L' ? 'Laki-laki' : (@$pendaftaran->jenis_kelamin == 'P' ? 'Perempuan' : 'Belum Di Lengkapi') }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">
-                                        {{ @$pendaftaran->dataRegistrasi->rapot->total_rata_nilai ?? 'Belum Di Lengkapi' }}
+                                        {{ (@$pendaftaran->dataRegistrasi->rapot->total_rata_nilai ?? null) === null || @$pendaftaran->dataRegistrasi->rapot->total_rata_nilai == 0.00 ? 'Belum Di Lengkapi' : @$pendaftaran->dataRegistrasi->rapot->total_rata_nilai }}
                                     </td>
-                                    <td class="border px-6 py-3 text-center">Dalam Kota</td>
+                                    <td class="border px-6 py-3 text-center">
+                                        {{ @$pendaftaran->kota === null ? 'Belum Dilengkapi' : (@$pendaftaran->kota === 'KOTA BOGOR' ? 'Dalam Kota' : 'Luar Kota') }}
+                                    </td>
                                     <td class="border px-6 py-3 text-center">
                                         @php
                                             $statusMapping = [

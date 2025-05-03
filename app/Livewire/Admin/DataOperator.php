@@ -102,7 +102,7 @@ class DataOperator extends Component
     public function render()
     {
         return view('livewire.admin.data-operator', [
-            'operators' => User::where('role', 'operator')->latest()->paginate(10)
+            'operators' => User::where('role', 'operator')->orderBy('id', 'asc')->paginate(10)
         ]);
     }
 }
