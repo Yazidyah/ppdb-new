@@ -32,8 +32,8 @@
                         </div>
                     </h1>
                     @if (count($data->berkas) !== 0)
-                        @forelse ($data->berkas->where('uploader_id', $user->id) as $berkas)
-                            @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . 'berkas' . $berkas->id))
+                        @forelse ($data->berkas->where('uploader_id', $user->id)->where('deleted_at',null) as $berkas)
+                            @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . '-berkas-' . $berkas->id))
                             <div>
                                 <div class="flex gap-2">
                                     @if (Str::contains(Str::lower($data->nama_persyaratan), 'rapot'))
