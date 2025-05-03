@@ -42,7 +42,7 @@
                                         {{ (@$pendaftaran->dataRegistrasi->rapot->total_rata_nilai ?? null) === null || @$pendaftaran->dataRegistrasi->rapot->total_rata_nilai == 0.00 ? 'Belum Di Lengkapi' : @$pendaftaran->dataRegistrasi->rapot->total_rata_nilai }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">
-                                        {{ @$pendaftaran->kota === 'KOTA BOGOR' ? 'Dalam Kota' : 'Luar Kota' }}
+                                        {{ @$pendaftaran->kota === null ? 'Belum Dilengkapi' : (@$pendaftaran->kota === 'KOTA BOGOR' ? 'Dalam Kota' : 'Luar Kota') }}
                                     </td>
                                     <td class="border px-6 py-3 text-center">
                                         @php
