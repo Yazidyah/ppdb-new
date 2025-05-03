@@ -41,38 +41,28 @@ class StepEmpat extends Component
 
         return redirect('/siswa/dashboard');
     }
-
     public function isSyaratComplete()
     {
-        // Tahap 1: cek apakah setiap persyaratan sudah ada berkas
         foreach ($this->persyaratan as $syarat) {
-            logger()->info('Memeriksa persyaratan', ['syarat' => $syarat]);
             if (count($syarat->berkas) === 0) {
-                logger()->warning('Persyaratan tidak memiliki berkas', ['syarat' => $syarat]);
                 $this->isValid = false;
-                return false; // langsung keluar, tidak perlu cek selanjutnya
+                return false;
             }
         }
-    
-        // Tahap 2: semua persyaratan punya berkas, lanjut validasi data_berkas
+
         foreach ($this->persyaratan as $syarat) {
             foreach ($syarat->berkas as $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
-                logger()->info('Memeriksa berkas', ['berkas' => $berkas, 'namaPersyaratan' => $namaPersyaratan]);
-    
-                // hanya syarat non‐simple yang dicek data_berkas-nya
+
                 if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) 
                     && empty($berkas->data_berkas)
                 ) {
-                    logger()->warning('Data berkas kosong untuk persyaratan', ['namaPersyaratan' => $namaPersyaratan]);
                     $this->isValid = false;
-                    return false; // langsung keluar kalau ada yang kosong
+                    return false;
                 }
             }
         }
-    
-        // Semua lolos
-        logger()->info('Semua persyaratan lengkap dan valid');
+
         $this->isValid = true;
         return true;
     }
