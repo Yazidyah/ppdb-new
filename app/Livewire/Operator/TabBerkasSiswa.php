@@ -54,6 +54,9 @@ class TabBerkasSiswa extends Component
         if ($this->syarat->berkas->where('uploader_id', $this->user->id)->count() > 0) {
             $this->berkasBaru = false;
         }
+        if ($this->syarat->berkas->where('uploader_id', $this->user->id)->count() == 0) {
+            $this->berkasBaru = true;
+        }
         if ($this->syarat->id_jalur == 1) {
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_reguler')->first();
         }
