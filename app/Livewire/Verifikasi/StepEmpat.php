@@ -56,7 +56,6 @@ class StepEmpat extends Component
                 if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) 
                     && empty($berkas->data_berkas)
                 ) {
-                    \Log::warning('Requirement not met: ' . $namaPersyaratan . ' - File data is empty.');
                     $this->isValid = false;
                     return false;
                 }
