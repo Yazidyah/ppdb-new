@@ -274,7 +274,7 @@
         @else
             <h1>TIDAK DITERIMA</h1>
         @endif
-        <p class="status-surat-peserta">Sebagai peserta didik baru MAN 1 Kota Bogor Tahun Pelajaran 2024/2025</p>
+        <p class="status-surat-peserta">Sebagai peserta didik baru MAN 1 Kota Bogor Tahun Pelajaran 2025/2026</p>
         <p class="status-surat-keterangan">Demikian Surat Keterangan ini disampaikan untuk dapat dipergunakan
             sebagaimana mestinya.</p>
     </div>

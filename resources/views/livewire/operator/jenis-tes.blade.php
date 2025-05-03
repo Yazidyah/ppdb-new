@@ -47,7 +47,7 @@
                                 @elseif ($item->no_jalur == "1")
                                     Reguler
                                 @elseif ($item->no_jalur == "2")
-                                    Afirmasi
+                                    Afirmasi/Prestasi
                                 @endif
                             </td>
                             <td class="border px-4 py-2 flex justify-center mx-auto   space-x-2 items-center">

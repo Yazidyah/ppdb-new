@@ -211,7 +211,7 @@
     <div class="judul-surat">
         <p class="karper">KARTU PESERTA
         <p>
-        <p class="tahpel">TAHUN PELAJARAN 2024/2025</p>
+        <p class="tahpel">TAHUN PELAJARAN 2025/2026</p>
     </div>
 
     <div class="content">
@@ -286,6 +286,7 @@
             <li>Pada saat Tes Wawancara didampingi oleh salah satu orang tua/wali;</li>
             <li>Selama tes peserta didik tidak diperkenankan menggunakan alat komunikasi/HP;</li>
             <li>Peserta didik datang sesuai jadwal yang sudah ditentukan oleh panitia.</li>
+            <li>Catatan ditambahkan (Sebelum tes kartu peserta dibawa ke ruang panitia untuk registrasi/stempel panitia dan kartu peserta tes tidak boleh hilang sampai selesai proses PPDB)</li>
         </ol>
     </div>
 </body>
