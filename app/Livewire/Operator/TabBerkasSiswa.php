@@ -76,7 +76,8 @@ class TabBerkasSiswa extends Component
                 'disk' => 'local',
             ]);
 
-            dd($berkas);
+            // dd($berkas);
+            
             $this->syarat->berkas()->save($berkas);
 
             Log::info('File berhasil disimpan: ', ['path' => $path]);
