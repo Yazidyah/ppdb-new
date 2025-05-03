@@ -79,7 +79,7 @@ class TabBerkasSiswa extends Component
             // dd($berkas);
             // $this->syarat->berkas()->sace($berkas);
             // $this->berkas->save();
-            dd($this->syarat->berkas()->save($berkas));
+            $this->syarat->berkas()->save($berkas);
 
             Log::info('File berhasil disimpan: ', ['path' => $path]);
             $this->berkas = null;
