@@ -43,7 +43,11 @@ class StepEmpat extends Component
     }
     public function isSyaratComplete()
     {
+        \Log::info('Checking if all requirements are complete.');
+
         foreach ($this->persyaratan as $syarat) {
+            \Log::info('Checking requirement: ' . $syarat->nama_persyaratan);
+
             if (count($syarat->berkas) === 0) {
                 \Log::warning('Requirement not met: ' . $syarat->nama_persyaratan . ' - No files uploaded.');
                 $this->isValid = false;
@@ -54,6 +58,8 @@ class StepEmpat extends Component
         foreach ($this->persyaratan as $syarat) {
             foreach ($syarat->berkas as $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
+                \Log::info('Checking file for requirement: ' . $namaPersyaratan);
+
                 if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) 
                     && empty($berkas->data_berkas)
                 ) {
@@ -64,11 +70,11 @@ class StepEmpat extends Component
             }
         }
 
+        \Log::info('All requirements are complete.');
         $this->isValid = true;
         return true;
     }
     
-
     public function render()
     {
         return view('livewire.verifikasi.step-empat')->layout('layouts.apk');
