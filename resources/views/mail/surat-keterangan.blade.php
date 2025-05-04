@@ -121,6 +121,7 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
+            margin-left: auto;
         }
 
         .table-footer .tempat {
@@ -292,7 +293,7 @@
                 <td style="width: 40%; text-align: left; vertical-align: top;">
                     <p class="tempat">Bogor, <br> Ketua Panitia</p>
                     <div class="tanda-tangan">
-                        <img src="{{ public_path('surat\ttd-ketua.jpg') }}" alt="ttd" style="width: 150px; height: 150px;">
+                    <div style="height: 30px;"></div>
                         <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
                             NIP. 198208222014111004</p>
                     </div>
