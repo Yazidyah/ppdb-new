@@ -18,7 +18,7 @@ class OrangTuaForm extends Component
     protected $rules = [
         'id_hubungan' => 'required|exists:hubungan_orang_tua,id_hubungan',
         'nama_lengkap' => 'required|string|max:255',
-        'nik' => 'required|numeric',
+        'nik' => 'required|digits:16',
         'pekerjaan' => 'required',
         'no_telp' => 'required|numeric',
     ];
@@ -27,6 +27,7 @@ class OrangTuaForm extends Component
         'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong',
         'nik.required' => 'NIK tidak boleh kosong',
         'nik.numeric' => 'NIK harus berupa angka',
+        'nik.digits' => 'NIK harus terdiri dari 16 angka',
         'pekerjaan.required' => 'Pekerjaan tidak boleh kosong',
         'no_telp.required' => 'No. Telp tidak boleh kosong',
         'no_telp.numeric' => 'No. Telp harus berupa angka',

@@ -29,7 +29,7 @@ class BiodataSiswa extends Component
 
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
-        'NIK' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK',
+        'NIK' => 'required|numeric|digits:16|unique:calon_siswa,NIK',
         'NISN' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN',
         'no_telp' => 'required|numeric|digits_between:1,15',
         'jenis_kelamin' => 'required',
@@ -47,6 +47,7 @@ class BiodataSiswa extends Component
         'nama_lengkap.required' => 'Nama Lengkap tidak boleh kosong',
         'NIK.required' => 'NIK tidak boleh kosong',
         'NIK.numeric' => 'NIK harus berupa angka',
+        'NIK.digits' => 'NIK harus terdiri dari 16 angka',
         'NIK.unique' => 'NIK sudah terdaftar',
         'NISN.required' => 'NISN tidak boleh kosong',
         'NISN.numeric' => 'NISN harus berupa angka',
@@ -119,7 +120,7 @@ class BiodataSiswa extends Component
 
         if ($propertyName == 'NIK') {
             $this->validateOnly($propertyName, [
-                'NIK' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
+                'NIK' => 'required|numeric|digits:16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
             ]);
             $this->siswa->$propertyName = $this->$propertyName ?: null;
             $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
