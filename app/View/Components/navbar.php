@@ -18,7 +18,7 @@ class navbar extends Component
     public function render(): View|Closure|string
     {
         return view('components.navbar', [
-            'open' => $this->open, // Pastikan $open diteruskan ke view
+            'open' => $this->open
         ]);
     }
 }
