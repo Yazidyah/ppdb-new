@@ -33,17 +33,9 @@
                                 cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary
                             @else
                                 bg-tertiary hover:bg-secondary hover:text-black text-secondary
-                            @endif" type="button" id="submitBtn" @if (!$isValid) disabled @endif
-                        data-tooltip-target="tooltip-incomplete">
+                            @endif" type="button" id="submitBtn" @if (!$isValid) disabled @endif>
                         Submit
                     </button>
-                    @if (!$isValid)
-                        <div id="tooltip-incomplete" role="tooltip"
-                            class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
-                            Harap lengkapi dokumen dan data terlebih dahulu
-                            <div class="tooltip-arrow" data-popper-arrow></div>
-                        </div>
-                    @endif
                 </div>
             @endif
         </div>

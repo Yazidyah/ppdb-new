@@ -43,21 +43,18 @@ class StepEmpat extends Component
     }
     public function isSyaratComplete()
     {
-        foreach ($this->persyaratan as $syarat) {
+        foreach ($this->persyaratan as $index => $syarat) {
             if (count($syarat->berkas) === 0) {
-                \Log::warning('Requirement not met: ' . $syarat->nama_persyaratan . ' - No files uploaded.');
                 $this->isValid = false;
                 return false;
             }
-        }
 
-        foreach ($this->persyaratan as $syarat) {
-            foreach ($syarat->berkas as $berkas) {
+            foreach ($syarat->berkas as $fileIndex => $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
+
                 if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) 
                     && empty($berkas->data_berkas)
                 ) {
-                    \Log::warning('Requirement not met: ' . $namaPersyaratan . ' - File data is empty.');
                     $this->isValid = false;
                     return false;
                 }
@@ -67,7 +64,6 @@ class StepEmpat extends Component
         $this->isValid = true;
         return true;
     }
-    
 
     public function render()
     {
