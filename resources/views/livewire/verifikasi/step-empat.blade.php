@@ -87,3 +87,24 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const submitBtn = document.getElementById('submitBtn');
+        const tooltipIncomplete = document.getElementById('tooltip-incomplete');
+
+        if (submitBtn) {
+            submitBtn.addEventListener('mouseover', function () {
+                if (tooltipIncomplete) {
+                    tooltipIncomplete.classList.remove('invisible', 'opacity-0');
+                }
+            });
+
+            submitBtn.addEventListener('mouseout', function () {
+                if (tooltipIncomplete) {
+                    tooltipIncomplete.classList.add('invisible', 'opacity-0');
+                }
+            });
+        }
+    });
+</script>
