@@ -8,17 +8,13 @@ use Illuminate\View\Component;
 
 class navbar extends Component
 {
-    /**
-     * Create a new component instance.
-     */
+
+    public $open;
     public function __construct()
     {
-        //
+        $this->open = \App\Models\Pembukaan::first();
     }
 
-    /**
-     * Get the view / contents that represent the component.
-     */
     public function render(): View|Closure|string
     {
         return view('components.navbar');

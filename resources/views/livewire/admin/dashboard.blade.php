@@ -6,7 +6,7 @@
                 <ul>
                     <li class="mb-2">
                         <button wire:click="$set('tab', 1)">
-                            <span  @class([
+                            <span @class([
                                 'block px-4 py-2 flex items-center p-2 rounded-lg  hover:bg-white hover:text-tertiary group',
                                 'text-white' => $tab != 1,
                                 'text-tertiary bg-white ' => $tab == 1,
@@ -44,13 +44,44 @@
     </div>
 
     <!-- Main Content -->
-        @if ($tab === 1)
+    @if ($tab === 1)
         <div class="p-4 sm:ml-64 flex justify-center items-center"></div>
-            <div class="mx-auto text-center pt-3">
+        <div class="mx-auto text-center pt-3">
+
+            <div class="bg-gray-100 py-10">
+                <h2 class="text-2xl font-bold mb-6 text-center">Status Pendaftaran</h2>
+                <div class="flex justify-center mt-6">
+                    <div class="flex items-center justify-center space-x-4">
+                        <select wire:change="bukatutup"
+                            class="block w-48 px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm">
+                            <option value="true" {{ $isOpen->is_open == true ? 'selected' : '' }}>Pendaftaran Dibuka
+                            </option>
+                            <option value="false" {{ $isOpen->is_open == false ? 'selected' : '' }}>Pendaftaran Ditutup
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <p class="text-lg font-semibold">
+                        Status saat ini:
+                        @if ($isOpen->is_open == true)
+                            <span class="text-green-500">
+                                Pendaftaran Dibuka
+                            </span>
+                        @endif
+                        @if ($isOpen->is_open == false)
+                            <span class="text-red-500">
+                                Pendaftaran Ditutup
+                            </span>
+                        @endif
+                    </p>
+                </div>
+            </div>
+
             <div class="bg-gray-100 py-10">
                 <h2 class="text-2xl font-bold mb-6 text-center">Data Pendaftaran</h2>
                 <div class="flex justify-center">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 ">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 p-3">
                         @foreach ($statistik->take(5) as $stat)
                             <div
                                 class="bg-white max-w-xs rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform scale-100 hover:scale-110 cursor-pointer">
@@ -219,7 +250,8 @@
                                         </thead>
                                         <tbody>
                                             <tr class="hover:bg-gray-100">
-                                                <td class="py-4 px-6 border-b border-gray-200">Tidak Lolos Administrasi</td>
+                                                <td class="py-4 px-6 border-b border-gray-200">Tidak Lolos Administrasi
+                                                </td>
                                                 <td class="py-4 text-center px-6 border-b border-gray-200">
                                                     {{ $countTidakLolosAdministrasi }}</td>
                                             </tr>
@@ -273,16 +305,15 @@
                     </div>
                 </div>
             </div>
-            </div>
-            </div>
-        @endif
-
-        @if ($tab == 2)
-            @livewire('admin.data-pendaftaran', key('data-pendaftaran' . rand()))
-        @endif
-
-        @if ($tab == 3)
-            @livewire('admin.data-operator', key('data-operator' . rand()))
-        @endif
+        </div>
 </div>
+@endif
 
+@if ($tab == 2)
+    @livewire('admin.data-pendaftaran', key('data-pendaftaran' . rand()))
+@endif
+
+@if ($tab == 3)
+    @livewire('admin.data-operator', key('data-operator' . rand()))
+@endif
+</div>

@@ -33,8 +33,10 @@
                 @else
                     <a href="login"
                         class="text-white outline-secondary outline px-7 py-4 flex items-center justify-center rounded-full font-bold text-xs xl:text-base hover:bg-white hover:text-primary">Masuk</a>
-                    <!-- <a href="register"
-                        class="flex items-center justify-center w-full text-sm font-bold px-9 py-4 bg-white rounded-full hover:bg-secondary hover:text-primary text-primary">Daftar</a> -->
+                    @if ($open->is_open == true)
+                        <a href="register"
+                            class="flex items-center justify-center w-full text-sm font-bold px-9 py-4 bg-white rounded-full hover:bg-secondary hover:text-primary text-primary">Daftar</a>
+                    @endif
                 @endif
             </div>
         </div>
@@ -63,17 +65,19 @@
             </li>
         </ul>
         <div class=" flex justify-center gap-4 px-4 pb-4 mt-4">
-        @if (Auth::check())
-                    <a href="{{ route('siswa.dashboard') }}"
-                        class="text-white  outline px-9 py-4 rounded-full font-bold text-sm hover:bg-secondary hover:text-primary">Dashboard</a>
-                @else
+            @if (Auth::check())
+                <a href="{{ route('siswa.dashboard') }}"
+                    class="text-white  outline px-9 py-4 rounded-full font-bold text-sm hover:bg-secondary hover:text-primary">Dashboard</a>
+            @else
                 <div class="flex justify-between gap-4 px-4 pb-4 mt-4">
                     <a href="login"
                         class="text-white outline-secondary outline px-7 py-4 flex items-center justify-center rounded-full font-bold text-xs xl:text-base hover:bg-white hover:text-primary">Masuk</a>
-                    <!-- <a href="register"
+                    @if ($open->is_open == true)
+                        <!-- <a href="register"
                         class="flex items-center justify-center w-full text-sm font-bold px-9 py-4 bg-white rounded-full hover:bg-secondary hover:text-primary text-primary">Daftar</a> -->
+                    @endif
                 </div>
-                @endif
+            @endif
         </div>
     </div>
 </div>
