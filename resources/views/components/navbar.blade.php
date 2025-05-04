@@ -33,10 +33,10 @@
                 @else
                     <a href="login"
                         class="text-white outline-secondary outline px-7 py-4 flex items-center justify-center rounded-full font-bold text-xs xl:text-base hover:bg-white hover:text-primary">Masuk</a>
-                    {{-- @if ($open->is_open == true)
+                    @if ($open->is_open == true)
                         <a href="register"
                             class="flex items-center justify-center w-full text-sm font-bold px-9 py-4 bg-white rounded-full hover:bg-secondary hover:text-primary text-primary">Daftar</a>
-                    @endif --}}
+                    @endif
                 @endif
             </div>
         </div>
