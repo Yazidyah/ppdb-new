@@ -43,34 +43,24 @@ class StepEmpat extends Component
     }
     public function isSyaratComplete()
     {
-        \Log::debug('Starting requirement validation process.');
-
         foreach ($this->persyaratan as $index => $syarat) {
-            \Log::debug("Checking requirement #{$index}: " . $syarat->nama_persyaratan);
-
             if (count($syarat->berkas) === 0) {
-                \Log::warning("Requirement #{$index} not met: " . $syarat->nama_persyaratan . " - No files uploaded.");
                 $this->isValid = false;
                 return false;
             }
 
             foreach ($syarat->berkas as $fileIndex => $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
-                \Log::debug("Checking file #{$fileIndex} for requirement #{$index}: " . $namaPersyaratan);
 
                 if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) 
                     && empty($berkas->data_berkas)
                 ) {
-                    \Log::warning("Requirement #{$index} not met: " . $namaPersyaratan . " - File data is empty for file #{$fileIndex}.");
                     $this->isValid = false;
                     return false;
-                } else {
-                    \Log::info("File #{$fileIndex} for requirement #{$index} is valid: " . $namaPersyaratan);
                 }
             }
         }
 
-        \Log::debug('All requirements have been validated and are complete.');
         $this->isValid = true;
         return true;
     }
