@@ -8,8 +8,8 @@ use Illuminate\View\Component;
 
 class navbar extends Component
 {
-
     public $open;
+
     public function __construct()
     {
         $this->open = \App\Models\Pembukaan::first();
@@ -17,6 +17,8 @@ class navbar extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.navbar');
+        return view('components.navbar', [
+            'open' => $this->open, // Pastikan $open diteruskan ke view
+        ]);
     }
 }
