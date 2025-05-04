@@ -77,6 +77,26 @@ class PendaftaranExport extends DefaultValueBinder implements
             return true;
         }
 
+        if ($cell->getColumn() === 'Y') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
+        if ($cell->getColumn() === 'Z') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
+        if ($cell->getColumn() === 'K') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
+        if ($cell->getColumn() === 'AA') { // 'C' adalah kolom "NISN"
+            $cell->setValueExplicit((string) $value, DataType::TYPE_STRING);
+            return true;
+        }
+
         // Untuk nilai numerik lainnya
         if (is_numeric($value)) {
             $cell->setValueExplicit($value, DataType::TYPE_NUMERIC);
@@ -184,6 +204,7 @@ class PendaftaranExport extends DefaultValueBinder implements
             'AW' => 10,
             'AX' => 10,
             'AY' => 10,
+            'AZ' => 10,
         ];
     }
 

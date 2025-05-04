@@ -35,7 +35,16 @@ class ExportDataSiswa extends Component
             })
             ->leftJoin('pekerjaan_orang_tua as pekerjaan_wali', 'wali.pekerjaan', '=', 'pekerjaan_wali.id_pekerjaan')
             ->leftJoin('rapot as rp', 'dr.id_registrasi', '=', 'rp.id_registrasi')
-
+            ->leftJoin('data_registrasi as ds', 'cs.id_calon_siswa', '=', 'ds.id_calon_siswa')
+            ->leftJoin('persyaratan as ps', function ($join) {
+                $join->on('ds.id_registrasi', '=', 'ps.id_jalur')
+                    ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%');
+            })
+            ->leftJoin('berkas as br', function ($join) {
+                $join->on('br.id_syarat', '=', 'ps.id_persyaratan')
+                    ->where('br.deleted_at', null);
+            })
+            // ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%')
 
             ->select(
                 'cs.id_calon_siswa',
@@ -70,6 +79,8 @@ class ExportDataSiswa extends Component
                 'wali.nik as NIK_wali',
                 'pekerjaan_wali.nama_pekerjaan as pekerjaan_wali',
                 'wali.no_telp as no_telp_wali',
+                //no kk
+                'br.data_berkas as no_kk',
                 // rapot sem 3
                 'rp.nilai_rapot->0->data->matematika as mat_3',
                 'rp.nilai_rapot->0->data->bahasa_indonesia as bind_3',
@@ -113,21 +124,21 @@ class ExportDataSiswa extends Component
                 'Gender' => $s->jenis_kelamin,
                 'Alamat' => $s->alamat_kk,
                 'Domisili' => $s->alamat_domisili,
-                'Ayah' => $s->nama_ayah,
-                'Pekerjaan Ayah' => $s->pekerjaan_ayah,
-                'NIK Ayah' => $s->NIK_ayah,
-                'Telp Ayah' => $s->no_telp_ayah,
-                'Ibu' => $s->nama_ibu,
-                'Pekerjaan Ibu' => $s->pekerjaan_ibu,
-                'NIK Ibu' => $s->NIK_ibu,
-                'Telp Ibu' => $s->no_telp_ibu,
-                'Wali' => $s->nama_wali,
-                'Pekerjaan Wali' => $s->pekerjaan_wali,
-                'NIK Wali' => $s->NIK_wali,
-                'Telp Wali' => $s->no_telp_wali,
-                'No KK' => '',
-                'Akreditasi Sekolah (Nilai)' => $s->nilai_akreditasi_sekolah,
-                'Akreditasi Sekolah (Predikat)' => $s->predikat_akreditasi_sekolah,
+                'Ayah' => @$s->nama_ayah,
+                'Pekerjaan Ayah' => @$s->pekerjaan_ayah,
+                'NIK Ayah' => @$s->NIK_ayah,
+                'Telp Ayah' => @$s->no_telp_ayah,
+                'Ibu' => @$s->nama_ibu,
+                'Pekerjaan Ibu' => @$s->pekerjaan_ibu,
+                'NIK Ibu' => @$s->NIK_ibu,
+                'Telp Ibu' => @$s->no_telp_ibu,
+                'Wali' => @$s->nama_wali,
+                'Pekerjaan Wali' => @$s->pekerjaan_wali,
+                'NIK Wali' => @$s->NIK_wali,
+                'Telp Wali' => @$s->no_telp_wali,
+                'No KK' => @$s->no_kk,
+                'Akreditasi Sekolah (Nilai)' => @$s->nilai_akreditasi_sekolah,
+                'Akreditasi Sekolah (Predikat)' => @$s->predikat_akreditasi_sekolah,
                 'Posisi' => '',
                 'Status Verifikasi' => '',
                 'Status Penerimaan' => '',
