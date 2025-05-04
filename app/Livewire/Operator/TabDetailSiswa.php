@@ -81,6 +81,7 @@ class TabDetailSiswa extends Component
             ->orderBy('id_registrasi')
             ->get();
 
+        
         $this->jadwalTesBQ = $jadwalTes->first()?->id_jadwal_tes;
         $this->jadwalTesJapres = $jadwalTes->skip(1)->first()?->id_jadwal_tes;
     }
@@ -115,6 +116,20 @@ class TabDetailSiswa extends Component
             'id_jalur' => $this->id_jalur,
             'nomor_peserta' => $newKodeRegistrasi,
         ]);
+
+        // Fetch and sort dataTes by id in ascending order before updating
+        $dataTes = DataTes::where('id_registrasi', $this->siswa->dataRegistrasi->id_registrasi)
+            ->orderBy('id', 'asc')
+            ->get();
+
+        if ($dataTes->isNotEmpty()) {
+            if ($dataTes->first()) {
+                $dataTes->first()->update(['id_jadwal_tes' => $this->jadwalTesBQ]);
+            }
+            if ($dataTes->skip(1)->first()) {
+                $dataTes->skip(1)->first()->update(['id_jadwal_tes' => $this->jadwalTesJapres]);
+            }
+        }
 
         $user = User::find($this->siswa->id_user);
         $user->update([

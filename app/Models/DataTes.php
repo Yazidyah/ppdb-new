@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class DataTes extends Model
 {
@@ -15,6 +16,16 @@ class DataTes extends Model
         'id_registrasi',
         'id_jadwal_tes',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Apply default sorting by id in ascending order
+        static::addGlobalScope('orderById', function (Builder $builder) {
+            $builder->orderBy('id', 'asc');
+        });
+    }
 
     public function registrasi()
     {

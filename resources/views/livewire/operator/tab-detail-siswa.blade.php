@@ -254,10 +254,6 @@
             Cetak Surat Keterangan
         </button>
     </div>
-
-
-
-
     @if (session()->has('message'))
         <p class="text-green-500 mt-2">{{ session('message') }}</p>
     @endif
