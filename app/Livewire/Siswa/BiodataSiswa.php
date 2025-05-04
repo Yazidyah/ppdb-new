@@ -24,13 +24,16 @@ class BiodataSiswa extends Component
     public $searchNpsn;
     public $sekolahs = [];
     public $alamat_domisili_disabled = false;
+    public $minTanggalLahir;
+    public $maxTanggalLahir;
+
     protected $rules = [
         'nama_lengkap' => 'required|string|max:255',
         'NIK' => 'required|numeric|digits_between:1,16|unique:calon_siswa,NIK',
         'NISN' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN',
         'no_telp' => 'required|numeric|digits_between:1,15',
         'jenis_kelamin' => 'required',
-        'tanggal_lahir' => 'required|date',
+        'tanggal_lahir' => 'required|date|before_or_equal:minTanggalLahir|after_or_equal:maxTanggalLahir',
         'tempat_lahir' => 'required|string',
         'sekolah_asal' => 'required|string',
         'NPSN' => 'required|string|max:8',
@@ -53,6 +56,8 @@ class BiodataSiswa extends Component
         'jenis_kelamin.required' => 'Jenis Kelamin tidak boleh kosong',
         'tanggal_lahir.required' => 'Tanggal Lahir tidak boleh kosong',
         'tanggal_lahir.date' => 'Tanggal Lahir harus berupa tanggal',
+        'tanggal_lahir.before_or_equal' => 'Tanggal Lahir harus kurang dari atau sama dengan 13 tahun yang lalu.',
+        'tanggal_lahir.after_or_equal' => 'Tanggal Lahir harus lebih dari atau sama dengan 21 tahun yang lalu.',
         'tempat_lahir.required' => 'Tempat Lahir tidak boleh kosong',
         'sekolah_asal.required' => 'Sekolah Asal tidak boleh kosong',
         'NPSN.required' => 'NPSN tidak boleh kosong',
@@ -98,6 +103,8 @@ class BiodataSiswa extends Component
         $this->kota = @Regency::where('name', $this->siswa->kota)->first()->id ?? '';
         $this->updateCities();
         $this->alamat_domisili_disabled = $this->getAlamatDomisiliDisabledFromLocalStorage();
+        $this->minTanggalLahir = now()->subYears(13)->format('Y-m-d');
+        $this->maxTanggalLahir = now()->subYears(21)->format('Y-m-d');
     }
 
     public function updated($propertyName)
@@ -134,6 +141,12 @@ class BiodataSiswa extends Component
             $this->siswa->save();
             $this->validateOnly($propertyName);
             return;
+        }
+
+        if ($propertyName == 'tanggal_lahir') {
+            $this->validateOnly($propertyName, [
+                'tanggal_lahir' => 'required|date|before_or_equal:' . $this->minTanggalLahir . '|after_or_equal:' . $this->maxTanggalLahir,
+            ]);
         }
 
         if ($propertyName != 'NIK' && $propertyName != 'NISN') {
