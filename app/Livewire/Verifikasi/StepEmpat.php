@@ -43,38 +43,38 @@ class StepEmpat extends Component
     }
     public function isSyaratComplete()
     {
-        \Log::info('Checking if all requirements are complete.');
+        \Log::debug('Starting requirement validation process.');
 
-        foreach ($this->persyaratan as $syarat) {
-            \Log::info('Checking requirement: ' . $syarat->nama_persyaratan);
+        foreach ($this->persyaratan as $index => $syarat) {
+            \Log::debug("Checking requirement #{$index}: " . $syarat->nama_persyaratan);
 
             if (count($syarat->berkas) === 0) {
-                \Log::warning('Requirement not met: ' . $syarat->nama_persyaratan . ' - No files uploaded.');
+                \Log::warning("Requirement #{$index} not met: " . $syarat->nama_persyaratan . " - No files uploaded.");
                 $this->isValid = false;
                 return false;
             }
-        }
 
-        foreach ($this->persyaratan as $syarat) {
-            foreach ($syarat->berkas as $berkas) {
+            foreach ($syarat->berkas as $fileIndex => $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
-                \Log::info('Checking file for requirement: ' . $namaPersyaratan);
+                \Log::debug("Checking file #{$fileIndex} for requirement #{$index}: " . $namaPersyaratan);
 
                 if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) 
                     && empty($berkas->data_berkas)
                 ) {
-                    \Log::warning('Requirement not met: ' . $namaPersyaratan . ' - File data is empty.');
+                    \Log::warning("Requirement #{$index} not met: " . $namaPersyaratan . " - File data is empty for file #{$fileIndex}.");
                     $this->isValid = false;
                     return false;
+                } else {
+                    \Log::info("File #{$fileIndex} for requirement #{$index} is valid: " . $namaPersyaratan);
                 }
             }
         }
 
-        \Log::info('All requirements are complete.');
+        \Log::debug('All requirements have been validated and are complete.');
         $this->isValid = true;
         return true;
     }
-    
+
     public function render()
     {
         return view('livewire.verifikasi.step-empat')->layout('layouts.apk');
