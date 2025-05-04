@@ -5,9 +5,9 @@
         </div>
     </div>
     <div class="text-center mt-6">
-                        <h4 id="pendaftaran" class="text-lg font-semibold mb-2">Pendaftaran Dimulai:</h4>
-                        <div id="countdown" class="text-2xl font-bold text-tertiary"></div>
-                    </div>
+    <h4 id="judulCountdown" class="text-lg font-semibold mb-2">Pendaftaran Dimulai:</h4>
+    <div id="hitungMundur" class="text-2xl font-bold text-tertiary"></div>
+</div>
     <section>
         <div class="container mx-auto py-5">
             @livewire('search-siswa')
@@ -16,29 +16,50 @@
             @livewire('get-jadwal-home')
 
             <script>
-    // Tanggal target (format: 'May 10, 2025 23:59:59')
-    const targetDate = new Date("May 04, 2025 23:59:59").getTime();
+    const startDate = new Date("May 05, 2025 00:00:01").getTime();
+    const endDate = new Date("May 09, 2025 23:59:00 ").getTime();
 
-    const countdownElement = document.getElementById("countdown");
-    const countdownPendaftaran = document.getElementById("pendaftaran");
+    const countdownElement = document.getElementById("hitungMundur");
+    const judulCountdown = document.getElementById("judulCountdown");
+    const btnDaftar = document.getElementById("btn-daftar");
 
     const countdownInterval = setInterval(() => {
         const now = new Date().getTime();
-        const distance = targetDate - now;
 
-        if (distance < 0) {
+        if (now < startDate) {
+            // Sebelum pendaftaran dibuka
+            const distance = startDate - now;
+            judulCountdown.innerHTML = "Pendaftaran Dimulai Dalam:";
+            updateCountdown(distance);
+        } else if (now >= startDate && now < endDate) {
+            // Saat pendaftaran dibuka
+            const distance = endDate - now;
+            judulCountdown.innerHTML = "Pendaftaran Ditutup Dalam:";
+            updateCountdown(distance);
+
+            if (btnDaftar) {
+                btnDaftar.classList.remove("hidden");
+                btnDaftar.classList.add("block");
+            }
+        } else {
+            // Setelah pendaftaran ditutup
             clearInterval(countdownInterval);
-            countdownElement.innerHTML = "PENDAFTARAN SUDAH DIBUKA";
-            countdownPendaftaran.innerHTML = "";
-            return;
-        }
+            judulCountdown.innerHTML = "";
+            countdownElement.innerHTML = "PENDAFTARAN TELAH DITUTUP";
 
+            if (btnDaftar) {
+                btnDaftar.classList.add("hidden");
+            }
+        }
+    }, 1000);
+
+    function updateCountdown(distance) {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         countdownElement.innerHTML = `${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
-    }, 1000);
+    }
 </script>
 </x-layout>
