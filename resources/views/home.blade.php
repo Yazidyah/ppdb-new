@@ -9,13 +9,24 @@
         <div id="hitungMundur" class="text-2xl font-bold text-tertiary"></div>
     </div>
     <section>
-        <div class="flex justify-center items-center py-10">
-            <div class="w-full max-w-2xl  rounded-lg p-6">
-                <div class="text-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800">Cari Data Pendaftaran</h3>
+        <div class="flex flex-wrap justify-center items-start py-10 gap-6">
+            <div class="w-full md:w-1/2 max-w-lg">
+                <div class="bg-white border-4 border-tertiary rounded-lg shadow-lg p-6 aspect-video">
+                    <div class="mb-4 text-left text-gray-700 text-sm font-bold">
+                        Tidak tahu cara mendaftar?<br> Silakan pelajari dari video di bawah ini
+                    </div>
+                    <div style="left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;">
+                        <iframe src="https://drive.google.com/file/d/17yg0dcFA4iryt5fO4lckL7r_wsFH_TIe/preview"
+                            style="top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;"
+                            allowfullscreen scrolling="no" allow="encrypted-media;"></iframe>
+                    </div>
                 </div>
-                <div>
-                    @livewire('search-siswa')
+            </div>
+            <div class="w-full md:w-1/2 max-w-lg">
+                <div class="rounded-lg p-6">
+                    <div>
+                        @livewire('search-siswa')
+                    </div>
                 </div>
             </div>
         </div>
