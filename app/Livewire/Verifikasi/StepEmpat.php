@@ -47,12 +47,12 @@ class StepEmpat extends Component
     }
     public function isSyaratComplete()
     {
-        foreach ($this->persyaratan as $index => $syarat) {
+        foreach ($this->persyaratan as $syarat) {
             if (count($syarat->berkas->where('deleted_at', null)) == 0) {
                 $this->isValid = false;
                 return false;
             }
-            foreach ($syarat->berkas->where('deleted_at', null) as $fileIndex => $berkas) {
+            foreach ($syarat->berkas->where('deleted_at', null) as $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
                 if (str_contains(strtolower($namaPersyaratan), 'kartu keluarga')) {
                     if (
@@ -71,13 +71,6 @@ class StepEmpat extends Component
                         return false;
                     }
                 }
-                // if (
-                //     !DocumentHelper::isSimpleSyarat($namaPersyaratan)
-                //     && empty($berkas->data_berkas)
-                // ) {
-                //     $this->isValid = false;
-                //     return false;
-                // }
             }
         }
 
