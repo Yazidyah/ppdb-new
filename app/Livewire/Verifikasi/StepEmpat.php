@@ -56,7 +56,7 @@ class StepEmpat extends Component
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
                 if (str_contains(strtolower($namaPersyaratan), 'kartu keluarga')) {
                     if (
-                        $berkas->data_berkas == null or $berkas->data_berkas == '' or empty($berkas->data_berkas)
+                        $berkas->data_berkas != null or $berkas->data_berkas != ''
                     ) {
                         $this->isValid = false;
                         return false;
