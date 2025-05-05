@@ -48,12 +48,13 @@ class StepEmpat extends Component
     public function isSyaratComplete()
     {
         foreach ($this->persyaratan as $index => $syarat) {
-            if (count($syarat->berkas) == 0) {
+            if (count($syarat->berkas->where('deleted_at', null)) == 0) {
                 $this->isValid = false;
                 return false;
             }
-
-            foreach ($syarat->berkas as $fileIndex => $berkas) {
+            // dd($syarat->berkas->where('deleted_at', null));
+            foreach ($syarat->berkas->where('deleted_at', null) as $fileIndex => $berkas) {
+                // dd($berkas);
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
 
                 if (
