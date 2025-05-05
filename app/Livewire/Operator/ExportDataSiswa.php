@@ -47,12 +47,13 @@ class ExportDataSiswa extends Component
             })
             ->leftJoin('berkas as br', function ($join) {
                 $join->on('br.id_syarat', '=', 'ps.id_persyaratan')
-                    ->whereIn('br.id_syarat', [
-                        32,
-                        33,
-                        4,
-                        34
-                    ])
+                    // ->whereIn('br.id_syarat', [
+                    //     32,
+                    //     33,
+                    //     4,
+                    //     34
+                    // ])
+                    ->where('br.data_berkas', '!=', null)
                     ->whereNull('br.deleted_at');
             })            // ->whereNull('cs.deleted_at', 'u.deleted_at')
             // ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%')
