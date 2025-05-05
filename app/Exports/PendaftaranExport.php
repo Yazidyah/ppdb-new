@@ -185,7 +185,7 @@ class PendaftaranExport extends DefaultValueBinder implements
             'AD' => 20,
             'AE' => 20,
             'AF' => 40,
-            'AG' => 20,
+            'AG' => 40,
             'AH' => 10,
             'AI' => 10,
             'AJ' => 10,
