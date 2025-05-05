@@ -40,9 +40,9 @@ class ExportDataSiswa extends Component
             })
             ->leftJoin('pekerjaan_orang_tua as pekerjaan_wali', 'wali.pekerjaan', '=', 'pekerjaan_wali.id_pekerjaan')
             ->leftJoin('rapot as rp', 'dr.id_registrasi', '=', 'rp.id_registrasi')
-            // ->leftJoin('data_registrasi as ds', 'cs.id_calon_siswa', '=', 'ds.id_calon_siswa')
+            ->leftJoin('data_registrasi as ds', 'cs.id_calon_siswa', '=', 'ds.id_calon_siswa')
             ->leftJoin('persyaratan as ps', function ($join) {
-                $join->on('dr.id_jalur', '=', 'ps.id_jalur')
+                $join->on('ds.id_jalur', '=', 'ps.id_jalur')
                     ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%');
             })
             ->leftJoin('berkas as br', function ($join) {
