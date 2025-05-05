@@ -40,16 +40,17 @@ class ExportDataSiswa extends Component
             })
             ->leftJoin('pekerjaan_orang_tua as pekerjaan_wali', 'wali.pekerjaan', '=', 'pekerjaan_wali.id_pekerjaan')
             ->leftJoin('rapot as rp', 'dr.id_registrasi', '=', 'rp.id_registrasi')
-            ->leftJoin('data_registrasi as ds', 'cs.id_calon_siswa', '=', 'ds.id_calon_siswa')
+            // ->leftJoin('data_registrasi as ds', 'cs.id_calon_siswa', '=', 'ds.id_calon_siswa')
             ->leftJoin('persyaratan as ps', function ($join) {
-                $join->on('ds.id_registrasi', '=', 'ps.id_jalur')
+                $join->on('dr.id_jalur', '=', 'ps.id_jalur')
                     ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%');
             })
-            ->join('berkas as br', function ($join) {
+            ->leftJoin('berkas as br', function ($join) {
                 $join->on('br.id_syarat', '=', 'ps.id_persyaratan')
-                    ->where('br.data_berkas', '!=', null)
                     ->whereNull('br.deleted_at');
-            })            // ->whereNull('cs.deleted_at', 'u.deleted_at')
+            })
+
+            // ->whereNull('cs.deleted_at', 'u.deleted_at')
             // ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%')
 
             ->select(
@@ -113,7 +114,7 @@ class ExportDataSiswa extends Component
             )
             ->get();
 
-        dd($siswa);
+        // dd($siswa);
 
         foreach ($siswa as $index => $s) {
             // dd($s);
