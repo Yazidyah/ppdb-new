@@ -47,6 +47,7 @@ class ExportDataSiswa extends Component
             })
             ->leftJoin('berkas as br', function ($join) {
                 $join->on('br.id_syarat', '=', 'ps.id_persyaratan')
+                    ->whereIn('br.id_syarat', [32, 33, 4, 34])
                     ->whereNull('br.deleted_at');
             })
 
