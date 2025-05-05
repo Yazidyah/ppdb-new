@@ -18,7 +18,7 @@ class ExportDataSiswa extends Component
             ->leftJoin('data_registrasi as dr', 'cs.id_calon_siswa', '=', 'dr.id_calon_siswa')
             ->leftJoin('jalur_registrasi as jr', 'dr.id_jalur', '=', 'jr.id_jalur')
             ->join('users as u', 'cs.id_user', '=', 'u.id')
-            ->whereNull('u.deleted_at')
+            // ->whereNull('u.deleted_at')
             // ->join('orang_tua as ot', 'cs.id_calon_siswa', '=', 'ot.id_calon_siswa')
             ->leftJoin('orang_tua as ibu', function ($join) {
                 $join->on('cs.id_calon_siswa', '=', 'ibu.id_calon_siswa')
@@ -45,6 +45,7 @@ class ExportDataSiswa extends Component
                 $join->on('br.id_syarat', '=', 'ps.id_persyaratan')
                     ->where('br.deleted_at', null);
             })
+            ->whereNull('cs.deleted_at')
             // ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%')
 
             ->select(
