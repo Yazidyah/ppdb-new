@@ -7,6 +7,8 @@ use Livewire\Component;
 use App\Models\DataRegistrasi;
 use App\Models\CalonSiswa;
 use App\Helpers\DocumentHelper;
+use App\Models\Persyaratan;
+
 class StepEmpat extends Component
 {
     public $tab = 1;
@@ -28,8 +30,10 @@ class StepEmpat extends Component
             session()->flash('message', 'Kamu sudah pernah mendaftar');
             return redirect('/siswa/dashboard');
         }
-
-        $this->persyaratan = $dataRegistrasi->syarat;
+        $idjalur = $dataRegistrasi->id_jalur;
+        $this->persyaratan = Persyaratan::where('id_jalur', $idjalur)
+            ->orderBy('id_persyaratan', 'asc')
+            ->get();
         $this->isSyaratComplete();
     }
 
@@ -44,7 +48,7 @@ class StepEmpat extends Component
     public function isSyaratComplete()
     {
         foreach ($this->persyaratan as $index => $syarat) {
-            if (count($syarat->berkas) === 0) {
+            if (count($syarat->berkas) == 0) {
                 $this->isValid = false;
                 return false;
             }
@@ -52,7 +56,8 @@ class StepEmpat extends Component
             foreach ($syarat->berkas as $fileIndex => $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
 
-                if (!DocumentHelper::isSimpleSyarat($namaPersyaratan) 
+                if (
+                    !DocumentHelper::isSimpleSyarat($namaPersyaratan)
                     && empty($berkas->data_berkas)
                 ) {
                     $this->isValid = false;
