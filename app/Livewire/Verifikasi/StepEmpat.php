@@ -52,7 +52,7 @@ class StepEmpat extends Component
                 $this->isValid = false;
                 return false;
             }
-            foreach ($syarat->berkas->where('deleted_at', null) as $berkas) {
+            foreach ($syarat->berkas->where('deleted_at', null)->where('uploader_id', $this->user->id) as $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
                 if (str_contains(strtolower($namaPersyaratan), 'kartu keluarga')) {
                     // dd($berkas->data_berkas);
