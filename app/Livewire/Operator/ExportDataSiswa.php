@@ -42,13 +42,16 @@ class ExportDataSiswa extends Component
             ->leftJoin('rapot as rp', 'dr.id_registrasi', '=', 'rp.id_registrasi')
             ->leftJoin('data_registrasi as ds', 'cs.id_calon_siswa', '=', 'ds.id_calon_siswa')
             ->leftJoin('persyaratan as ps', function ($join) {
-                $join->on('ds.id_registrasi', '=', 'ps.id_jalur')
+                $join->on('ds.id_jalur', '=', 'ps.id_jalur')
                     ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%');
             })
             ->leftJoin('berkas as br', function ($join) {
                 $join->on('br.id_syarat', '=', 'ps.id_persyaratan')
-                    ->where('br.deleted_at', null);
+                    // ->whereIn('br.id_syarat', [32, 33, 4, 34])
+                    ->whereColumn('br.uploader_id', 'cs.id_user')
+                    ->whereNull('br.deleted_at');
             })
+
             // ->whereNull('cs.deleted_at', 'u.deleted_at')
             // ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%')
 
