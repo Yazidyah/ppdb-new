@@ -52,26 +52,26 @@ class StepEmpat extends Component
                 $this->isValid = false;
                 return false;
             }
-            foreach ($syarat->berkas->where('deleted_at', null) as $berkas) {
-                $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
-                if (str_contains(strtolower($namaPersyaratan), 'kartu keluarga')) {
-                    if (
-                        $berkas->data_berkas == null or $berkas->data_berkas == '' or empty($berkas->data_berkas)
-                    ) {
-                        $this->isValid = false;
-                        return false;
-                    }
-                }
+            // foreach ($syarat->berkas->where('deleted_at', null) as $berkas) {
+            //     $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
+            //     if (str_contains(strtolower($namaPersyaratan), 'kartu keluarga')) {
+            //         if (
+            //             $berkas->data_berkas == null or $berkas->data_berkas == '' or empty($berkas->data_berkas)
+            //         ) {
+            //             $this->isValid = false;
+            //             return false;
+            //         }
+            //     }
 
-                if (str_contains(strtolower($namaPersyaratan), 'nisn')) {
-                    if (
-                        $berkas->data_berkas == null or $berkas->data_berkas == '' or empty($berkas->data_berkas)
-                    ) {
-                        $this->isValid = false;
-                        return false;
-                    }
-                }
-            }
+            //     if (str_contains(strtolower($namaPersyaratan), 'nisn')) {
+            //         if (
+            //             $berkas->data_berkas == null or $berkas->data_berkas == '' or empty($berkas->data_berkas)
+            //         ) {
+            //             $this->isValid = false;
+            //             return false;
+            //         }
+            //     }
+            // }
         }
 
         $this->isValid = true;
