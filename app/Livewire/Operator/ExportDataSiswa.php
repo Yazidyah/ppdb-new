@@ -119,7 +119,7 @@ class ExportDataSiswa extends Component
             // dd($s);
             $exportedCollection->push([
                 'No' => $index + 1,
-                'Jalur' => $s->nama_jalur,
+                'Jalur' => @$s->nama_jalur ?? 'Belum dipilih',
                 'NISN' => @$s->NISN ?? 'Belum dilengkapi',
                 'No. Pendaftaran' => $s->nomor_peserta,
                 'Sekolah Asal' => $s->sekolah_asal,
@@ -149,7 +149,7 @@ class ExportDataSiswa extends Component
                 'Akreditasi Sekolah (Predikat)' => @$s->predikat_akreditasi_sekolah,
                 'Posisi' => $s->status == 0 ? 'Biodata' : ($s->status == 1 ? 'Jalur' : ($s->status == 2 ? 'Upload' : 'Submit')),
                 'Status Verifikasi' => $s->status == 4 ? 'Tidak Lolos Verifikasi' : ($s->status == 5 ? 'Lolos Verifikasi' : 'Belum Diverifikasi'),
-                'Status Penerimaan' => $s->status == 6 ? 'Tidak Diterima' : ($s->status == 7 ? 'Diterima' : ($s->status == 8 ? 'Dicadangkan' : 'Belum ada status penerimaans')),
+                'Status Penerimaan' => $s->status == 6 ? 'Tidak Diterima' : ($s->status == 7 ? 'Diterima' : ($s->status == 8 ? 'Dicadangkan' : 'Belum ada status penerimaan')),
                 'Nomor Suket' => @$s->nomor_suket,
                 'Eng 3' => @$s->eng_3,
                 'Mat 3' => @$s->mat_3,
