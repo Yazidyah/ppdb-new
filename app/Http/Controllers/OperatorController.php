@@ -8,6 +8,7 @@ use App\Models\Persyaratan;
 use App\Models\JalurRegistrasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class OperatorController extends Controller
 {
@@ -29,6 +30,9 @@ class OperatorController extends Controller
             $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
             $item->status_label = $this->getStatusLabel($item->dataRegistrasi->status ?? null);
             $item->no_telp = $item->no_telp;
+            $item->tanggal_daftar = $item->dataRegistrasi->created_at 
+                ? Carbon::parse($item->dataRegistrasi->created_at)->locale('id')->translatedFormat('d-M-Y') 
+                : '-';
             return $item;
         });
 
@@ -46,10 +50,9 @@ class OperatorController extends Controller
             3 => 'Submit',
             4 => 'Tidak Lolos Verifikasi',
             5 => 'Lolos Verifikasi',
-            6 => 'Belum Ditentukan',
-            7 => 'Tidak Diterima',
-            8 => 'Diterima',
-            9 => 'Dicadangkan'
+            6 => 'Tidak Diterima',
+            7 => 'Diterima',
+            8 => 'Dicadangkan'
         ];
 
         return $statusLabels[$status] ?? '-';
