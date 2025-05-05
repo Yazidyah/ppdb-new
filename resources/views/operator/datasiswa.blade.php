@@ -121,7 +121,7 @@
                                 @endphp
 
                                 <td scope="col" class="{{ $tdClass }}">
-                                    {{ $siswa->id_calon_siswa }}
+                                    {{ $loop->iteration }}
                                 </td>
                                 <td scope="col" class="{{ $tdClass }}">
                                     {{ $siswa->nama_lengkap ?? 'Belum Di Lengkapi' }}
