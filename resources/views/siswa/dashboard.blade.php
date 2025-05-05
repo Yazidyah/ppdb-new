@@ -39,59 +39,59 @@
     @endif
     <!-- Stepper -->
     <section>
-        <div class="container flex justify-center my-4 mx-auto gap-2">
-            <div class="w-full flex justify-center my-4 items-center flex-col">
+        <div class="container flex justify-center my-8 mx-auto gap-4">
+            <div class="w-full flex justify-center my-8 items-center flex-col">
                 <ol
-                    class=" items-center w-full max-w-4xl mx-auto space-y-4 sm:flex sm:space-x-8 sm:space-y-0 rtl:space-x-reverse">
+                    class="items-center w-full max-w-6xl mx-auto space-y-6 sm:flex sm:space-x-12 sm:space-y-0 rtl:space-x-reverse">
                     <!-- Step 1: Daftar Diri -->
                     <li
-                        class="ml-12 md:ml-0 flex items-center {{ $activeStep >= 1 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
+                        class="ml-16 md:ml-0 flex items-center {{ $activeStep >= 1 ? 'text-tertiary' : 'text-gray-500' }} space-x-4 rtl:space-x-reverse">
                         <span
-                            class="flex items-center justify-center w-8 h-8 border {{ $activeStep >= 1 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0">
+                            class="flex items-center justify-center w-12 h-12 border {{ $activeStep >= 1 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0 text-lg">
                             1
                         </span>
                         <span>
-                            <h3 class="font-medium leading-tight text-lg" id="status">Daftar Diri</h3>
-                            <p class="text-base" id="detail-status">{{ $daftarDiriDetail }}</p>
+                            <h3 class="font-semibold leading-tight text-xl" id="status">Daftar Diri</h3>
+                            <p class="text-lg" id="detail-status">{{ $daftarDiriDetail }}</p>
                         </span>
                     </li>
 
                     <!-- Step 2: Verifikasi Berkas -->
                     <li
-                        class="ml-12 md:ml-0 flex items-center {{ $activeStep >= 2 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
+                        class="ml-16 md:ml-0 flex items-center {{ $activeStep >= 2 ? 'text-tertiary' : 'text-gray-500' }} space-x-4 rtl:space-x-reverse">
                         <span
-                        class="flex items-center justify-center w-8 h-8 border {{ $activeStep >= 2 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0">
+                            class="flex items-center justify-center w-12 h-12 border {{ $activeStep >= 2 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0 text-lg">
                             2
                         </span>
                         <span>
-                            <h3 class="font-medium leading-tight text-lg">Verifikasi Berkas</h3>
-                            <p class="text-base">{{ $verifikasiDetail }}</p>
+                            <h3 class="font-semibold leading-tight text-xl">Verifikasi Berkas</h3>
+                            <p class="text-lg">{{ $verifikasiDetail }}</p>
                         </span>
                     </li>
 
                     <!-- Step 3: Tes Wawancara -->
                     <li
-                        class="ml-12 md:ml-0 flex items-center {{ $activeStep >= 3 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
+                        class="ml-16 md:ml-0 flex items-center {{ $activeStep >= 3 ? 'text-tertiary' : 'text-gray-500' }} space-x-4 rtl:space-x-reverse">
                         <span
-                        class="flex items-center justify-center w-8 h-8 border {{ $activeStep >= 3 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0">
+                            class="flex items-center justify-center w-12 h-12 border {{ $activeStep >= 3 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0 text-lg">
                             3
                         </span>
                         <span>
-                            <h3 class="font-medium leading-tight text-lg">Tes & Wawancara</h3>
-                            <p class="text-base">{{ $tesWawancaraDetail }}</p>
+                            <h3 class="font-semibold leading-tight text-xl">Tes & Wawancara</h3>
+                            <p class="text-lg">{{ $tesWawancaraDetail }}</p>
                         </span>
                     </li>
 
                     <!-- Step 4: Penetapan Siswa Baru -->
                     <li
-                        class="ml-12 md:ml-0 flex items-center {{ $activeStep >= 4 ? 'text-tertiary' : 'text-gray-500' }} space-x-2.5 rtl:space-x-reverse">
+                        class="ml-16 md:ml-0 flex items-center {{ $activeStep >= 4 ? 'text-tertiary' : 'text-gray-500' }} space-x-4 rtl:space-x-reverse">
                         <span
-                        class="flex items-center justify-center w-8 h-8 border {{ $activeStep >= 4 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0">
+                            class="flex items-center justify-center w-12 h-12 border {{ $activeStep >= 4 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0 text-lg">
                             4
                         </span>
                         <span>
-                            <h3 class="font-medium leading-tight text-lg">Penetapan Siswa Baru</h3>
-                            <p class="text-base">{{ $penetapanDetail }}</p>
+                            <h3 class="font-semibold leading-tight text-xl">Penetapan Siswa Baru</h3>
+                            <p class="text-lg">{{ $penetapanDetail }}</p>
                         </span>
                     </li>
                 </ol>
