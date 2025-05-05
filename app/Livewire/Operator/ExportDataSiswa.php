@@ -118,7 +118,7 @@ class ExportDataSiswa extends Component
             )
             ->get();
 
-        dd($siswa);
+        // dd($siswa);
 
         foreach ($siswa as $index => $s) {
             // dd($s);
