@@ -55,7 +55,7 @@ class StepEmpat extends Component
             foreach ($syarat->berkas->where('deleted_at', null) as $berkas) {
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
                 if (str_contains(strtolower($namaPersyaratan), 'kartu keluarga')) {
-                    dd($berkas->data_berkas);
+                    // dd($berkas->data_berkas);
                     if (
                         $berkas->data_berkas == null or $berkas->data_berkas == ''
                     ) {
