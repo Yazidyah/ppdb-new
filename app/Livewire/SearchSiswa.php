@@ -20,10 +20,9 @@ class SearchSiswa extends Component
         3 => 'Submit Dokumen',
         4 => 'Tidak Lolos Verifikasi Berkas',
         5 => 'Lolos Verifikasi Berkas, Silahkan Cek Email secara berkala',
-        6 => 'Belum Ditentukan',
-        7 => 'Tidak Diterima',
-        8 => 'Diterima',
-        9 => 'Dicadangkan'
+        6 => 'Tidak Diterima',
+        7 => 'Diterima',
+        8 => 'Dicadangkan'
     ];
 
     protected $rules = [

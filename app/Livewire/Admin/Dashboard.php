@@ -49,10 +49,10 @@ class Dashboard extends Component
         $this->countUpload = (clone $cteDataRegistrasi)->where('status', '2')->count();
         $this->countSubmit = (clone $cteDataRegistrasi)->where('status', '3')->count();
         $this->countTidakLolosAdministrasi = (clone $cteDataRegistrasi)->where('status', '4')->count();
-        $this->countLolosAdministrasi = (clone $cteDataRegistrasi)->whereIn('status', ['5', '6'])->count();
-        $this->countTidakDiterima = (clone $cteDataRegistrasi)->where('status', '7')->count();
-        $this->countDiterima = (clone $cteDataRegistrasi)->where('status', '8')->count();
-        $this->countDicadangkan = (clone $cteDataRegistrasi)->where('status', '9')->count();
+        $this->countLolosAdministrasi = (clone $cteDataRegistrasi)->where('status', '5')->count();
+        $this->countTidakDiterima = (clone $cteDataRegistrasi)->where('status', '6')->count();
+        $this->countDiterima = (clone $cteDataRegistrasi)->where('status', '7')->count();
+        $this->countDicadangkan = (clone $cteDataRegistrasi)->where('status', '8')->count();
 
         $statistikData = $this->prepareStatistikData($totalCalonSiswa, $countJalurReguler, $countJalurAfirmasiPrestasi, $countJalurAfirmasiKETM, $countJalurAfirmasiABK);
 

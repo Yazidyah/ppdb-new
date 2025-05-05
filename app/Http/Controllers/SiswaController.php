@@ -63,12 +63,11 @@ class SiswaController extends Controller
         }
 
         // --- Tahap Penetapan Siswa Baru ---
-        if (isset($status) && $status >= 6 && $status <= 9) {
+        if (isset($status) && $status >= 6 && $status <= 8) {
             $penetapanDetail = [
-                6 => 'Belum Ditentukan',
-                7 => 'Tidak Diterima',
-                8 => 'Diterima',
-                9 => 'Dicadangkan'
+                6 => 'Tidak Diterima',
+                7 => 'Diterima',
+                8 => 'Dicadangkan'
             ][$status];
         } else {
             $penetapanDetail = 'Belum ditetapkan';

@@ -47,16 +47,14 @@
                         <option value="1" {{ request('filter') == '1' ? 'selected' : '' }}>Jalur</option>
                         <option value="2" {{ request('filter') == '2' ? 'selected' : '' }}>Upload</option>
                         <option value="3" {{ request('filter') == '3' ? 'selected' : '' }}>Submit</option>
-                        <option value="4" {{ request('filter') == '4' ? 'selected' : '' }}>Tidak Lolos
+                        <option value="4" {{ request('filter') == '4' ? 'selected' : '' }}>Tidak Lolos Berkas
                         </option>
-                        <option value="5" {{ request('filter') == '5' ? 'selected' : '' }}>Lolos</option>
-                        <option value="6" {{ request('filter') == '6' ? 'selected' : '' }}>Belum Ditentukan
+                        <option value="5" {{ request('filter') == '5' ? 'selected' : '' }}>Lolos Berkas</option>
+                        <option value="6" {{ request('filter') == '6' ? 'selected' : '' }}>Tidak Diterima
                         </option>
-                        <option value="7" {{ request('filter') == '7' ? 'selected' : '' }}>Tidak Diterima
+                        <option value="7" {{ request('filter') == '7' ? 'selected' : '' }}>Diterima
                         </option>
-                        <option value="8" {{ request('filter') == '8' ? 'selected' : '' }}>Diterima
-                        </option>
-                        <option value="9" {{ request('filter') == '9' ? 'selected' : '' }}>Dicadangkan
+                        <option value="8" {{ request('filter') == '8' ? 'selected' : '' }}>Dicadangkan
                         </option>
                     </select>
                     <select name="jalur" class="px-4 py-2 border rounded-lg"
@@ -86,7 +84,7 @@
                                 $columns = [
                                     ['name' => 'NO', 'sort_by' => 'id_calon_siswa'],
                                     ['name' => 'NAMA', 'sort_by' => 'nama_lengkap'],
-                                    ['name' => 'AKUN', 'sort_by' => null],
+                                    ['name' => 'AKUN (NISN / No. Regis / Email)', 'sort_by' => null],
                                     ['name' => 'ASAL SEKOLAH', 'sort_by' => 'sekolah_asal'],
                                     ['name' => 'JENIS KELAMIN', 'sort_by' => 'jenis_kelamin'],
                                     ['name' => 'NILAI RATA-RATA', 'sort_by' => 'total_rata_nilai'],
@@ -141,10 +139,10 @@
                                     {{ $siswa->jenis_kelamin ?? 'Belum Di Lengkapi' }}
                                 </td>
                                 <td scope="col" class="{{ $tdClass }}">
-                                    {{ $siswa->dataRegistrasi->rapot->total_rata_nilai ?? '-' }}
+                                    {{ ($siswa->dataRegistrasi->rapot->total_rata_nilai ?? 0) == 0 ? '-' : $siswa->dataRegistrasi->rapot->total_rata_nilai }}
                                 </td>
                                 <td scope="col" class="{{ $tdClass }}">
-                                    {{ $siswa->dataRegistrasi->dataTes->pluck('id_jadwal_tes')->join(' / ') ?? '-' }}
+                                    {{ $siswa->dataRegistrasi->dataTes->pluck('id_jadwal_tes')->isNotEmpty() ? $siswa->dataRegistrasi->dataTes->pluck('id_jadwal_tes')->join(' / ') : '-' }}
                                 </td>
                                 <td scope="col" class="{{ $tdClass }}">
                                     {{ $siswa->status_label ?? '-' }}
@@ -153,7 +151,7 @@
                                     {{ $siswa->dataRegistrasi->jalur->nama_jalur ?? '-' }}
                                 </td>
                                 <td scope="col" class="{{ $tdClass }}">
-                                    {{ @$siswa->dataRegistrasi->created_at ? @$siswa->dataRegistrasi->created_at->format('d-M-Y') : '-' }}
+                                    {{ $siswa->tanggal_daftar }}
                                 </td>
                                 <td scope="col" class="px-6 py-3 text-center" onclick="event.stopPropagation()">
                                     @livewire('operator.verif-berkas', ['siswa' => $siswa], key($siswa->user_id . '-berkas-' . $siswa->id_calon_siswa))
