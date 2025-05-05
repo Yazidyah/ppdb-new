@@ -2,6 +2,18 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NG6ZPNFX66"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NG6ZPNFX66');
+    </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,7 +30,8 @@
                 <div class="text-center">
                     <a href="/" class="flex flex-col justify-center items-center">
                         <img src="/logoman.webp" class="w-20 h-20 justify-center items-center fill-current">
-                        <h1 class="text-xl fill-current text-gray-700 font-bold text-center mt-2">PPDB MAN 1 Kota Bogor</h1>
+                        <h1 class="text-xl fill-current text-gray-700 font-bold text-center mt-2">PPDB MAN 1 Kota Bogor
+                        </h1>
                     </a>
                 </div>
                 <div class="text-left">
@@ -39,7 +52,8 @@
                             <p>Fingerprint: {{ $fingerprint }} - {{ auth()->id() ?? '' }}</p>
                         </div>
                     @else
-                        <div class="relative p-2 my-4 text-sm text-gray-500 bg-gray-100 border border-gray-300 rounded-lg">
+                        <div
+                            class="relative p-2 my-4 text-sm text-gray-500 bg-gray-100 border border-gray-300 rounded-lg">
                             <p>Timestamp: {{ now()->toDateTimeString() }}</p>
                         </div>
                     @endif
