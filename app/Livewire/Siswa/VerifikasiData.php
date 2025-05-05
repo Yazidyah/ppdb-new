@@ -15,6 +15,8 @@ class VerifikasiData extends Component
     public $orangTuaIbu;
     public $orangTuaAyah;
     public $id_calon_siswa;
+    public $user;
+    public $orangTuaWali;
 
     public function mount()
     {

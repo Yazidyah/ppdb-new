@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\CalonSiswa;
 use App\Models\DataRegistrasi;
+use App\Models\Pembukaan;
 use Livewire\Component;
 use App\Models\Statistik;
 use Illuminate\Support\Facades\DB;
@@ -14,18 +15,27 @@ class Dashboard extends Component
     public $filterNamaStatistik = '';
     public $allNamaStatistik = [];
     public $statistik, $countLakiLaki, $countPerempuan, $countSekolahNegeri, $countSekolahSwasta, $countLuarBogor, $countDalamBogor, $countJalur, $countUpload, $countSubmit, $countTidakLolosAdministrasi, $countLolosAdministrasi, $countBelumDitentukan, $countDiterima, $countTidakDiterima, $countDicadangkan;
-
+    public $isOpen;
     protected $queryString = [
         'tab' => ['except' => 'konsep', 'as' => 't'],
     ];
 
     public function mount()
     {
+        $this->isOpen = Pembukaan::first();
         $this->updateStatistik();
         $this->loadStatistik();
         $this->loadAllNamaStatistik();
     }
 
+    public function bukatutup()
+    {
+
+        $pembukaan = Pembukaan::first();
+        $pembukaan->is_open = !$pembukaan->is_open;
+        $pembukaan->save();
+        $this->mount();
+    }
     public function updateStatistik()
     {
         $cteCalonSiswa = CalonSiswa::withoutTrashed();
