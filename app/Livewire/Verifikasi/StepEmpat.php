@@ -64,14 +64,14 @@ class StepEmpat extends Component
                     }
                 }
 
-                // if (str_contains(strtolower($namaPersyaratan), 'nisn')) {
-                //     if (
-                //         $berkas->data_berkas == null or $berkas->data_berkas == '' or empty($berkas->data_berkas)
-                //     ) {
-                //         $this->isValid = false;
-                //         return false;
-                //     }
-                // }
+                if (str_contains(strtolower($namaPersyaratan), 'nisn')) {
+                    if (
+                        $berkas->data_berkas == null or $berkas->data_berkas == '' or empty($berkas->data_berkas)
+                    ) {
+                        $this->isValid = false;
+                        return false;
+                    }
+                }
             }
         }
 
