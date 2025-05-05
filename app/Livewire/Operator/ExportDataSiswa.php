@@ -47,8 +47,13 @@ class ExportDataSiswa extends Component
             })
             ->leftJoin('berkas as br', function ($join) {
                 $join->on('br.id_syarat', '=', 'ps.id_persyaratan')
-                    ->whereNull('br.deleted_at')
-                    ->whereColumn('br.uploader_id', 'u.id');
+                    ->whereIn('br.id_syarat', [
+                        32,
+                        33,
+                        4,
+                        34
+                    ])
+                    ->whereNull('br.deleted_at');
             })            // ->whereNull('cs.deleted_at', 'u.deleted_at')
             // ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%')
 
@@ -113,7 +118,7 @@ class ExportDataSiswa extends Component
             )
             ->get();
 
-        // dd($siswa);
+        dd($siswa);
 
         foreach ($siswa as $index => $s) {
             // dd($s);
