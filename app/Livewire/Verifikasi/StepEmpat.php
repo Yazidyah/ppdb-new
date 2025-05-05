@@ -52,18 +52,26 @@ class StepEmpat extends Component
                 $this->isValid = false;
                 return false;
             }
-            // dd($syarat->berkas->where('deleted_at', null));
             foreach ($syarat->berkas->where('deleted_at', null) as $fileIndex => $berkas) {
-                // dd($berkas);
                 $namaPersyaratan = $berkas->persyaratan->nama_persyaratan ?? 'Tidak diketahui';
-
                 if (
-                    !DocumentHelper::isSimpleSyarat($namaPersyaratan)
-                    && empty($berkas->data_berkas)
+                    str_contains(strtolower($namaPersyaratan), 'kartu keluarga') or
+                    str_contains(strtolower($namaPersyaratan), 'nisn')
                 ) {
-                    $this->isValid = false;
-                    return false;
+                    if (
+                        $berkas->data_berkas == null or $berkas->data_berkas == '' or empty($berkas->data_berkas)
+                    ) {
+                        $this->isValid = false;
+                        return false;
+                    }
                 }
+                // if (
+                //     !DocumentHelper::isSimpleSyarat($namaPersyaratan)
+                //     && empty($berkas->data_berkas)
+                // ) {
+                //     $this->isValid = false;
+                //     return false;
+                // }
             }
         }
 
