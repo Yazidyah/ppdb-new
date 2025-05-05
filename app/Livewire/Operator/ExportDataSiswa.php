@@ -45,7 +45,7 @@ class ExportDataSiswa extends Component
                 $join->on('br.id_syarat', '=', 'ps.id_persyaratan')
                     ->where('br.deleted_at', null);
             })
-            ->whereNull('cs.deleted_at')
+            ->whereNull('cs.deleted_at', 'u.deleted_at')
             // ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%')
 
             ->select(
