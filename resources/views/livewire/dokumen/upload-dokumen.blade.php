@@ -321,8 +321,14 @@
         @endif
         @if ($isRapotLengkap == false)
             <button wire:click="validateAndSubmit"
-                class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary cursor-not-allowed"
-                type="button" id="submitBtn" disabled >Lanjutkan ke tahap verifikasi</button>
+                class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary cursor-not-allowed relative group"
+                type="button" id="submitBtn" disabled>
+                Lanjutkan ke tahap verifikasi
+                <span
+                    class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-white bg-gray-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                    Pastikan semua data rapot telah diisi untuk melanjutkan
+                </span>
+            </button>
         @endif
         {{-- <button onclick="window.location.href='/siswa/daftar-step-empat?t=1'"
             class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
