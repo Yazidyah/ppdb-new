@@ -25,6 +25,7 @@ class UploadDokumen extends Component
     public $syarat;
     public $kb;
     public $rapot;
+    public $isRapotLengkap = false;
 
     #[On('isian-updated')]
     public function mount()
@@ -36,12 +37,12 @@ class UploadDokumen extends Component
         $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->orderBy('id_persyaratan', 'asc')->get();
         $this->syarat = null;
 
-        // Check if at least one document has been uploaded
         $uploadedDocumentsCount = Berkas::where('uploader_id', $this->user->id)->count();
         if ($uploadedDocumentsCount > 0) {
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
                 ->update(['status' => 2]);
         }
+        $this->validateIsianRapot();
     }
 
     private function isSimpleSyarat($namaSyarat) //Buat syarat yang ga butuh ngisi data
@@ -178,6 +179,31 @@ class UploadDokumen extends Component
         } else {
             Log::info('Tidak ada file yang diterima');
         }
+    }
+
+    public function validateIsianRapot()
+    {
+        $rapot = $this->user->siswa->dataRegistrasi->rapot;
+
+        if (empty($rapot) || empty($rapot->nilai_rapot)) {
+            $this->isRapotLengkap = false;
+            return;
+        }
+
+        $nilaiRapotArray = json_decode(trim($rapot, "\""), true);
+
+        if (isset($nilaiRapotArray['nilai_rapot'])) {
+            foreach ($nilaiRapotArray['nilai_rapot'] as $semesterData) {
+                foreach ($semesterData['data'] as $value) {
+                    if ($value == 0) {
+                        $this->isRapotLengkap = false;
+                        return;
+                    }
+                }
+            }
+        }
+
+        $this->isRapotLengkap = true;
     }
 
     public function render()
