@@ -242,14 +242,20 @@
                 const currentSortBy = document.querySelector('input[name="sort_by"]').value;
                 const currentSortOrder = document.querySelector('input[name="sort_order"]').value;
 
-                // Default to 'desc' for specific columns
-                const defaultDescColumns = ['total_rata_nilai', 'created_at'];
-
+                // Toggle sort order if the same column is clicked
                 if (currentSortBy === column) {
                     document.querySelector('input[name="sort_order"]').value = currentSortOrder === 'asc' ? 'desc' : 'asc';
                 } else {
+                    // Default to 'desc' for specific columns, otherwise 'asc'
+                    const defaultDescColumns = ['total_rata_nilai', 'created_at'];
                     document.querySelector('input[name="sort_order"]').value = defaultDescColumns.includes(column) ? 'desc' : 'asc';
                 }
+
+                // Update the sort_by input value
+                document.querySelector('input[name="sort_by"]').value = column;
+
+                // Submit the form to apply sorting
+                document.getElementById('searchForm').submit();
             }
         </script>
     </div>
