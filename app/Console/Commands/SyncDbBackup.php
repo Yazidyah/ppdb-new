@@ -104,6 +104,12 @@ class SyncDbBackup extends Command
 
             $calon_siswa_id = $cs->id_calon_siswa;
 
+            $userExists = $pgbackup->table('users')->where('id', $cs->id_user)->exists();
+            if (!$userExists) {
+                Log::channel('scheduler-calon-siswa-backup')->warning("Skipping calon siswa " . $cs->nama_lengkap . " because id_user " . $cs->id_user . " does not exist in users table.");
+                continue;
+            }
+
             $exists = $pgbackup->table('calon_siswa')->where('id_calon_siswa', $calon_siswa_id)->exists();
             if (!$exists) {
                 $pgbackup->table('calon_siswa')->insert([
