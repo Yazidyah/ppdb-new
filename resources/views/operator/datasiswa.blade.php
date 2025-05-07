@@ -242,10 +242,13 @@
                 const currentSortBy = document.querySelector('input[name="sort_by"]').value;
                 const currentSortOrder = document.querySelector('input[name="sort_order"]').value;
 
+                // Default to 'desc' for specific columns
+                const defaultDescColumns = ['total_rata_nilai', 'created_at'];
+
                 if (currentSortBy === column) {
                     document.querySelector('input[name="sort_order"]').value = currentSortOrder === 'asc' ? 'desc' : 'asc';
                 } else {
-                    document.querySelector('input[name="sort_order"]').value = 'asc';
+                    document.querySelector('input[name="sort_order"]').value = defaultDescColumns.includes(column) ? 'desc' : 'asc';
                 }
             }
         </script>

@@ -112,9 +112,14 @@ class OperatorController extends Controller
 
     private function applySorting($query, $sortBy, $sortOrder)
     {
-        $validSortByColumns = ['id_calon_siswa', 'nama_lengkap', 'NISN', 'sekolah_asal', 'jenis_kelamin', 'status', 'total_rata_nilai'];
+        $validSortByColumns = ['id_calon_siswa', 'nama_lengkap', 'NISN', 'sekolah_asal', 'jenis_kelamin', 'status', 'total_rata_nilai', 'created_at'];
         if (!in_array($sortBy, $validSortByColumns)) {
             $sortBy = 'id_calon_siswa';
+        }
+
+        // Set default sort order to 'desc' for specific columns
+        if (in_array($sortBy, ['total_rata_nilai', 'created_at']) && $sortOrder === 'asc') {
+            $sortOrder = 'desc';
         }
 
         if (!in_array($sortOrder, ['asc', 'desc'])) {
