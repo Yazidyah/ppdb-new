@@ -80,6 +80,20 @@ return [
             'days' => 2,
         ],
 
+        'scheduler-user-backup' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/scheduler-user-backup.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 2,
+        ],
+
+        'scheduler-calon-siswa-backup' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/scheduler-calon-siswa-backup.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 2,
+        ],
+
         'upload' => [
             'driver' => 'daily',
             'path' => storage_path('logs/upload.log'),
