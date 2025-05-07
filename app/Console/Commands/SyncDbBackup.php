@@ -93,7 +93,7 @@ class SyncDbBackup extends Command
         $calonSiswa = DB::table('calon_siswa')->get();
 
         foreach ($calonSiswa as $cs) {
-            Log::channel('scheduler')->info("Syncing calon siswa: " . $cs->name);
+            Log::channel('scheduler')->info("Syncing calon siswa: " . $cs->nama_lengkap);
 
             $calon_siswa_id = $cs->id;
 
@@ -122,9 +122,9 @@ class SyncDbBackup extends Command
                     'updated_at' => $cs->updated_at,
                     'deleted_at' => $cs->deleted_at,
                 ]);
-                Log::channel('scheduler')->info("Calon siswa " . $cs->name . " synced successfully.");
+                Log::channel('scheduler')->info("Calon siswa " . $cs->nama_lengkap . " synced successfully.");
             } else {
-                Log::channel('scheduler')->info("Calon siswa " . $cs->name . " already exists in backup database.");
+                Log::channel('scheduler')->info("Calon siswa " . $cs->nama_lengkap . " already exists in backup database.");
                 $pgbackup->table('calon_siswa')->where('id', $calon_siswa_id)->update([
                     'nama_lengkap' => $cs->nama_lengkap,
                     'NIK' => $cs->NIK,
