@@ -37,7 +37,7 @@ class SyncDbBackup extends Command
             $this->info("Connected to backup database");
 
             // table user
-            $this->userSync($pg, $pgbackup);
+            // $this->userSync($pg, $pgbackup);
 
             // table calon_siswa
             $this->calonSiswaSync($pg, $pgbackup);
@@ -89,6 +89,7 @@ class SyncDbBackup extends Command
 
     public function calonSiswaSync($pg, $pgbackup)
     {
+        dd('calon siswa sync');
         $calonSiswa = DB::table('calon_siswa')->get();
 
         foreach ($calonSiswa as $cs) {
