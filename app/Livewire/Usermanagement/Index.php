@@ -44,13 +44,14 @@ class Index extends Component
             'users' => User::query()
                 ->when(!empty($this->search), function ($p) {
                     $p->where('name', 'ilike', '%' . $this->search . '%')
-                        ->orWhere('email', 'ilike', '%' . $this->search . '%');
+                        ->orWhere('email', 'ilike', '%' . $this->search . '%')
+                        ->orWhere('id', 'ilike', '%' . $this->search . '%');
                 })
                 ->when($this->filterRole, function ($q) {
                     $q->role($this->filterRole);
                 })
                 ->when($this->showDeleted, function ($q) {
-                    $q->onlyTrashed(); 
+                    $q->onlyTrashed();
                 }, function ($q) {
                     $q->whereNull('deleted_at');
                 })

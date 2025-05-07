@@ -18,7 +18,8 @@
                 <div class="text-center">
                     <a href="/" class="flex flex-col justify-center items-center">
                         <img src="/logoman.webp" class="w-20 h-20 justify-center items-center fill-current">
-                        <h1 class="text-xl fill-current text-gray-700 font-bold text-center mt-2">PPDB MAN 1 Kota Bogor</h1>
+                        <h1 class="text-xl fill-current text-gray-700 font-bold text-center mt-2">PPDB MAN 1 Kota Bogor
+                        </h1>
                     </a>
                 </div>
                 <div class="text-left">
@@ -39,7 +40,8 @@
                             <p>Fingerprint: {{ $fingerprint }} - {{ auth()->id() ?? '' }}</p>
                         </div>
                     @else
-                        <div class="relative p-2 my-4 text-sm text-gray-500 bg-gray-100 border border-gray-300 rounded-lg">
+                        <div
+                            class="relative p-2 my-4 text-sm text-gray-500 bg-gray-100 border border-gray-300 rounded-lg">
                             <p>Timestamp: {{ now()->toDateTimeString() }}</p>
                         </div>
                     @endif

@@ -41,7 +41,7 @@ class OrangTua extends Component
                 ModelsOrangTua::create([
                     'id_calon_siswa' => $this->siswa->id_calon_siswa,
                     'id_hubungan' => 2,
-                    'pekerjaan' => 2,   
+                    'pekerjaan' => 2,
                 ]);
             }
             $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)
@@ -55,6 +55,7 @@ class OrangTua extends Component
         ModelsOrangTua::create([
             'id_calon_siswa' => $this->siswa->id_calon_siswa,
             'id_hubungan' => 3,
+            'pekerjaan' => 1,
         ]);
 
         $this->orangTua = ModelsOrangTua::where('id_calon_siswa', $this->siswa->id_calon_siswa)->get();

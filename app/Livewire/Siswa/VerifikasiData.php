@@ -36,13 +36,16 @@ class VerifikasiData extends Component
         $this->orangTuaWali = OrangTua::where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)->where('id_hubungan', 3)->first();
 
         if ($this->orangTuaIbu) {
-            $this->orangTuaIbu->pekerjaan = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaIbu->pekerjaan)->first()->nama_pekerjaan;
+            $pekerjaanIbu = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaIbu->pekerjaan)->first();
+            $this->orangTuaIbu->pekerjaan = $pekerjaanIbu ? $pekerjaanIbu->nama_pekerjaan : null;
         }
         if ($this->orangTuaAyah) {
-            $this->orangTuaAyah->pekerjaan = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaAyah->pekerjaan)->first()->nama_pekerjaan;
+            $pekerjaanAyah = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaAyah->pekerjaan)->first();
+            $this->orangTuaAyah->pekerjaan = $pekerjaanAyah ? $pekerjaanAyah->nama_pekerjaan : null;
         }
         if ($this->orangTuaWali) {
-            $this->orangTuaWali->pekerjaan = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaWali->pekerjaan)->first()->nama_pekerjaan;
+            $pekerjaanWali = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaWali->pekerjaan)->first();
+            $this->orangTuaWali->pekerjaan = $pekerjaanWali ? $pekerjaanWali->nama_pekerjaan : null;
         }
     }
 
