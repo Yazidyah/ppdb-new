@@ -95,7 +95,7 @@ class SyncDbBackup extends Command
         foreach ($calonSiswa as $cs) {
             Log::channel('scheduler')->info("Syncing calon siswa: " . $cs->nama_lengkap);
 
-            $calon_siswa_id = $cs->id;
+            $calon_siswa_id = $cs->id_calon_siswa;
 
             $exists = $pgbackup->table('calon_siswa')->where('id_calon_siswa', $calon_siswa_id)->exists();
             if (!$exists) {
