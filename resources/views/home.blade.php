@@ -18,7 +18,7 @@
                 </div>
                 <iframe
                     class="w-full h-full rounded-lg shadow-lg"
-                    src="https://drive.google.com/file/d/17yg0dcFA4iryt5fO4lckL7r_wsFH_TIe/preview"
+                    src="https://www.youtube.com/embed/5BXqa6kn85A"
                     title="Video Tutorial PPDB"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
