@@ -48,21 +48,21 @@
                     <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4 text-gray-700">
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">Email</p>
-                            <p class="text-sm text-gray-500">{{ @$siswa->user->email ?? 'Belum Di Lengkapi' }}</p>
+                            <p class="text-sm text-gray-500">{{ @$siswa->user->email ?? 'Belum Dilengkapi' }}</p>
                         </div>
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">NISN</p>
-                            <p class="text-sm text-gray-500">{{ @$siswa->NISN ?? 'Belum Di Lengkapi' }}</p>
+                            <p class="text-sm text-gray-500">{{ @$siswa->NISN ?? 'Belum Dilengkapi' }}</p>
                         </div>
                         <div class="flex flex-col text-left">
-                            <p class="text-xs font-medium">Jalur</p>
+                            <p class="text-xs font-medium">Domisili</p>
                             <p class="text-sm text-gray-500">
-                                {{ @$siswa->dataRegistrasi->jalur->nama_jalur ?? 'Belum Di Pilih' }}</p>
+                                {{ @$siswa->kota == 'KOTA BOGOR' ? 'Dalam Kota' : 'Luar Kota' }}</p>
                             </p>
                         </div>
                         <div class="flex flex-col text-left">
                             <p class="text-xs font-medium">Kode Registrasi</p>
-                            <p class="text-sm text-gray-500">{{ @$siswa->DataRegistrasi->nomor_peserta ?? 'Belum Di Lengkapi' }}</p>
+                            <p class="text-sm text-gray-500">{{ @$siswa->DataRegistrasi->nomor_peserta ?? 'Belum Dilengkapi' }}</p>
                         </div>
                     </div>
                 </div>
