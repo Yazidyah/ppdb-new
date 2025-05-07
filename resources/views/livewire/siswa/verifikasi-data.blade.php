@@ -44,7 +44,8 @@
             </div>
             <div class="mb-4 mx-2">
                 <label for="npsn" class="block text-sm font-medium text-gray-700">NPSN</label>
-                <input type="text" id="npsn" value="{{ strtoupper($calonSiswa->NPSN) ?: 'DATA INI KOSONG' }}" disabled
+                <input type="text" id="npsn" value="{{ strtoupper($calonSiswa->NPSN) ?: 'DATA INI KOSONG' }}"
+                    disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->NPSN ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
@@ -71,8 +72,8 @@
             </div>
             <div class="mb-4 mx-2">
                 <label for="alamat_kk" class="block text-sm font-medium text-gray-700">Alamat KK</label>
-                <input type="text" id="alamat_kk" value="{{ strtoupper($calonSiswa->alamat_kk) ?: 'DATA INI KOSONG' }}"
-                    disabled
+                <input type="text" id="alamat_kk"
+                    value="{{ strtoupper($calonSiswa->alamat_kk) ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->alamat_kk ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
@@ -90,81 +91,92 @@
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->nilai_akreditasi_sekolah ? 'text-red-500' : '' }}">
             </div>
         </div>
-        @if($orangTuaIbu)
+        @if ($orangTuaIbu)
             <h2 class="text-2xl font-bold mb-4 mx-2 text-start">Biodata Orang Tua Ibu</h2>
             <div class="mb-4 mx-2">
-                <label for="nama_orang_tua_ibu" class="block text-sm font-medium text-gray-700">Nama Lengkap Ibu</label>
+                <label for="nama_orang_tua_ibu" class="block text-sm font-medium text-gray-700">Nama Lengkap
+                    Ibu</label>
                 <input type="text" id="nama_orang_tua_ibu"
                     value="{{ strtoupper($orangTuaIbu->nama_lengkap) ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaIbu->nama_lengkap ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
                 <label for="nik_orang_tua_ibu" class="block text-sm font-medium text-gray-700">NIK Ibu</label>
-                <input type="text" id="nik_orang_tua_ibu" value="{{ $orangTuaIbu->nik ?: 'DATA INI KOSONG' }}" disabled
+                <input type="text" id="nik_orang_tua_ibu" value="{{ $orangTuaIbu->nik ?: 'DATA INI KOSONG' }}"
+                    disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaIbu->nik ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
-                <label for="pekerjaan_orang_tua_ibu" class="block text-sm font-medium text-gray-700">Pekerjaan Ibu</label>
+                <label for="pekerjaan_orang_tua_ibu" class="block text-sm font-medium text-gray-700">Pekerjaan
+                    Ibu</label>
                 <input type="text" id="pekerjaan_orang_tua_ibu"
                     value="{{ strtoupper($orangTuaIbu->pekerjaan) ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaIbu->pekerjaan ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
                 <label for="no_telp_orang_tua_ibu" class="block text-sm font-medium text-gray-700">No Telp Ibu</label>
-                <input type="text" id="no_telp_orang_tua_ibu" value="{{ $orangTuaIbu->no_telp ?: 'DATA INI KOSONG' }}"
-                    disabled
+                <input type="text" id="no_telp_orang_tua_ibu"
+                    value="{{ $orangTuaIbu->no_telp ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaIbu->no_telp ? 'text-red-500' : '' }}">
             </div>
         @endif
-        @if($orangTuaAyah)
+        @if ($orangTuaAyah)
             <h2 class="text-2xl font-bold mb-4 mx-2 text-start">Biodata Orang Tua Ayah</h2>
             <div class="mb-4 mx-2">
-                <label for="nama_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Nama Lengkap Ayah</label>
+                <label for="nama_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Nama Lengkap
+                    Ayah</label>
                 <input type="text" id="nama_orang_tua_ayah"
                     value="{{ strtoupper($orangTuaAyah->nama_lengkap) ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaAyah->nama_lengkap ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
                 <label for="nik_orang_tua_ayah" class="block text-sm font-medium text-gray-700">NIK Ayah</label>
-                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaAyah->nik ?: 'DATA INI KOSONG' }}" disabled
+                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaAyah->nik ?: 'DATA INI KOSONG' }}"
+                    disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaAyah->nik ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
-                <label for="pekerjaan_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
+                <label for="pekerjaan_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Pekerjaan
+                    Ayah</label>
                 <input type="text" id="pekerjaan_orang_tua_ayah"
                     value="{{ strtoupper($orangTuaAyah->pekerjaan) ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaAyah->pekerjaan ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
-                <label for="no_telp_orang_tua_ayah" class="block text-sm font-medium text-gray-700">No Telp Ayah</label>
-                <input type="text" id="no_telp_orang_tua_ayah" value="{{ $orangTuaAyah->no_telp ?: 'DATA INI KOSONG' }}"
-                    disabled
+                <label for="no_telp_orang_tua_ayah" class="block text-sm font-medium text-gray-700">No Telp
+                    Ayah</label>
+                <input type="text" id="no_telp_orang_tua_ayah"
+                    value="{{ $orangTuaAyah->no_telp ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaAyah->no_telp ? 'text-red-500' : '' }}">
             </div>
         @endif
-        @if($orangTuaWali != null)
+        @if ($orangTuaWali != null)
             <h2 class="text-2xl font-bold mb-4 mx-2 text-start">Biodata Orang Tua Wali</h2>
             <div class="mb-4 mx-2">
-                <label for="nama_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Nama Lengkap Wali</label>
+                <label for="nama_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Nama Lengkap
+                    Wali</label>
                 <input type="text" id="nama_orang_tua_ayah"
                     value="{{ strtoupper($orangTuaWali->nama_lengkap) ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->nama_lengkap ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
                 <label for="nik_orang_tua_ayah" class="block text-sm font-medium text-gray-700">NIK Ayah</label>
-                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaWali->nik ?: 'DATA INI KOSONG' }}" disabled
+                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaWali->nik ?: 'DATA INI KOSONG' }}"
+                    disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->nik ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
-                <label for="pekerjaan_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Pekerjaan Ayah</label>
+                <label for="pekerjaan_orang_tua_ayah" class="block text-sm font-medium text-gray-700">Pekerjaan
+                    Ayah</label>
                 <input type="text" id="pekerjaan_orang_tua_ayah"
                     value="{{ strtoupper($orangTuaWali->pekerjaan) ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->pekerjaan ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
-                <label for="no_telp_orang_tua_ayah" class="block text-sm font-medium text-gray-700">No Telp Ayah</label>
-                <input type="text" id="no_telp_orang_tua_ayah" value="{{ $orangTuaWali->no_telp ?: 'DATA INI KOSONG' }}"
-                    disabled
+                <label for="no_telp_orang_tua_ayah" class="block text-sm font-medium text-gray-700">No Telp
+                    Ayah</label>
+                <input type="text" id="no_telp_orang_tua_ayah"
+                    value="{{ $orangTuaWali->no_telp ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->no_telp ? 'text-red-500' : '' }}">
             </div>
         @endif
@@ -198,7 +210,8 @@
                     <h3 class="mb-4 text-3xl font-bold text-gray-900">Konfirmasi Pengisian Data</h3>
                     <p class="text-md text-justify ">
                         Dengan ini saya menyatakan bahwa saya meyakini sepenuhnya bahwa data isian biodata dan data
-                        orang tua yang telah saya masukkan ke dalam sistem adalah <span class="font-bold text-tertiary">
+                        orang tua yang telah saya masukkan ke dalam sistem adalah <span
+                            class="font-bold text-tertiary">
                             Valid, Benar, dan Dapat Dipertanggungjawabkan.</span>
                     </p>
                     <p class="text-md text-justify">
