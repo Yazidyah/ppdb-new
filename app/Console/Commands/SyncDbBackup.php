@@ -146,7 +146,7 @@ class SyncDbBackup extends Command
                     'updated_at' => $cs->updated_at,
                     'deleted_at' => $cs->deleted_at,
                 ]);
-                Log::channel('scheduler')->info("Calon siswa " . $cs->name . " updated successfully.");
+                Log::channel('scheduler')->info("Calon siswa " . $cs->nama_lengkap . " updated successfully.");
             }
         }
         Log::channel('scheduler')->info("Calon siswa data synced successfully.");
