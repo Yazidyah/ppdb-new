@@ -89,7 +89,7 @@ class SyncDbBackup extends Command
 
     public function calonSiswaSync($pg, $pgbackup)
     {
-        dd('calon siswa sync');
+        // dd('calon siswa sync');
         $calonSiswa = DB::table('calon_siswa')->get();
 
         foreach ($calonSiswa as $cs) {
