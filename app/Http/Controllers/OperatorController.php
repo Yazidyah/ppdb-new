@@ -9,6 +9,7 @@ use App\Models\JalurRegistrasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class OperatorController extends Controller
 {
@@ -117,11 +118,7 @@ class OperatorController extends Controller
             $sortBy = 'id_calon_siswa';
         }
 
-        // Set default sort order to 'desc' for specific columns
-        if (in_array($sortBy, ['total_rata_nilai', 'created_at']) && $sortOrder === 'asc') {
-            $sortOrder = 'desc';
-        }
-
+        // Ensure sortOrder is valid
         if (!in_array($sortOrder, ['asc', 'desc'])) {
             $sortOrder = 'asc';
         }
@@ -133,6 +130,9 @@ class OperatorController extends Controller
             $query->join('data_registrasi', 'calon_siswa.id_calon_siswa', '=', 'data_registrasi.id_calon_siswa')
                 ->join('rapot', 'data_registrasi.id_registrasi', '=', 'rapot.id_registrasi')
                 ->orderBy('rapot.total_rata_nilai', $sortOrder);
+        } elseif ($sortBy == 'created_at') {
+            $query->join('data_registrasi', 'calon_siswa.id_calon_siswa', '=', 'data_registrasi.id_calon_siswa')
+                ->orderBy('data_registrasi.created_at', $sortOrder);
         } else {
             $query->orderBy($sortBy, $sortOrder);
         }
