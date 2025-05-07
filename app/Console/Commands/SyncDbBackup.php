@@ -97,7 +97,7 @@ class SyncDbBackup extends Command
 
             $calon_siswa_id = $cs->id;
 
-            $exists = $pgbackup->table('calon_siswa')->where('id', $calon_siswa_id)->exists();
+            $exists = $pgbackup->table('calon_siswa')->where('id_calon_siswa', $calon_siswa_id)->exists();
             if (!$exists) {
                 $pgbackup->table('calon_siswa')->insert([
                     'id_calon_siswa' => $cs->id_calon_siswa,
@@ -125,7 +125,7 @@ class SyncDbBackup extends Command
                 Log::channel('scheduler')->info("Calon siswa " . $cs->nama_lengkap . " synced successfully.");
             } else {
                 Log::channel('scheduler')->info("Calon siswa " . $cs->nama_lengkap . " already exists in backup database.");
-                $pgbackup->table('calon_siswa')->where('id', $calon_siswa_id)->update([
+                $pgbackup->table('calon_siswa')->where('id_calon_siswa', $calon_siswa_id)->update([
                     'nama_lengkap' => $cs->nama_lengkap,
                     'NIK' => $cs->NIK,
                     'NISN' => $cs->NISN,
