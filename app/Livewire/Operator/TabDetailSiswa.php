@@ -19,7 +19,7 @@ class TabDetailSiswa extends Component
 {
     public $id_calon_siswa;
     public $siswa;
-    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $npsn, $sekolah_asal, $status_sekolah, $alamat_domisili, $alamat_kk, $provinsi, $kota, $id_jalur;
+    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $npsn, $sekolah_asal, $status_sekolah,$nilai_akreditasi_sekolah,$predikat_akreditasi_sekolah, $alamat_domisili, $alamat_kk, $provinsi, $kota, $id_jalur;
     public $name, $email, $password;
     public $jadwalTesBQ, $jadwalTesJapres;
     public $jalurOptions;
@@ -40,6 +40,8 @@ class TabDetailSiswa extends Component
         'npsn' => 'nullable|string|max:8',
         'sekolah_asal' => 'nullable|string|max:255',
         'status_sekolah' => 'nullable|string|max:255',
+        'nilai_akreditasi_sekolah' => 'nullable|numeric|max:4',
+        'predikat_akreditasi_sekolah' => 'nullable|string|max:255',
         'alamat_domisili' => 'nullable|string|max:255',
         'alamat_kk' => 'nullable|string|max:255',
         'provinsi' => 'nullable|string|max:255',
@@ -70,7 +72,9 @@ class TabDetailSiswa extends Component
         $this->alamat_kk = ucwords($siswa->alamat_kk);
         $this->provinsi = $siswa->provinsi;
         $this->kota = $siswa->kota;
-        $this->id_jalur = $siswa->dataRegistrasi->jalur->id_jalur ?? ""; // Default to empty string if null
+        $this->id_jalur = $siswa->dataRegistrasi->jalur->id_jalur ?? "";
+        $this->nilai_akreditasi_sekolah = $siswa->nilai_akreditasi_sekolah;
+        $this->predikat_akreditasi_sekolah = $siswa->predikat_akreditasi_sekolah;
         $this->jalurOptions = JalurRegistrasi::all();
         $user = $siswa->user;
         $this->name = $user->name;
@@ -101,6 +105,8 @@ class TabDetailSiswa extends Component
             'NPSN' => $this->npsn,
             'sekolah_asal' => strtolower($this->sekolah_asal),
             'status_sekolah' => strtolower($this->status_sekolah),
+            'nilai_akreditasi_sekolah' => $this->nilai_akreditasi_sekolah,
+            'predikat_akreditasi_sekolah' => $this->predikat_akreditasi_sekolah,
             'alamat_domisili' => strtolower($this->alamat_domisili),
             'alamat_kk' => strtolower($this->alamat_kk),
             'provinsi' => strtoupper($this->provinsi),

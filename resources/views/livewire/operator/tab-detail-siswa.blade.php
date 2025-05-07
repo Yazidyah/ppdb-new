@@ -175,6 +175,22 @@
                         <input type="text" wire:model="status_sekolah"
                             class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                     </div>
+                    <div>
+                        <label class="text-xs font-medium">Nilai Akreditasi Sekolah</label>
+                        <input type="text" wire:model="nilai_akreditasi_sekolah"
+                            class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
+                    </div>
+                    <div>
+                        <label class="text-xs font-medium">Predikat Akreditasi Sekolah</label>
+                        <select wire:model="predikat_akreditasi_sekolah"
+                            class="border p-2 w-full rounded-lg focus:border-tertiary focus:ring-tertiary shadow-sm">
+                            <option value="" disabled="disabled">Pilih Predikat Akreditasi</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="Belum Terakreditasi">Belum Terakreditasi</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="border p-4 rounded-lg bg-green-50">
