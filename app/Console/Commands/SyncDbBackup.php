@@ -38,6 +38,9 @@ class SyncDbBackup extends Command
 
             // table user
             $this->userSync($pg, $pgbackup);
+
+            // table calon_siswa
+            $this->calonSiswaSync($pg, $pgbackup);
         } catch (PDOException $e) {
             $this->error("Database error: " . $e->getMessage());
         } catch (\Exception $e) {
@@ -83,4 +86,100 @@ class SyncDbBackup extends Command
         }
         Log::channel('scheduler')->info("User data synced successfully.");
     }
+
+    public function calonSiswaSync($pg, $pgbackup)
+    {
+        $calonSiswa = DB::table('calon_siswa')->get();
+
+        foreach ($calonSiswa as $cs) {
+            Log::channel('scheduler')->info("Syncing calon siswa: " . $cs->name);
+
+            $calon_siswa_id = $cs->id;
+
+            $exists = $pgbackup->table('calon_siswa')->where('id', $calon_siswa_id)->exists();
+            if (!$exists) {
+                $pgbackup->table('calon_siswa')->insert([
+                    'id_calon_siswa' => $cs->id_calon_siswa,
+                    'id_user' => $cs->id_user,
+                    'nama_lengkap' => $cs->nama_lengkap,
+                    'NIK' => $cs->NIK,
+                    'NISN' => $cs->NISN,
+                    'no_telp' => $cs->no_telp,
+                    'jenis_kelamin' => $cs->jenis_kelamin,
+                    'tempat_lahir' => $cs->tempat_lahir,
+                    'tanggal_lahir' => $cs->tanggal_lahir,
+                    'NPSN' => $cs->NPSN,
+                    'sekolah_asal' => $cs->sekolah_asal,
+                    'status_sekolah' => $cs->status_sekolah,
+                    'predikat_akreditasi_sekolah' => $cs->predikat_akreditasi_sekolah,
+                    'nilai_akreditasi_sekolah' => $cs->nilai_akreditasi_sekolah,
+                    'alamat_domisili' => $cs->alamat_domisili,
+                    'alamat_kk' => $cs->alamat_kk,
+                    'provinsi' => $cs->provinsi,
+                    'kota' => $cs->kota,
+                    'created_at' => $cs->created_at,
+                    'updated_at' => $cs->updated_at,
+                    'deleted_at' => $cs->deleted_at,
+                ]);
+                Log::channel('scheduler')->info("Calon siswa " . $cs->name . " synced successfully.");
+            } else {
+                Log::channel('scheduler')->info("Calon siswa " . $cs->name . " already exists in backup database.");
+                $pgbackup->table('calon_siswa')->where('id', $calon_siswa_id)->update([
+                    'nama_lengkap' => $cs->nama_lengkap,
+                    'NIK' => $cs->NIK,
+                    'NISN' => $cs->NISN,
+                    'no_telp' => $cs->no_telp,
+                    'jenis_kelamin' => $cs->jenis_kelamin,
+                    'tempat_lahir' => $cs->tempat_lahir,
+                    'tanggal_lahir' => $cs->tanggal_lahir,
+                    'NPSN' => $cs->NPSN,
+                    'sekolah_asal' => $cs->sekolah_asal,
+                    'status_sekolah' => $cs->status_sekolah,
+                    'predikat_akreditasi_sekolah' => $cs->predikat_akreditasi_sekolah,
+                    'nilai_akreditasi_sekolah' => $cs->nilai_akreditasi_sekolah,
+                    'alamat_domisili' => $cs->alamat_domisili,
+                    'alamat_kk' => $cs->alamat_kk,
+                    'provinsi' => $cs->provinsi,
+                    'kota' => $cs->kota,
+                    'created_at' => $cs->created_at,
+                    'updated_at' => $cs->updated_at,
+                    'deleted_at' => $cs->deleted_at,
+                ]);
+                Log::channel('scheduler')->info("Calon siswa " . $cs->name . " updated successfully.");
+            }
+        }
+        Log::channel('scheduler')->info("Calon siswa data synced successfully.");
+    }
+
+    // public function dataRegistrasiSync($pg, $pgbackup)
+    // {
+    //     $dataRegistrasi = DB::table('data_registrasi')->get();
+
+    //     foreach ($dataRegistrasi as $dr) {
+    //         Log::channel('scheduler')->info("Syncing data registrasi: " . $dr->name);
+
+    //         $data_registrasi_id = $dr->id;
+
+    //         $exists = $pgbackup->table('data_registrasi')->where('id', $data_registrasi_id)->exists();
+    //         if (!$exists) {
+    //             $pgbackup->table('data_registrasi')->insert([
+    //                 'id_registrasi' => $dr->id_registrasi,
+    //                 'id_calon_siswa' => $dr->id_calon_siswa,
+    //                 'id_jalur' => $dr->id_jalur,
+    //                 'created_at' => $dr->created_at,
+    //                 'updated_at' => $dr->updated_at,
+    //             ]);
+    //             Log::channel('scheduler')->info("Data registrasi " . $dr->name . " synced successfully.");
+    //         } else {
+    //             Log::channel('scheduler')->info("Data registrasi " . $dr->name . " already exists in backup database.");
+    //             $pgbackup->table('data_registrasi')->where('id', $data_registrasi_id)->update([
+    //                 'status' => $dr->status,
+    //                 'created_at' => $dr->created_at,
+    //                 'updated_at' => $dr->updated_at,
+    //             ]);
+    //             Log::channel('scheduler')->info("Data registrasi " . $dr->name . " updated successfully.");
+    //         }
+    //     }
+    //     Log::channel('scheduler')->info("Data registrasi data synced successfully.");
+    // }
 }
