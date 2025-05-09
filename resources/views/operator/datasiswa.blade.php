@@ -142,7 +142,7 @@
                                     {{ ($siswa->dataRegistrasi->rapot->total_rata_nilai ?? 0) == 0 ? '-' : $siswa->dataRegistrasi->rapot->total_rata_nilai }}
                                 </td>
                                 <td scope="col" class="{{ $tdClass }}">
-                                    {{ $siswa->dataRegistrasi->dataTes->isNotEmpty() ? @$siswa->dataRegistrasi->dataTes->pluck('id_jadwal_tes')->join(' / ') : '-' }}
+                                    {{ @$siswa->dataRegistrasi && @$siswa->dataRegistrasi->dataTes ? @$siswa->dataRegistrasi->dataTes->pluck('id_jadwal_tes')->join(' / ') : '-' }}
                                 </td>
                                 <td scope="col" class="{{ $tdClass }}">
                                     {{ $siswa->status_label ?? '-' }}
