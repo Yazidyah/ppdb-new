@@ -31,8 +31,8 @@ class OperatorController extends Controller
             $item->jenis_kelamin = $item->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan';
             $item->status_label = $this->getStatusLabel($item->dataRegistrasi->status ?? null);
             $item->no_telp = $item->no_telp;
-            $item->tanggal_daftar = $item->dataRegistrasi->created_at 
-                ? Carbon::parse($item->dataRegistrasi->created_at)->locale('id')->translatedFormat('d-M-Y') 
+            $item->tanggal_daftar = @$item->dataRegistrasi->created_at
+                ? Carbon::parse(@$item->dataRegistrasi->created_at)->locale('id')->translatedFormat('d-M-Y')
                 : '-';
             return $item;
         });
