@@ -77,7 +77,7 @@
         <!-- Countdown Jalur Reguler -->
         <section class="bg-white p-6 rounded-xl border border-neutral-200 w-full max-w-md">
             <div x-data="{
-                startDate: new Date('May 26, 2025 00:00:01').getTime(),
+                startDate: new Date('May 25, 2025 00:00:01').getTime(),
                 endDate: new Date('June 05, 2025 23:59:00').getTime(),
                 remainingTime: 0,
                 countdownMessage: '',
