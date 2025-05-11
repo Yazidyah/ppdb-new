@@ -1,5 +1,5 @@
 <x-guest-layout>
-    @if (session('status') === 'verification-required')
+    {{-- @if (session('status') === 'verification-required')
         <div class="mb-4 text-sm text-gray-600">
             {{ __('Silakan verifikasi email Anda sebelum melanjutkan.') }}
         </div>
@@ -53,5 +53,15 @@
                 {{ __('Daftar') }}
             </x-primary-button>
         </div>
-    </form>
+    </form> --}}
+    <div class="text-center mt-6">
+        <p class="text-xl text-red-600 font-bold">
+            {{ __('Registrasi telah ditutup. Silahkan lakukan login untuk mengakses pendaftaran.') }}
+        </p>
+        <a href="{{ route('login') }}"
+            class="mt-6 inline-block w-full px-6 py-3 bg-tertiary text-white text-center font-bold rounded-lg shadow-md hover:bg-primary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 transition">
+            {{ __('Login') }}
+        </a>
+        </a>
+    </div>
 </x-guest-layout>
