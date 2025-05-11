@@ -27,10 +27,10 @@
                     const now = new Date().getTime();
                     if (now < startDate) {
                         $data.remainingTime = startDate - now;
-                        $data.countdownMessage = 'Pendaftaran Jalur Afirmatif dan Prestasi Di Mulai Dalam:';
+                        $data.countdownMessage = 'Pendaftaran Jalur Afirmatif dan Prestasi Di Mulai Dalam';
                     } else if (now >= startDate && now < endDate) {
                         $data.remainingTime = endDate - now;
-                        $data.countdownMessage = 'Pendaftaran Jalur Afirmatif dan Prestasi Berakhir Dalam:';
+                        $data.countdownMessage = 'Pendaftaran Jalur Afirmatif dan Prestasi Berakhir Dalam';
                     } else {
                         $data.remainingTime = 0;
                         $data.countdownMessage = 'PENDAFTARAN JALUR AFIRMATIF DAN PRESTASI TELAH DITUTUP';
@@ -93,13 +93,13 @@
                     const now = new Date().getTime();
                     if (now < startDate) {
                         $data.remainingTime = startDate - now;
-                        $data.countdownMessage = 'Pendaftaran Jalur Reguler Di Mulai Dalam:';
+                        $data.countdownMessage = 'Pendaftaran Jalur Reguler Di Mulai Dalam';
                     } else if (now >= startDate && now < endDate) {
                         $data.remainingTime = endDate - now;
-                        $data.countdownMessage = 'Pendaftaran Jalur Reguler Berakhir Dalam:';
+                        $data.countdownMessage = 'Pendaftaran Jalur Reguler Berakhir Dalam';
                     } else {
                         $data.remainingTime = 0;
-                        $data.countdownMessage = 'PENDAFTARAN JALUR REGULER TELAH DITUTUP!';
+                        $data.countdownMessage = 'PENDAFTARAN JALUR REGULER TELAH DITUTUP';
                     }
                 };
                 updateCountdown();
