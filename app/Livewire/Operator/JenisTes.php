@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class JenisTes extends Component
 {
-    public $id, $nama, $no_jalur = "";  
+    public $id, $nama, $no_jalur = "";
     public $isEdit = false;
     public $showModal = false;
     public $isTableVisible = true;
@@ -41,7 +41,7 @@ class JenisTes extends Component
         $this->validate();
         JenisTesModel::create([
             'id' => null, // Auto increment
-            'no_jalur' => (string) $this->no_jalur, 
+            'no_jalur' => (string) $this->no_jalur,
             'nama' => $this->nama,
         ]);
 
@@ -59,14 +59,14 @@ class JenisTes extends Component
         $this->showModal = true;
     }
 
-    public function Update()
+    public function update()
     {
         $this->validate();
 
         $jenis_tes = JenisTesModel::findOrFail($this->id);
 
         $jenis_tes->update([
-            'no_jalur' => (string) $this->no_jalur, 
+            'no_jalur' => (string) $this->no_jalur,
             'nama' => $this->nama,
         ]);
 
