@@ -193,11 +193,11 @@ class ExportDataSiswa extends Component
                 'Status Verifikasi' => $s->status < 4 ? 'Belum Diverifikasi' : ($s->status == 4 ? 'Tidak Lolos Verifikasi' : ($s->status >= 5 ? 'Lolos Verifikasi' : 'Status tidak diketahui')),
                 'Status Penerimaan' => $s->status < 6 ? 'Belum ada status penerimaan' : ($s->status == 6 ? 'Tidak Diterima' : ($s->status == 7 ? 'Diterima' : ($s->status == 8 ? 'Dicadangkan' : 'Status tidak diketahui'))),
                 'Nomor Suket' => @$s->nomor_suket,
-                'Sesi BQ & Wawancara' => 'Ruang ' . (@$s->ruang_bq ? @$s->ruang_bq . ' - ' : '') .
+                'Sesi BQ & Wawancara' => (@$s->ruang_bq ? 'Ruang ' . @$s->ruang_bq . ' - ' : '') .
                     (@$s->tanggal_bq ? (\Carbon\Carbon::parse(@$s->tanggal_bq)->locale('id')->translatedFormat('d F Y') . ' - ') : '') .
                     (@$s->jam_mulai_bq ? \Carbon\Carbon::parse(@$s->jam_mulai_bq)->format('H:i') . ' - ' : '') .
                     (@$s->jam_selesai_bq ? \Carbon\Carbon::parse(@$s->jam_selesai_bq)->format('H:i') : ''),
-                'Sesi Japres/Tes Akademik' => 'Ruang ' . (@$s->ruang_lainnya ? @$s->ruang_lainnya . ' - ' : '') .
+                'Sesi Japres/Tes Akademik' => (@$s->ruang_lainnya ? 'Ruang ' . @$s->ruang_lainnya . ' - ' : '') .
                     (@$s->tanggal_lainnya ? (\Carbon\Carbon::parse(@$s->tanggal_lainnya)->locale('id')->translatedFormat('d F Y') . ' - ') : '') .
                     (@$s->jam_mulai_lainnya ? \Carbon\Carbon::parse(@$s->jam_mulai_lainnya)->format('H:i') . ' - ' : '') .
                     (@$s->jam_selesai_lainnya ? \Carbon\Carbon::parse(@$s->jam_selesai_lainnya)->format('H:i') : ''),
