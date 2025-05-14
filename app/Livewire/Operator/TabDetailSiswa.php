@@ -239,7 +239,7 @@ class TabDetailSiswa extends Component
         }
 
         $jadwalBq = $this->formatJadwalTes($jadwalBqWawancara);
-        $jadwalJapres = $this->formatJadwalTes($jadwalJapresWawancara);
+        $jadwalJapres = isset($jadwalJapresWawancara) ? $this->formatJadwalTes($jadwalJapresWawancara) : null;
 
         $pdf = Pdf::loadView('mail.kartu-peserta', [
             'pas_foto' => $this->urlPasFoto ? Storage::path($this->urlPasFoto) : null,
