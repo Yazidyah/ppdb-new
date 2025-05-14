@@ -51,6 +51,30 @@ class ExportDataSiswa extends Component
                     ->whereColumn('br.uploader_id', 'cs.id_user')
                     ->whereNull('br.deleted_at');
             })
+            ->leftJoin('data_tes as jwl_bq', function ($join) {
+                $join->on('jwl_bq.id_registrasi', '=', 'dr.id_registrasi')
+                    ->whereIn('jwl_bq.id_jadwal_tes', [19, 13, 16, 15, 14, 12, 11, 20]);
+            })
+            ->leftJoin('jadwal_tes as jadwal_bq', function ($join) {
+                $join->on('jadwal_bq.id', '=', 'jwl_bq.id_jadwal_tes');
+            })
+
+            ->leftJoin('data_tes as jwl_lainnya', function ($join) {
+                $join->on('jwl_lainnya.id_registrasi', '=', 'dr.id_registrasi')
+                    ->whereNotIn('jwl_lainnya.id_jadwal_tes', [19, 13, 16, 15, 14, 12, 11, 20]);
+            })
+
+            ->leftJoin('jadwal_tes as jadwal_lainnya', function ($join) {
+                $join->on('jadwal_lainnya.id', '=', 'jwl_lainnya.id_jadwal_tes');
+            })
+            // ->leftJoin('jenis_tes as jadwal_bq', function ($join) {
+            //     $join->on('jadwal_bq.id', '=', 'jadwal.id_jenis_tes')
+            //         ->where('jadwal_bq', 'ilike', '%' . 'BQ' . '%');
+            // })
+            // ->leftJoin('jenis_tes as jadwal_lain', function ($join) {
+            //     $join->on('jadwal_lain.id', '=', 'jadwal.id_jenis_tes')
+            //         ->where('jadwal_lain', 'not like', '%' . 'BQ' . '%');
+            // })
 
             // ->whereNull('cs.deleted_at', 'u.deleted_at')
             // ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%')
@@ -113,6 +137,21 @@ class ExportDataSiswa extends Component
                 'rp.nilai_rapot->2->data->pai as pai_5',
                 'rp.nilai_rapot->2->data->ipa as ipa_5',
                 'rp.nilai_rapot->2->data->ips as ips_5',
+
+                //jadwal bq
+                'jadwal_bq.ruang as ruang_bq',
+                'jadwal_bq.tanggal as tanggal_bq',
+                'jadwal_bq.jam_mulai as jam_mulai_bq',
+                'jadwal_bq.jam_selesai as jam_selesai_bq',
+
+                // jadwal lainnya
+                'jadwal_lainnya.ruang as ruang_lainnya',
+                'jadwal_lainnya.tanggal as tanggal_lainnya',
+                'jadwal_lainnya.jam_mulai as jam_mulai_lainnya',
+                'jadwal_lainnya.jam_selesai as jam_selesai_lainnya',
+                // 'jadwal_bq',
+                // 'jadwal_lain'
+
             )
             ->get();
 
@@ -154,6 +193,14 @@ class ExportDataSiswa extends Component
                 'Status Verifikasi' => $s->status < 4 ? 'Belum Diverifikasi' : ($s->status == 4 ? 'Tidak Lolos Verifikasi' : ($s->status >= 5 ? 'Lolos Verifikasi' : 'Status tidak diketahui')),
                 'Status Penerimaan' => $s->status < 6 ? 'Belum ada status penerimaan' : ($s->status == 6 ? 'Tidak Diterima' : ($s->status == 7 ? 'Diterima' : ($s->status == 8 ? 'Dicadangkan' : 'Status tidak diketahui'))),
                 'Nomor Suket' => @$s->nomor_suket,
+                'Sesi BQ & Wawancara' => 'Ruang ' . (@$s->ruang_bq ? @$s->ruang_bq . ' - ' : '') .
+                    (@$s->tanggal_bq ? (\Carbon\Carbon::parse(@$s->tanggal_bq)->locale('id')->translatedFormat('d F Y') . ' - ') : '') .
+                    (@$s->jam_mulai_bq ? \Carbon\Carbon::parse(@$s->jam_mulai_bq)->format('H:i') . ' - ' : '') .
+                    (@$s->jam_selesai_bq ? \Carbon\Carbon::parse(@$s->jam_selesai_bq)->format('H:i') : ''),
+                'Sesi Japres/Tes Akademik' => 'Ruang ' . (@$s->ruang_lainnya ? @$s->ruang_lainnya . ' - ' : '') .
+                    (@$s->tanggal_lainnya ? (\Carbon\Carbon::parse(@$s->tanggal_lainnya)->locale('id')->translatedFormat('d F Y') . ' - ') : '') .
+                    (@$s->jam_mulai_lainnya ? \Carbon\Carbon::parse(@$s->jam_mulai_lainnya)->format('H:i') . ' - ' : '') .
+                    (@$s->jam_selesai_lainnya ? \Carbon\Carbon::parse(@$s->jam_selesai_lainnya)->format('H:i') : ''),
                 'Eng 3' => @$s->eng_3,
                 'Mat 3' => @$s->mat_3,
                 'Ind 3' => @$s->bind_3,
