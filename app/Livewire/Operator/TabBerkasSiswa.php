@@ -7,6 +7,7 @@ use App\Models\CalonSiswa;
 use App\Models\DataRegistrasi;
 use App\Models\KategoriBerkas;
 use App\Models\Persyaratan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -29,6 +30,7 @@ class TabBerkasSiswa extends Component
 
     public function mount()
     {
+        // dd(Auth::user()->id);
         $this->user = $this->siswa->user;
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
         $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->pluck('id_jalur');
@@ -44,7 +46,7 @@ class TabBerkasSiswa extends Component
             ]);
             $this->simpan();
         } catch (\Exception $e) {
-            \Log::info('terlalu besar');
+            Log::channel('upload')->info('File operator gagal disimpan', ['error' => $e->getMessage(), 'operator_id' => Auth::user()->id]);
         }
     }
 
@@ -87,13 +89,13 @@ class TabBerkasSiswa extends Component
 
             $this->syarat->berkas()->save($berkas);
 
-            Log::info('File berhasil disimpan: ', ['path' => $path]);
+            Log::channel('upload')->info('File operator berhasil disimpan', ['path' => $path, 'operator_id' => Auth::user()->id]);
             $this->berkas = null;
             if ($this->berkasBaru == false) {
                 $this->deleteExistsBerkas($this->syarat->berkas->where('uploader_id', $this->user->id)->sortBy('id')->first());
             }
         } else {
-            Log::info('Tidak ada file yang diterima');
+            Log::channer('upload')->info('Tidak ada file yang diterima');
         }
     }
 
