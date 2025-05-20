@@ -253,7 +253,7 @@
             Panitia Penerimaan Peserta Didik Baru Madrasah Aliyah Negeri 1 Kota Bogor Tahun
         </p>
         <p style="margin-top: 5px;">
-            Pelajaran 2024/2025 dengan ini menerangkan bahwa :
+            Pelajaran 2025/2026 dengan ini menerangkan bahwa :
         </p>
         <div class="isi-surat">
             <p>Nama Lengkap
@@ -293,7 +293,7 @@
                     </div> --}}
                 </td>
                 <td style="width: 40%; text-align: left; vertical-align: top;">
-                    <p class="tempat">Bogor,22 Mei 2025<br> Ketua Panitia</p>
+                    <p class="tempat">Bogor, 22 Mei 2025<br> Ketua Panitia</p>
                     <div class="tanda-tangan">
                         <img src="{{ 'surat/ttd-ketua.jpg' }}" style="width: 150px; height: 150px;">
                         <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
