@@ -293,7 +293,7 @@
                 <td style="width: 40%; text-align: left; vertical-align: top;">
                     <p class="tempat">Bogor, <br> Ketua Panitia</p>
                     <div class="tanda-tangan">
-                        {{-- <img src="{{ 'surat/ttd-ketua.jpg' }}" style="width: 150px; height: 150px;"> --}}
+                        <img src="{{ 'surat/ttd-ketua.jpg' }}" style="width: 150px; height: 150px;">
                         <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
                             NIP. 198208222014111004</p>
                     </div>
