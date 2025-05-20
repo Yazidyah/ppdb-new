@@ -21,12 +21,15 @@ class KirimEmailJalurPrestasiAfirmasi extends Component
     public function kirimEmail()
     {
         foreach ($this->siswa as $s) {
-            // dd($s->dataRegistrasi->status);
+            // dd($s->dataRegistrasi);
             $messageBody = $s->dataRegistrasi->status === '8'
-                ? "Selamat, Kamu telah diterima."
+                ? "Kamu dicadangkan."
                 : ($s->dataRegistrasi->status === '7'
-                    ? "Maaf, Kamu tidak diterima."
-                    : "Kamu dicadangkan.");
+                    ? "Selamat, Kamu telah diterima."
+                    : ($s->dataRegistrasi->status === '6'
+                        ? "Maaf, Kamu tidak diterima."
+                        : "Status kamu belum diproses."));
+            // dd($messageBody);
             SendStatusAccEmail::dispatch($s, $messageBody, $s->dataRegistrasi->status);
         }
         // dd('Kirim email jalur prestasi afirmasi');
