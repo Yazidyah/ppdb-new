@@ -8,6 +8,11 @@
                         @livewire('operator.export-data-siswa', ['key' => 'export-data-' . uniqid()])
                     </div>
                 </div>
+                <div>
+                    <div wire:ignore>
+                        @livewire('operator.kirim-email-penerimaan', ['key' => 'send-email-' . uniqid()])
+                    </div>
+                </div>
                 <div class="inline-flex rounded-md shadow-xs mb-4" role="group" id="page_request">
                     <button type="button"
                         class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border rounded-s-lg {{ request('per_page', 10) == 10 ? 'bg-tertiary text-tertiary' : '' }} hover:bg-gray-100 hover:text-tertiary focus:z-10 focus:text-white focus:bg-tertiary"
