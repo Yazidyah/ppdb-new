@@ -35,12 +35,13 @@ class JalurRegistrasi extends Component
         $currentYear = date('Y');
         $registrasi = str_pad($registrasiId, 4, '0', STR_PAD_LEFT);
 
+        $currentMonth = date('m');
         if ($jalurId == 1) {
             $kodeRegistrasi = 'R' . $year . $nextYear . $registrasi;
-            $nomorSuket = $registrasi . '/Ma.10.60/PPDB-R.2025/06/' . $currentYear;
+            $nomorSuket = $registrasi . '/Ma.10.60/PPDB-R.2025/' . $currentMonth . '/' . $currentYear;
         } else {
             $kodeRegistrasi = 'A' . $year . $nextYear . $registrasi;
-            $nomorSuket = $registrasi . '/Ma.10.60/PPDB.2025/06/' . $currentYear;
+            $nomorSuket = $registrasi . '/Ma.10.60/PPDB.2025/' . $currentMonth . '/' . $currentYear;
         }
 
         return ['kodeRegistrasi' => $kodeRegistrasi, 'nomorSuket' => $nomorSuket];
