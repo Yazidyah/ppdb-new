@@ -267,9 +267,9 @@
     </div>
 
     <div class="status-surat">
-        @if ($status == 8)
+        @if ($status == 7)
             <h1>DITERIMA</h1>
-        @elseif($status == 9)
+        @elseif($status == 8)
             <h1>DICADANGKAN</h1>
         @else
             <h1>TIDAK DITERIMA</h1>
@@ -283,16 +283,17 @@
         <table style="width: 100%">
             <tr>
                 <td style="width: 60%; text-align: left;">
-                    <div class="qrcode">
-                        @if ($status != 7)
-                        <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" alt="QR Code" style="width: 100%; height: auto;">
+                    {{-- <div class="qrcode">
+                        @if ($status != 8)
+                            <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}"
+                                alt="QR Code" style="width: 100%; height: auto;">
                         @endif
-                    </div>
+                    </div> --}}
                 </td>
                 <td style="width: 40%; text-align: left; vertical-align: top;">
                     <p class="tempat">Bogor, <br> Ketua Panitia</p>
                     <div class="tanda-tangan">
-                        <img src="{{ public_path('surat\ttd-ketua.jpg') }}" alt="ttd" style="width: 150px; height: 150px;">
+                        {{-- <img src="{{ 'surat/ttd-ketua.jpg' }}" style="width: 150px; height: 150px;"> --}}
                         <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
                             NIP. 198208222014111004</p>
                     </div>
@@ -301,24 +302,25 @@
         </table>
     </div>
 
-    @if ($status == 8)
+    @if ($status == 7)
         <div class="notes">
             <p>Keterangan :</p>
             <p>Daftar Ulang Pada SENIN, 01 JULI 2024, Pkl 10.00 S.D. 12.00, Ruang 2</p>
             <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
         </div>
-    @elseif ($status == 9)
-        <div class="notes">
+    @elseif ($status == 6)
+        {{-- <div class="notes">
             <p>Keterangan :</p>
-            <p>Silahkan menghubungi Contact Person Panitia yang tertera pada WEB (tanggal 02 Juli 2024, Pukul 15.00 WIB)</p>
-        </div>
+            <p>Silahkan menghubungi Contact Person Panitia yang tertera pada WEB (tanggal 02 Juli 2024, Pukul 15.00 WIB)
+            </p>
+        </div> --}}
     @else
-        <div class="notes">
+        {{-- <div class="notes">
             <p>Keterangan :</p>
-        </div>
+        </div> --}}
     @endif
 
-    @if ($status == 8)
+    @if ($status == 7 or $status == 8)
         <div class="contoh-satu">
             <img src="{{ 'surat/contoh_1.jpg' }}" alt="Checklist Data">
         </div>
