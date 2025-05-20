@@ -305,7 +305,7 @@
     @if ($status == 7)
         <div class="notes">
             <p>Keterangan :</p>
-            <p>Daftar Ulang Pada SENIN, 01 JULI 2024, Pkl 10.00 S.D. 12.00, Ruang 2</p>
+            <p>Daftar Ulang dengan membawa berkas tanggal Pada 22 - 23 Mei 2025</p>
             <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
         </div>
     @elseif ($status == 6)
