@@ -75,12 +75,12 @@
                     @endif
                 </div>
             </form>
-            <div class="flex flex-row gap-4 my-6 p-4 bg-gradient-to-r from-blue-100 to-blue-50 rounded-lg shadow">
+            <div class="flex flex-row gap-4 my-6 p-4 bg-secondary rounded-lg shadow">
                 <div>
-                    <p class="font-semibold text-lg text-blue-700 text-left">Blasting Email Siswa Terdaftar Jalur
+                    <p class="font-semibold text-lg text-tertiary text-left">Blasting Email Siswa Terdaftar Jalur
                         Prestasi dan Afirmasi</p>
-                    <p class="text-sm text-blue-500">Mengirim email membutuhkan waktu, harap tidak melakukan klik
-                        berkali-kali.</p>
+                    <p class="text-sm text-tertiary">Mengirim email membutuhkan waktu, harap tidak melakukan klik
+                        berkali-kali dan tidak melakukan refresh ketika mengirim email.</p>
                 </div>
                 <div class="ml-auto">
                     <div wire:ignore>
