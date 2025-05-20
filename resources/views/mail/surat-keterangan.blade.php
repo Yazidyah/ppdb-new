@@ -142,12 +142,12 @@
             margin-top: 20px;
         }
 
-        .contoh-satu {
+        .contoh-surat-daftar-ulang {
             margin-top: -40px;
             text-align: center;
         }
 
-        .contoh-satu img {
+        .contoh-surat-daftar-ulang img {
             width: 95%;
             height: 95%;
             max-width: 210mm;
@@ -323,21 +323,33 @@
     @endif
 
     @if ($status == 7 or $status == 8)
-        <div class="contoh-satu">
-            <img src="{{ 'surat/contoh_1.jpg' }}" alt="Checklist Data">
-        </div>
-
-        <div class="contoh-surat-pernyataan">
-            <img src="{{ 'surat/contoh-surat-pernyataan.jpg' }}" alt="Surat Penyataan">
-        </div>
-
-        <div class="contoh-surat-pernyataan-orang-tua">
-            <img src="{{ 'surat/contoh-surat-pernyataan-orang-tua.jpg' }}" alt="Surat Pernyataan Orang Tua">
-        </div>
-
-        <div class="contoh-surat-pernyataan-aja">
-            <img src="{{ 'surat/contoh-surat-pernyataan-aja.jpg' }}" alt="Surat Pernyataan Orang Tua">
-        </div>
+        @if ($siswa->dataRegistrasi->id_jalur != 1)
+            <div class="contoh-surat-daftar-ulang">
+                <img src="{{ 'surat/Diterima Afirmatif_page-0001.jpg' }}" alt="Checklist Data">
+            </div>
+            <div class="contoh-surat-pernyataan">
+                <img src="{{ 'surat/Diterima Afirmatif_page-0002.jpg' }}" alt="Surat Penyataan">
+            </div>
+            <div class="contoh-surat-pernyataan-orang-tua">
+                <img src="{{ 'surat/Diterima Afirmatif_page-0003.jpg' }}" alt="Surat Pernyataan Orang Tua">
+            </div>
+            <div class="contoh-surat-pernyataan-aja">
+                <img src="{{ 'surat/Diterima Afirmatif_page-0004.jpg' }}" alt="Surat Pernyataan Orang Tua">
+            </div>
+        @else
+            <div class="contoh-surat-daftar-ulang">
+                <img src="{{ 'surat/contoh-surat-daftar-ulang.jpg' }}" alt="Checklist Data">
+            </div>
+            <div class="contoh-surat-pernyataan">
+                <img src="{{ 'surat/contoh-surat-pernyataan.jpg' }}" alt="Surat Penyataan">
+            </div>
+            <div class="contoh-surat-pernyataan-orang-tua">
+                <img src="{{ 'surat/contoh-surat-pernyataan-orang-tua.jpg' }}" alt="Surat Pernyataan Orang Tua">
+            </div>
+            <div class="contoh-surat-pernyataan-aja">
+                <img src="{{ 'surat/contoh-surat-pernyataan-aja.jpg' }}" alt="Surat Pernyataan Orang Tua">
+            </div>
+        @endif
 
         <div class="ukuran-seragam-wanita">
             <img src="{{ 'surat/ukuran-seragam-wanita.jpg' }}" alt="ukuran Seragam Wanita">
