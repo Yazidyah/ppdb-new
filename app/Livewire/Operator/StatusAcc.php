@@ -90,15 +90,15 @@ class StatusAcc extends Component
         $this->siswa->dataRegistrasi->status = $this->status;
         $this->siswa->dataRegistrasi->save();
 
-        if (in_array($this->status, ['7', '8', '9'])) {
-            $messageBody = $this->status === '8'
-                ? "Selamat, Kamu telah diterima."
-                : ($this->status === '7'
-                    ? "Maaf, Kamu tidak diterima."
-                    : "Kamu dicadangkan.");
+        // if (in_array($this->status, ['7', '8', '9'])) {
+        //     $messageBody = $this->status === '8'
+        //         ? "Selamat, Kamu telah diterima."
+        //         : ($this->status === '7'
+        //             ? "Maaf, Kamu tidak diterima."
+        //             : "Kamu dicadangkan.");
 
-            SendStatusAccEmail::dispatch($this->siswa, $messageBody, $this->status);
-        }
+        //     SendStatusAccEmail::dispatch($this->siswa, $messageBody, $this->status);
+        // }
 
         $this->modalOpen = false;
         return redirect()->route('operator.datasiswa')->with('success', 'Status berhasil diubah.');
