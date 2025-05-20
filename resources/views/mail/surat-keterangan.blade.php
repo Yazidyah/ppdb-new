@@ -244,7 +244,13 @@
         <p class="judul-surat">SURAT KETERANGAN HASIL SELEKSI</p>
         <hr class="garis-bawah-kedua">
         <p class="nomor-suket">
-            {{ str_replace('/06/', '/05/', $siswa->dataRegistrasi->nomor_suket) }}
+            {{-- Tampilkan nomor_suket + string tambahan sesuai id_jalur --}}
+            {{
+                $siswa->dataRegistrasi->nomor_suket
+                . '/Ma.10.60/'
+                . ($siswa->dataRegistrasi->id_jalur == 1 ? 'PPDB-R' : 'PPDB')
+                . '.2025/' . date('m') . '/' . date('Y')
+            }}
         </p>
     </div>
 
