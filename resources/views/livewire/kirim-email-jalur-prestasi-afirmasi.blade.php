@@ -1,9 +1,7 @@
 <div class="text-left mb-4">
     <button
-        class="cursor-pointer px-4 py-2 text-sm font-medium text-white transition-colors bg-tertiary border rounded-md hover:bg-secondary hover:text-tertiary active:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none min-w-[199px]"
-        wire:click="kirimEmail"
-        wire:loading.attr="disabled"
-        wire:target="kirimEmail">
+        class="cursor-not-allowed px-4 py-2 text-sm font-medium text-white transition-colors bg-tertiary border rounded-md hover:bg-secondary hover:text-tertiary active:bg-secondary focus:bg-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none min-w-[199px]"
+        wire:click="kirimEmail" wire:loading.attr="disabled" wire:target="kirimEmail" cursor-not-allowed disabled>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="inline-block w-6 h-6 mr-2">
             <path stroke-linecap="round" stroke-linejoin="round"
