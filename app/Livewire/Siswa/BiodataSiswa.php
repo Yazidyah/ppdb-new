@@ -137,12 +137,12 @@ class BiodataSiswa extends Component
         }
 
         if ($propertyName == 'NISN') {
-            $this->validateOnly($propertyName, [
-                'NISN' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
-            ]);
             $this->siswa->$propertyName = $this->$propertyName ?: null;
             $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             $this->siswa->save();
+            $this->validateOnly($propertyName, [
+                'NISN' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
+            ]);
         }
 
         if ($propertyName == 'nilai_akreditasi_sekolah') {
