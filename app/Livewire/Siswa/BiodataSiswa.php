@@ -119,12 +119,21 @@ class BiodataSiswa extends Component
         }
 
         if ($propertyName == 'NIK') {
+            if ($this->$propertyName) {
+                $this->validateOnly($propertyName, [
+                    'NIK' => 'required|numeric|digits:16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
+                ]);
+                $this->siswa->$propertyName = $this->$propertyName;
+            } else {
+                $this->siswa->$propertyName = null;
+            }
+
+            $this->siswa->save();
             $this->validateOnly($propertyName, [
                 'NIK' => 'required|numeric|digits:16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
             ]);
-            $this->siswa->$propertyName = $this->$propertyName ?: null;
             $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
-            $this->siswa->save();
+            return;
         }
 
         if ($propertyName == 'NISN') {
@@ -208,13 +217,13 @@ class BiodataSiswa extends Component
         $data = $this->fetchNpsnFromHtml($url);
         if ($data['npsn']) {
             if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs', 'PKBM'])) {
-                $this->resetErrorBag(['npsn']); 
+                $this->resetErrorBag(['npsn']);
                 $this->addError('sekolah_asal', 'Tingkat pendidikan harus MTs atau SMP');
-                $this->NPSN = ''; 
-                $this->sekolah_asal = ''; 
-                $this->siswa->NPSN = null; 
-                $this->siswa->sekolah_asal = null; 
-                $this->siswa->status_sekolah = null; 
+                $this->NPSN = '';
+                $this->sekolah_asal = '';
+                $this->siswa->NPSN = null;
+                $this->siswa->sekolah_asal = null;
+                $this->siswa->status_sekolah = null;
                 $this->siswa->save();
 
                 return;
@@ -227,10 +236,10 @@ class BiodataSiswa extends Component
                 $this->siswa->save();
             }
         } else {
-            $this->resetErrorBag(['sekolah_asal']); 
-            $this->sekolah_asal = ''; 
-            $this->siswa->sekolah_asal = null; 
-            $this->siswa->status_sekolah = null; 
+            $this->resetErrorBag(['sekolah_asal']);
+            $this->sekolah_asal = '';
+            $this->siswa->sekolah_asal = null;
+            $this->siswa->status_sekolah = null;
             $this->siswa->NPSN = null;
             $this->addError('NPSN', 'NPSN tidak ditemukan di basis data kementerian');
             $this->siswa->save();
