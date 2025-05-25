@@ -120,9 +120,9 @@ class BiodataSiswa extends Component
 
         if ($propertyName == 'NIK') {
             if ($this->$propertyName) {
-                $this->validateOnly($propertyName, [
-                    'NIK' => 'required|numeric|digits:16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
-                ]);
+                // $this->validateOnly($propertyName, [
+                //     'NIK' => 'required|numeric|digits:16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
+                // ]);
                 $this->siswa->$propertyName = $this->$propertyName;
             } else {
                 $this->siswa->$propertyName = null;
