@@ -129,17 +129,17 @@ class BiodataSiswa extends Component
             }
 
             $this->siswa->save();
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             $this->validateOnly($propertyName, [
                 'NIK' => 'required|numeric|digits:16|unique:calon_siswa,NIK,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
             ]);
-            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             return;
         }
 
         if ($propertyName == 'NISN') {
             $this->siswa->$propertyName = $this->$propertyName ?: null;
-            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             $this->siswa->save();
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             $this->validateOnly($propertyName, [
                 'NISN' => 'required|numeric|digits_between:1,10|unique:calon_siswa,NISN,' . $this->siswa->id_calon_siswa . ',id_calon_siswa',
             ]);
@@ -302,7 +302,33 @@ class BiodataSiswa extends Component
 
     public function isBiodataComplete()
     {
-        return $this->nama_lengkap && $this->NIK && $this->NISN && $this->no_telp && $this->jenis_kelamin && $this->tanggal_lahir && $this->tempat_lahir && $this->sekolah_asal && $this->status_sekolah && $this->alamat_kk && $this->alamat_domisili && $this->provinsi && $this->kota && $this->predikat_akreditasi_sekolah && $this->nilai_akreditasi_sekolah;
+        if (
+            $this->nama_lengkap &&
+            $this->NIK &&
+            $this->NISN &&
+            $this->no_telp &&
+            $this->jenis_kelamin &&
+            $this->tanggal_lahir &&
+            $this->tempat_lahir &&
+            $this->sekolah_asal &&
+            $this->status_sekolah &&
+            $this->alamat_kk &&
+            $this->alamat_domisili &&
+            $this->provinsi &&
+            $this->kota &&
+            $this->predikat_akreditasi_sekolah &&
+            ($this->nilai_akreditasi_sekolah !== null || $this->nilai_akreditasi_sekolah === 0)
+            && $this->NISN != null
+            && $this->NIK != null
+            && preg_match('/^\d{16}$/', $this->NIK)
+            && strlen($this->NIK) === 16
+            && ctype_digit($this->NIK)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+        // return $this->nama_lengkap && $this->NIK && $this->NISN && $this->no_telp && $this->jenis_kelamin && $this->tanggal_lahir && $this->tempat_lahir && $this->sekolah_asal && $this->status_sekolah && $this->alamat_kk && $this->alamat_domisili && $this->provinsi && $this->kota && $this->predikat_akreditasi_sekolah && $this->nilai_akreditasi_sekolah;
     }
 
     public function render()
