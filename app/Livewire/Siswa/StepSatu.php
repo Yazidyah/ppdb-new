@@ -117,6 +117,7 @@ class StepSatu extends Component
             ($siswa->nilai_akreditasi_sekolah !== null || $siswa->nilai_akreditasi_sekolah === 0)
             && $siswa->NISN != null
             && $siswa->NIK != null
+            && preg_match('/^\d{16}$/', $siswa->NIK)
         ) {
             $this->isCompleteBiodata = true;
         } else {
