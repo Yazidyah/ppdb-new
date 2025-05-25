@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\DataRegistrasi;
 use App\Models\CalonSiswa;
 use App\Helpers\DocumentHelper;
+use App\Models\Berkas;
 use App\Models\Persyaratan;
 
 class StepEmpat extends Component
@@ -35,6 +36,7 @@ class StepEmpat extends Component
             ->orderBy('id_persyaratan', 'asc')
             ->get();
         $this->isSyaratComplete();
+        $this->isBerkasComplete();
     }
 
     public function updateStatus()
@@ -77,6 +79,24 @@ class StepEmpat extends Component
 
         $this->isValid = true;
         return true;
+    }
+
+    public function isBerkasComplete()
+    {
+        // dd($this->persyaratan);
+        foreach ($this->persyaratan as $syarat) {
+            $berkasCount = Berkas::where('id_syarat', $syarat->id_persyaratan)
+                ->where('uploader_id', Auth::user()->id)
+                ->where('deleted_at', null)
+                ->count();
+
+            if ($berkasCount > 0) {
+                $this->isValid = true;
+            } else {
+                $this->isValid = false;
+                break;
+            }
+        }
     }
 
     public function render()
