@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                         @empty
-                            @if ($data->nama_persyaratan === 'Rapot MTs/SMP (Sem 1-5)')
+                            @if (Str::of($data->nama_persyaratan)->lower()->contains('rapot'))
                                 <div class="flex items-center justify-center w-full h-full">
                                     <label
                                         class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -131,7 +131,7 @@
                                             type="file" class="hidden" />
                                     </label>
                                 </div>
-                            @elseif ($data->nama_persyaratan === 'Pas Foto')
+                            @elseif (Str::of($data->nama_persyaratan)->lower()->contains('pas foto'))
                                 <div class="flex items-center justify-center w-full h-full">
                                     <label
                                         class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -153,7 +153,7 @@
                                             class="hidden" />
                                     </label>
                                 </div>
-                            @elseif ($data->nama_persyaratan !== 'Rapot MTs/SMP (Sem 1-5)')
+                            @elseif (!Str::of($data->nama_persyaratan)->lower()->contains('rapot '))
                                 <div class="flex items-center justify-center w-full h-full">
                                     <label
                                         class="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-tertiary text-white hover:text-tertiary hover:bg-secondary">
@@ -178,7 +178,71 @@
                             @endif
                         @endforelse
                     @endif
-                    @if (count($data->berkas) === 0 or $data->berkas->contains(fn($berkas) => $berkas->trashed()))
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'ijazah'))
+                        @if (session()->has('error-ijazah'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-ijazah') }}</p>
+                        @endif
+                    @endif
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'rapot'))
+                        @if (session()->has('error-rapot'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-rapot') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'pas foto'))
+                        @if (session()->has('error-foto'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-foto') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'kartu keluarga'))
+                        @if (session()->has('error-kk'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-kk') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'akta kelahiran'))
+                        @if (session()->has('error-akte'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-akte') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'sertifikat akreditasi'))
+                        @if (session()->has('error-akreditasi'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-akreditasi') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'sertifikat prestasi'))
+                        @if (session()->has('error-prestasi'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-prestasi') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'nisn'))
+                        @if (session()->has('error-nisn'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-nisn') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'kip'))
+                        @if (session()->has('error-kip'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-kip') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'tabungan'))
+                        @if (session()->has('error-tabungan'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-tabungan') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'psikolog'))
+                        @if (session()->has('error-psikolog'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-psikolog') }}</p>
+                        @endif
+                    @endif
+                    {{-- @if (count($data->berkas) === 0 or $data->berkas->contains(fn($berkas) => $berkas->trashed()))
                         @if ($data->nama_persyaratan === 'Rapot MTs/SMP (Sem 1-5)')
                             <div class="flex items-center justify-center w-full h-full">
                                 <label
@@ -249,6 +313,7 @@
                         @endif
 
                         @if (Str::contains(Str::lower($data->nama_persyaratan), 'pas foto'))
+                            <p>tes</p>
                             @if (session()->has('error-foto'))
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-foto') }}</p>
                             @endif
@@ -301,7 +366,7 @@
                                 <p class="text-red-500 text-xs mt-2">{{ session('error-psikolog') }}</p>
                             @endif
                         @endif
-                    @endif
+                    @endif --}}
                     <button type="button" onclick="showExample('{{ $data->nama_persyaratan }}')"
                         class="mt-2 px-4 py-2 bg-tertiary hover:bg-secondary hover:text-tertiary text-white rounded-lg">
                         Lihat Contoh
