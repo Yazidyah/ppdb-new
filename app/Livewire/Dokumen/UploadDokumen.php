@@ -27,6 +27,8 @@ class UploadDokumen extends Component
     public $rapot;
     public $isRapotLengkap = false;
 
+    public $isBerkasLengkap = false;
+
     #[On('isian-updated')]
     public function mount()
     {
@@ -43,6 +45,7 @@ class UploadDokumen extends Component
                 ->update(['status' => 2]);
         }
         $this->validateIsianRapot();
+        // $this->isianBerkas();
     }
 
     private function isSimpleSyarat($namaSyarat) //Buat syarat yang ga butuh ngisi data
@@ -169,6 +172,9 @@ class UploadDokumen extends Component
             ]);
 
             $this->syarat->berkas()->save($berkas);
+            $this->isianBerkas();
+            $this->dispatch('berkas-updated', ['complete' => $this->isianBerkas()]);
+
 
             // Update status in DataRegistrasi
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
@@ -204,6 +210,24 @@ class UploadDokumen extends Component
         }
 
         $this->isRapotLengkap = true;
+    }
+
+    public function isianBerkas()
+    {
+        foreach ($this->persyaratan as $item) {
+            $berkasCount = Berkas::where('id_syarat', $item->id_persyaratan)
+                ->where('uploader_id', Auth::user()->id)
+                ->where('deleted_at', null)
+                ->count();
+
+            if ($berkasCount > 0) {
+                $this->isBerkasLengkap = true;
+            } else {
+                $this->isBerkasLengkap = false;
+                break;
+            }
+        }
+        // dd($this->isBerkasLengkap);
     }
 
     public function render()

@@ -379,19 +379,19 @@
         <!-- <button wire:click="validateAndSubmit"
             class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
             type="button" id="submitBtn">Lanjutkan ke tahap verifikasi</button> -->
-        @if ($isRapotLengkap == true)
+        @if ($isRapotLengkap == true && $isBerkasLengkap == true)
             <button onclick="window.location.href='/siswa/daftar-step-empat?t=1'"
                 class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
                 type="button" id="submitBtn">Lanjutkan ke tahap verifikasi</button>
         @endif
-        @if ($isRapotLengkap == false)
+        @if ($isRapotLengkap == false or $isBerkasLengkap == false)
             <button onclick="window.location.href='/siswa/daftar-step-empat?t=1'"
                 class="px-3 w-full py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary cursor-not-allowed relative group"
                 type="button" id="submitBtn" disabled>
                 Lanjutkan ke tahap verifikasi
                 <span
                     class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 text-xs text-white bg-gray-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-                    Pastikan semua data rapot telah diisi untuk melanjutkan
+                    Pastikan semua data rapot dan berkas telah diisi untuk melanjutkan
                 </span>
             </button>
         @endif
