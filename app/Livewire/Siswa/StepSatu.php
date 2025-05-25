@@ -128,8 +128,10 @@ class StepSatu extends Component
         $ibu = $this->siswa->ortu->where('id_hubungan', 1)->first();
         $ayah = $this->siswa->ortu->where('id_hubungan', 2)->first();
 
-        if ($ibu->nama_lengkap && $ibu->nik && $ibu->pekerjaan && $ibu->no_telp && $ayah->nama_lengkap && $ayah->nik && $ayah->pekerjaan && $ayah->no_telp) {
+        if ($ibu->nama_lengkap && $ibu->nik && $ibu->pekerjaan && $ibu->no_telp && $ayah->nama_lengkap && $ayah->nik && $ayah->pekerjaan && $ayah->no_telp && $ibu->nama_lengkap != '' && $ibu->nik != '' && $ibu->pekerjaan != '' && $ibu->no_telp != '' && $ayah->nama_lengkap != '' && $ayah->nik != '' && $ayah->pekerjaan != '' && $ayah->no_telp != '') {
             $this->isCompleteOrangtua = true;
+        } else {
+            $this->isCompleteOrangtua = false;
         }
     }
 

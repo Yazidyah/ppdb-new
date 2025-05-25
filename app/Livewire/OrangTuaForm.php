@@ -63,17 +63,20 @@ class OrangTuaForm extends Component
 
     public function updated($propertyName)
     {
-        $this->validateOnly($propertyName);
         $this->orangTua->$propertyName = $this->$propertyName;
         $this->orangTua->save();
+
         $this->dispatch('orangtua-updated', ['complete' => $this->isOrangTuaComplete()]);
+        $this->validateOnly($propertyName);
     }
 
     public function isOrangTuaComplete()
     {
         $orangTua = $this->orangTua;
-        if ($orangTua->nama_lengkap && $orangTua->nik && $orangTua->pekerjaan && $orangTua->no_telp) {
+        if ($orangTua->nama_lengkap && $orangTua->nik && $orangTua->pekerjaan && $orangTua->no_telp && $orangTua->nama_lengkap != '' && $orangTua->nik != '' && $orangTua->pekerjaan != '' && $orangTua->no_telp != '') {
             return true;
+        } else {
+            return false;
         }
     }
     // public function updatedNamaLengkap($value)
