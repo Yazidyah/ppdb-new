@@ -45,6 +45,7 @@ class UploadDokumen extends Component
                 ->update(['status' => 2]);
         }
         $this->validateIsianRapot();
+        $this->isianBerkas();
         // $this->isianBerkas();
     }
 
@@ -173,7 +174,7 @@ class UploadDokumen extends Component
 
             $this->syarat->berkas()->save($berkas);
             $this->isianBerkas();
-            $this->dispatch('berkas-updated', ['complete' => $this->isianBerkas()]);
+            // $this->dispatch('berkas-updated', ['complete' => $this->isianBerkas()]);
 
 
             // Update status in DataRegistrasi
