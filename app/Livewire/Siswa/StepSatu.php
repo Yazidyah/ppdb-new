@@ -115,7 +115,8 @@ class StepSatu extends Component
             $siswa->kota &&
             $siswa->predikat_akreditasi_sekolah &&
             ($siswa->nilai_akreditasi_sekolah !== null || $siswa->nilai_akreditasi_sekolah === 0)
-            && $siswa->nisn != '' && $siswa->nama_lengkap != '' && $siswa->NIK != '' && $siswa->no_telp != '' && $siswa->jenis_kelamin != '' && $siswa->tanggal_lahir != '' && $siswa->tempat_lahir != '' && $siswa->sekolah_asal != '' && $siswa->status_sekolah != '' && $siswa->alamat_kk != '' && $siswa->alamat_domisili != '' && $siswa->provinsi != '' && $siswa->kota != '' && $siswa->predikat_akreditasi_sekolah != ''
+            && $siswa->NISN != null
+            && $siswa->NIK != null
         ) {
             $this->isCompleteBiodata = true;
         } else {
