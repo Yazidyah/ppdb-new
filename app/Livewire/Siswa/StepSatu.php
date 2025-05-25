@@ -118,6 +118,8 @@ class StepSatu extends Component
             && $siswa->NISN != null
             && $siswa->NIK != null
             && preg_match('/^\d{16}$/', $siswa->NIK)
+            && strlen($siswa->NIK) === 16
+            && ctype_digit($siswa->NIK)
         ) {
             $this->isCompleteBiodata = true;
         } else {
