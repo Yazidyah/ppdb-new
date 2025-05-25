@@ -7,9 +7,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $totalPendaftar = DataRegistrasi::where('status','>=',3)->count();
-        $pendaftarSudahDiproses = DataRegistrasi::where('status', '>', 3)->count();
-        $pendaftarHarusDiproses = DataRegistrasi::where('status', 3)->count();
+        $totalPendaftar = DataRegistrasi::where('status','>=',3)->whereIn('id_jalur',[2,3,4])->count();
+        $pendaftarSudahDiproses = DataRegistrasi::where('status', '>', 3)->whereIn('id_jalur',[2,3,4])->count();
+        $pendaftarHarusDiproses = DataRegistrasi::where('status', 3)->whereIn('id_jalur',[2,3,4])->count();
         
         $totalPendaftarReguler = DataRegistrasi::where('status','>=',3)->where('id_jalur',1)->count();
         $pendaftarSudahDiprosesReguler = DataRegistrasi::where('status', '>', 3)->where('id_jalur',1)->count();
