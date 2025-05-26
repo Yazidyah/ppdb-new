@@ -232,20 +232,20 @@ class TabDetailSiswa extends Component
 
         foreach ($jadwalWawancara as $jadwal) {
             if (strpos($jadwal->jadwalTes->jenisTes->nama, 'BQ') !== false) {
-                $jadwalBqWawancara = $jadwal->id_jadwal_tes;
+                $jadwalBqWawancara = @$jadwal->id_jadwal_tes ?? '-';
             } else {
-                $jadwalJapresWawancara = $jadwal->id_jadwal_tes;
+                $jadwalJapresWawancara = $jadwal->id_jadwal_tes ?? '-';
             }
         }
 
-        $jadwalBq = $this->formatJadwalTes($jadwalBqWawancara);
+        $jadwalBq = $this->formatJadwalTes(@$jadwalBqWawancara);
         $jadwalJapres = isset($jadwalJapresWawancara) ? $this->formatJadwalTes($jadwalJapresWawancara) : null;
 
         $pdf = Pdf::loadView('mail.kartu-peserta', [
             'pas_foto' => $this->urlPasFoto ? Storage::path($this->urlPasFoto) : null,
             'siswa' => $this->siswa,
-            'jadwal_bq_wawancara' => $jadwalBq,
-            'jadwal_japres_tes_akademik' => $jadwalJapres,
+            'jadwal_bq_wawancara' => @$jadwalBq ?? '-',
+            'jadwal_japres_tes_akademik' => @$jadwalJapres ?? '-',
         ]);
 
         $filePath = 'temp/kartu-peserta-' . $siswa->id_calon_siswa . '-' . uniqid() . '.pdf';
