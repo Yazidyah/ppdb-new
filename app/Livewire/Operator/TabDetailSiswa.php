@@ -114,14 +114,22 @@ class TabDetailSiswa extends Component
             'updated_at' => now(),
         ]);
 
-        $currentKodeRegistrasi = DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->first()->nomor_peserta;
+        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->first();
+        $currentKodeRegistrasi = $dataRegistrasi->nomor_peserta;
+        $currentJalur = $dataRegistrasi->id_jalur;
         $nomor_peserta = $this->id_jalur == 1 ? 'R' : 'A';
         $newKodeRegistrasi = $nomor_peserta . substr($currentKodeRegistrasi, 1);
 
-        DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->update([
+        // Cek jika id_jalur berubah, set status = 2
+        $updateData = [
             'id_jalur' => $this->id_jalur,
             'nomor_peserta' => $newKodeRegistrasi,
-        ]);
+        ];
+        if ($currentJalur != $this->id_jalur) {
+            $updateData['status'] = 2;
+        }
+
+        DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->update($updateData);
 
         // Fetch and sort dataTes by id in ascending order before updating
         $dataTes = DataTes::where('id_registrasi', $this->siswa->dataRegistrasi->id_registrasi)
