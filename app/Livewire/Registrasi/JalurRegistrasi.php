@@ -28,21 +28,26 @@ class JalurRegistrasi extends Component
         $this->jalurRegistrasi = JalurRegistrasiModel::where('is_open', true)->with('persyaratan')->get();
     }
 
-    public function generateNomor($jalurId, $registrasiId)
+    public function generateNomor($jalurId)
     {
         $year = date('y');
         $nextYear = date('y', strtotime('+1 year'));
         $currentYear = date('Y');
-        $registrasi = str_pad($registrasiId, 4, '0', STR_PAD_LEFT);
-
         $currentMonth = date('m');
+
+        $count = DataRegistrasi::where('id_jalur', $jalurId)
+            ->where('status', 3)
+            ->count();
+        $registrasi = str_pad($count + 1, 4, '0', STR_PAD_LEFT);
+
         if ($jalurId == 1) {
             $kodeRegistrasi = 'R' . $year . $nextYear . $registrasi;
-            $nomorSuket = $registrasi . '/Ma.10.60/PPDB-R.2025/' . $currentMonth . '/' . $currentYear;
         } else {
             $kodeRegistrasi = 'A' . $year . $nextYear . $registrasi;
-            $nomorSuket = $registrasi . '/Ma.10.60/PPDB.2025/' . $currentMonth . '/' . $currentYear;
         }
+
+        // nomor_suket hanya $registrasi saja
+        $nomorSuket = $registrasi;
 
         return ['kodeRegistrasi' => $kodeRegistrasi, 'nomorSuket' => $nomorSuket];
     }
@@ -53,10 +58,13 @@ class JalurRegistrasi extends Component
         $this->siswa->status = 2;
         $this->siswa->save();
 
-        $kodeData = $this->generateNomor($value, $this->siswa->id_calon_siswa);
-        $this->siswa->nomor_peserta = $kodeData['kodeRegistrasi'];
-        $this->siswa->nomor_suket = $kodeData['nomorSuket'];
-        $this->siswa->save();
+        // Hanya generate nomor jika status == 3
+        if ($this->siswa->status == 3) {
+            $kodeData = $this->generateNomor($value);
+            $this->siswa->nomor_peserta = $kodeData['kodeRegistrasi'];
+            $this->siswa->nomor_suket = $kodeData['nomorSuket'];
+            $this->siswa->save();
+        }
 
         return redirect()->to('/siswa/daftar-step-tiga?t=' . $value);
     }
