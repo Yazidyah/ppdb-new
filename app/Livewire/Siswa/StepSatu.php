@@ -44,13 +44,11 @@ class StepSatu extends Component
             $this->user->save();
         }
 
-        if ($this->user->siswa->dataRegistrasi == null) {
-            if ($this->user->siswa && $this->user->siswa->dataRegistrasi == null) {
-                $this->regis = DataRegistrasi::firstOrCreate([
-                    'id_calon_siswa' => $this->user->siswa->id_calon_siswa,
-                    'status' => '0',
-                ]);
-            }
+        if ($this->user->siswa && $this->user->siswa->dataRegistrasi == null) {
+            $this->regis = DataRegistrasi::firstOrCreate(
+                ['id_calon_siswa' => $this->user->siswa->id_calon_siswa],
+                ['status' => '0']
+            );
         }
     }
 
