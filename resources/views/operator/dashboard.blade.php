@@ -8,9 +8,10 @@
             </div>
         
         <div class="mt-10 pb-1">
-            <div class="relative">
-                <div class="absolute inset-0 bg-gray-50">
-                    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="sticky">
+                <div class=" inset-0 ">
+                    <div class="sticky max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h1 class="font-bold text-[32px] text-center pt-3 pb-3">Pendaftaran Jalur Afirmasi</h1> 
                         <div class="max-w-6xl mx-auto">
                             <dl class="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
                                 <div
@@ -41,6 +42,49 @@
                                     </dt>
                                     <dd class="order-1 text-5xl font-extrabold text-gray-800">
                                         {{ $persentaseSudahDiproses }}%
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10 pb-1">
+            <div class="sticky">
+                <div class=" inset-0 ">
+                    <div class="sticky max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h1 class="font-bold text-[32px] text-center pt-3 pb-3">Pendaftaran Jalur Reguler</h1> 
+                    <div class="max-w-6xl mx-auto">
+                            <dl class="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
+                                <div
+                                    class="flex flex-col border-b border-gray-200 p-6 text-center sm:border-0 sm:border-r">
+                                    <dt
+                                        class="whitespace-nowrap overflow-hidden text-ellipsis order-2 mt-2 text-lg leading-6 font-medium text-gray-600">
+                                        Perlu Diproses
+                                    </dt>
+                                    <dd class="order-1 text-5xl font-extrabold text-gray-800">
+                                        {{ $pendaftarHarusDiprosesReguler }}
+                                    </dd>
+                                </div>
+                                <div
+                                    class="flex flex-col border-t border-b border-gray-200 p-6 text-center sm:border-0 sm:border-l sm:border-r">
+                                    <dt
+                                        class="whitespace-nowrap overflow-hidden text-ellipsis order-2 mt-2 text-lg leading-6 font-medium text-gray-600">
+                                        Berhasil Diproses
+                                    </dt>
+                                    <dd class="order-1 text-5xl font-extrabold text-gray-800">
+                                        {{ $pendaftarSudahDiprosesReguler }}
+                                    </dd>
+                                </div>
+                                <div
+                                    class="flex flex-col border-t border-gray-200 p-6 text-center sm:border-0 sm:border-l">
+                                    <dt
+                                        class="whitespace-nowrap overflow-hidden text-ellipsis order-2 mt-2 text-lg leading-6 font-medium text-gray-600">
+                                        Tingkat Pemrosesan
+                                    </dt>
+                                    <dd class="order-1 text-5xl font-extrabold text-gray-800">
+                                        {{ $persentaseSudahDiprosesReguler }}%
                                     </dd>
                                 </div>
                             </dl>
