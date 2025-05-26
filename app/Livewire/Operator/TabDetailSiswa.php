@@ -19,7 +19,7 @@ class TabDetailSiswa extends Component
 {
     public $id_calon_siswa;
     public $siswa;
-    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $npsn, $sekolah_asal, $status_sekolah,$nilai_akreditasi_sekolah,$predikat_akreditasi_sekolah, $alamat_domisili, $alamat_kk, $provinsi, $kota, $id_jalur;
+    public $nama_lengkap, $nik, $nisn, $no_telp, $jenis_kelamin, $tempat_lahir, $tanggal_lahir, $npsn, $sekolah_asal, $status_sekolah, $nilai_akreditasi_sekolah, $predikat_akreditasi_sekolah, $alamat_domisili, $alamat_kk, $provinsi, $kota, $id_jalur;
     public $name, $email, $password;
     public $jadwalTesBQ, $jadwalTesJapres;
     public $jalurOptions;
@@ -85,14 +85,14 @@ class TabDetailSiswa extends Component
             ->orderBy('id_registrasi')
             ->get();
 
-        
+
         $this->jadwalTesBQ = $jadwalTes->first()?->id_jadwal_tes;
         $this->jadwalTesJapres = $jadwalTes->skip(1)->first()?->id_jadwal_tes;
     }
 
     public function updateSiswa()
     {
-        $this->validate();
+        // $this->validate();
 
         CalonSiswa::where('id_calon_siswa', $this->id_calon_siswa)->update([
             'nama_lengkap' => strtolower($this->nama_lengkap),
