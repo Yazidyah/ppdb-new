@@ -110,6 +110,7 @@ class BiodataSiswa extends Component
 
     public function updated($propertyName)
     {
+        $this->isBiodataComplete();
         if ($propertyName == 'nama_lengkap') {
             $this->siswa->$propertyName = strtolower($this->$propertyName ?: null);
             $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
