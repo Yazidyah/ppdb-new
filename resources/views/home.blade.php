@@ -167,7 +167,7 @@
     </section>
     @livewire('get-jadwal-home')
 
-    <script>
+    {{-- <script>
         const startDate = new Date("May 05, 2025 00:00:01").getTime();
         const endDate = new Date("May 09, 2025 23:59:00 ").getTime();
 
@@ -213,5 +213,5 @@
 
             countdownElement.innerHTML = `${days} Hari ${hours} Jam ${minutes} Menit ${seconds} Detik`;
         }
-    </script>
+    </script> --}}
 </x-layout>
