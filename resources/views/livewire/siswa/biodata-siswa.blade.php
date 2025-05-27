@@ -83,8 +83,13 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="NPSN" required autofocus autocomplete="NPSN"
                                     placeholder="NPSN" wire:model="NPSN" maxlength="8" />
-                                <button wire:click="searchByNpsn"
-                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Cek Sekolah
+                                <button wire:click="searchByNpsn" wire:loading.attr="disabled"
+                                    wire:target="searchByNpsn"
+                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md flex items-center">
+                                    <span wire:loading.remove wire:target="searchByNpsn">Cek Sekolah</span>
+                                    <span wire:loading wire:target="searchByNpsn" class="flex items-center">
+                                        Memproses...
+                                    </span>
                                 </button>
                             </div>
                             @error('NPSN')
