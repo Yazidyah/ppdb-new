@@ -113,6 +113,22 @@
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                             @enderror
                         </div>
+                        <!-- Status Sekolah -->
+                        <div class="col-span-2 mt-2">
+                            <x-reg-input-label>Status Sekolah</x-reg-input-label>
+                            <div
+                                class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
+                                <select id="status_sekolah" name="status_sekolah" wire:model.live="status_sekolah"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
+                                    <option value="" disabled="disabled">Pilih Status Sekolah</option>
+                                    <option value="negeri">Negeri</option>
+                                    <option value="swasta">Swasta</option>
+                                </select>
+                            </div>
+                            @error('status_sekolah')
+                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
+                            @enderror
+                        </div>
                         <!-- Predikat Akreditasi Sekolah -->
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label>Predikat Akreditasi Sekolah</x-reg-input-label>
