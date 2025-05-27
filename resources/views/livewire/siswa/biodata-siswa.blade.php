@@ -84,12 +84,7 @@
                                     type="text" name="NPSN" required autofocus autocomplete="NPSN"
                                     placeholder="NPSN" wire:model="NPSN" maxlength="8" />
                                 <button wire:click="searchByNpsn"
-                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md"
-                                    wire:loading.attr="disabled" wire:target="searchByNpsn">
-                                    <span wire:loading.remove wire:target="searchByNpsn">Cek Sekolah</span>
-                                    <span wire:loading wire:target="searchByNpsn">
-                                        Memproses...
-                                    </span>
+                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Cek Sekolah
                                 </button>
                             </div>
                             @error('NPSN')
@@ -106,7 +101,7 @@
                                     class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
                                     disabled="disabled" type="text" name="sekolah_asal" required autofocus
                                     autocomplete="sekolah_asal" placeholder="Asal Sekolah"
-                                    wire:model.live="sekolah_asal" value="{{ strtoupper($sekolah_asal) }}" />
+                                    value="{{ strtoupper($sekolah_asal) }}" />
                             </div>
                             @error('sekolah_asal')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
