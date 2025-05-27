@@ -124,6 +124,7 @@ class TabDetailSiswa extends Component
         $updateData = [
             'id_jalur' => $this->id_jalur,
             'nomor_peserta' => $newKodeRegistrasi,
+            'status' => 2,
         ];
         if ($currentJalur != $this->id_jalur) {
             $updateData['status'] = 2;
@@ -132,18 +133,18 @@ class TabDetailSiswa extends Component
         DataRegistrasi::where('id_calon_siswa', $this->id_calon_siswa)->update($updateData);
 
         // Fetch and sort dataTes by id in ascending order before updating
-        $dataTes = DataTes::where('id_registrasi', $this->siswa->dataRegistrasi->id_registrasi)
-            ->orderBy('id', 'asc')
-            ->get();
+        // $dataTes = DataTes::where('id_registrasi', $this->siswa->dataRegistrasi->id_registrasi)
+        //     ->orderBy('id', 'asc')
+        //     ->get();
 
-        if ($dataTes->isNotEmpty()) {
-            if ($dataTes->first()) {
-                $dataTes->first()->update(['id_jadwal_tes' => $this->jadwalTesBQ]);
-            }
-            if ($dataTes->skip(1)->first()) {
-                $dataTes->skip(1)->first()->update(['id_jadwal_tes' => $this->jadwalTesJapres]);
-            }
-        }
+        // if ($dataTes->isNotEmpty()) {
+        //     if ($dataTes->first()) {
+        //         $dataTes->first()->update(['id_jadwal_tes' => $this->jadwalTesBQ]);
+        //     }
+        //     if ($dataTes->skip(1)->first()) {
+        //         $dataTes->skip(1)->first()->update(['id_jadwal_tes' => $this->jadwalTesJapres]);
+        //     }
+        // }
 
         $user = User::find($this->siswa->id_user);
         $user->update([

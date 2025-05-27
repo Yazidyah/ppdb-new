@@ -215,7 +215,7 @@
                 </div>
             </div>
         </div>
-        <div class="border p-4 rounded-lg col-span-2 bg-green-50">
+        {{-- <div class="border p-4 rounded-lg col-span-2 bg-green-50">
             <h6 class="mb-4">Jadwal Tes</h6>
             <div class="grid grid-cols-2 gap-4">
                 <div>
@@ -229,25 +229,25 @@
                         class="border p-2 w-full rounded-lg focus:border-tertiary  focus:ring-tertiary shadow-sm">
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
     <!-- Tombol Update -->
     <div class="grid grid-cols-6 gap-4 text-gray-700 text-left mb-3">
-    <div class="col-start-3 col-span-1">
-        <button wire:click="deleteSiswa"
-            class="mt-4 px-4 py-2 w-full inline-flex justify-center items-center bg-red-500 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 hover:text-white focus:bg-red-500 active:bg-red-500 active:border active:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150 rounded">
-            Hapus Siswa
-        </button>
+        <div class="col-start-3 col-span-1">
+            <button wire:click="deleteSiswa"
+                class="mt-4 px-4 py-2 w-full inline-flex justify-center items-center bg-red-500 border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 hover:text-white focus:bg-red-500 active:bg-red-500 active:border active:border-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150 rounded">
+                Hapus Siswa
+            </button>
+        </div>
+        <div class="col-start-4 col-span-1">
+            <button wire:click="updateSiswa"
+                class="mt-4 px-4 py-2 w-full inline-flex justify-center items-center bg-tertiary border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 transition ease-in-out duration-150 rounded">
+                Simpan Perubahan
+            </button>
+        </div>
     </div>
-    <div class="col-start-4 col-span-1">
-        <button wire:click="updateSiswa"
-            class="mt-4 px-4 py-2 w-full inline-flex justify-center items-center bg-tertiary border border-transparent font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 transition ease-in-out duration-150 rounded">
-            Simpan Perubahan
-        </button>
-    </div>
-</div>
 
     <div class="grid grid-cols-2 gap-4 text-gray-700 text-left mb-3">
         <button wire:click="previewKartuPeserta"
