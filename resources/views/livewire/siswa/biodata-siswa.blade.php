@@ -28,7 +28,7 @@
                     <!-- Left Column -->
                     <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-8 py-2 w-full">
                         <!-- Nama Lengkap -->
-                        <div class="col-span-4 mt-2">
+                        <div class="col-span-2 mt-2">
                             <x-reg-input-label>Nama Lengkap</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
