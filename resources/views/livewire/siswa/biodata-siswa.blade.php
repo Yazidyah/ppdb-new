@@ -84,7 +84,19 @@
                                     type="text" name="NPSN" required autofocus autocomplete="NPSN"
                                     placeholder="NPSN" wire:model="NPSN" maxlength="8" />
                                 <button wire:click="searchByNpsn"
-                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md">Cek Sekolah
+                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md"
+                                    wire:loading.attr="disabled" wire:target="searchByNpsn">
+                                    <span wire:loading.remove wire:target="searchByNpsn">Cek Sekolah</span>
+                                    <span wire:loading wire:target="searchByNpsn">
+                                        <svg class="animate-spin h-5 w-5 text-white inline"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle class="opacity-25" cx="12" cy="12" r="10"
+                                                stroke="currentColor" stroke-width="4"></circle>
+                                            <path class="opacity-75" fill="currentColor"
+                                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                                        </svg>
+                                        Memproses...
+                                    </span>
                                 </button>
                             </div>
                             @error('NPSN')
@@ -98,7 +110,7 @@
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="sekolah_asal"
-                                class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
+                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
                                     disabled="disabled" type="text" name="sekolah_asal" required autofocus
                                     autocomplete="sekolah_asal" placeholder="Asal Sekolah"
                                     value="{{ strtoupper($sekolah_asal) }}" />
@@ -112,7 +124,8 @@
                             <x-reg-input-label>Predikat Akreditasi Sekolah</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <select id="predikat_akreditasi_sekolah" name="predikat_akreditasi_sekolah" wire:model.live="predikat_akreditasi_sekolah"
+                                <select id="predikat_akreditasi_sekolah" name="predikat_akreditasi_sekolah"
+                                    wire:model.live="predikat_akreditasi_sekolah"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
                                     <option value="" disabled="disabled">Pilih Predikat Akreditasi</option>
                                     <option value="A">A</option>
@@ -133,8 +146,9 @@
                                 <x-reg-input-text id="nilai_akreditasi_sekolah"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="nilai_akreditasi_sekolah" required autofocus
-                                    autocomplete="nilai_akreditasi_sekolah" placeholder="Isi '0' jika belum terakreditasi"
-                                    wire:model.live="nilai_akreditasi_sekolah" inputmode="decimal" 
+                                    autocomplete="nilai_akreditasi_sekolah"
+                                    placeholder="Isi '0' jika belum terakreditasi"
+                                    wire:model.live="nilai_akreditasi_sekolah" inputmode="decimal"
                                     oninput="this.value = this.value.replace(/[^0-9.]/g, '');" />
                             </div>
                             @error('nilai_akreditasi_sekolah')
@@ -282,8 +296,7 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="date" name="tanggal_lahir" required autofocus
                                     autocomplete="tanggal_lahir" placeholder="Tanggal Lahir"
-                                    wire:model.live='tanggal_lahir'
-                                    min="{{ now()->subYears(21)->format('Y-m-d') }}"
+                                    wire:model.live='tanggal_lahir' min="{{ now()->subYears(21)->format('Y-m-d') }}"
                                     max="{{ now()->subYears(13)->format('Y-m-d') }}" />
                             </div>
                             @error('tanggal_lahir')
