@@ -28,7 +28,7 @@
                     <!-- Left Column -->
                     <div class="md:grid flex flex-col grid-cols-4 grid-rows-4 gap-8 py-2 w-full">
                         <!-- Nama Lengkap -->
-                        <div class="col-span-2 mt-2">
+                        <div class="col-span-4 mt-2">
                             <x-reg-input-label>Nama Lengkap</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
@@ -82,16 +82,15 @@
                                 <x-reg-input-text id="NPSN"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="NPSN" required autofocus autocomplete="NPSN"
-                                    placeholder="NPSN" wire:model.live="NPSN" maxlength="8" pattern="[0-9]*"
-                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" />
-                                {{-- <button wire:click="searchByNpsn"
+                                    placeholder="NPSN" wire:model="NPSN" maxlength="8" />
+                                <button wire:click="searchByNpsn"
                                     class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md"
                                     wire:loading.attr="disabled" wire:target="searchByNpsn">
                                     <span wire:loading.remove wire:target="searchByNpsn">Cek Sekolah</span>
                                     <span wire:loading wire:target="searchByNpsn">
                                         Memproses...
                                     </span>
-                                </button> --}}
+                                </button>
                             </div>
                             @error('NPSN')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
@@ -104,28 +103,12 @@
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="sekolah_asal"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
-                                    type="text" name="sekolah_asal" required autofocus autocomplete="sekolah_asal"
-                                    placeholder="Asal Sekolah" wire:model.live="sekolah_asal"
-                                    value="{{ strtoupper($sekolah_asal) }}" />
+                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
+                                    disabled="disabled" type="text" name="sekolah_asal" required autofocus
+                                    autocomplete="sekolah_asal" placeholder="Asal Sekolah"
+                                    wire:model.live="sekolah_asal" value="{{ strtoupper($sekolah_asal) }}" />
                             </div>
                             @error('sekolah_asal')
-                                <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <!-- Status Sekolah -->
-                        <div class="col-span-2 mt-2">
-                            <x-reg-input-label>Status Sekolah</x-reg-input-label>
-                            <div
-                                class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <select id="status_sekolah" name="status_sekolah" wire:model.live="status_sekolah"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
-                                    <option value="" disabled="disabled">Pilih Status Sekolah</option>
-                                    <option value="negeri">Negeri</option>
-                                    <option value="swasta">Swasta</option>
-                                </select>
-                            </div>
-                            @error('status_sekolah')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                             @enderror
                         </div>
