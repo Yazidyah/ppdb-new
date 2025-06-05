@@ -1,5 +1,5 @@
 <x-guest-layout>
-    @if (session('status') === 'verification-required')
+    {{-- @if (session('status') === 'verification-required')
         <div class="mb-4 text-sm text-gray-600">
             {{ __('Silakan verifikasi email Anda sebelum melanjutkan.') }}
         </div>
@@ -53,8 +53,8 @@
                 {{ __('Daftar') }}
             </x-primary-button>
         </div>
-    </form>
-    {{-- <div class="text-center mt-6">
+    </form> --}}
+    <div class="text-center mt-6">
         <p class="text-xl text-red-600 font-bold">
             {{ __('Registrasi telah ditutup. Silahkan lakukan login untuk mengakses pendaftaran.') }}
         </p>
@@ -63,5 +63,5 @@
             {{ __('Login') }}
         </a>
         </a>
-    </div> --}}
+    </div>
 </x-guest-layout>
