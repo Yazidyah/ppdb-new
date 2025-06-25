@@ -245,12 +245,13 @@
         <hr class="garis-bawah-kedua">
         <p class="nomor-suket">
             {{-- Tampilkan nomor_suket + string tambahan sesuai id_jalur --}}
-            {{
-                $siswa->dataRegistrasi->nomor_suket
-                . '/Ma.10.60/'
-                . ($siswa->dataRegistrasi->id_jalur == 1 ? 'PPDB-R' : 'PPDB')
-                . '.2025/' . date('m') . '/' . date('Y')
-            }}
+            {{ $siswa->dataRegistrasi->nomor_suket .
+                '/Ma.10.60/' .
+                ($siswa->dataRegistrasi->id_jalur == 1 ? 'PPDB-R' : 'PPDB') .
+                '.2025/' .
+                date('m') .
+                '/' .
+                date('Y') }}
         </p>
     </div>
 
@@ -344,16 +345,16 @@
             </div>
         @else
             <div class="contoh-surat-daftar-ulang">
-                <img src="{{ 'surat/Diterima Afirmatif_page-0001.jpg' }}" alt="Checklist Data">
+                <img src="{{ 'surat/daftar_ulang.png' }}" alt="Checklist Data">
             </div>
             <div class="contoh-surat-pernyataan">
-                <img src="{{ 'surat/Diterima Afirmatif_page-0002.jpg' }}" alt="Surat Penyataan">
+                <img src="{{ 'surat/pernyataan_peserta_didik.png' }}" alt="Surat Penyataan">
             </div>
             <div class="contoh-surat-pernyataan-orang-tua">
-                <img src="{{ 'surat/Diterima Afirmatif_page-0003.jpg' }}" alt="Surat Pernyataan Orang Tua">
+                <img src="{{ 'surat/pernyataan_orang_tua.png' }}" alt="Surat Pernyataan Orang Tua">
             </div>
             <div class="contoh-surat-pernyataan-aja">
-                <img src="{{ 'surat/Diterima Afirmatif_page-0004.jpg' }}" alt="Surat Pernyataan Orang Tua">
+                <img src="{{ 'surat/pernyataan.png' }}" alt="Surat Pernyataan Orang Tua">
             </div>
         @endif
 
