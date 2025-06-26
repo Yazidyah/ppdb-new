@@ -21,19 +21,22 @@ class KirimEmailJalurReguler extends Component
     public function kirimEmail()
     {
         foreach ($this->siswa as $s) {
-            // dd($s->dataRegistrasi);
             if ($s->dataRegistrasi == null) {
                 continue;
             } else {
-                if ($s->dataRegistrasi->status == 6 || $s->dataRegistrasi->status == 7 || $s->dataRegistrasi->status == 8) {
-                    $messageBody = $s->dataRegistrasi->status === '8'
-                        ? "Kamu dicadangkan."
-                        : ($s->dataRegistrasi->status === '7'
-                            ? "Selamat, Kamu telah diterima."
-                            : ($s->dataRegistrasi->status === '6'
-                                ? "Maaf, Kamu tidak diterima."
-                                : "Status kamu belum diproses."));
-                    SendStatusAccEmail::dispatch($s, $messageBody, $s->dataRegistrasi->status);
+                if ($s->dataRegistrasi->id_jalur == 1) {
+                    if ($s->dataRegistrasi->status == 6 || $s->dataRegistrasi->status == 7 || $s->dataRegistrasi->status == 8) {
+                        $messageBody = $s->dataRegistrasi->status === '8'
+                            ? "Kamu dicadangkan."
+                            : ($s->dataRegistrasi->status === '7'
+                                ? "Selamat, Kamu telah diterima."
+                                : ($s->dataRegistrasi->status === '6'
+                                    ? "Maaf, Kamu tidak diterima."
+                                    : "Status kamu belum diproses."));
+                        SendStatusAccEmail::dispatch($s, $messageBody, $s->dataRegistrasi->status);
+                    } else {
+                        continue;
+                    }
                 } else {
                     continue;
                 }
