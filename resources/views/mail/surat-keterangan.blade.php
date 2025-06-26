@@ -162,8 +162,8 @@
         }
 
         .contoh-surat-pernyataan img {
-            width: 80%;
-            height: 80%;
+            width: 95%;
+            height: 95%;
             max-width: 210mm;
             max-height: 297mm;
             object-fit: cover;
@@ -176,8 +176,8 @@
         }
 
         .contoh-surat-pernyataan-orang-tua img {
-            width: 80%;
-            height: 80%;
+            width: 95%;
+            height: 95%;
             max-width: 210mm;
             max-height: 297mm;
             object-fit: cover;
@@ -190,8 +190,8 @@
         }
 
         .contoh-surat-pernyataan-aja img {
-            width: 80%;
-            height: 80%;
+            width: 95%;
+            height: 95%;
             max-width: 210mm;
             max-height: 297mm;
             object-fit: cover;
