@@ -36,13 +36,17 @@ class SendStatusAccEmail implements ShouldQueue
     {
         $this->delay(now()->addSeconds(2));
 
-        Mail::to($this->siswa->user->email)->send(new StatusAcc(
+        $email = $this->siswa->user->email ?? null;
+        if (empty($email)) {
+            return;
+        }
+
+        Mail::to($email)->send(new StatusAcc(
             $this->siswa,
             $this->messageBody,
             $this->status
         ));
 
-        // Clean up QR code file
         $qrCodePath = public_path('qrcode/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png');
         if (File::exists($qrCodePath)) {
             File::delete($qrCodePath);
