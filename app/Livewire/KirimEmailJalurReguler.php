@@ -20,7 +20,7 @@ class KirimEmailJalurReguler extends Component
 
     public function kirimEmail()
     {
-        foreach ($this->siswa as $s) {
+        foreach ($this->siswa->sortBy('id') as $s) {
             if ($s->dataRegistrasi == null) {
                 continue;
             } else {
