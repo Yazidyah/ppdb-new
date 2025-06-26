@@ -300,7 +300,7 @@
                     </div> --}}
                 </td>
                 <td style="width: 40%; text-align: left; vertical-align: top;">
-                    <p class="tempat">Bogor, 21 Mei 2025<br> Ketua Panitia</p>
+                    <p class="tempat">Bogor, 26 Juni 2025<br> Ketua Panitia</p>
                     <div class="tanda-tangan">
                         <img src="{{ 'surat/ttd-ketua.jpg' }}" style="width: 150px; height: 150px;">
                         <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
@@ -314,7 +314,7 @@
     @if ($status == 7)
         <div class="notes">
             <p>Keterangan :</p>
-            <p>Daftar Ulang dengan membawa berkas tanggal Pada 22 - 23 Mei 2025</p>
+            <p>Daftar Ulang dengan membawa berkas tanggal Pada 30 Juni - 03 Juli 2025</p>
             <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
         </div>
     @elseif ($status == 6)
