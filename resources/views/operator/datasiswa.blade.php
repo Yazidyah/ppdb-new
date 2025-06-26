@@ -89,7 +89,7 @@
                 </div>
             </div> --}}
 
-            <div class="flex flex-row gap-4 my-6 p-4 bg-secondary rounded-lg shadow">
+            {{-- <div class="flex flex-row gap-4 my-6 p-4 bg-secondary rounded-lg shadow">
                 <div>
                     <p class="font-semibold text-lg text-tertiary text-left">Blasting Email Siswa Terdaftar Jalur
                         Reguler</p>
@@ -101,7 +101,7 @@
                         @livewire('kirim-email-jalur-reguler', ['key' => 'email-hasil-' . uniqid()])
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6">
                 <table class="w-full max-w-full rtl:justify-left text-sm text-left text-gray-500 my-3">
