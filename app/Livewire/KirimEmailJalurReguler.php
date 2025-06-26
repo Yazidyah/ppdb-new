@@ -25,7 +25,7 @@ class KirimEmailJalurReguler extends Component
                 continue;
             } else {
                 if ($s->dataRegistrasi->id_jalur == 1) {
-                    if ($s->dataRegistrasi->status == 6 || $s->dataRegistrasi->status == 7 || $s->dataRegistrasi->status == 8) {
+                    if ($s->dataRegistrasi->status == 7) {
                         $messageBody = $s->dataRegistrasi->status === '8'
                             ? "Kamu dicadangkan."
                             : ($s->dataRegistrasi->status === '7'
