@@ -5,7 +5,7 @@ namespace App\Livewire;
 use App\Models\CalonSiswa;
 use Livewire\Component;
 use App\Jobs\SendStatusAccEmail;
-
+use Illuminate\Support\Facades\Log;
 
 class KirimEmailJalurReguler extends Component
 {
@@ -20,7 +20,7 @@ class KirimEmailJalurReguler extends Component
 
     public function kirimEmail()
     {
-        foreach ($this->siswa->sortBy('id') as $s) {
+        foreach ($this->siswa->sortBy('id_calon_siswa') as $s) {
             if ($s->dataRegistrasi == null) {
                 continue;
             } else {
@@ -34,6 +34,7 @@ class KirimEmailJalurReguler extends Component
                                     ? "Maaf, Kamu tidak diterima."
                                     : "Status kamu belum diproses."));
                         SendStatusAccEmail::dispatch($s, $messageBody, $s->dataRegistrasi->status);
+                        Log::info('Email sent to: ' . $s->user->email . ' with status: ' . $s->dataRegistrasi->status);
                     } else {
                         continue;
                     }
