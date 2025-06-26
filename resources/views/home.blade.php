@@ -143,7 +143,7 @@
 
 
     <section>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 items-start py-5 ">
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-2 items-start py-5 ">
             <div class="container mx-auto py-5">
                 <div class="container mx-auto p-4">
                     <div
@@ -159,9 +159,9 @@
                     </div>
                 </div>
             </div>
-            <div class="container mx-auto py-5 ">
+            {{--  <div class="container mx-auto py-5 ">
                 @livewire('search-siswa')
-            </div>
+            </div> --}}
 
         </div>
     </section>
