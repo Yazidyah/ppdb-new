@@ -182,7 +182,7 @@
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">7</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Daftar Ulang</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">30 Mei - 03 Juli 2025</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">30 Juni - 03 Juli 2025</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Daftar Ulang dilakukan
                         secara Tatap muka dengan membawa Berkas - berkas</h1>
                 </div>

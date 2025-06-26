@@ -83,7 +83,7 @@
                     </li>
 
                     <!-- Step 4: Penetapan Siswa Baru -->
-                    <li
+                    {{-- <!-- <li
                         class="ml-16 md:ml-0 flex items-center {{ $activeStep >= 4 ? 'text-tertiary' : 'text-gray-500' }} space-x-4 rtl:space-x-reverse">
                         <span
                             class="flex items-center justify-center w-12 h-12 border {{ $activeStep >= 4 ? 'border-white bg-tertiary text-white' : 'border-gray-500' }} rounded-full shrink-0 text-lg">
@@ -93,7 +93,7 @@
                             <h3 class="font-semibold leading-tight text-xl">Penetapan Siswa Baru</h3>
                             <p class="text-lg">{{ $penetapanDetail }}</p>
                         </span>
-                    </li>
+                    </li> --> --}}
                 </ol>
             </div>
         </div>
