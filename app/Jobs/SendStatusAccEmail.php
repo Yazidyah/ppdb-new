@@ -34,7 +34,7 @@ class SendStatusAccEmail implements ShouldQueue
      */
     public function handle()
     {
-        $this->delay(now()->addSeconds(5));
+        $this->delay(now()->addSeconds(2));
 
         Mail::to($this->siswa->user->email)->send(new StatusAcc(
             $this->siswa,
