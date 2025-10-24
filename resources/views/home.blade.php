@@ -149,7 +149,7 @@
                     <div
                         class="max-w-md mx-auto bg-white border-4 border-tertiary rounded-lg shadow-lg p-6 aspect-video">
                         <div class="mb-4 text-left text-gray-700 text-sm font-bold">
-                            <br> Silakan pelajari dari video di bawah ini
+                            Tidak tahu cara mendaftar?<br> Silakan pelajari dari video di bawah ini
                         </div>
                         <iframe class="w-full h-full rounded-lg shadow-lg"
                             src="https://www.youtube.com/embed/5BXqa6kn85A" title="Video Tutorial PPDB" frameborder="0"
