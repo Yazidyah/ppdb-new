@@ -27,6 +27,7 @@ use App\Livewire\Dokumen\StepTiga;
 use App\Livewire\Verifikasi\StepEmpat;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\NpsnController;
+use App\Http\Controllers\JalurController;
 
 use App\Livewire\Admin\Dashboard;
 
@@ -205,3 +206,7 @@ Route::get('local/temp/{path}', function (string $path) {
 // Route::get('/fetch-npsn', [NpsnController::class, 'getNpsn']);
 
 require __DIR__ . '/auth.php';
+
+// Backend guard endpoint for validating selected jalur before register submit
+Route::post('/register/validate-jalur', [JalurController::class, 'validateRegisterJalur'])
+    ->name('register.validate-jalur');
