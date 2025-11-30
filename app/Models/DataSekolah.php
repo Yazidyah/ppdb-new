@@ -22,6 +22,7 @@ class DataSekolah extends Model
         'sekolah_asal',
         'status_sekolah',
         'predikat_akreditasi_sekolah',
+        'bentuk_sekolah',
     ];
 
     /**

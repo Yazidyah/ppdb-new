@@ -230,8 +230,21 @@ class BiodataSiswa extends Component
             return;
         }
 
-        // Business rule check: tingkat pendidikan if needed (optional since not stored in DB now)
-        // If you later store bentuk pendidikan in data_sekolah, validate here.
+        // Validasi bentuk pendidikan harus SMP atau MTs
+        $bentuk = strtoupper(trim((string) ($dataSekolah->bentuk_sekolah ?? '')));
+        $allowed = in_array($bentuk, ['SMP', 'MTS'], true);
+        if (!$allowed) {
+            $this->resetErrorBag(['sekolah_asal']);
+            $this->addError('NPSN', 'Masukkan NPSN Sekolah SMP/MTs Sederajat');
+            // Reset related fields to avoid persisting invalid school types
+            $this->sekolah_asal = '';
+            $this->status_sekolah = '';
+            $this->siswa->NPSN = null;
+            $this->siswa->sekolah_asal = null;
+            $this->siswa->status_sekolah = null;
+            $this->siswa->save();
+            return;
+        }
 
         try {
             DB::transaction(function () use ($dataSekolah) {

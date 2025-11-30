@@ -66,6 +66,15 @@ class BiodataController extends Controller
             ], 503);
         }
 
+        // Validate bentuk pendidikan must be SMP or MTs
+        $bentuk = strtoupper(trim((string) $dataSekolah->bentuk_sekolah));
+        $allowed = in_array($bentuk, ['SMP', 'MTS'], true);
+        if (!$allowed) {
+            return response()->json([
+                'error' => 'Masukkan NPSN Sekolah SMP/MTs Sederajat'
+            ], 422);
+        }
+
         // Upsert calon_siswa rows referencing this NPSN if business rule requires immediate synchronization.
         // Here we demonstrate an example upsert-by-NPSN for the currently authenticated user, if provided.
         // If this endpoint is meant to be pure lookup, you can remove the upsert block.
@@ -99,6 +108,7 @@ class BiodataController extends Controller
             'npsn' => $dataSekolah->npsn,
             'sekolah_asal' => $dataSekolah->sekolah_asal,
             'status_sekolah' => $dataSekolah->status_sekolah,
+            'bentuk_sekolah' => $dataSekolah->bentuk_sekolah,
             'predikat_akreditasi_sekolah' => $dataSekolah->predikat_akreditasi_sekolah,
             'nilai_akreditasi_sekolah' => $dataSekolah->nilai_akreditasi_sekolah,
         ]);

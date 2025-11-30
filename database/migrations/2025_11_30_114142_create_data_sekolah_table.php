@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('sekolah_asal', 100)->nullable();
             $table->string('status_sekolah')->nullable();
             $table->string('predikat_akreditasi_sekolah', 100)->nullable();
+            $table->string('bentuk_sekolah', 100)->nullable();
             $table->timestamps();
         });
     }
