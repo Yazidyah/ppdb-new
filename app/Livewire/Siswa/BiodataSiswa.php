@@ -9,6 +9,8 @@ use App\Models\Regency;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
+use App\Services\DataSekolahService;
 
 class BiodataSiswa extends Component
 {
@@ -213,67 +215,45 @@ class BiodataSiswa extends Component
     public function searchByNpsn()
     {
         $this->NPSN = preg_replace('/\s+/', '', $this->NPSN);
-        $baseUrl = env('NPSN_API_BASE_URL');
-        $url = "{$baseUrl}{$this->NPSN}";
-        $data = $this->fetchNpsnFromHtml($url);
-        if ($data['npsn']) {
-            if (!in_array($data['tingkat_pendidikan'], ['SMP', 'MTs', 'PKBM'])) {
-                $this->resetErrorBag(['npsn']);
-                $this->addError('sekolah_asal', 'Tingkat pendidikan harus MTs atau SMP');
-                $this->NPSN = '';
-                $this->sekolah_asal = '';
-                $this->siswa->NPSN = null;
-                $this->siswa->sekolah_asal = null;
-                $this->siswa->status_sekolah = null;
-                $this->siswa->save();
+        if ($this->NPSN === '' || !preg_match('/^\d{1,8}$/', $this->NPSN)) {
+            $this->addError('NPSN', 'NPSN tidak valid. Harus angka maksimal 8 digit.');
+            return;
+        }
 
-                return;
-            }
-            if (!$this->getErrorBag()->has('sekolah_asal')) {
-                $this->siswa->NPSN = $this->NPSN;
-                $this->siswa->status_sekolah = strtolower($data['status_sekolah']);
-                $this->siswa->sekolah_asal = strtolower($data['nama_sekolah']);
-                $this->sekolah_asal = strtoupper($data['nama_sekolah']);
-                $this->siswa->save();
-            }
-        } else {
+        /** @var DataSekolahService $service */
+        $service = app(DataSekolahService::class);
+        $dataSekolah = $service->getOrFetchByNpsn($this->NPSN);
+
+        if (!$dataSekolah) {
             $this->resetErrorBag(['sekolah_asal']);
-            $this->sekolah_asal = '';
-            $this->siswa->sekolah_asal = null;
-            $this->siswa->status_sekolah = null;
-            $this->siswa->NPSN = null;
-            $this->addError('NPSN', 'NPSN tidak ditemukan di basis data kementerian');
-            $this->siswa->save();
+            $this->addError('NPSN', 'Referensi sekolah tidak tersedia saat ini dan belum ada di database lokal.');
+            return;
+        }
+
+        // Business rule check: tingkat pendidikan if needed (optional since not stored in DB now)
+        // If you later store bentuk pendidikan in data_sekolah, validate here.
+
+        try {
+            DB::transaction(function () use ($dataSekolah) {
+                $this->siswa->NPSN = $dataSekolah->npsn;
+                $this->siswa->status_sekolah = strtolower($dataSekolah->status_sekolah ?? '');
+                $this->siswa->sekolah_asal = strtolower($dataSekolah->sekolah_asal ?? '');
+                $this->siswa->predikat_akreditasi_sekolah = $dataSekolah->predikat_akreditasi_sekolah;
+                $this->siswa->nilai_akreditasi_sekolah = $dataSekolah->nilai_akreditasi_sekolah;
+                $this->siswa->save();
+            });
+
+            $this->sekolah_asal = strtoupper($dataSekolah->sekolah_asal ?? '');
+            $this->status_sekolah = strtoupper($dataSekolah->status_sekolah ?? '');
+            $this->predikat_akreditasi_sekolah = $dataSekolah->predikat_akreditasi_sekolah ?? '';
+            $this->nilai_akreditasi_sekolah = $dataSekolah->nilai_akreditasi_sekolah ?? '';
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
+        } catch (\Throwable $e) {
+            $this->addError('NPSN', 'Data sekolah ditemukan namun penyimpanan biodata gagal.');
         }
     }
 
-    public function fetchNpsnFromHtml($url)
-    {
-        $html = file_get_contents($url);
-        $dom = new \DOMDocument();
-        @$dom->loadHTML($html);
-        $xpath = new \DOMXPath($dom);
-
-        $npsnNode = $xpath->query("//a[@class='link1']")->item(0);
-        $npsn = $npsnNode ? $npsnNode->nodeValue : null;
-
-        $nameNode = $xpath->query("//td[contains(text(), 'Nama')]/following-sibling::td[2]")->item(0);
-        $schoolName = $nameNode ? $nameNode->nodeValue : null;
-
-        $tingkatPendidikanNode = $xpath->query("//td[contains(text(), 'Bentuk Pendidikan')]/following-sibling::td[2]")->item(0);
-        $tingkatPendidikan = $tingkatPendidikanNode ? $tingkatPendidikanNode->nodeValue : null;
-
-        $statusSekolahNode = $xpath->query("//td[contains(text(), 'Status Sekolah')]/following-sibling::td[2]")->item(0);
-        $statusSekolah = $statusSekolahNode ? $statusSekolahNode->nodeValue : null;
-
-        return [
-            'nama_sekolah' => $schoolName,
-            'npsn' => $npsn,
-            'tingkat_pendidikan' => $tingkatPendidikan,
-            'status_sekolah' => $statusSekolah,
-
-        ];
-    }
+    // Scraping dipindahkan ke service untuk single-responsibility dan DB-first caching.
 
     public function copyAlamatKk()
     {
