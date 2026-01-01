@@ -46,7 +46,6 @@
     <!-- Main Content -->
     @if ($tab === 1)
         <div class="p-4 sm:ml-64 flex justify-center items-center">
-
         </div>
 
         <div class="mx-auto text-center pt-3">
