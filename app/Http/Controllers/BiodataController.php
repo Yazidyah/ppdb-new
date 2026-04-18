@@ -52,11 +52,6 @@ class BiodataController extends Controller
             ], 422);
         }
 
-        /**
-         * DB-first strategy: try local data_sekolah first; only scrape if not found.
-         * Then upsert calon_siswa with the same school metadata to ensure consistency.
-         */
-        /** @var DataSekolahService $service */
         $service = app(DataSekolahService::class);
         $dataSekolah = $service->getOrFetchByNpsn($npsn);
 
@@ -66,7 +61,6 @@ class BiodataController extends Controller
             ], 503);
         }
 
-        // Validate bentuk pendidikan must be SMP or MTs
         $bentuk = strtoupper(trim((string) $dataSekolah->bentuk_sekolah));
         $allowed = in_array($bentuk, ['SMP', 'MTS'], true);
         if (!$allowed) {
@@ -75,9 +69,6 @@ class BiodataController extends Controller
             ], 422);
         }
 
-        // Upsert calon_siswa rows referencing this NPSN if business rule requires immediate synchronization.
-        // Here we demonstrate an example upsert-by-NPSN for the currently authenticated user, if provided.
-        // If this endpoint is meant to be pure lookup, you can remove the upsert block.
         try {
             DB::transaction(function () use ($dataSekolah) {
                 CalonSiswa::updateOrCreate(
@@ -91,7 +82,6 @@ class BiodataController extends Controller
                 );
             });
         } catch (\Throwable $e) {
-            // Do not fail the entire request if local data exists; just return the school data and a warning.
             return response()->json([
                 'warning' => 'Data sekolah ditemukan namun sinkronisasi calon_siswa gagal.',
                 'sekolah' => [

@@ -8,12 +8,6 @@ use Illuminate\Support\Facades\Log;
 
 class DataSekolahService
 {
-    /**
-     * Contract
-     * - Input: numeric NPSN (string or int, up to 8 digits)
-     * - Output: DataSekolah model instance (persisted)
-     * - Errors: throws \InvalidArgumentException for invalid input; returns existing data on scrape failure if present
-     */
     public function getOrFetchByNpsn(string $npsn): ?DataSekolah
     {
         $npsn = trim($npsn);
@@ -22,14 +16,11 @@ class DataSekolahService
         }
         $allowedBentuk = ['SMP', 'MTS'];
 
-        // 1) DB-first lookup
         $existing = DataSekolah::where('npsn', $npsn)->first();
         if ($existing) {
-            // Enrich missing bentuk_sekolah once for validation purpose
             if (empty($existing->bentuk_sekolah)) {
                 if ($scraped = $this->fetchNpsnFromHtml($npsn)) {
                     $bentuk = strtoupper(trim((string)($scraped['bentukPendidikan'] ?? '')));
-                    // set temp attribute so callers can validate even if we don't persist
                     $existing->setAttribute('bentuk_sekolah', $scraped['bentukPendidikan'] ?? null);
                     if (in_array($bentuk, $allowedBentuk, true)) {
                         $update = [
@@ -51,17 +42,14 @@ class DataSekolahService
                     }
                 }
             }
-            return $existing; // Return existing (with temp attribute if enriched)
+            return $existing;
         }
 
-        // 2) Fetch externally and persist atomically
         $scraped = $this->fetchNpsnFromHtml($npsn);
         if (!$scraped || empty($scraped['npsn'])) {
-            // If scraping failed and nothing in local DB, return null (caller can decide fallback UX)
             return null;
         }
 
-        // Normalize payload to DataSekolah schema
         $payload = [
             'npsn' => $scraped['npsn'],
             'sekolah_asal' => $scraped['schoolName'] ?? null,
@@ -70,16 +58,14 @@ class DataSekolahService
             'bentuk_sekolah' => $scraped['bentukPendidikan'] ?? null,
         ];
 
-        // Do not persist if bentuk pendidikan not allowed; return transient model for validation
         $bentuk = strtoupper(trim((string)($scraped['bentukPendidikan'] ?? '')));
         if (!in_array($bentuk, $allowedBentuk, true)) {
             Log::info('NPSN bentuk tidak diizinkan; tidak dipersist ke data_sekolah', ['npsn' => $npsn, 'bentuk' => $bentuk]);
-            return new DataSekolah($payload); // unsaved model, allows caller to read attributes
+            return new DataSekolah($payload);
         }
 
         try {
             return DB::transaction(function () use ($npsn, $payload) {
-                // Upsert by unique npsn
                 DataSekolah::updateOrCreate(['npsn' => $npsn], $payload);
                 return DataSekolah::where('npsn', $npsn)->first();
             });
@@ -88,15 +74,10 @@ class DataSekolahService
                 'npsn' => $npsn,
                 'error' => $e->getMessage(),
             ]);
-            // If upsert fails but we later have a partial record, try read once more
             return DataSekolah::where('npsn', $npsn)->first();
         }
     }
 
-    /**
-     * Scrape Referensi Data Kemdikbud for NPSN details.
-     * Kept here to centralize side-effects; callers should not use this directly.
-     */
     private function fetchNpsnFromHtml(string $npsn): ?array
     {
         $baseUrl = env('NPSN_API_BASE_URL');
@@ -129,7 +110,6 @@ class DataSekolahService
             $bentukNode = $xpath->query("//td[contains(text(), 'Bentuk Pendidikan')]/following-sibling::td[2]")->item(0);
             $bentukPendidikan = $bentukNode ? trim($bentukNode->nodeValue) : null;
 
-            // Optional: Akreditasi nodes; keep best-effort
             $predikatNode = $xpath->query("//td[contains(text(), 'Akreditasi')]/following-sibling::td[2]")->item(0);
             $predikatAkreditasi = $predikatNode ? trim($predikatNode->nodeValue) : null;
 

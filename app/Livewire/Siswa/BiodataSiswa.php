@@ -230,7 +230,6 @@ class BiodataSiswa extends Component
             return;
         }
 
-        // Validasi bentuk pendidikan harus SMP atau MTs
         $bentuk = strtoupper(trim((string) ($dataSekolah->bentuk_sekolah ?? '')));
         $allowed = in_array($bentuk, ['SMP', 'MTS'], true);
         if (!$allowed) {
@@ -249,7 +248,7 @@ class BiodataSiswa extends Component
         try {
             DB::transaction(function () use ($dataSekolah) {
                 $this->siswa->NPSN = $dataSekolah->npsn;
-                $this->siswa->status_sekolah = strtolower($dataSekolah->status_sekolah ?? '');
+                $this->siswa->status_sekolah = strtolower($dataSekolah->status_sekolah ?? '');  
                 $this->siswa->sekolah_asal = strtolower($dataSekolah->sekolah_asal ?? '');
                 $this->siswa->predikat_akreditasi_sekolah = $dataSekolah->predikat_akreditasi_sekolah;
                 $this->siswa->nilai_akreditasi_sekolah = $dataSekolah->nilai_akreditasi_sekolah;
@@ -264,9 +263,7 @@ class BiodataSiswa extends Component
         } catch (\Throwable $e) {
             $this->addError('NPSN', 'Data sekolah ditemukan namun penyimpanan biodata gagal.');
         }
-    }
-
-    // Scraping dipindahkan ke service untuk single-responsibility dan DB-first caching.
+    }d
 
     public function copyAlamatKk()
     {
