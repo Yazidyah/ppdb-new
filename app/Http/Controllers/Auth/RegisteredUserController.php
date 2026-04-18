@@ -61,6 +61,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('siswa.dashboard', absolute: false));
+        return redirect()->route('verification.notice')
+            ->with('status', 'verification-link-sent');
     }
 }
