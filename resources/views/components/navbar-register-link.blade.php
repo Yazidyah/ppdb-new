@@ -7,7 +7,7 @@
 @endphp
 
 @if($hasAnyOpenJalur)
-    <a href="{{ route('siswa.daftar-step-satu') }}"
+    <a href="{{ route('register') }}"
        class="flex items-center justify-center w-full text-xs xl:text-base font-bold px-9 py-4 bg-white rounded-full hover:bg-secondary hover:text-primary text-primary">
         Daftar
     </a>

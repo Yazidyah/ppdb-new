@@ -20,7 +20,7 @@ class JalurService
 
             $affected = JalurRegistrasi::query()
                 ->whereNotNull('tanggal_tutup')
-                ->whereDate('tanggal_tutup', '<=', $today)
+                ->whereDate('tanggal_tutup', '<', $today)
                 ->where('is_open', true)
                 ->update(['is_open' => false]);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\JalurRegistrasi;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -29,6 +30,18 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $hasAnyOpenJalur = JalurRegistrasi::query()
+            ->where('is_open', true)
+            ->exists();
+
+        if (!$hasAnyOpenJalur) {
+            return back()
+                ->withInput($request->only(['name', 'email']))
+                ->withErrors([
+                    'register' => 'Registrasi telah ditutup. Silahkan lakukan login untuk mengakses pendaftaran.',
+                ]);
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
