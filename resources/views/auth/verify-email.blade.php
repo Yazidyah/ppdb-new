@@ -13,10 +13,11 @@
         <form method="POST" action="{{ route('verification.send') }}" id="resend-form">
             @csrf
 
-            <div>
-                <x-primary-button id="resend-btn">
+            <div class="flex items-center">
+                <x-primary-button id="resend-btn" type="submit">
                     {{ __('Kirim Ulang Email Verifikasi') }}
                 </x-primary-button>
+                <span id="resend-countdown" class="ml-3 text-sm text-gray-600" style="display: none;"></span>
             </div>
         </form>
 
@@ -30,74 +31,87 @@
     </div>
 
     <script>
-        // Helper untuk set cookie
-        function setCookie(name, value, days) {
-            let expires = "";
-            if (days) {
-                const date = new Date();
-                date.setTime(date.getTime() + (days*24*60*60*1000));
-                expires = "; expires=" + date.toUTCString();
-            }
-            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-        }
-
-        // Helper untuk get cookie
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for(let i=0;i < ca.length;i++) {
-                let c = ca[i];
-                while (c.charAt(0)==' ') c = c.substring(1,c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-            }
-            return null;
-        }
-
-        // Helper untuk hash string dengan SHA-256 dan hasil hex
-        async function sha256(str) {
-            const buf = new TextEncoder().encode(str);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', buf);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
             const resendBtn = document.getElementById('resend-btn');
             const resendForm = document.getElementById('resend-form');
-            const cookieName = 'ppdb_man_1_kota_bogor_verification';
-            // Ganti dengan email user jika tersedia, atau string unik lain
+            const countdownDisplay = document.getElementById('resend-countdown');
+            const COUNTDOWN_TIME = 90;
             const userIdentifier = "{{ Auth::user()->email ?? 'user' }}";
+            const STORAGE_KEY = `verificationCooldown_${userIdentifier}`;
+            let remainingTime = 0;
+            let countdownInterval = null;
 
-            // Fungsi utama untuk handle tombol dan cookie
-            async function handleResendButton() {
-                const hashValue = await sha256(userIdentifier);
-
-                // Cek cookie, jika sudah ada, disable tombol dan ubah teks
-                if (getCookie(cookieName) === hashValue) {
-                    resendBtn.disabled = true;
-                    resendBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
-                    resendBtn.innerText = 'Batas pengiriman habis, cek email anda';
-                }
-
-                resendBtn?.addEventListener('click', async function(e) {
-                    const hashValue = await sha256(userIdentifier);
-                    setCookie(cookieName, hashValue, 1);
-                    resendBtn.disabled = true;
-                    resendBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
-                    resendBtn.innerText = 'Batas pengiriman habis, cek email anda';
-                });
-
-                resendForm?.addEventListener('submit', async function(e) {
-                    const hashValue = await sha256(userIdentifier);
-                    if (getCookie(cookieName) === hashValue) {
-                        e.preventDefault();
-                        return false;
-                    }
-                    // Tidak perlu setCookie lagi di sini, sudah di-handle saat klik
-                });
+            function updateButtonState(isDisabled) {
+                resendBtn.disabled = isDisabled;
+                resendBtn.classList.toggle('bg-gray-400', isDisabled);
+                resendBtn.classList.toggle('cursor-not-allowed', isDisabled);
+                resendBtn.classList.toggle('opacity-50', isDisabled);
+                resendBtn.innerText = isDisabled ? 'Silakan Cek Email' : 'Kirim Ulang Email Verifikasi';
             }
 
-            handleResendButton();
+            function updateCountdown() {
+                const minutes = Math.floor(remainingTime / 60);
+                const seconds = remainingTime % 60;
+                countdownDisplay.textContent = `(${minutes}:${seconds.toString().padStart(2, '0')})`;
+            }
+
+            function startCountdown(initialTime = COUNTDOWN_TIME) {
+                remainingTime = initialTime;
+                updateButtonState(true);
+                countdownDisplay.style.display = 'inline';
+                updateCountdown();
+
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                }
+
+                countdownInterval = setInterval(function() {
+                    remainingTime--;
+                    updateCountdown();
+
+                    if (remainingTime <= 0) {
+                        clearInterval(countdownInterval);
+                        localStorage.removeItem(STORAGE_KEY);
+                        countdownDisplay.style.display = 'none';
+                        updateButtonState(false);
+                    }
+                }, 1000);
+            }
+
+            function restoreCountdown() {
+                const storedTime = localStorage.getItem(STORAGE_KEY);
+
+                if (!storedTime) {
+                    updateButtonState(false);
+                    countdownDisplay.style.display = 'none';
+                    return;
+                }
+
+                const elapsedTime = Math.floor((Date.now() - parseInt(storedTime)) / 1000);
+                const timeLeft = COUNTDOWN_TIME - elapsedTime;
+
+                if (timeLeft > 0) {
+                    startCountdown(timeLeft);
+                } else {
+                    localStorage.removeItem(STORAGE_KEY);
+                    countdownDisplay.style.display = 'none';
+                    updateButtonState(false);
+                }
+            }
+
+            resendForm.addEventListener('submit', function() {
+                localStorage.setItem(STORAGE_KEY, Date.now().toString());
+                startCountdown();
+            });
+
+            restoreCountdown();
+
+            @if (session('status') == 'verification-link-sent')
+                if (!localStorage.getItem(STORAGE_KEY)) {
+                    localStorage.setItem(STORAGE_KEY, Date.now().toString());
+                }
+                restoreCountdown();
+            @endif
         });
     </script>
 </x-guest-layout>
