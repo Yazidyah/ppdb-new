@@ -118,29 +118,12 @@ class KonfigurasiJalur extends Component
 
     private function getInputData()
     {
-        // Enforce business rule: if tanggal_tutup < today then is_open must be false
-        try {
-            $today = \Carbon\Carbon::today();
-            $tutup = $this->tanggal_tutup ? \Carbon\Carbon::parse($this->tanggal_tutup) : null;
-            if ($tutup) {
-                if ($tutup->lt($today)) {
-                    // tanggal_tutup < today => closed
-                    $this->is_open = '0';
-                } else {
-                    // tanggal_tutup >= today => open
-                    $this->is_open = '1';
-                }
-            }
-        } catch (\Throwable $e) {
-            // ignore parse errors; validation layer already ensures date format
-        }
-
         return [
             'nama_jalur' => $this->nama_jalur,
             'deskripsi' => $this->deskripsi,
             'tanggal_buka' => $this->tanggal_buka,
             'tanggal_tutup' => $this->tanggal_tutup,
-            'is_open' => $this->is_open,
+            'is_open' => (bool) $this->is_open,
         ];
     }
 }

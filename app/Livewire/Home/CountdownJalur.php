@@ -34,7 +34,7 @@ class CountdownJalur extends Component
     {
         try {
             $openJalur = JalurRegistrasi::query()
-                ->where('is_open', true)
+                ->openForRegistration()
                 ->get();
 
             $this->hasOpenJalur = $openJalur->isNotEmpty();

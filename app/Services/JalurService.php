@@ -45,7 +45,7 @@ class JalurService
     public function assertJalurOpen(int $jalurId): void
     {
         $jalur = JalurRegistrasi::find($jalurId);
-        if (!$jalur || !$jalur->is_open) {
+        if (!$jalur || !$jalur->isCurrentlyOpen()) {
             throw new \RuntimeException('Jalur yang dipilih tidak terbuka untuk pendaftaran.');
         }
     }

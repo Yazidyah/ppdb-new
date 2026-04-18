@@ -31,7 +31,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $hasAnyOpenJalur = JalurRegistrasi::query()
-            ->where('is_open', true)
+            ->openForRegistration()
             ->exists();
 
         if (!$hasAnyOpenJalur) {
