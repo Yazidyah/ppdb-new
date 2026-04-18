@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\CalonSiswa;
+use App\Models\DataSekolah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\DB;
+use App\Services\DataSekolahService;
 
 class BiodataController extends Controller
 {
@@ -42,21 +45,62 @@ class BiodataController extends Controller
 
     public function searchByNpsn(Request $request)
     {
-        $npsn = $request->query('npsn');
-        $apiUrl = env('NPSN_API_BASE_URL') . "/sekolah?npsn={$npsn}";
-        $response = Http::get($apiUrl);
-
-        if ($response->successful()) {
-            $data = $response->json();
-            $filteredData = array_map(function ($item) {
-                return [
-                    'npsn' => $item['npsn'],
-                    'sekolah' => $item['sekolah']
-                ];
-            }, $data['dataSekolah']);
-            return response()->json($filteredData);
+        $npsn = trim((string) $request->query('npsn'));
+        if ($npsn === '' || !preg_match('/^\d{1,8}$/', $npsn)) {
+            return response()->json([
+                'error' => 'NPSN tidak valid. Harus angka maksimal 8 digit.'
+            ], 422);
         }
 
-        return response()->json(['error' => 'Failed to fetch data'], 500);
+        $service = app(DataSekolahService::class);
+        $dataSekolah = $service->getOrFetchByNpsn($npsn);
+
+        if (!$dataSekolah) {
+            return response()->json([
+                'error' => 'Referensi sekolah tidak tersedia saat ini dan belum ada di database lokal.'
+            ], 503);
+        }
+
+        $bentuk = strtoupper(trim((string) $dataSekolah->bentuk_sekolah));
+        $allowed = in_array($bentuk, ['SMP', 'MTS'], true);
+        if (!$allowed) {
+            return response()->json([
+                'error' => 'Masukkan NPSN Sekolah SMP/MTs Sederajat'
+            ], 422);
+        }
+
+        try {
+            DB::transaction(function () use ($dataSekolah) {
+                CalonSiswa::updateOrCreate(
+                    ['NPSN' => $dataSekolah->npsn],
+                    [
+                        'sekolah_asal' => $dataSekolah->sekolah_asal,
+                        'status_sekolah' => $dataSekolah->status_sekolah,
+                        'predikat_akreditasi_sekolah' => $dataSekolah->predikat_akreditasi_sekolah,
+                        'nilai_akreditasi_sekolah' => $dataSekolah->nilai_akreditasi_sekolah,
+                    ]
+                );
+            });
+        } catch (\Throwable $e) {
+            return response()->json([
+                'warning' => 'Data sekolah ditemukan namun sinkronisasi calon_siswa gagal.',
+                'sekolah' => [
+                    'npsn' => $dataSekolah->npsn,
+                    'sekolah_asal' => $dataSekolah->sekolah_asal,
+                    'status_sekolah' => $dataSekolah->status_sekolah,
+                    'predikat_akreditasi_sekolah' => $dataSekolah->predikat_akreditasi_sekolah,
+                    'nilai_akreditasi_sekolah' => $dataSekolah->nilai_akreditasi_sekolah,
+                ],
+            ], 200);
+        }
+
+        return response()->json([
+            'npsn' => $dataSekolah->npsn,
+            'sekolah_asal' => $dataSekolah->sekolah_asal,
+            'status_sekolah' => $dataSekolah->status_sekolah,
+            'bentuk_sekolah' => $dataSekolah->bentuk_sekolah,
+            'predikat_akreditasi_sekolah' => $dataSekolah->predikat_akreditasi_sekolah,
+            'nilai_akreditasi_sekolah' => $dataSekolah->nilai_akreditasi_sekolah,
+        ]);
     }
 }
