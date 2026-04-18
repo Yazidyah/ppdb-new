@@ -263,7 +263,7 @@ class BiodataSiswa extends Component
         } catch (\Throwable $e) {
             $this->addError('NPSN', 'Data sekolah ditemukan namun penyimpanan biodata gagal.');
         }
-    }d
+    }
 
     public function copyAlamatKk()
     {

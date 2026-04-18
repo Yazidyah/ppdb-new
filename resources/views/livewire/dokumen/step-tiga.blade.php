@@ -13,7 +13,7 @@
                 <button wire:click="$set('tab', 1)"
                     class="step-indicator w-16 h-16 sm:w-24 sm:h-24 rounded-xl flex flex-col items-center justify-center {{ $tab == 1 ? 'bg-tertiary text-white' : '' }}">
                     <a class="">
-                        <h1 class="text-wrap text-xs md:text-xl font-semibold flex text-center">Upload Dokumen syarat
+                        <h1 class="text-wrap text-xs md:text-lg font-semibold flex text-center">Upload Dokumen syarat
                         </h1>
                     </a>
                 </button>

@@ -3,7 +3,7 @@
     <div class="mb-7">
         <div class="">
             <div class="pt-6 pb-12">
-                <h1 class="text-3xl text-center font-bold">BIODATA DIRI</h1>
+                <h1 class="text-3xl text-tertiary text-center font-bold">BIODATA DIRI</h1>
             </div>
         </div>
 
@@ -13,7 +13,7 @@
                 <a class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
                     <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">1</h1>
                 </a>
-                <a class="text-[8px] md:text-[13px]">
+                <a class="text-[8px] md:text-[12px]">
                     <h1 class="font-semibold flex text-center">Biodata Diri</h1>
                 </a>
             </button>
@@ -25,7 +25,7 @@
                 <a class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
                     <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">2</h1>
                 </a>
-                <a class="text-[8px] md:text-[13px]">
+                <a class="text-[8px] md:text-[12px]">
                     <h1 class="font-semibold flex text-center">Data Orang Tua dan Wali</h1>
                 </a>
             </button>
@@ -37,7 +37,7 @@
                 <a class="bg-white rounded-full items-center justify-center flex w-8 h-8 sm:w-12 sm:h-12">
                     <h1 class="font-bold text-primary text-center text-sm sm:text-3xl">3</h1>
                 </a>
-                <a class="text-[8px] md:text-[13px]">
+                <a class="text-[8px] md:text-[12px]">
                     <h1 class="font-semibold flex text-center">Verifikasi Data</h1>
                 </a>
             </button>

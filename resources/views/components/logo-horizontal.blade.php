@@ -1,5 +1,5 @@
 <div class="">
-    <ul class="flex items-center gap-1 justify-start py-6 px-6">
+    <ul class="flex items-center gap-4 justify-start px-8 py-8">
         <li class="w-10"><img  src="/logoman.webp" alt="LOGO MAN 1"></li>
         <li class="border-l border-black py-6 "></li>
         <a href="/siswa/dashboard">

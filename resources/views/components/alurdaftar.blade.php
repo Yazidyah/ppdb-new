@@ -1,29 +1,29 @@
 <ol class="stepper container mx-auto flex justify-center items-center w-1/2 text-sm font-medium text-center text-gray-500 dark:text-gray-400 sm:text-base my-4">
-    <li data-step="1" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-satu') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
-        <a href="/daftar/step-satu">
+    <li data-step="1" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-satu') ? 'text-tertiary' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+        <h1 href="/daftar/step-satu">
             <span class="flex items-center sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
             <span class="me-2">1</span>
                 Biodata <span class="hidden sm:inline-flex sm:ms-2">Diri</span>
             </span>
-        </a>
+        </h1>
     </li>
-    <li data-step="2" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-dua') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
-        <a href="/daftar/step-dua">
+    <li data-step="2" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-dua') ? 'text-tertiary' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+        <h1 href="/daftar/step-dua">
             <span class="flex items-center sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 <span class="me-2">2</span>
                 Jalur <span class="hidden sm:inline-flex sm:ms-2">Pendaftaran</span>
             </span>
-        </a>
+        </h1>
     </li>
-    <li data-step="3" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-tiga') ? 'text-blue-600 dark:text-blue-500' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
-        <a href="/daftar/step-tiga">
+    <li data-step="3" class="step flex md:w-full items-center {{ Request::is('siswa/daftar-step-tiga') ? 'text-tertiary' : '' }} sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-6 xl:after:mx-10 dark:after:border-gray-700">
+        <h1 href="/daftar/step-tiga">
             <span class="flex items-center sm:after:hidden after:mx-2 after:text-gray-200 dark:after:text-gray-500">
                 <span class="me-2">3</span>
                 Dokumen
             </span>
-        </a>
+        </h1>
     </li>
-    <li data-step="4" class="step flex items-center {{ Request::is('siswa/daftar-step-empat') ? 'text-blue-600 dark:text-blue-500' : '' }}">
+    <li data-step="4" class="step flex items-center {{ Request::is('siswa/daftar-step-empat') ? 'text-tertiary' : '' }}">
         <span class="me-2">4</span>
         Verifikasi
     </li>

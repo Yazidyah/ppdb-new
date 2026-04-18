@@ -1,13 +1,10 @@
 <div class=" bg-tertiary mx-auto w-full sticky z-10 top-0 right-0 left-0">
     <!-- Navigation -->
     <nav class="flex justify-between items-center container mx-auto">
-        <a href="/" class=" flex items-center gap-4 justify-center px-6">
-            <img class="w-10 " src="logoman.webp" alt="">
-            <div class="">
-                <h1 class=" text-xl font-bold text-white font-poppins">PPDB</h1>
-                <h1 class=" text-xl font-bold text-white font-poppins">MAN 1 KOTA BOGOR</h1>
-            </div>
-        </a>
+        <div class=" flex items-center gap-4 justify-start px-3">
+                <img class="w-10" src="/logoman.webp" alt="">
+                <h1 class=" text-xl font-bold text-white font-poppins">PPDB MAN 1 Kota Bogor</h1>
+        </div>
         <div class="items-center flex">
             <div class="">
                 <ul class="text-white text-xs xl:text-base font-semibold lg:flex gap-4 hidden">

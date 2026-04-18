@@ -68,7 +68,7 @@
                 </div>
                 <div class="pb-7">
                     <button type="button"
-                        class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-full sm:text-sm"
+                        class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-primary text-base font-medium text-white hover:bg-secondary hover:text-tertiary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tertiary sm:w-full sm:text-sm"
                         wire:click="$toggle('preview')">
                         Close
                     </button>

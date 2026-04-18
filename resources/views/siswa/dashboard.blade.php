@@ -39,10 +39,10 @@
     @endif
     <!-- Stepper -->
     <section>
-        <div class="container flex justify-center my-8 mx-auto gap-4">
-            <div class="w-full flex justify-center my-8 items-center flex-col">
+        <div class="container flex justify-center my-4 mx-auto gap-4">
+            <div class="w-full flex justify-center my-4 items-center flex-col">
                 <ol
-                    class="items-center w-full max-w-6xl mx-auto space-y-6 sm:flex sm:space-x-12 sm:space-y-0 rtl:space-x-reverse">
+                    class="items-center justify-center w-full max-w-6xl gap-4 mx-auto space-y-6 sm:flex sm:space-x-12 sm:space-y-0 rtl:space-x-reverse">
                     <!-- Step 1: Daftar Diri -->
                     <li
                         class="ml-16 md:ml-0 flex items-center {{ $activeStep >= 1 ? 'text-tertiary' : 'text-gray-500' }} space-x-4 rtl:space-x-reverse">
@@ -104,16 +104,13 @@
         <section>
             <div class="container flex justify-center my-4 mx-auto gap-2">
                 <div
-                    class="w-3/4 md:w-1/2 flex justify-center items-center flex-col p-6 bg-primary border border-gray-200 rounded-lg shadow-sm">
-                    <a href="/siswa/daftar-step-satu">
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">PENDAFTARAN</h5>
-                    </a>
-                    <p class="mb-3 font-normal text-white text-center">
+                    class="w-3/4 md:w-1/2 flex justify-center items-center flex-col p-6 bg-white border-4 border-tertiary rounded-lg shadow-sm">
+                    <h5 class=" text-2xl font-bold tracking-tight text-tertiary">PENDAFTARAN</h5>
+                    <p class="mb-4 font-normal text-tertiary text-center">
                         {{ $status != 0 ? 'LANJUTKAN PENDAFTARAN' : 'KLIK TOMBOL DI BAWAH INI UNTUK MENDAFTAR' }}
                     </p>
                     <a href="{{ route('siswa.daftar-step-satu', ['t' => 1]) }}"
-                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-2 focus:outline-none focus:ring-tertiary hover:text-tertiary
-                                 border border-transparent tracking-widest  focus:bg-tertiary active:text-white focus:text-white active:bg-tertiary active:border active:border-tertiary  focus:ring-offset-2  transition ease-in-out duration-150">
+                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-2 focus:outline-none focus:ring-tertiary hover:text-tertiary border border-transparent tracking-widest  focus:bg-tertiary active:text-white focus:text-white active:bg-tertiary active:border active:border-tertiary  focus:ring-offset-2  transition ease-in-out duration-150">
                         PENDAFTARAN
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 10">
@@ -129,10 +126,10 @@
     @if ($calonSiswa && $calonSiswa->dataRegistrasi)
         <!-- Display User Data -->
         <section>
-            <div class="container mx-auto my-8">
+            <div class="container mx-auto py-4">
                 <h3 class="text-xl font-bold mb-4">Data yang Telah Diisi</h3>
                 <div class="grid grid-cols-2 gap-4 text-gray-700 text-left">
-                    <div class="border-4 p-4 rounded-lg col-span-2">
+                    <div class="border-4 border-tertiary p-4 rounded-lg col-span-2">
                         <h6 class="font-medium mb-2">Data Registrasi</h6>
                         <div class="grid grid-cols-2 gap-4">
                             <div>
@@ -163,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="border-4 p-4 rounded-lg">
+                    <div class="border-4 border-tertiary p-4 rounded-lg">
                         <h6 class="font-medium mb-2">Informasi Pribadi</h6>
                         <div>
                             <label class="text-xs font-medium">Nama Lengkap</label>
@@ -202,7 +199,7 @@
                             </p>
                         </div>
                     </div>
-                    <div class="border-4 p-4 rounded-lg">
+                    <div class="border-4 border-tertiary p-4 rounded-lg">
                         <h6 class="font-medium mb-2 ">Informasi Pendidikan</h6>
                         <div>
                             <label class="text-xs font-medium">NISN (Nomor Induk Siswa Nasional)</label>

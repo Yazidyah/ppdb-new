@@ -17,7 +17,7 @@
                     <h1 class="flex items-center gap-2 relative group">
                         {{ $data->nama_persyaratan }}
                         <button data-tooltip-target="tooltip-top-{{ $data->id_persyaratan }}"
-                            data-tooltip-placement="top" type="button" class="text-blue-500">
+                            data-tooltip-placement="top" type="button" class="text-tertiary">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="size-5">
                                 <path fill-rule="evenodd"
