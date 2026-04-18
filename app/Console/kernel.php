@@ -18,9 +18,14 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('app:sync-db-backup')->dailyAt('00:00');
         $schedule->command('app:check-status-jalur')
-        ->dailyAt('00:00')
-        ->withoutOverlapping(); // Biar ga bentrok
-        }
+            ->dailyAt('00:00')
+            ->withoutOverlapping(); // Biar ga bentrok
+
+        // Sync state of jalur_registrasi.is_open based on tanggal_tutup
+        $schedule->command('app:sync-jalur-open-state')
+            ->dailyAt('00:10')
+            ->withoutOverlapping();
+    }
 
     /**
      * Register the commands for the application.

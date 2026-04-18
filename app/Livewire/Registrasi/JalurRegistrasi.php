@@ -25,7 +25,7 @@ class JalurRegistrasi extends Component
             ['id_calon_siswa' => $this->id_siswa],
         );
         $this->id_jalur = $this->siswa->jalurRegistrasi->id_jalur ?? '';
-        $this->jalurRegistrasi = JalurRegistrasiModel::where('is_open', true)->with('persyaratan')->get();
+        $this->jalurRegistrasi = JalurRegistrasiModel::openForRegistration()->with('persyaratan')->get();
     }
 
     public function generateNomor($jalurId)

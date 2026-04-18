@@ -123,7 +123,7 @@ class KonfigurasiJalur extends Component
             'deskripsi' => $this->deskripsi,
             'tanggal_buka' => $this->tanggal_buka,
             'tanggal_tutup' => $this->tanggal_tutup,
-            'is_open' => $this->is_open,
+            'is_open' => (bool) $this->is_open,
         ];
     }
 }

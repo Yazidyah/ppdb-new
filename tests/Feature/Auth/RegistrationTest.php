@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Models\JalurRegistrasi;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -18,6 +20,14 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register(): void
     {
+        JalurRegistrasi::create([
+            'nama_jalur' => 'Reguler',
+            'deskripsi' => 'Jalur reguler',
+            'tanggal_buka' => Carbon::today()->subDay()->toDateString(),
+            'tanggal_tutup' => Carbon::today()->addDay()->toDateString(),
+            'is_open' => true,
+        ]);
+
         $response = $this->post('/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
@@ -26,6 +36,6 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(route('dashboard', absolute: false));
+        $response->assertRedirect(route('siswa.dashboard', absolute: false));
     }
 }
