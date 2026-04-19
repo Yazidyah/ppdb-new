@@ -1,0 +1,33 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          script: |
+            cd /var/www/ppdb-new
+            git config --global --add safe.directory /var/www/ppdb-new
+            git reset --hard HEAD
+            git pull origin main
+            sudo chown -R andre:www-data /var/www/ppdb-new
+            composer install --optimize-autoloader --no-dev
+            npm install && npm run build
+            sudo chown -R www-data:www-data /var/www/ppdb-new
+            sudo chmod -R 775 /var/www/ppdb-new/storage
+            sudo chmod -R 775 /var/www/ppdb-new/bootstrap/cache
+            sudo -u www-data php artisan migrate --force
+            sudo -u www-data php artisan config:cache
+            sudo -u www-data php artisan route:cache
+            sudo -u www-data php artisan view:cache
