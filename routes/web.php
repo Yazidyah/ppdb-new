@@ -173,7 +173,7 @@ Route::middleware(['auth', 'verified', 'admin'])->group(function () {
 
     Route::get('/admin/tambah-persyaratan', function () {
         return view('admin.tambah-persyaratan');
-    })->name('admin.tambah-persyaratan');
+    })->name('admin.show-persyaratan');
     Route::post('/admin/tambah-persyaratan', [OperatorController::class, 'tambahpersyaratan'])->name('admin.tambah-persyaratan');
 });
 
