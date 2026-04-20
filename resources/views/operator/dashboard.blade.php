@@ -3,7 +3,7 @@
             <!-- Update container header agar lebarnya konsisten -->
             <div class="relative max-w-7xl mx-auto pt-5 px-4 sm:px-6 lg:px-8">
                 <div class="my-4 bg-tertiary rounded-lg text-white text-center py-8 leading-tight">
-                    <h2 class="font-bold text-lg md:text-4xl text-wrap">DASHBOARD OPERATOR PPDB MAN 1 KOTA BOGOR 2025/2026</h2>
+                    <h2 class="font-bold text-lg md:text-4xl text-wrap">DASHBOARD OPERATOR PPDB MAN 1 KOTA BOGOR 2026/2027</h2>
                 </div>
             </div>
         

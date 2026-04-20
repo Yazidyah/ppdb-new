@@ -4,7 +4,7 @@
         <div class="flex justify-between mb-3">
             <div>
                 <button wire:click="toggleTable"
-                    class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700 transition duration-300">
+                    class="bg-tertiary text-white hover:text-tertiary px-4 py-2 rounded hover:bg-secondary transition duration-300">
                     @if($isTableVisible)
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
                             <path fill-rule="evenodd"
