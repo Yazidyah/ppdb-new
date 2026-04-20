@@ -22,7 +22,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">05 Mei - 26 Juni 2025</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">04 Mei - 04 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 "><span><a href="ppdb.man1kotabogor.id">Klik ppdb.man1kotabogor.id</a></span> dan Pilih Menu PPDB</h3>
                 </div>
             </li>
@@ -35,7 +35,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">05 Mei - 05 Juni 2025</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">04 Mei - 04 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Membuat Akun PPDB dan masuk dengan akun yang sudah Dibuat</h3>
                     </div>
             </li>
@@ -48,7 +48,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">05 Mei - 05 Juni 2025</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">04 Mei - 04 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Mengisi Formulir dan Melengkapi Berkas</h3>
                 </div>
             </li>
@@ -61,7 +61,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">14 Mei & 10 - 12 Juni 2025</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">08 Mei & 05, 08 - 09 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Verifikasi Data dan Berkas</h3>
                 </div>
             </li>
@@ -74,7 +74,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">14 Mei & 13 Juni 2025</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">08 Mei & 13 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Cetak Kartu Pendaftaran</h3>
                 </div>
             </li>
@@ -87,7 +87,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">15 - 16 Mei & 16 - 19 Juni 2025</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">11 - 13 Mei & 10,12 dan <span><br></span> 15 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Tes Kemampuan Prestasi/Akademik dan Tes Baca Al Quran</h3>
                 </div>
             </li>
@@ -100,8 +100,21 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">21 Mei & 26 Juni 2025</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">18 Mei & 25 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Pengumuman</h3>
+                </div>
+            </li>
+            <li class="sticky mb-6 sm:mb-0 w-full justify-center text-center">
+                <div class="flex items-center">
+                    <div
+                        class="z-10 flex items-center justify-center w-6 h-6 bg-primary rounded-full ring-0 ring-white  sm:ring-8  shrink-0">
+                        <h1 class="text-white">8</h1>
+                    </div>
+                    <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
+                </div>
+                <div class="ml-6 mt-3 sm:pe-8">
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">19-20 Mei & <span><br></span>29, 30 Juni - 01 Juli 2026</time>
+                    <h3 class="text-lg font-semibold text-gray-900 ">Daftar Ulang</h3>
                 </div>
             </li>
         </ol>
