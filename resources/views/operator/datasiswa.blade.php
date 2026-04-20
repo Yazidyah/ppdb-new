@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="p-4 sm:ml-64">
         <div class="mx-auto text-center pt-3">
-            <h1 class="font-bold text-[32px] pt-3 pb-3">Siswa Terdaftar</h1>
+            <h1 class="font-bold text-[32px] pt-3 pb-3">Data Pendaftar</h1>
             <div class="flex justify-start items-center">
                 <div>
                     <div wire:ignore>
