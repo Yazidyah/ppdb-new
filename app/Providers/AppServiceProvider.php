@@ -23,5 +23,9 @@ class AppServiceProvider extends ServiceProvider
         // Route::prefix('ppdb')
         //     ->middleware('web')
         //     ->group(base_path('routes/web.php'));
+        if (config('app.env') === 'production') {
+            \URL::forceRootUrl(config('app.url'));
+            \URL::forceScheme('https');
+        }
     }
 }
