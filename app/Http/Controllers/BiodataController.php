@@ -25,14 +25,54 @@ class BiodataController extends Controller
 
     public function store(Request $request)
     {
-        $calonSiswa = CalonSiswa::create($request->all());
+        $validated = $request->validate([
+            'id_user' => 'required|integer|exists:users,id',
+            'nama_lengkap' => 'required|string|max:255',
+            'NIK' => 'required|string|size:16',
+            'NISN' => 'required|string|max:20',
+            'no_telp' => 'nullable|string|max:20',
+            'jenis_kelamin' => 'required|in:L,P',
+            'tanggal_lahir' => 'required|date',
+            'tempat_lahir' => 'required|string|max:255',
+            'NPSN' => 'nullable|string|max:8',
+            'sekolah_asal' => 'nullable|string|max:255',
+            'status_sekolah' => 'nullable|string|max:50',
+            'alamat_domisili' => 'nullable|string|max:500',
+            'alamat_kk' => 'nullable|string|max:500',
+            'id_provinsi' => 'nullable|integer',
+            'id_kota' => 'nullable|integer',
+            'predikat_akreditasi_sekolah' => 'nullable|string|max:10',
+            'nilai_akreditasi_sekolah' => 'nullable|numeric',
+        ]);
+
+        $calonSiswa = CalonSiswa::create($validated);
         return response()->json($calonSiswa, 201);
     }
 
     public function update(Request $request, $id)
     {
         $calonSiswa = CalonSiswa::findOrFail($id);
-        $calonSiswa->update($request->all());
+
+        $validated = $request->validate([
+            'nama_lengkap' => 'sometimes|string|max:255',
+            'NIK' => 'sometimes|string|size:16',
+            'NISN' => 'sometimes|string|max:20',
+            'no_telp' => 'nullable|string|max:20',
+            'jenis_kelamin' => 'sometimes|in:L,P',
+            'tanggal_lahir' => 'sometimes|date',
+            'tempat_lahir' => 'sometimes|string|max:255',
+            'NPSN' => 'nullable|string|max:8',
+            'sekolah_asal' => 'nullable|string|max:255',
+            'status_sekolah' => 'nullable|string|max:50',
+            'alamat_domisili' => 'nullable|string|max:500',
+            'alamat_kk' => 'nullable|string|max:500',
+            'id_provinsi' => 'nullable|integer',
+            'id_kota' => 'nullable|integer',
+            'predikat_akreditasi_sekolah' => 'nullable|string|max:10',
+            'nilai_akreditasi_sekolah' => 'nullable|numeric',
+        ]);
+
+        $calonSiswa->update($validated);
         return response()->json($calonSiswa);
     }
 

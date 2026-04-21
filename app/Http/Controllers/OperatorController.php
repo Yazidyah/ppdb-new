@@ -61,7 +61,10 @@ class OperatorController extends Controller
 
     public function showsiswaDetail($id)
     {
-        $siswa = CalonSiswa::findOrFail($id);
+        $siswa = CalonSiswa::whereHas('dataRegistrasi')
+            ->whereHas('user', fn ($q) => $q->whereNull('deleted_at'))
+            ->findOrFail($id);
+
         return view('operator.data-siswa-detail', compact('siswa'));
     }
 

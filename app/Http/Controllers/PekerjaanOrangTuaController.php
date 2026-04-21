@@ -19,7 +19,7 @@ class PekerjaanOrangTuaController extends Controller
             'nama_pekerjaan' => 'required|string|max:255',
         ]);
 
-        PekerjaanOrangTua::create($request->all());
+        PekerjaanOrangTua::create($request->only('nama_pekerjaan'));
         return redirect()->route('pekerjaan-ortu.index')->with('success', 'Pekerjaan Orang Tua berhasil ditambahkan.');
     }
 
@@ -30,7 +30,7 @@ class PekerjaanOrangTuaController extends Controller
         ]);
 
         $pekerjaanOrtu = PekerjaanOrangTua::findOrFail($id);
-        $pekerjaanOrtu->update($request->all());
+        $pekerjaanOrtu->update($request->only('nama_pekerjaan'));
         return redirect()->route('pekerjaan-ortu.index')->with('success', 'Pekerjaan Orang Tua berhasil diperbarui.');
     }
 
