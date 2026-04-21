@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\DataSekolah;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class DataSekolahService
@@ -88,9 +89,37 @@ class DataSekolahService
         $url = rtrim($baseUrl, '/') . '/' . $npsn;
 
         try {
-            $html = @file_get_contents($url);
-            if ($html === false || $html === null) {
-                Log::warning('Gagal mengambil HTML referensi NPSN', ['url' => $url]);
+            $response = null;
+
+            try {
+                $response = Http::timeout(20)
+                    ->accept('text/html,application/xhtml+xml')
+                    ->get($url);
+            } catch (\Throwable $e) {
+                if (!app()->isLocal()) {
+                    throw $e;
+                }
+            }
+
+            if (($response === null || !$response->successful()) && app()->isLocal()) {
+                // Fallback local-dev when host CA bundle is not configured.
+                $response = Http::withoutVerifying()
+                    ->timeout(20)
+                    ->accept('text/html,application/xhtml+xml')
+                    ->get($url);
+            }
+
+            if ($response === null || !$response->successful()) {
+                Log::warning('Gagal mengambil HTML referensi NPSN', [
+                    'url' => $url,
+                    'status' => $response?->status(),
+                ]);
+                return null;
+            }
+
+            $html = $response->body();
+            if ($html === '') {
+                Log::warning('HTML referensi NPSN kosong', ['url' => $url]);
                 return null;
             }
 
@@ -98,23 +127,18 @@ class DataSekolahService
             @$dom->loadHTML($html);
             $xpath = new \DOMXPath($dom);
 
-            $npsnNode = $xpath->query("//a[@class='link1']")->item(0);
-            $npsnVal = $npsnNode ? trim($npsnNode->nodeValue) : null;
+            $schoolName = $this->extractTableValue($xpath, 'Nama');
+            $statusSekolah = $this->extractTableValue($xpath, 'Status Sekolah');
+            $bentukPendidikan = $this->extractTableValue($xpath, 'Bentuk Pendidikan');
+            $predikatAkreditasi = $this->extractTableValue($xpath, 'Akreditasi');
+            $nilaiAkreditasi = $this->extractTableValue($xpath, 'Nilai Akreditasi');
 
-            $nameNode = $xpath->query("//td[contains(text(), 'Nama')]/following-sibling::td[2]")->item(0);
-            $schoolName = $nameNode ? trim($nameNode->nodeValue) : null;
-
-            $statusNode = $xpath->query("//td[contains(text(), 'Status Sekolah')]/following-sibling::td[2]")->item(0);
-            $statusSekolah = $statusNode ? trim($statusNode->nodeValue) : null;
-
-            $bentukNode = $xpath->query("//td[contains(text(), 'Bentuk Pendidikan')]/following-sibling::td[2]")->item(0);
-            $bentukPendidikan = $bentukNode ? trim($bentukNode->nodeValue) : null;
-
-            $predikatNode = $xpath->query("//td[contains(text(), 'Akreditasi')]/following-sibling::td[2]")->item(0);
-            $predikatAkreditasi = $predikatNode ? trim($predikatNode->nodeValue) : null;
-
-            $nilaiNode = $xpath->query("//td[contains(text(), 'Nilai Akreditasi')]/following-sibling::td[2]")->item(0);
-            $nilaiAkreditasi = $nilaiNode ? trim($nilaiNode->nodeValue) : null;
+            $npsnAnchorNode = $xpath->query("//td[normalize-space(.)='NPSN']/following-sibling::td[last()]//a")->item(0);
+            $npsnVal = $npsnAnchorNode ? trim($npsnAnchorNode->nodeValue) : null;
+            if ($npsnVal === null || !preg_match('/^\d{8}$/', $npsnVal)) {
+                // Fallback if page structure shifts slightly.
+                $npsnVal = $this->extractTableValue($xpath, 'NPSN');
+            }
 
             return [
                 'npsn' => $npsnVal,
@@ -131,6 +155,17 @@ class DataSekolahService
             ]);
             return null;
         }
+    }
+
+    private function extractTableValue(\DOMXPath $xpath, string $label): ?string
+    {
+        $query = "//td[normalize-space(.)='{$label}']/following-sibling::td[last()]";
+        $node = $xpath->query($query)->item(0);
+        if (!$node) {
+            return null;
+        }
+        $value = trim($node->textContent);
+        return $value === '' ? null : $value;
     }
 
     private function toNullableInt($value): ?int

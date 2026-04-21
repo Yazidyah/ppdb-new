@@ -182,9 +182,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('biodata', BiodataController::class);
-    Route::get('npsn-data', [BiodataController::class, 'getNpsnData'])->name('npsn.data');
+    Route::get('npsn-data', [BiodataController::class, 'searchByNpsn'])->name('npsn.data');
     Route::get('npsn-data/sekolah', [BiodataController::class, 'searchByNpsn'])->name('search.npsn');
-    Route::get('npsn-data/sekolah', [BiodataController::class, 'searchBySekolah'])->name('search.sekolah');
 });
 
 Route::get('local/temp/{path}', function (string $path) {

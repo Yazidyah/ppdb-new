@@ -8,7 +8,6 @@ use App\Models\Province;
 use App\Models\Regency;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
 use App\Services\DataSekolahService;
 
@@ -94,7 +93,7 @@ class BiodataSiswa extends Component
         $this->alamat_domisili = ucwords($this->siswa->alamat_domisili ?? '');
         $this->provinsi = $this->siswa->provinsi ?? '';
         $this->kota = $this->siswa->kota ?? '';
-        $this->predikat_akreditasi_sekolah = $this->siswa->predikat_akreditasi_sekolah ?? '';
+        $this->predikat_akreditasi_sekolah = $this->normalizePredikatAkreditasi($this->siswa->predikat_akreditasi_sekolah ?? '');
         $this->nilai_akreditasi_sekolah = $this->siswa->nilai_akreditasi_sekolah ?? '';
         $this->provinces = Province::all()->map(function ($province) {
             return [
@@ -246,23 +245,50 @@ class BiodataSiswa extends Component
         }
 
         try {
+            $predikatAkreditasi = $this->normalizePredikatAkreditasi($dataSekolah->predikat_akreditasi_sekolah ?? '');
+
             DB::transaction(function () use ($dataSekolah) {
                 $this->siswa->NPSN = $dataSekolah->npsn;
                 $this->siswa->status_sekolah = strtolower($dataSekolah->status_sekolah ?? '');  
                 $this->siswa->sekolah_asal = strtolower($dataSekolah->sekolah_asal ?? '');
-                $this->siswa->predikat_akreditasi_sekolah = $dataSekolah->predikat_akreditasi_sekolah;
+                $this->siswa->predikat_akreditasi_sekolah = $this->normalizePredikatAkreditasi($dataSekolah->predikat_akreditasi_sekolah ?? '');
                 $this->siswa->nilai_akreditasi_sekolah = $dataSekolah->nilai_akreditasi_sekolah;
                 $this->siswa->save();
             });
 
             $this->sekolah_asal = strtoupper($dataSekolah->sekolah_asal ?? '');
             $this->status_sekolah = strtoupper($dataSekolah->status_sekolah ?? '');
-            $this->predikat_akreditasi_sekolah = $dataSekolah->predikat_akreditasi_sekolah ?? '';
+            $this->predikat_akreditasi_sekolah = $predikatAkreditasi;
             $this->nilai_akreditasi_sekolah = $dataSekolah->nilai_akreditasi_sekolah ?? '';
             $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
         } catch (\Throwable $e) {
             $this->addError('NPSN', 'Data sekolah ditemukan namun penyimpanan biodata gagal.');
         }
+    }
+
+    private function normalizePredikatAkreditasi(?string $predikat): string
+    {
+        $value = strtoupper(trim((string) $predikat));
+        if ($value === '') {
+            return '';
+        }
+
+        if (str_contains($value, 'BELUM')) {
+            return 'Belum Terakreditasi';
+        }
+
+        if (preg_match('/\bA\b/', $value)) {
+            return 'A';
+        }
+        if (preg_match('/\bB\b/', $value)) {
+            return 'B';
+        }
+        if (preg_match('/\bC\b/', $value)) {
+            return 'C';
+        }
+
+        // Keep original-ish value so UI can still force-select dynamic option.
+        return trim((string) $predikat);
     }
 
     public function copyAlamatKk()

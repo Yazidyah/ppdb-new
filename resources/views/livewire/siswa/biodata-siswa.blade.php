@@ -120,7 +120,14 @@
                                 <select id="predikat_akreditasi_sekolah" name="predikat_akreditasi_sekolah"
                                     wire:model.live="predikat_akreditasi_sekolah"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
+                                    @php
+                                        $predikatOptions = ['A', 'B', 'C', 'Belum Terakreditasi'];
+                                        $currentPredikat = trim((string) $predikat_akreditasi_sekolah);
+                                    @endphp
                                     <option value="" disabled="disabled">Pilih Predikat Akreditasi</option>
+                                    @if ($currentPredikat !== '' && !in_array($currentPredikat, $predikatOptions, true))
+                                        <option value="{{ $currentPredikat }}">{{ $currentPredikat }}</option>
+                                    @endif
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
