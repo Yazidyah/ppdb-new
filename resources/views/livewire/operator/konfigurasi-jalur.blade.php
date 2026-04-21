@@ -24,7 +24,7 @@
             @endif
 
             <div class="container mx-auto mt-10">
-                <h2 class="font-bold text-[24px] pb-4">Jalur Registrasi yang Sudah Dibuat</h2>
+                <h2 class="font-bold text-[24px] pb-4">Konfigurasi Jalur</h2>
                 <div class="flex justify-between">
                     <div>
                     </div>

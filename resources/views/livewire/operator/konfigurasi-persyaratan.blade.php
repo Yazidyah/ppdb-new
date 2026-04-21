@@ -152,7 +152,7 @@
                 </div>
             @endif
             <div class="container mx-auto mt-10">
-                <h2 class="font-bold text-[24px] pb-4">Persyaratan yang Sudah Dibuat</h2>
+                <h2 class="font-bold text-[24px] pb-4">Konfigursi Persyaratan</h2>
                 <div class="mb-4 flex justify-between">
                     <select wire:model="filterJalur"
                         class="md:w-1/4 w-1/2 flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary"

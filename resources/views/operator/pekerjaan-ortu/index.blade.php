@@ -1,37 +1,50 @@
 <x-app-layout>
 <div class="p-4 sm:ml-64">
-            <div class="container mx-auto md:w-1/2 text-center pt-7">
-                <h2 class="font-bold text-[24px] pb-4">Daftar Pekerjaan Orang Tua</h2>
-                <div class="flex justify-between">
-                    <div></div>
-                    <div class="w-1/4 inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-                            <button wire:click="openModal(false)">
-                        <button onclick="showCreateModal()" class="text-center flex justify-center items-center w-full">+ PEKERJAAN</button>
-                    </div>
+            <div class="container mx-auto md:w-11/12 lg:w-5/6 text-center pt-7">
+                <h2 class="font-bold text-[24px] pb-4">Konfigurasi Pekerjaan Orang Tua</h2>
+                <div class="flex justify-end">
+                    <button type="button" onclick="showCreateModal()" class="inline-flex justify-center items-center px-4 py-3 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-gray-700 dark:focus:bg-white active:bg-white active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                        + PEKERJAAN
+                    </button>
                 </div>
-                <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
-                    <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
-                        <tr class="text-sm text-tertiary uppercase bg-gray-50">
-                            <th class="px-4 text-center py-2">Nama Pekerjaan</th>
-                            <th class="px-4 text-center py-2">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pekerjaanOrtu as $item)
-                            <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer text-center">
-                                <td class="border text-tertiary px-4 py-2 text-lg">{{ $item->nama_pekerjaan }}</td>
-                                <td class="border text-tertiary px-4 py-2 flex justify-center space-x-2">
-                                    <button onclick="showEditModal({{ $item->id_pekerjaan }}, '{{ $item->nama_pekerjaan }}')" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
-                                    <form action="{{ route('pekerjaan-ortu.destroy', $item->id_pekerjaan) }}" method="post" onsubmit="return confirm('Are you sure?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                @php
+                    $chunkSize = (int) max(1, ceil($pekerjaanOrtu->count() / 2));
+                    $pekerjaanColumns = $pekerjaanOrtu->chunk($chunkSize);
+                @endphp
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-6">
+                    @forelse ($pekerjaanColumns as $column)
+                        <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+                            <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
+                                <tr class="text-sm text-tertiary uppercase bg-gray-50">
+                                    <th class="px-4 text-center py-2">Nama Pekerjaan</th>
+                                    <th class="px-4 text-center py-2">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($column as $item)
+                                    <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer text-center">
+                                        <td class="border text-tertiary px-4 py-2 text-lg">{{ $item->nama_pekerjaan }}</td>
+                                        <td class="border text-tertiary px-4 py-2">
+                                            <div class="flex justify-center space-x-2">
+                                                <button type="button" onclick='showEditModal({{ $item->id_pekerjaan }}, @json($item->nama_pekerjaan))' class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Edit</button>
+                                                <form action="{{ route('pekerjaan-ortu.destroy', $item->id_pekerjaan) }}" method="post" onsubmit="return confirm('Are you sure?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="bg-red-900 text-white px-4 py-2 hover:bg-red-500 rounded">Hapus</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @empty
+                        <div class="col-span-full py-10 text-center text-gray-500 border rounded-lg bg-white">
+                            Belum ada data pekerjaan orang tua.
+                        </div>
+                    @endforelse
+                </div>
             </div>
 
     </div>
@@ -97,6 +110,7 @@
                             <button type="submit" class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Update</button>
 
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
