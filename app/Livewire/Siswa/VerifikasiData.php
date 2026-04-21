@@ -31,21 +31,32 @@ class VerifikasiData extends Component
 
     private function loadOrangTuaData()
     {
-        $this->orangTuaIbu = OrangTua::where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)->where('id_hubungan', 1)->first();
-        $this->orangTuaAyah = OrangTua::where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)->where('id_hubungan', 2)->first();
-        $this->orangTuaWali = OrangTua::where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)->where('id_hubungan', 3)->first();
+        $orangTuaCollection = OrangTua::with('pekerjaanOrangTua')
+            ->where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)
+            ->whereIn('id_hubungan', [1, 2, 3])
+            ->get()
+            ->keyBy('id_hubungan');
 
-        if ($this->orangTuaIbu) {
-            $pekerjaanIbu = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaIbu->pekerjaan)->first();
-            $this->orangTuaIbu->pekerjaan = $pekerjaanIbu ? $pekerjaanIbu->nama_pekerjaan : null;
-        }
-        if ($this->orangTuaAyah) {
-            $pekerjaanAyah = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaAyah->pekerjaan)->first();
-            $this->orangTuaAyah->pekerjaan = $pekerjaanAyah ? $pekerjaanAyah->nama_pekerjaan : null;
-        }
-        if ($this->orangTuaWali) {
-            $pekerjaanWali = PekerjaanOrangTua::where('id_pekerjaan', $this->orangTuaWali->pekerjaan)->first();
-            $this->orangTuaWali->pekerjaan = $pekerjaanWali ? $pekerjaanWali->nama_pekerjaan : null;
+        $this->orangTuaIbu = $orangTuaCollection->get(1);
+        $this->orangTuaAyah = $orangTuaCollection->get(2);
+        $this->orangTuaWali = $orangTuaCollection->get(3);
+
+        $pekerjaanIds = $orangTuaCollection->pluck('pekerjaan')->filter()->unique()->toArray();
+        
+        if (!empty($pekerjaanIds)) {
+            $pekerjaanMap = PekerjaanOrangTua::whereIn('id_pekerjaan', $pekerjaanIds)
+                ->get()
+                ->keyBy('id_pekerjaan');
+
+            if ($this->orangTuaIbu && isset($pekerjaanMap[$this->orangTuaIbu->pekerjaan])) {
+                $this->orangTuaIbu->pekerjaan = $pekerjaanMap[$this->orangTuaIbu->pekerjaan]->nama_pekerjaan;
+            }
+            if ($this->orangTuaAyah && isset($pekerjaanMap[$this->orangTuaAyah->pekerjaan])) {
+                $this->orangTuaAyah->pekerjaan = $pekerjaanMap[$this->orangTuaAyah->pekerjaan]->nama_pekerjaan;
+            }
+            if ($this->orangTuaWali && isset($pekerjaanMap[$this->orangTuaWali->pekerjaan])) {
+                $this->orangTuaWali->pekerjaan = $pekerjaanMap[$this->orangTuaWali->pekerjaan]->nama_pekerjaan;
+            }
         }
     }
 

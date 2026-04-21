@@ -17,7 +17,11 @@ class VerifOpController extends Controller
             'status' => 'required|integer|in:3,4,5,6,7,8',
         ]);
 
-        $siswa = CalonSiswa::with('dataRegistrasi')->findOrFail($request->id_calon_siswa);
+        $siswa = CalonSiswa::with(['dataRegistrasi', 'user'])
+            ->whereHas('user', function($q) {
+                $q->whereNull('deleted_at');
+            })
+            ->findOrFail($request->id_calon_siswa);
 
         if (!$siswa->dataRegistrasi) {
             Log::error('Failed to update status for student ID: ' . $request->id_calon_siswa . '. Data registrasi tidak ditemukan.');
@@ -40,7 +44,10 @@ class VerifOpController extends Controller
             'catatan.*' => 'nullable|string|max:1000',
         ]);
 
-        $siswa = CalonSiswa::findOrFail($request->id_calon_siswa);
+        $siswa = CalonSiswa::whereHas('user', function($q) {
+            $q->whereNull('deleted_at');
+        })->findOrFail($request->id_calon_siswa);
+        
         Log::info('Updating verification for student ID: ' . $request->id_calon_siswa);
 
         $ownedBerkasIds = Berkas::where('uploader_id', $siswa->id_calon_siswa)->pluck('id')->toArray();
@@ -81,7 +88,11 @@ class VerifOpController extends Controller
 
     public function getStatusVerif($id)
     {
-        $siswa = CalonSiswa::with('dataRegistrasi')->findOrFail($id);
+        $siswa = CalonSiswa::with('dataRegistrasi')
+            ->whereHas('user', function($q) {
+                $q->whereNull('deleted_at');
+            })
+            ->findOrFail($id);
 
         if (!$siswa->dataRegistrasi) {
             return response()->json(['error' => 'Data registrasi tidak ditemukan.'], 404);
@@ -94,14 +105,23 @@ class VerifOpController extends Controller
 
     public function getBerkas($id)
     {
-        $siswa = CalonSiswa::with(['dataRegistrasi.berkas.kategoriBerkas'])->findOrFail($id);
+        $siswa = CalonSiswa::with([
+            'dataRegistrasi.berkas' => function($query) use ($id) {
+                $query->where('uploader_id', $id);
+            },
+            'dataRegistrasi.berkas.kategoriBerkas',
+            'user'
+        ])
+        ->whereHas('user', function($q) {
+            $q->whereNull('deleted_at');
+        })
+        ->findOrFail($id);
 
         if (!$siswa->dataRegistrasi) {
             return response()->json(['error' => 'Data registrasi tidak ditemukan.'], 404);
         }
 
         $dokumen = $siswa->dataRegistrasi->berkas ? $siswa->dataRegistrasi->berkas
-            ->filter(fn ($berkas) => $berkas->uploader_id == $siswa->id_calon_siswa)
             ->map(function ($berkas) {
             return [
                 'id' => $berkas->id,

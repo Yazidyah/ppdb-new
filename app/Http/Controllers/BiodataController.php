@@ -13,13 +13,21 @@ class BiodataController extends Controller
 {
     public function index()
     {
-        $calonSiswa = CalonSiswa::all();
+        if (!auth()->check()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        
+        $calonSiswa = CalonSiswa::with('user')->get();
         return response()->json($calonSiswa);
     }
 
     public function show($id)
     {
-        $calonSiswa = CalonSiswa::findOrFail($id);
+        if (!auth()->check()) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        
+        $calonSiswa = CalonSiswa::with('user')->findOrFail($id);
         return response()->json($calonSiswa);
     }
 
@@ -85,12 +93,12 @@ class BiodataController extends Controller
 
     public function searchByNpsn(Request $request)
     {
-        $npsn = trim((string) $request->query('npsn'));
-        if ($npsn === '' || !preg_match('/^\d{1,8}$/', $npsn)) {
-            return response()->json([
-                'error' => 'NPSN tidak valid. Harus angka maksimal 8 digit.'
-            ], 422);
-        }
+        // Validate NPSN input
+        $request->validate([
+            'npsn' => 'required|string|regex:/^\d{1,8}$/',
+        ]);
+
+        $npsn = trim($request->query('npsn'));
 
         $service = app(DataSekolahService::class);
         $dataSekolah = $service->getOrFetchByNpsn($npsn);

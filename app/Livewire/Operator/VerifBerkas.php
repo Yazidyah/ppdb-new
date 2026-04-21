@@ -53,7 +53,11 @@ class VerifBerkas extends Component
     {
         $dataRegistrasi = $this->siswa->dataRegistrasi;
         if ($dataRegistrasi) {
-            $this->syarat = $dataRegistrasi->syarat;
+            $this->syarat = $dataRegistrasi->syarat()->with([
+                'berkas' => function($query) {
+                    $query->where('uploader_id', $this->siswa->id_user);
+                }
+            ])->get();
             $this->status = $dataRegistrasi->status;
             $this->jalur = $dataRegistrasi->jalur;
             $this->id_registrasi = $dataRegistrasi->id_registrasi;
@@ -108,7 +112,9 @@ class VerifBerkas extends Component
      */
     protected function setExistingDataTes()
     {
-        $existingDataTes = DataTes::where('id_registrasi', $this->id_registrasi)->get();
+        $existingDataTes = DataTes::with(['jadwalTes.jenisTes'])
+            ->where('id_registrasi', $this->id_registrasi)
+            ->get();
         foreach ($existingDataTes as $dataTes) {
             if (strpos($dataTes->jadwalTes->jenisTes->nama, 'BQ') !== false) {
                 $this->sesi_bq_wawancara = $dataTes->id_jadwal_tes;
@@ -124,7 +130,7 @@ class VerifBerkas extends Component
     protected function setExistingCatatan()
     {
         foreach ($this->syarat as $item) {
-            foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
+            foreach ($item->berkas as $berkas) {
                 $this->catatan[$berkas->id] = $berkas->verify_notes;
             }
         }
@@ -136,7 +142,7 @@ class VerifBerkas extends Component
     protected function setExistingVerif()
     {
         foreach ($this->syarat as $item) {
-            foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
+            foreach ($item->berkas as $berkas) {
                 $this->verif[$berkas->id] = $berkas->verify;
             }
         }
@@ -174,12 +180,13 @@ class VerifBerkas extends Component
 
     public function cekBerkasPasFoto()
     {
-        $berkases = $this->siswa->user->berkas;
+        $berkases = $this->siswa->user->berkas()->with('persyaratan')->get();
         foreach ($berkases as $berkas) {
-            if ($berkas->persyaratan->nama_persyaratan == 'Pas Foto') {
+            if ($berkas->persyaratan && $berkas->persyaratan->nama_persyaratan == 'Pas Foto') {
                 $encodedPath = base64_encode($berkas->file_name);
                 // $this->urlPasFoto = route('local.temp', ['path' => $encodedPath]);
                 $this->urlPasFoto = $berkas->file_name;
+                break; 
             }
         }
     }
@@ -192,6 +199,22 @@ class VerifBerkas extends Component
      */
     public function simpan()
     {
+        if ($this->sesi_bq_wawancara) {
+            $jadwalBq = JadwalTes::find($this->sesi_bq_wawancara);
+            if (!$jadwalBq) {
+                session()->flash('error', 'Jadwal tes BQ tidak valid.');
+                return;
+            }
+        }
+
+        if ($this->sesi_japres_tes_akademik) {
+            $jadwalJapres = JadwalTes::find($this->sesi_japres_tes_akademik);
+            if (!$jadwalJapres) {
+                session()->flash('error', 'Jadwal tes akademik tidak valid.');
+                return;
+            }
+        }
+
         $this->updateBerkasVerifikasi();
         $this->updateRegistrasiStatus();
         $this->processDataTes();
@@ -212,7 +235,15 @@ class VerifBerkas extends Component
 
         $qrCodePath = $qrCodeDirectory . '/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png';
         $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . urlencode($this->siswa->dataRegistrasi->nomor_peserta);
-        file_put_contents($qrCodePath, file_get_contents($qrCodeUrl));
+        
+        try {
+            $qrCodeContent = @file_get_contents($qrCodeUrl);
+            if ($qrCodeContent !== false) {
+                file_put_contents($qrCodePath, $qrCodeContent);
+            }
+        } catch (\Exception $e) {
+            \Log::warning('Failed to generate QR code: ' . $e->getMessage());
+        }
 
         // Dispatch the email job
         SendVerificationEmail::dispatch(
@@ -251,7 +282,7 @@ class VerifBerkas extends Component
     protected function updateBerkasVerifikasi()
     {
         foreach ($this->syarat as $item) {
-            foreach ($item->berkas->where('uploader_id', $this->siswa->id_user) as $berkas) {
+            foreach ($item->berkas as $berkas) {
                 $berkas->verify = $this->verif[$berkas->id] ?? null;
                 $berkas->verify_notes = $this->catatan[$berkas->id] ?? null;
                 $berkas->save();
@@ -289,7 +320,9 @@ class VerifBerkas extends Component
     {
         $previousBq = null;
         $previousJapres = null;
-        $existingDataTes = DataTes::where('id_registrasi', $this->id_registrasi)->get();
+        $existingDataTes = DataTes::with(['jadwalTes.jenisTes'])
+            ->where('id_registrasi', $this->id_registrasi)
+            ->get();
 
         foreach ($existingDataTes as $dataTes) {
             if (strpos($dataTes->jadwalTes->jenisTes->nama, 'BQ') !== false) {

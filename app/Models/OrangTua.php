@@ -32,4 +32,9 @@ class OrangTua extends Model
     {
         return $this->belongsTo(PekerjaanOrangTua::class, 'pekerjaan', 'id_pekerjaan');
     }
+
+    public function pekerjaanOrangTua()
+    {
+        return $this->belongsTo(PekerjaanOrangTua::class, 'pekerjaan', 'id_pekerjaan');
+    }
 }
