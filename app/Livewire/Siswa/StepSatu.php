@@ -105,8 +105,8 @@ class StepSatu extends Component
             $siswa->jenis_kelamin &&
             $siswa->tanggal_lahir &&
             $siswa->tempat_lahir &&
+            $siswa->NPSN &&
             $siswa->sekolah_asal &&
-            $siswa->status_sekolah &&
             $siswa->alamat_kk &&
             $siswa->alamat_domisili &&
             $siswa->provinsi &&

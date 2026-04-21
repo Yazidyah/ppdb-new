@@ -301,8 +301,8 @@ class BiodataSiswa extends Component
             $this->jenis_kelamin &&
             $this->tanggal_lahir &&
             $this->tempat_lahir &&
+            $this->NPSN &&
             $this->sekolah_asal &&
-            $this->status_sekolah &&
             $this->alamat_kk &&
             $this->alamat_domisili &&
             $this->provinsi &&
@@ -319,7 +319,6 @@ class BiodataSiswa extends Component
         } else {
             return false;
         }
-        // return $this->nama_lengkap && $this->NIK && $this->NISN && $this->no_telp && $this->jenis_kelamin && $this->tanggal_lahir && $this->tempat_lahir && $this->sekolah_asal && $this->status_sekolah && $this->alamat_kk && $this->alamat_domisili && $this->provinsi && $this->kota && $this->predikat_akreditasi_sekolah && $this->nilai_akreditasi_sekolah;
     }
 
     public function render()
