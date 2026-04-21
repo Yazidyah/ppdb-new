@@ -17,12 +17,12 @@ class Dashboard extends Component
     public $statistik, $countLakiLaki, $countPerempuan, $countSekolahNegeri, $countSekolahSwasta, $countLuarBogor, $countDalamBogor, $countJalur, $countUpload, $countSubmit, $countTidakLolosAdministrasi, $countLolosAdministrasi, $countBelumDitentukan, $countDiterima, $countTidakDiterima, $countDicadangkan;
     public $isOpen;
     protected $queryString = [
-        'tab' => ['except' => 'konsep', 'as' => 't'],
+        'tab' => ['except' => '1', 'as' => 't', 'type' => 'integer'],
     ];
 
     public function mount()
     {
-        $this->isOpen = Pembukaan::first();
+        $this->isOpen = Pembukaan::first() ?? new Pembukaan(['is_open' => false]);
         $this->updateStatistik();
         $this->loadStatistik();
         $this->loadAllNamaStatistik();

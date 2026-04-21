@@ -96,9 +96,8 @@ class DataSekolahService
                     ->accept('text/html,application/xhtml+xml')
                     ->get($url);
             } catch (\Throwable $e) {
-                if (!app()->isLocal()) {
-                    throw $e;
-                }
+                Log::warning('NPSN API request failed', ['url' => $url, 'error' => $e->getMessage()]);
+                $response = null;
             }
 
             if (($response === null || !$response->successful()) && app()->isLocal()) {
