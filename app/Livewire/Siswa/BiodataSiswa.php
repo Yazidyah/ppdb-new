@@ -211,7 +211,8 @@ class BiodataSiswa extends Component
         }
     }
 
-
+   
+    /*
     public function searchByNpsn()
     {
         $this->NPSN = preg_replace('/\s+/', '', $this->NPSN);
@@ -220,7 +221,6 @@ class BiodataSiswa extends Component
             return;
         }
 
-        /** @var DataSekolahService $service */
         $service = app(DataSekolahService::class);
         $dataSekolah = $service->getOrFetchByNpsn($this->NPSN);
 
@@ -235,7 +235,6 @@ class BiodataSiswa extends Component
         if (!$allowed) {
             $this->resetErrorBag(['sekolah_asal']);
             $this->addError('NPSN', 'Masukkan NPSN Sekolah SMP/MTs Sederajat');
-            // Reset related fields to avoid persisting invalid school types
             $this->sekolah_asal = '';
             $this->status_sekolah = '';
             $this->siswa->NPSN = null;
@@ -264,6 +263,7 @@ class BiodataSiswa extends Component
             $this->addError('NPSN', 'Data sekolah ditemukan namun penyimpanan biodata gagal.');
         }
     }
+    */
 
     public function copyAlamatKk()
     {
