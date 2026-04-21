@@ -31,8 +31,7 @@
                             <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
                     </h1>
-                    @if (count($data->berkas) !== 0)
-                        @forelse ($data->berkas->where('uploader_id', $user->id)->where('deleted_at',null) as $berkas)
+                    @forelse ($data->berkas->where('uploader_id', $user->id)->where('deleted_at',null) as $berkas)
                             @livewire('pemberkasan.berkas', ['berkas' => $berkas, 'editable' => true], key($user->id . '-berkas-' . $berkas->id))
                             <div>
                                 <div class="flex gap-2">
@@ -177,7 +176,6 @@
                                 </div>
                             @endif
                         @endforelse
-                    @endif
                     @if (Str::contains(Str::lower($data->nama_persyaratan), 'ijazah'))
                         @if (session()->has('error-ijazah'))
                             <p class="text-red-500 text-xs mt-2">{{ session('error-ijazah') }}</p>

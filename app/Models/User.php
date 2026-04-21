@@ -28,7 +28,6 @@ class User extends Authenticatable implements CanResetPassword, MustVerifyEmail
         'email',
         'password',
         'role',
-        'remember_token', // Pastikan ini ada jika menggunakan $fillable
     ];
 
     /**

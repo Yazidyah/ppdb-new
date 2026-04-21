@@ -61,7 +61,10 @@ class OperatorController extends Controller
 
     public function showsiswaDetail($id)
     {
-        $siswa = CalonSiswa::findOrFail($id);
+        $siswa = CalonSiswa::whereHas('dataRegistrasi')
+            ->whereHas('user', fn ($q) => $q->whereNull('deleted_at'))
+            ->findOrFail($id);
+
         return view('operator.data-siswa-detail', compact('siswa'));
     }
 
@@ -82,9 +85,9 @@ class OperatorController extends Controller
             });
 
         if ($request->has('search')) {
-            $search = strtolower($request->input('search'));
+            $search = $request->input('search');
             $query->where(function ($q) use ($search) {
-                $q->whereRaw('LOWER(nama_lengkap) like ?', ["%$search%"])
+                $q->where('nama_lengkap', 'like', "%$search%")
                     ->orWhere('NISN', 'like', "%$search%");
             });
         }
@@ -104,8 +107,8 @@ class OperatorController extends Controller
         }
 
         if ($request->has('sekolah_asal') && $request->input('sekolah_asal') != '') {
-            $sekolahAsal = strtolower($request->input('sekolah_asal'));
-            $query->whereRaw('LOWER(sekolah_asal) like ?', ["%$sekolahAsal%"]);
+            $sekolahAsal = $request->input('sekolah_asal');
+            $query->where('sekolah_asal', 'like', "%$sekolahAsal%");
         }
 
         return $query;
