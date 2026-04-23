@@ -14,11 +14,20 @@ class DataRegistrasi extends Model
         'id_calon_siswa',
         'id_jalur',
         'nomor_peserta',
-        'nomor_suket', 
+        'nomor_suket',
         'status',
         'id_jadwal_tes',
+        'is_active',
     ];
     protected $dates = ['deleted_at', 'updated_at'];
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
 
     public function calonSiswa()
     {

@@ -35,13 +35,16 @@ class UploadDokumen extends Component
         $this->user = Auth::user();
         $this->rapot = $this->user->siswa->dataRegistrasi->rapot;
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
-        $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->pluck('id_jalur')->first();
+        $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
+            ->where('is_active', true)
+            ->value('id_jalur');
         $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get();
         $this->syarat = null;
 
         $uploadedDocumentsCount = Berkas::where('uploader_id', $this->user->id)->count();
         if ($uploadedDocumentsCount > 0) {
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
+                ->where('is_active', true)
                 ->update(['status' => 2]);
         }
         $this->validateIsianRapot();
@@ -179,6 +182,7 @@ class UploadDokumen extends Component
 
             // Update status in DataRegistrasi
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
+                ->where('is_active', true)
                 ->update(['status' => 2]);
 
             Log::channel('upload')->info('File ' . $this->syarat->nama_persyaratan . ' berhasil disimpan', ['path' => $path, 'user_id' => Auth::user()->id]);

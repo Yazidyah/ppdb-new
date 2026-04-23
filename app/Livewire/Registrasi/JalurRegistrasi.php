@@ -21,9 +21,19 @@ class JalurRegistrasi extends Component
     {
         $this->user = Auth::user();
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
-        $this->siswa = DataRegistrasi::updateOrCreate(
-            ['id_calon_siswa' => $this->id_siswa],
-        );
+        $this->siswa = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
+            ->where('is_active', true)
+            ->latest('id_registrasi')
+            ->first();
+
+        if (!$this->siswa) {
+            $this->siswa = DataRegistrasi::create([
+                'id_calon_siswa' => $this->id_siswa,
+                'status' => '0',
+                'is_active' => true,
+            ]);
+        }
+
         $this->id_jalur = $this->siswa->jalurRegistrasi->id_jalur ?? '';
         $this->jalurRegistrasi = JalurRegistrasiModel::openForRegistration()->with('persyaratan')->get();
     }
@@ -66,7 +76,7 @@ class JalurRegistrasi extends Component
             $this->siswa->save();
         }
 
-        return redirect()->to('/siswa/daftar-step-tiga?t=' . $value);
+        return redirect()->to('/siswa/daftar-step-tiga?t=1');
     }
 
     public function render()
