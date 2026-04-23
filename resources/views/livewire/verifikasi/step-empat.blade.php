@@ -29,11 +29,11 @@
                         class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
                         type="button" id="nextBtn">Previous</button>
                     <button onclick="document.getElementById('info-popup').classList.remove('hidden')" class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
-                            @if (!$isValid)
-                                cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary
-                            @else
-                                bg-tertiary hover:bg-secondary hover:text-black text-secondary
-                            @endif" type="button" id="submitBtn" @if (!$isValid) disabled @endif>
+                                @if (!$isValid)
+                                    cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary
+                                @else
+                                    bg-tertiary hover:bg-secondary hover:text-black text-secondary
+                                @endif" type="button" id="submitBtn" @if (!$isValid) disabled @endif>
                         Submit
                     </button>
                 </div>
@@ -55,14 +55,14 @@
                 <div class="mb-6 text-base font-light text-gray-500">
                     <h3 class="mb-4 text-3xl font-bold text-gray-900">Konfirmasi Unggah Dokumen</h3>
                     <p class="text-md text-justify">
-                        Dengan ini saya menyatakan bahwa saya meyakini sepenuhnya bahwa dokumen yang telah saya unggah
-                        merupakan dokumen yang <span class="font-bold text-tertiary"> Sah, Valid</span>, dan memuat
-                        informasi yang <span class="font-bold text-tertiary"> Akurat sesuai dengan kondisi
-                            sebenarnya.</span></p>
+                        Saya menjamin bahwa seluruh dokumen yang telah saya unggah adalah
+                        <span class="font-bold text-tertiary">Valid, Sah,</span> dan memuat informasi yang
+                        <span class="font-bold text-tertiary">Akurat sesuai kondisi sebenarnya.</span>
+                    </p>
                     <p class="text-md text-justify">
-                        Saya juga bersedia untuk <span class="font-bold text-tertiary">mempertanggungjawabkan</span>
-                        keabsahan serta kebenaran data yang tercantum di dalam dokumen tersebut sesuai dengan peraturan
-                        dan standar yang berlaku.
+                        Saya bertanggung jawab penuh atas <span class="font-bold text-tertiary">keabsahan dan
+                            kebenaran</span>
+                        data tersebut sesuai dengan peraturan dan standar yang berlaku.
                     </p>
                 </div>
                 <div class="justify-between items-center pt-0 space-y-4 sm:flex sm:space-y-0">

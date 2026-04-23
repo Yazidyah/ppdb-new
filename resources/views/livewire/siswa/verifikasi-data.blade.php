@@ -44,8 +44,7 @@
             </div>
             <div class="mb-4 mx-2">
                 <label for="npsn" class="block text-sm font-medium text-gray-700">NPSN</label>
-                <input type="text" id="npsn" value="{{ strtoupper($calonSiswa->NPSN) ?: 'DATA INI KOSONG' }}"
-                    disabled
+                <input type="text" id="npsn" value="{{ strtoupper($calonSiswa->NPSN) ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->NPSN ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
@@ -72,8 +71,8 @@
             </div>
             <div class="mb-4 mx-2">
                 <label for="alamat_kk" class="block text-sm font-medium text-gray-700">Alamat KK</label>
-                <input type="text" id="alamat_kk"
-                    value="{{ strtoupper($calonSiswa->alamat_kk) ?: 'DATA INI KOSONG' }}" disabled
+                <input type="text" id="alamat_kk" value="{{ strtoupper($calonSiswa->alamat_kk) ?: 'DATA INI KOSONG' }}"
+                    disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->alamat_kk ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
@@ -87,8 +86,9 @@
                 <label for="nilai_akreditasi_sekolah" class="block text-sm font-medium text-gray-700">Nilai Akreditasi
                     Sekolah</label>
                 <input type="text" id="nilai_akreditasi_sekolah"
-                    value="{{ $calonSiswa->nilai_akreditasi_sekolah ?: 'DATA INI KOSONG' }}" disabled
-                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$calonSiswa->nilai_akreditasi_sekolah ? 'text-red-500' : '' }}">
+                    value="{{ in_array($calonSiswa->nilai_akreditasi_sekolah, [0, '0'], true) ? 'Belum Terakreditasi' : ($calonSiswa->nilai_akreditasi_sekolah ?? 'DATA INI KOSONG') }}"
+                    disabled
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ is_null($calonSiswa->nilai_akreditasi_sekolah) || $calonSiswa->nilai_akreditasi_sekolah === '' ? 'text-red-500' : '' }}">
             </div>
         </div>
         @if ($orangTuaIbu)
@@ -102,8 +102,7 @@
             </div>
             <div class="mb-4 mx-2">
                 <label for="nik_orang_tua_ibu" class="block text-sm font-medium text-gray-700">NIK Ibu</label>
-                <input type="text" id="nik_orang_tua_ibu" value="{{ $orangTuaIbu->nik ?: 'DATA INI KOSONG' }}"
-                    disabled
+                <input type="text" id="nik_orang_tua_ibu" value="{{ $orangTuaIbu->nik ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaIbu->nik ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
@@ -115,8 +114,8 @@
             </div>
             <div class="mb-4 mx-2">
                 <label for="no_telp_orang_tua_ibu" class="block text-sm font-medium text-gray-700">No Telp Ibu</label>
-                <input type="text" id="no_telp_orang_tua_ibu"
-                    value="{{ $orangTuaIbu->no_telp ?: 'DATA INI KOSONG' }}" disabled
+                <input type="text" id="no_telp_orang_tua_ibu" value="{{ $orangTuaIbu->no_telp ?: 'DATA INI KOSONG' }}"
+                    disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaIbu->no_telp ? 'text-red-500' : '' }}">
             </div>
         @endif
@@ -131,8 +130,7 @@
             </div>
             <div class="mb-4 mx-2">
                 <label for="nik_orang_tua_ayah" class="block text-sm font-medium text-gray-700">NIK Ayah</label>
-                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaAyah->nik ?: 'DATA INI KOSONG' }}"
-                    disabled
+                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaAyah->nik ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaAyah->nik ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
@@ -145,8 +143,8 @@
             <div class="mb-4 mx-2">
                 <label for="no_telp_orang_tua_ayah" class="block text-sm font-medium text-gray-700">No Telp
                     Ayah</label>
-                <input type="text" id="no_telp_orang_tua_ayah"
-                    value="{{ $orangTuaAyah->no_telp ?: 'DATA INI KOSONG' }}" disabled
+                <input type="text" id="no_telp_orang_tua_ayah" value="{{ $orangTuaAyah->no_telp ?: 'DATA INI KOSONG' }}"
+                    disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaAyah->no_telp ? 'text-red-500' : '' }}">
             </div>
         @endif
@@ -161,8 +159,7 @@
             </div>
             <div class="mb-4 mx-2">
                 <label for="nik_orang_tua_ayah" class="block text-sm font-medium text-gray-700">NIK Ayah</label>
-                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaWali->nik ?: 'DATA INI KOSONG' }}"
-                    disabled
+                <input type="text" id="nik_orang_tua_ayah" value="{{ $orangTuaWali->nik ?: 'DATA INI KOSONG' }}" disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->nik ? 'text-red-500' : '' }}">
             </div>
             <div class="mb-4 mx-2">
@@ -175,8 +172,8 @@
             <div class="mb-4 mx-2">
                 <label for="no_telp_orang_tua_ayah" class="block text-sm font-medium text-gray-700">No Telp
                     Ayah</label>
-                <input type="text" id="no_telp_orang_tua_ayah"
-                    value="{{ $orangTuaWali->no_telp ?: 'DATA INI KOSONG' }}" disabled
+                <input type="text" id="no_telp_orang_tua_ayah" value="{{ $orangTuaWali->no_telp ?: 'DATA INI KOSONG' }}"
+                    disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ !$orangTuaWali->no_telp ? 'text-red-500' : '' }}">
             </div>
         @endif
@@ -208,16 +205,16 @@
                 </button>
                 <div class="mb-6 text-base font-light text-gray-500">
                     <h3 class="mb-4 text-3xl font-bold text-gray-900">Konfirmasi Pengisian Data</h3>
-                    <p class="text-md text-justify ">
-                        Dengan ini saya menyatakan bahwa saya meyakini sepenuhnya bahwa data isian biodata dan data
-                        orang tua yang telah saya masukkan ke dalam sistem adalah <span
-                            class="font-bold text-tertiary">
-                            Valid, Benar, dan Dapat Dipertanggungjawabkan.</span>
+                    <p class="text-md text-justify">
+                        Saya mengonfirmasi bahwa seluruh data diri dan data orang tua yang saya masukkan ke dalam sistem
+                        adalah
+                        <span class="font-bold text-tertiary">
+                            Valid dan Sah.
+                        </span>
                     </p>
                     <p class="text-md text-justify">
-                        Saya memahami bahwa kebenaran informasi tersebut sangat penting untuk
-                        kelancaran proses administrasi, dan saya siap mempertanggungjawabkan kebenaran setiap data yang
-                        telah saya berikan sesuai dengan ketentuan yang berlaku.
+                        Saya bertanggung jawab penuh atas kebenaran informasi tersebut demi kelancaran proses
+                        administrasi sesuai dengan ketentuan yang berlaku.
                     </p>
                 </div>
                 <div class="justify-between items-center pt-0 space-y-4 sm:flex sm:space-y-0">

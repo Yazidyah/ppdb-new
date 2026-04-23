@@ -37,7 +37,7 @@ class BiodataSiswa extends Component
         'tanggal_lahir' => 'required|date|before_or_equal:minTanggalLahir|after_or_equal:maxTanggalLahir',
         'tempat_lahir' => 'required|string',
         'sekolah_asal' => 'required|string',
-        'NPSN' => 'required|string|max:8',
+        'NPSN' => 'required|string|max:10|alpha_num',
         'alamat_domisili' => 'required|string',
         'alamat_kk' => 'required|string',
         'predikat_akreditasi_sekolah' => 'required|string',
@@ -63,9 +63,8 @@ class BiodataSiswa extends Component
         'tempat_lahir.required' => 'Tempat Lahir tidak boleh kosong',
         'sekolah_asal.required' => 'Sekolah Asal tidak boleh kosong',
         'NPSN.required' => 'NPSN tidak boleh kosong',
-        'NPSN.numeric' => 'NPSN harus berupa angka',
-        'NPSN.digits_between' => 'NPSN harus terdiri dari maksimal 8 digit',
-        'NPSN.max' => 'NPSN harus terdiri dari maksimal 8 karakter',
+        'NPSN.alpha_num' => 'NPSN hanya boleh berisi huruf dan angka',
+        'NPSN.max' => 'NPSN harus terdiri dari maksimal 10 karakter',
         'alamat_domisili.required' => 'Alamat Domisili tidak boleh kosong',
         'alamat_kk.required' => 'Alamat KK tidak boleh kosong',
         'predikat_akreditasi_sekolah.required' => 'Predikat Akreditasi Sekolah tidak boleh kosong',
@@ -214,8 +213,8 @@ class BiodataSiswa extends Component
     public function searchByNpsn()
     {
         $this->NPSN = preg_replace('/\s+/', '', $this->NPSN);
-        if ($this->NPSN === '' || !preg_match('/^\d{1,8}$/', $this->NPSN)) {
-            $this->addError('NPSN', 'NPSN tidak valid. Harus angka maksimal 8 digit.');
+        if ($this->NPSN === '' || !preg_match('/^[A-Za-z0-9]{1,10}$/', $this->NPSN)) {
+            $this->addError('NPSN', 'NPSN tidak valid. Harus huruf/angka maksimal 10 karakter.');
             return;
         }
 

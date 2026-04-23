@@ -37,7 +37,7 @@ class TabDetailSiswa extends Component
         'jenis_kelamin' => 'required|in:L,P',
         'tempat_lahir' => 'nullable|string|max:255',
         'tanggal_lahir' => 'nullable|date',
-        'npsn' => 'nullable|string|max:8',
+        'npsn' => 'nullable|string|max:10|alpha_num',
         'sekolah_asal' => 'nullable|string|max:255',
         'status_sekolah' => 'nullable|string|max:255',
         'nilai_akreditasi_sekolah' => 'nullable|numeric|max:4',

@@ -42,7 +42,7 @@ class BiodataController extends Controller
             'jenis_kelamin' => 'required|in:L,P',
             'tanggal_lahir' => 'required|date',
             'tempat_lahir' => 'required|string|max:255',
-            'NPSN' => 'nullable|string|max:8',
+            'NPSN' => 'nullable|string|max:10|alpha_num',
             'sekolah_asal' => 'nullable|string|max:255',
             'status_sekolah' => 'nullable|string|max:50',
             'alamat_domisili' => 'nullable|string|max:500',
@@ -69,7 +69,7 @@ class BiodataController extends Controller
             'jenis_kelamin' => 'sometimes|in:L,P',
             'tanggal_lahir' => 'sometimes|date',
             'tempat_lahir' => 'sometimes|string|max:255',
-            'NPSN' => 'nullable|string|max:8',
+            'NPSN' => 'nullable|string|max:10|alpha_num',
             'sekolah_asal' => 'nullable|string|max:255',
             'status_sekolah' => 'nullable|string|max:50',
             'alamat_domisili' => 'nullable|string|max:500',
@@ -95,7 +95,7 @@ class BiodataController extends Controller
     {
         // Validate NPSN input
         $request->validate([
-            'npsn' => 'required|string|regex:/^\d{1,8}$/',
+            'npsn' => 'required|string|regex:/^[A-Za-z0-9]{1,10}$/',
         ]);
 
         $npsn = trim($request->query('npsn'));
