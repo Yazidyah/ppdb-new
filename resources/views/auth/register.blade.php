@@ -5,7 +5,7 @@
             ->exists();
     @endphp
 
-    @if($hasAnyOpenJalur)
+    {{-- @if($hasAnyOpenJalur) --}}
         @if (session('status') === 'verification-required')
             <div class="mb-4 text-sm text-gray-600">
                 {{ __('Silakan verifikasi email Anda sebelum melanjutkan.') }}
@@ -71,5 +71,5 @@
                 {{ __('Login') }}
             </a>
         </div> --}}
-    @endif
+    {{-- @endif --}}
 </x-guest-layout>
