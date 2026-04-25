@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\PekerjaanOrangTua;
 
 class PekerjaanOrtuSeeder extends Seeder
 {
@@ -13,7 +13,6 @@ class PekerjaanOrtuSeeder extends Seeder
      */
     public function run(): void
     {
-        $timestamp = now();
         $pekerjaan = [
             ['nama_pekerjaan' => 'Ibu Rumah Tangga'],
             ['nama_pekerjaan' => 'Petani'],
@@ -29,11 +28,11 @@ class PekerjaanOrtuSeeder extends Seeder
             ['nama_pekerjaan' => 'Sopir'],
         ];
 
-        foreach ($pekerjaan as &$item) {
-            $item['created_at'] = $timestamp;
-            $item['updated_at'] = $timestamp;
+        foreach ($pekerjaan as $item) {
+            PekerjaanOrangTua::firstOrCreate(
+                ['nama_pekerjaan' => $item['nama_pekerjaan']],
+                $item
+            );
         }
-
-        DB::table('pekerjaan_orang_tua')->insert($pekerjaan);
     }
 }

@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\JalurRegistrasi;
+
 class JalurRegistrasiSeeder extends Seeder
 {
     /**
@@ -11,8 +12,6 @@ class JalurRegistrasiSeeder extends Seeder
      */
     public function run(): void
     {
-        $timestamp = now();
-
         $jalur = [
             [
                 'nama_jalur' => 'Reguler',
@@ -51,10 +50,11 @@ class JalurRegistrasiSeeder extends Seeder
             ],
         ];
 
-        foreach ($jalur as &$item) {
-            $item['created_at'] = $timestamp;
-            $item['updated_at'] = $timestamp;
-            DB::table('jalur_registrasi')->insert($item);
+        foreach ($jalur as $item) {
+            JalurRegistrasi::firstOrCreate(
+                ['nama_jalur' => $item['nama_jalur']],
+                $item
+            );
         }
     }
 }

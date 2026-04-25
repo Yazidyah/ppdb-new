@@ -13,26 +13,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Siswa User',
-            'email' => 'siswa@example.com',
-            'role' => 'siswa',
-            'password' => bcrypt('password'),
-        ]);
+        User::firstOrCreate(
+            ['email' => 'siswa@example.com'],
+            [
+                'name' => 'Siswa User',
+                'role' => 'siswa',
+                'password' => bcrypt('password'),
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Operator User',
-            'email' => 'operator@example.com',
-            'role' => 'operator',
-            'password' => bcrypt('password'),
-        ]);
+        User::firstOrCreate(
+            ['email' => 'operator@example.com'],
+            [
+                'name' => 'Operator User',
+                'role' => 'operator',
+                'password' => bcrypt('password'),
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'role' => 'admin',
-            'password' => bcrypt('password'),
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin User',
+                'role' => 'admin',
+                'password' => bcrypt('password'),
+            ]
+        );
 
         $this->call(HubunganOrangTuaSeeder::class);
         $this->call(JalurRegistrasiSeeder::class);

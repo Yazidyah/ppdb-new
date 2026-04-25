@@ -10,4 +10,8 @@ class KategoriPersyaratan extends Model
     use HasFactory;
 
     protected $table = 'kategori_persyaratan';
+    protected $fillable = [
+        'id_persyaratan',
+        'id_kategori_berkas',
+    ];
 }

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\KategoriPersyaratan;
 
 class KategoriPersyaratanSeeder extends Seeder
 {
@@ -40,6 +40,11 @@ class KategoriPersyaratanSeeder extends Seeder
             ]
         ];
 
-        DB::table('kategori_persyaratan')->insert($kategoriPersyaratan);
+        foreach ($kategoriPersyaratan as $record) {
+            KategoriPersyaratan::firstOrCreate([
+                'id_persyaratan' => $record['id_persyaratan'],
+                'id_kategori_berkas' => $record['id_kategori_berkas'],
+            ]);
+        }
     }
 }
