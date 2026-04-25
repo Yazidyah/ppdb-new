@@ -137,9 +137,8 @@
                                 <div class="justify-between flex  px-4 py-2 border-t">
 
                                     <div>
-                                        <button wire:click="closeModal"
+                                        <button type="button" wire:click="closeModal"
                                             class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Tutup</button>
-
                                     </div>
                                     <div>
                                         <x-primary-button
@@ -152,7 +151,7 @@
                 </div>
             @endif
             <div class="container mx-auto mt-10">
-                <h2 class="font-bold text-[24px] pb-4">Konfigursi Persyaratan</h2>
+                <h2 class="font-bold text-[24px] pb-4">Konfigurasi Persyaratan</h2>
                 <div class="mb-4 flex justify-between">
                     <select wire:model="filterJalur"
                         class="md:w-1/4 w-1/2 flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary"
@@ -181,7 +180,8 @@
                         </thead>
                         <tbody>
                             @forelse ($persyaratan as $item)
-                                <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                                <tr wire:key="persyaratan-row-{{ $item->id_persyaratan }}"
+                                    class="hover:bg-gray-200 transition duration-200 cursor-pointer">
                                     <td class="border text-tertiary text-left px-4 py-2 pl-12">
                                         {{ $item->nama_persyaratan }}
                                     </td>
@@ -195,7 +195,7 @@
                                         class="border text-tertiary text-center px-4 py-2 flex justify-center space-x-2">
                                         <button type="button" wire:click="edit({{ $item->id_persyaratan }})"
                                             class="bg-tertiary text-white px-4 py-2 hover:bg-secondary hover:text-tertiary rounded">Edit</button>
-                                        <button wire:click="delete({{ $item->id_persyaratan }})"
+                                        <button type="button" wire:click="delete({{ $item->id_persyaratan }})"
                                             class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
                                     </td>
                                 </tr>
