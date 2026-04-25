@@ -8,55 +8,73 @@
     <div class="mx-auto container  border-tertiary border-4 p-6 text-tertiary w-3/4 rounded-xl">
         <h1 class="text-xl font-bold mb-2">A. Syarat Umum Calon Peserta Didik MAN 1 Kota Bogor</h1>
         <ol class="list-decimal items-center ml-12">
-            <li class="text-wrap">Usia Maksimal 21 tahun pada tanggal 1 Juli 2025</li>
-            <li class="text-wrap">Memiliki Rapor MTs/SMP dari sekolah asal (Upload Max 3 MB/PDF)</li>
-            <li class="text-wrap">Memiliki Sertifikat Akreditasi dari Sekolahan Asal (Upload Max 200 Kb/PDF)</li>
-            <li class="text-wrap">Memiliki Akta Kelahiran (Upload Max 200 Kb/PDF)</li>
-            <li class="text-wrap">Memiliki Kartu Keluarga (Upload Max 200 Kb/PDF)</li>
-            <li class="text-wrap">Memiliki NISN yang tercatat di <span class="text-wrap"><a href="https://nisn.data.kemdikbud.go.id">https://nisn.data.kemdikbud.go.id</a> (Upload Max 200 Kb/PDF)</span></li>
-            <li class="text-wrap">Memiliki Email Aktif</li>
+            <li class="text-wrap">Usia Maksimal 21 tahun pada tanggal 1 Juli 2026</li>
+            <li class="text-wrap">Memiliki Ijazah MTs/SMP/sederajat</li>
+            <li class="text-wrap">Mengikuti seluruh rangkaian prosedur PMB MAN 1 KOTA BOGOR TP. 2026/2027</li>
         </ol>
     </div>
     <div class="mx-auto container border-tertiary border-4 p-6 text-tertiary w-3/4 rounded-xl mt-10">
         <h1 class="text-xl font-bold mb-2">B. Syarat Khusus</h1>
         <ul>
-            <li class="text-wrap">
-                <h1 class="text-md font-bold">1. Jalur Afirmatif</h1>
-            <ul class=" items-center list-decimal ml-12">
-                <li class="ml-2">a. Prestasi Akademik (KSM/KSN/OSN/MYRES) Kemenag, Kemendikbud, LIPI, BRIN Prestasi yang diperoleh peserta didik di MTs/SMP minimal tahun pelajaran 2022-2023
-                    <ol class="list-disc ml-8">
-                    <li>Tingkat Nasional Minimal Juara 3</li>
-                    <li>Tingkat Provinsi Minimal Juara 2</li>
-                    <li>Tingkat Kab/ Kota Minimal Juara 1</li>
-                    <li>Upload medali, piagam/ sertifikat ASLI dan Surat keterangan dari sekolah asal yang menyatakan siswa tersebut berprestasi di bidang tersebut (sesuai bukti pendukung)</li>
+            <li class="gap-y-4 text-wrap">
+                <h1 class="text-md font-bold">A. Jalur Afirmasi</h1>
+            <ul class=" items-center gap-y-4 list-decimal ml-12">
+                <li class="ml-2"> Jalur Peserta Didik Keluarga Ekonomi Tidak Mampu
+                    <ol class="list-decimal ml-4">
+                        <li>Melakukan Pendaftaran</li>
+                        <li>Melakukan Verifikasi berkas (Offline/Tatap muka)</li>
+                        <li>Mengikuti Tes Baca Al-Qur'an</li>
+                        <li>Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</li>
                     </ol>
                 </li>
-                <li class="ml-2">b. Prestasi Non Akademik (AKSIOMA) antara lain:
-                    <ul class=" list-decimal ml-8 ">
-                        <li>Olah Raga (Bulu tangkis, Futsal, Basket, Pencak Silat, Voli)</li>
-                        <li>Keagamaan (Tahfidz minimal 4 Juz yg ditandatangani Kementerian Agama), MTQ</li>
-                        <li>Kesenian (Kaligrafi, Solois, Pidato Bahasa Arab/Inggris)</li>
-                        <li>Ekstrakurikuler (Pramuka, Paskibra, PMR, Robotik) Prestasi yang diperoleh peserta didik di MTs/SMP minimal tahun pelajaran 2022-2023
-  <ol class="list-disc ml-8">
-                    <li>Tingkat Nasional Minimal Juara 3</li>
-                    <li>Tingkat Provinsi Minimal Juara 2</li>
-                    <li>Tingkat Kab/ Kota Minimal Juara 1</li>
-                    <li>Upload medali, piagam/ sertifikat ASLI dan Surat keterangan dari sekolah asal yang menyatakan siswa tersebut berprestasi di bidang tersebut (sesuai bukti pendukung)</li>
-                    </ol>
-</li>
-                    </ul>
-                </li>
-                <li>c. Jalur Keluarga Ekonomi Tidak Mampu
-                    <ol class="list-disc ml-8">
-                        <li>Upload  Kartu  Indonesia  Pintar  (KIP)/ PKH/ KKS</li>
-                        <li>Upload Buku Tabungan KIP yang menyatakan terjadi pencairan minimal tahun pelajaran 2022-2023</li>
+                    <h1 class="mt-1 mb-2">Catatan : Jalur KETM akan dilakukan survei dari pihak madrasah</h1>
+                <li class="ml-2">Jalur Peserta Didik Berprestasi
+                    <ol class="list-decimal ml-4">
+                        <li>Melakukan Pendaftaran</li>
+                        <li>Melakukan Verifikasi berkas (Offline/Tatap muka)</li>
+                        <li>Mengikuti Tes Baca Al-Qur'an</li>
+                        <li>Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</li>
                     </ol>
                 </li>
-                <li>d. Jalur Berkebutuhan Khusus</li>
-            </ul></li>
+                <h1 class="mt-1 mb-4">Catatan : PDBK mendapatkan perhatian dan pelayanan sesuai dengan kemampuan satuan pendidikan</h1>
+            </ul>
+            </li>
+            <li class="gap-y-4 text-wrap">
+                <h1 class="text-md font-bold">B. Jalur Prestasi</h1>
+            <ul class=" items-center gap-y-4 list-decimal ml-12">
+                <li class="ml-2">Jalur Prestasi Akademik
+                    <ol class="list-decimal ml-4">
+                        <li>Melakukan Pendaftaran</li>
+                        <li>Melakukan Verifikasi berkas (Offline/Tatap muka)</li>
+                        <li>Mengikuti Tes Baca Al-Qur'an</li>
+                        <li>Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</li>
+                        <li>Mengikuti Tes Kemampuan Prestasi masing-masing bidang</li>
+                    </ol>
+                </li>
+                    <h1 class="mt-1 mb-2">Catatan : Sertifikat/Piagam/Medali/Piala Lomba yang diselenggarakan oleh Kementerian Agama/Kementerian Pendidikan Dasar dan Menengah, Kementerian Lainnya, Pemerintah Daerah, PTN Terakreditasi atau Lembaga Profesional Lainnya.</h1>
+                <li class="ml-2">Jalur Peserta Didik Berprestasi
+                    <ol class="list-decimal ml-4">
+                        <li>Melakukan Pendaftaran</li>
+                        <li>Melakukan Verifikasi berkas (Offline/Tatap muka)</li>
+                        <li>Mengikuti Tes Baca Al-Qur'an</li>
+                        <li>Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</li>
+                        <li>Mengikuti Tes Kemampuan Prestasi masing-masing bidang</li>
+                    </ol>
+                </li>
+                <h1 class="mt-1 mb-4">Catatan : Sertifikat/Piagam/Medali/Piala Lomba yang diselenggarakan oleh Kementerian Agama/Kementerian Pendidikan Dasar dan Menengah, Kementerian Lainnya, Pemerintah Daerah, PTN Terakreditasi atau Lembaga Profesional Lainnya.</h1>
+            </ul>
+            </li>
+
             <li>
-                <h1 class="text-md font-bold">2. Jalur Reguler</h1>
-                <h3>Tidak Memiliki Syarat Khusus</h3>
+                <h1 class="text-md font-bold">3. Jalur Reguler</h1>
+                <ol class="list-decimal ml-12">
+                        <li>Melakukan Pendaftaran</li>
+                        <li>Verifikasi berkas oleh Panitia</li>
+                        <li>Mengikuti Tes Baca Al-Qur'an</li>
+                        <li>Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</li>
+                        <li>Mengikuti Tes Kemampuan Akademik (Pendidikan Agama, Bahasa Indonesia, Matematika, Bahasa Inggris, IPA, IPS)</li>
+                    </ol>
+                    <h1 class="mt-4">Catatan : Peserta jalur afirmasi dan prestasi yang dinyatakan tidak lulus bisa melanjutkan ke jalur reguler (konfirmasi ke panitia)</h1>
             </li>
 </ul>
     </div>
