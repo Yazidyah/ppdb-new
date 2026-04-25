@@ -11,35 +11,13 @@
         endDate: new Date('{{$endIso}}').getTime(),
         remainingTime: 0,
         countdownMessage: '',
-        phase: 'idle', // 'start' | 'end' | 'closed'
+        phase: 'idle',
         formatTime(time) {
             const days = Math.floor(time / (1000 * 60 * 60 * 24));
             const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((time % (1000 * 60)) / 1000);
             return { days, hours, minutes, seconds };
-        },
-        visibleUnits(time) {
-            const parts = this.formatTime(time);
-
-            if (parts.days > 0) {
-                return [
-                    { label: 'Hari', value: parts.days },
-                    { label: 'Jam', value: parts.hours },
-                ];
-            }
-
-            if (parts.hours > 0) {
-                return [
-                    { label: 'Jam', value: parts.hours },
-                    { label: 'Menit', value: parts.minutes },
-                ];
-            }
-
-            return [
-                { label: 'Menit', value: parts.minutes },
-                { label: 'Detik', value: parts.seconds },
-            ];
         }
     }" x-init="() => {
         const updateCountdown = () => {
@@ -61,33 +39,85 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
     }">
-    <div class="min-h-[120px] flex flex-col justify-center">
-        <div class="text-center text-base font-semibold mb-3">{{ $title }}</div>
+    
+    <div class="min-h-[200px] flex flex-col justify-center">
+        @if($title)
+        <div class="text-center text-lg font-bold text-tertiary mb-4">{{ $title }}</div>
+        @endif
+        
         <template x-if="remainingTime > 0">
             <div>
-                <div class="flex justify-center mb-3">
-                    <span
-                        x-text="countdownMessage"
-                        :class="{
-                            'text-blue-800 bg-blue-100 border border-blue-300': phase === 'start',
-                            'text-orange-800 bg-orange-100 border border-orange-300': phase === 'end'
-                        }"
-                        class="text-sm font-semibold px-3 py-1 rounded-md"
-                    ></span>
+                <div class="flex justify-center mb-6">
+                    <div x-text="countdownMessage"
+                         :class="{
+                             'bg-gradient-to-r from-blue-500 to-blue-600 text-white': phase === 'start',
+                             'bg-gradient-to-r from-orange-500 to-red-500 text-white': phase === 'end'
+                         }"
+                         class="text-sm font-bold px-6 py-2.5 rounded-full inline-flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span x-text="countdownMessage"></span>
+                    </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4 text-center">
-                    <template x-for="unit in visibleUnits(remainingTime)" :key="unit.label">
-                        <div class="flex flex-col items-center w-16 mx-auto">
-                            <div class="text-2xl font-medium text-gray-600" x-text="unit.value"></div>
-                            <div class="text-xs text-gray-500" x-text="unit.label"></div>
+                
+                <div class="grid grid-cols-4 gap-3 md:gap-4">
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-primary to-tertiary rounded-xl p-3 md:p-4">
+                            <div class="text-2xl md:text-3xl font-bold text-white text-center mb-1" x-text="formatTime(remainingTime).days">0</div>
+                            <div class="text-xs md:text-sm text-secondary font-semibold text-center uppercase">Hari</div>
                         </div>
-                    </template>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-primary to-tertiary rounded-xl p-3 md:p-4">
+                            <div class="text-2xl md:text-3xl font-bold text-white text-center mb-1" x-text="formatTime(remainingTime).hours">0</div>
+                            <div class="text-xs md:text-sm text-secondary font-semibold text-center uppercase">Jam</div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-primary to-tertiary rounded-xl p-3 md:p-4">
+                            <div class="text-2xl md:text-3xl font-bold text-white text-center mb-1" x-text="formatTime(remainingTime).minutes">0</div>
+                            <div class="text-xs md:text-sm text-secondary font-semibold text-center uppercase">Menit</div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-primary to-tertiary rounded-xl p-3 md:p-4">
+                            <div class="text-2xl md:text-3xl font-bold text-white text-center mb-1" x-text="formatTime(remainingTime).seconds">0</div>
+                            <div class="text-xs md:text-sm text-secondary font-semibold text-center uppercase">Detik</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-gray-200">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-3 text-xs md:text-sm text-gray-600">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="font-medium">Mulai: <span class="text-tertiary font-semibold" x-text="new Date('{{$startIso}}').toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'})"></span></span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-4 h-4 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span class="font-medium">Tutup: <span class="text-tertiary font-semibold" x-text="new Date('{{$endIso}}').toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'})"></span></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </template>
+        
         <template x-if="remainingTime <= 0">
-            <div class="flex justify-center">
-                <span class="text-sm font-semibold px-3 py-1 rounded-md text-red-800 bg-red-100 border border-red-300" x-text="countdownMessage"></span>
+            <div class="flex flex-col items-center justify-center py-8">
+                <div class="bg-red-100 rounded-full p-4 mb-4">
+                    <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <span class="text-base font-bold px-6 py-3 rounded-xl text-red-800 bg-red-100 border-2 border-red-300" x-text="countdownMessage"></span>
             </div>
         </template>
     </div>
