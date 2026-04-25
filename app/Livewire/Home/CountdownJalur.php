@@ -23,10 +23,6 @@ class CountdownJalur extends Component
     public $nonRegulerNearestOpen = null; // Carbon|null
     public $nonRegulerLatestClose = null; // Carbon|null
 
-    protected $listeners = [
-        'refreshCountdown' => '$refresh',
-    ];
-
     public function mount()
     {
         $this->refreshData();

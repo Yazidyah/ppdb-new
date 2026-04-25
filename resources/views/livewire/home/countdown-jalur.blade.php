@@ -1,4 +1,4 @@
-<div wire:poll.60s="refreshData">
+<div>
     @if(!$hasOpenJalur)
         <div class="text-center mt-6">
             <h4 class="text-xl font-semibold mb-4">Mohon Maaf, Pendaftaran sudah ditutup</h4>
