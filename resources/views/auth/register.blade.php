@@ -5,7 +5,7 @@
             ->exists();
     @endphp
 
-    {{-- @if($hasAnyOpenJalur) --}}
+    @if($hasAnyOpenJalur)
         @if (session('status') === 'verification-required')
             <div class="mb-4 text-sm text-gray-600">
                 {{ __('Silakan verifikasi email Anda sebelum melanjutkan.') }}
@@ -61,7 +61,7 @@
                 </x-primary-button>
             </div>
         </form>
-    {{-- @else
+    @else
         <div class="text-center mt-6">
             <p class="text-xl text-red-600 font-bold">
                 {{ __('Registrasi telah ditutup. Silahkan lakukan login untuk mengakses pendaftaran.') }}
@@ -70,6 +70,6 @@
                 class="mt-6 inline-block w-full px-6 py-3 bg-tertiary text-white text-center font-bold rounded-lg shadow-md hover:bg-primary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 transition">
                 {{ __('Login') }}
             </a>
-        </div> --}}
-    {{-- @endif --}}
+        </div>
+    @endif
 </x-guest-layout>
