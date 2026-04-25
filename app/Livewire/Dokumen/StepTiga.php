@@ -21,7 +21,14 @@ class StepTiga extends Component
         $this->tab = request()->query('t', 1);
         $this->user = Auth::user();
         $calonSiswa = CalonSiswa::where('id_user', $this->user->id)->first();
-        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $calonSiswa->id_calon_siswa)->first();
+        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $calonSiswa->id_calon_siswa)
+            ->where('is_active', true)
+            ->latest('id_registrasi')
+            ->first();
+
+        if (!$dataRegistrasi) {
+            return redirect()->to('/siswa/daftar-step-satu?t=1');
+        }
 
         if ($dataRegistrasi->status == 0) {
             return redirect()->to('/siswa/daftar-step-satu?t=1');

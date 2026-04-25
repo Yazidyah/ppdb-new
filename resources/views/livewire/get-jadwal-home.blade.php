@@ -81,30 +81,26 @@
                                 <li>Jalur Prestasi (Akademik dan Non Akademik)</li>
                                 </ul>
                         </span></h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">04 - 07 Mei 2026</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran online melalui
-                        website <span class="hover:underline"><a href="#">ppdb.man1kotabogor.id</a></span></h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">01 - 06 Mei 2026</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran online melalui website <span class="hover:underline"><a href="https://www.man1kotabogor.id">www.man1kotabogor.id</a></span></h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">2</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Verifikasi, Validasi berkas
-                        dan Pencetakan Kartu Ujian</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">08 Mei 2026</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Verifikasi dan Validasi
-                        dilakukan secara Tatap muka sesuai Jadwal</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Verifikasi, Validasi berkas dan Pencetakan Kartu Ujian</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">07 Mei 2026</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Verifikasi dan Validasi dilakukan secara Tatap muka sesuai Jadwal</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">3</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes Baca Quran dan
-                        Wawancara</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">11 - 12 Mei 2026</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes Kemampuan Prestasi(Jalur Prestasi)</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">08 Mei 2026</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes dilakukan secara Tatap
                         muka sesuai Jadwal di Kartu Peserta</h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">4</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes Kemampuan Prestasi (Jalur Prestasi)</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">13 Mei 2026</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes Baca Quran dan Wawancara</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">11 - 12 Mei 2026</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Tes dilakukan secara Tatap
                         muka sesuai Jadwal di Kartu Peserta</h1>
                 </div>
@@ -117,7 +113,7 @@
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">6</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Daftar Ulang</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">19 - 20 Mei 2026</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">20 - 21 Mei 2026</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Daftar Ulang dilakukan
                         secara Tatap muka dengan membawa Berkas-berkas</h1>
                 </div>
@@ -137,9 +133,9 @@
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center  bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">1</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran</h1>
-                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">04 Mei - 04 Juni 2026</h1>
+                    <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base text-center">01 Mei - 04 Juni 2026</h1>
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base ">Pendaftaran online melalui
-                        website <span class="hover:underline"><a href="#">ppdb.man1kotabogor.id</a></span></h1>
+                        website <span class="hover:underline"><a href="https://www.man1kotabogor.id">www.man1kotabogor.id</a></span></h1>
                 </div>
                 <div class=" w-full  grid grid-cols-4 py-3 px-1 grid-flow-col gap-2 items-center bg-dasar">
                     <h1 class=" text-tertiary text-xs md:text-md lg:text-lg px-1 font-base mt-2 text-center">2</h1>
@@ -179,5 +175,17 @@
                 </div>
             </div>
         </div>
+        <div class="mx-auto container  border-tertiary border-4 p-6 text-tertiary w-1/2 rounded-xl mb-4">
+        <h1 class="text-xl text-center font-bold mb-2">Catatan Penting Pemberkasan</h1>
+        <ol class="list-decimal items-center ml-8">
+            <li class="text-wrap">Foto Terbaru 3x4 Berwarna Background Merah (Jpeg/Max 200Kb)</li>
+            <li class="text-wrap">Scan Akta Kelahiran (PDF/Max 200Kb)</li>
+            <li class="text-wrap">Scan Kartu Keluarga (PDF/Max 200Kb)</li>
+            <li class="text-wrap">Scan Sertifikat Akreditasi Sekolah Asal (PDF/Max 200Kb)</li>
+            <li class="text-wrap">Scan Rapor semester 1 - 5 dari aslinya (PDF/Max 3Mb)</li>
+            <li class="text-wrap">Screenshot NISN dari Website <span class="hover:underline"><a href="https://nisn.data.kemdikbud.go.id" target="_blank">https://nisn.data.kemdikbud.go.id</a></span> (PDF/Max 200Kb)</li>
+            <li class="text-wrap">Untuk Dokumen Pendukung lainnya berupa (PDF/Max 200Kb)</li>
+        </ol>
+    </div>
     </section>
 </div>

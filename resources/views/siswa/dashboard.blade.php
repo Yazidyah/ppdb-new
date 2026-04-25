@@ -100,18 +100,18 @@
     </section>
 
     <!-- Contoh link pendaftaran -->
-    @if ($status < 3)
+    @if ($status < 3 || (in_array($status, [4, 6]) && (($calonSiswa->dataRegistrasi->id_jalur ?? null) != 1)))
         <section>
             <div class="container flex justify-center my-4 mx-auto gap-2">
                 <div
                     class="w-3/4 md:w-1/2 flex justify-center items-center flex-col p-6 bg-white border-4 border-tertiary rounded-lg shadow-sm">
                     <h5 class=" text-2xl font-bold tracking-tight text-tertiary">PENDAFTARAN</h5>
                     <p class="mb-4 font-normal text-tertiary text-center">
-                        {{ $status != 0 ? 'LANJUTKAN PENDAFTARAN' : 'KLIK TOMBOL DI BAWAH INI UNTUK MENDAFTAR' }}
+                        {{ (in_array($status, [4, 6]) && (($calonSiswa->dataRegistrasi->id_jalur ?? null) != 1)) ? 'KAMU BISA MENDAFTAR ULANG DENGAN MEMILIH JALUR BARU' : ($status != 0 ? 'LANJUTKAN PENDAFTARAN' : 'KLIK TOMBOL DI BAWAH INI UNTUK MENDAFTAR') }}
                     </p>
                     <a href="{{ route('siswa.daftar-step-satu', ['t' => 1]) }}"
                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-tertiary rounded-lg hover:bg-secondary focus:ring-2 focus:outline-none focus:ring-tertiary hover:text-tertiary border border-transparent tracking-widest  focus:bg-tertiary active:text-white focus:text-white active:bg-tertiary active:border active:border-tertiary  focus:ring-offset-2  transition ease-in-out duration-150">
-                        PENDAFTARAN
+                        {{ (in_array($status, [4, 6]) && (($calonSiswa->dataRegistrasi->id_jalur ?? null) != 1)) ? 'DAFTAR ULANG' : 'PENDAFTARAN' }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

@@ -44,12 +44,38 @@ class StepSatu extends Component
             $this->user->save();
         }
 
-        if ($this->user->siswa && $this->user->siswa->dataRegistrasi == null) {
-            $this->regis = DataRegistrasi::firstOrCreate(
-                ['id_calon_siswa' => $this->user->siswa->id_calon_siswa],
-                ['status' => '0']
-            );
+        if ($this->user->siswa) {
+            $this->regis = $this->ensureActiveRegistration($this->user->siswa->id_calon_siswa);
         }
+    }
+
+    private function ensureActiveRegistration(int $idCalonSiswa): DataRegistrasi
+    {
+        $active = DataRegistrasi::where('id_calon_siswa', $idCalonSiswa)
+            ->where('is_active', true)
+            ->latest('id_registrasi')
+            ->first();
+
+        if (!$active) {
+            return DataRegistrasi::create([
+                'id_calon_siswa' => $idCalonSiswa,
+                'status' => '0',
+                'is_active' => true,
+            ]);
+        }
+
+        // Siswa non-reguler yang gagal verifikasi/tidak diterima bisa daftar lagi dengan record aktif baru.
+        if (in_array((int) $active->status, [4, 6], true) && (int) $active->id_jalur !== 1) {
+            $active->update(['is_active' => false]);
+
+            return DataRegistrasi::create([
+                'id_calon_siswa' => $idCalonSiswa,
+                'status' => '1',
+                'is_active' => true,
+            ]);
+        }
+
+        return $active;
     }
 
 
@@ -65,11 +91,16 @@ class StepSatu extends Component
 
     public function checkRegistrationStatus()
     {
-        if (!$this->siswa || !$this->siswa->dataRegistrasi) {
+        $registrasiAktif = DataRegistrasi::where('id_calon_siswa', $this->siswa?->id_calon_siswa)
+            ->where('is_active', true)
+            ->latest('id_registrasi')
+            ->first();
+
+        if (!$this->siswa || !$registrasiAktif) {
             return;
         }
 
-        $status = $this->siswa->dataRegistrasi->status;
+        $status = $registrasiAktif->status;
 
         if ($status == 1) {
             return redirect()->to('/siswa/daftar-step-dua?t=1');

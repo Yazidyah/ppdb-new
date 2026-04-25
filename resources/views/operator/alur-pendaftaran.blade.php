@@ -21,7 +21,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">04 Mei - 04 Juni 2026</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">01 Mei - 06 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 "><span><a href="ppdb.man1kotabogor.id">Klik ppdb.man1kotabogor.id</a></span> dan Pilih Menu PPDB</h3>
                 </div>
             </li>
@@ -34,7 +34,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">04 Mei - 04 Juni 2026</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">01 Mei - 06 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Membuat Akun PPDB dan masuk dengan akun yang sudah Dibuat</h3>
                     </div>
             </li>
@@ -47,7 +47,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">04 Mei - 04 Juni 2026</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">01 Mei - 06 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Mengisi Formulir dan Melengkapi Berkas</h3>
                 </div>
             </li>
@@ -60,7 +60,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">08 Mei & 05, 08 - 09 Juni 2026</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">07 Mei & 05, 08 - 09 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Verifikasi Data dan Berkas</h3>
                 </div>
             </li>
@@ -73,7 +73,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">08 Mei & 13 Juni 2026</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">07 Mei & 13 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Cetak Kartu Pendaftaran</h3>
                 </div>
             </li>
@@ -86,7 +86,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">11 - 13 Mei & 10,12 dan <span><br></span> 15 Juni 2026</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">08 Mei & 10,12 dan <span><br></span> 15 Juni 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Tes Kemampuan Prestasi/Akademik dan Tes Baca Al Quran</h3>
                 </div>
             </li>
@@ -112,7 +112,7 @@
                     <div class="hidden sm:flex w-full bg-gray-200 h-0.5 "></div>
                 </div>
                 <div class="ml-6 mt-3 sm:pe-8">
-                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">19-20 Mei & <span><br></span>29, 30 Juni - 01 Juli 2026</time>
+                    <time class="block mb-2 text-xs font-normal leading-none text-gray-400 ">20-21 Mei & <span><br></span>29, 30 Juni - 01 Juli 2026</time>
                     <h3 class="text-lg font-semibold text-gray-900 ">Daftar Ulang</h3>
                 </div>
             </li>

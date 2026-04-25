@@ -79,6 +79,7 @@ class VerifikasiData extends Component
     {
         $updated = DB::table('data_registrasi')
             ->where('id_calon_siswa', $this->calonSiswa->id_calon_siswa)
+            ->where('is_active', true)
             ->update(['status' => 1]);
 
         if ($updated) {
