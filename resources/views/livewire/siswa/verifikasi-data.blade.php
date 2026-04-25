@@ -86,7 +86,7 @@
                 <label for="nilai_akreditasi_sekolah" class="block text-sm font-medium text-gray-700">Nilai Akreditasi
                     Sekolah</label>
                 <input type="text" id="nilai_akreditasi_sekolah"
-                    value="{{ in_array($calonSiswa->nilai_akreditasi_sekolah, [0, '0'], true) ? 'Belum Terakreditasi' : ($calonSiswa->nilai_akreditasi_sekolah ?? 'DATA INI KOSONG') }}"
+                    value="{{ in_array($calonSiswa->nilai_akreditasi_sekolah, [0, '0'], true) ? 'Tidak Terakreditasi' : ($calonSiswa->nilai_akreditasi_sekolah ?? 'DATA INI KOSONG') }}"
                     disabled
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm {{ is_null($calonSiswa->nilai_akreditasi_sekolah) || $calonSiswa->nilai_akreditasi_sekolah === '' ? 'text-red-500' : '' }}">
             </div>

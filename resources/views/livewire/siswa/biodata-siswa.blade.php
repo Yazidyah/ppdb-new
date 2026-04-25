@@ -83,15 +83,22 @@
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
                                     type="text" name="NPSN" required autofocus autocomplete="NPSN"
                                     placeholder="NPSN" wire:model="NPSN" maxlength="8" />
-                                <button wire:click="searchByNpsn" wire:loading.attr="disabled"
-                                    wire:target="searchByNpsn"
-                                    class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md flex items-center">
-                                    <span wire:loading.remove wire:target="searchByNpsn">Cek Sekolah</span>
-                                    <span wire:loading wire:target="searchByNpsn" class="flex items-center">
-                                        Memproses...
-                                    </span>
-                                </button>
+                                @if (!$manualSekolahMode)
+                                    <button wire:click="searchByNpsn" wire:loading.attr="disabled"
+                                        wire:target="searchByNpsn"
+                                        class="ml-2 px-4 py-2 bg-green-500 text-white rounded-md flex items-center">
+                                        <span wire:loading.remove wire:target="searchByNpsn">Cek Sekolah</span>
+                                        <span wire:loading wire:target="searchByNpsn" class="flex items-center">
+                                            Memproses...
+                                        </span>
+                                    </button>
+                                @endif
                             </div>
+                            @if ($manualSekolahMode)
+                                <span class="text-xs text-amber-600 flex items-center mx-1 mt-1">
+                                    Silakan isi secara manual
+                                </span>
+                            @endif
                             @error('NPSN')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
                             @enderror
@@ -102,11 +109,19 @@
                             <x-reg-input-label>Asal Sekolah</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <x-reg-input-text id="sekolah_asal"
-                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
-                                    disabled="disabled" type="text" name="sekolah_asal" required autofocus
-                                    autocomplete="sekolah_asal" placeholder="Asal Sekolah"
-                                    value="{{ strtoupper($sekolah_asal) }}" />
+                                @if ($manualSekolahMode)
+                                    <x-reg-input-text id="sekolah_asal"
+                                        class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-transparent"
+                                        type="text" name="sekolah_asal" required autofocus
+                                        autocomplete="sekolah_asal" placeholder="Asal Sekolah"
+                                        wire:model.live="sekolah_asal" />
+                                @else
+                                    <x-reg-input-text id="sekolah_asal"
+                                        class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
+                                        disabled="disabled" type="text" name="sekolah_asal" required autofocus
+                                        autocomplete="sekolah_asal" placeholder="Asal Sekolah"
+                                        value="{{ strtoupper($sekolah_asal) }}" />
+                                @endif
                             </div>
                             @error('sekolah_asal')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
@@ -117,22 +132,24 @@
                             <x-reg-input-label>Predikat Akreditasi Sekolah</x-reg-input-label>
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
-                                <select id="predikat_akreditasi_sekolah" name="predikat_akreditasi_sekolah"
-                                    wire:model.live="predikat_akreditasi_sekolah"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
-                                    @php
-                                        $predikatOptions = ['A', 'B', 'C', 'Belum Terakreditasi'];
-                                        $currentPredikat = trim((string) $predikat_akreditasi_sekolah);
-                                    @endphp
-                                    <option value="" disabled="disabled">Pilih Predikat Akreditasi</option>
-                                    @if ($currentPredikat !== '' && !in_array($currentPredikat, $predikatOptions, true))
-                                        <option value="{{ $currentPredikat }}">{{ $currentPredikat }}</option>
-                                    @endif
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="Belum Terakreditasi">Belum Terakreditasi</option>
-                                </select>
+                                @if ($manualSekolahMode)
+                                    <select id="predikat_akreditasi_sekolah" name="predikat_akreditasi_sekolah"
+                                        wire:model.live="predikat_akreditasi_sekolah"
+                                        class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full">
+                                        <option value="" disabled="disabled">Pilih Predikat Akreditasi</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="Tidak Terakreditasi">Tidak Terakreditasi</option>
+                                    </select>
+                                @else
+                                    <x-reg-input-text id="predikat_akreditasi_sekolah"
+                                        class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full bg-gray-300"
+                                        disabled="disabled" type="text" name="predikat_akreditasi_sekolah" required
+                                        autofocus autocomplete="predikat_akreditasi_sekolah"
+                                        placeholder="Predikat Akreditasi Sekolah"
+                                        value="{{ $predikat_akreditasi_sekolah }}" />
+                                @endif
                             </div>
                             @error('predikat_akreditasi_sekolah')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>
@@ -141,15 +158,21 @@
                         <!-- Nilai Akreditasi Sekolah -->
                         <div class="col-span-2 mt-2">
                             <x-reg-input-label>Nilai Akreditasi Sekolah</x-reg-input-label>
+                            @php
+                                $isTidakTerakreditasi = str_contains(strtolower(trim((string) $predikat_akreditasi_sekolah)), 'tidak');
+                            @endphp
                             <div
                                 class="w-full h-full flex rounded-md shadow-sm ring-1 ring-inset ring-tertiary focus-within:ring-2 focus-within:ring-inset focus-within:ring-tertiary">
                                 <x-reg-input-text id="nilai_akreditasi_sekolah"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full"
+                                    wire:key="nilai-akreditasi-{{ $isTidakTerakreditasi ? 'tidak' : 'normal' }}"
+                                    class="block flex-1 border-0 py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 w-full {{ $isTidakTerakreditasi ? 'bg-gray-300' : 'bg-transparent' }}"
                                     type="text" name="nilai_akreditasi_sekolah" required autofocus
                                     autocomplete="nilai_akreditasi_sekolah"
-                                    placeholder="Isi '0' jika belum terakreditasi"
+                                    placeholder="Isi '0' jika tidak terakreditasi"
                                     wire:model.live="nilai_akreditasi_sekolah" inputmode="decimal"
-                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '');" />
+                                    oninput="this.value = this.value.replace(/[^0-9.]/g, '');"
+                                    value="{{ $isTidakTerakreditasi ? '0' : $nilai_akreditasi_sekolah }}"
+                                    :disabled="$isTidakTerakreditasi" />
                             </div>
                             @error('nilai_akreditasi_sekolah')
                                 <span class="text-xs text-red-500 flex items-center mx-1">{{ $message }}</span>

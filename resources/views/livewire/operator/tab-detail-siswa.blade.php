@@ -188,7 +188,7 @@
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="C">C</option>
-                            <option value="Belum Terakreditasi">Belum Terakreditasi</option>
+                            <option value="Tidak Terakreditasi">Tidak Terakreditasi</option>
                         </select>
                     </div>
                 </div>

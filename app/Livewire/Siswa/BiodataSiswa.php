@@ -25,6 +25,7 @@ class BiodataSiswa extends Component
     public $searchNpsn;
     public $sekolahs = [];
     public $alamat_domisili_disabled = false;
+    public $manualSekolahMode = false;
     public $minTanggalLahir;
     public $maxTanggalLahir;
 
@@ -94,6 +95,9 @@ class BiodataSiswa extends Component
         $this->kota = $this->siswa->kota ?? '';
         $this->predikat_akreditasi_sekolah = $this->normalizePredikatAkreditasi($this->siswa->predikat_akreditasi_sekolah ?? '');
         $this->nilai_akreditasi_sekolah = $this->siswa->nilai_akreditasi_sekolah ?? '';
+        if ($this->isTidakTerakreditasi($this->predikat_akreditasi_sekolah)) {
+            $this->nilai_akreditasi_sekolah = 0;
+        }
         $this->provinces = Province::all()->map(function ($province) {
             return [
                 'id' => (string) $province->id,
@@ -147,7 +151,30 @@ class BiodataSiswa extends Component
         }
 
         if ($propertyName == 'nilai_akreditasi_sekolah') {
+            if ($this->isTidakTerakreditasi($this->predikat_akreditasi_sekolah)) {
+                $this->nilai_akreditasi_sekolah = 0;
+            }
             $this->siswa->$propertyName = $this->$propertyName === '0' ? 0 : ($this->$propertyName ?: null);
+            $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
+            $this->siswa->save();
+            $this->validateOnly($propertyName);
+            return;
+        }
+
+        if ($propertyName == 'predikat_akreditasi_sekolah') {
+            $wasTidakTerakreditasi = $this->isTidakTerakreditasi($this->siswa->predikat_akreditasi_sekolah ?? '');
+            $this->predikat_akreditasi_sekolah = $this->normalizePredikatAkreditasi($this->predikat_akreditasi_sekolah);
+            $this->siswa->predikat_akreditasi_sekolah = $this->predikat_akreditasi_sekolah ?: null;
+
+            if ($this->isTidakTerakreditasi($this->predikat_akreditasi_sekolah)) {
+                $this->nilai_akreditasi_sekolah = 0;
+                $this->siswa->nilai_akreditasi_sekolah = 0;
+            } elseif ($wasTidakTerakreditasi) {
+                // Force re-entry when changing from "Tidak Terakreditasi" to accredited options.
+                $this->nilai_akreditasi_sekolah = '';
+                $this->siswa->nilai_akreditasi_sekolah = null;
+            }
+
             $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
             $this->siswa->save();
             $this->validateOnly($propertyName);
@@ -220,13 +247,26 @@ class BiodataSiswa extends Component
 
         /** @var DataSekolahService $service */
         $service = app(DataSekolahService::class);
-        $dataSekolah = $service->getOrFetchByNpsn($this->NPSN);
+        $result = $service->getOrFetchByNpsnResult($this->NPSN);
 
-        if (!$dataSekolah) {
-            $this->resetErrorBag(['sekolah_asal']);
-            $this->addError('NPSN', 'Referensi sekolah tidak tersedia saat ini dan belum ada di database lokal.');
+        if (($result['status'] ?? null) === 'service_down') {
+            $this->manualSekolahMode = true;
+            // Reset manual fields so user can input fresh values without stale locked state.
+            $this->predikat_akreditasi_sekolah = '';
+            $this->nilai_akreditasi_sekolah = '';
             return;
         }
+
+        $dataSekolah = $result['data'] ?? null;
+
+        if (!$dataSekolah) {
+            $this->manualSekolahMode = false;
+            $this->resetErrorBag(['sekolah_asal']);
+            $this->addError('NPSN', 'Data sekolah untuk NPSN ini tidak ditemukan.');
+            return;
+        }
+
+        $this->manualSekolahMode = false;
 
         $bentuk = strtoupper(trim((string) ($dataSekolah->bentuk_sekolah ?? '')));
         $allowed = in_array($bentuk, ['SMP', 'MTS'], true);
@@ -247,18 +287,26 @@ class BiodataSiswa extends Component
             $predikatAkreditasi = $this->normalizePredikatAkreditasi($dataSekolah->predikat_akreditasi_sekolah ?? '');
 
             DB::transaction(function () use ($dataSekolah) {
+                $predikat = $this->normalizePredikatAkreditasi($dataSekolah->predikat_akreditasi_sekolah ?? '');
+                $nilaiAkreditasi = $dataSekolah->nilai_akreditasi_sekolah;
+                if ($this->isTidakTerakreditasi($predikat)) {
+                    $nilaiAkreditasi = 0;
+                }
+
                 $this->siswa->NPSN = $dataSekolah->npsn;
                 $this->siswa->status_sekolah = strtolower($dataSekolah->status_sekolah ?? '');  
                 $this->siswa->sekolah_asal = strtolower($dataSekolah->sekolah_asal ?? '');
-                $this->siswa->predikat_akreditasi_sekolah = $this->normalizePredikatAkreditasi($dataSekolah->predikat_akreditasi_sekolah ?? '');
-                $this->siswa->nilai_akreditasi_sekolah = $dataSekolah->nilai_akreditasi_sekolah;
+                $this->siswa->predikat_akreditasi_sekolah = $predikat;
+                $this->siswa->nilai_akreditasi_sekolah = $nilaiAkreditasi;
                 $this->siswa->save();
             });
 
             $this->sekolah_asal = strtoupper($dataSekolah->sekolah_asal ?? '');
             $this->status_sekolah = strtoupper($dataSekolah->status_sekolah ?? '');
             $this->predikat_akreditasi_sekolah = $predikatAkreditasi;
-            $this->nilai_akreditasi_sekolah = $dataSekolah->nilai_akreditasi_sekolah ?? '';
+            $this->nilai_akreditasi_sekolah = $this->isTidakTerakreditasi($predikatAkreditasi)
+                ? 0
+                : ($dataSekolah->nilai_akreditasi_sekolah ?? '');
             $this->dispatch('biodata-updated', ['complete' => $this->isBiodataComplete()]);
         } catch (\Throwable $e) {
             $this->addError('NPSN', 'Data sekolah ditemukan namun penyimpanan biodata gagal.');
@@ -273,7 +321,11 @@ class BiodataSiswa extends Component
         }
 
         if (str_contains($value, 'BELUM')) {
-            return 'Belum Terakreditasi';
+            return 'Tidak Terakreditasi';
+        }
+
+        if (str_contains($value, 'TIDAK')) {
+            return 'Tidak Terakreditasi';
         }
 
         if (preg_match('/\bA\b/', $value)) {
@@ -288,6 +340,11 @@ class BiodataSiswa extends Component
 
         // Keep original-ish value so UI can still force-select dynamic option.
         return trim((string) $predikat);
+    }
+
+    private function isTidakTerakreditasi(?string $predikat): bool
+    {
+        return str_contains(strtoupper(trim((string) $predikat)), 'TIDAK');
     }
 
     public function copyAlamatKk()

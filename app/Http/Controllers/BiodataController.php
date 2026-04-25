@@ -101,12 +101,20 @@ class BiodataController extends Controller
         $npsn = trim($request->query('npsn'));
 
         $service = app(DataSekolahService::class);
-        $dataSekolah = $service->getOrFetchByNpsn($npsn);
+        $result = $service->getOrFetchByNpsnResult($npsn);
+
+        if (($result['status'] ?? null) === 'service_down') {
+            return response()->json([
+                'error' => 'Layanan referensi sekolah sedang tidak dapat diakses.'
+            ], 503);
+        }
+
+        $dataSekolah = $result['data'] ?? null;
 
         if (!$dataSekolah) {
             return response()->json([
-                'error' => 'Referensi sekolah tidak tersedia saat ini dan belum ada di database lokal.'
-            ], 503);
+                'error' => 'Referensi sekolah tidak ditemukan.'
+            ], 404);
         }
 
         $bentuk = strtoupper(trim((string) $dataSekolah->bentuk_sekolah));

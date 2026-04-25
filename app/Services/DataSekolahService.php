@@ -11,14 +11,23 @@ class DataSekolahService
 {
     public function getOrFetchByNpsn(string $npsn): ?DataSekolah
     {
+        $result = $this->getOrFetchByNpsnResult($npsn);
+        return $result['data'];
+    }
+
+    public function getOrFetchByNpsnResult(string $npsn): array
+    {
         $npsn = trim($npsn);
         if ($npsn === '' || !preg_match('/^[A-Za-z0-9]{1,10}$/', $npsn)) {
             throw new \InvalidArgumentException('NPSN harus berupa huruf/angka dengan maksimal 10 karakter.');
         }
+
         $existing = DataSekolah::where('npsn', $npsn)->first();
         if ($existing) {
             if (empty($existing->bentuk_sekolah) || in_array(strtoupper(trim((string) $existing->bentuk_sekolah)), ['SKB', 'PKBM'], true)) {
-                if ($scraped = $this->fetchNpsnFromHtml($npsn)) {
+                $fetchResult = $this->fetchNpsnFromHtmlDetailed($npsn);
+                if ($fetchResult['status'] === 'ok' && $fetchResult['data']) {
+                    $scraped = $fetchResult['data'];
                     $bentuk = strtoupper(trim((string)($scraped['bentukPendidikan'] ?? '')));
                     $programLayanan = $scraped['programLayanan'] ?? null;
                     $bentukForStorage = $this->normalizeBentukForStorage($bentuk, $programLayanan);
@@ -43,12 +52,26 @@ class DataSekolahService
                     }
                 }
             }
-            return $existing;
+            return [
+                'status' => 'ok',
+                'data' => $existing,
+            ];
         }
 
-        $scraped = $this->fetchNpsnFromHtml($npsn);
+        $fetchResult = $this->fetchNpsnFromHtmlDetailed($npsn);
+        if ($fetchResult['status'] !== 'ok') {
+            return [
+                'status' => $fetchResult['status'],
+                'data' => null,
+            ];
+        }
+
+        $scraped = $fetchResult['data'];
         if (!$scraped || empty($scraped['npsn'])) {
-            return null;
+            return [
+                'status' => 'not_found',
+                'data' => null,
+            ];
         }
 
         $bentuk = strtoupper(trim((string)($scraped['bentukPendidikan'] ?? '')));
@@ -65,66 +88,104 @@ class DataSekolahService
 
         if (!$this->isAllowedBentuk($bentuk, $programLayanan)) {
             Log::info('NPSN bentuk tidak diizinkan; tidak dipersist ke data_sekolah', ['npsn' => $npsn, 'bentuk' => $bentuk, 'program_layanan' => $programLayanan]);
-            return new DataSekolah($payload);
+            return [
+                'status' => 'ok',
+                'data' => new DataSekolah($payload),
+            ];
         }
 
         try {
-            return DB::transaction(function () use ($npsn, $payload) {
+            $stored = DB::transaction(function () use ($npsn, $payload) {
                 DataSekolah::updateOrCreate(['npsn' => $npsn], $payload);
                 return DataSekolah::where('npsn', $npsn)->first();
             });
+
+            return [
+                'status' => 'ok',
+                'data' => $stored,
+            ];
         } catch (\Throwable $e) {
             Log::error('Gagal menyimpan DataSekolah', [
                 'npsn' => $npsn,
                 'error' => $e->getMessage(),
             ]);
-            return DataSekolah::where('npsn', $npsn)->first();
+            return [
+                'status' => 'ok',
+                'data' => DataSekolah::where('npsn', $npsn)->first(),
+            ];
         }
     }
 
     private function fetchNpsnFromHtml(string $npsn): ?array
     {
+        $result = $this->fetchNpsnFromHtmlDetailed($npsn);
+        return $result['status'] === 'ok' ? $result['data'] : null;
+    }
+
+    private function fetchNpsnFromHtmlDetailed(string $npsn): array
+    {
         $baseUrl = env('NPSN_API_BASE_URL');
         if (!$baseUrl) {
             Log::warning('NPSN_API_BASE_URL tidak diset di env.');
-            return null;
+            return [
+                'status' => 'service_down',
+                'data' => null,
+            ];
         }
         $url = rtrim($baseUrl, '/') . '/' . $npsn;
 
+        $response = null;
+        $requestFailed = false;
+
         try {
+            $response = Http::timeout(20)
+                ->accept('text/html,application/xhtml+xml')
+                ->get($url);
+        } catch (\Throwable $e) {
+            Log::warning('NPSN API request failed', ['url' => $url, 'error' => $e->getMessage()]);
             $response = null;
+            $requestFailed = true;
+        }
 
+        if (($response === null || !$response->successful()) && app()->isLocal()) {
+            // Fallback local-dev when host CA bundle is not configured.
             try {
-                $response = Http::timeout(20)
-                    ->accept('text/html,application/xhtml+xml')
-                    ->get($url);
-            } catch (\Throwable $e) {
-                Log::warning('NPSN API request failed', ['url' => $url, 'error' => $e->getMessage()]);
-                $response = null;
-            }
-
-            if (($response === null || !$response->successful()) && app()->isLocal()) {
-                // Fallback local-dev when host CA bundle is not configured.
                 $response = Http::withoutVerifying()
                     ->timeout(20)
                     ->accept('text/html,application/xhtml+xml')
                     ->get($url);
+                $requestFailed = false;
+            } catch (\Throwable $e) {
+                Log::warning('NPSN API request failed without TLS verification', ['url' => $url, 'error' => $e->getMessage()]);
+                $response = null;
+                $requestFailed = true;
             }
+        }
 
-            if ($response === null || !$response->successful()) {
-                Log::warning('Gagal mengambil HTML referensi NPSN', [
-                    'url' => $url,
-                    'status' => $response?->status(),
-                ]);
-                return null;
-            }
+        if ($response === null || !$response->successful()) {
+            $statusCode = $response?->status();
+            Log::warning('Gagal mengambil HTML referensi NPSN', [
+                'url' => $url,
+                'status' => $statusCode,
+            ]);
 
-            $html = $response->body();
-            if ($html === '') {
-                Log::warning('HTML referensi NPSN kosong', ['url' => $url]);
-                return null;
-            }
+            $isServiceDown = $requestFailed || $statusCode === null || $statusCode >= 500;
+            return [
+                'status' => $isServiceDown ? 'service_down' : 'not_found',
+                'data' => null,
+            ];
+        }
 
+        $html = $response->body();
+        if ($html === '') {
+            Log::warning('HTML referensi NPSN kosong', ['url' => $url]);
+            return [
+                'status' => 'not_found',
+                'data' => null,
+            ];
+        }
+
+        try {
             $dom = new \DOMDocument();
             @$dom->loadHTML($html);
             $xpath = new \DOMXPath($dom);
@@ -144,21 +205,34 @@ class DataSekolahService
                 $npsnVal = $this->extractTableValue($xpath, 'NPSN');
             }
 
+            if ($npsnVal === null || !preg_match('/^\d{8}$/', (string) $npsnVal)) {
+                return [
+                    'status' => 'not_found',
+                    'data' => null,
+                ];
+            }
+
             return [
-                'npsn' => $npsnVal,
-                'schoolName' => $schoolName,
-                'statusSekolah' => $statusSekolah,
-                'bentukPendidikan' => $bentukPendidikan,
-                'programLayanan' => $programLayanan,
-                'predikatAkreditasi' => $predikatAkreditasi,
-                'nilaiAkreditasi' => $nilaiAkreditasi,
+                'status' => 'ok',
+                'data' => [
+                    'npsn' => $npsnVal,
+                    'schoolName' => $schoolName,
+                    'statusSekolah' => $statusSekolah,
+                    'bentukPendidikan' => $bentukPendidikan,
+                    'programLayanan' => $programLayanan,
+                    'predikatAkreditasi' => $predikatAkreditasi,
+                    'nilaiAkreditasi' => $nilaiAkreditasi,
+                ],
             ];
         } catch (\Throwable $e) {
             Log::error('Exception saat scraping NPSN', [
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
-            return null;
+            return [
+                'status' => 'not_found',
+                'data' => null,
+            ];
         }
     }
 
