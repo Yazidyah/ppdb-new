@@ -22,7 +22,6 @@ class VerifyEmailController extends Controller
             event(new Verified($request->user()));
         }
 
-        // Redirect to siswa.dashboard after successful verification
-        return redirect()->route('siswa.dashboard')->with('status', 'email-verified');
+        return redirect()->intended(route('siswa.dashboard', absolute: false) . '?verified=1');
     }
 }
