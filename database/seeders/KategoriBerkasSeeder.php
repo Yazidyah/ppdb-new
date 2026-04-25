@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\KategoriBerkas;
 
 class KategoriBerkasSeeder extends Seeder
 {
@@ -71,10 +71,10 @@ class KategoriBerkasSeeder extends Seeder
         ];
 
         foreach ($kategoriBerkas as $item) {
-            DB::table('kategori_berkas')->insert(array_merge($item, [
-                'created_at' => now(),
-                'updated_at' => now()
-            ]));
+            KategoriBerkas::firstOrCreate(
+                ['nama' => $item['nama'], 'key' => $item['key']],
+                $item
+            );
         }
     }
 }

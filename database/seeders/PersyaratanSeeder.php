@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Persyaratan;
 
 class PersyaratanSeeder extends Seeder
 {
@@ -47,10 +47,10 @@ class PersyaratanSeeder extends Seeder
         ];
 
         foreach ($persyaratan as $item) {
-            DB::table('persyaratan')->insert(array_merge($item, [
-                'created_at' => now(),
-                'updated_at' => now()
-            ]));
+            Persyaratan::firstOrCreate(
+                ['id_jalur' => $item['id_jalur'], 'nama_persyaratan' => $item['nama_persyaratan']],
+                $item
+            );
         }
     }
 }

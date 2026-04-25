@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use App\Models\JadwalTes;
 
 class JadwalTesSeeder extends Seeder
 {
@@ -90,11 +89,20 @@ class JadwalTesSeeder extends Seeder
             ],
         ];        
 
-        foreach ($data as &$record) {
-            $record['created_at'] = Carbon::now();
-            $record['updated_at'] = Carbon::now();
+        foreach ($data as $record) {
+            JadwalTes::firstOrCreate(
+                [
+                    'id_jenis_tes' => $record['id_jenis_tes'],
+                    'ruang' => $record['ruang'],
+                    'tanggal' => $record['tanggal'],
+                    'jam_mulai' => $record['jam_mulai'],
+                    'jam_selesai' => $record['jam_selesai'],
+                ],
+                [
+                    'terisi' => $record['terisi'],
+                    'kuota' => $record['kuota'],
+                ]
+            );
         }
-
-        DB::table('jadwal_tes')->insert($data);
     }
 }

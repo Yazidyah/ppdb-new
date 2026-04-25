@@ -4,8 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use App\Models\JenisTes;
 
 class JenisTesSeeder extends Seeder
 {
@@ -33,11 +32,11 @@ class JenisTesSeeder extends Seeder
             ],
         ];
 
-        foreach ($data as &$item) {
-            $item['created_at'] = Carbon::now();
-            $item['updated_at'] = Carbon::now();
+        foreach ($data as $item) {
+            JenisTes::firstOrCreate(
+                ['no_jalur' => $item['no_jalur'], 'nama' => $item['nama']],
+                $item
+            );
         }
-
-        DB::table('jenis_tes')->insert($data);
     }
 }

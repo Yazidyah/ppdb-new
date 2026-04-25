@@ -30,17 +30,17 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $hasAnyOpenJalur = JalurRegistrasi::query()
-            ->openForRegistration()
-            ->exists();
+        // $hasAnyOpenJalur = JalurRegistrasi::query()
+        //     ->openForRegistration()
+        //     ->exists();
 
-        if (!$hasAnyOpenJalur) {
-            return back()
-                ->withInput($request->only(['name', 'email']))
-                ->withErrors([
-                    'register' => 'Registrasi telah ditutup. Silahkan lakukan login untuk mengakses pendaftaran.',
-                ]);
-        }
+        // if (!$hasAnyOpenJalur) {
+        //     return back()
+        //         ->withInput($request->only(['name', 'email']))
+        //         ->withErrors([
+        //             'register' => 'Registrasi telah ditutup. Silahkan lakukan login untuk mengakses pendaftaran.',
+        //         ]);
+        // }
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
