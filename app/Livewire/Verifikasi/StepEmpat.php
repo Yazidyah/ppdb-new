@@ -25,7 +25,14 @@ class StepEmpat extends Component
     {
         $this->user = Auth::user();
         $calonSiswa = CalonSiswa::where('id_user', $this->user->id)->first();
-        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $calonSiswa->id_calon_siswa)->first();
+        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $calonSiswa->id_calon_siswa)
+            ->where('is_active', true)
+            ->latest('id_registrasi')
+            ->first();
+
+        if (!$dataRegistrasi) {
+            return redirect('/siswa/daftar-step-satu?t=1');
+        }
 
         if ($dataRegistrasi->status == 3) {
             session()->flash('message', 'Kamu sudah pernah mendaftar');
@@ -42,7 +49,14 @@ class StepEmpat extends Component
     public function updateStatus()
     {
         $calonSiswa = CalonSiswa::where('id_user', $this->user->id)->first();
-        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $calonSiswa->id_calon_siswa)->first();
+        $dataRegistrasi = DataRegistrasi::where('id_calon_siswa', $calonSiswa->id_calon_siswa)
+            ->where('is_active', true)
+            ->latest('id_registrasi')
+            ->first();
+
+        if (!$dataRegistrasi) {
+            return redirect('/siswa/daftar-step-satu?t=1');
+        }
 
         // Update status ke 3
         $dataRegistrasi->status = 3;
