@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 
 class CountdownJalur extends Component
 {
+    private const REGULER_NAME = 'Reguler';
+
     public $hasOpenJalur = false;
 
     // Reguler
@@ -33,64 +35,66 @@ class CountdownJalur extends Component
     public function refreshData()
     {
         try {
-            $jalurRegistrasi = JalurRegistrasi::query()
-                ->where('is_open', true)
-                ->where(function ($query) {
-                    $query->whereNull('tanggal_tutup')
-                        ->orWhereDate('tanggal_tutup', '>=', Carbon::today());
-                })
-                ->get();
+            $jalurRegistrasi = $this->getActiveJalurRegistrasi();
 
             $this->hasOpenJalur = $jalurRegistrasi->isNotEmpty();
-
-            // Reguler
-            $reguler = $jalurRegistrasi->firstWhere('nama_jalur', 'Reguler');
-            if ($reguler) {
-                $this->regulerOpen = true;
-                $this->regulerStartAt = $reguler->tanggal_buka ? Carbon::parse($reguler->tanggal_buka) : null;
-                $this->regulerEndAt = $reguler->tanggal_tutup ? Carbon::parse($reguler->tanggal_tutup) : null;
-            } else {
-                $this->regulerOpen = false;
-                $this->regulerStartAt = null;
-                $this->regulerEndAt = null;
-            }
-
-            // Non-Reguler
-            $nonReguler = $jalurRegistrasi->filter(function ($item) {
-                return $item->nama_jalur !== 'Reguler';
-            });
-
-            if ($nonReguler->isNotEmpty()) {
-                $this->nonRegulerOpen = true;
-                // nearest opening date among non-reguler
-                $nearest = $nonReguler
-                    ->filter(fn($j) => !empty($j->tanggal_buka))
-                    ->map(fn($j) => Carbon::parse($j->tanggal_buka))
-                    ->sort()
-                    ->first();
-
-                // latest closing date among ALL open jalur
-                $latestClose = $jalurRegistrasi
-                    ->filter(fn($j) => !empty($j->tanggal_tutup))
-                    ->map(fn($j) => Carbon::parse($j->tanggal_tutup))
-                    ->sortDesc()
-                    ->first();
-
-                $this->nonRegulerNearestOpen = $nearest ?: null;
-                $this->nonRegulerLatestClose = $latestClose ?: null;
-            } else {
-                $this->nonRegulerOpen = false;
-                $this->nonRegulerNearestOpen = null;
-                $this->nonRegulerLatestClose = null;
-            }
+            $this->syncRegulerCountdown($jalurRegistrasi);
+            $this->syncNonRegulerCountdown($jalurRegistrasi);
         } catch (\Throwable $e) {
             Log::error('CountdownJalur refreshData failed', [
                 'message' => $e->getMessage(),
             ]);
-            $this->hasOpenJalur = false;
-            $this->regulerOpen = false;
-            $this->nonRegulerOpen = false;
+            $this->resetCountdownState();
         }
+    }
+
+    private function getActiveJalurRegistrasi()
+    {
+        return JalurRegistrasi::query()
+            ->where('is_open', true)
+            ->where(function ($query) {
+                $query->whereNull('tanggal_tutup')
+                    ->orWhereDate('tanggal_tutup', '>=', Carbon::today());
+            })
+            ->get();
+    }
+
+    private function syncRegulerCountdown($jalurRegistrasi): void
+    {
+        $reguler = $jalurRegistrasi->firstWhere('nama_jalur', self::REGULER_NAME);
+
+        $this->regulerOpen = (bool) $reguler;
+        $this->regulerStartAt = $reguler?->tanggal_buka ? Carbon::parse($reguler->tanggal_buka) : null;
+        $this->regulerEndAt = $reguler?->tanggal_tutup ? Carbon::parse($reguler->tanggal_tutup) : null;
+    }
+
+    private function syncNonRegulerCountdown($jalurRegistrasi): void
+    {
+        $nonReguler = $jalurRegistrasi->reject(fn ($item) => $item->nama_jalur === self::REGULER_NAME);
+
+        $this->nonRegulerOpen = $nonReguler->isNotEmpty();
+        $this->nonRegulerNearestOpen = $nonReguler
+            ->filter(fn ($jalur) => !empty($jalur->tanggal_buka))
+            ->map(fn ($jalur) => Carbon::parse($jalur->tanggal_buka))
+            ->sort()
+            ->first() ?: null;
+
+        $this->nonRegulerLatestClose = $jalurRegistrasi
+            ->filter(fn ($jalur) => !empty($jalur->tanggal_tutup))
+            ->map(fn ($jalur) => Carbon::parse($jalur->tanggal_tutup))
+            ->sortDesc()
+            ->first() ?: null;
+    }
+
+    private function resetCountdownState(): void
+    {
+        $this->hasOpenJalur = false;
+        $this->regulerOpen = false;
+        $this->regulerStartAt = null;
+        $this->regulerEndAt = null;
+        $this->nonRegulerOpen = false;
+        $this->nonRegulerNearestOpen = null;
+        $this->nonRegulerLatestClose = null;
     }
 
     public function render()

@@ -12,7 +12,6 @@
         remainingTime: 0,
         countdownMessage: '',
         phase: 'idle', // 'start' | 'end' | 'closed'
-        displayMode: 'minutes',
         formatTime(time) {
             const days = Math.floor(time / (1000 * 60 * 60 * 24));
             const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -24,7 +23,6 @@
             const parts = this.formatTime(time);
 
             if (parts.days > 0) {
-                this.displayMode = 'days';
                 return [
                     { label: 'Hari', value: parts.days },
                     { label: 'Jam', value: parts.hours },
@@ -32,14 +30,12 @@
             }
 
             if (parts.hours > 0) {
-                this.displayMode = 'hours';
                 return [
                     { label: 'Jam', value: parts.hours },
                     { label: 'Menit', value: parts.minutes },
                 ];
             }
 
-            this.displayMode = 'minutes';
             return [
                 { label: 'Menit', value: parts.minutes },
                 { label: 'Detik', value: parts.seconds },
@@ -70,14 +66,14 @@
         <template x-if="remainingTime > 0">
             <div>
                 <div class="flex justify-center mb-3">
-                                        <span x-text="countdownMessage"
-                                                    :class="{
-                                                        // Dimulai Dalam = Biru Laut
-                                                        'text-blue-800 bg-blue-100 border border-blue-300': phase === 'start',
-                                                        // Ditutup Dalam = Oranye Terang
-                                                        'text-orange-800 bg-orange-100 border border-orange-300': phase === 'end'
-                                                    }"
-                          class="text-sm font-semibold px-3 py-1 rounded-md"></span>
+                    <span
+                        x-text="countdownMessage"
+                        :class="{
+                            'text-blue-800 bg-blue-100 border border-blue-300': phase === 'start',
+                            'text-orange-800 bg-orange-100 border border-orange-300': phase === 'end'
+                        }"
+                        class="text-sm font-semibold px-3 py-1 rounded-md"
+                    ></span>
                 </div>
                 <div class="grid grid-cols-2 gap-4 text-center">
                     <template x-for="unit in visibleUnits(remainingTime)" :key="unit.label">
