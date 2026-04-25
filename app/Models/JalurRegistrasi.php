@@ -36,6 +36,10 @@ class JalurRegistrasi extends Model
 
         return $query->where('is_open', true)
             ->where(function ($builder) use ($today) {
+                $builder->whereNull('tanggal_buka')
+                    ->orWhereDate('tanggal_buka', '<=', $today);
+            })
+            ->where(function ($builder) use ($today) {
                 $builder->whereNull('tanggal_tutup')
                     ->orWhereDate('tanggal_tutup', '>=', $today);
             });
@@ -44,6 +48,10 @@ class JalurRegistrasi extends Model
     public function isCurrentlyOpen(): bool
     {
         if (!$this->is_open) {
+            return false;
+        }
+
+        if ($this->tanggal_buka && Carbon::today()->lt(Carbon::parse($this->tanggal_buka))) {
             return false;
         }
 

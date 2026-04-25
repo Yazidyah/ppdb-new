@@ -12,12 +12,38 @@
         remainingTime: 0,
         countdownMessage: '',
         phase: 'idle', // 'start' | 'end' | 'closed'
+        displayMode: 'minutes',
         formatTime(time) {
             const days = Math.floor(time / (1000 * 60 * 60 * 24));
             const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((time % (1000 * 60)) / 1000);
             return { days, hours, minutes, seconds };
+        },
+        visibleUnits(time) {
+            const parts = this.formatTime(time);
+
+            if (parts.days > 0) {
+                this.displayMode = 'days';
+                return [
+                    { label: 'Hari', value: parts.days },
+                    { label: 'Jam', value: parts.hours },
+                ];
+            }
+
+            if (parts.hours > 0) {
+                this.displayMode = 'hours';
+                return [
+                    { label: 'Jam', value: parts.hours },
+                    { label: 'Menit', value: parts.minutes },
+                ];
+            }
+
+            this.displayMode = 'minutes';
+            return [
+                { label: 'Menit', value: parts.minutes },
+                { label: 'Detik', value: parts.seconds },
+            ];
         }
     }" x-init="() => {
         const updateCountdown = () => {
@@ -53,23 +79,13 @@
                                                     }"
                           class="text-sm font-semibold px-3 py-1 rounded-md"></span>
                 </div>
-                <div class="flex justify-between text-center gap-4">
-                    <div class="flex flex-col items-center w-16">
-                        <div class="text-2xl font-medium text-gray-600" x-text="formatTime(remainingTime).days"></div>
-                        <div class="text-xs text-gray-500">Hari</div>
-                    </div>
-                    <div class="flex flex-col items-center w-16">
-                        <div class="text-2xl font-medium text-gray-600" x-text="formatTime(remainingTime).hours"></div>
-                        <div class="text-xs text-gray-500">Jam</div>
-                    </div>
-                    <div class="flex flex-col items-center w-16">
-                        <div class="text-2xl font-medium text-gray-600" x-text="formatTime(remainingTime).minutes"></div>
-                        <div class="text-xs text-gray-500">Menit</div>
-                    </div>
-                    <div class="flex flex-col items-center w-16">
-                        <div class="text-2xl font-medium text-gray-600" x-text="formatTime(remainingTime).seconds"></div>
-                        <div class="text-xs text-gray-500">Detik</div>
-                    </div>
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <template x-for="unit in visibleUnits(remainingTime)" :key="unit.label">
+                        <div class="flex flex-col items-center w-16 mx-auto">
+                            <div class="text-2xl font-medium text-gray-600" x-text="unit.value"></div>
+                            <div class="text-xs text-gray-500" x-text="unit.label"></div>
+                        </div>
+                    </template>
                 </div>
             </div>
         </template>

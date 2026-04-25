@@ -33,14 +33,18 @@ class CountdownJalur extends Component
     public function refreshData()
     {
         try {
-            $openJalur = JalurRegistrasi::query()
-                ->openForRegistration()
+            $jalurRegistrasi = JalurRegistrasi::query()
+                ->where('is_open', true)
+                ->where(function ($query) {
+                    $query->whereNull('tanggal_tutup')
+                        ->orWhereDate('tanggal_tutup', '>=', Carbon::today());
+                })
                 ->get();
 
-            $this->hasOpenJalur = $openJalur->isNotEmpty();
+            $this->hasOpenJalur = $jalurRegistrasi->isNotEmpty();
 
             // Reguler
-            $reguler = $openJalur->firstWhere('nama_jalur', 'Reguler');
+            $reguler = $jalurRegistrasi->firstWhere('nama_jalur', 'Reguler');
             if ($reguler) {
                 $this->regulerOpen = true;
                 $this->regulerStartAt = $reguler->tanggal_buka ? Carbon::parse($reguler->tanggal_buka) : null;
@@ -52,7 +56,7 @@ class CountdownJalur extends Component
             }
 
             // Non-Reguler
-            $nonReguler = $openJalur->filter(function ($item) {
+            $nonReguler = $jalurRegistrasi->filter(function ($item) {
                 return $item->nama_jalur !== 'Reguler';
             });
 
@@ -66,7 +70,7 @@ class CountdownJalur extends Component
                     ->first();
 
                 // latest closing date among ALL open jalur
-                $latestClose = $openJalur
+                $latestClose = $jalurRegistrasi
                     ->filter(fn($j) => !empty($j->tanggal_tutup))
                     ->map(fn($j) => Carbon::parse($j->tanggal_tutup))
                     ->sortDesc()

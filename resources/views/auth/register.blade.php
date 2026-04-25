@@ -1,7 +1,7 @@
 <x-guest-layout>
     @php
         $hasAnyOpenJalur = \App\Models\JalurRegistrasi::query()
-            ->where('is_open', true)
+            ->openForRegistration()
             ->exists();
     @endphp
 

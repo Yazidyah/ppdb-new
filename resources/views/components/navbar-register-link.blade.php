@@ -2,7 +2,7 @@
     // Show the Register button unless ALL jalur are closed.
     // When there exists any row with is_open = true, show the button.
     $hasAnyOpenJalur = \App\Models\JalurRegistrasi::query()
-        ->where('is_open', true)
+    ->openForRegistration()
         ->exists();
 @endphp
 
