@@ -76,7 +76,7 @@
                     </ol>
                     <h1 class="mt-4">Catatan : Peserta jalur afirmasi dan prestasi yang dinyatakan tidak lulus bisa melanjutkan ke jalur reguler (konfirmasi ke panitia)</h1>
             </li>
-</ul>
+        </ul>
     </div>
     @php
         $alphabet = range('A', 'Z');
