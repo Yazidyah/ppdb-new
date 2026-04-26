@@ -51,7 +51,7 @@
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors">
                                 <td class="px-3 py-3 md:px-6 md:py-4 text-sm md:text-base text-gray-700 font-semibold">3</td>
-                                <td class="px-3 py-3 md:px-6 md:py-4 text-sm md:text-base text-gray-700">Mengikuti seluruh rangkaian prosedur PMB MAN 1 KOTA BOGOR TP. 2026/2027</td>
+                                <td class="px-3 py-3 md:px-6 md:py-4 text-sm md:text-base text-gray-700">Mengikuti seluruh rangkaian prosedur PMBM MAN 1 KOTA BOGOR TP. 2026/2027</td>
                             </tr>
                         </tbody>
                     </table>

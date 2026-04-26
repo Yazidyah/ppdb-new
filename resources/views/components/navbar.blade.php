@@ -2,7 +2,7 @@
     <nav class="flex justify-between items-center container mx-auto">
         <div class=" flex items-center gap-2 md:gap-4 justify-start px-3 py-2 md:py-0 min-w-0">
                 <img class="w-8 md:w-10 flex-shrink-0" src="/logoman.webp" alt="">
-                <h1 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white font-poppins truncate">PMB MAN 1 Kota Bogor</h1>
+                <h1 class="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white font-poppins truncate">PMBM MAN 1 Kota Bogor</h1>
         </div>
         <div class="items-center flex">
             <div class="">

@@ -16,7 +16,7 @@
                 
                 <h1 class="font-bold text-2xl md:text-4xl lg:text-5xl text-white leading-tight mb-2 animate-fade-in">
                     Selamat Datang di
-                    <span class="block mt-1 text-secondary drop-shadow-2xl">PMB MAN 1 Kota Bogor</span>
+                    <span class="block mt-1 text-secondary drop-shadow-2xl">PMBM MAN 1 Kota Bogor</span>
                 </h1>
                 
                 <p class="text-white/90 text-sm md:text-base mb-4 max-w-2xl mx-auto leading-relaxed">

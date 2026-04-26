@@ -21,7 +21,7 @@
         <h1 class="text-xl font-bold mb-2">B. Syarat Khusus</h1>
         <ul>
             <li class="text-wrap">
-                <h1 class="text-md font-bold">1. Jalur Afirmatif</h1>
+                <h1 class="text-md font-bold">1. Jalur Afirmasi</h1>
             <ul class=" items-center list-decimal ml-12">
                 <li class="ml-2">a. Prestasi Akademik (KSM/KSN/OSN/MYRES) Kemenag, Kemendikbud, LIPI, BRIN Prestasi yang diperoleh peserta didik di MTs/SMP minimal tahun pelajaran 2022-2023
                     <ol class="list-disc ml-8">

@@ -10,7 +10,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <title>PMB MAN 1 KOTA BOGOR</title>
+    <title>PMBM MAN 1 KOTA BOGOR</title>
     
     <style>
         /* Custom animations */
