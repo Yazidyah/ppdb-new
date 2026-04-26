@@ -2,7 +2,7 @@
     <div class="p-6 mx-auto flex justify-center">
         <div class="container mx-auto text-center pt-6">
             <div class="w-full container mx-auto mt-10">
-                <h1 class="text-4xl font-extrabold text-gray-800 mb-6">Data Pendaftar Calon Siswa MAN 1 Kota Bogor
+                <h1 class="text-4xl font-extrabold text-gray-800 mb-6">Data Pendaftar Calon Murid MAN 1 Kota Bogor
                 </h1>
                 <div wire:ignore class="mb-6">
                     @livewire('operator.export-data-siswa', ['key' => 'export-data-admin-' . uniqid()])
