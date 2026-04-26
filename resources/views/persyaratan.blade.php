@@ -268,10 +268,10 @@
 
             @php
                 $alphabet = range('A', 'Z');
-                $index = 1;
+                $index = 2;
             @endphp
             @foreach($jalurRegistrasi as $jalur)
-            @if(stripos($jalur->nama_jalur, 'Reguler') === false)
+            @if(stripos($jalur->nama_jalur, 'Reguler') === true)
                 @continue
             @endif
             <div class="bg-white rounded-2xl shadow-sm overflow-hidden">

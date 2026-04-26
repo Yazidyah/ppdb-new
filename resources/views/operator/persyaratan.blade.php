@@ -270,10 +270,10 @@
 
             @php
                 $alphabet = range('A', 'Z');
-                $index = 1;
+                $index = 2;
             @endphp
             @foreach($jalurRegistrasi as $jalur)
-            @if(stripos($jalur->nama_jalur, 'Reguler') === false)
+            @if(stripos($jalur->nama_jalur, 'Reguler') === true)
                 @continue
             @endif
             <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
@@ -308,28 +308,6 @@
         </div>
     </section>
 
-    <section class="bg-gradient-to-r from-tertiary to-primary py-12 md:py-16 mt-12" style="position: relative; z-index: 1;">
-        <div class="container mx-auto px-4 text-center">
-            <h3 class="text-2xl md:text-3xl font-bold text-white mb-4">Sudah Siap Mendaftar?</h3>
-            <p class="text-white/90 text-base md:text-lg mb-8 max-w-2xl mx-auto">
-                Pastikan semua persyaratan sudah terpenuhi sebelum melakukan pendaftaran
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="{{ route('register') }}" class="inline-flex items-center justify-center px-8 py-4 bg-secondary text-primary font-bold rounded-xl hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-                    </svg>
-                    Daftar Sekarang
-                </a>
-                <a href="/" class="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-white/20 transition-all duration-300 border-2 border-white/30">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                    </svg>
-                    Kembali ke Beranda
-                </a>
-            </div>
-        </div>
-    </section>
     </div>
 
 </x-app-layout>

@@ -113,7 +113,7 @@
                     <h5 class="font-bold text-tertiary mb-1">Informasi Penting</h5>
                     <p class="text-gray-700 text-sm leading-relaxed">
                         Pastikan Anda melengkapi semua persyaratan sebelum batas waktu pendaftaran berakhir. 
-                        Untuk informasi lebih lanjut, silakan hubungi panitia PPDB.
+                        Untuk informasi lebih lanjut, silakan hubungi panitia PMBM.
                     </p>
                 </div>
             </div>
