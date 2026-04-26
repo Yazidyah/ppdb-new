@@ -12,7 +12,7 @@
                     <span class="text-secondary font-semibold text-xs md:text-sm">📋 Persyaratan</span>
                 </div>
                 <h1 class="font-bold text-2xl md:text-4xl text-white leading-tight mb-3">
-                    Persyaratan PMB
+                    Persyaratan PMBM
                     <span class="block mt-1 text-secondary">Madrasah Aliyah Negeri 1 Kota Bogor</span>
                 </h1>
                 <p class="text-white/90 text-sm md:text-base max-w-2xl mx-auto">
