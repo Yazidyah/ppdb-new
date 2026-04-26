@@ -67,7 +67,7 @@
                 
                 <div class="p-6">
                     <p class="text-gray-700 text-sm md:text-base mb-6 leading-relaxed">
-                        Untuk siswa berprestasi akademik maupun non-akademik tingkat nasional/internasional
+                        Untuk siswa berprestasi akademik maupun non-akademik tingkat Nasional/Internasional
                     </p>
                     <div class="flex items-center text-sm text-gray-600 mb-4">
                         <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -134,7 +134,7 @@
                     <span class="text-primary font-semibold text-sm">📅 Jadwal Lengkap</span>
                 </div>
                 <h2 class="font-bold text-2xl md:text-3xl lg:text-4xl text-tertiary px-4 mb-3">
-                    Jadwal Penerimaan Peserta Didik Baru
+                    Jadwal Penerimaan Murid Baru Madrasah
                 </h2>
                 <div class="inline-flex items-center gap-2 bg-white rounded-full px-6 py-3 shadow-md">
                     <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -248,7 +248,7 @@
                                 </ul>
                             </td>
                             <td class="px-4 py-4 text-center text-tertiary font-semibold">01 - 06 Mei 2026</td>
-                            <td class="px-4 py-4 text-tertiary text-sm">Pendaftaran online melalui website <a href="https://www.man1kotabogor.id" class="text-secondary hover:underline">www.man1kotabogor.id</a></td>
+                            <td class="px-4 py-4 text-tertiary text-sm">Pendaftaran online melalui website <a href="https://www.man1kotabogor.id" class="text-tertiary hover:underline">www.man1kotabogor.id</a></td>
                         </tr>
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-4 py-4 text-center text-tertiary font-semibold">2</td>
@@ -368,7 +368,7 @@
                             <td class="px-4 py-4 text-center text-tertiary font-semibold">1</td>
                             <td class="px-4 py-4 text-tertiary font-semibold">Pendaftaran</td>
                             <td class="px-4 py-4 text-center text-tertiary font-semibold">01 Mei - 04 Juni 2026</td>
-                            <td class="px-4 py-4 text-tertiary text-sm">Pendaftaran online melalui website <a href="https://www.man1kotabogor.id" class="text-secondary hover:underline">www.man1kotabogor.id</a></td>
+                            <td class="px-4 py-4 text-tertiary text-sm">Pendaftaran online melalui website <a href="https://www.man1kotabogor.id" class="text-tertiary hover:underline">www.man1kotabogor.id</a></td>
                         </tr>
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-4 py-4 text-center text-tertiary font-semibold">2</td>

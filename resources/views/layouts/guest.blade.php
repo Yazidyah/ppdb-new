@@ -43,7 +43,7 @@
         <div class="relative z-10">
             <a href="/" class="flex flex-col justify-center items-center">
                 <img src="/logoman.webp" class="w-40">
-                <h1 class="text-3xl text-white font-bold text-center mt-4">PPDB MAN 1 Kota Bogor</h1>
+                <h1 class="text-3xl text-white font-bold text-center mt-4">PMB MAN 1 Kota Bogor</h1>
             </a>
         </div>
 

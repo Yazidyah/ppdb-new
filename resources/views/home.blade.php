@@ -16,11 +16,11 @@
                 
                 <h1 class="font-bold text-2xl md:text-4xl lg:text-5xl text-white leading-tight mb-2 animate-fade-in">
                     Selamat Datang di
-                    <span class="block mt-1 text-secondary drop-shadow-2xl">PPDB MAN 1 Kota Bogor</span>
+                    <span class="block mt-1 text-secondary drop-shadow-2xl">PMB MAN 1 Kota Bogor</span>
                 </h1>
                 
                 <p class="text-white/90 text-sm md:text-base mb-4 max-w-2xl mx-auto leading-relaxed">
-                    Portal Penerimaan Peserta Didik Baru yang mudah, cepat, dan terpercaya
+                    Portal Penerimaan Murid Baru Madrasah yang mudah, cepat, dan terpercaya
                 </p>
 
                 <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-5 py-2 shadow-xl border border-white/30">
@@ -64,7 +64,7 @@
                             <iframe 
                                 class="absolute top-0 left-0 w-full h-full"
                                 src="https://www.youtube.com/embed/5BXqa6kn85A" 
-                                title="Video Tutorial PPDB" 
+                                title="Video Tutorial PBMB" 
                                 frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen>
@@ -120,7 +120,7 @@
         <div class="container mx-auto px-4 text-center">
             <h3 class="text-xl md:text-3xl font-bold text-white mb-3 md:mb-4">Siap Mendaftar?</h3>
             <p class="text-white/90 text-sm md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto">
-                Jangan lewatkan kesempatan untuk bergabung dengan MAN 1 Kota Bogor. Daftar sekarang dan raih masa depan cemerlang!
+                Jangan lewatkan kesempatan untuk bergabung dengan MAN 1 Kota Bogor.</br> Daftar sekarang dan raih masa depan cemerlang!
             </p>
             <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
                 <a href="{{ route('register') }}" class="inline-flex items-center justify-center px-6 md:px-8 py-3 md:py-4 bg-secondary text-primary font-bold rounded-xl hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-sm md:text-base">

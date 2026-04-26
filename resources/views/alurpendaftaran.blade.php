@@ -11,7 +11,7 @@
                 </div>
                 <h1 class="font-bold text-2xl md:text-4xl text-white leading-tight mb-3">
                     Alur Pendaftaran
-                    <span class="block mt-1 text-secondary">Penerimaan Peserta Didik Baru</span>
+                    <span class="block mt-1 text-secondary">Penerimaan Murid Baru Madrasah</span>
                 </h1>
                 <p class="text-white/90 text-sm md:text-base max-w-2xl mx-auto">
                     Ikuti langkah-langkah pendaftaran dengan mudah dan terstruktur
@@ -37,8 +37,8 @@
                         <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-primary">01 Mei - 06 Juni 2026</p>
                         </div>
-                        <h3 class="text-base font-bold text-tertiary mb-2">Akses Website PPDB</h3>
-                        <p class="text-sm text-gray-600">Klik <a href="https://ppdb.man1kotabogor.id" class="text-primary font-semibold hover:underline">ppdb.man1kotabogor.id</a> dan Pilih Menu PPDB</p>
+                        <h3 class="text-base font-bold text-tertiary mb-2">Akses Website PMBM</h3>
+                        <p class="text-sm text-gray-600">Klik <a href="https://www.man1kotabogor.id" class="text-primary font-semibold hover:underline">www.man1kotabogor.id</a> dan Pilih Menu PMBM</p>
                     </div>
                 </div>
 
@@ -50,8 +50,8 @@
                         <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-primary">01 Mei - 06 Juni 2026</p>
                         </div>
-                        <h3 class="text-base font-bold text-tertiary mb-2">Buat Akun PPDB</h3>
-                        <p class="text-sm text-gray-600">Membuat Akun PPDB dan masuk dengan akun yang sudah dibuat</p>
+                        <h3 class="text-base font-bold text-tertiary mb-2">Buat Akun PMBM</h3>
+                        <p class="text-sm text-gray-600">Membuat Akun PMBM dan masuk dengan akun yang sudah dibuat</p>
                     </div>
                 </div>
 

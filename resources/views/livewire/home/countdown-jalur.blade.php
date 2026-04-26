@@ -38,7 +38,7 @@
                     <div class="flex items-center justify-between">
                         <h4 class="text-white font-bold text-lg md:text-xl">Jalur Reguler</h4>
                         <div class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-white text-xs font-semibold">Regular</span>
+                            <span class="text-white text-xs font-semibold">Reguler</span>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                     <div class="flex items-center justify-between">
                         <h4 class="text-white font-bold text-lg md:text-xl">Afirmatif & Prestasi</h4>
                         <div class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-white text-xs font-semibold">Special</span>
+                            <span class="text-white text-xs font-semibold">Khusus</span>
                         </div>
                     </div>
                 </div>
