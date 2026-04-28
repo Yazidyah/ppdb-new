@@ -300,7 +300,7 @@
             $jadwalReguler = [
                 ['no' => 1, 'kegiatan' => 'Pendaftaran', 'waktu' => '01 Mei - 04 Juni 2026', 'keterangan' => 'Pendaftaran online melalui website www.man1kotabogor.id'],
                 ['no' => 2, 'kegiatan' => 'Verifikasi dan Validasi berkas', 'waktu' => '05, 08 - 09 Juni 2026', 'keterangan' => 'Online dilakukan oleh panitia'],
-                ['no' => 3, 'kegiatan' => 'Pencetakan Kartu Ujian', 'waktu' => '13 Juni 2026', 'keterangan' => 'Online dilakukan oleh calon siswa'],
+                ['no' => 3, 'kegiatan' => 'Pencetakan Kartu Ujian', 'waktu' => '09 Juni 2026', 'keterangan' => 'Online dilakukan oleh calon siswa'],
                 ['no' => 4, 'kegiatan' => 'Tes Akademik', 'waktu' => '10 - 12 dan 15 Juni 2026', 'keterangan' => 'Tes dilakukan secara Tatap muka sesuai Jadwal di Kartu Peserta'],
                 ['no' => 5, 'kegiatan' => "Tes Baca Qur'an dan Wawancara", 'waktu' => '17 - 19 dan 22 Juni 2026', 'keterangan' => 'Tes dilakukan secara Tatap muka sesuai Jadwal di Kartu Peserta'],
                 ['no' => 6, 'kegiatan' => 'Pengumuman', 'waktu' => '25 Juni 2026', 'keterangan' => 'Pengumuman Online'],
@@ -379,7 +379,7 @@
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-4 py-4 text-center text-tertiary font-semibold">3</td>
                             <td class="px-4 py-4 text-tertiary font-semibold">Pencetakan Kartu Ujian</td>
-                            <td class="px-4 py-4 text-center text-tertiary font-semibold">13 Juni 2026</td>
+                            <td class="px-4 py-4 text-center text-tertiary font-semibold">09 Juni 2026</td>
                             <td class="px-4 py-4 text-tertiary text-sm">Online dilakukan oleh calon siswa</td>
                         </tr>
                         <tr class="hover:bg-gray-50 transition-colors">

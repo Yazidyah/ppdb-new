@@ -202,7 +202,7 @@
         <img src="{{ './logoman.png' }}" alt="Logo MAN 1 Kota Bogor">
         <div class="text-container">
             <p>KEMENTERIAN AGAMA</p>
-            <p><strong>PANITIA PENERIMAAN PESERTA DIDIK BARU (PPDB)</strong></p>
+            <p><strong>PANITIA PENERIMAAN MURID BARU MADRASAH (PMBM)</strong></p>
             <p><strong>MAN 1 KOTA BOGOR</strong></p>
             <p>Jl. Dr. Sumeru Komplek Bumi Menteng Asri ( Jl. Terapi ), Kec. Bogor Barat, Kota Bogor</p>
         </div>
@@ -211,7 +211,7 @@
     <div class="judul-surat">
         <p class="karper">KARTU PESERTA
         <p>
-        <p class="tahpel">TAHUN PELAJARAN 2025/2026</p>
+        <p class="tahpel">TAHUN PELAJARAN 2026/2027</p>
     </div>
 
     <div class="content">
@@ -286,7 +286,7 @@
             <li>Pada saat Tes Wawancara didampingi oleh salah satu orang tua/wali;</li>
             <li>Selama tes peserta didik tidak diperkenankan menggunakan alat komunikasi/HP;</li>
             <li>Peserta didik datang sesuai jadwal yang sudah ditentukan oleh panitia.</li>
-            <li>Peserta wajib membawa kartu tes ke ruang panitia sebelum tes dimulai untuk registrasi dan stempel. Kartu tes ini wajib dijaga dan tidak boleh hilang selama proses PPDB berlangsung.</li>
+            <li>Peserta wajib membawa kartu tes ke ruang panitia sebelum tes dimulai untuk registrasi dan stempel. Kartu tes ini wajib dijaga dan tidak boleh hilang selama proses PMBM berlangsung.</li>
         </ol>
     </div>
 </body>

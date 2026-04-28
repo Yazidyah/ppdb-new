@@ -87,7 +87,7 @@
                     </div>
                     <div class="text-center">
                         <div class="bg-tertiary/10 rounded-lg px-3 py-1 inline-block mb-3">
-                            <p class="text-xs font-semibold text-tertiary">07 Mei & 13 Juni 2026</p>
+                            <p class="text-xs font-semibold text-tertiary">07 Mei & 09 Juni 2026</p>
                         </div>
                         <h3 class="text-base font-bold text-tertiary mb-2">Cetak Kartu</h3>
                         <p class="text-sm text-gray-600">Cetak Kartu Pendaftaran</p>

@@ -233,7 +233,7 @@
         <img src="{{ './logoman.png' }}" alt="Logo MAN 1 Kota Bogor">
         <div class="text-container">
             <p>KEMENTERIAN AGAMA</p>
-            <p><strong>PANITIA PENERIMAAN PESERTA DIDIK BARU (PPDB)</strong></p>
+            <p><strong>PANITIA PENERIMAAN MURID BARU MADRASAH (PMBM)</strong></p>
             <p><strong>MAN 1 KOTA BOGOR</strong></p>
             <p>Jl. Dr. Sumeru Komplek Bumi Menteng Asri ( Jl. Terapi ), Kec. Bogor Barat, Kota Bogor</p>
         </div>
@@ -247,8 +247,8 @@
             {{-- Tampilkan nomor_suket + string tambahan sesuai id_jalur --}}
             {{ $siswa->dataRegistrasi->nomor_suket .
                 '/Ma.10.60/' .
-                ($siswa->dataRegistrasi->id_jalur == 1 ? 'PPDB-R' : 'PPDB') .
-                '.2025/' .
+                ($siswa->dataRegistrasi->id_jalur == 1 ? 'PMBM-R' : 'PMBM') .
+                '.2026/' .
                 date('m') .
                 '/' .
                 date('Y') }}
@@ -257,10 +257,10 @@
 
     <div class="announcement">
         <p>
-            Panitia Penerimaan Peserta Didik Baru Madrasah Aliyah Negeri 1 Kota Bogor Tahun
+            Panitia Penerimaan Murid Baru Madrasah Aliyah Negeri 1 Kota Bogor Tahun
         </p>
         <p style="margin-top: 5px;">
-            Pelajaran 2025/2026 dengan ini menerangkan bahwa :
+            Pelajaran 2026/2027 dengan ini menerangkan bahwa :
         </p>
         <div class="isi-surat">
             <p>Nama Lengkap
@@ -283,7 +283,7 @@
         @else
             <h1>TIDAK DITERIMA</h1>
         @endif
-        <p class="status-surat-peserta">Sebagai peserta didik baru MAN 1 Kota Bogor Tahun Pelajaran 2025/2026</p>
+        <p class="status-surat-peserta">Sebagai murid baru MAN 1 Kota Bogor Tahun Pelajaran 2026/2027</p>
         <p class="status-surat-keterangan">Demikian Surat Keterangan ini disampaikan untuk dapat dipergunakan
             sebagaimana mestinya.</p>
     </div>
@@ -300,7 +300,7 @@
                     </div> --}}
                 </td>
                 <td style="width: 40%; text-align: left; vertical-align: top;">
-                    <p class="tempat">Bogor, 26 Juni 2025<br> Ketua Panitia</p>
+                    <p class="tempat">Bogor, 25 Juni 2026<br> Ketua Panitia</p>
                     <div class="tanda-tangan">
                         <img src="{{ 'surat/ttd-ketua.jpg' }}" style="width: 150px; height: 150px;">
                         <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
@@ -314,7 +314,7 @@
     @if ($status == 7)
         <div class="notes">
             <p>Keterangan :</p>
-            <p>Daftar Ulang dengan membawa berkas tanggal Pada 30 Juni - 03 Juli 2025</p>
+            <p>Daftar Ulang dengan membawa berkas tanggal Pada 29,30 Juni - 01 Juli 2026</p>
             <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
         </div>
     @elseif ($status == 6)

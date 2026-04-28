@@ -322,7 +322,7 @@
             </div>
         </div>
 </div>
-@endif
+    @endif
 
 @if ($tab == 2)
     @livewire('admin.data-pendaftaran', key('data-pendaftaran' . rand()))
