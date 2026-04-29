@@ -4,7 +4,7 @@
         <form wire:submit.prevent="search">
             <!-- tambahkan teks "Sudah pernah mendaftar? cari disini -->
             <div class="mb-4 text-left text-gray-700 text-sm font-bold">
-                Sudah pernah mendaftar PPDB MAN 1 Kota Bogor?<br> Silakan cari disini
+                Sudah pernah mendaftar PMBM MAN 1 Kota Bogor?<br> Silakan cari disini
             </div>
             <div class="mb-4">
                 <label for="nik" class="block text-gray-700 text-sm font-bold mb-2">NIK</label> <!-- Updated label -->

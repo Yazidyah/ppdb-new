@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'PPDB MAN 1 KOTA BOGOR'),
+    'name' => env('APP_NAME', 'PMBM MAN 1 KOTA BOGOR'),
 
     /*
     |--------------------------------------------------------------------------
