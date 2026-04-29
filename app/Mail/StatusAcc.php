@@ -34,7 +34,7 @@ class StatusAcc extends Mailable
             'siswa' => $this->siswa,
             'status' => $this->status,
         ]);
-        $this->fileName = 'Surat_keterangan_ppdb_man1kotabogor_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
+        $this->fileName = 'Surat_keterangan_pmbm_man1kotabogor_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
     }
 
     /**

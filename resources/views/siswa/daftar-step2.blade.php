@@ -70,7 +70,7 @@ function submitForm() {
 
 </script>
 <div class="w-[20vw] p-6  border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white mx-auto container bg-secondary text-tertiary ">
-            <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PPDB Jalur Prestasi adalah sebagai berikut: </h1>
+            <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PMBM Jalur Prestasi adalah sebagai berikut: </h1>
             <ol class="list-decimal items-center">
                 <li class="">Pas Foto 3x4</li>
                 <li class="">Kartu Keluarga</li>
@@ -82,7 +82,7 @@ function submitForm() {
             </ol>
         </div>
 <div class="w-[20vw] p-6  border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white mx-auto container bg-secondary text-tertiary ">
-            <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PPDB Jalur KETM adalah sebagai berikut: </h1>
+            <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PMBM Jalur KETM adalah sebagai berikut: </h1>
             <ol class="list-decimal items-center">
                 <li class="">Pas Foto 3x4</li>
                 <li class="">Kartu Keluarga</li>
@@ -94,7 +94,7 @@ function submitForm() {
             </ol>
         </div>
 <div class="w-[20vw] p-6  border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-white mx-auto container bg-secondary text-tertiary ">
-            <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PPDB Jalur Anak Berkemampuan Khusus adalah sebagai berikut: </h1>
+            <h1 class="text-xl font-bold mb-2">Dokumen Persyaratan PMBM Jalur Anak Berkemampuan Khusus adalah sebagai berikut: </h1>
             <ol class="list-decimal items-center">
                 <li class="">Pas Foto 3x4</li>
                 <li class="">Kartu Keluarga</li>

@@ -18,7 +18,7 @@
                 <div class="text-center">
                     <a href="/" class="flex flex-col justify-center items-center">
                         <img src="/logoman.webp" class="w-20 h-20 justify-center items-center fill-current">
-                        <h1 class="text-xl fill-current text-gray-700 font-bold text-center mt-2">PPDB MAN 1 Kota Bogor
+                        <h1 class="text-xl fill-current text-gray-700 font-bold text-center mt-2">PMBM MAN 1 Kota Bogor
                         </h1>
                     </a>
                 </div>
