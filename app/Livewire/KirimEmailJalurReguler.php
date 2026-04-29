@@ -10,44 +10,54 @@ use Illuminate\Support\Facades\Log;
 class KirimEmailJalurReguler extends Component
 {
     public $siswa;
+    public $totalEmail = 0;
 
     public function mount()
     {
-        $this->siswa = CalonSiswa::where('deleted_at',  null)
-            ->get();
-        // dd($this->siswa);
+        $this->siswa = CalonSiswa::whereHas('dataRegistrasi', function($query) {
+            $query->where('id_jalur', 1)
+                  ->whereIn('status', [6, 7, 8]);
+        })
+        ->whereNull('deleted_at')
+        ->get();
+        
+        $this->totalEmail = $this->siswa->count();
     }
 
     public function kirimEmail()
     {
-        foreach ($this->siswa->whereIn('id_calon_siswa', [855, 854, 853, 852, 851, 850, 849, 848, 847, 846, 845, 844, 843, 842, 841, 840, 839, 838, 837, 836, 835, 834, 833, 832, 831, 830, 829, 828, 827, 826, 825, 824, 823, 822, 821, 820, 819, 818, 817, 816, 815, 814, 813, 812, 811, 810, 809, 808, 807, 806, 805, 804, 803])->sortBy('id_calon_siswa') as $s) {
-            if ($s->dataRegistrasi == null) {
+        $emailSent = 0;
+        $emailFailed = 0;
+
+        foreach ($this->siswa as $s) {
+            if ($s->dataRegistrasi == null || $s->user == null || $s->user->email == null) {
+                $emailFailed++;
+                Log::warning('Email gagal dikirim - Data tidak lengkap untuk siswa ID: ' . $s->id_calon_siswa);
                 continue;
-            } else {
-                if ($s->dataRegistrasi->id_jalur == 1) {
-                    if ($s->dataRegistrasi->status == 6) {
-                        if ($s->user->email !== null) {
-                            $messageBody = $s->dataRegistrasi->status === '8'
-                                ? "Kamu dicadangkan."
-                                : ($s->dataRegistrasi->status === '7'
-                                    ? "Selamat, Kamu telah diterima."
-                                    : ($s->dataRegistrasi->status === '6'
-                                        ? "Maaf, Kamu tidak diterima."
-                                        : "Status kamu belum diproses."));
-                            SendStatusAccEmail::dispatch($s, $messageBody, $s->dataRegistrasi->status);
-                            Log::info('Email sent to: ' . $s->user->email . ' with status: ' . $s->dataRegistrasi->status);
-                        } else {
-                            continue;
-                        }
-                    } else {
-                        continue;
-                    }
-                } else {
-                    continue;
-                }
+            }
+
+            $messageBody = match((int)$s->dataRegistrasi->status) {
+                7 => "Selamat! Anda telah diterima di MAN 1 Kota Bogor",
+                6 => "Pemberitahuan Hasil Seleksi PPDB MAN 1 Kota Bogor",
+                8 => "Anda masuk dalam daftar cadangan MAN 1 Kota Bogor",
+                default => "Update Status Pendaftaran PPDB MAN 1 Kota Bogor"
+            };
+
+            try {
+                SendStatusAccEmail::dispatch($s, $messageBody, $s->dataRegistrasi->status);
+                $emailSent++;
+                Log::info('Email berhasil dikirim ke: ' . $s->user->email . ' (Status: ' . $s->dataRegistrasi->status . ')');
+            } catch (\Exception $e) {
+                $emailFailed++;
+                Log::error('Email gagal dikirim ke: ' . $s->user->email . ' - Error: ' . $e->getMessage());
             }
         }
+
+        session()->flash('success', "Blasting email selesai! Berhasil: {$emailSent}, Gagal: {$emailFailed}");
+        
+        $this->dispatch('emailSent');
     }
+
     public function render()
     {
         return view('livewire.kirim-email-jalur-reguler');

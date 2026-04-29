@@ -84,24 +84,33 @@ class StatusAcc extends Component
     public function simpan()
     {
         $this->validate([
-            'status' => 'required|in:6,7,8,9',
+            'status' => 'required|in:6,7,8',
         ]);
 
+        $oldStatus = $this->siswa->dataRegistrasi->status;
         $this->siswa->dataRegistrasi->status = $this->status;
         $this->siswa->dataRegistrasi->save();
 
-        // if (in_array($this->status, ['7', '8', '9'])) {
-        //     $messageBody = $this->status === '8'
-        //         ? "Selamat, Kamu telah diterima."
-        //         : ($this->status === '7'
-        //             ? "Maaf, Kamu tidak diterima."
-        //             : "Kamu dicadangkan.");
+        if (in_array($this->status, [6, 7, 8]) && $oldStatus != $this->status) {
+            $messageBody = match((int)$this->status) {
+                7 => "Selamat! Anda telah diterima di MAN 1 Kota Bogor",
+                6 => "Pemberitahuan Hasil Seleksi PPDB MAN 1 Kota Bogor",
+                8 => "Anda masuk dalam daftar cadangan MAN 1 Kota Bogor",
+                default => "Update Status Pendaftaran PPDB MAN 1 Kota Bogor"
+            };
 
-        //     SendStatusAccEmail::dispatch($this->siswa, $messageBody, $this->status);
-        // }
+            SendStatusAccEmail::dispatch($this->siswa, $messageBody, $this->status);
+            
+            session()->flash('success', 'Status berhasil diubah dan email notifikasi telah dikirim ke ' . $this->siswa->user->email);
+        } else {
+            session()->flash('success', 'Status berhasil diubah.');
+        }
 
         $this->modalOpen = false;
-        return redirect()->route('operator.datasiswa')->with('success', 'Status berhasil diubah.');
+        $this->setButtonColor();
+        $this->setButtonIcon();
+        
+        return redirect()->route('operator.datasiswa');
     }
 
     public function render()
