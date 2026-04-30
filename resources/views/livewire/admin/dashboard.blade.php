@@ -96,8 +96,8 @@
             <div class="bg-gray-100 py-10">
                 <h2 class="text-2xl font-bold mb-6 text-center">Data Pendaftaran</h2>
                 <div class="flex justify-center">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 p-3">
-                        @foreach ($statistik->take(5) as $stat)
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3">
+                        @foreach ($statistik->filter(fn($s) => str_contains($s->nama_statistik, 'Pendaftar Jalur'))->take(6) as $stat)
                             <div
                                 class="bg-white max-w-xs rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform scale-100 hover:scale-110 cursor-pointer">
                                 <div class="h-20 bg-tertiary flex items-center justify-between p-5">
@@ -117,7 +117,7 @@
             <div class="bg-gray-100 py-10">
                 <h2 class="text-2xl font-bold mb-6 text-center">Statistik Pendaftar</h2>
                 <div class="flex justify-center">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Gender Table -->
                         <div class="rounded-lg bg-white shadow-xl" id="gender">
                             <div class="w-11/12 mx-auto">

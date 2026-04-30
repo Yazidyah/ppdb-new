@@ -7,6 +7,7 @@ use App\Models\DataRegistrasi;
 use App\Models\Pembukaan;
 use Livewire\Component;
 use App\Models\Statistik;
+use App\Models\JalurRegistrasi;
 use Illuminate\Support\Facades\DB;
 
 class Dashboard extends Component
@@ -41,12 +42,20 @@ class Dashboard extends Component
         $cteCalonSiswa = CalonSiswa::withoutTrashed();
         $cteDataRegistrasi = DataRegistrasi::withoutTrashed();
 
+        $jalurList = JalurRegistrasi::all();
+
+        $statistikJalur = [];
+
+        foreach ($jalurList as $jalur) {
+            $count = (clone $cteDataRegistrasi)
+                ->where('id_jalur', $jalur->id)
+                ->count();
+
+        $statistikJalur["Pendaftar Jalur {$jalur->nama_jalur}"] = $count;
+}
         $totalCalonSiswa = $cteCalonSiswa->count();
         // Clone the base query for each condition to avoid query state pollution
-        $countJalurReguler = (clone $cteDataRegistrasi)->where('id_jalur', 1)->count();
-        $countJalurAfirmasiPrestasi = (clone $cteDataRegistrasi)->where('id_jalur', 2)->count();
-        $countJalurAfirmasiKETM = (clone $cteDataRegistrasi)->where('id_jalur', 3)->count();
-        $countJalurAfirmasiABK = (clone $cteDataRegistrasi)->where('id_jalur', 4)->count();
+        
 
         $this->countLakiLaki = (clone $cteCalonSiswa)->where('jenis_kelamin', 'L')->count();
         $this->countPerempuan = $totalCalonSiswa - $this->countLakiLaki;
@@ -64,7 +73,7 @@ class Dashboard extends Component
         $this->countDiterima = (clone $cteDataRegistrasi)->where('status', '7')->count();
         $this->countDicadangkan = (clone $cteDataRegistrasi)->where('status', '8')->count();
 
-        $statistikData = $this->prepareStatistikData($totalCalonSiswa, $countJalurReguler, $countJalurAfirmasiPrestasi, $countJalurAfirmasiKETM, $countJalurAfirmasiABK);
+        $statistikData = $this->prepareStatistikData($totalCalonSiswa, $statistikJalur);
 
         foreach ($statistikData as $nama_statistik => $count) {
             Statistik::updateOrCreate(
@@ -74,30 +83,26 @@ class Dashboard extends Component
         }
     }
 
-    private function prepareStatistikData($totalCalonSiswa, $countJalurReguler, $countJalurAfirmasiPrestasi, $countJalurAfirmasiKETM, $countJalurAfirmasiABK)
-    {
-        return [
-            'Total Pendaftar' => $totalCalonSiswa,
-            'Pendaftar Jalur Reguler' => $countJalurReguler,
-            'Pendaftar Jalur Afirmasi Prestasi' => $countJalurAfirmasiPrestasi,
-            'Pendaftar Jalur Afirmasi KETM' => $countJalurAfirmasiKETM,
-            'Pendaftar Jalur Afirmasi ABK' => $countJalurAfirmasiABK,
-            'Pendaftar Laki-laki' => $this->countLakiLaki,
-            'Pendaftar Perempuan' => $this->countPerempuan,
-            'Dari Sekolah Negeri' => $this->countSekolahNegeri,
-            'Dari Sekolah Swasta' => $this->countSekolahSwasta,
-            'Dari Luar Kota' => $this->countLuarBogor,
-            'Dari Dalam Kota' => $this->countDalamBogor,
-            'Pendaftar Memilih Jalur' => $this->countJalur,
-            'Pendaftar Upload Dokumen' => $this->countUpload,
-            'Pendaftar Submit' => $this->countSubmit,
-            'Pendaftar Tidak Lolos Administrasi' => $this->countTidakLolosAdministrasi,
-            'Pendaftar Lolos Administrasi' => $this->countLolosAdministrasi,
-            'Pendaftar Tidak Diterima' => $this->countTidakDiterima,
-            'Pendaftar Diterima' => $this->countDiterima,
-            'Pendaftar Dicadangkan' => $this->countDicadangkan,
-        ];
-    }
+    private function prepareStatistikData($totalCalonSiswa, $statistikJalur)
+{
+    return array_merge([
+        'Total Pendaftar' => $totalCalonSiswa,
+        'Pendaftar Laki-laki' => $this->countLakiLaki,
+        'Pendaftar Perempuan' => $this->countPerempuan,
+        'Dari Sekolah Negeri' => $this->countSekolahNegeri,
+        'Dari Sekolah Swasta' => $this->countSekolahSwasta,
+        'Dari Luar Kota' => $this->countLuarBogor,
+        'Dari Dalam Kota' => $this->countDalamBogor,
+        'Pendaftar Memilih Jalur' => $this->countJalur,
+        'Pendaftar Upload Dokumen' => $this->countUpload,
+        'Pendaftar Submit' => $this->countSubmit,
+        'Pendaftar Tidak Lolos Administrasi' => $this->countTidakLolosAdministrasi,
+        'Pendaftar Lolos Administrasi' => $this->countLolosAdministrasi,
+        'Pendaftar Tidak Diterima' => $this->countTidakDiterima,
+        'Pendaftar Diterima' => $this->countDiterima,
+        'Pendaftar Dicadangkan' => $this->countDicadangkan,
+    ], $statistikJalur);
+}
 
     public function updatedFilterNamaStatistik()
     {
