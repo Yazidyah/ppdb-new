@@ -240,6 +240,18 @@
                             <p class="text-red-500 text-xs mt-2">{{ session('error-psikolog') }}</p>
                         @endif
                     @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'berkebutuhan'))
+                        @if (session()->has('error-surat-abk'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-surat-abk') }}</p>
+                        @endif
+                    @endif
+
+                    @if (Str::contains(Str::lower($data->nama_persyaratan), 'dokter spesialis'))
+                        @if (session()->has('error-surat-dokter'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('error-surat-dokter') }}</p>
+                        @endif
+                    @endif
                     {{-- @if (count($data->berkas) === 0 or $data->berkas->contains(fn($berkas) => $berkas->trashed()))
                         @if ($data->nama_persyaratan === 'Rapot MTs/SMP (Sem 1-5)')
                             <div class="flex items-center justify-center w-full h-full">

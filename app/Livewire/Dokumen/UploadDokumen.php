@@ -108,6 +108,14 @@ class UploadDokumen extends Component
             return stripos($item->nama_persyaratan, 'psikolog') !== false;
         })->pluck('nama_persyaratan')->first();
 
+        $suratAbk = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'berkebutuhan') !== false;
+        })->pluck('nama_persyaratan')->first();
+
+        $suratDokter = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'dokter spesialis') !== false;
+        })->pluck('nama_persyaratan')->first();
+
 
 
 
@@ -123,6 +131,8 @@ class UploadDokumen extends Component
             $kip => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-kip'],
             $tabungan => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-tabungan'],
             $psikolog => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-psikolog'],
+            $suratAbk => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-surat-abk'],
+            $suratDokter => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-surat-dokter'],
         ];
         if (isset($validationRules[$this->syarat->nama_persyaratan])) {
             [$rules, $errorKey] = $validationRules[$this->syarat->nama_persyaratan];
