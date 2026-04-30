@@ -20,9 +20,10 @@
             </div>
         </div>
         <div id="exampleModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm" onclick="closeExample()">
-            <div class="bg-white p-6 rounded-lg shadow-lg w-[32rem]" onclick="event.stopPropagation()">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-[90vw] max-w-3xl" onclick="event.stopPropagation()">
             <h2 class="text-lg font-semibold">Contoh File</h2>
-            <img id="exampleImage" href="exampleFiles()" alt="Contoh File" class="mt-4 w-full rounded">
+            <img id="exampleImage" alt="Contoh File" class="mt-4 w-full rounded">
+            <iframe id="examplePdf" class="hidden mt-4 w-full rounded" style="height:75vh;" frameborder="0"></iframe>
             <button onclick="closeExample()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg">Tutup</button>
             </div>
         </div>

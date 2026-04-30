@@ -47,7 +47,7 @@
             </a>
         </div>
 
-        <div class="relative z-10 w-full sm:max-w-md mt-4 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+        <div class="relative z-10 w-full sm:max-w-md mt-6 px-8 py-8 bg-white shadow-2xl overflow-hidden sm:rounded-2xl border border-gray-100">
             {{ $slot }}
         </div>
     </div>

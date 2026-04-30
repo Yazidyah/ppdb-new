@@ -63,12 +63,15 @@ class TabBerkasSiswa extends Component
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_reguler')->first();
         }
         if ($this->syarat->id_jalur == 2) {
-            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_prestasi')->first();
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_prestasi_akademik')->first();
         }
-        if ($this->syarat->id_jalur == 3) {
+        if ($this->syarat->id_jalur == 6) {
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_prestasi_non_akademik')->first();
+        }
+        if ($this->syarat->id_jalur == 7) {
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_afirmasi_ketm')->first();
         }
-        if ($this->syarat->id_jalur == 4) {
+         if ($this->syarat->id_jalur == 8) {
             $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_afirmasi_abk')->first();
         }
     }

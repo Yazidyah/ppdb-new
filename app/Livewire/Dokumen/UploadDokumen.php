@@ -108,21 +108,31 @@ class UploadDokumen extends Component
             return stripos($item->nama_persyaratan, 'psikolog') !== false;
         })->pluck('nama_persyaratan')->first();
 
+        $suratAbk = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'berkebutuhan') !== false;
+        })->pluck('nama_persyaratan')->first();
+
+        $suratDokter = $this->persyaratan->filter(function ($item) {
+            return stripos($item->nama_persyaratan, 'dokter spesialis') !== false;
+        })->pluck('nama_persyaratan')->first();
+
 
 
 
         $validationRules = [
-            $ijazah => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-ijazah'],
-            $pasFoto => [['required', 'file', 'mimes:jpeg,jpg,png', 'max:300'], 'error-foto'],
-            $kartuKeluarga => [['required', 'file', 'mimes:pdf', 'max:300'], 'error-kk'],
-            $akta => [['required', 'file', 'mimes:pdf', 'max:300'], 'error-akte'],
-            $akreditasi => [['required', 'file', 'mimes:pdf', 'max:300'], 'error-akreditasi'],
+            $ijazah => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-ijazah'],
+            $pasFoto => [['required', 'file', 'mimes:jpeg,jpg,png', 'max:3000'], 'error-foto'],
+            $kartuKeluarga => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-kk'],
+            $akta => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-akte'],
+            $akreditasi => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-akreditasi'],
             $rapot => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-rapot'],
-            $prestasi => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-prestasi'],
-            $nisn => [['required', 'file', 'mimes:pdf', 'max:300'], 'error-nisn'],
-            $kip => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-kip'],
-            $tabungan => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-tabungan'],
-            $psikolog => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:300'], 'error-psikolog'],
+            $prestasi => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-prestasi'],
+            $nisn => [['required', 'file', 'mimes:pdf', 'max:3000'], 'error-nisn'],
+            $kip => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-kip'],
+            $tabungan => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-tabungan'],
+            $psikolog => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-psikolog'],
+            $suratAbk => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-surat-abk'],
+            $suratDokter => [['required', 'file', 'mimes:jpeg,jpg,png,pdf', 'max:3000'], 'error-surat-dokter'],
         ];
         if (isset($validationRules[$this->syarat->nama_persyaratan])) {
             [$rules, $errorKey] = $validationRules[$this->syarat->nama_persyaratan];
@@ -147,23 +157,61 @@ class UploadDokumen extends Component
     public function setSyarat($id)
     {
         $this->syarat = Persyaratan::find($id);
-        if ($this->syarat->id_jalur == 1) {
-            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_reguler')->first();
+        
+        $jalurKeyMap = [
+            1 => 'jalur_reguler',
+            2 => 'jalur_prestasi_akademik',
+            6 => 'jalur_prestasi_non_akademik',
+            7 => 'jalur_afirmasi_ketm',
+            8 => 'jalur_afirmasi_abk',
+        ];
+        
+        $jalurKey = $jalurKeyMap[$this->syarat->id_jalur] ?? 'jalur_reguler';
+        
+        $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')
+            ->where('key', $jalurKey)
+            ->first();
+        
+        if (!$this->kb) {
+            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')
+                ->where('key', 'jalur_reguler')
+                ->first();
+            
+            Log::channel('upload')->warning('KategoriBerkas not found for jalur ' . $jalurKey . ', using jalur_reguler as fallback', [
+                'persyaratan' => $this->syarat->nama_persyaratan,
+                'id_jalur' => $this->syarat->id_jalur,
+                'user_id' => Auth::user()->id
+            ]);
         }
-        if ($this->syarat->id_jalur == 2) {
-            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_prestasi')->first();
-        }
-        if ($this->syarat->id_jalur == 3) {
-            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_afirmasi_ketm')->first();
-        }
-        if ($this->syarat->id_jalur == 4) {
-            $this->kb = KategoriBerkas::where('nama', 'ilike', '%' . $this->syarat->nama_persyaratan . '%')->where('key', 'jalur_afirmasi_abk')->first();
+        
+        if (!$this->kb) {
+            Log::channel('upload')->error('KategoriBerkas not found for persyaratan', [
+                'persyaratan' => $this->syarat->nama_persyaratan,
+                'id_jalur' => $this->syarat->id_jalur,
+                'jalur_key' => $jalurKey,
+                'user_id' => Auth::user()->id
+            ]);
         }
     }
 
     public function simpan()
     {
-        if ($this->berkas) {
+        if (!$this->berkas) {
+            Log::info('Tidak ada file yang diterima');
+            return;
+        }
+        
+        if (!$this->kb) {
+            session()->flash('error-upload', 'Kategori berkas tidak ditemukan. Silakan hubungi administrator.');
+            Log::channel('upload')->error('Tidak dapat menyimpan file karena KategoriBerkas tidak ditemukan', [
+                'persyaratan' => $this->syarat->nama_persyaratan ?? 'unknown',
+                'id_jalur' => $this->syarat->id_jalur ?? 'unknown',
+                'user_id' => Auth::user()->id
+            ]);
+            return;
+        }
+
+        try {
             $path = $this->berkas->store('pendaftaran/persyaratan', 'local');
 
             $berkas = new Berkas([
@@ -177,18 +225,28 @@ class UploadDokumen extends Component
 
             $this->syarat->berkas()->save($berkas);
             $this->isianBerkas();
-            // $this->dispatch('berkas-updated', ['complete' => $this->isianBerkas()]);
-
 
             // Update status in DataRegistrasi
             DataRegistrasi::where('id_calon_siswa', $this->id_siswa)
                 ->where('is_active', true)
                 ->update(['status' => 2]);
 
-            Log::channel('upload')->info('File ' . $this->syarat->nama_persyaratan . ' berhasil disimpan', ['path' => $path, 'user_id' => Auth::user()->id]);
-            $this->berkas = null; // Reset variabel
-        } else {
-            Log::info('Tidak ada file yang diterima');
+            Log::channel('upload')->info('File ' . $this->syarat->nama_persyaratan . ' berhasil disimpan', [
+                'path' => $path, 
+                'user_id' => Auth::user()->id,
+                'kategori_berkas_id' => $this->kb->id
+            ]);
+            
+            $this->berkas = null; 
+            
+            session()->flash('success-upload', 'File berhasil diunggah!');
+        } catch (\Exception $e) {
+            Log::channel('upload')->error('Error saat menyimpan file: ' . $e->getMessage(), [
+                'persyaratan' => $this->syarat->nama_persyaratan ?? 'unknown',
+                'user_id' => Auth::user()->id,
+                'trace' => $e->getTraceAsString()
+            ]);
+            session()->flash('error-upload', 'Terjadi kesalahan saat menyimpan file. Silakan coba lagi.');
         }
     }
 
