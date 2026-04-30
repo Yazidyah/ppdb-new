@@ -21,7 +21,7 @@
                                     @foreach($jalur->persyaratan as $persyaratan)
                                         <li>
                                             {{ $persyaratan->nama_persyaratan }}
-                                            @if ($persyaratan->nama_persyaratan === 'Rapot MTs/SMP (Sem 1-5)')
+                                            @if ($persyaratan->nama_persyaratan === 'Rapot MTs/SMP')
                                                 <span class="text-xs text-gray-500">(Upload Max 3mb/PDF)</span>
                                             @elseif($persyaratan->nama_persyaratan === 'Pas Foto')
                                                 <span class="text-xs text-gray-500">(Upload Max 200kb/JPG, JPEG)</span>

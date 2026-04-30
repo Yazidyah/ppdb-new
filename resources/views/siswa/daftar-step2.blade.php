@@ -89,7 +89,7 @@ function submitForm() {
                 <li class="">Akte Kelahiran</li>
                 <li class="">Rapor semester 1-5</li>
                 <li class="">Piagam Akreditasi Sekolah Asal</li>
-                <li class="">KIP/KKS/PKH</li>
+                <li class="">KIP/PKH/KKS</li>
                 <li class="">Buku Rekening KIP Sekolah asal (MTs/SMP)</li>
             </ol>
         </div>
