@@ -47,9 +47,9 @@
         <div class="container mx-auto px-3 sm:px-4">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center mb-6 md:mb-10">
-                    <div class="inline-block bg-secondary/20 rounded-full px-3 md:px-4 py-1.5 md:py-2 mb-3 md:mb-4">
+                    {{-- <div class="inline-block bg-secondary/20 rounded-full px-3 md:px-4 py-1.5 md:py-2 mb-3 md:mb-4">
                         <span class="text-primary font-semibold text-xs md:text-sm">📺 Tutorial</span>
-                    </div>
+                    </div> --}}
                     <h2 class="text-2xl md:text-4xl font-bold text-tertiary mb-2 md:mb-3">
                         Panduan Pendaftaran
                     </h2>
