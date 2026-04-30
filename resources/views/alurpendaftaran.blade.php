@@ -7,7 +7,7 @@
         <div class="container mx-auto px-4 relative" style="z-index: 2;">
             <div class="text-center max-w-4xl mx-auto">
                 <div class="inline-block bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-3">
-                    <span class="text-secondary font-semibold text-xs md:text-sm">🔄 Alur Pendaftaran</span>
+                    <span class="text-secondary font-semibold text-xs md:text-sm">Alur Pendaftaran</span>
                 </div>
                 <h1 class="font-bold text-2xl md:text-4xl text-white leading-tight mb-3">
                     Alur Pendaftaran
