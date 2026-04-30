@@ -75,7 +75,7 @@ class CountdownJalur extends Component
             ->sort()
             ->first() ?: null;
 
-        $this->nonRegulerLatestClose = $jalurRegistrasi
+        $this->nonRegulerLatestClose = $nonReguler
             ->filter(fn ($jalur) => !empty($jalur->tanggal_tutup))
             ->map(fn ($jalur) => Carbon::parse($jalur->tanggal_tutup))
             ->sortDesc()
