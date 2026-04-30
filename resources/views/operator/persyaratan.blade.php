@@ -1,7 +1,7 @@
 <x-app-layout>
 <div class="p-4 sm:ml-64">
 
-<div class="relative overflow-hidden bg-gradient-to-br from-tertiary via-primary to-tertiary pt-6 pb-28 md:pt-8 md:pb-32" style="z-index: 1;">
+    <div class="relative overflow-hidden bg-gradient-to-br from-tertiary via-primary to-tertiary pt-6 pb-28 md:pt-8 md:pb-32" style="z-index: 1;">
         <div class="absolute inset-0 opacity-10" style="z-index: 0;">
             <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
         </div>
@@ -9,7 +9,7 @@
         <div class="container mx-auto px-4 relative" style="z-index: 2;">
             <div class="text-center max-w-4xl mx-auto">
                 <div class="inline-block bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-3">
-                    <span class="text-secondary font-semibold text-xs md:text-sm">📋 Persyaratan</span>
+                    <span class="text-secondary font-semibold text-xs md:text-sm">Persyaratan</span>
                 </div>
                 <h1 class="font-bold text-2xl md:text-4xl text-white leading-tight mb-3">
                     Persyaratan PMBM
@@ -71,7 +71,7 @@
                         
                         <div class="space-y-4">
                             <div>
-                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">a. Jalur Peserta Didik Keluarga Ekonomi Tidak Mampu</h4>
+                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">a. Jalur Murid Keluarga Ekonomi Tidak Mampu</h4>
                                 <div class="overflow-x-auto">
                                     <table class="w-full border border-gray-200 rounded-lg">
                                         <thead class="bg-primary/5">
@@ -95,7 +95,7 @@
                                             </tr>
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700 font-semibold">4</td>
-                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</td>
+                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Murid beserta salah satu orang tua)</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -106,7 +106,7 @@
                             </div>
 
                             <div>
-                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">b. Jalur Peserta Didik Berprestasi</h4>
+                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">b. Jalur Murid Berkebutuhan Khusus</h4>
                                 <div class="overflow-x-auto">
                                     <table class="w-full border border-gray-200 rounded-lg">
                                         <thead class="bg-primary/5">
@@ -130,13 +130,13 @@
                                             </tr>
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700 font-semibold">4</td>
-                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</td>
+                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Murid beserta salah satu orang tua)</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                                 <div class="mt-3 bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
-                                    <p class="text-xs md:text-sm text-blue-800"><strong>Catatan:</strong> PDBK mendapatkan perhatian dan pelayanan sesuai dengan kemampuan satuan pendidikan</p>
+                                    <p class="text-xs md:text-sm text-blue-800"><strong>Catatan:</strong> MBK mendapatkan perhatian dan pelayanan sesuai dengan kemampuan satuan pendidikan</p>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                                             </tr>
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700 font-semibold">4</td>
-                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</td>
+                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Murid beserta salah satu orang tua)</td>
                                             </tr>
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700 font-semibold">5</td>
@@ -186,7 +186,7 @@
                             </div>
 
                             <div>
-                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">b. Jalur Peserta Didik Berprestasi</h4>
+                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">b. Jalur Prestasi Non Akademik</h4>
                                 <div class="overflow-x-auto">
                                     <table class="w-full border border-gray-200 rounded-lg">
                                         <thead class="bg-tertiary/5">

@@ -1,7 +1,5 @@
 <x-app-layout>
-
-
-<div class="relative overflow-hidden bg-gradient-to-br from-tertiary via-primary to-tertiary pt-6 pb-28 md:pt-8 md:pb-32" style="z-index: 1;">
+    <div class="relative overflow-hidden bg-gradient-to-br from-tertiary via-primary to-tertiary pt-6 pb-28 md:pt-8 md:pb-32" style="z-index: 1;">
         <div class="absolute inset-0 opacity-10" style="z-index: 0;">
             <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23ffffff&quot; fill-opacity=&quot;1&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
         </div>
@@ -9,7 +7,7 @@
         <div class="container mx-auto px-4 relative" style="z-index: 2;">
             <div class="text-center max-w-4xl mx-auto">
                 <div class="inline-block bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-3">
-                    <span class="text-secondary font-semibold text-xs md:text-sm">🔄 Alur Pendaftaran</span>
+                    <span class="text-secondary font-semibold text-xs md:text-sm">Alur Pendaftaran</span>
                 </div>
                 <h1 class="font-bold text-2xl md:text-4xl text-white leading-tight mb-3">
                     Alur Pendaftaran
@@ -36,9 +34,9 @@
                         <span class="text-lg md:text-2xl font-bold text-white">1</span>
                     </div>
                     <div class="text-center">
-                        <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
+                        <!-- <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-primary">01 Mei - 06 Juni 2026</p>
-                        </div>
+                        </div> -->
                         <h3 class="text-base font-bold text-tertiary mb-2">Akses Website PMBM</h3>
                         <p class="text-sm text-gray-600">Klik <a href="https://www.man1kotabogor.id" class="text-primary font-semibold hover:underline">www.man1kotabogor.id</a> dan Pilih Menu PMBM</p>
                     </div>
@@ -49,9 +47,9 @@
                         <span class="text-lg md:text-2xl font-bold text-white">2</span>
                     </div>
                     <div class="text-center">
-                        <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
+                        <!-- <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-primary">01 Mei - 06 Juni 2026</p>
-                        </div>
+                        </div> -->
                         <h3 class="text-base font-bold text-tertiary mb-2">Buat Akun PMBM</h3>
                         <p class="text-sm text-gray-600">Membuat Akun PMBM dan masuk dengan akun yang sudah dibuat</p>
                     </div>
@@ -62,9 +60,9 @@
                         <span class="text-lg md:text-2xl font-bold text-white">3</span>
                     </div>
                     <div class="text-center">
-                        <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
+                        <!-- <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-primary">01 Mei - 06 Juni 2026</p>
-                        </div>
+                        </div> -->
                         <h3 class="text-base font-bold text-tertiary mb-2">Isi Formulir</h3>
                         <p class="text-sm text-gray-600">Mengisi Formulir dan Melengkapi Berkas</p>
                     </div>
@@ -75,9 +73,9 @@
                         <span class="text-lg md:text-2xl font-bold text-white">4</span>
                     </div>
                     <div class="text-center">
-                        <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
+                        <!-- <div class="bg-primary/10 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-primary">07 Mei & 05, 08-09 Juni 2026</p>
-                        </div>
+                        </div> -->
                         <h3 class="text-base font-bold text-tertiary mb-2">Verifikasi</h3>
                         <p class="text-sm text-gray-600">Verifikasi Data dan Berkas</p>
                     </div>
@@ -88,9 +86,9 @@
                         <span class="text-lg md:text-2xl font-bold text-white">5</span>
                     </div>
                     <div class="text-center">
-                        <div class="bg-tertiary/10 rounded-lg px-3 py-1 inline-block mb-3">
+                        <!-- <div class="bg-tertiary/10 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-tertiary">07 Mei & 09 Juni 2026</p>
-                        </div>
+                        </div> -->
                         <h3 class="text-base font-bold text-tertiary mb-2">Cetak Kartu</h3>
                         <p class="text-sm text-gray-600">Cetak Kartu Pendaftaran</p>
                     </div>
@@ -101,9 +99,9 @@
                         <span class="text-lg md:text-2xl font-bold text-white">6</span>
                     </div>
                     <div class="text-center">
-                        <div class="bg-tertiary/10 rounded-lg px-3 py-1 inline-block mb-3">
+                        <!-- <div class="bg-tertiary/10 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-tertiary">08 Mei & 10,12,15 Juni 2026</p>
-                        </div>
+                        </div> -->
                         <h3 class="text-base font-bold text-tertiary mb-2">Tes Kemampuan</h3>
                         <p class="text-sm text-gray-600">Tes Kemampuan Prestasi/Akademik dan Tes Baca Al Quran</p>
                     </div>
@@ -114,9 +112,9 @@
                         <span class="text-lg md:text-2xl font-bold text-primary">7</span>
                     </div>
                     <div class="text-center">
-                        <div class="bg-secondary/20 rounded-lg px-3 py-1 inline-block mb-3">
+                        <!-- <div class="bg-secondary/20 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-primary">18 Mei & 25 Juni 2026</p>
-                        </div>
+                        </div> -->
                         <h3 class="text-base font-bold text-tertiary mb-2">Pengumuman</h3>
                         <p class="text-sm text-gray-600">Pengumuman Hasil Seleksi</p>
                     </div>
@@ -127,9 +125,9 @@
                         <span class="text-lg md:text-2xl font-bold text-primary">8</span>
                     </div>
                     <div class="text-center">
-                        <div class="bg-secondary/20 rounded-lg px-3 py-1 inline-block mb-3">
+                        <!-- <div class="bg-secondary/20 rounded-lg px-3 py-1 inline-block mb-3">
                             <p class="text-xs font-semibold text-primary">20-21 Mei & 29-30 Juni, 01 Juli 2026</p>
-                        </div>
+                        </div> -->
                         <h3 class="text-base font-bold text-tertiary mb-2">Daftar Ulang</h3>
                         <p class="text-sm text-gray-600">Daftar Ulang Peserta Diterima</p>
                     </div>
