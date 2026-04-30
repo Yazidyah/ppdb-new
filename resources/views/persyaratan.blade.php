@@ -69,7 +69,7 @@
                         
                         <div class="space-y-4">
                             <div>
-                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">a. Jalur Peserta Didik Keluarga Ekonomi Tidak Mampu</h4>
+                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">a. Jalur Murid Keluarga Ekonomi Tidak Mampu</h4>
                                 <div class="overflow-x-auto">
                                     <table class="w-full border border-gray-200 rounded-lg">
                                         <thead class="bg-primary/5">
@@ -93,7 +93,7 @@
                                             </tr>
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700 font-semibold">4</td>
-                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</td>
+                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Murid beserta salah satu orang tua)</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -104,7 +104,7 @@
                             </div>
 
                             <div>
-                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">b. Jalur Peserta Didik Berprestasi</h4>
+                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">b. Jalur Murid Berkebutuhan Khusus</h4>
                                 <div class="overflow-x-auto">
                                     <table class="w-full border border-gray-200 rounded-lg">
                                         <thead class="bg-primary/5">
@@ -128,7 +128,7 @@
                                             </tr>
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700 font-semibold">4</td>
-                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</td>
+                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Murid beserta salah satu orang tua)</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -169,7 +169,7 @@
                                             </tr>
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700 font-semibold">4</td>
-                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Peserta didik beserta salah satu orang tua)</td>
+                                                <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700">Mengikuti Wawancara (Calon Murid beserta salah satu orang tua)</td>
                                             </tr>
                                             <tr class="hover:bg-gray-50">
                                                 <td class="px-2 py-2.5 md:px-4 md:py-3 text-xs md:text-sm text-gray-700 font-semibold">5</td>
@@ -184,7 +184,7 @@
                             </div>
 
                             <div>
-                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">b. Jalur Peserta Didik Berprestasi</h4>
+                                <h4 class="text-sm md:text-base font-semibold text-gray-800 mb-2 md:mb-3 bg-gray-50 px-3 md:px-4 py-2 rounded-lg">b. Jalur Prestasi Non Akademik</h4>
                                 <div class="overflow-x-auto">
                                     <table class="w-full border border-gray-200 rounded-lg">
                                         <thead class="bg-tertiary/5">

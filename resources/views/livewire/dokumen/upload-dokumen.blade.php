@@ -425,16 +425,20 @@
 
         // Tentukan URL gambar contoh berdasarkan jenis file
         let exampleFiles = {
-            "Pas Foto": "/contoh_berkas/contoh-pas-foto.jpg",
+            "Pas Foto": "/contoh_berkas/contoh-pas-foto.png",
             "NISN": "/contoh_berkas/contoh-nisn.png",
             "Akta Kelahiran": "/contoh_berkas/contoh-akta.png",
             "Kartu Pelajar": "/contoh_berkas/contoh-kartu-pelajar.jpg",
-            "Rapot MTs/SMP (Sem 1-5)": "/contoh_berkas/cover-rapot.png",
+            "Rapot MTs/SMP": "/contoh_berkas/cover-rapot.png",
             "Rapor %": "/contoh_berkas/cover-rapot.png",
             "Raport %": "/contoh_berkas/cover-rapot.png",
             "Kartu Keluarga": "/contoh_berkas/contoh-kk.jpg",
             "Sertifikat Akreditasi": "/contoh_berkas/contoh-sertifikat-akreditasi.png",
-            "KIP/KKS/PKH": "/contoh_berkas/contoh-kip.png",
+            "Buku Tabungan": "/contoh_berkas/contoh-buku-tabungan.png",
+            "KIP/PKH/KKS": "/contoh_berkas/contoh-kip.png",
+            "Sertifikat Prestasi": "/contoh_berkas/contoh-sertifikat-prestasi.png",
+            "Surat Keterangan Anak Berkebutuhan Khusus": "/contoh_berkas/contoh-sertifikat-abk.png",
+            "Surat Keterangan dari Dokter Spesialis": "/contoh_berkas/contoh-sertifikat-spesialis.png",
             // Tambahkan contoh file lainnya di sini...
         };
 

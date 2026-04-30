@@ -497,7 +497,7 @@
                     </div>
                     <div class="flex-1">
                         <p class="text-gray-800 leading-relaxed">
-                            <span class="font-semibold text-tertiary">Scan Rapor Semester 1 - 5</span> dari aslinya
+                            <span class="font-semibold text-tertiary">Scan Rapor Cover, Identitas dan nilai Semester 1 - 5 dari aslinya atau fotocopy yang sudah dilegalisir</span> 
                             <span class="inline-block bg-red-100 text-red-800 text-xs font-semibold px-2 py-1 rounded ml-2">PDF / Max 3MB</span>
                         </p>
                     </div>

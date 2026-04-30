@@ -71,11 +71,11 @@ function showExample(type) {
     // Tentukan URL gambar contoh berdasarkan jenis file
     let exampleFiles = {
         "Foto": "/logoman.webp",
-        "pas_foto": "https://example.com/contoh-pasfoto.jpg",
-        "pas_foto": "https://example.com/contoh-pasfoto.jpg",
-        "pas_foto": "https://example.com/contoh-pasfoto.jpg",
-        "pas_foto": "https://example.com/contoh-pasfoto.jpg",
-        "pas_foto": "https://example.com/contoh-pasfoto.jpg",
+        "pas_foto": "https://example.com/contoh-pasfoto.png",
+        "pas_foto": "https://example.com/contoh-pasfoto.png",
+        "pas_foto": "https://example.com/contoh-pasfoto.png",
+        "pas_foto": "https://example.com/contoh-pasfoto.png",
+        "pas_foto": "https://example.com/contoh-pasfoto.png",
         // Tambahkan contoh file lainnya di sini...
     };
 
