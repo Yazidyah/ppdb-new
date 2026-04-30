@@ -167,7 +167,7 @@
                                             <p class="mb-2 text-sm"><span class="font-semibold">Tekan untuk
                                                     unggah</span>
                                             </p>
-                                            <p class="text-xs">PDF (MAX. 1MB)</p>
+                                            <p class="text-xs">PDF (MAX. 3MB)</p>
                                         </div>
                                         <input wire:model="berkas"
                                             wire:change="setSyarat({{ $data->id_persyaratan }})" type="file"
