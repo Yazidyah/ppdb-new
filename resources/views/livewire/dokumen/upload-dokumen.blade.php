@@ -441,9 +441,9 @@
             "NISN": "/contoh_berkas/contoh-nisn.png",
             "Akta Kelahiran": "/contoh_berkas/contoh-akta.png",
             "Kartu Pelajar": "/contoh_berkas/contoh-kartu-pelajar.jpg",
-            "Rapot MTs/SMP": "/contoh_berkas/cover-rapot.png",
-            "Rapor %": "/contoh_berkas/cover-rapot.png",
-            "Raport %": "/contoh_berkas/cover-rapot.png",
+            "Rapot MTs/SMP": "/contoh_berkas/contoh-rapor.pdf",
+            "Rapor %": "/contoh_berkas/contoh-rapor.pdf",
+            "Raport %": "/contoh_berkas/contoh-rapor.pdf",
             "Kartu Keluarga": "/contoh_berkas/contoh-kk.jpeg",
             "Sertifikat Akreditasi": "/contoh_berkas/contoh-sertifikat-akreditasi.png",
             "Buku Tabungan": "/contoh_berkas/contoh-buku-tabungan.png",
@@ -454,14 +454,37 @@
             // Tambahkan contoh file lainnya di sini...
         };
 
-        // Gunakan default-image.jpg jika contoh file tidak ditemukan
-        exampleImage.src = exampleFiles[type] || "/default-no-image.png";
+        // Cari URL contoh file, cocokkan dengan wildcard '%'
+        let url = null;
+        for (const key in exampleFiles) {
+            if (key.endsWith('%')) {
+                const prefix = key.slice(0, -1).trim();
+                if (type.startsWith(prefix)) { url = exampleFiles[key]; break; }
+            } else if (key === type) {
+                url = exampleFiles[key]; break;
+            }
+        }
+        url = url || "/default-no-image.png";
+
+        const examplePdf = document.getElementById('examplePdf');
+        if (url.endsWith('.pdf')) {
+            exampleImage.classList.add('hidden');
+            examplePdf.src = url;
+            examplePdf.classList.remove('hidden');
+        } else {
+            examplePdf.classList.add('hidden');
+            examplePdf.src = '';
+            exampleImage.src = url;
+            exampleImage.classList.remove('hidden');
+        }
         exampleModal.classList.remove('hidden');
     }
 
     // Fungsi untuk menutup modal contoh file
     function closeExample() {
-        document.getElementById('exampleModal').classList.add('hidden');
+        const modal = document.getElementById('exampleModal');
+        modal.classList.add('hidden');
+        document.getElementById('examplePdf').src = '';
     }
 
     // Fungsi untuk menutup toast
