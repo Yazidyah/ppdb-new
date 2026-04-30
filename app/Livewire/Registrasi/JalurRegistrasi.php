@@ -35,7 +35,11 @@ class JalurRegistrasi extends Component
         }
 
         $this->id_jalur = $this->siswa->jalurRegistrasi->id_jalur ?? '';
-        $this->jalurRegistrasi = JalurRegistrasiModel::openForRegistration()->with('persyaratan')->get();
+        $this->jalurRegistrasi = JalurRegistrasiModel::openForRegistration()
+            ->with('persyaratan')
+            ->orderByRaw("CASE WHEN nama_jalur = 'Reguler' THEN 1 ELSE 0 END")
+            ->orderBy('nama_jalur', 'asc')
+            ->get();
     }
 
     public function generateNomor($jalurId)
