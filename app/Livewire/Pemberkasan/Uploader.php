@@ -61,7 +61,7 @@ class Uploader extends Component
     {
         try {
             $this->validate([
-                'berkas' => 'required|file|max:51200',
+                'berkas' => 'required|file|max:51200|mimes:pdf,jpg,jpeg,png,webp',
             ]);
             $this->simpan();
         } catch (\Exception $e) {
