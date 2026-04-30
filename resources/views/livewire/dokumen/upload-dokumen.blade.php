@@ -432,7 +432,7 @@
             "Rapot MTs/SMP": "/contoh_berkas/cover-rapot.png",
             "Rapor %": "/contoh_berkas/cover-rapot.png",
             "Raport %": "/contoh_berkas/cover-rapot.png",
-            "Kartu Keluarga": "/contoh_berkas/contoh-kk.jpg",
+            "Kartu Keluarga": "/contoh_berkas/contoh-kk.jpeg",
             "Sertifikat Akreditasi": "/contoh_berkas/contoh-sertifikat-akreditasi.png",
             "Buku Tabungan": "/contoh_berkas/contoh-buku-tabungan.png",
             "KIP/PKH/KKS": "/contoh_berkas/contoh-kip.png",

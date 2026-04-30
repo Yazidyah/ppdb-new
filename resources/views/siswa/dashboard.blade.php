@@ -3,8 +3,11 @@
         <div class="my-4 bg-tertiary rounded-lg text-white text-center py-8 leading-tight">
             <h2 class="font-bold text-3xl md:text-4xl">
                 @if ($status >= 3)
-                    Pendaftaran Berhasil!<br>
-                    <span class="text-xl font-normal">Silakan Cek Email/Akun Kamu untuk Informasi Lebih Lanjut.</span>
+                <div class="flex flex-col">
+                    <h2 class="">Pendaftaran Berhasil!</h1><br>
+                        <span class="text-xl font-normal">Silakan Cek Email/Akun Kamu untuk Informasi Lebih Lanjut.</span>
+                        <span class="text-base font-normal">Screenshot halaman ini untuk bukti pendaftaran</span>
+                    </div>
                 @else
                     Selamat Datang Calon Siswa MAN 1 Kota Bogor
                 @endif
