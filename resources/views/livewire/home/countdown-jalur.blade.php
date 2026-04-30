@@ -34,40 +34,6 @@
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
             <div class="relative bg-white rounded-2xl shadow-sm transition-all duration-300 overflow-hidden border border-gray-100">
-                <div class="bg-gradient-to-r from-primary to-tertiary px-6 py-4">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-white font-bold text-lg md:text-xl">Jalur Reguler</h4>
-                        <div class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
-                            <span class="text-white text-xs font-semibold">Reguler</span>
-                        </div>
-                    </div>
-                </div>
-
-                @if($regulerOpen && $regulerStartAt && $regulerEndAt)
-                    <div class="p-6 md:p-8">
-                        <x-countdown-box 
-                            title=""
-                            :start="$regulerStartAt"
-                            :end="$regulerEndAt" 
-                        />
-                    </div>
-                @else
-                    <div class="p-8 md:p-10 min-h-[240px] flex flex-col items-center justify-center text-center">
-                        <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mb-4">
-                            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                        </div>
-                        <p class="text-lg md:text-xl font-bold text-gray-700 mb-2">Jalur Reguler</p>
-                        <p class="text-sm text-gray-500">Belum dibuka</p>
-                        <div class="mt-4 bg-gray-50 rounded-lg px-4 py-2">
-                            <p class="text-xs text-gray-600">Pantau terus untuk info pembukaan</p>
-                        </div>
-                    </div>
-                @endif
-            </div>
-
-            <div class="relative bg-white rounded-2xl shadow-sm transition-all duration-300 overflow-hidden border border-gray-100">
                 <div class="bg-gradient-to-r from-tertiary to-primary px-6 py-4">
                     <div class="flex items-center justify-between">
                         <h4 class="text-white font-bold text-lg md:text-xl">Afirmasi & Prestasi</h4>
@@ -93,6 +59,40 @@
                             </svg>
                         </div>
                         <p class="text-lg md:text-xl font-bold text-gray-700 mb-2">Afirmasi & Prestasi</p>
+                        <p class="text-sm text-gray-500">Belum dibuka</p>
+                        <div class="mt-4 bg-gray-50 rounded-lg px-4 py-2">
+                            <p class="text-xs text-gray-600">Pantau terus untuk info pembukaan</p>
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            <div class="relative bg-white rounded-2xl shadow-sm transition-all duration-300 overflow-hidden border border-gray-100">
+                <div class="bg-gradient-to-r from-primary to-tertiary px-6 py-4">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-white font-bold text-lg md:text-xl">Jalur Reguler</h4>
+                        <div class="bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                            <span class="text-white text-xs font-semibold">Reguler</span>
+                        </div>
+                    </div>
+                </div>
+
+                @if($regulerOpen && $regulerStartAt && $regulerEndAt)
+                    <div class="p-6 md:p-8">
+                        <x-countdown-box 
+                            title=""
+                            :start="$regulerStartAt"
+                            :end="$regulerEndAt" 
+                        />
+                    </div>
+                @else
+                    <div class="p-8 md:p-10 min-h-[240px] flex flex-col items-center justify-center text-center">
+                        <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mb-4">
+                            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-lg md:text-xl font-bold text-gray-700 mb-2">Jalur Reguler</p>
                         <p class="text-sm text-gray-500">Belum dibuka</p>
                         <div class="mt-4 bg-gray-50 rounded-lg px-4 py-2">
                             <p class="text-xs text-gray-600">Pantau terus untuk info pembukaan</p>
