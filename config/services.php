@@ -34,5 +34,7 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
+    'npsn' => [
+        'base_url' => env('NPSN_API_BASE_URL'),
+    ],
 ];
