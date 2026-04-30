@@ -124,7 +124,7 @@ class DataSekolahService
 
     private function fetchNpsnFromHtmlDetailed(string $npsn): array
     {
-        $baseUrl = config('NPSN_API_BASE_URL');
+        $baseUrl = config('services.npsn.base_url');
         if (!$baseUrl) {
             Log::warning('NPSN_API_BASE_URL tidak diset di env.');
             return [
