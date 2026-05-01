@@ -15,7 +15,7 @@ class Dashboard extends Component
     public $tab = 1;
     public $filterNamaStatistik = '';
     public $allNamaStatistik = [];
-    public $statistik, $countLakiLaki, $countPerempuan, $countSekolahNegeri, $countSekolahSwasta, $countLuarBogor, $countDalamBogor, $countJalur, $countUpload, $countSubmit, $countTidakLolosAdministrasi, $countLolosAdministrasi, $countBelumDitentukan, $countDiterima, $countTidakDiterima, $countDicadangkan;
+    public $statistik, $countLakiLaki, $countPerempuan, $countSekolahNegeri, $countSekolahSwasta, $countLuarBogor, $countDalamBogor, $countJalur, $countUpload, $countSubmit, $countTidakLolosAdministrasi, $countLolosAdministrasi, $countBelumDitentukan, $countDiterima, $countTidakDiterima, $countDicadangkan, $countJalurReguler, $countJalurPrestasiAkademik, $countJalurPrestasiNonAkademik, $countJalurMKETM, $countJalurMBK;
     public $isOpen;
     protected $queryString = [
         'tab' => ['except' => '1', 'as' => 't', 'type' => 'integer'],
@@ -42,20 +42,7 @@ class Dashboard extends Component
         $cteCalonSiswa = CalonSiswa::withoutTrashed();
         $cteDataRegistrasi = DataRegistrasi::withoutTrashed();
 
-        $jalurList = JalurRegistrasi::all();
-
-        $statistikJalur = [];
-
-        foreach ($jalurList as $jalur) {
-            $count = (clone $cteDataRegistrasi)
-                ->where('id_jalur', $jalur->id)
-                ->count();
-
-        $statistikJalur["Pendaftar Jalur {$jalur->nama_jalur}"] = $count;
-}
-        $totalCalonSiswa = (clone $cteDataRegistrasi)
-            ->distinct('id_calon_siswa')
-            ->count('id_calon_siswa');
+        $totalCalonSiswa = $cteCalonSiswa->count();
         // Clone the base query for each condition to avoid query state pollution
         
 
@@ -75,7 +62,13 @@ class Dashboard extends Component
         $this->countDiterima = (clone $cteDataRegistrasi)->where('status', '7')->count();
         $this->countDicadangkan = (clone $cteDataRegistrasi)->where('status', '8')->count();
 
-        $statistikData = $this->prepareStatistikData($totalCalonSiswa, $statistikJalur);
+        $countJalurReguler = (clone $cteDataRegistrasi)->where('id_jalur', 1)->count();
+        $countJalurPrestasiAkademik = (clone $cteDataRegistrasi)->where('id_jalur', 2)->count();
+        $countJalurPrestasiNonAkademik = (clone $cteDataRegistrasi)->where('id_jalur', 6)->count();
+        $countJalurMKETM = (clone $cteDataRegistrasi)->where('id_jalur', 7)->count();
+        $countJalurMBK = (clone $cteDataRegistrasi)->where('id_jalur', 8)->count();
+
+        $statistikData = $this->prepareStatistikData($totalCalonSiswa, $countJalurReguler, $countJalurPrestasiAkademik, $countJalurPrestasiNonAkademik, $countJalurMKETM, $countJalurMBK);
 
         foreach ($statistikData as $nama_statistik => $count) {
             Statistik::updateOrCreate(
@@ -85,10 +78,15 @@ class Dashboard extends Component
         }
     }
 
-    private function prepareStatistikData($totalCalonSiswa, $statistikJalur)
+    private function prepareStatistikData($totalCalonSiswa, $countJalurReguler, $countJalurPrestasiAkademik, $countJalurPrestasiNonAkademik, $countJalurMKETM, $countJalurMBK)
 {
     return array_merge([
         'Total Pendaftar' => $totalCalonSiswa,
+        'Pendaftar Jalur Reguler' => $countJalurReguler,
+        'Pendaftar Jalur Prestasi Akademik' => $countJalurPrestasiAkademik,
+        'Pendaftar Jalur Prestasi Non-Akademik' => $countJalurPrestasiNonAkademik,
+        'Pendaftar Jalur Afirmasi MKETM' => $countJalurMKETM,
+        'Pendaftar Jalur Afirmasi MBK' => $countJalurMBK,
         'Pendaftar Laki-laki' => $this->countLakiLaki,
         'Pendaftar Perempuan' => $this->countPerempuan,
         'Dari Sekolah Negeri' => $this->countSekolahNegeri,
@@ -103,7 +101,7 @@ class Dashboard extends Component
         'Pendaftar Tidak Diterima' => $this->countTidakDiterima,
         'Pendaftar Diterima' => $this->countDiterima,
         'Pendaftar Dicadangkan' => $this->countDicadangkan,
-    ], $statistikJalur);
+    ]);
 }
 
     public function updatedFilterNamaStatistik()

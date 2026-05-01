@@ -94,56 +94,30 @@
             </div> --}}
 
             <div class="bg-gray-100 py-10">
-    <h2 class="text-2xl font-bold mb-6 text-center">Data Pendaftaran</h2>
-
-    @php
-        $totalPendaftar = optional(
-            $statistik->firstWhere('nama_statistik', 'Total Pendaftar')
-        )->count ?? 0;
-    @endphp
-
-    <div class="flex justify-center flex-col items-center">
-
-        <!-- TOTAL PENDAFTAR -->
-        <div class="mb-8 w-full flex justify-center">
-            <div class="bg-tertiary text-white w-full max-w-xs rounded-xl shadow-lg p-6 text-center">
-                <p class="text-lg">Total Pendaftar</p>
-                <p class="text-4xl font-bold mt-2">{{ $totalPendaftar }}</p>
-            </div>
-        </div>
-
-        <!-- GRID -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3">
-            @foreach ($statistik->filter(fn($s) => str_contains($s->nama_statistik, 'Pendaftar Jalur'))->take(23) as $stat)
-                <div
-                    class="bg-white max-w-xs rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 hover:scale-105 cursor-pointer">
-
-                    <div class="h-20 bg-tertiary flex items-center px-5">
-                        <p class="text-white text-lg font-semibold">
-                            {{ $stat->nama_statistik }}
-                        </p>
+                <h2 class="text-2xl font-bold mb-6 text-center">Data Pendaftaran</h2>
+                <div class="flex justify-center">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6 p-3">
+                        @foreach ($statistik->take(6) as $stat)
+                            <div
+                                class="bg-white max-w-xs rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform scale-100 hover:scale-110 cursor-pointer">
+                                <div class="h-20 bg-tertiary flex items-center justify-between p-5">
+                                    <p class="text-white text-lg">{{ $stat->nama_statistik }}</p>
+                                </div>
+                                <div class="flex justify-between px-5 pt-6 mb-2 text-sm text-gray-600">
+                                    <p>TOTAL</p>
+                                </div>
+                                <p class="py-4 text-3xl ml-5">{{ $stat->count }}</p>
+                            </div>
+                        @endforeach
                     </div>
-
-                    <div class="px-5 pt-4 text-sm text-gray-500">
-                        TOTAL
-                    </div>
-
-                    <p class="py-4 px-5 text-3xl font-bold text-gray-800">
-                        {{ $stat->count }}
-                    </p>
-
                 </div>
-            @endforeach
-        </div>
-
-    </div>
-</div>
+            </div>
 
             <!-- Table Section -->
             <div class="bg-gray-100 py-10">
                 <h2 class="text-2xl font-bold mb-6 text-center">Statistik Pendaftar</h2>
                 <div class="flex justify-center">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <!-- Gender Table -->
                         <div class="rounded-lg bg-white shadow-xl" id="gender">
                             <div class="w-11/12 mx-auto">
