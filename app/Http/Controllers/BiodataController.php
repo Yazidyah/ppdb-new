@@ -110,15 +110,15 @@ class BiodataController extends Controller
         }
 
         $dataSekolah = $result['data'] ?? null;
+        $jenjang = strtoupper(trim((string)($result['jenjangPendidikan'] ?? '')));
 
         if (!$dataSekolah) {
             return response()->json([
                 'error' => 'Referensi sekolah tidak ditemukan.'
             ], 404);
         }
-
         $bentuk = strtoupper(trim((string) $dataSekolah->bentuk_sekolah));
-        $allowed = in_array($bentuk, ['SMP', 'MTS'], true);
+        $allowed = in_array($bentuk, ['SMP', 'MTS'], true) || (str_contains($bentuk, 'PONDOK') && $jenjang === 'DIKDAS');
         if (!$allowed) {
             return response()->json([
                 'error' => 'Masukkan NPSN Sekolah SMP/MTs Sederajat'

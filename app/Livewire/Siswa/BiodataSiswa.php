@@ -258,6 +258,7 @@ class BiodataSiswa extends Component
         }
 
         $dataSekolah = $result['data'] ?? null;
+        $jenjang = strtoupper(trim((string)($result['jenjangPendidikan'] ?? '')));
 
         if (!$dataSekolah) {
             $this->manualSekolahMode = false;
@@ -269,7 +270,7 @@ class BiodataSiswa extends Component
         $this->manualSekolahMode = false;
 
         $bentuk = strtoupper(trim((string) ($dataSekolah->bentuk_sekolah ?? '')));
-        $allowed = in_array($bentuk, ['SMP', 'MTS'], true);
+        $allowed = in_array($bentuk, ['SMP', 'MTS'], true) || (str_contains($bentuk, 'PONDOK') && $jenjang === 'DIKDAS');
         if (!$allowed) {
             $this->resetErrorBag(['sekolah_asal']);
             $this->addError('NPSN', 'Masukkan NPSN Sekolah SMP/MTs Sederajat');

@@ -23,16 +23,24 @@ class DataSekolahService
         }
 
         $existing = DataSekolah::where('npsn', $npsn)->first();
+        $foundJenjang = null;
         if ($existing) {
-            if (empty($existing->bentuk_sekolah) || in_array(strtoupper(trim((string) $existing->bentuk_sekolah)), ['SKB', 'PKBM'], true)) {
+            $existingBentuk = strtoupper(trim((string) $existing->bentuk_sekolah));
+            if (
+                empty($existing->bentuk_sekolah)
+                || in_array($existingBentuk, ['SKB', 'PKBM'], true)
+                || str_contains($existingBentuk, 'PONDOK')
+            ) {
                 $fetchResult = $this->fetchNpsnFromHtmlDetailed($npsn);
                 if ($fetchResult['status'] === 'ok' && $fetchResult['data']) {
                     $scraped = $fetchResult['data'];
                     $bentuk = strtoupper(trim((string)($scraped['bentukPendidikan'] ?? '')));
                     $programLayanan = $scraped['programLayanan'] ?? null;
-                    $bentukForStorage = $this->normalizeBentukForStorage($bentuk, $programLayanan);
+                    $jenjang = strtoupper(trim((string)($scraped['jenjangPendidikan'] ?? '')));
+                    $foundJenjang = $jenjang;
+                    $bentukForStorage = $this->normalizeBentukForStorage($bentuk, $programLayanan, $jenjang);
                     $existing->setAttribute('bentuk_sekolah', $bentukForStorage);
-                    if ($this->isAllowedBentuk($bentuk, $programLayanan)) {
+                    if ($this->isAllowedBentuk($bentuk, $programLayanan, $jenjang)) {
                         $update = [
                             'sekolah_asal' => $scraped['schoolName'] ?? $existing->sekolah_asal,
                             'status_sekolah' => $scraped['statusSekolah'] ?? $existing->status_sekolah,
@@ -55,6 +63,7 @@ class DataSekolahService
             return [
                 'status' => 'ok',
                 'data' => $existing,
+                'jenjangPendidikan' => $foundJenjang,
             ];
         }
 
@@ -76,7 +85,9 @@ class DataSekolahService
 
         $bentuk = strtoupper(trim((string)($scraped['bentukPendidikan'] ?? '')));
         $programLayanan = $scraped['programLayanan'] ?? null;
-        $bentukForStorage = $this->normalizeBentukForStorage($bentuk, $programLayanan);
+        $jenjang = strtoupper(trim((string)($scraped['jenjangPendidikan'] ?? '')));
+        $foundJenjang = $jenjang;
+        $bentukForStorage = $this->normalizeBentukForStorage($bentuk, $programLayanan, $jenjang);
 
         $payload = [
             'npsn' => $scraped['npsn'],
@@ -86,11 +97,12 @@ class DataSekolahService
             'bentuk_sekolah' => $bentukForStorage,
         ];
 
-        if (!$this->isAllowedBentuk($bentuk, $programLayanan)) {
-            Log::info('NPSN bentuk tidak diizinkan; tidak dipersist ke data_sekolah', ['npsn' => $npsn, 'bentuk' => $bentuk, 'program_layanan' => $programLayanan]);
+        if (!$this->isAllowedBentuk($bentuk, $programLayanan, $jenjang)) {
+            Log::info('NPSN bentuk tidak diizinkan; tidak dipersist ke data_sekolah', ['npsn' => $npsn, 'bentuk' => $bentuk, 'program_layanan' => $programLayanan, 'jenjang' => $jenjang]);
             return [
                 'status' => 'ok',
                 'data' => new DataSekolah($payload),
+                'jenjangPendidikan' => $foundJenjang,
             ];
         }
 
@@ -103,6 +115,7 @@ class DataSekolahService
             return [
                 'status' => 'ok',
                 'data' => $stored,
+                'jenjangPendidikan' => $foundJenjang,
             ];
         } catch (\Throwable $e) {
             Log::error('Gagal menyimpan DataSekolah', [
@@ -112,6 +125,7 @@ class DataSekolahService
             return [
                 'status' => 'ok',
                 'data' => DataSekolah::where('npsn', $npsn)->first(),
+                'jenjangPendidikan' => $foundJenjang,
             ];
         }
     }
@@ -195,6 +209,7 @@ class DataSekolahService
             $bentukPendidikan = $this->extractTableValue($xpath, 'Bentuk Pendidikan');
             $programLayanan = $this->extractTableValue($xpath, 'Program / Layanan')
                 ?? $this->extractTableValue($xpath, 'Program/Layanan');
+            $jenjangPendidikan = $this->extractTableValue($xpath, 'Jenjang Pendidikan');
             $predikatAkreditasi = $this->extractTableValue($xpath, 'Akreditasi');
             $nilaiAkreditasi = $this->extractTableValue($xpath, 'Nilai Akreditasi');
 
@@ -220,6 +235,7 @@ class DataSekolahService
                     'statusSekolah' => $statusSekolah,
                     'bentukPendidikan' => $bentukPendidikan,
                     'programLayanan' => $programLayanan,
+                    'jenjangPendidikan' => $jenjangPendidikan,
                     'predikatAkreditasi' => $predikatAkreditasi,
                     'nilaiAkreditasi' => $nilaiAkreditasi,
                 ],
@@ -258,9 +274,11 @@ class DataSekolahService
         return null;
     }
 
-    private function isAllowedBentuk(?string $bentuk, ?string $programLayanan = null): bool
+    private function isAllowedBentuk(?string $bentuk, ?string $programLayanan = null, ?string $jenjang = null): bool
     {
         $bentuk = strtoupper(trim((string) $bentuk));
+        $jenjang = strtoupper(trim((string) $jenjang));
+
         if (in_array($bentuk, ['SMP', 'MTS'], true)) {
             return true;
         }
@@ -270,17 +288,21 @@ class DataSekolahService
             return str_contains($program, 'PAKET B');
         }
 
+        if (str_contains($bentuk, 'PONDOK')) {
+            return $jenjang === 'DIKDAS';
+        }
+
         return false;
     }
 
-    private function normalizeBentukForStorage(?string $bentuk, ?string $programLayanan = null): ?string
+    private function normalizeBentukForStorage(?string $bentuk, ?string $programLayanan = null, ?string $jenjang = null): ?string
     {
         $normalized = strtoupper(trim((string) $bentuk));
         if ($normalized === '') {
             return null;
         }
 
-        if (in_array($normalized, ['SKB', 'PKBM'], true) && $this->isAllowedBentuk($normalized, $programLayanan)) {
+        if (in_array($normalized, ['SKB', 'PKBM'], true) && $this->isAllowedBentuk($normalized, $programLayanan, $jenjang)) {
             return 'SMP';
         }
 
