@@ -53,12 +53,12 @@ class Dashboard extends Component
 
         $statistikJalur["Pendaftar Jalur {$jalur->nama_jalur}"] = $count;
 }
-        $totalCalonSiswa = $cteCalonSiswa->count();
+        $totalCalonSiswa = (clone $cteDataRegistrasi)->count();
         // Clone the base query for each condition to avoid query state pollution
         
 
         $this->countLakiLaki = (clone $cteCalonSiswa)->where('jenis_kelamin', 'L')->count();
-        $this->countPerempuan = $totalCalonSiswa - $this->countLakiLaki;
+        $this->countPerempuan = (clone $cteCalonSiswa)->where('jenis_kelamin', 'P')->count();
         $this->countSekolahNegeri = (clone $cteCalonSiswa)->where('status_sekolah', 'negeri')->count();
         $this->countSekolahSwasta = $totalCalonSiswa - $this->countSekolahNegeri;
         $this->countLuarBogor = (clone $cteCalonSiswa)->where('kota', '!=', 'KOTA BOGOR')->count();
