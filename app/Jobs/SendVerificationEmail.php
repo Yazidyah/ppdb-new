@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Mail\VerificationMail;
 
 class SendVerificationEmail implements ShouldQueue
 {
@@ -43,7 +44,7 @@ class SendVerificationEmail implements ShouldQueue
     {
         $this->delay(now()->addSeconds(5));
 
-        $email = $this->siswa->user->email ?? null;
+        $email = optional($this->siswa->user)->email;
         
         if (empty($email)) {
             \Log::warning('SendVerificationEmail: Email kosong untuk siswa ID ' . $this->siswa->id_calon_siswa);
@@ -67,24 +68,32 @@ class SendVerificationEmail implements ShouldQueue
             ]);
 
             $fileName = 'kartu-peserta_' . $this->siswa->dataRegistrasi->nomor_peserta . '.pdf';
-
+            
             if ($this->status == 5) {
-                $messageBody = "Selamat {$this->siswa->nama_lengkap}, Kamu telah lolos verifikasi berkas.";
-                Mail::send([], [], function ($message) use ($pdf, $messageBody, $fileName, $email) {
-                    $message->to($email)
-                        ->subject('Hasil Verifikasi Berkas')
-                        ->text($messageBody)
-                        ->attachData($pdf->output(), $fileName, [
-                            'mime' => 'application/pdf',
-                        ]);
-                });
+                
+            $messageBody = "Selamat {$this->siswa->nama_lengkap}, Kamu telah lolos verifikasi berkas.";
+                
+                Mail::to($email)->send(
+                    (new VerificationMail(
+                        $this->siswa,
+                        $this->status,
+                        $messageBody
+                    ))->attachData($pdf->output(), $fileName, [
+                        'mime' => 'application/pdf',
+                    ])
+                );
                 \Log::info('SendVerificationEmail: Email lolos verifikasi berhasil dikirim ke ' . $email);
+
             } elseif ($this->status == 4) {
                 $messageBody = "Maaf {$this->siswa->nama_lengkap}, Kamu belum lolos verifikasi berkas";
-                Mail::raw($messageBody, function ($message) use ($email) {
-                    $message->to($email)
-                        ->subject('Hasil Verifikasi Berkas');
-                });
+               
+                Mail::to($email)->send(
+                    new VerificationMail(
+                        $this->siswa,
+                        $this->status,
+                        $messageBody,
+                    )
+                );
                 \Log::info('SendVerificationEmail: Email tidak lolos verifikasi dikirim ke ' . $email);
 
                 $qrCodePath = public_path('qrcode/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png');
