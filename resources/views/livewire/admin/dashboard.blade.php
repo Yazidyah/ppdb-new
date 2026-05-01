@@ -114,7 +114,7 @@
 
         <!-- GRID -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3">
-            @foreach ($statistik->filter(fn($s) => str_contains($s->nama_statistik, 'Pendaftar Jalur'))->take(6) as $stat)
+            @foreach ($statistik->filter(fn($s) => str_contains($s->nama_statistik, 'Pendaftar Jalur'))->take(23) as $stat)
                 <div
                     class="bg-white max-w-xs rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 hover:scale-105 cursor-pointer">
 
