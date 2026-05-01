@@ -1,6 +1,11 @@
 <x-app-layout>
     <div class="p-4 sm:ml-64">
         <div class="mx-auto text-center pt-3">
+            @php
+                $currentPerPage = (int) request('per_page', 10);
+                $currentPage = $data->currentPage();
+                $lastPage = $data->lastPage();
+            @endphp
             <h1 class="font-bold text-[32px] pt-3 pb-3">Data Pendaftar</h1>
             <div class="flex justify-start items-center">
                 <div>
@@ -8,19 +13,19 @@
                         @livewire('operator.export-data-siswa', ['key' => 'export-data-' . uniqid()])
                     </div>
                 </div>
-                <div class="inline-flex rounded-md shadow-xs mb-4" role="group" id="page_request">
+                <div class="inline-flex rounded-md shadow-xs mb-4 ml-3" role="group" id="page_request">
                     <button type="button"
-                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border rounded-s-lg {{ request('per_page', 10) == 10 ? 'bg-tertiary text-tertiary' : '' }} hover:bg-gray-100 hover:text-tertiary focus:z-10 focus:text-white focus:bg-tertiary"
+                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border rounded-s-lg {{ $currentPerPage == 10 ? '!bg-tertiary !text-white !border-0 shadow-sm' : '' }} hover:bg-gray-100 hover:text-tertiary focus:z-10 focus:text-white focus:bg-tertiary"
                         title="Menampilkan 10 data" onclick="updatePerPage(10)">
                         10
                     </button>
                     <button type="button"
-                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-l border-gray-200 {{ request('per_page', 10) == 50 ? 'bg-tertiary text-tertiary' : '' }} hover:bg-gray-100 hover:text-tertiary focus:z-10 focus:text-white focus:bg-tertiary"
+                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-l border-gray-200 {{ $currentPerPage == 50 ? '!bg-tertiary !text-white !border-0 shadow-sm' : '' }} hover:bg-gray-100 hover:text-tertiary focus:z-10 focus:text-white focus:bg-tertiary"
                         title="Menampilkan 50 data" onclick="updatePerPage(50)">
                         50
                     </button>
                     <button type="button"
-                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-l border-gray-200 {{ request('per_page', 10) == 100 ? 'bg-tertiary text-tertiary' : '' }} hover:bg-gray-100 hover:text-tertiary focus:z-10 focus:text-white focus:bg-tertiary"
+                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-l border-gray-200 rounded-e-lg {{ $currentPerPage == 100 ? '!bg-tertiary !text-white !border-0 shadow-sm' : '' }} hover:bg-gray-100 hover:text-tertiary focus:z-10 focus:text-white focus:bg-tertiary"
                         title="Menampilkan 100 data" onclick="updatePerPage(100)">
                         100
                     </button>
@@ -35,6 +40,7 @@
             <form method="GET" action="{{ route('operator.datasiswa') }}" class="mb-4 flex justify-between"
                 id="searchForm">
                 <div>
+                    <input type="hidden" name="per_page" value="{{ $currentPerPage }}">
                     <input type="text" name="search" value="{{ request('search') }}"
                         placeholder="Cari Nama atau NISN" class="px-4 py-2 border rounded-lg" id="searchInput">
                     <input type="text" name="sekolah_asal" value="{{ request('sekolah_asal') }}"
@@ -70,7 +76,7 @@
                     <input type="hidden" name="sort_by" value="{{ request('sort_by', 'id_calon_siswa') }}">
                     <input type="hidden" name="sort_order" value="{{ request('sort_order', 'asc') }}">
                     @if (request('search') || request('filter') || request('jalur') || request('sekolah_asal'))
-                        <a href="{{ route('operator.datasiswa') }}"
+                        <a href="{{ route('operator.datasiswa', ['per_page' => $currentPerPage, 'sort_by' => request('sort_by', 'id_calon_siswa'), 'sort_order' => request('sort_order', 'asc')]) }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded-lg">Reset</a>
                     @endif
                 </div>

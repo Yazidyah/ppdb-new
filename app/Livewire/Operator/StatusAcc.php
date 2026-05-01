@@ -110,7 +110,7 @@ class StatusAcc extends Component
         $this->setButtonColor();
         $this->setButtonIcon();
         
-        return redirect()->route('operator.datasiswa');
+        return redirect()->route('operator.datasiswa', request()->query());
     }
 
     public function render()

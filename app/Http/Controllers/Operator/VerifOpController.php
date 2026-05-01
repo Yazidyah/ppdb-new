@@ -25,7 +25,7 @@ class VerifOpController extends Controller
 
         if (!$siswa->dataRegistrasi) {
             Log::error('Failed to update status for student ID: ' . $request->id_calon_siswa . '. Data registrasi tidak ditemukan.');
-            return redirect()->route('operator.datasiswa')->with('error', 'Data registrasi tidak ditemukan.');
+            return redirect()->route('operator.datasiswa', request()->query())->with('error', 'Data registrasi tidak ditemukan.');
         }
 
         $siswa->dataRegistrasi->status = $request->status;
@@ -58,7 +58,7 @@ class VerifOpController extends Controller
                 $invalidIds = array_diff($submittedBerkasIds, $ownedBerkasIds);
                 if (!empty($invalidIds)) {
                     Log::warning('Attempt to verify berkas not belonging to student ID: ' . $request->id_calon_siswa . '. Invalid IDs: ' . implode(',', $invalidIds));
-                    return redirect()->route('operator.datasiswa')->with('error', 'Berkas tidak valid untuk siswa ini.');
+                    return redirect()->route('operator.datasiswa', request()->query())->with('error', 'Berkas tidak valid untuk siswa ini.');
                 }
 
                 foreach ($request->verif as $berkasId => $verif) {
@@ -83,7 +83,7 @@ class VerifOpController extends Controller
             }
         }
 
-        return redirect()->route('operator.datasiswa')->with('success', 'Verifikasi berkas berhasil diupdate.');
+        return redirect()->route('operator.datasiswa', request()->query())->with('success', 'Verifikasi berkas berhasil diupdate.');
     }
 
     public function getStatusVerif($id)

@@ -18,7 +18,7 @@ class StatusController extends Controller
         $siswa->dataRegistrasi->status = $request->status;
         $siswa->dataRegistrasi->save();
 
-        return redirect()->route('operator.datasiswa')->with('success', 'Status berhasil diubah.');
+        return redirect()->route('operator.datasiswa', request()->query())->with('success', 'Status berhasil diubah.');
     }
 
     public function getStatus($id)
