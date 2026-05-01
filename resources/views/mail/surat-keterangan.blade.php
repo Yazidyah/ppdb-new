@@ -7,7 +7,7 @@
     <title>Verifikasi Berkas</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Times New Roman', Times, serif;
             margin: 0;
             padding: 0;
         }
@@ -54,7 +54,6 @@
 
         .surat-nomor {
             text-align: center;
-            font-family: Arial, sans-serif;
             font-size: 14px;
             color: #000000;
         }
@@ -105,7 +104,7 @@
 
         .table-footer {
             display: flex;
-            margin-top: 10px;
+            margin-top: 40px;
         }
 
         .footer {
@@ -114,6 +113,29 @@
             align-items: center;
         }
 
+        
+        .table-footer .tempat {
+            text-align: left;
+        }
+        
+        .table-footer .tanda-tangan {
+            position: relative;
+            text-align: left;
+            margin-top: 5px;
+        }
+        
+        .table-footer .tanda-tangan img {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 25px;   /* atur naik turun */
+            left: 40px;  /* geser kiri kanan */
+            width: 120px;
+            opacity: 0.9;
+        }
+        .nama {
+            margin-top: 60px; /* atur jarak nama dengan tanda tangan */
+}
         .qrcode {
             width: 40mm;
             height: 40mm;
@@ -121,20 +143,6 @@
             align-items: center;
             justify-content: center;
             font-size: 12px;
-        }
-
-        .table-footer .tempat {
-            text-align: left;
-        }
-
-        .table-footer .tanda-tangan {
-            text-align: left;
-            margin-top: 5px;
-        }
-
-        .table-footer .tanda-tangan img {
-            width: 100px;
-            height: 100px;
         }
 
         .notes {
@@ -248,7 +256,7 @@
             {{ $siswa->dataRegistrasi->nomor_suket .
                 '/Ma.10.60/' .
                 ($siswa->dataRegistrasi->id_jalur == 1 ? 'PMBM-R' : 'PMBM') .
-                '.2026/' .
+                '/' .
                 date('m') .
                 '/' .
                 date('Y') }}
@@ -260,7 +268,7 @@
             Panitia Penerimaan Murid Baru Madrasah Aliyah Negeri 1 Kota Bogor Tahun
         </p>
         <p style="margin-top: 5px;">
-            Pelajaran 2026/2027 dengan ini menerangkan bahwa :
+            Pelajaran 2026/2027 menerangkan bahwa :
         </p>
         <div class="isi-surat">
             <p>Nama Lengkap
@@ -299,11 +307,14 @@
                         @endif
                     </div> --}}
                 </td>
-                <td style="width: 40%; text-align: left; vertical-align: top;">
-                    <p class="tempat">Bogor, 25 Juni 2026<br> Ketua Panitia</p>
+                <td style="width: 40%; vertical-align: top;">
                     <div class="tanda-tangan">
+                    <p class="tempat">Bogor, 25 Juni 2026<br> Ketua Panitia</p>
+
                         <img src="{{ 'surat/ttd-ketua.jpg' }}" style="width: 150px; height: 150px;">
-                        <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
+
+
+                    <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
                             NIP. 198208222014111004</p>
                     </div>
                 </td>

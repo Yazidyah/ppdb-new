@@ -98,7 +98,7 @@
                 <div class="mb-8 w-full flex justify-center"> <div class="bg-tertiary text-white w-full max-w-xs rounded-xl shadow-lg p-6 text-center"> <p class="text-lg">Total Pendaftar</p> <p class="text-4xl font-bold mt-2">{{ optional($statistik->whereIn('id', [1])->first())->count ?? 0 }}</p> </div> </div>
                 <div class="flex justify-center">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 p-3">
-                        @foreach ($statistik->whereIn('id', [21,22,24,25,26]) as $stat)
+                        @foreach ($statistik->whereIn('id', [2,21,22,25,26]) as $stat)
                             <div
                                 class="bg-white max-w-xs rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-500 transform scale-100 hover:scale-110 cursor-pointer">
                                 <div class="h-20 bg-tertiary flex items-center justify-between p-5">

@@ -130,12 +130,13 @@ body {
 }
 
 .qr-overlay {
+    width: 100px;
+    height: 100px;
     position: absolute;
-    top: 55px; /* atur posisi naik turun */
-    right: 60px; /* atur geser kiri kanan */
-    width: 90px;
-    opacity: 0.95;
-    z-index: 10;
+    top: 50px;   /* atur naik turun */
+    left: 40px;  /* geser kiri kanan */
+    width: 120px;
+    opacity: 0.9;
 }
 </style>
 </head>
@@ -219,7 +220,7 @@ body {
 
             <!-- QR ditempel di atas -->
             <img 
-                src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}" 
+                src="{{ 'surat/ttd-ketua.jpg' }}" 
                 class="qr-overlay"
             >
         </div>
