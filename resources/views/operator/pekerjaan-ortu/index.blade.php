@@ -126,7 +126,10 @@
         }
 
         function showEditModal(id, nama_pekerjaan) {
-            document.getElementById('editForm').action = `/pekerjaan-ortu/${id}`;
+            let url = "{{ route('pekerjaan-ortu.update', ':id') }}";
+            url = url.replace(':id', id);
+
+            document.getElementById('editForm').action = url;
             document.getElementById('edit_nama_pekerjaan').value = nama_pekerjaan;
             document.getElementById('editModal').classList.remove('hidden');
         }
