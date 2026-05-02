@@ -6,8 +6,19 @@
             <h1 class="text-2xl font-bold text-tertiary">Data Pendaftaran</h1>
             <p class="text-sm text-gray-500 mt-0.5">Daftar seluruh calon peserta didik MAN 1 Kota Bogor</p>
         </div>
-        <div wire:ignore>
-            @livewire('operator.export-data-siswa', ['key' => 'export-data-admin-' . uniqid()])
+        <div class="flex items-center gap-3">
+            <div class="hidden sm:block">
+                <input
+                    type="text"
+                    wire:model.debounce.3000ms="search"
+                    wire:keydown.enter.prevent="searchNow($event.target.value)"
+                    placeholder="Cari nama, NISN, atau sekolah..."
+                    class="w-64 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none"
+                />
+            </div>
+            <div wire:ignore>
+                @livewire('operator.export-data-siswa', ['key' => 'export-data-admin-' . uniqid()])
+            </div>
         </div>
     </div>
 
@@ -109,7 +120,9 @@
                                     <svg class="w-12 h-12 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                     </svg>
-                                    <p class="text-sm font-medium">Belum ada data pendaftaran</p>
+                                    <p class="text-sm font-medium">
+                                        {{ trim($search) !== '' ? 'Data tidak ditemukan' : 'Belum ada data pendaftaran' }}
+                                    </p>
                                 </div>
                             </td>
                         </tr>
