@@ -84,7 +84,7 @@
                     <h1 class="text-2xl font-bold text-tertiary">Dashboard</h1>
                     <p class="text-sm text-gray-500 mt-0.5">Selamat datang, <strong>{{ Auth::user()->name }}</strong> — {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
                 </div>
-                <div class="flex items-center gap-2">
+                {{-- <div class="flex items-center gap-2">
                     @if ($isOpen->is_open)
                         <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-200">
                             <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
@@ -96,7 +96,7 @@
                             Pendaftaran Ditutup
                         </span>
                     @endif
-                </div>
+                </div> --}}
             </div>
 
             {{-- ── Hero: Total Pendaftar ── --}}
