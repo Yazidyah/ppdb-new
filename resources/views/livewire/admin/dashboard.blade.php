@@ -164,9 +164,9 @@
                     @foreach ($statistik->whereIn('id', [2,21,22,25,26]) as $stat)
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300">
                         <div class="bg-gradient-to-br {{ $jalurColors[$jalurIdx] }} px-4 py-4 flex items-start gap-3">
-                            <svg class="w-6 h-6 text-white/80 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            {{-- <svg class="w-6 h-6 text-white/80 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="{{ $jalurIcons[$jalurIdx] }}"/>
-                            </svg>
+                            </svg> --}}
                             <p class="text-sm text-white font-bold leading-snug">{{ $stat->nama_statistik }}</p>
                         </div>
                         <div class="px-4 py-3">
