@@ -39,6 +39,44 @@
                             </button>
                         </div>
                     </div>
+
+                    @if ($user->role === 'siswa')
+                        <div class="mt-6">
+                            <h3 class="text-lg font-medium text-gray-800">Registrasi</h3>
+                            @php
+                                $status = optional(optional($user->siswa)->dataRegistrasi)->status;
+                                $statusLabels = [
+                                    0 => 'Belum Isi Biodata',
+                                    1 => 'Isi biodata',
+                                    2 => 'Pilih jalur',
+                                    3 => 'Upload',
+                                    4 => 'Tidak Lolos Verifikasi',
+                                    5 => 'Lolos Verifikasi',
+                                    6 => 'Tidak Diterima',
+                                    7 => 'Diterima',
+                                    8 => 'Dicadangkan',
+                                ];
+                                $statusLabel = is_null($status) ? 'N/A' : ($statusLabels[(int) $status] ?? 'Status ' . $status);
+                                $statusInt = is_null($status) ? null : (int) $status;
+                                $previousStatuses = [];
+                                if ($statusInt !== null && $statusInt > 0) {
+                                    $previousStatuses = range(0, $statusInt - 1);
+                                }
+                            @endphp
+                            <p class="text-sm text-gray-600 mt-2">Status: <strong class="text-gray-800">{{ $statusLabel }}</strong></p>
+
+                            @if (!empty($previousStatuses))
+                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
+                                    @foreach ($previousStatuses as $ps)
+                                        <button wire:click="setRegistrasiStatus({{ $ps }})"
+                                            class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition text-sm font-medium">
+                                            Pindah {{ $ps }}. {{ $statusLabels[$ps] ?? 'Status ' . $ps }}
+                                        </button>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                    @endif
                 </div>
 
                 <div class="flex justify-end mt-8 space-x-4">
