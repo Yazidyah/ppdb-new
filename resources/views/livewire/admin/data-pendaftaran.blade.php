@@ -133,12 +133,12 @@
 
         {{-- Pagination --}}
         @if($pendaftarans->hasPages())
-        <div class="px-5 py-4 border-t border-gray-100 flex items-center justify-between gap-4">
+        <div class="px-5 py-4 border-t border-gray-100 flex flex-col items-start gap-3">
             <p class="text-xs text-gray-400">
                 Menampilkan <span class="font-semibold text-gray-600">{{ $pendaftarans->firstItem() }}–{{ $pendaftarans->lastItem() }}</span>
                 dari <span class="font-semibold text-gray-600">{{ $pendaftarans->total() }}</span> pendaftar
             </p>
-            <div class="text-sm">
+            <div class="text-sm w-full">
                 {{ $pendaftarans->links() }}
             </div>
         </div>
