@@ -66,13 +66,20 @@
                             <p class="text-sm text-gray-600 mt-2">Status: <strong class="text-gray-800">{{ $statusLabel }}</strong></p>
 
                             @if (!empty($previousStatuses))
-                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-4">
-                                    @foreach ($previousStatuses as $ps)
-                                        <button wire:click="setRegistrasiStatus({{ $ps }})"
-                                            class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition text-sm font-medium">
-                                            Pindah {{ $ps }}. {{ $statusLabels[$ps] ?? 'Status ' . $ps }}
-                                        </button>
-                                    @endforeach
+                                <div class="mt-4 max-w-md">
+                                    <label for="status-backward" class="block text-sm font-medium text-gray-700 mb-2">
+                                        Pindahkan status ke bawah
+                                    </label>
+                                    <select id="status-backward"
+                                        wire:change="setRegistrasiStatus($event.target.value)"
+                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 text-sm">
+                                        <option value="">Pilih status</option>
+                                        @foreach ($previousStatuses as $ps)
+                                            <option value="{{ $ps }}">
+                                                Pindah ke {{ $ps }}. {{ $statusLabels[$ps] ?? 'Status ' . $ps }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             @endif
                         </div>
