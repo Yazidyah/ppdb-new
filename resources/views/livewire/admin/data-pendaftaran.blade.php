@@ -6,27 +6,54 @@
             <h1 class="text-2xl font-bold text-tertiary">Data Pendaftaran</h1>
             <p class="text-sm text-gray-500 mt-0.5">Daftar seluruh calon peserta didik MAN 1 Kota Bogor</p>
         </div>
-        <div class="flex items-center gap-3">
-            <div class="hidden sm:block">
-                <input
-                    type="text"
-                    wire:model.debounce.3000ms="search"
-                    wire:keydown.enter.prevent="searchNow($event.target.value)"
-                    placeholder="Cari nama, NISN, atau sekolah..."
-                    class="w-64 bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none"
-                />
-            </div>
-            <div wire:ignore>
-                @livewire('operator.export-data-siswa', ['key' => 'export-data-admin-' . uniqid()])
-            </div>
+        <div wire:ignore>
+            @livewire('operator.export-data-siswa', ['key' => 'export-data-admin-' . uniqid()])
         </div>
     </div>
 
     {{-- Table Card --}}
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
+        <div class="px-5 py-4 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center gap-3">
+
+            <div class="relative flex-1 max-w-sm">
+                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-4.35-4.35M17 11A6 6 0 1 0 5 11a6 6 0 0 0 12 0z"/>
+                    </svg>
+                </div>
+                <input
+                    wire:model.live.debounce.300ms="search"
+                    type="text"
+                    placeholder="Cari nama, NISN, atau asal sekolah..."
+                    class="w-full rounded-xl border border-gray-200 bg-gray-50 py-2.5 pl-9 pr-9 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition"
+                />
+                @if($search !== '')
+                <button wire:click="$set('search', '')"
+                    class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 transition">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+                @endif
+            </div>
+
+            <div class="flex items-center gap-2 sm:ml-auto">
+                <label class="text-xs text-gray-500 whitespace-nowrap">Tampilkan</label>
+                <select wire:model.live="perPage"
+                    class="rounded-xl border border-gray-200 bg-gray-50 py-2 px-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    {{-- <option value="100">100</option> --}}
+                </select>
+                <span class="text-xs text-gray-500 whitespace-nowrap">data</span>
+            </div>
+        </div>
+
         {{-- Table --}}
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto" wire:loading.class="opacity-60 pointer-events-none">
             <table class="w-full text-sm text-left">
                 <thead>
                     <tr class="bg-tertiary text-white">
@@ -56,7 +83,6 @@
                             $nilai = (@$pendaftaran->dataRegistrasi->rapot->total_rata_nilai ?? null);
                             $nilaiDisplay = ($nilai === null || $nilai == 0.00) ? '-' : $nilai;
                             $jk = @$pendaftaran->jenis_kelamin;
-                            $jkDisplay = $jk == 'L' ? 'Laki-laki' : ($jk == 'P' ? 'Perempuan' : '-');
                             $domisili = @$pendaftaran->kota;
                             $domisiliDisplay = $domisili === null ? '-' : ($domisili === 'KOTA BOGOR' ? 'Dalam Kota' : 'Luar Kota');
                         @endphp
@@ -118,11 +144,18 @@
                             <td colspan="8" class="px-5 py-16 text-center">
                                 <div class="flex flex-col items-center gap-3 text-gray-400">
                                     <svg class="w-12 h-12 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                     </svg>
-                                    <p class="text-sm font-medium">
-                                        {{ trim($search) !== '' ? 'Data tidak ditemukan' : 'Belum ada data pendaftaran' }}
-                                    </p>
+                                    @if($search !== '')
+                                        <p class="text-sm font-medium">Tidak ada hasil untuk "<span class="text-tertiary font-semibold">{{ $search }}</span>"</p>
+                                        <button wire:click="$set('search', '')"
+                                            class="mt-1 text-xs text-primary hover:underline font-medium">
+                                            Hapus pencarian
+                                        </button>
+                                    @else
+                                        <p class="text-sm font-medium">Belum ada data pendaftaran</p>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
@@ -131,17 +164,94 @@
             </table>
         </div>
 
-        {{-- Pagination --}}
-        @if($pendaftarans->hasPages())
-        <div class="px-5 py-4 border-t border-gray-100 flex flex-col items-start gap-3">
-            <p class="text-xs text-gray-400">
-                Menampilkan <span class="font-semibold text-gray-600">{{ $pendaftarans->firstItem() }}–{{ $pendaftarans->lastItem() }}</span>
-                dari <span class="font-semibold text-gray-600">{{ $pendaftarans->total() }}</span> pendaftar
-            </p>
-            <div class="text-sm w-full">
-                {{ $pendaftarans->links() }}
+        {{-- Pagination Footer --}}
+        <div class="px-5 py-4 border-t border-gray-100">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+
+                <p class="text-xs text-gray-400">
+                    @if($pendaftarans->total() > 0)
+                        Menampilkan
+                        <span class="font-semibold text-gray-600">{{ $pendaftarans->firstItem() }}</span>–<span class="font-semibold text-gray-600">{{ $pendaftarans->lastItem() }}</span>
+                        dari <span class="font-semibold text-gray-600">{{ number_format($pendaftarans->total()) }}</span> pendaftar
+                        @if($search !== '')
+                            <span class="text-primary font-medium">(hasil pencarian)</span>
+                        @endif
+                    @else
+                        Tidak ada data
+                    @endif
+                </p>
+
+                @if($pendaftarans->hasPages())
+                @php
+                    $currentPage = $pendaftarans->currentPage();
+                    $lastPage    = $pendaftarans->lastPage();
+                    $window      = 2;
+                    $pages       = collect(range(
+                        max(1, $currentPage - $window),
+                        min($lastPage, $currentPage + $window)
+                    ));
+                @endphp
+                <div class="flex items-center gap-1">
+
+                    @if($pendaftarans->onFirstPage())
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-gray-300 cursor-not-allowed select-none">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </span>
+                    @else
+                        <button wire:click="previousPage"
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-tertiary transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                    @endif
+
+                    @if($pages->first() > 1)
+                        <button wire:click="gotoPage(1)"
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs text-gray-500 hover:bg-gray-100 hover:text-tertiary transition">1</button>
+                        @if($pages->first() > 2)
+                            <span class="px-0.5 text-gray-300 text-xs select-none">...</span>
+                        @endif
+                    @endif
+
+                    @foreach($pages as $page)
+                        @if($page === $currentPage)
+                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-tertiary text-white text-xs font-semibold shadow-sm">{{ $page }}</span>
+                        @else
+                            <button wire:click="gotoPage({{ $page }})"
+                                class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs text-gray-500 hover:bg-gray-100 hover:text-tertiary transition">{{ $page }}</button>
+                        @endif
+                    @endforeach
+
+                    @if($pages->last() < $lastPage)
+                        @if($pages->last() < $lastPage - 1)
+                            <span class="px-0.5 text-gray-300 text-xs select-none">...</span>
+                        @endif
+                        <button wire:click="gotoPage({{ $lastPage }})"
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-xs text-gray-500 hover:bg-gray-100 hover:text-tertiary transition">{{ $lastPage }}</button>
+                    @endif
+
+                    @if($pendaftarans->hasMorePages())
+                        <button wire:click="nextPage"
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-tertiary transition">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    @else
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-gray-300 cursor-not-allowed select-none">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </span>
+                    @endif
+
+                </div>
+                @endif
+
             </div>
         </div>
-        @endif
     </div>
 </div>
