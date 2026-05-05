@@ -4,9 +4,6 @@ namespace App\Livewire\Operator;
 
 use Livewire\Component;
 use App\Models\CalonSiswa;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\StatusAcc as StatusAccMail;
-use App\Jobs\SendStatusAccEmail;
 
 class StatusAcc extends Component
 {
@@ -87,24 +84,8 @@ class StatusAcc extends Component
             'status' => 'required|in:6,7,8',
         ]);
 
-        $oldStatus = $this->siswa->dataRegistrasi->status;
         $this->siswa->dataRegistrasi->status = $this->status;
         $this->siswa->dataRegistrasi->save();
-
-        if (in_array($this->status, [6, 7, 8]) && $oldStatus != $this->status) {
-            $messageBody = match((int)$this->status) {
-                7 => "Selamat! Anda telah diterima di MAN 1 Kota Bogor",
-                6 => "Pemberitahuan Hasil Seleksi PPDB MAN 1 Kota Bogor",
-                8 => "Anda masuk dalam daftar cadangan MAN 1 Kota Bogor",
-                default => "Update Status Pendaftaran PPDB MAN 1 Kota Bogor"
-            };
-
-            SendStatusAccEmail::dispatch($this->siswa, $messageBody, $this->status);
-            
-            session()->flash('success', 'Status berhasil diubah dan email notifikasi telah dikirim ke ' . $this->siswa->user->email);
-        } else {
-            session()->flash('success', 'Status berhasil diubah.');
-        }
 
         $this->modalOpen = false;
         $this->setButtonColor();
