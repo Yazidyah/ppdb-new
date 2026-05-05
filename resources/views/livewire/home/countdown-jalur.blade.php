@@ -43,28 +43,17 @@
                     </div>
                 </div>
 
-                @if($nonRegulerOpen && $nonRegulerNearestOpen && $nonRegulerLatestClose)
-                    <div class="p-6 md:p-8">
-                        <x-countdown-box 
-                            title=""
-                            :start="$nonRegulerNearestOpen"
-                            :end="$nonRegulerLatestClose" 
-                        />
-                    </div>
-                @else
-                    <div class="p-8 md:p-10 min-h-[240px] flex flex-col items-center justify-center text-center">
-                        <div class="bg-gray-100 rounded-full w-20 h-20 flex items-center justify-center mb-4">
-                            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                        </div>
-                        <p class="text-lg md:text-xl font-bold text-gray-700 mb-2">Afirmasi & Prestasi</p>
-                        <p class="text-sm text-gray-500">Belum dibuka</p>
-                        <div class="mt-4 bg-gray-50 rounded-lg px-4 py-2">
-                            <p class="text-xs text-gray-600">Pantau terus untuk info pembukaan</p>
-                        </div>
-                    </div>
-                @endif
+                @php
+                    $afirmasiPrestasiEnd = \Carbon\Carbon::parse('2026-05-06 23:59:59');
+                    $afirmasiPrestasiStart = \Carbon\Carbon::parse('2026-04-01 00:00:00');
+                @endphp
+                <div class="p-6 md:p-8">
+                    <x-countdown-box 
+                        title=""
+                        :start="$afirmasiPrestasiStart"
+                        :end="$afirmasiPrestasiEnd" 
+                    />
+                </div>
             </div>
 
             <div class="relative bg-white rounded-2xl shadow-sm transition-all duration-300 overflow-hidden border border-gray-100">
