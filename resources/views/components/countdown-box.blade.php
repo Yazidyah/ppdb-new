@@ -3,7 +3,7 @@
 @php
     // Pass ISO datetime strings to JS
     $startIso = optional($start)->toIso8601String();
-    $endIso = optional($end)->toIso8601String();
+    $endIso = optional($end)->copy()->endOfDay()->toIso8601String();
 @endphp
 
 <div x-data="{
