@@ -311,7 +311,7 @@
                     <div class="tanda-tangan">
                     <p class="tempat">Bogor, 25 Juni 2026<br> Ketua Panitia</p>
 
-                        <img src="{{ 'surat/ttd-ketua.jpg' }}" style="width: 150px; height: 150px;">
+                        <img src="{{ 'surat/ttd-ketua.png' }}" style="width: 150px; height: 150px;">
 
 
                     <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>

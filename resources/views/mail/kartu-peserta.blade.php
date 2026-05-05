@@ -94,29 +94,44 @@ body {
 }
 
 /* FOOTER (TANDA TANGAN) */
-.footer {
-    margin-top: 16px;
-    position: relative;
-}
+.table-footer {
+            display: flex;
+            margin-top: 0px;
+        }
 
-.ttd-container {
-    width: 100%;
-    text-align: right;
-    position: relative;
-}
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.ttd {
-    display: inline-block;
-    text-align: left;
-    font-size: 13pt;
-    line-height: 1.5;
-    position: relative;
-}
+        
+        .table-footer .tempat {
+            text-align: left;
+        }
+        
+        .table-footer .tanda-tangan {
+            position: relative;
+            text-align: left;
+            margin-top: 2px;
+        }
+        
+        .table-footer .tanda-tangan img {
+            width: 220px;
+            position: absolute;
+            top: 25px;   /* atur naik turun */
+            left: -10px;  /* geser kiri kanan */
+            opacity: 0.9;
+        }
+        .nama {
+            margin-top: 60px; 
+        }
+/* atur jarak nama dengan tanda tangan */
 
 /* NOTES */
 .notes {
     clear: both;
-    margin-top: 18px;
+    margin-top: 2px;
     font-size: 11pt;
 }
 
@@ -126,18 +141,10 @@ body {
 
 /* ruang tanda tangan */
 .spasi {
-    height: 70px;
+    height: 60px;
 }
 
-.qr-overlay {
-    width: 100px;
-    height: 100px;
-    position: absolute;
-    top: 50px;   /* atur naik turun */
-    left: 40px;  /* geser kiri kanan */
-    width: 120px;
-    opacity: 0.9;
-}
+
 </style>
 </head>
 
@@ -207,32 +214,38 @@ body {
 </table>
 
 <!-- FOOTER -->
-<div class="footer">
-    <div class="ttd-container">
-        <div class="ttd">
-            Bogor, {{ date('d M Y') }}<br>
-            Ketua Panitia<br>
+<div class="table-footer">
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 60%; text-align: left;">
+                    {{-- <div class="qrcode">
+                        @if ($status != 8)
+                            <img src="{{ public_path('qrcode/' . $siswa->dataRegistrasi->nomor_peserta . '.png') }}"
+                                alt="QR Code" style="width: 100%; height: auto;">
+                        @endif
+                    </div> --}}
+                </td>
+                <td style="width: 40%; vertical-align: top;">
+                    <div class="tanda-tangan">
+                    <p class="tempat">Bogor, 25 Juni 2026<br> Ketua Panitia</p>
 
-            <div class="spasi"></div>
+                        <img src="{{ 'surat/ttd-ketua.png' }}" style="width: 220px;">
 
-            <strong>Gun Gun Gunawijaya, SE, SP, M.Pd</strong><br>
-            NIP. 198208222014111004
 
-            <!-- QR ditempel di atas -->
-            <img 
-                src="{{ 'surat/ttd-ketua.jpg' }}" 
-                class="qr-overlay"
-            >
-        </div>
+                    <strong><p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
+                            NIP. 198208222014111004</p></strong>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
-</div>
 
 <!-- NOTES -->
 <div class="notes">
 <b>Catatan:</b>
 <ol>
-<li>Kartu peserta wajib dibawa pada saat tes;</li>
-<li>Selama tes peserta mengenakan pakaian seragam sekolah asal;</li> <li>Membawa alat-alat tulis;</li>
+<li>Peserta wajib membawa kartu peserta dan alat tulis pada saat tes;</li>
+<li>Selama tes peserta mengenakan pakaian seragam sekolah asal;</li>
 <li>Pada saat Tes Wawancara didampingi oleh salah satu orang tua/wali;</li>
 <li>Selama tes peserta didik tidak diperkenankan menggunakan alat komunikasi/HP;</li>
 <li>Peserta didik datang sesuai jadwal yang sudah ditentukan oleh panitia.</li> <li>Peserta wajib membawa kartu tes ke ruang panitia sebelum tes dimulai untuk registrasi dan stempel. Kartu tes ini wajib dijaga dan tidak boleh hilang selama proses PMBM berlangsung.</li>
