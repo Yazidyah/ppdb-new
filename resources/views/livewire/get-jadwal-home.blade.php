@@ -38,7 +38,7 @@
                         <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
-                        <span class="font-semibold">{{ $tanggalBukaAfirmatif }} - {{ $tanggalTutupAfirmatif }}</span>
+                        <span class="font-semibold">{{ $tanggalBukaAfirmatif }} - 6 Mei 2026</span>
                     </div>
                     <a href="#afirmatif"
                         class="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-bold text-white bg-gradient-to-r from-primary to-tertiary rounded-xl hover:shadow-md transition-all duration-200">
@@ -73,7 +73,7 @@
                         <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
-                        <span class="font-semibold">{{ $tanggalBukaAfirmatif }} - {{ $tanggalTutupAfirmatif }}</span>
+                        <span class="font-semibold">{{ $tanggalBukaAfirmatif }} - 6 Mei 2026</span>
                     </div>
                     <a href="#afirmatif"
                         class="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-bold text-white bg-gradient-to-r from-tertiary to-primary rounded-xl hover:shadow-md transition-all duration-200">
@@ -108,7 +108,7 @@
                         <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
-                        <span class="font-semibold">{{ $tanggalBukaReguler }} - {{ $tanggalTutupReguler }}</span>
+                        <span class="font-semibold">{{ $tanggalBukaReguler }} - 4 Juni 2026</span>
                     </div>
                     <a href="#reguler"
                         class="w-full inline-flex items-center justify-center px-5 py-3 text-sm font-bold text-white bg-gradient-to-r from-primary to-tertiary rounded-xl hover:shadow-md transition-all duration-200">
