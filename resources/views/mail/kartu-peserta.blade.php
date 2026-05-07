@@ -227,7 +227,7 @@ body {
                 </td>
                 <td style="width: 40%; vertical-align: top;">
                     <div class="tanda-tangan">
-                    <p class="tempat">Bogor, 25 Juni 2026<br> Ketua Panitia</p>
+                    <p class="tempat">Bogor, {{ \Carbon\Carbon::now()->locale('id')->translatedFormat('d F Y') }}<br> Ketua Panitia</p>
 
                         <img src="{{ 'surat/ttd-ketua.png' }}" style="width: 220px;">
 
