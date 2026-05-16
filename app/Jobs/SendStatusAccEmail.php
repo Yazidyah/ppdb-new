@@ -31,24 +31,25 @@ class SendStatusAccEmail implements ShouldQueue
 
     public function handle()
     {
-        $this->delay(now()->addSeconds(2));
+        sleep(2);
 
         $email = $this->siswa->user->email ?? null;
-        
+        $siswaId = $this->siswa->id_calon_siswa;
+
         if (empty($email)) {
-            \Log::warning('SendStatusAccEmail: Email kosong untuk siswa ID ' . $this->siswa->id_calon_siswa);
+            \Log::warning('SendStatusAccEmail: Email kosong untuk siswa ID ' . $siswaId);
             $this->updateLog('failed', 'Email kosong');
             return;
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            \Log::error('SendStatusAccEmail: Email tidak valid: ' . $email . ' untuk siswa ID ' . $this->siswa->id_calon_siswa);
+            \Log::error('SendStatusAccEmail: Email tidak valid untuk siswa ID ' . $siswaId);
             $this->updateLog('failed', 'Email tidak valid');
             return;
         }
 
         try {
-            \Log::info('SendStatusAccEmail: Memulai pengiriman email ke ' . $email . ' (Status: ' . $this->status . ')');
+            \Log::info('SendStatusAccEmail: Memulai pengiriman email untuk siswa ID ' . $siswaId . ' (Status: ' . $this->status . ')');
             
             Mail::to($email)->send(new StatusAcc(
                 $this->siswa,
@@ -56,7 +57,7 @@ class SendStatusAccEmail implements ShouldQueue
                 $this->status
             ));
             
-            \Log::info('SendStatusAccEmail: Email berhasil dikirim ke ' . $email);
+            \Log::info('SendStatusAccEmail: Email berhasil dikirim untuk siswa ID ' . $siswaId);
             $this->updateLog('sent');
             
             $qrCodePath = public_path('qrcode/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png');
@@ -65,10 +66,10 @@ class SendStatusAccEmail implements ShouldQueue
                 \Log::info('SendStatusAccEmail: QR Code dihapus untuk ' . $this->siswa->dataRegistrasi->nomor_peserta);
             }
         } catch (\Swift_TransportException $e) {
-            \Log::error('SendStatusAccEmail: SMTP Error untuk ' . $email . ' - ' . $e->getMessage());
+            \Log::error('SendStatusAccEmail: SMTP Error untuk siswa ID ' . $siswaId . ' - ' . $e->getMessage());
             $this->updateLog('failed', 'SMTP Error: ' . $e->getMessage());
         } catch (\Exception $e) {
-            \Log::error('SendStatusAccEmail: Gagal mengirim email ke ' . $email . ' - Error: ' . $e->getMessage());
+            \Log::error('SendStatusAccEmail: Gagal mengirim email untuk siswa ID ' . $siswaId . ' - Error: ' . $e->getMessage());
             $this->updateLog('failed', $e->getMessage());
             throw $e;
         }

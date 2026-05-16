@@ -76,7 +76,7 @@ class KirimEmailJalurReguler extends Component
             }
 
             if (!filter_var($s->user->email, FILTER_VALIDATE_EMAIL)) {
-                Log::warning('Email tidak valid: ' . $s->user->email);
+                Log::warning('Email tidak valid untuk siswa ID: ' . $s->id_calon_siswa);
                 continue;
             }
 
