@@ -167,10 +167,16 @@
     </div>
 
     <div class="container mx-auto px-4 py-8 space-y-8">
-
+        @php
+        $showAfter3PM = \Carbon\Carbon::now()->greaterThanOrEqualTo(
+                    \Carbon\Carbon::create(2026, 5, 18, 15, 0, 0)
+                );
+        $isDaftarUlang = in_array($status, [4, 6]) && (($calonSiswa->dataRegistrasi->id_jalur ?? null) != 1);
+        @endphp
         {{-- CTA Pendaftaran --}}
-        @if ($status < 3 || (in_array($status, [4, 6]) && (($calonSiswa->dataRegistrasi->id_jalur ?? null) != 1)))
+        @if (($status < 3 || $isDaftarUlang) && $showAfter3PM)
             @php
+                
                 $isDaftarUlang = in_array($status, [4, 6]) && (($calonSiswa->dataRegistrasi->id_jalur ?? null) != 1);
                 $ctaLabel = $isDaftarUlang ? 'Daftar Ulang' : ($status != 0 ? 'Lanjutkan Pendaftaran' : 'Mulai Pendaftaran');
                 $ctaDesc  = $isDaftarUlang ? 'Kamu bisa mendaftar ulang dengan memilih jalur baru.' : ($status != 0 ? 'Segera lengkapi berkas dan data pendaftaranmu.' : 'Klik tombol di bawah untuk memulai proses pendaftaran.');
