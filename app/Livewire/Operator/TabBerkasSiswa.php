@@ -33,7 +33,7 @@ class TabBerkasSiswa extends Component
         // dd(Auth::user()->id);
         $this->user = $this->siswa->user;
         $this->id_siswa = CalonSiswa::where('id_user', $this->user->id)->first()->id_calon_siswa;
-        $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->pluck('id_jalur');
+        $this->id_jalur = DataRegistrasi::where('id_calon_siswa', $this->id_siswa)->where('is_active', true)->value('id_jalur');
         $this->persyaratan = Persyaratan::where('id_jalur', $this->id_jalur)->get();
         $this->syarat = null;
     }

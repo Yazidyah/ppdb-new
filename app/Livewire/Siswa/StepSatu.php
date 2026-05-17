@@ -65,15 +65,15 @@ class StepSatu extends Component
         }
 
         // Siswa non-reguler yang gagal verifikasi/tidak diterima bisa daftar lagi dengan record aktif baru.
-        if (in_array((int) $active->status, [4, 6], true) && (int) $active->id_jalur !== 1) {
-            $active->update(['is_active' => false]);
+        // if (in_array((int) $active->status, [4, 6], true) && (int) $active->id_jalur !== 1) {
+        //     $active->update(['is_active' => false]);
 
-            return DataRegistrasi::create([
-                'id_calon_siswa' => $idCalonSiswa,
-                'status' => '1',
-                'is_active' => true,
-            ]);
-        }
+        //     return DataRegistrasi::create([
+        //         'id_calon_siswa' => $idCalonSiswa,
+        //         'status' => '1',
+        //         'is_active' => true,
+        //     ]);
+        // }
 
         return $active;
     }
