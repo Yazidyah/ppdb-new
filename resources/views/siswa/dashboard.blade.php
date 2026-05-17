@@ -121,6 +121,46 @@
                     <p class="mt-2 text-sm font-semibold {{ $activeStep >= 3 ? 'text-tertiary' : 'text-gray-400' }}">Tes & Wawancara</p>
                     <p class="text-xs {{ $activeStep >= 3 ? 'text-gray-500' : 'text-gray-300' }} mt-0.5">{{ $tesWawancaraDetail }}</p>
                 </div>
+                
+                {{-- Connector 3-4 --}}
+                <div class="flex-1 h-0.5 mx-2 mb-7 rounded {{ in_array($status, [6,7,8]) ? 'bg-tertiary' : 'bg-gray-200' }}"></div>
+                
+               @php
+                    $showPenetapan = false;
+
+                    // Jalur Afirmasi
+                    if ($calonSiswa->dataRegistrasi->id_jalur != 1) {
+                        $showPenetapan = \Carbon\Carbon::now()->greaterThanOrEqualTo(
+                            \Carbon\Carbon::create(2026, 5, 18, 15, 0, 0)
+                        );
+                    } 
+                    // Jalur Reguler
+                    else {
+                        $showPenetapan = \Carbon\Carbon::now()->greaterThanOrEqualTo(
+                            \Carbon\Carbon::create(2026, 6, 4, 15, 0, 0)
+                        );
+                    }
+                @endphp
+
+                {{-- Step 4 --}}
+                <div class="flex flex-col items-center text-center flex-1">
+                    <div class="flex items-center justify-center w-11 h-11 rounded-full font-bold text-base transition
+                        {{ in_array($status, [6,7,8]) ? 'bg-tertiary text-white shadow-md shadow-tertiary/30' : 'bg-gray-100 text-gray-400 border-2 border-gray-200' }}">
+                        @if($activeStep > 6)
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        @else
+                            4
+                        @endif
+                    </div>
+                    <p class="mt-2 text-sm font-semibold {{ in_array($status, [6,7,8]) ? 'text-tertiary' : 'text-gray-400' }}">
+                        Hasil Seleksi
+                    </p>
+                    @if ($showPenetapan)
+                        <p class="text-xs {{in_array($status, [6,7,8]) ? 'text-gray-500' : 'text-gray-300' }} mt-0.5">
+                            {{ $penetapanDetail }}
+                        </p>
+                    @endif
+                </div>
 
             </div>
         </div>

@@ -129,7 +129,7 @@
             height: 100px;
             position: absolute;
             top: 25px;   /* atur naik turun */
-            left: 40px;  /* geser kiri kanan */
+            left: 0px;  /* geser kiri kanan */
             width: 120px;
             opacity: 0.9;
         }
@@ -265,10 +265,10 @@
 
     <div class="announcement">
         <p>
-            Panitia Penerimaan Murid Baru Madrasah Aliyah Negeri 1 Kota Bogor Tahun
+            Panitia Penerimaan Murid Baru Madrasah Aliyah Negeri 1 Kota Bogor Tahun Pelajaran 2026/2027
         </p>
         <p style="margin-top: 5px;">
-            Pelajaran 2026/2027 menerangkan bahwa :
+            menerangkan bahwa :
         </p>
         <div class="isi-surat">
             <p>Nama Lengkap
@@ -309,9 +309,9 @@
                 </td>
                 <td style="width: 40%; vertical-align: top;">
                     <div class="tanda-tangan">
-                    <p class="tempat">Bogor, 25 Juni 2026<br> Ketua Panitia</p>
+                    <p class="tempat">Bogor, 18 Mei 2026<br> Ketua Panitia</p>
 
-                        <img src="{{ 'surat/ttd-ketua.png' }}" style="width: 150px; height: 150px;">
+                        <img src="{{ 'surat/ttd-ketua.png' }}" style="width: 200px;" >
 
 
                     <p class="nama">Gun Gun Gunawijaya, SE, SP, M.Pd<br>
@@ -325,8 +325,8 @@
     @if ($status == 7)
         <div class="notes">
             <p>Keterangan :</p>
-            <p>Daftar Ulang dengan membawa berkas tanggal Pada 29,30 Juni - 01 Juli 2026</p>
-            <p>Bagi yg tidak melakukan daftar ulang pada jadwal yg sudah ditentukan dianggap mengundurkan diri.</p>
+            <p>Daftar ulang dilakukan sesuai jadwal (tanggal yang tertera pada lampiran persyaratan daftar ulang)</p>
+            <p>Bagi yang tidak melakukan daftar ulang sesuai jadwal yang ditetapkan, maka dianggap mengundurkan diri</p>
         </div>
     @elseif ($status == 6)
         {{-- <div class="notes">
@@ -343,16 +343,16 @@
     @if ($status == 7 or $status == 8)
         @if ($siswa->dataRegistrasi->id_jalur != 1)
             <div class="contoh-surat-daftar-ulang">
-                <img src="{{ 'surat/Diterima Afirmatif_page-0001.jpg' }}" alt="Checklist Data">
+                <img src="{{ 'surat/Diterima Afirmasi 2026_001.jpg' }}" alt="Checklist Data">
             </div>
             <div class="contoh-surat-pernyataan">
-                <img src="{{ 'surat/Diterima Afirmatif_page-0002.jpg' }}" alt="Surat Penyataan">
+                <img src="{{ 'surat/Diterima Afirmasi 2026_002.jpg' }}" alt="Surat Pernyataan">
             </div>
             <div class="contoh-surat-pernyataan-orang-tua">
-                <img src="{{ 'surat/Diterima Afirmatif_page-0003.jpg' }}" alt="Surat Pernyataan Orang Tua">
+                <img src="{{ 'surat/Diterima Afirmasi 2026_003.jpg' }}" alt="Surat Pernyataan Orang Tua">
             </div>
             <div class="contoh-surat-pernyataan-aja">
-                <img src="{{ 'surat/Diterima Afirmatif_page-0004.jpg' }}" alt="Surat Pernyataan Orang Tua">
+                <img src="{{ 'surat/Diterima Afirmasi 2026_004.jpg' }}" alt="Surat Pernyataan Tidak Mengundurkan diri">
             </div>
         @else
             <div class="contoh-surat-daftar-ulang">

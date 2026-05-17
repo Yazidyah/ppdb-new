@@ -95,7 +95,7 @@ class SiswaController extends Controller
             'status', 
             'nomor_peserta', 
             'jadwalTesBQ', 
-            'jadwalTesJapres'
+            'jadwalTesJapres',
         ));
     }
 

@@ -81,7 +81,7 @@
                     @endif
                 </div>
             </form>
-            {{-- <div class="flex flex-row gap-4 my-6 p-4 bg-secondary rounded-lg shadow">
+            <div class="flex flex-row gap-4 my-6 p-4 bg-secondary rounded-lg shadow">
                 <div>
                     <p class="font-semibold text-lg text-tertiary text-left">Blasting Email Siswa Terdaftar Jalur
                         Prestasi dan Afirmasi</p>
@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div>
-
+            {{-- 
             <div class="flex flex-row gap-4 my-6 p-4 bg-secondary rounded-lg shadow">
                 <div>
                     <p class="font-semibold text-lg text-tertiary text-left">Blasting Email Siswa Terdaftar Jalur
