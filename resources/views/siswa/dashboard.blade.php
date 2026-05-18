@@ -169,19 +169,17 @@
 
     <div class="container mx-auto px-4 py-8 space-y-8">
         @php
-        $showAfter3PM = \Carbon\Carbon::now()->greaterThanOrEqualTo(
-                    \Carbon\Carbon::create(2026, 5, 18, 15, 0, 0)
-                );
-        $isDaftarUlang = in_array($status, [4, 6]) && (($calonSiswa?->dataRegistrasi?->id_jalur ?? null) != 1);
+        $now = \Carbon\Carbon::now('Asia/Jakarta');
+
+        $showAfter3PM = $now->greaterThanOrEqualTo(
+            \Carbon\Carbon::create(2026, 5, 18, 16, 0, 0, 'Asia/Jakarta')
+        );
+        $isDaftarUlang = in_array($status, [4, 6]) && (($calonSiswa->dataRegistrasi->id_jalur ?? null) != 1);
+        $ctaLabel = $isDaftarUlang ? 'Daftar Ulang' : ($status != 0 ? 'Lanjutkan Pendaftaran' : 'Mulai Pendaftaran');
+                $ctaDesc  = $isDaftarUlang ? 'Kamu bisa mendaftar ulang dengan memilih jalur baru.' : ($status != 0 ? 'Segera lengkapi berkas dan data pendaftaranmu.' : 'Klik tombol di bawah untuk memulai proses pendaftaran.');
         @endphp
         {{-- CTA Pendaftaran --}}
-        @if (($status < 3 || $isDaftarUlang) && $showAfter3PM)
-            @php
-                
-                $isDaftarUlang = in_array($status, [4, 6]) && (($calonSiswa?->dataRegistrasi?->id_jalur ?? null) != 1);
-                $ctaLabel = $isDaftarUlang ? 'Daftar Ulang' : ($status != 0 ? 'Lanjutkan Pendaftaran' : 'Mulai Pendaftaran');
-                $ctaDesc  = $isDaftarUlang ? 'Kamu bisa mendaftar ulang dengan memilih jalur baru.' : ($status != 0 ? 'Segera lengkapi berkas dan data pendaftaranmu.' : 'Klik tombol di bawah untuk memulai proses pendaftaran.');
-            @endphp
+        @if (($status < 3 || $isDaftarUlang && $showAfter3PM))
             <div class="relative overflow-hidden bg-gradient-to-r from-primary to-tertiary rounded-2xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-5">
                 <div class="absolute right-0 top-0 bottom-0 w-48 opacity-10 hidden md:block">
                     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full text-white fill-current">
