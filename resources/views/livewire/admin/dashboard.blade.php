@@ -84,19 +84,18 @@
                     <h1 class="text-2xl font-bold text-tertiary">Dashboard</h1>
                     <p class="text-sm text-gray-500 mt-0.5">Selamat datang, <strong>{{ Auth::user()->name }}</strong> — {{ \Carbon\Carbon::now()->translatedFormat('l, d F Y') }}</p>
                 </div>
-                {{-- <div class="flex items-center gap-2">
-                    @if ($isOpen->is_open)
-                        <span class="inline-flex items-center gap-1.5 bg-green-100 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-green-200">
-                            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                            Pendaftaran Dibuka
-                        </span>
-                    @else
-                        <span class="inline-flex items-center gap-1.5 bg-red-100 text-red-600 text-xs font-semibold px-3 py-1.5 rounded-full border border-red-200">
-                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                            Pendaftaran Ditutup
-                        </span>
-                    @endif
-                </div> --}}
+                {{-- status indicator (kept commented) --}}
+                <div class="flex items-center gap-2">
+                    {{-- Optional: pembukaan status indicator (currently commented logic kept) --}}
+                    {{-- action: batch migrate to Jalur Reguler --}}
+                    <button
+                        wire:click="batchMoveToReguler"
+                        onclick="return confirm('Yakin menjalankan batch? Ini akan membuat record baru Jalur Reguler untuk pendaftar dengan status 4 atau 6 dan menonaktifkan record lama.')"
+                        class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-tertiary text-white hover:opacity-90 shadow-sm text-sm">
+                        Batch Buat Reguler
+                        <span wire:loading wire:target="batchMoveToReguler" class="loader"></span>
+                    </button>
+                </div>
             </div>
 
             {{-- ── Hero: Total Pendaftar ── --}}
@@ -119,7 +118,7 @@
                         <div>
                             <p class="text-secondary text-sm font-semibold uppercase tracking-widest">Total Pendaftar</p>
                             <p class="text-5xl font-extrabold leading-none mt-1">{{ number_format($totalPendaftar) }}</p>
-                            <p class="text-white/60 text-sm mt-1">Siswa telah mendaftar PPDB {{ date('Y') }}</p>
+                            <p class="text-white/60 text-sm mt-1">Siswa telah mendaftar PMBM {{ date('Y') }}</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4 text-center">

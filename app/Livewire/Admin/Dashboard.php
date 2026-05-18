@@ -37,6 +37,56 @@ class Dashboard extends Component
         $pembukaan->save();
         $this->mount();
     }
+
+    /**
+     * Batch move: for each active DataRegistrasi with status 4 or 6,
+     * create a new record with id_jalur = 1, status = 1 and is_active = true,
+     * then mark the old record's is_active = false.
+     */
+    public function batchMoveToReguler()
+    {
+        DB::transaction(function () {
+            $records = DataRegistrasi::whereIn('status', [4, 6])
+                ->where('is_active', true)
+                ->get();
+
+            foreach ($records as $rec) {
+                // If there exists any inactive old record with status 4 or 6 for this calon, skip creating duplicate
+                $hasInactiveOld = DataRegistrasi::where('id_calon_siswa', $rec->id_calon_siswa)
+                    ->whereIn('status', [4, 6])
+                    ->where('is_active', false)
+                    ->exists();
+
+                if (! $hasInactiveOld) {
+                    // If there's already an active reguler record for this calon, don't duplicate
+                    $exists = DataRegistrasi::where('id_calon_siswa', $rec->id_calon_siswa)
+                        ->where('id_jalur', 1)
+                        ->where('is_active', true)
+                        ->exists();
+
+                    if (! $exists) {
+                        DataRegistrasi::create([
+                            'id_calon_siswa' => $rec->id_calon_siswa,
+                            'id_jalur' => 1,
+                            'nomor_peserta' => null,
+                            'nomor_suket' => null,
+                            'status' => 1,
+                            'is_active' => true,
+                        ]);
+                    }
+                }
+
+                // Deactivate the old record regardless
+                $rec->is_active = false;
+                $rec->save();
+            }
+        });
+
+        $this->updateStatistik();
+        $this->loadStatistik();
+
+        session()->flash('message', 'Batch selesai: data registrasi dipindahkan/ditambah ke Jalur Reguler.');
+    }
     public function updateStatistik()
     {
         $cteCalonSiswa = CalonSiswa::withoutTrashed();
@@ -62,7 +112,7 @@ class Dashboard extends Component
         $this->countDiterima = (clone $cteDataRegistrasi)->where('status', '7')->count();
         $this->countDicadangkan = (clone $cteDataRegistrasi)->where('status', '8')->count();
 
-        $countJalurReguler = (clone $cteDataRegistrasi)->where('id_jalur', 1)->count();
+        $countJalurReguler = (clone $cteDataRegistrasi)->where('id_jalur', 1)->where('is_active', true)->count();
         $countJalurPrestasiAkademik = (clone $cteDataRegistrasi)->where('id_jalur', 2)->count();
         $countJalurPrestasiNonAkademik = (clone $cteDataRegistrasi)->where('id_jalur', 6)->count();
         $countJalurMKETM = (clone $cteDataRegistrasi)->where('id_jalur', 7)->count();
