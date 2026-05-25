@@ -1,4 +1,36 @@
 <div>
+    @if (session('success'))
+        <div
+            x-data="{ show: true }"
+            x-init="setTimeout(() => show = false, 2500)"
+            x-show="show"
+            x-transition:enter="transition ease-out duration-500"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-500"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="fixed top-4 left-1/2 z-[120] -translate-x-1/2 rounded-lg bg-emerald-600 px-4 py-3 text-sm font-medium text-white shadow-lg"
+        >
+            {{ session('success') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div
+            x-data="{ show: true }"
+            x-init="setTimeout(() => show = false, 2500)"
+            x-show="show"
+            x-transition:enter="transition ease-out duration-500"
+            x-transition:enter-start="opacity-0 -translate-y-2"
+            x-transition:enter-end="opacity-100 translate-y-0"
+            x-transition:leave="transition ease-in duration-500"
+            x-transition:leave-start="opacity-100 translate-y-0"
+            x-transition:leave-end="opacity-0 -translate-y-2"
+            class="fixed top-4 left-1/2 z-[120] -translate-x-1/2 rounded-lg bg-red-600 px-4 py-3 text-sm font-medium text-white shadow-lg"
+        >
+            {{ session('error') }}
+        </div>
+    @endif
     <button wire:click="$set('modalOpen', true)" type="button"
         class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors {{ $buttonColor }} border rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">
         {!! $buttonIcon !!}
@@ -102,7 +134,7 @@
                         class="inline-flex justify-center items-center px-4 py-2 bg-sky-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-sky-800 focus:bg-sky-700 active:bg-sky-700 active:border active:border-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:ring-offset-2 transition ease-in-out duration-150">
                         Kirim Email
                     </button>
-                    <button wire:click="$set('modalOpen', false)" type="button"
+                    <button wire:click="cancel" type="button"
                         class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Cancel</button>
                     <button wire:click="simpan" type="button"
                         class="inline-flex justify-center items-center px-4 py-2 bg-tertiary border border-transparent rounded-md font-semibold text-xs text-white focus:text-white uppercase tracking-widest hover:bg-secondary hover:text-tertiary focus:bg-tertiary active:bg-tertiary active:border active:border-tertiary focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2  transition ease-in-out duration-150">Simpan</button>

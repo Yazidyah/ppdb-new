@@ -193,7 +193,7 @@ class VerifBerkas extends Component
     /**
      * Proses penyimpanan verifikasi berkas dan pengaturan data tes.
      *
-     * @return \Illuminate\Http\RedirectResponse
+        * @return void
      */
     public function simpan()
     {
@@ -201,7 +201,7 @@ class VerifBerkas extends Component
             $jadwalBq = JadwalTes::find($this->sesi_bq_wawancara);
             if (!$jadwalBq) {
                 session()->flash('error', 'Jadwal tes BQ tidak valid.');
-                return redirect(request()->header('Referer'));
+                return;
             }
         }
 
@@ -209,7 +209,7 @@ class VerifBerkas extends Component
             $jadwalJapres = JadwalTes::find($this->sesi_japres_tes_akademik);
             if (!$jadwalJapres) {
                 session()->flash('error', 'Jadwal tes akademik tidak valid.');
-                return redirect(request()->header('Referer'));
+                return;
             }
         }
 
@@ -219,9 +219,9 @@ class VerifBerkas extends Component
         $this->cekBerkasPasFoto();
         $this->generateQrCode();
 
-        $this->modalOpen = false;
+        session()->flash('success', 'Data berhasil disimpan.');
 
-        return redirect(request()->header('Referer'));
+        return;
     }
 
     /**
@@ -254,7 +254,33 @@ class VerifBerkas extends Component
         );
 
         session()->flash('success', 'Email verifikasi berhasil dijadwalkan.');
+        $this->reloadModalData();
+    }
+
+    /**
+     * Batalkan perubahan yang belum disimpan dan kembalikan state modal ke data database.
+     */
+    public function cancel()
+    {
+        $this->reloadModalData();
         $this->modalOpen = false;
+    }
+
+    /**
+     * Reload data modal dari database tanpa menutup modal.
+     */
+    protected function reloadModalData(): void
+    {
+        $this->initializeData();
+        $this->jadwalTesBqWawancara = $this->getJadwalTes(true);
+        $this->jadwalTesJapresTesAkademik = $this->getJadwalTes(false);
+        $this->setExistingDataTes();
+        $this->setExistingCatatan();
+        $this->setExistingVerif();
+        $this->setButtonColor();
+        $this->setButtonIcon();
+        $this->cekBerkasPasFoto();
+        $this->modalOpen = true;
     }
 
     /**
