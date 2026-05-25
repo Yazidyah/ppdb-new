@@ -61,7 +61,7 @@ class CountdownJalur extends Component
 
         $this->regulerOpen = (bool) $reguler;
         $this->regulerStartAt = $reguler?->tanggal_buka ? Carbon::parse($reguler->tanggal_buka) : null;
-        $this->regulerEndAt = $reguler?->tanggal_tutup ? Carbon::parse($reguler->tanggal_tutup) : null;
+        $this->regulerEndAt = $reguler?->tanggal_tutup ? Carbon::parse($reguler->tanggal_tutup)->endOfDay() : null;
     }
 
     private function syncNonRegulerCountdown($jalurRegistrasi): void
@@ -77,7 +77,7 @@ class CountdownJalur extends Component
 
         $this->nonRegulerLatestClose = $nonReguler
             ->filter(fn ($jalur) => !empty($jalur->tanggal_tutup))
-            ->map(fn ($jalur) => Carbon::parse($jalur->tanggal_tutup))
+            ->map(fn ($jalur) => Carbon::parse($jalur->tanggal_tutup)->endOfDay())
             ->sortDesc()
             ->first() ?: null;
     }

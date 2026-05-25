@@ -1,22 +1,23 @@
 <div>
-<button wire:click="$set('modalOpen', true)" type="button"
+    <button wire:click="$set('modalOpen', true)" type="button"
         class="inline-flex items-center justify-center h-10 px-4 py-2 text-sm font-medium text-white transition-colors {{ $buttonColor }} border rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">
         {!! $buttonIcon !!}
     </button>
     @if ($modalOpen)
-        <div class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen backdrop-blur-sm overflow-y-auto">
+        <div
+            class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen backdrop-blur-sm overflow-y-auto">
             <div class="absolute inset-0 w-full h-full bg-black backdrop-blur-sm bg-opacity-70"
                 wire:click="$set('modalOpen', false)"></div>
             <div class="relative w-full py-6 bg-white border shadow-lg px-7 border-neutral-200 sm:max-w-2xl sm:rounded-lg">
                 <div class="flex items-center justify-between pb-3">
                     <h3 class="text-lg font-semibold">Verifikasi {{ ucwords($siswa->nama_lengkap) }}</h3>
                     <button wire:click="$set('modalOpen', false)"
-                    class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-red-400 rounded-full hover:text-white hover:bg-red-400">
-                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                        stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                        class="absolute top-0 right-0 flex items-center justify-center w-8 h-8 mt-5 mr-5 text-red-400 rounded-full hover:text-white hover:bg-red-400">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
                 <div class="relative w-auto pb-8">
                     <input type="hidden" wire:model="id_registrasi">
@@ -37,14 +38,17 @@
                                         <td class="px-4 py-2">{{ $loop->parent->index + 1 }}</td>
                                         <td class="px-4 py-2">
                                             {{-- <a wire:click="$toggle('preview')">{{ $item->nama_persyaratan }}</a> --}}
-                                            @livewire('operator.berkas-verif', ['syarat' => $item, 'berkas' => $berkas], key($siswa->id_user . 'berkas' . $berkas->id))
+                                            <livewire:operator.berkas-verif :syarat="$item" :berkas="$berkas" :key="$siswa->id_user . 'berkas' . $berkas->id" />
                                         </td>
                                         <td class="px-4 py-2">
-                                            <input type="checkbox" wire:model="verif.{{ $berkas->id }}" value="1" {{ $berkas->verify ? 'checked' : '' }} class=" h-6 w-6 accent-tertiary text-tertiary  rounded cursor-pointer active:border active:border-tertiary  focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 ">
+                                            <input type="checkbox" wire:model="verif.{{ $berkas->id }}" value="1" {{ $berkas->verify ? 'checked' : '' }}
+                                                class=" h-6 w-6 accent-tertiary text-tertiary  rounded cursor-pointer active:border active:border-tertiary  focus:outline-none focus:ring-2 focus:ring-tertiary focus:ring-offset-2 ">
                                         </td>
                                         <td class="px-4 py-2">
                                             <input wire:model="catatan.{{ $berkas->id }}" type="text"
-                                                name="catatan[{{ $berkas->id }}]" class="w-full border focus:border-tertiary  focus:ring-tertiary rounded-md shadow-sm" value="{{ $berkas->verify_notes }}">
+                                                name="catatan[{{ $berkas->id }}]"
+                                                class="w-full border focus:border-tertiary  focus:ring-tertiary rounded-md shadow-sm"
+                                                value="{{ $berkas->verify_notes }}">
                                         </td>
                                     </tr>
                                 @empty
@@ -71,7 +75,8 @@
                         </select>
                     </div>
                     <div class="mb-4 grid grid-cols-2 gap-4 items-center">
-                        <label for="sesi_bq_wawancara" class="text-sm font-medium text-gray-700 text-left">Sesi BQ & Wawancara</label>
+                        <label for="sesi_bq_wawancara" class="text-sm font-medium text-gray-700 text-left">Sesi BQ &
+                            Wawancara</label>
                         <select id="sesi_bq_wawancara" wire:model="sesi_bq_wawancara"
                             class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-tertiary focus:border-tertiary sm:text-sm rounded-md">
                             <option value="">Tidak dijadwalkan</option>
@@ -93,6 +98,10 @@
                     </div>
                 </div>
                 <div class="flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2">
+                    <button wire:click="kirimEmail" type="button"
+                        class="inline-flex justify-center items-center px-4 py-2 bg-sky-700 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-sky-800 focus:bg-sky-700 active:bg-sky-700 active:border active:border-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-700 focus:ring-offset-2 transition ease-in-out duration-150">
+                        Kirim Email
+                    </button>
                     <button wire:click="$set('modalOpen', false)" type="button"
                         class="inline-flex justify-center items-center px-4 py-2 bg-red-900 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500  focus:bg-red-900 active:bg-red-900 active:border active:border-red-900 focus:outline-none focus:ring-2 focus:ring-red-900 focus:ring-offset-2  transition ease-in-out duration-150">Cancel</button>
                     <button wire:click="simpan" type="button"

@@ -5,12 +5,10 @@ namespace App\Livewire\Operator;
 use Livewire\Component;
 use App\Models\JadwalTes;
 use App\Models\DataTes;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use App\Jobs\SendVerificationEmail;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class VerifBerkas extends Component
 {
@@ -203,7 +201,7 @@ class VerifBerkas extends Component
             $jadwalBq = JadwalTes::find($this->sesi_bq_wawancara);
             if (!$jadwalBq) {
                 session()->flash('error', 'Jadwal tes BQ tidak valid.');
-                return;
+                return redirect(request()->header('Referer'));
             }
         }
 
@@ -211,7 +209,7 @@ class VerifBerkas extends Component
             $jadwalJapres = JadwalTes::find($this->sesi_japres_tes_akademik);
             if (!$jadwalJapres) {
                 session()->flash('error', 'Jadwal tes akademik tidak valid.');
-                return;
+                return redirect(request()->header('Referer'));
             }
         }
 
@@ -219,45 +217,44 @@ class VerifBerkas extends Component
         $this->updateRegistrasiStatus();
         $this->processDataTes();
         $this->cekBerkasPasFoto();
+        $this->generateQrCode();
 
-        if ($this->sesi_bq_wawancara != null) {
-            $jadwalBqWawancara = $this->formatJadwalTes($this->sesi_bq_wawancara);
-        }
-        if ($this->sesi_japres_tes_akademik != null) {
-            $jadwalJapresTesAkademik = $this->formatJadwalTes($this->sesi_japres_tes_akademik);
-        }
+        $this->modalOpen = false;
 
-        // Generate QR code and save to public\qrcode
-        $qrCodeDirectory = public_path('qrcode');
-        if (!File::exists($qrCodeDirectory)) {
-            File::makeDirectory($qrCodeDirectory, 0755, true);
-        }
+        return redirect(request()->header('Referer'));
+    }
 
-        $qrCodePath = $qrCodeDirectory . '/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png';
-        $qrCodeUrl = "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" . urlencode($this->siswa->dataRegistrasi->nomor_peserta);
-        
-        try {
-            $qrCodeContent = @file_get_contents($qrCodeUrl);
-            if ($qrCodeContent !== false) {
-                file_put_contents($qrCodePath, $qrCodeContent);
-            }
-        } catch (\Exception $e) {
-            \Log::warning('Failed to generate QR code: ' . $e->getMessage());
+    /**
+     * Kirim email verifikasi tanpa menyimpan perubahan data.
+     */
+    public function kirimEmail()
+    {
+        if (!in_array($this->status, [4, 5])) {
+            session()->flash('error', 'Pilih status Tidak Lolos atau Lolos sebelum mengirim email.');
+            return;
         }
 
-        // Dispatch the email job
+        $this->cekBerkasPasFoto();
+        $this->generateQrCode();
+
+        $jadwalBqWawancara = $this->sesi_bq_wawancara != null
+            ? $this->formatJadwalTes($this->sesi_bq_wawancara)
+            : null;
+        $jadwalJapresTesAkademik = $this->sesi_japres_tes_akademik != null
+            ? $this->formatJadwalTes($this->sesi_japres_tes_akademik)
+            : null;
+
         SendVerificationEmail::dispatch(
             $this->siswa,
             $this->status,
             $this->urlPasFoto,
             $this->syarat,
-            @$jadwalBqWawancara,
-            @$jadwalJapresTesAkademik
+            $jadwalBqWawancara,
+            $jadwalJapresTesAkademik
         );
 
+        session()->flash('success', 'Email verifikasi berhasil dijadwalkan.');
         $this->modalOpen = false;
-
-        return redirect(request()->header('Referer'));
     }
 
     /**
@@ -277,15 +274,57 @@ class VerifBerkas extends Component
     }
 
     /**
+     * Generate QR code peserta untuk kebutuhan dokumen email.
+     */
+    protected function generateQrCode()
+    {
+        $qrCodeDirectory = public_path('qrcode');
+        if (!File::exists($qrCodeDirectory)) {
+            File::makeDirectory($qrCodeDirectory, 0755, true);
+        }
+
+        $qrCodePath = $qrCodeDirectory . '/' . $this->siswa->dataRegistrasi->nomor_peserta . '.png';
+        $qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' . urlencode($this->siswa->dataRegistrasi->nomor_peserta);
+
+        try {
+            $qrCodeContent = @file_get_contents($qrCodeUrl);
+            if ($qrCodeContent !== false) {
+                file_put_contents($qrCodePath, $qrCodeContent);
+            }
+        } catch (\Exception $e) {
+            \Log::warning('Failed to generate QR code: ' . $e->getMessage());
+        }
+    }
+
+    /**
      * Update status verifikasi pada setiap berkas.
      */
     protected function updateBerkasVerifikasi()
     {
         foreach ($this->syarat as $item) {
             foreach ($item->berkas as $berkas) {
-                $berkas->verify = $this->verif[$berkas->id] ?? null;
-                $berkas->verify_notes = $this->catatan[$berkas->id] ?? null;
-                $berkas->save();
+                $hasVerifyKey = is_array($this->verif) && array_key_exists($berkas->id, $this->verif);
+                $hasNotesKey = is_array($this->catatan) && array_key_exists($berkas->id, $this->catatan);
+
+                $payload = [];
+                if ($hasVerifyKey) {
+                    $payload['verify'] = $this->verif[$berkas->id];
+                }
+                if ($hasNotesKey) {
+                    $payload['verify_notes'] = $this->catatan[$berkas->id];
+                }
+
+                Log::info('Livewire will save berkas', array_merge(['berkas_id' => $berkas->id], $payload));
+
+                if (!empty($payload)) {
+                    $berkas->fill($payload);
+                    $berkas->save();
+
+                    $fresh = $berkas->fresh();
+                    Log::info('Livewire saved berkas', ['berkas_id' => $fresh->id, 'verify' => $fresh->verify, 'verify_notes' => $fresh->verify_notes]);
+                } else {
+                    Log::debug('Livewire skipped saving berkas because no data keys present', ['berkas_id' => $berkas->id]);
+                }
             }
         }
     }

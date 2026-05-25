@@ -49,8 +49,15 @@ class VerifOpController extends Controller
         })->findOrFail($request->id_calon_siswa);
         
         Log::info('Updating verification for student ID: ' . $request->id_calon_siswa);
+        Log::debug('updateVerifBerkas request payload', $request->all());
 
-        $ownedBerkasIds = Berkas::where('uploader_id', $siswa->id_calon_siswa)->pluck('id')->toArray();
+        // Determine uploader/user id used on Berkas.uploader_id. Other parts of the app
+        // (Livewire, jobs) use CalonSiswa->id_user, so prefer that value when present.
+        $uploaderId = $siswa->id_user ?? optional($siswa->user)->id;
+        Log::debug('Determined uploader_id for berkas lookup', ['uploader_id' => $uploaderId]);
+
+        $ownedBerkasIds = $uploaderId ? Berkas::where('uploader_id', $uploaderId)->pluck('id')->toArray() : [];
+        Log::debug('ownedBerkasIds', $ownedBerkasIds);
 
         if ($request->has('verif') || $request->has('catatan')) {
             if (is_array($request->verif)) {
@@ -63,10 +70,16 @@ class VerifOpController extends Controller
 
                 foreach ($request->verif as $berkasId => $verif) {
                     $berkas = Berkas::find($berkasId);
-                    if ($berkas && $berkas->uploader_id == $siswa->id_calon_siswa) {
+                    if ($berkas && $berkas->uploader_id == $uploaderId) {
                         $berkas->verify = $verif ? 1 : 0;
                         $berkas->verify_notes = $request->catatan[$berkasId] ?? '';
                         $berkas->save();
+
+                        // Log DB state after save for diagnostics
+                        $fresh = Berkas::find($berkasId);
+                        Log::info('Saved berkas via controller', ['berkas_id' => $berkasId, 'verify' => $fresh->verify, 'verify_notes' => $fresh->verify_notes]);
+                    } else {
+                        Log::warning('Skipped saving berkas due to uploader mismatch or missing', ['berkas_id' => $berkasId, 'expected_uploader' => $uploaderId, 'found_uploader' => $berkas->uploader_id ?? null]);
                     }
                 }
 
@@ -78,6 +91,9 @@ class VerifOpController extends Controller
                         $berkas->verify = 0;
                         $berkas->verify_notes = $request->catatan[$berkasId] ?? '';
                         $berkas->save();
+
+                        $fresh = Berkas::find($berkasId);
+                        Log::info('Unchecked berkas set to 0', ['berkas_id' => $berkasId, 'verify' => $fresh->verify, 'verify_notes' => $fresh->verify_notes]);
                     }
                 }
             }

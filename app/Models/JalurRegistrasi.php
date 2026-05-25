@@ -59,6 +59,6 @@ class JalurRegistrasi extends Model
             return true;
         }
 
-        return Carbon::today()->lte(Carbon::parse($this->tanggal_tutup));
+        return Carbon::now()->lte(Carbon::parse($this->tanggal_tutup)->endOfDay());
     }
 }
