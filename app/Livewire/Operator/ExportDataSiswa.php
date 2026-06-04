@@ -15,7 +15,10 @@ class ExportDataSiswa extends Component
         $exportedCollection = collect();
 
         $siswa = DB::table('calon_siswa as cs')
-            ->leftJoin('data_registrasi as dr', 'cs.id_calon_siswa', '=', 'dr.id_calon_siswa')
+            ->leftJoin('data_registrasi as dr', function ($join) {
+                $join->on('cs.id_calon_siswa', '=', 'dr.id_calon_siswa')
+                    ->where('dr.is_active', '=', true);
+            })
             ->leftJoin('jalur_registrasi as jr', 'dr.id_jalur', '=', 'jr.id_jalur')
             // ->join('users as u',  'cs.id_user', '=', 'u.id')
             ->join('users as u', function ($join) {
@@ -40,7 +43,10 @@ class ExportDataSiswa extends Component
             })
             ->leftJoin('pekerjaan_orang_tua as pekerjaan_wali', 'wali.pekerjaan', '=', 'pekerjaan_wali.id_pekerjaan')
             ->leftJoin('rapot as rp', 'dr.id_registrasi', '=', 'rp.id_registrasi')
-            ->leftJoin('data_registrasi as ds', 'cs.id_calon_siswa', '=', 'ds.id_calon_siswa')
+            ->leftJoin('data_registrasi as ds', function ($join) {
+                $join->on('cs.id_calon_siswa', '=', 'ds.id_calon_siswa')
+                    ->where('ds.is_active', '=', true);
+            })
             ->leftJoin('persyaratan as ps', function ($join) {
                 $join->on('ds.id_jalur', '=', 'ps.id_jalur')
                     ->where('ps.nama_persyaratan', 'ilike', '%kartu keluarga%');
