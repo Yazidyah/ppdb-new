@@ -39,7 +39,7 @@
         </thead>
         <tbody >
             @foreach ($jadwalTes as $item)
-                <tr class="hover:bg-gray-200 transition duration-200 cursor-pointer">
+                <tr wire:key="jadwal-{{ $item->id }}" class="hover:bg-gray-200 transition duration-200 cursor-pointer">
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $loop->iteration }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jenisTes->nama }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->ruang }}</td>
@@ -50,7 +50,7 @@
                     <td class="border px-4 py-2 flex justify-center space-x-2">
                         <button wire:click="edit({{ $item->id }})"
                             class="bg-tertiary text-white px-4 py-2  hover:bg-secondary hover:text-tertiary rounded">Edit</button>
-                        <button wire:click="delete({{ $item->id }})"
+                        <button wire:click="confirmDelete({{ $item->id }})"
                             class="bg-red-900 text-white px-4 py-2 hover:bg-red-500  rounded">Hapus</button>
                     </td>
                 </tr>
@@ -58,6 +58,22 @@
         </tbody>
     </table>
     </div>
+    
+    {{-- Delete confirmation modal --}}
+    @if($confirmingDeleteId)
+        <div class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50" wire:keydown.escape="cancelDelete">
+            <div class="bg-white rounded-lg shadow-lg w-96">
+                <div class="p-4">
+                    <h5 class="text-lg font-semibold">Konfirmasi Hapus</h5>
+                    <p class="mt-2 text-sm text-gray-600">Apakah Anda yakin ingin menghapus jadwal tes ini?</p>
+                </div>
+                <div class="flex justify-end px-4 py-2 border-t">
+                    <button wire:click="cancelDelete" class="bg-gray-200 text-gray-800 px-4 py-2 rounded mr-2">Batal</button>
+                    <button wire:click="deleteConfirmed" class="bg-red-900 text-white px-4 py-2 rounded">Hapus</button>
+                </div>
+            </div>
+        </div>
+    @endif
     @if($showModal)
         <div class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50"
             wire:keydown.escape="closeModal">

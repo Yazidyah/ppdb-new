@@ -18,6 +18,7 @@ class JadwalTes extends Component
     public $showModal = false;
 
     public $isTableVisible = true;
+    public $confirmingDeleteId = null;
     
     protected $rules = [
         'id_jenis_tes' => 'required',
@@ -53,12 +54,17 @@ class JadwalTes extends Component
     {
         $this->validate();
         
+        // Normalize tanggal to Y-m-d for DB and times to H:i
+        $tanggalDb = Carbon::parse($this->tanggal)->format('Y-m-d');
+        $jamMulai = Carbon::parse($this->jam_mulai)->format('H:i');
+        $jamSelesai = Carbon::parse($this->jam_selesai)->format('H:i');
+
         JadwalTesModel::create([
             'id_jenis_tes' => $this->id_jenis_tes,
             'ruang'        => $this->ruang,
-            'tanggal'      => $this->tanggal,
-            'jam_mulai'    => $this->jam_mulai,
-            'jam_selesai'  => $this->jam_selesai,
+            'tanggal'      => $tanggalDb,
+            'jam_mulai'    => $jamMulai,
+            'jam_selesai'  => $jamSelesai,
             'kuota'        => $this->kuota,
         ]);
 
@@ -79,9 +85,10 @@ class JadwalTes extends Component
         $this->id_tes       = $id;
         $this->id_jenis_tes = $tes->id_jenis_tes;
         $this->ruang        = $tes->ruang;
-        $this->tanggal      = $tes->tanggal;
-        $this->jam_mulai    = $tes->jam_mulai;
-        $this->jam_selesai  = $tes->jam_selesai;
+        // Ensure date input receives Y-m-d format
+        $this->tanggal      = Carbon::parse($tes->tanggal)->format('Y-m-d');
+        $this->jam_mulai    = Carbon::parse($tes->jam_mulai)->format('H:i');
+        $this->jam_selesai  = Carbon::parse($tes->jam_selesai)->format('H:i');
         $this->kuota        = $tes->kuota;
         $this->isEdit       = true;
         $this->showModal    = true;
@@ -98,12 +105,17 @@ class JadwalTes extends Component
             return;
         }
 
+        // Normalize tanggal and times before updating
+        $tanggalDb = Carbon::parse($this->tanggal)->format('Y-m-d');
+        $jamMulai = Carbon::parse($this->jam_mulai)->format('H:i');
+        $jamSelesai = Carbon::parse($this->jam_selesai)->format('H:i');
+
         $tes->update([
             'id_jenis_tes' => $this->id_jenis_tes,
             'ruang'        => $this->ruang,
-            'tanggal'      => $this->tanggal,
-            'jam_mulai'    => $this->jam_mulai,
-            'jam_selesai'  => $this->jam_selesai,
+            'tanggal'      => $tanggalDb,
+            'jam_mulai'    => $jamMulai,
+            'jam_selesai'  => $jamSelesai,
             'kuota'        => $this->kuota,
         ]);
 
@@ -122,6 +134,45 @@ class JadwalTes extends Component
 
         $tes->delete();
         $this->loadJadwalTes();
+    }
+
+    /**
+     * Prompt confirmation modal (sets id to confirm)
+     */
+    public function confirmDelete($id)
+    {
+        $this->confirmingDeleteId = $id;
+    }
+
+    /**
+     * Cancel delete confirmation
+     */
+    public function cancelDelete()
+    {
+        $this->confirmingDeleteId = null;
+    }
+
+    /**
+     * Actually delete the confirmed id
+     */
+    public function deleteConfirmed()
+    {
+        if (!$this->confirmingDeleteId) {
+            return;
+        }
+
+        $tes = JadwalTesModel::find($this->confirmingDeleteId);
+
+        if (!$tes) {
+            session()->flash('error', 'Data tidak ditemukan.');
+            $this->confirmingDeleteId = null;
+            return;
+        }
+
+        $tes->delete();
+        $this->confirmingDeleteId = null;
+        $this->loadJadwalTes();
+        session()->flash('message', 'Jadwal Tes berhasil dihapus.');
     }
 
     public function closeModal()
