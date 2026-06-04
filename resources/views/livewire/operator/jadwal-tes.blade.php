@@ -23,8 +23,8 @@
             <button wire:click="create" class="text-center flex justify-center items-center w-full">+ JADWAL TES</button>
         </div>
     </div>
-    <div class="w-full overflow-x-auto mx-auto flex items-center relative shadow-md sm:rounded-lg my-6 transition-all duration-500"  style="max-height: {{ $isTableVisible ? '1000px' : '0' }};">
-    <table class="table-auto overflow-x-auto mx-auto items-center relative shadow-md sm:rounded-lg my-6 w-full max-w-full rtl:justify-left text-sm text-left text-gray-500">
+    <div class="w-full overflow-y-auto mx-auto relative shadow-md sm:rounded-lg my-6 transition-all duration-500"  style="max-height: {{ $isTableVisible ? '500px' : '0' }};">
+    <table class="table-auto w-full max-w-full overflow-x-auto rtl:justify-left text-sm text-left text-gray-500">
         <thead class="w-full max-w-full rtl:justify-left text-lg text-left text-gray-500 my-3">
             <tr class="text-sm text-tertiary uppercase bg-gray-50">
                 <th class="px-4 py-2 text-center">No</th>
@@ -43,9 +43,9 @@
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $loop->iteration }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jenisTes->nama }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->ruang }}</td>
-                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->tanggal }}</td>
-                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jam_mulai }}</td>
-                    <td class="border px-4 py-2 text-tertiary text-center">{{ $item->jam_selesai }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ \Carbon\Carbon::parse($item->jam_mulai)->format('H:i') }}</td>
+                    <td class="border px-4 py-2 text-tertiary text-center">{{ \Carbon\Carbon::parse($item->jam_selesai)->format('H:i') }}</td>
                     <td class="border px-4 py-2 text-tertiary text-center">{{ $item->terisi }}/{{ $item->kuota }}</td>
                     <td class="border px-4 py-2 flex justify-center space-x-2">
                         <button wire:click="edit({{ $item->id }})"
