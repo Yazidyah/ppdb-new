@@ -1,4 +1,4 @@
-@props(['title' => '', 'start' => null, 'end' => null])
+@props(['title' => '', 'start' => null, 'end' => null, 'message' => null])
 
 @php
     // Pass ISO datetime strings to JS
@@ -12,6 +12,7 @@
         remainingTime: 0,
         countdownMessage: '',
         phase: 'idle',
+        message: '{{ $message }}',
         formatTime(time) {
             const days = Math.floor(time / (1000 * 60 * 60 * 24));
             const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -28,7 +29,7 @@
                 $data.phase = 'start';
             } else if (now >= startDate && now < endDate) {
                 $data.remainingTime = endDate - now;
-                $data.countdownMessage = 'Pendaftaran Ditutup Dalam';
+                $data.countdownMessage = message ?? 'Pendaftaran Ditutup Dalam';
                 $data.phase = 'end';
             } else {
                 $data.remainingTime = 0;
@@ -91,7 +92,7 @@
                     </div>
                 </div>
 
-                <div class="mt-6 pt-4 border-t border-gray-200">
+                <!-- <div class="mt-6 pt-4 border-t border-gray-200">
                     <div class="flex flex-col md:flex-row items-center justify-between gap-3 text-xs md:text-sm text-gray-600">
                         <div class="flex items-center gap-2">
                             <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,7 +107,7 @@
                             <span class="font-medium">Tutup: <span class="text-tertiary font-semibold" x-text="new Date('{{$endIso}}').toLocaleDateString('id-ID', {day: 'numeric', month: 'short', year: 'numeric'})"></span></span>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </template>
         

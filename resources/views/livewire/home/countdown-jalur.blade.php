@@ -5,7 +5,7 @@
                 <div class="absolute top-0 right-0 w-32 h-32 bg-secondary/10 rounded-full -mr-16 -mt-16"></div>
                 <div class="absolute bottom-0 left-0 w-24 h-24 bg-primary/10 rounded-full -ml-12 -mb-12"></div>
                 
-                <div class="relative z-10">
+                <!-- <div class="relative z-10">
                     <div class="bg-gray-100 rounded-full w-24 h-24 md:w-28 md:h-28 mx-auto mb-6 flex items-center justify-center">
                         <svg class="w-12 h-12 md:w-16 md:h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -16,6 +16,15 @@
                         Mohon maaf, saat ini tidak ada jalur pendaftaran yang dibuka.<br>
                         <span class="text-sm">Silakan pantau website ini untuk informasi pembukaan pendaftaran selanjutnya.</span>
                     </p>
+                </div> -->
+                    <div class="p-6 md:p-8">
+                        <x-countdown-box 
+                            title=""
+                            :start="now()"
+                            :end="Carbon\Carbon::create(2026, 6, 25, 23, 59, 59)"
+                            :message=" 'Hitung Mundur Pengumuman Pendaftaran' "
+                        />
+                    </div>
                 </div>
             </div>
         </div>
