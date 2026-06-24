@@ -176,7 +176,7 @@
                 @endphp
 
                 {{-- Step 4 --}}
-                <div class="flex flex-col items-center text-center flex-1">
+                <!-- <div class="flex flex-col items-center text-center flex-1">
                     <div
                         class="flex items-center justify-center w-11 h-11 rounded-full font-bold text-base transition
                         {{ in_array($status, [6, 7, 8]) ? 'bg-tertiary text-white shadow-md shadow-tertiary/30' : 'bg-gray-100 text-gray-400 border-2 border-gray-200' }}">
@@ -198,7 +198,7 @@
                             {{ $penetapanDetail }}
                         </p>
                     @endif
-                </div>
+                </div> -->
 
             </div>
         </div>
