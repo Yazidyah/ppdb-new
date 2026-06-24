@@ -28,14 +28,14 @@
                     <button onclick="window.location.href='/siswa/daftar-step-tiga?t=1'"
                         class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center hover:bg-secondary rounded-xl text-secondary font-medium bg-tertiary hover:text-tertiary"
                         type="button" id="nextBtn">Previous</button>
-                    <button onclick="document.getElementById('info-popup').classList.remove('hidden')" class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
+                    {{-- <button onclick="document.getElementById('info-popup').classList.remove('hidden')" class="px-3 py-1 sm:px-6 sm:py-2 flex items-center justify-center rounded-xl font-medium
                                 @if (!$isValid)
                                     cursor-not-allowed bg-tertiary hover:bg-secondary hover:text-black text-secondary
                                 @else
                                     bg-tertiary hover:bg-secondary hover:text-black text-secondary
                                 @endif" type="button" id="submitBtn" @if (!$isValid) disabled @endif>
                         Submit
-                    </button>
+                    </button> --}}
                 </div>
             @endif
         </div>
