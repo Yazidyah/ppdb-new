@@ -325,8 +325,13 @@
     @if ($status == 7)
         <div class="notes">
             <p>Keterangan :</p>
-            <p>Daftar ulang dilakukan sesuai jadwal (tanggal yang tertera pada lampiran persyaratan daftar ulang)</p>
+            <p>Daftar ulang dilakukan sesuai jadwal masing-masing yang sudah ditentukan panitia (jadwal akan diinfokan via WA yg terdaftar)</p>
             <p>Bagi yang tidak melakukan daftar ulang sesuai jadwal yang ditetapkan, maka dianggap mengundurkan diri</p>
+        </div>
+    @elseif ($status == 8)
+        <div class="notes">
+            <p>Keterangan :</p>
+            <p>Menunggu konfirmasi dari panitia PMBM MAN 1 Kota Bogor tanggal 01 Juli 2026 pukul 15.00 WIB melalui WA</p>
         </div>
     @elseif ($status == 6)
         {{-- <div class="notes">
