@@ -361,16 +361,16 @@
             </div>
         @else
             <div class="contoh-surat-daftar-ulang">
-                <img src="{{ 'surat/daftar_ulang.png' }}" alt="Checklist Data">
+                <img src="{{ 'surat/daftar_ulang_2026.png' }}" alt="Checklist Data">
             </div>
             <div class="contoh-surat-pernyataan">
-                <img src="{{ 'surat/pernyataan_peserta_didik.png' }}" alt="Surat Penyataan">
+                <img src="{{ 'surat/pernyataan_peserta_didik_2026.png' }}" alt="Surat Penyataan">
             </div>
             <div class="contoh-surat-pernyataan-orang-tua">
-                <img src="{{ 'surat/pernyataan_orang_tua.png' }}" alt="Surat Pernyataan Orang Tua">
+                <img src="{{ 'surat/pernyataan_orang_tua_2026.png' }}" alt="Surat Pernyataan Orang Tua">
             </div>
             <div class="contoh-surat-pernyataan-aja">
-                <img src="{{ 'surat/pernyataan.png' }}" alt="Surat Pernyataan Orang Tua">
+                <img src="{{ 'surat/pernyataan_2026.png' }}" alt="Surat Pernyataan Orang Tua">
             </div>
         @endif
 
