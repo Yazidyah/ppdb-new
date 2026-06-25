@@ -345,7 +345,7 @@
         </div> --}}
     @endif
 
-    @if ($status == 7 or $status == 8)
+    @if ($status == 7)
         @if ($siswa->dataRegistrasi->id_jalur != 1)
             <div class="contoh-surat-daftar-ulang">
                 <img src="{{ 'surat/Diterima Afirmasi 2026_001.jpg' }}" alt="Checklist Data">
