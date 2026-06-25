@@ -21,7 +21,7 @@
                         <x-countdown-box 
                             title=""
                             :start="now()"
-                            :end="Carbon\Carbon::create(2026, 6, 25, 23, 59, 59)"
+                            :end="Carbon\Carbon::create(2026, 6, 25, 15, 0, 0)"
                             :message=" 'Hitung Mundur Pengumuman Pendaftaran' "
                         />
                     </div>
